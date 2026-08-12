@@ -13,8 +13,38 @@ and evaluation contract. A result card is not a universal ranking.
 
 | Study | Tested scope | Main finding | Practical decision | Evidence strength |
 | --- | --- | --- | --- | --- |
+| [Property-based Testing v2](#property-based-testing-v2) | Exact baseline versus one pinned skill; four private tasks; eight valid repeat-1 cells | 0 favorable, 0 unfavorable, 4 tied pairs. Treatment activated 4/4 and had two critical added-test incompatibilities; baseline had the same two incompatibilities. | **Reject exact intervention:** do not use evidence from this pilot to prefer the injected skill on this surface. | Preregistered and maintainer-evaluated; four matched pairs; confirmation correctly unopened. |
 | [Council Generation 1](#council-generation-1) | Four workflows; three synthetic held-out engineering cases; 12 runs | No general answer-quality win. The candidate repaired a reproduced execution-conformance defect and preserved measured quality. | **Narrow adoption:** use the exact workflow for the measured local Council surface; test again before transferring it. | Maintainer-evaluated; one run per cell; not independently reproduced. |
 | [Focused Change Verification calibration](#focused-change-verification-calibration) | Same Codex stack with and without one skill; three public coding tasks; six runs | All six runs passed. The skill activated, but the task prompts gave baseline much of the intended behavior. | **No skill-effect decision:** keep the pack as a runner smoke test and design harder tasks. | Operational calibration; not a confirmatory comparison. |
+
+## Property-based Testing v2
+
+### Should I add this skill to this Codex stack?
+
+Not on the basis of this pilot. Adding the exact pinned skill did not change
+hidden acceptance on any of the four matched tasks, while treatment hit the
+prespecified critical gate twice. Baseline produced the same two incompatible
+added-test failures, so the result does not show that the skill caused those
+failures; it shows no measured benefit and no safe reason to continue spending
+the frozen budget.
+
+| Question | Answer |
+| --- | --- |
+| What was compared? | Codex CLI 0.146.0 with `gpt-5.6-sol` at `xhigh`, first without and then with the exact source-locked Trail of Bits `property-based-testing` skill. |
+| On what tasks? | Four private screening tasks across serialization-roundtrip and normalization-idempotence defect families. |
+| What happened? | Both conditions passed 2/4 hidden checks. All four matched pairs tied; favorable and unfavorable counts were both zero. |
+| Did the skill activate? | Yes, in all four treatment cells. |
+| Why did the study stop? | Two treatment cells added tests incompatible with the private reference repair, violating the frozen zero-critical-failure gate. Baseline also produced two such incompatibilities. |
+| What did it cost? | Treatment used 47,330 generated-work tokens and 857,633 ms; baseline used 37,341 tokens and 752,432 ms. These are descriptive totals, not stable cost effects. |
+| What is supported? | Rejecting this exact intervention on this exact pilot surface and retaining the negative result. |
+| What is not supported? | General claims about property-based testing, Trail of Bits, Codex, skills, other defect families, or production impact. |
+
+**Read and audit**
+
+- [Full result](reports/2026-08-12-property-based-testing-v2.md)
+- [Evidence receipt](studies/agent-skills-season-1/results/property-based-testing-v2/evidence-receipt.md)
+- [Public preregistration freeze](studies/agent-skills-season-1/screening/property-based-testing-v2.freeze.json)
+- [Run records and measurements](studies/agent-skills-season-1/results/property-based-testing-v2)
 
 ## Council Generation 1
 
@@ -92,7 +122,6 @@ These are plans, not completed evidence.
 | --- | --- | --- |
 | [Council Generation 2](studies/council-generation-2/README.md) | Draft and illustratively calibrated; not run | Test whether a frozen adaptive Council candidate beats a strong sequential baseline with the same knowledge and matched budget. |
 | [Focused Change Verification discriminating pack](studies/focused-change-verification/discriminating-pack-brief.md) | Design required | Test whether the skill changes verification routing and truthful state reporting when the task does not reveal the desired checks. |
-| [Property-based Testing v2 pathfinder](studies/agent-skills-season-1/screening/property-based-testing-v2-analysis-plan.md) | Preregistered: exact baseline and skill snapshot, four screening tasks, two locked confirmation tasks, schedules, budgets, hashes, and stop rules frozen with zero scored calls | Test whether this exact skill injection improves hidden-adversarial acceptance on two bounded defect families. |
 | [Remaining Agent Skills Season 1 studies](studies/agent-skills-season-1/README.md) | Activation calibration completed: 22 formal run records, ten receipts, ten of twelve skills explicitly read; other effectiveness studies unrun | Continue task-specific screening without a false global score. |
 
 ## Why there is no leaderboard yet

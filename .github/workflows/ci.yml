@@ -51,6 +51,12 @@ jobs:
             studies/agent-skills-season-1/concept.json \
             studies/agent-skills-season-1/manifests \
             studies/agent-skills-season-1/calibration/runtime-v1
+          uv run ael validate \
+            studies/agent-skills-season-1/concept.json \
+            studies/agent-skills-season-1/manifests/property-based-testing-v2.study-manifest.json \
+            studies/agent-skills-season-1/results/property-based-testing-v2/evidence-receipt.json \
+            studies/agent-skills-season-1/results/property-based-testing-v2/measurement-set.json \
+            studies/agent-skills-season-1/results/property-based-testing-v2/runs
           uv run python tools/materialize_agent_skills_season.py --check
       - name: Check public release tree
         run: uv run python tools/release_check.py
@@ -84,6 +90,12 @@ jobs:
             studies/agent-skills-season-1/calibration/runtime-v1
           .release-venv/bin/ael study freeze-check \
             studies/agent-skills-season-1/screening/property-based-testing-v2.freeze.json
+          .release-venv/bin/ael validate \
+            studies/agent-skills-season-1/concept.json \
+            studies/agent-skills-season-1/manifests/property-based-testing-v2.study-manifest.json \
+            studies/agent-skills-season-1/results/property-based-testing-v2/evidence-receipt.json \
+            studies/agent-skills-season-1/results/property-based-testing-v2/measurement-set.json \
+            studies/agent-skills-season-1/results/property-based-testing-v2/runs
 
   docker-smoke:
     name: docker isolation smoke

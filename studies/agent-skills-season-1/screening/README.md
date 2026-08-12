@@ -1,19 +1,21 @@
 # Agent Skills Season 1 — first-wave screening boundary
 
-State: one preregistered pathfinder; no effectiveness screening has run.
+State: one preregistered pathfinder completed with a bounded negative result.
 
 Activation calibration is the completed `v0.1.0-alpha.2` milestone. The
-Property-based Testing v2 pilot now has private screening and confirmation
-packs outside Git plus a public freeze that binds their digests, evaluator
-boundary, budget, order, repeat rules, code, prompt, and stop rules. It was
-frozen with zero scored calls.
+Property-based Testing v2 pilot used private screening and confirmation packs
+outside Git plus a public freeze that binds their digests, evaluator boundary,
+budget, order, repeat rules, code, prompt, and stop rules. It was frozen with
+zero scored calls, then stopped after eight valid repeat-1 cells under the
+prespecified critical-failure gate. Repeat 2 and confirmation remained locked.
 
 ## Scope
 
 The first wave still contains the three studies marked `first_wave` in
 `season.toml`, but calibration changed the execution order:
 
-1. Property-based Testing v2 is the first frozen pathfinder.
+1. Property-based Testing v2 is the first completed pathfinder; its exact
+   intervention was rejected on the measured surface.
 2. Truthful completion returns to task design after two sacrificial prompt
    variants produced a baseline ceiling; no scored calls were made.
 3. The debugging tournament remains the next distinct study after the

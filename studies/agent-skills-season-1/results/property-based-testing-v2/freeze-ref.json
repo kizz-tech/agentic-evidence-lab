@@ -1,0 +1,9 @@
+{
+  "freeze_id": "kizz:ael:freeze:agent-skills-season-1:property-based-testing:v2-pilot-1",
+  "freeze_sha256": "a1fac08b84e35f412de04f37a1d3eb3ac3ce2711df474febd9a64b2fb4e3fb05",
+  "preregistration_sha": "610f0d9e1e19d9c89dd6beba8fab7900222df5dd",
+  "screening_pack_sha256": "968db26b2ac6378e3792830a14cd7e4e9f29924ce479b44277f99ed1125b6f95",
+  "confirmation_pack_sha256": "349e44906c4bc522e4fc65a42643c94c2bc670f82946c401b2854ba6fd35a0c8",
+  "screening_decision_sha256": "90f792419b4b2d64ecc49d10afd54e9f3e7f9f597f7981a299a027fac6a192d1",
+  "confirmation_decision_sha256": null
+}

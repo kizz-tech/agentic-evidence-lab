@@ -1,0 +1,89 @@
+{
+  "schema_version": "ael.run-record/0.1",
+  "object_type": "run_record",
+  "run_id": "kizz:ael:run:agent-skills-season-1:property-based-testing-v2:P-S01:S1:R01",
+  "study_ref": {
+    "study_id": "kizz:ael:study:agent-skills-season-1:property-based-testing",
+    "revision": 2,
+    "uri": "../../../manifests/property-based-testing-v2.study-manifest.json",
+    "sha256": "48b4d8211412ad06123a27cee10cc7051a6a5d9e5d79d055fe98715ff36f6d62",
+    "visibility": "public"
+  },
+  "condition_id": "S1",
+  "task": {
+    "task_pack_id": "property-based-testing-v2-screening",
+    "task_id": "P-S01",
+    "stratum": "serialization-roundtrip",
+    "role": "screening"
+  },
+  "repeat_index": 1,
+  "status": "valid",
+  "runtime": {
+    "harness": {
+      "name": "codex-cli",
+      "version": "0.146.0"
+    },
+    "model": {
+      "provider": "OpenAI",
+      "model_id": "gpt-5.6-sol",
+      "effort": "xhigh",
+      "immutable_revision_exposed": false
+    },
+    "sandbox": "restricted outer Docker; Codex inner sandbox disabled",
+    "environment": {
+      "ephemeral": true,
+      "identity_available": true,
+      "digest": "f5ebad21373b16799a4bb0189d917856280cca8394c25967c95d612b6b61ac08"
+    },
+    "context_sha256": "b8d74622dc6ff6d759d1ede091849290589725fb74bb28522ae22110c0d01f2c"
+  },
+  "usage": {
+    "input_tokens": 346517,
+    "cached_input_tokens": 281600,
+    "output_tokens": 9449,
+    "reasoning_output_tokens": 5804,
+    "wall_time_ms": 252858
+  },
+  "outputs": [
+    {
+      "uri": "urn:kizz:ael:private-run:pbt-v2:pbt-v2:P-S01:S1:1:candidate",
+      "sha256": "b8d74622dc6ff6d759d1ede091849290589725fb74bb28522ae22110c0d01f2c",
+      "revision": "property-based-testing-v2-pilot-1",
+      "visibility": "private"
+    }
+  ],
+  "effects": [],
+  "event_summary": {
+    "captured": true,
+    "event_count": 42,
+    "authenticated_actor_ids": [],
+    "limitations": [
+      "The provider did not expose an immutable model revision.",
+      "Raw tasks, events, candidates, and evaluator outputs remain private and are represented by hashes.",
+      "Encrypted provider traffic was not inspected."
+    ]
+  },
+  "integrity_issues": [
+    "The maintainer-approved reusable ChatGPT credential was readable by the Codex process; only frozen maintainer-controlled inputs were used."
+  ],
+  "source_refs": [
+    {
+      "uri": "urn:kizz:ael:private-run:pbt-v2:pbt-v2:P-S01:S1:1:events",
+      "sha256": "5f57760778bf5f60b346bf1ad1dc8d1b0c26a1bc263ea589c8f45b6c561b7e8a",
+      "revision": "property-based-testing-v2-pilot-1",
+      "visibility": "private"
+    },
+    {
+      "uri": "urn:kizz:ael:private-run:pbt-v2:pbt-v2:P-S01:S1:1:invocation",
+      "sha256": "88f1a67cc98c9f240435ea159b91c1138caad03cb1476bf116bbd7e1bb0eff96",
+      "revision": "property-based-testing-v2-pilot-1",
+      "visibility": "private"
+    },
+    {
+      "uri": "urn:kizz:ael:private-run:pbt-v2:pbt-v2:P-S01:S1:1:score",
+      "sha256": "832cee671f8b6a79204410d19324168a37cc689e8454c6518e8842dfb7515c1c",
+      "revision": "property-based-testing-v2-pilot-1",
+      "visibility": "private"
+    }
+  ]
+}

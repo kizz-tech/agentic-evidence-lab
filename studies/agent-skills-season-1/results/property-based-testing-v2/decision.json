@@ -1,0 +1,31 @@
+{
+  "confirmation_unlocked": false,
+  "counts": {
+    "activation_failures": 0,
+    "baseline_hidden_failures": 2,
+    "complete_pairs": 4,
+    "favorable_pairs": 0,
+    "invalid_observations": 0,
+    "tied_pairs": 4,
+    "treatment_critical_failures": 2,
+    "treatment_hidden_failures": 2,
+    "unfavorable_pairs": 0,
+    "valid_observations": 8
+  },
+  "decision_id": "kizz:ael:freeze:agent-skills-season-1:property-based-testing:v2-pilot-1:continuation",
+  "freeze_ref": {
+    "freeze_id": "kizz:ael:freeze:agent-skills-season-1:property-based-testing:v2-pilot-1",
+    "sha256": "a1fac08b84e35f412de04f37a1d3eb3ac3ce2711df474febd9a64b2fb4e3fb05"
+  },
+  "observations_sha256": "fe033dc21192f12cb2f3e691030c9f1db6f0af586ead4dbc3b3c606ed5398c79",
+  "outcome": "reject_all_critical_failure",
+  "rule": {
+    "maximum_unfavorable_pairs": 0,
+    "minimum_favorable_pairs": 1,
+    "require_zero_treatment_critical_failures": true
+  },
+  "schema_version": "ael.study-decision/0.1",
+  "stage": "continuation",
+  "study_id": "kizz:ael:study:agent-skills-season-1:property-based-testing",
+  "study_revision": 2
+}

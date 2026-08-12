@@ -25,6 +25,7 @@ boundaries.
 
 | Study | What was tested | Result | Decision |
 | --- | --- | --- | --- |
+| [Property-based Testing v2](reports/2026-08-12-property-based-testing-v2.md) | Exact Codex stack with and without one pinned public skill; eight valid cells across four private tasks | All four matched pairs tied on hidden acceptance. Treatment activated 4/4 but had two critical added-test incompatibilities, as did baseline. | Reject this exact skill injection for this exact pilot surface. Repeat 2 and confirmation remained locked. |
 | [Council Generation 1](reports/2026-08-12-council-generation-1.md) | Four engineering-decision workflows; 12 runs across three synthetic held-out cases | The adaptive candidate did not show a general quality advantage. It did repair a reproduced execution-conformance defect while preserving measured quality. | Adopt the exact workflow only for the measured local surface. Do not claim that councils are generally superior. |
 | [Focused Change Verification calibration](reports/2026-08-12-focused-change-verification-codex-calibration.md) | The same Codex stack with and without one skill; six runs across three public coding tasks | All six runs passed, so the task pack could not distinguish the skill from baseline. The runner and skill activation worked. | Keep the pack as an operational smoke test. Do not infer that the skill improves code quality. |
 | [Agent Skills Season 1 activation](reports/2026-08-12-agent-skills-season-1-activation.md) | 22 retained Codex cells across ten public-skill studies | The controlled runner and evaluators worked; ten of twelve treatment skills were explicitly read. MCP-builder and webapp-testing were injected but did not activate. Two benchmark defects were found and invalidated before publication. | Advance the ten activated snapshots to discriminating screening. Redesign MCP and webapp activation tasks first. Do not publish a skill-effect leaderboard. |
@@ -35,11 +36,11 @@ limitations, evidence strength, and links to every public artifact.
 
 Active research: [Agent Skills Season 1](studies/agent-skills-season-1/README.md)
 now has ten bounded protocols, exact upstream source locks, a healthy public
-calibration pack, 22 formal activation records, and a
-[frozen Property-based Testing v2 pathfinder](studies/agent-skills-season-1/screening/property-based-testing-v2-analysis-plan.md)
-with zero scored calls at preregistration. It has no third-party skill-effect
-result yet; arbitrary submissions remain outside the maintainer-controlled
-execution boundary.
+calibration pack, 22 formal activation records, and a completed
+[Property-based Testing v2 pathfinder](reports/2026-08-12-property-based-testing-v2.md).
+The pathfinder is the first preregistered third-party skill-effect result and is
+negative for its exact surface; arbitrary submissions remain outside the
+maintainer-controlled execution boundary.
 
 ## What AEL helps answer
 
@@ -160,7 +161,7 @@ maintainer-reviewed snapshots and maintainer-controlled fixtures; arbitrary
 submissions remain blocked. Read [SECURITY.md](SECURITY.md) and
 [Container runner isolation](docs/runner-isolation.md) before execution.
 
-`v0.1.0-alpha.2` is pre-stable. It does not claim universal benchmarking,
+`v0.1.0-alpha.3` is pre-stable. It does not claim universal benchmarking,
 independent verification of Kizz-authored capabilities, model-only superiority
 from stack comparisons, or downstream production impact.
 

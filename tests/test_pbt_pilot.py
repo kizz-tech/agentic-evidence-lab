@@ -6,7 +6,7 @@ import unittest
 from pathlib import Path
 
 from ael.pbt_pilot import execution_code_sha256, paired_counts
-from ael.validation import sha256_path
+from ael.validation import sha256_path, validate
 from tools.run_pbt_v2 import STUDY_PROMPT
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -17,6 +17,8 @@ FREEZE = (
     / "screening"
     / "property-based-testing-v2.freeze.json"
 )
+SEASON = ROOT / "studies" / "agent-skills-season-1"
+RESULT = SEASON / "results" / "property-based-testing-v2"
 
 
 def observation(condition: str, accepted: bool) -> dict[str, object]:
@@ -32,6 +34,28 @@ def observation(condition: str, accepted: bool) -> dict[str, object]:
 
 
 class PbtPairTests(unittest.TestCase):
+    def test_terminal_public_result_is_complete_and_bounded(self) -> None:
+        decision = json.loads((RESULT / "decision.json").read_text(encoding="utf-8"))
+        self.assertEqual("reject_all_critical_failure", decision["outcome"])
+        self.assertEqual(4, decision["counts"]["complete_pairs"])
+        self.assertEqual(0, decision["counts"]["favorable_pairs"])
+        self.assertEqual(0, decision["counts"]["unfavorable_pairs"])
+        self.assertEqual(4, decision["counts"]["tied_pairs"])
+        self.assertEqual(2, decision["counts"]["treatment_critical_failures"])
+        self.assertFalse((RESULT / "confirmation-decision.json").exists())
+        self.assertEqual(8, len(list((RESULT / "runs").glob("*.json"))))
+        documents, issues = validate(
+            [
+                SEASON / "concept.json",
+                SEASON / "manifests" / "property-based-testing-v2.study-manifest.json",
+                RESULT / "evidence-receipt.json",
+                RESULT / "measurement-set.json",
+                RESULT / "runs",
+            ]
+        )
+        self.assertEqual([], [str(issue) for issue in issues])
+        self.assertEqual(12, len(documents))
+
     def test_public_freeze_binds_current_study_code_and_prompt(self) -> None:
         bundle = json.loads(FREEZE.read_text(encoding="utf-8"))
         self.assertEqual(

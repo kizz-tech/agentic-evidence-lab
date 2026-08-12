@@ -1,0 +1,164 @@
+{
+  "schema_version": "ael.evidence-receipt/0.1",
+  "object_type": "evidence_receipt",
+  "receipt_id": "kizz:ael:receipt:agent-skills-season-1:pbt-v2",
+  "generated_at": "2026-08-12T17:29:24+03:00",
+  "concept_ref": {
+    "concept_id": "kizz:ael:concept:public-agent-skill-effectiveness",
+    "revision": 1,
+    "uri": "../../concept.json",
+    "sha256": "832391e453e62d7615ec67d150534a074d043a76346a9d3b8e83e21a45aac5a6",
+    "visibility": "public"
+  },
+  "study_ref": {
+    "study_id": "kizz:ael:study:agent-skills-season-1:property-based-testing",
+    "revision": 2,
+    "uri": "../../manifests/property-based-testing-v2.study-manifest.json",
+    "sha256": "48b4d8211412ad06123a27cee10cc7051a6a5d9e5d79d055fe98715ff36f6d62",
+    "visibility": "public"
+  },
+  "run_record_refs": [
+    {
+      "run_id": "kizz:ael:run:agent-skills-season-1:property-based-testing-v2:P-S01:B0:R01",
+      "uri": "runs/P-S01-B0-R01.json",
+      "sha256": "f92768de66234e5c0b7bc00bbc2e067054ae3c1ca4da14cede89101a7d4ccf37",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:agent-skills-season-1:property-based-testing-v2:P-S01:S1:R01",
+      "uri": "runs/P-S01-S1-R01.json",
+      "sha256": "848d294a13583f25b5d709993f76aebb6d1f2f2d2a66d34bed5a088cb460817d",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:agent-skills-season-1:property-based-testing-v2:P-S02:B0:R01",
+      "uri": "runs/P-S02-B0-R01.json",
+      "sha256": "cf070ab2c8b166276e4e0dc8102cf990cf68b1454b152f2fe3abccf1ae4d87b3",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:agent-skills-season-1:property-based-testing-v2:P-S02:S1:R01",
+      "uri": "runs/P-S02-S1-R01.json",
+      "sha256": "de96eef924e54995a1dd3b06c4559e1942db29283dc49a09b8737730c2deaffe",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:agent-skills-season-1:property-based-testing-v2:P-S03:B0:R01",
+      "uri": "runs/P-S03-B0-R01.json",
+      "sha256": "aea819bbf1e01c29b383911a6a1121a6cf4b2e44b27f9742c32236a7cd8851ab",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:agent-skills-season-1:property-based-testing-v2:P-S03:S1:R01",
+      "uri": "runs/P-S03-S1-R01.json",
+      "sha256": "3b19adc51fb12ea80ecff8530679c95b28fd15477af1e26d218a0fc6062472a4",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:agent-skills-season-1:property-based-testing-v2:P-S04:B0:R01",
+      "uri": "runs/P-S04-B0-R01.json",
+      "sha256": "ee11abaed993f8083a267346470c3f743f56b2f8b10287b8b78c62ed59684b13",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:agent-skills-season-1:property-based-testing-v2:P-S04:S1:R01",
+      "uri": "runs/P-S04-S1-R01.json",
+      "sha256": "5ca5ed0127590840c6e2bec4dd174cec01a5be6ce38610c23390b78f12ad7c72",
+      "visibility": "public"
+    }
+  ],
+  "measurement_set_ref": {
+    "measurement_set_id": "kizz:ael:measurements:agent-skills-season-1:pbt-v2",
+    "uri": "measurement-set.json",
+    "sha256": "e77974bec757ed9af6280dd95ce1899897f11aa3c9c8dd1c2891ee49445251a5",
+    "visibility": "public"
+  },
+  "evidence_level": "controlled_effect_observed",
+  "reproducibility": "rerunnable",
+  "independence": {
+    "label": "maintainer_evaluated",
+    "role_overlaps": [
+      "Kizz authored the tasks, operated the runner, evaluated deterministic outcomes, and owns the decision."
+    ],
+    "disclosure": "This is a preregistered maintainer pilot, not independent verification."
+  },
+  "decision": {
+    "disposition": "reject",
+    "summary": "S1 did not meet the frozen selection or confirmation rule on this pilot surface.",
+    "scope": [
+      "the exact frozen PBT v2 serialization and normalization tasks",
+      "Codex CLI 0.146.0 with gpt-5.6-sol at xhigh effort",
+      "preregistration commit 610f0d9e1e19d9c89dd6beba8fab7900222df5dd"
+    ],
+    "reversal_trigger": "Re-evaluate after any intervention, task, evaluator, runtime, model, prompt, budget, or provider-behavior change."
+  },
+  "evaluated_claims": [
+    {
+      "claim_id": "AEL-PBT-V2-01",
+      "statement": "S1 changed hidden-edge acceptance enough to satisfy the frozen terminal rule on the exact pilot cells.",
+      "status": "contradicted",
+      "claim_level": "factor_causal",
+      "scope": [
+        "exact matched serialization and normalization pilot cells"
+      ],
+      "evidence_refs": [
+        "hidden_acceptance:P-S01:B0:R01",
+        "hidden_acceptance:P-S01:S1:R01",
+        "hidden_acceptance:P-S02:B0:R01",
+        "hidden_acceptance:P-S02:S1:R01",
+        "hidden_acceptance:P-S03:B0:R01",
+        "hidden_acceptance:P-S03:S1:R01",
+        "hidden_acceptance:P-S04:B0:R01",
+        "hidden_acceptance:P-S04:S1:R01"
+      ],
+      "falsifier": "A retained cell, frozen-rule recomputation, or untouched confirmation result contradicts the published counts or outcome."
+    },
+    {
+      "claim_id": "AEL-PBT-V2-02",
+      "statement": "The public decision is bound to a preregistered freeze and private pack composites that preceded scored calls.",
+      "status": "supported",
+      "claim_level": "workflow",
+      "scope": [
+        "freeze and result artifacts in this repository"
+      ],
+      "evidence_refs": [
+        "screening-decision.json",
+        "decision.json"
+      ],
+      "falsifier": "Git history or retained private evidence shows a scored call preceding the freeze or a pack hash mismatch."
+    }
+  ],
+  "unsupported_inferences": [
+    "Property-based-testing skills work in general.",
+    "The skill independently caused defect discovery or prevention rather than a final hidden-acceptance difference.",
+    "The result transfers to other defect families, tasks, models, CLIs, repositories, or production systems.",
+    "The maintainer-evaluated result is independent verification.",
+    "A token or latency difference from this small pilot is a stable cost effect."
+  ],
+  "limitations": [
+    "The terminal decision used 4 matched pairs and has wide task-sampling uncertainty.",
+    "Tasks, raw events, candidates, and deterministic evaluator outputs remain private and are represented by opaque hashes.",
+    "Kizz authored, operated, and evaluated this pilot; no independent replication exists.",
+    "The provider exposed a model identifier but not an immutable model revision.",
+    "The reusable ChatGPT credential was process-readable; persisted output was exact-value scanned, but encrypted provider traffic was not inspected."
+  ],
+  "invalidation_triggers": [
+    "A pack hash, freeze hash, preregistration SHA, observation hash, or published count fails verification",
+    "A scored call is shown to predate preregistration",
+    "A task, evaluator, prompt, source, model, effort, image, budget, or decision rule changed after freeze",
+    "Public language promotes this bounded pilot into a general skill or model claim"
+  ],
+  "state": {
+    "experiment": "PBT v2 terminal outcome: reject_all_critical_failure",
+    "artifact": "frozen private task composites represented by hashes; sanitized evidence materialized",
+    "repository": "result package prepared in the local release candidate",
+    "publication": "prepared, not published",
+    "deployment": "not deployed",
+    "outcome": "hidden-edge acceptance observed on exact pilot cells; downstream production outcome unmeasured"
+  },
+  "publication_state": "public_ready",
+  "generator": {
+    "name": "agentic-evidence-lab",
+    "version": "0.1.0a3"
+  }
+}

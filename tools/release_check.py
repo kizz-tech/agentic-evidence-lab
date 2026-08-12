@@ -132,12 +132,12 @@ def main() -> int:
             continue
         failures.extend(payload_failures(relative, payload))
 
-    expected_version = "0.1.0a2"
+    expected_version = "0.1.0a3"
     if __version__ != expected_version:
         failures.append(f"package version is {__version__}, expected {expected_version}")
     citation = (ROOT / "CITATION.cff").read_text(encoding="utf-8")
-    if 'version: "0.1.0-alpha.2"' not in citation:
-        failures.append("CITATION.cff release version is not 0.1.0-alpha.2")
+    if 'version: "0.1.0-alpha.3"' not in citation:
+        failures.append("CITATION.cff release version is not 0.1.0-alpha.3")
 
     if failures:
         for failure in failures:

@@ -1,7 +1,7 @@
 schema_version = "ael.study-season/0.1-dev"
 season_id = "agent-skills-season-1"
 title = "Do Agent Skills Actually Work? — Season 1"
-state = "property_based_testing_v2_preregistered_scored_calls_zero"
+state = "property_based_testing_v2_terminal_reject_all_critical_failure"
 comparison_policy = "No cross-study aggregate. Rank only conditions inside the same frozen study contract."
 source_lock = "sources.lock.toml"
 concept = "concept.json"

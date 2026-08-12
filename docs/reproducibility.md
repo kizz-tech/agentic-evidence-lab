@@ -5,7 +5,7 @@ comparison, not a claim that stochastic model behavior is byte-identical.
 
 ## Deterministic release checks
 
-From a clean checkout of `v0.1.0-alpha.2`:
+From a clean checkout of `v0.1.0-alpha.3`:
 
 ```bash
 uv sync --locked --all-groups
