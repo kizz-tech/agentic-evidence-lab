@@ -1,0 +1,100 @@
+schema_version = "ael.study-season/0.1-dev"
+season_id = "agent-skills-season-1"
+title = "Do Agent Skills Actually Work? — Season 1"
+state = "activation_calibration_complete_effectiveness_unrun"
+comparison_policy = "No cross-study aggregate. Rank only conditions inside the same frozen study contract."
+source_lock = "sources.lock.toml"
+concept = "concept.json"
+public_calibration_pack = "task-pack/calibration-v1"
+hidden_pack_policy = "Screening and confirmation tasks and rubrics remain outside public Git history; public receipts retain opaque immutable digests."
+hosted_execution_gate = "maintainer_reviewed_pinned_snapshots_only"
+
+[[studies]]
+ordinal = 1
+study_id = "truthful-completion"
+title = "Truthful completion"
+protocol = "protocols/01-truthful-completion.md"
+source_ids = ["superpowers-verification"]
+primary_endpoint = "unsupported completion claim rate"
+first_wave = true
+
+[[studies]]
+ordinal = 2
+study_id = "debugging-tournament"
+title = "Debugging tournament"
+protocol = "protocols/02-debugging-tournament.md"
+source_ids = ["superpowers-systematic-debugging", "every-ce-debug"]
+primary_endpoint = "root-cause-correct repair rate"
+first_wave = true
+
+[[studies]]
+ordinal = 3
+study_id = "test-driven-development"
+title = "Test-driven development"
+protocol = "protocols/03-test-driven-development.md"
+source_ids = ["superpowers-test-driven-development"]
+primary_endpoint = "behavioral regression detection before implementation completion"
+first_wave = false
+
+[[studies]]
+ordinal = 4
+study_id = "property-based-testing"
+title = "Property-based testing"
+protocol = "protocols/04-property-based-testing.md"
+source_ids = ["trailofbits-property-based-testing"]
+primary_endpoint = "seeded edge-case defect detection rate"
+first_wave = true
+
+[[studies]]
+ordinal = 5
+study_id = "differential-security-review"
+title = "Differential security review"
+protocol = "protocols/05-differential-security-review.md"
+source_ids = ["trailofbits-differential-review"]
+primary_endpoint = "critical security regression recall at bounded false-positive count"
+first_wave = false
+
+[[studies]]
+ordinal = 6
+study_id = "review-team-topology"
+title = "One reviewer versus a review team"
+protocol = "protocols/06-review-team-topology.md"
+source_ids = ["every-ce-code-review"]
+primary_endpoint = "actionable defect recall after deduplication"
+first_wave = false
+
+[[studies]]
+ordinal = 7
+study_id = "mcp-server-construction"
+title = "MCP server construction"
+protocol = "protocols/07-mcp-server-construction.md"
+source_ids = ["anthropic-mcp-builder"]
+primary_endpoint = "protocol-conformant task completion rate"
+first_wave = false
+
+[[studies]]
+ordinal = 8
+study_id = "webapp-testing"
+title = "Web application testing"
+protocol = "protocols/08-webapp-testing.md"
+source_ids = ["anthropic-webapp-testing"]
+primary_endpoint = "user-visible regression detection and reproducible evidence rate"
+first_wave = false
+
+[[studies]]
+ordinal = 9
+study_id = "frontend-design"
+title = "Frontend design"
+protocol = "protocols/09-frontend-design.md"
+source_ids = ["anthropic-frontend-design"]
+primary_endpoint = "blinded preference under accessibility and task-success gates"
+first_wave = false
+
+[[studies]]
+ordinal = 10
+study_id = "recursive-skill-improvement"
+title = "Recursive skill improvement"
+protocol = "protocols/10-recursive-skill-improvement.md"
+source_ids = ["anthropic-skill-creator", "trailofbits-skill-improver"]
+primary_endpoint = "held-out skill-task improvement without new critical failures"
+first_wave = false

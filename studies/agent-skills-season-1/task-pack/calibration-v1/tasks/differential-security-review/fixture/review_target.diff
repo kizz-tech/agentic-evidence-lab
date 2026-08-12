@@ -1,0 +1,13 @@
+diff --git a/auth.py b/auth.py
+index 7b18f3a..b86e019 100644
+--- a/auth.py
++++ b/auth.py
+@@ -1,7 +1,6 @@
+-import hmac
+-
+ def valid_signature(expected: str, supplied: str) -> bool:
+-    return hmac.compare_digest(expected, supplied)
++    return expected == supplied
+ 
+ def authorize(expected: str, supplied: str) -> bool:
+     return valid_signature(expected, supplied)

@@ -17,6 +17,7 @@ from ael.sandbox import (
     _validate_image_reference,
     tree_sha256,
 )
+from ael.taskpack import evaluate_candidate
 
 
 class SandboxPolicyTests(unittest.TestCase):
@@ -137,6 +138,32 @@ class SandboxPolicyTests(unittest.TestCase):
             leaked = _scan_exact_secret_values(output, auth)
             self.assertEqual(["leak.txt"], leaked["files_with_matches"])
             self.assertNotIn(secret, str(leaked))
+
+    @patch("ael.taskpack.run_container")
+    def test_candidate_evaluator_stages_inside_validated_output_root(
+        self, run_container: object
+    ) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            task = root / "task"
+            candidate = root / "candidate"
+            output = root / "output"
+            (task / "fixture").mkdir(parents=True)
+            (task / "evaluator").mkdir()
+            candidate.mkdir()
+            (task / "fixture" / "TASK.md").write_text("task\n", encoding="utf-8")
+            (task / "evaluator" / "test_acceptance.py").write_text(
+                "raise SystemExit(0)\n", encoding="utf-8"
+            )
+            (candidate / "tests").mkdir()
+            run_container.side_effect = [
+                type("Result", (), {"exit_code": 0})(),
+                type("Result", (), {"exit_code": 0})(),
+            ]
+            result = evaluate_candidate(task, candidate, output)
+            self.assertTrue(result["accepted"])
+            acceptance_fixture = Path(run_container.call_args_list[1].args[0])
+            self.assertEqual(output.resolve(), acceptance_fixture.parent.resolve())
 
 
 if __name__ == "__main__":

@@ -24,6 +24,12 @@ from ael.sandbox import (
     docker_doctor,
     run_container,
 )
+from ael.source_lock import (
+    load_source_lock,
+    source_by_id,
+    validate_source_lock,
+    verify_checkout,
+)
 from ael.taskpack import check_adaptation_pack, evaluate_candidate
 from ael.validation import sha256_path, validate
 
@@ -205,6 +211,40 @@ def _taskpack_evaluate(args: argparse.Namespace) -> int:
     return 0 if result["accepted"] else 1
 
 
+def _source_lock_check(args: argparse.Namespace) -> int:
+    try:
+        data = load_source_lock(Path(args.lock).resolve())
+    except SandboxError as exc:
+        print(f"source-lock check failed: {exc}", file=sys.stderr)
+        return 1
+    issues = validate_source_lock(data)
+    if issues:
+        for issue in issues:
+            print(issue, file=sys.stderr)
+        print(f"source-lock check failed: {len(issues)} issue(s)", file=sys.stderr)
+        return 1
+    print(f"source-lock check passed: {len(data['sources'])} source(s)")
+    return 0
+
+
+def _source_lock_verify(args: argparse.Namespace) -> int:
+    try:
+        data = load_source_lock(Path(args.lock).resolve())
+        issues = validate_source_lock(data)
+        if issues:
+            raise SandboxError(f"source lock has {len(issues)} validation issue(s)")
+        source = source_by_id(data, args.source_id)
+        result = verify_checkout(source, Path(args.checkout))
+    except SandboxError as exc:
+        print(f"source-lock verification failed: {exc}", file=sys.stderr)
+        return 1
+    print(
+        "source-lock verification passed: "
+        f"source={result['source_id']} revision={result['revision']} tree={result['tree_sha256']}"
+    )
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="ael", description="Agentic Evidence Lab contract tools")
     parser.add_argument("--version", action="version", version=__version__)
@@ -319,6 +359,25 @@ def build_parser() -> argparse.ArgumentParser:
     taskpack_evaluate_parser.add_argument("--output", required=True)
     taskpack_evaluate_parser.add_argument("--image", default=DEFAULT_IMAGE)
     taskpack_evaluate_parser.set_defaults(handler=_taskpack_evaluate)
+
+    source_lock_parser = subparsers.add_parser(
+        "source-lock", help="validate and verify immutable third-party source references"
+    )
+    source_lock_subparsers = source_lock_parser.add_subparsers(
+        dest="source_lock_command", required=True
+    )
+    source_lock_check_parser = source_lock_subparsers.add_parser(
+        "check", help="validate source-lock metadata and execution gates"
+    )
+    source_lock_check_parser.add_argument("lock", help="source lock TOML")
+    source_lock_check_parser.set_defaults(handler=_source_lock_check)
+    source_lock_verify_parser = source_lock_subparsers.add_parser(
+        "verify", help="verify one caller-provided Git checkout without executing it"
+    )
+    source_lock_verify_parser.add_argument("lock", help="source lock TOML")
+    source_lock_verify_parser.add_argument("--source-id", required=True)
+    source_lock_verify_parser.add_argument("--checkout", required=True)
+    source_lock_verify_parser.set_defaults(handler=_source_lock_verify)
     return parser
 
 

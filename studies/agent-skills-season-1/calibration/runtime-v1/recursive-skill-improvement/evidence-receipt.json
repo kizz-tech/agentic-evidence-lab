@@ -1,0 +1,149 @@
+{
+  "schema_version": "ael.evidence-receipt/0.1",
+  "object_type": "evidence_receipt",
+  "receipt_id": "kizz:ael:receipt:agent-skills-season-1:recursive-skill-improvement:activation-v1",
+  "generated_at": "2026-08-12T20:30:00+03:00",
+  "concept_ref": {
+    "concept_id": "kizz:ael:concept:public-agent-skill-effectiveness",
+    "revision": 1,
+    "uri": "../../../concept.json",
+    "sha256": "832391e453e62d7615ec67d150534a074d043a76346a9d3b8e83e21a45aac5a6",
+    "visibility": "public"
+  },
+  "study_ref": {
+    "study_id": "kizz:ael:study:agent-skills-season-1:recursive-skill-improvement",
+    "revision": 1,
+    "uri": "../../../manifests/recursive-skill-improvement.study-manifest.json",
+    "sha256": "a5ccd8ce3579bbe9432157b6c42dd223a041dbb5598d78c012a09509524750af",
+    "visibility": "public"
+  },
+  "run_record_refs": [
+    {
+      "run_id": "kizz:ael:run:agent-skills-season-1:recursive-skill-improvement:B0:01",
+      "uri": "runs/B0-01.json",
+      "sha256": "8e2d5175af565444885e604950def582e4a6775ecfb16bad46a10cb49ea47335",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:agent-skills-season-1:recursive-skill-improvement:S1:01",
+      "uri": "runs/S1-01.json",
+      "sha256": "3509cf9b214506f286eac415498b4635ce6a194394fe80d144ac5f12608c80a5",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:agent-skills-season-1:recursive-skill-improvement:S2:01",
+      "uri": "runs/S2-01.json",
+      "sha256": "b8be3150815a5504b35218b3693c2dbb660ef972bc9c4afb8f802ab7b9487949",
+      "visibility": "public"
+    }
+  ],
+  "measurement_set_ref": {
+    "measurement_set_id": "kizz:ael:measurements:agent-skills-season-1:recursive-skill-improvement:activation-v1",
+    "uri": "measurement-set.json",
+    "sha256": "ca722b901ab4cbe32049102516b98711b6a056a2ceee0c0887cfe415ef462e09",
+    "visibility": "public"
+  },
+  "evidence_level": "runtime_conformant",
+  "reproducibility": "rerunnable",
+  "independence": {
+    "label": "maintainer_evaluated",
+    "role_overlaps": [
+      "Kizz owns source selection, task pack, execution, evaluation, and continuation decision."
+    ],
+    "disclosure": "This is maintainer activation calibration, not independent certification or a confirmatory skill-effect study."
+  },
+  "decision": {
+    "disposition": "narrow",
+    "summary": "The pinned condition is execution-compatible with the current Codex Docker adapter and may proceed to discriminating screening; this calibration does not establish effectiveness.",
+    "scope": [
+      "Codex CLI 0.146.0 with gpt-5.6-sol at xhigh effort",
+      "the exact pinned runner and proxy image identities in the run records",
+      "one public maintainer-authored mechanics task",
+      "one non-randomized repeat per listed condition"
+    ],
+    "reversal_trigger": "Re-evaluate after any source, task, runner, model, effort, evaluator, or credential-boundary change, or if a repeated screening study contradicts this compatibility result."
+  },
+  "evaluated_claims": [
+    {
+      "claim_id": "AEL-S1-RECURSIVE-SKILL-IMPROVEMENT-CAL-01",
+      "statement": "The listed conditions reached a normal Codex terminal state and were evaluated against the public mechanics task.",
+      "status": "supported",
+      "claim_level": "workflow",
+      "scope": [
+        "listed activation-v1 cells",
+        "maintainer-controlled fixture"
+      ],
+      "evidence_refs": [
+        "acceptance:B0",
+        "acceptance:S1",
+        "acceptance:S2"
+      ],
+      "falsifier": "A retained invocation or evaluation shows an invalid runtime, changed fixture, or missing terminal evaluation."
+    },
+    {
+      "claim_id": "AEL-S1-RECURSIVE-SKILL-IMPROVEMENT-CAL-02",
+      "statement": "Every treatment skill was installed and explicitly read during its assigned treatment cell.",
+      "status": "supported",
+      "claim_level": "artifact",
+      "scope": [
+        "listed treatment cells",
+        "retained private Codex event streams"
+      ],
+      "evidence_refs": [
+        "skill-activation:S1",
+        "skill-activation:S2"
+      ],
+      "falsifier": "A retained treatment event stream lacks the exact installed SKILL.md read."
+    },
+    {
+      "claim_id": "AEL-S1-RECURSIVE-SKILL-IMPROVEMENT-CAL-03",
+      "statement": "This single public calibration task does not identify a skill-effect difference or support a leaderboard position.",
+      "status": "bounded",
+      "claim_level": "workflow",
+      "scope": [
+        "single public calibration repeat"
+      ],
+      "evidence_refs": [
+        "acceptance:B0",
+        "acceptance:S1",
+        "acceptance:S2"
+      ],
+      "falsifier": "A frozen repeated screening or holdout study measures the prespecified primary estimand with uncertainty and critical-failure gates."
+    }
+  ],
+  "unsupported_inferences": [
+    "The treatment skill improves correctness, quality, security, design quality, or cost-effectiveness.",
+    "A treatment that used fewer tokens or less wall time is superior.",
+    "The result transfers to real repositories, other tasks, models, or agent runtimes.",
+    "Codex is superior to Claude Code, Cursor, another CLI, or a raw model API.",
+    "The current runner is safe for arbitrary unreviewed third-party submissions."
+  ],
+  "limitations": [
+    "One non-randomized public calibration repeat was run per listed condition; this is not an effect estimate.",
+    "The public mechanics task is intentionally small and may prescribe behavior that masks treatment differences.",
+    "Kizz selected the sources, authored the task, operated the runner, and evaluated the result.",
+    "The provider exposes a model identifier but not an immutable model revision.",
+    "Realized token usage and wall time were recorded but not forced to equality.",
+    "The maintainer-approved reusable ChatGPT credential was process-readable; persisted outputs were exact-value scanned, but encrypted provider traffic was not inspected.",
+    "No effectiveness, transfer, production, downstream rework, or user outcome was measured."
+  ],
+  "invalidation_triggers": [
+    "A change to a pinned source, task, Codex version, model, effort, image, proxy policy, prompt, or evaluator",
+    "Evidence that credential material entered persisted artifacts or an unauthorized network path",
+    "A repeated screening or real-shadow study contradicts the activation observation",
+    "A public claim presents this calibration as effectiveness evidence or a leaderboard result"
+  ],
+  "state": {
+    "experiment": "activation calibration completed; effectiveness screening not run",
+    "artifact": "source-locked public intervention snapshot and calibration task locally validated",
+    "repository": "generated evidence present in the local release candidate",
+    "publication": "prepared, not published",
+    "deployment": "not deployed",
+    "outcome": "not observed"
+  },
+  "publication_state": "public_ready",
+  "generator": {
+    "name": "agentic-evidence-lab",
+    "version": "0.1.0a2"
+  }
+}

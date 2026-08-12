@@ -1,0 +1,300 @@
+{
+  "schema_version": "ael.measurement-set/0.1",
+  "object_type": "measurement_set",
+  "measurement_set_id": "kizz:ael:measurements:agent-skills-season-1:differential-security-review:activation-v1",
+  "study_ref": {
+    "study_id": "kizz:ael:study:agent-skills-season-1:differential-security-review",
+    "revision": 1,
+    "uri": "../../../manifests/differential-security-review.study-manifest.json",
+    "sha256": "8f6057188a407d233743b86587615a85e38edd1b080701d7d6662ea8ab062248",
+    "visibility": "public"
+  },
+  "measurements": [
+    {
+      "measurement_id": "acceptance:B0",
+      "kind": "deterministic",
+      "metric": "calibration_task_accepted",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:differential-security-review:B0:01"
+      ],
+      "condition_id": "B0",
+      "task_id": "B0",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:differential-security-review:B0:01:evaluation",
+          "sha256": "ffe25b0ac1c331ca2923f188ecaa250413ead92b467a11289598a9a8da3b709e",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "visible-tests:B0",
+      "kind": "deterministic",
+      "metric": "visible_tests_passed",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:differential-security-review:B0:01"
+      ],
+      "condition_id": "B0",
+      "task_id": "B0",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:differential-security-review:B0:01:evaluation",
+          "sha256": "ffe25b0ac1c331ca2923f188ecaa250413ead92b467a11289598a9a8da3b709e",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated-work:B0",
+      "kind": "cost",
+      "metric": "generated_work_tokens",
+      "value": 3499,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:differential-security-review:B0:01"
+      ],
+      "condition_id": "B0",
+      "task_id": "B0",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:differential-security-review:B0:01:events",
+          "sha256": "317e5fcde3166919dc0ec50bc5436383e0676aacddb3c53541f587ad2c7609ae",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "wall-time:B0",
+      "kind": "cost",
+      "metric": "wall_time",
+      "value": 67955,
+      "unit": "milliseconds",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:differential-security-review:B0:01"
+      ],
+      "condition_id": "B0",
+      "task_id": "B0",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:differential-security-review:B0:01:events",
+          "sha256": "317e5fcde3166919dc0ec50bc5436383e0676aacddb3c53541f587ad2c7609ae",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "acceptance:S1",
+      "kind": "deterministic",
+      "metric": "calibration_task_accepted",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:differential-security-review:S1:01"
+      ],
+      "condition_id": "S1",
+      "task_id": "S1",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:differential-security-review:S1:01:evaluation",
+          "sha256": "eca855244f30e51201dcdba445191cb0252d986db640040557a20a54247e7067",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "visible-tests:S1",
+      "kind": "deterministic",
+      "metric": "visible_tests_passed",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:differential-security-review:S1:01"
+      ],
+      "condition_id": "S1",
+      "task_id": "S1",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:differential-security-review:S1:01:evaluation",
+          "sha256": "eca855244f30e51201dcdba445191cb0252d986db640040557a20a54247e7067",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated-work:S1",
+      "kind": "cost",
+      "metric": "generated_work_tokens",
+      "value": 3901,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:differential-security-review:S1:01"
+      ],
+      "condition_id": "S1",
+      "task_id": "S1",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:differential-security-review:S1:01:events",
+          "sha256": "c612c9a0e5e891af972a878b4ffa7c9f78c0bea33023cb42df0fb94eb400f1ad",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "wall-time:S1",
+      "kind": "cost",
+      "metric": "wall_time",
+      "value": 86883,
+      "unit": "milliseconds",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:differential-security-review:S1:01"
+      ],
+      "condition_id": "S1",
+      "task_id": "S1",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:differential-security-review:S1:01:events",
+          "sha256": "c612c9a0e5e891af972a878b4ffa7c9f78c0bea33023cb42df0fb94eb400f1ad",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "skill-activation:S1",
+      "kind": "process",
+      "metric": "skill_activated",
+      "value": true,
+      "unit": "boolean",
+      "direction": "target",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:differential-security-review:S1:01"
+      ],
+      "condition_id": "S1",
+      "task_id": "S1",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:differential-security-review:S1:01:events",
+          "sha256": "c612c9a0e5e891af972a878b4ffa7c9f78c0bea33023cb42df0fb94eb400f1ad",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    }
+  ],
+  "critical_failures": [
+    {
+      "failure_id": "canonical-fixture-or-runtime-integrity-failure",
+      "severity": "critical",
+      "observed": false,
+      "description": "No canonical fixture, runtime-image, intervention-injection, or persisted-secret integrity failure was observed.",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:differential-security-review:B0:01",
+        "kizz:ael:run:agent-skills-season-1:differential-security-review:S1:01"
+      ],
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:differential-security-review:B0:01:events",
+          "sha256": "317e5fcde3166919dc0ec50bc5436383e0676aacddb3c53541f587ad2c7609ae",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        },
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:differential-security-review:S1:01:events",
+          "sha256": "c612c9a0e5e891af972a878b4ffa7c9f78c0bea33023cb42df0fb94eb400f1ad",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "One non-randomized public calibration repeat was run per listed condition; this is not an effect estimate.",
+    "The public mechanics task is intentionally small and may prescribe behavior that masks treatment differences.",
+    "Kizz selected the sources, authored the task, operated the runner, and evaluated the result.",
+    "The provider exposes a model identifier but not an immutable model revision.",
+    "Realized token usage and wall time were recorded but not forced to equality.",
+    "The maintainer-approved reusable ChatGPT credential was process-readable; persisted outputs were exact-value scanned, but encrypted provider traffic was not inspected.",
+    "No effectiveness, transfer, production, downstream rework, or user outcome was measured."
+  ],
+  "source_refs": [
+    {
+      "uri": "urn:kizz:ael:private-run-set:agent-skills-season-1:differential-security-review:activation-v1",
+      "sha256": "5a1b9762a19f7868f546816ea4d3296755bc9318096fef69c1ce0fb3b4d55273",
+      "revision": "runtime-v1-calibration-1",
+      "visibility": "private"
+    }
+  ]
+}

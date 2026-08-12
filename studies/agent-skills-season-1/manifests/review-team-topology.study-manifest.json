@@ -1,0 +1,191 @@
+{
+  "schema_version": "ael.study-manifest/0.1",
+  "object_type": "study_manifest",
+  "study_id": "kizz:ael:study:agent-skills-season-1:review-team-topology",
+  "revision": 1,
+  "status": "draft",
+  "decision_question": "At a matched total-system budget, does the frozen ce-code-review topology produce more actionable non-duplicate findings than one strong reviewer?",
+  "comparison_mode": "controlled_factor",
+  "primary_estimand": {
+    "name": "actionable defect recall after deduplication",
+    "description": "Matched-condition difference in actionable defect recall after deduplication; critical failures, invalid runs, cost, and latency remain separate gates.",
+    "unit_of_analysis": "task cluster",
+    "aggregation": "Report task and stratum outcomes before a prespecified paired aggregate; numeric threshold and uncertainty method remain calibration-blocked."
+  },
+  "concept_ref": {
+    "concept_id": "kizz:ael:concept:public-agent-skill-effectiveness",
+    "revision": 1,
+    "uri": "../concept.json",
+    "sha256": "832391e453e62d7615ec67d150534a074d043a76346a9d3b8e83e21a45aac5a6",
+    "visibility": "public"
+  },
+  "conditions": [
+    {
+      "condition_id": "B0",
+      "label": "Frozen strong Codex baseline",
+      "role": "baseline",
+      "intervention_class": "topology",
+      "intervention_ref": {
+        "uri": "urn:kizz:ael:season1:baseline:review-team-topology:unfrozen",
+        "visibility": "private"
+      },
+      "changed_factors": [],
+      "delta_from_baseline": "Reference condition; exact runtime and context snapshot remain to be frozen after activation calibration."
+    },
+    {
+      "condition_id": "S1",
+      "label": "every-ce-code-review",
+      "role": "treatment",
+      "intervention_class": "skill",
+      "intervention_ref": {
+        "uri": "https://github.com/EveryInc/compound-engineering-plugin/tree/071b08ea7d30e74c5210eb9ef9d62a4c8f4b8b81/skills/ce-code-review",
+        "sha256": "b90352717c0eb8bdfd511e3f47bf93da42d9e041419930da046b8233b529669d",
+        "revision": "071b08ea7d30e74c5210eb9ef9d62a4c8f4b8b81",
+        "visibility": "public"
+      },
+      "changed_factors": [
+        "installed_skill_tree",
+        "instruction_context"
+      ],
+      "delta_from_baseline": "Adds the exact source-locked upstream skill tree to the otherwise frozen base condition. The raw upstream tree activated in Codex calibration; upstream runtime assumptions may still limit behavior and any later compatibility bundle is a distinct intervention."
+    }
+  ],
+  "task_packs": [
+    {
+      "task_pack_id": "agent-skills-season-1-calibration-v1",
+      "revision": 4,
+      "role": "calibration",
+      "strata": [
+        "review-team-topology"
+      ],
+      "artifact_ref": {
+        "uri": "../task-pack/calibration-v1/task-pack.toml",
+        "sha256": "c5ae7c9d8b31878f0f8079fe8d79f0a0d676b8111e895f28d25f96b6abeefa4d",
+        "visibility": "public"
+      },
+      "contamination_notes": [
+        "Public mechanics task only; cannot enter a skill-effect estimate or hidden confirmation pack."
+      ]
+    },
+    {
+      "task_pack_id": "review-team-topology-screening",
+      "revision": 1,
+      "role": "screening",
+      "artifact_ref": {
+        "uri": "urn:kizz:ael:season1:review-team-topology:screening:unfrozen",
+        "visibility": "hidden"
+      },
+      "contamination_notes": [
+        "Must not prescribe the target behavior or reuse public calibration defects."
+      ]
+    },
+    {
+      "task_pack_id": "review-team-topology-confirmation",
+      "revision": 1,
+      "role": "holdout",
+      "artifact_ref": {
+        "uri": "urn:kizz:ael:season1:review-team-topology:confirmation:unfrozen",
+        "visibility": "hidden"
+      },
+      "contamination_notes": [
+        "No candidate author, adaptation run, or screening evaluator may access this pack before finalist freeze."
+      ]
+    }
+  ],
+  "budget": {
+    "status": "uncalibrated",
+    "description": "Match total-system resources after activation calibration; no numeric execution cap is yet frozen.",
+    "dimensions": [
+      {
+        "metric": "generated_work_tokens",
+        "unit": "tokens",
+        "scope": "whole condition per task",
+        "rule": "count every parent, subagent, integration, and retry call",
+        "source": "activation calibration required"
+      },
+      {
+        "metric": "wall_time",
+        "unit": "seconds",
+        "scope": "whole condition per task",
+        "rule": "record actual elapsed time and predeclare timeout",
+        "source": "activation calibration required"
+      }
+    ]
+  },
+  "adaptation_boundary": {
+    "candidate_freeze_required": true,
+    "runner_up_substitution": "forbidden",
+    "description": "Every compatibility adaptation is a separately named content-addressed intervention. Screening selects one frozen finalist or rejects all; holdout failure cannot promote a runner-up."
+  },
+  "selection_rules": [
+    "Require source-lock verification and observed intervention activation before effectiveness screening.",
+    "Select or reject using only frozen screening rules; do not revise a candidate after seeing holdout evidence.",
+    "Keep invalid, negative, and inconclusive cells in the evidence package."
+  ],
+  "stop_rules": [
+    "Run third-party content only as an exact source-locked, maintainer-reviewed snapshot in maintainer-controlled execution; arbitrary submissions remain blocked.",
+    "Stop if task instructions prescribe the target behavior, evaluators cannot distinguish pristine inputs, or condition equality is not evidenced.",
+    "Retry only operationally invalid byte-equivalent runs under a predeclared rule.",
+    "Do not publish an effectiveness or leaderboard claim from the public calibration task."
+  ],
+  "roles": [
+    {
+      "role": "concept_owner",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    },
+    {
+      "role": "artifact_author",
+      "actor_id": "external-source-authors-and-adaptation-owner-unassigned",
+      "independence_group": "mixed"
+    },
+    {
+      "role": "task_pack_owner",
+      "actor_id": "season-one-task-owner-unassigned",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    },
+    {
+      "role": "runner_operator",
+      "actor_id": "season-one-runner-unassigned",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    },
+    {
+      "role": "evaluator",
+      "actor_id": "season-one-evaluator-unassigned",
+      "independence_group": "maintainer-evaluation"
+    },
+    {
+      "role": "decision_owner",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    },
+    {
+      "role": "receipt_signer",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    }
+  ],
+  "independence_claim": {
+    "label": "maintainer_evaluated",
+    "role_overlaps": [
+      "Kizz owns the experiment contract, task-pack process, execution, and final decision; external independent replication is not yet assigned."
+    ]
+  },
+  "analysis_plan": {
+    "uri": "../protocols/06-review-team-topology.md",
+    "sha256": "ba6e80270f08b48ea47073e4d6f30f2db1935d8642ab437cab631f0b1e6998ad",
+    "visibility": "public"
+  },
+  "source_refs": [
+    {
+      "uri": "../sources.lock.toml",
+      "sha256": "0c78e3ebc1431df7a99508b0cb149777d1cb3c79c9e2e4db2388bc63595ba806",
+      "visibility": "public"
+    }
+  ]
+}

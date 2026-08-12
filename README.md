@@ -27,10 +27,17 @@ boundaries.
 | --- | --- | --- | --- |
 | [Council Generation 1](reports/2026-08-12-council-generation-1.md) | Four engineering-decision workflows; 12 runs across three synthetic held-out cases | The adaptive candidate did not show a general quality advantage. It did repair a reproduced execution-conformance defect while preserving measured quality. | Adopt the exact workflow only for the measured local surface. Do not claim that councils are generally superior. |
 | [Focused Change Verification calibration](reports/2026-08-12-focused-change-verification-codex-calibration.md) | The same Codex stack with and without one skill; six runs across three public coding tasks | All six runs passed, so the task pack could not distinguish the skill from baseline. The runner and skill activation worked. | Keep the pack as an operational smoke test. Do not infer that the skill improves code quality. |
+| [Agent Skills Season 1 activation](reports/2026-08-12-agent-skills-season-1-activation.md) | 22 retained Codex cells across ten public-skill studies | The controlled runner and evaluators worked; ten of twelve treatment skills were explicitly read. MCP-builder and webapp-testing were injected but did not activate. Two benchmark defects were found and invalidated before publication. | Advance the ten activated snapshots to discriminating screening. Redesign MCP and webapp activation tasks first. Do not publish a skill-effect leaderboard. |
 
 These studies answer different questions and cannot be combined into a global
 ranking. See the [Results Index](RESULTS.md) for direct usage guidance,
 limitations, evidence strength, and links to every public artifact.
+
+Active research: [Agent Skills Season 1](studies/agent-skills-season-1/README.md)
+now has ten bounded protocols, exact upstream source locks, a healthy public
+calibration pack, and 22 formal activation records. It has no third-party
+skill-effect result yet; arbitrary submissions remain outside the
+maintainer-controlled execution boundary.
 
 ## What AEL helps answer
 
@@ -146,11 +153,12 @@ uses a disposable workspace, read-only canonical input, bounded resources, and
 no network by default.
 
 The hosted Codex adapter is **not safe for third-party submissions** because the
-agent process can read its reusable credential. It is restricted to
-maintainer-controlled content. Read [SECURITY.md](SECURITY.md) and
+agent process can read its reusable credential. It is restricted to exact,
+maintainer-reviewed snapshots and maintainer-controlled fixtures; arbitrary
+submissions remain blocked. Read [SECURITY.md](SECURITY.md) and
 [Container runner isolation](docs/runner-isolation.md) before execution.
 
-`v0.1.0-alpha.1` is pre-stable. It does not claim universal benchmarking,
+`v0.1.0-alpha.2` is pre-stable. It does not claim universal benchmarking,
 independent verification of Kizz-authored capabilities, model-only superiority
 from stack comparisons, or downstream production impact.
 

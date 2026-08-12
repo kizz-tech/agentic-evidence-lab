@@ -42,6 +42,14 @@ jobs:
         run: uv run python -m unittest discover -s tests -v
       - name: Validate public examples
         run: uv run ael validate examples
+      - name: Validate Agent Skills Season 1
+        run: |
+          uv run ael source-lock check studies/agent-skills-season-1/sources.lock.toml
+          uv run ael validate \
+            studies/agent-skills-season-1/concept.json \
+            studies/agent-skills-season-1/manifests \
+            studies/agent-skills-season-1/calibration/runtime-v1
+          uv run python tools/materialize_agent_skills_season.py --check
       - name: Check public release tree
         run: uv run python tools/release_check.py
       - name: Build distributions
@@ -68,6 +76,10 @@ jobs:
           uv pip install --python .release-venv/bin/python "$wheel"
           .release-venv/bin/ael --version
           .release-venv/bin/ael validate examples
+          .release-venv/bin/ael validate \
+            studies/agent-skills-season-1/concept.json \
+            studies/agent-skills-season-1/manifests \
+            studies/agent-skills-season-1/calibration/runtime-v1
 
   docker-smoke:
     name: docker isolation smoke
@@ -97,5 +109,12 @@ jobs:
             --image kizz/ael-runner:0.1.0-alpha.1 \
             -- python mutate.py
           test -f "$output/result/sandbox-invocation.json"
+      - name: Reproduce Agent Skills Season 1 public calibration
+        run: |
+          output=$(mktemp -d)
+          uv run ael taskpack check-adaptation \
+            studies/agent-skills-season-1/task-pack/calibration-v1 \
+            --output "$output/result" \
+            --image kizz/ael-runner:0.1.0-alpha.1
       - name: Check Codex image without credentials
         run: docker run --rm --entrypoint codex kizz/ael-codex-runner:0.146.0 --version

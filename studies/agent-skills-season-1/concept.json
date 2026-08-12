@@ -1,0 +1,38 @@
+{
+  "schema_version": "ael.concept/0.1",
+  "object_type": "concept",
+  "concept_id": "kizz:ael:concept:public-agent-skill-effectiveness",
+  "revision": 1,
+  "owner": {
+    "owner_id": "kizz-agentic-evidence-lab-maintainer",
+    "meaning_authority": "maintainer"
+  },
+  "idea": "Public agent skills should be treated as versioned interventions whose effects are tested on task-specific outcomes, activation, failure modes, cost, and transfer instead of inferred from persuasive instructions or repository popularity.",
+  "mechanism_hypothesis": "A skill may improve a bounded agent workflow when its instructions activate, add decision-relevant behavior not already present in the base prompt or runtime, and do not introduce offsetting omissions, latency, cost, or unsafe effects.",
+  "intended_scope": [
+    "software-development agent skills used through Codex-compatible file packaging",
+    "controlled-factor comparisons within one frozen task and runtime contract",
+    "operational-stack comparisons when exact factor isolation is impossible",
+    "public calibration fixtures plus separately held-out screening and confirmation packs"
+  ],
+  "known_non_goals": [
+    "a universal score for unrelated skills",
+    "a marketplace or package manager",
+    "a claim that instructions alone prove effectiveness",
+    "redistribution of third-party source trees",
+    "hosted execution of untrusted interventions with reusable credentials"
+  ],
+  "lineage": {
+    "change_summary": "Initial public-skills research program derived from the Contract v0 kernel and the ceiling-limited Focused Change Verification calibration."
+  },
+  "source_refs": [
+    {
+      "uri": "https://agentskills.io/specification",
+      "visibility": "public"
+    },
+    {
+      "uri": "../focused-change-verification/README.md",
+      "visibility": "public"
+    }
+  ]
+}

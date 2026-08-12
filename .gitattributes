@@ -1,0 +1,2 @@
+# Unified-diff fixtures require a single-space marker for blank context lines.
+studies/agent-skills-season-1/task-pack/calibration-v1/tasks/*/fixture/*.diff -whitespace

@@ -1,0 +1,95 @@
+{
+  "schema_version": "ael.run-record/0.1",
+  "object_type": "run_record",
+  "run_id": "kizz:ael:run:agent-skills-season-1:recursive-skill-improvement:B0:01",
+  "study_ref": {
+    "study_id": "kizz:ael:study:agent-skills-season-1:recursive-skill-improvement",
+    "revision": 1,
+    "uri": "../../../../manifests/recursive-skill-improvement.study-manifest.json",
+    "sha256": "a5ccd8ce3579bbe9432157b6c42dd223a041dbb5598d78c012a09509524750af",
+    "visibility": "public"
+  },
+  "condition_id": "B0",
+  "task": {
+    "task_pack_id": "agent-skills-season-1-calibration-v1",
+    "task_id": "recursive-skill-improvement",
+    "stratum": "recursive-skill-improvement",
+    "role": "calibration"
+  },
+  "repeat_index": 1,
+  "status": "valid",
+  "runtime": {
+    "harness": {
+      "name": "codex-cli",
+      "version": "0.146.0"
+    },
+    "model": {
+      "provider": "OpenAI",
+      "model_id": "gpt-5.6-sol",
+      "effort": "xhigh",
+      "immutable_revision_exposed": false
+    },
+    "sandbox": "restricted outer Docker; Codex inner sandbox disabled",
+    "environment": {
+      "ephemeral": true,
+      "identity_available": true,
+      "digest": "f5ebad21373b16799a4bb0189d917856280cca8394c25967c95d612b6b61ac08"
+    },
+    "context_sha256": "55fc8d1a0268e6cd77d21d9d0c01eb72c237c8f04106a42b6667c45e38bfed40"
+  },
+  "usage": {
+    "input_tokens": 279972,
+    "cached_input_tokens": 241152,
+    "output_tokens": 7550,
+    "reasoning_output_tokens": 3815,
+    "wall_time_ms": 189897
+  },
+  "outputs": [
+    {
+      "uri": "urn:kizz:ael:private-run:agent-skills-season-1:recursive-skill-improvement:B0:01:final",
+      "sha256": "e989db99bb871ec51e9af1827d32d717b6e0cdd7e13a429d8d851b39b2a29658",
+      "revision": "runtime-v1-calibration-1",
+      "visibility": "private"
+    },
+    {
+      "uri": "urn:kizz:ael:private-run:agent-skills-season-1:recursive-skill-improvement:B0:01:candidate",
+      "sha256": "cd55c0c4ce30716ec538e4bbdf6f080f407f02c909c8784d6a7236715bbf3c5c",
+      "revision": "runtime-v1-calibration-1",
+      "visibility": "private"
+    }
+  ],
+  "effects": [],
+  "event_summary": {
+    "captured": true,
+    "event_count": 36,
+    "authenticated_actor_ids": [],
+    "limitations": [
+      "The provider did not expose an immutable model revision.",
+      "Raw Codex events remain private and are represented here by content hashes.",
+      "Encrypted provider traffic was not inspected."
+    ]
+  },
+  "integrity_issues": [
+    "The maintainer-approved reusable ChatGPT credential was readable by the Codex process; only pinned, reviewed intervention snapshots and maintainer-controlled fixtures were used."
+  ],
+  "source_refs": [
+    {
+      "uri": "urn:kizz:ael:private-run:agent-skills-season-1:recursive-skill-improvement:B0:01:events",
+      "sha256": "b86b4736cdf44000c62b9f8e1a013cf4a1e1652d8f98b0a94184b7c1de337f47",
+      "revision": "runtime-v1-calibration-1",
+      "visibility": "private"
+    },
+    {
+      "uri": "urn:kizz:ael:private-run:agent-skills-season-1:recursive-skill-improvement:B0:01:invocation",
+      "sha256": "fd1d2afa1e75be142d413e8fee2b21cad67712fdb4dc7ab316a609cda860cf97",
+      "revision": "runtime-v1-calibration-1",
+      "visibility": "private"
+    },
+    {
+      "uri": "urn:kizz:ael:private-run:agent-skills-season-1:recursive-skill-improvement:B0:01:evaluation",
+      "sha256": "769d998ed825308d6ae4847d61c3c5c3cb9ad4046ee2a74c7746ab98d7b074f8",
+      "revision": "runtime-v1-calibration-1",
+      "visibility": "private"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "healthy": true,
+  "schema_version": "ael.task-pack-health/0.1",
+  "task_count": 10,
+  "task_pack": "calibration-v1",
+  "tasks": [
+    {
+      "fixture_sha256": "10b7545befd5730bf3d9b63c4ab411e9e6bad66d73e1b3f7341c30530f32eeaa",
+      "healthy": true,
+      "pristine_acceptance_exit_code": 1,
+      "task_id": "debugging-tournament",
+      "visible_exit_code": 0
+    },
+    {
+      "fixture_sha256": "741787912cc24351d3f7d607f136aff8f1b4dc3d77c40822a38b9e6b40535dfa",
+      "healthy": true,
+      "pristine_acceptance_exit_code": 1,
+      "task_id": "differential-security-review",
+      "visible_exit_code": 0
+    },
+    {
+      "fixture_sha256": "b18f797d52052512a0344d3c853d2341c615f8a87d99ea55a2c8e3ae3ad32cfa",
+      "healthy": true,
+      "pristine_acceptance_exit_code": 1,
+      "task_id": "frontend-design",
+      "visible_exit_code": 0
+    },
+    {
+      "fixture_sha256": "bde970596fe9adddc31198c8413647a592b1b4a9a7675613a8fc31af1628b226",
+      "healthy": true,
+      "pristine_acceptance_exit_code": 1,
+      "task_id": "mcp-server-construction",
+      "visible_exit_code": 0
+    },
+    {
+      "fixture_sha256": "348a89733c3b149ad57945964f86e6155175fcf4052e043872b5a08b42c5125f",
+      "healthy": true,
+      "pristine_acceptance_exit_code": 1,
+      "task_id": "property-based-testing",
+      "visible_exit_code": 0
+    },
+    {
+      "fixture_sha256": "55fc8d1a0268e6cd77d21d9d0c01eb72c237c8f04106a42b6667c45e38bfed40",
+      "healthy": true,
+      "pristine_acceptance_exit_code": 1,
+      "task_id": "recursive-skill-improvement",
+      "visible_exit_code": 0
+    },
+    {
+      "fixture_sha256": "ec9554019ae7a87bb77016c29f391df2bc5aa6e16d1d3a6bf91b8fad5787d188",
+      "healthy": true,
+      "pristine_acceptance_exit_code": 1,
+      "task_id": "review-team-topology",
+      "visible_exit_code": 0
+    },
+    {
+      "fixture_sha256": "86717eeba729420d8e934e0aca41dcbc93cf6db194539ec94a7af2f4cee65858",
+      "healthy": true,
+      "pristine_acceptance_exit_code": 1,
+      "task_id": "test-driven-development",
+      "visible_exit_code": 0
+    },
+    {
+      "fixture_sha256": "3a8d449790bf58bb980ef4741affbe350ec842634ee9a32018708ba2036e92ac",
+      "healthy": true,
+      "pristine_acceptance_exit_code": 1,
+      "task_id": "truthful-completion",
+      "visible_exit_code": 0
+    },
+    {
+      "fixture_sha256": "cbaf540cf8764b2340a8a340cb6fce7cec25d52edd351585a5e31c997a5c9ed4",
+      "healthy": true,
+      "pristine_acceptance_exit_code": 1,
+      "task_id": "webapp-testing",
+      "visible_exit_code": 0
+    }
+  ]
+}

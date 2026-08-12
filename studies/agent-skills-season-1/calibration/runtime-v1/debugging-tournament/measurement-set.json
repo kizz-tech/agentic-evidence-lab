@@ -1,0 +1,442 @@
+{
+  "schema_version": "ael.measurement-set/0.1",
+  "object_type": "measurement_set",
+  "measurement_set_id": "kizz:ael:measurements:agent-skills-season-1:debugging-tournament:activation-v1",
+  "study_ref": {
+    "study_id": "kizz:ael:study:agent-skills-season-1:debugging-tournament",
+    "revision": 1,
+    "uri": "../../../manifests/debugging-tournament.study-manifest.json",
+    "sha256": "4ec68297896cafa999ad1c70c25105b77e98e7ed46f36cca890182fa788d76ef",
+    "visibility": "public"
+  },
+  "measurements": [
+    {
+      "measurement_id": "acceptance:B0",
+      "kind": "deterministic",
+      "metric": "calibration_task_accepted",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:debugging-tournament:B0:01"
+      ],
+      "condition_id": "B0",
+      "task_id": "B0",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:debugging-tournament:B0:01:evaluation",
+          "sha256": "e1a8992a5cad7c2aae98230ee9366837cb2d1238130664ba634dd0a659e54f22",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "visible-tests:B0",
+      "kind": "deterministic",
+      "metric": "visible_tests_passed",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:debugging-tournament:B0:01"
+      ],
+      "condition_id": "B0",
+      "task_id": "B0",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:debugging-tournament:B0:01:evaluation",
+          "sha256": "e1a8992a5cad7c2aae98230ee9366837cb2d1238130664ba634dd0a659e54f22",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated-work:B0",
+      "kind": "cost",
+      "metric": "generated_work_tokens",
+      "value": 3544,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:debugging-tournament:B0:01"
+      ],
+      "condition_id": "B0",
+      "task_id": "B0",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:debugging-tournament:B0:01:events",
+          "sha256": "5383095746d61a0f7b77d27ac8bae596533bb1f44dc44b19bd3e15e5e7176fc9",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "wall-time:B0",
+      "kind": "cost",
+      "metric": "wall_time",
+      "value": 71773,
+      "unit": "milliseconds",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:debugging-tournament:B0:01"
+      ],
+      "condition_id": "B0",
+      "task_id": "B0",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:debugging-tournament:B0:01:events",
+          "sha256": "5383095746d61a0f7b77d27ac8bae596533bb1f44dc44b19bd3e15e5e7176fc9",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "acceptance:S1",
+      "kind": "deterministic",
+      "metric": "calibration_task_accepted",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:debugging-tournament:S1:01"
+      ],
+      "condition_id": "S1",
+      "task_id": "S1",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:debugging-tournament:S1:01:evaluation",
+          "sha256": "ad2cb93a9ce41a653d054d241c59381e31d16f21132c8dc1b4cd009688eb09d0",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "visible-tests:S1",
+      "kind": "deterministic",
+      "metric": "visible_tests_passed",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:debugging-tournament:S1:01"
+      ],
+      "condition_id": "S1",
+      "task_id": "S1",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:debugging-tournament:S1:01:evaluation",
+          "sha256": "ad2cb93a9ce41a653d054d241c59381e31d16f21132c8dc1b4cd009688eb09d0",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated-work:S1",
+      "kind": "cost",
+      "metric": "generated_work_tokens",
+      "value": 4072,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:debugging-tournament:S1:01"
+      ],
+      "condition_id": "S1",
+      "task_id": "S1",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:debugging-tournament:S1:01:events",
+          "sha256": "1bb6bed9297f05df70907ca607eec42e6265b35298b78bb77dea766726ac2053",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "wall-time:S1",
+      "kind": "cost",
+      "metric": "wall_time",
+      "value": 87584,
+      "unit": "milliseconds",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:debugging-tournament:S1:01"
+      ],
+      "condition_id": "S1",
+      "task_id": "S1",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:debugging-tournament:S1:01:events",
+          "sha256": "1bb6bed9297f05df70907ca607eec42e6265b35298b78bb77dea766726ac2053",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "skill-activation:S1",
+      "kind": "process",
+      "metric": "skill_activated",
+      "value": true,
+      "unit": "boolean",
+      "direction": "target",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:debugging-tournament:S1:01"
+      ],
+      "condition_id": "S1",
+      "task_id": "S1",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:debugging-tournament:S1:01:events",
+          "sha256": "1bb6bed9297f05df70907ca607eec42e6265b35298b78bb77dea766726ac2053",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "acceptance:S2",
+      "kind": "deterministic",
+      "metric": "calibration_task_accepted",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:debugging-tournament:S2:01"
+      ],
+      "condition_id": "S2",
+      "task_id": "S2",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:debugging-tournament:S2:01:evaluation",
+          "sha256": "dbca4f694c9e7e93b1574d862680d7318db5ee3055d422cd2a8a82ddb20c8800",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "visible-tests:S2",
+      "kind": "deterministic",
+      "metric": "visible_tests_passed",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:debugging-tournament:S2:01"
+      ],
+      "condition_id": "S2",
+      "task_id": "S2",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:debugging-tournament:S2:01:evaluation",
+          "sha256": "dbca4f694c9e7e93b1574d862680d7318db5ee3055d422cd2a8a82ddb20c8800",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated-work:S2",
+      "kind": "cost",
+      "metric": "generated_work_tokens",
+      "value": 6564,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:debugging-tournament:S2:01"
+      ],
+      "condition_id": "S2",
+      "task_id": "S2",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:debugging-tournament:S2:01:events",
+          "sha256": "95f16c17deec8a689611aee9fddced14293973c23e97f51b2a1dc6af92ee3ccb",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "wall-time:S2",
+      "kind": "cost",
+      "metric": "wall_time",
+      "value": 134510,
+      "unit": "milliseconds",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:debugging-tournament:S2:01"
+      ],
+      "condition_id": "S2",
+      "task_id": "S2",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:debugging-tournament:S2:01:events",
+          "sha256": "95f16c17deec8a689611aee9fddced14293973c23e97f51b2a1dc6af92ee3ccb",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "skill-activation:S2",
+      "kind": "process",
+      "metric": "skill_activated",
+      "value": true,
+      "unit": "boolean",
+      "direction": "target",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:debugging-tournament:S2:01"
+      ],
+      "condition_id": "S2",
+      "task_id": "S2",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:debugging-tournament:S2:01:events",
+          "sha256": "95f16c17deec8a689611aee9fddced14293973c23e97f51b2a1dc6af92ee3ccb",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    }
+  ],
+  "critical_failures": [
+    {
+      "failure_id": "canonical-fixture-or-runtime-integrity-failure",
+      "severity": "critical",
+      "observed": false,
+      "description": "No canonical fixture, runtime-image, intervention-injection, or persisted-secret integrity failure was observed.",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:debugging-tournament:B0:01",
+        "kizz:ael:run:agent-skills-season-1:debugging-tournament:S1:01",
+        "kizz:ael:run:agent-skills-season-1:debugging-tournament:S2:01"
+      ],
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:debugging-tournament:B0:01:events",
+          "sha256": "5383095746d61a0f7b77d27ac8bae596533bb1f44dc44b19bd3e15e5e7176fc9",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        },
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:debugging-tournament:S1:01:events",
+          "sha256": "1bb6bed9297f05df70907ca607eec42e6265b35298b78bb77dea766726ac2053",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        },
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:debugging-tournament:S2:01:events",
+          "sha256": "95f16c17deec8a689611aee9fddced14293973c23e97f51b2a1dc6af92ee3ccb",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "One non-randomized public calibration repeat was run per listed condition; this is not an effect estimate.",
+    "The public mechanics task is intentionally small and may prescribe behavior that masks treatment differences.",
+    "Kizz selected the sources, authored the task, operated the runner, and evaluated the result.",
+    "The provider exposes a model identifier but not an immutable model revision.",
+    "Realized token usage and wall time were recorded but not forced to equality.",
+    "The maintainer-approved reusable ChatGPT credential was process-readable; persisted outputs were exact-value scanned, but encrypted provider traffic was not inspected.",
+    "No effectiveness, transfer, production, downstream rework, or user outcome was measured."
+  ],
+  "source_refs": [
+    {
+      "uri": "urn:kizz:ael:private-run-set:agent-skills-season-1:debugging-tournament:activation-v1",
+      "sha256": "8c00d0186cf61ecae88dfb2489f3d0b03ce948623073794f83e4c6584de93ed7",
+      "revision": "runtime-v1-calibration-1",
+      "visibility": "private"
+    }
+  ]
+}

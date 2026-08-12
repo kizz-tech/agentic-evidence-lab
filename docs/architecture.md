@@ -45,6 +45,21 @@ It is therefore limited to maintainer-controlled inputs. See
 acceptance tests initially fail, then evaluates an exported candidate against
 both. This is one adapter, not a universal task format.
 
+## Third-party source locks
+
+`ael.source_lock` validates metadata-only references to external capability
+trees and verifies a caller-provided Git checkout against the exact commit,
+repository-relative tree hash, and observed license file. It does not fetch,
+install, import, or execute the source. Registration and execution eligibility
+are separate states. The current hosted runner permits only exact source-locked
+snapshots that the maintainer reviewed and explicitly accepted for
+maintainer-controlled execution; arbitrary submissions remain blocked because
+its reusable credential is readable by the agent process.
+
+The first multi-study use is [Agent Skills Season 1](../studies/agent-skills-season-1/README.md).
+Its ten dossiers share the evidence envelope and isolation policy while keeping
+their metrics, task semantics, and evaluators local.
+
 ## Ownership boundaries
 
 - A capability repository owns its concept, prompts, tools, skills, versions,
@@ -54,6 +69,12 @@ both. This is one adapter, not a universal task format.
 - Evaluators own domain postconditions and cannot be replaced by model voting.
 - Private holdouts, raw hosted traces, and credentials remain outside the
   public repository.
+
+Private screening and confirmation packs also remain outside the Git worktree,
+not merely under an ignored directory. Public manifests and receipts retain
+only opaque identifiers, hashes, roles, and non-revealing strata. Operators
+place a unique reserved private-evidence canary inside each private pack; the
+release scan fails if any such bytes enter the public tree.
 
 The system is deliberately local and file-based in alpha. There is no database,
 RAG layer, hosted control plane, marketplace, or registry service.

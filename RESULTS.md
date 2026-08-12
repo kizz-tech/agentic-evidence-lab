@@ -92,7 +92,7 @@ These are plans, not completed evidence.
 | --- | --- | --- |
 | [Council Generation 2](studies/council-generation-2/README.md) | Draft and illustratively calibrated; not run | Test whether a frozen adaptive Council candidate beats a strong sequential baseline with the same knowledge and matched budget. |
 | [Focused Change Verification discriminating pack](studies/focused-change-verification/discriminating-pack-brief.md) | Design required | Test whether the skill changes verification routing and truthful state reporting when the task does not reveal the desired checks. |
-| Third-party capability transfer | Gated | Determine whether Contract v0 can evaluate a licensed external capability without owner-only assumptions. |
+| [Agent Skills Season 1 screening](studies/agent-skills-season-1/README.md) | Activation calibration completed: 22 formal run records, ten receipts, ten of twelve skills explicitly read; effectiveness unrun | Test verification, debugging, TDD, PBT, security review, review topology, MCP, web testing, frontend design, and recursive improvement without a false global score. |
 
 ## Why there is no leaderboard yet
 

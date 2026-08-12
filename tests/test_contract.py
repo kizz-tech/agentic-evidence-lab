@@ -142,6 +142,53 @@ class ContractValidationTests(unittest.TestCase):
             _, issues = validate([path])
         self.assertTrue(any("duplicate object member" in issue.message for issue in issues))
 
+    def test_distinct_study_revisions_can_validate_together(self) -> None:
+        study = json.loads((COUNCIL_EXAMPLE / "study-manifest.json").read_text(encoding="utf-8"))
+        study["status"] = "draft"
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            revision_one = root / "study-v1.json"
+            revision_two = root / "study-v2.json"
+            revision_one.write_text(json.dumps(study), encoding="utf-8")
+            study["revision"] = 2
+            revision_two.write_text(json.dumps(study), encoding="utf-8")
+            documents, issues = validate([revision_one, revision_two])
+        self.assertEqual([], [str(issue) for issue in issues])
+        self.assertEqual([1, 2], sorted(document.data["revision"] for document in documents))
+
+    def test_duplicate_study_revision_is_rejected(self) -> None:
+        study = json.loads((COUNCIL_EXAMPLE / "study-manifest.json").read_text(encoding="utf-8"))
+        study["status"] = "draft"
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "study-a.json").write_text(json.dumps(study), encoding="utf-8")
+            (root / "study-b.json").write_text(json.dumps(study), encoding="utf-8")
+            _, issues = validate([root])
+        self.assertTrue(any("duplicates" in issue.message for issue in issues))
+
+    def test_run_reference_resolves_exact_study_revision(self) -> None:
+        study = json.loads((COUNCIL_EXAMPLE / "study-manifest.json").read_text(encoding="utf-8"))
+        run = json.loads((COUNCIL_EXAMPLE / "runs" / "E1-C0.json").read_text(encoding="utf-8"))
+        study["status"] = "draft"
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            revision_one = root / "study-v1.json"
+            revision_two = root / "study-v2.json"
+            revision_one.write_text(json.dumps(study), encoding="utf-8")
+            study["revision"] = 2
+            revision_two.write_text(json.dumps(study), encoding="utf-8")
+            run["study_ref"]["revision"] = 2
+            run["study_ref"]["uri"] = "study-v1.json"
+            run["study_ref"]["sha256"] = sha256_path(revision_one)
+            run_path = root / "run.json"
+            run_path.write_text(json.dumps(run), encoding="utf-8")
+            _, issues = validate([root])
+        self.assertTrue(
+            any(
+                "referenced study revision hash does not match" in issue.message for issue in issues
+            )
+        )
+
     def test_nonfinite_json_numbers_are_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             path = Path(temporary) / "nonfinite.json"

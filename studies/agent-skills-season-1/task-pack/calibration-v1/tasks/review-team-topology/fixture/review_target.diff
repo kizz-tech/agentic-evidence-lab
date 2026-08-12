@@ -1,0 +1,19 @@
+diff --git a/service.py b/service.py
+index 521aefd..e8e6152 100644
+--- a/service.py
++++ b/service.py
+@@ -8,10 +8,11 @@ def lookup(connection, email):
+-    return connection.execute("select id from users where email = ?", (email,)).fetchone()
++    return connection.execute(f"select id from users where email = '{email}'").fetchone()
+ 
+ def refresh(cache, lock, key, value):
+     lock.acquire()
+-    try:
+-        cache[key] = value
+-    finally:
+-        lock.release()
++    if key in cache:
++        return cache[key]
++    cache[key] = value
++    lock.release()
+     return value

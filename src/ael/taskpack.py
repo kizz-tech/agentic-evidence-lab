@@ -66,7 +66,7 @@ def check_adaptation_pack(
             ["python", "-m", "unittest", "discover", "-s", "tests", "-v"],
             image=image,
         )
-        with tempfile.TemporaryDirectory(prefix=f"ael-{task_id}-") as temporary:
+        with tempfile.TemporaryDirectory(prefix=f"ael-{task_id}-", dir=output) as temporary:
             staging = Path(temporary)
             shutil.copytree(fixture, staging / "candidate", symlinks=True)
             shutil.copytree(evaluator, staging / "evaluator", symlinks=True)
@@ -130,7 +130,9 @@ def evaluate_candidate(
         ["python", "-m", "unittest", "discover", "-s", "tests", "-v"],
         image=image,
     )
-    with tempfile.TemporaryDirectory(prefix=f"ael-evaluate-{task_root.name}-") as temporary:
+    with tempfile.TemporaryDirectory(
+        prefix=f"ael-evaluate-{task_root.name}-", dir=output
+    ) as temporary:
         staging = Path(temporary)
         shutil.copytree(candidate, staging / "candidate", symlinks=True)
         shutil.copytree(evaluator, staging / "evaluator", symlinks=True)

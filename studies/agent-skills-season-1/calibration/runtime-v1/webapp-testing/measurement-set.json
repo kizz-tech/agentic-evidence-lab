@@ -1,0 +1,300 @@
+{
+  "schema_version": "ael.measurement-set/0.1",
+  "object_type": "measurement_set",
+  "measurement_set_id": "kizz:ael:measurements:agent-skills-season-1:webapp-testing:activation-v1",
+  "study_ref": {
+    "study_id": "kizz:ael:study:agent-skills-season-1:webapp-testing",
+    "revision": 1,
+    "uri": "../../../manifests/webapp-testing.study-manifest.json",
+    "sha256": "bbabd3793f05168c2aee8064421ef0dc22abc619d1f26c965e75dd3d7197d54e",
+    "visibility": "public"
+  },
+  "measurements": [
+    {
+      "measurement_id": "acceptance:B0",
+      "kind": "deterministic",
+      "metric": "calibration_task_accepted",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:webapp-testing:B0:01"
+      ],
+      "condition_id": "B0",
+      "task_id": "B0",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:webapp-testing:B0:01:evaluation",
+          "sha256": "16f1b6bbbba743cc4fdd71a5c8385849bea466c86875182dffc8d1bf1d8e0dcb",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "visible-tests:B0",
+      "kind": "deterministic",
+      "metric": "visible_tests_passed",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:webapp-testing:B0:01"
+      ],
+      "condition_id": "B0",
+      "task_id": "B0",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:webapp-testing:B0:01:evaluation",
+          "sha256": "16f1b6bbbba743cc4fdd71a5c8385849bea466c86875182dffc8d1bf1d8e0dcb",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated-work:B0",
+      "kind": "cost",
+      "metric": "generated_work_tokens",
+      "value": 7669,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:webapp-testing:B0:01"
+      ],
+      "condition_id": "B0",
+      "task_id": "B0",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:webapp-testing:B0:01:events",
+          "sha256": "3885af9418a7b73d5cf305c4f806b7677f1674731d3ab37bcf672922cb542585",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "wall-time:B0",
+      "kind": "cost",
+      "metric": "wall_time",
+      "value": 145210,
+      "unit": "milliseconds",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:webapp-testing:B0:01"
+      ],
+      "condition_id": "B0",
+      "task_id": "B0",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:webapp-testing:B0:01:events",
+          "sha256": "3885af9418a7b73d5cf305c4f806b7677f1674731d3ab37bcf672922cb542585",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "acceptance:S1",
+      "kind": "deterministic",
+      "metric": "calibration_task_accepted",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:webapp-testing:S1:01"
+      ],
+      "condition_id": "S1",
+      "task_id": "S1",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:webapp-testing:S1:01:evaluation",
+          "sha256": "01269b8d5cc8b09a91c93d1f2aa86e2a2322ace2574d3b2f877d7a1caee2eb12",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "visible-tests:S1",
+      "kind": "deterministic",
+      "metric": "visible_tests_passed",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:webapp-testing:S1:01"
+      ],
+      "condition_id": "S1",
+      "task_id": "S1",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:webapp-testing:S1:01:evaluation",
+          "sha256": "01269b8d5cc8b09a91c93d1f2aa86e2a2322ace2574d3b2f877d7a1caee2eb12",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated-work:S1",
+      "kind": "cost",
+      "metric": "generated_work_tokens",
+      "value": 8219,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:webapp-testing:S1:01"
+      ],
+      "condition_id": "S1",
+      "task_id": "S1",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:webapp-testing:S1:01:events",
+          "sha256": "44f925e8955aa796ac1ed23d68661ccffe6dc29ef8436d37534e71979058e894",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "wall-time:S1",
+      "kind": "cost",
+      "metric": "wall_time",
+      "value": 128470,
+      "unit": "milliseconds",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:webapp-testing:S1:01"
+      ],
+      "condition_id": "S1",
+      "task_id": "S1",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:webapp-testing:S1:01:events",
+          "sha256": "44f925e8955aa796ac1ed23d68661ccffe6dc29ef8436d37534e71979058e894",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "skill-activation:S1",
+      "kind": "process",
+      "metric": "skill_activated",
+      "value": false,
+      "unit": "boolean",
+      "direction": "target",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:webapp-testing:S1:01"
+      ],
+      "condition_id": "S1",
+      "task_id": "S1",
+      "stratum": "activation-calibration",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-taskpack-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:webapp-testing:S1:01:events",
+          "sha256": "44f925e8955aa796ac1ed23d68661ccffe6dc29ef8436d37534e71979058e894",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    }
+  ],
+  "critical_failures": [
+    {
+      "failure_id": "canonical-fixture-or-runtime-integrity-failure",
+      "severity": "critical",
+      "observed": false,
+      "description": "No canonical fixture, runtime-image, intervention-injection, or persisted-secret integrity failure was observed.",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:webapp-testing:B0:01",
+        "kizz:ael:run:agent-skills-season-1:webapp-testing:S1:01"
+      ],
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:webapp-testing:B0:01:events",
+          "sha256": "3885af9418a7b73d5cf305c4f806b7677f1674731d3ab37bcf672922cb542585",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        },
+        {
+          "uri": "urn:kizz:ael:private-run:agent-skills-season-1:webapp-testing:S1:01:events",
+          "sha256": "44f925e8955aa796ac1ed23d68661ccffe6dc29ef8436d37534e71979058e894",
+          "revision": "runtime-v1-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "One non-randomized public calibration repeat was run per listed condition; this is not an effect estimate.",
+    "The public mechanics task is intentionally small and may prescribe behavior that masks treatment differences.",
+    "Kizz selected the sources, authored the task, operated the runner, and evaluated the result.",
+    "The provider exposes a model identifier but not an immutable model revision.",
+    "Realized token usage and wall time were recorded but not forced to equality.",
+    "The maintainer-approved reusable ChatGPT credential was process-readable; persisted outputs were exact-value scanned, but encrypted provider traffic was not inspected.",
+    "No effectiveness, transfer, production, downstream rework, or user outcome was measured."
+  ],
+  "source_refs": [
+    {
+      "uri": "urn:kizz:ael:private-run-set:agent-skills-season-1:webapp-testing:activation-v1",
+      "sha256": "1b4aa7ab4ce2991b4cd82331e653996e804dec267da7065edf33bfb875c1df7e",
+      "revision": "runtime-v1-calibration-1",
+      "visibility": "private"
+    }
+  ]
+}

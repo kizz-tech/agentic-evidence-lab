@@ -27,6 +27,8 @@ IDENTITY_FIELDS = {
     "evidence_receipt": "receipt_id",
 }
 
+VERSIONED_OBJECT_TYPES = {"concept", "study_manifest"}
+
 EVALUATIVE_MEASUREMENT_KINDS = {"outcome", "subjective"}
 MAX_JSON_DOCUMENTS = 10_000
 MAX_JSON_BYTES = 8 * 1024 * 1024
@@ -46,6 +48,11 @@ class Document:
     def identity(self) -> str:
         field = IDENTITY_FIELDS.get(self.object_type)
         return str(self.data.get(field, "")) if field else ""
+
+    @property
+    def identity_key(self) -> tuple[str, str, int | None]:
+        revision = self.data.get("revision") if self.object_type in VERSIONED_OBJECT_TYPES else None
+        return self.object_type, self.identity, revision if isinstance(revision, int) else None
 
 
 @dataclass(frozen=True)
@@ -280,11 +287,48 @@ def _validate_study(document: Document) -> list[ValidationIssue]:
     return issues
 
 
-def _validate_run(document: Document, studies: dict[str, Document]) -> list[ValidationIssue]:
+def _study_reference_key(reference: dict[str, Any]) -> tuple[str, int] | None:
+    study_id = reference.get("study_id")
+    revision = reference.get("revision")
+    if not isinstance(study_id, str) or not isinstance(revision, int):
+        return None
+    return study_id, revision
+
+
+def _resolve_study(
+    document: Document,
+    reference: dict[str, Any],
+    studies: dict[tuple[str, int], Document],
+    location: str,
+) -> tuple[Document | None, list[ValidationIssue]]:
+    key = _study_reference_key(reference)
+    if key is None:
+        return None, []
+    study = studies.get(key)
+    if study is None:
+        return None, [
+            ValidationIssue(document.path, location, "referenced study revision was not loaded")
+        ]
+    expected_hash = reference.get("sha256")
+    if expected_hash and sha256_path(study.path) != expected_hash:
+        return study, [
+            ValidationIssue(
+                document.path,
+                f"{location}.sha256",
+                "referenced study revision hash does not match",
+            )
+        ]
+    return study, []
+
+
+def _validate_run(
+    document: Document, studies: dict[tuple[str, int], Document]
+) -> list[ValidationIssue]:
     data = document.data
     issues: list[ValidationIssue] = []
-    study_id = data.get("study_ref", {}).get("study_id")
-    study = studies.get(study_id)
+    study_ref = data.get("study_ref", {})
+    study, resolution_issues = _resolve_study(document, study_ref, studies, "study_ref")
+    issues.extend(resolution_issues)
     if study:
         conditions = {item["condition_id"] for item in study.data.get("conditions", [])}
         if data.get("condition_id") not in conditions:
@@ -300,19 +344,20 @@ def _validate_run(document: Document, studies: dict[str, Document]) -> list[Vali
                     document.path, "task.task_pack_id", "task pack is absent from referenced study"
                 )
             )
-        expected_hash = data.get("study_ref", {}).get("sha256")
-        if expected_hash and sha256_path(study.path) != expected_hash:
-            issues.append(
-                ValidationIssue(
-                    document.path, "study_ref.sha256", "referenced study hash does not match"
-                )
-            )
-    issues.extend(_validate_reference_hash(document, data.get("study_ref", {}), "study_ref"))
+    issues.extend(_validate_reference_hash(document, study_ref, "study_ref"))
     return issues
 
 
-def _validate_measurements(document: Document, runs: dict[str, Document]) -> list[ValidationIssue]:
+def _validate_measurements(
+    document: Document,
+    runs: dict[str, Document],
+    studies: dict[tuple[str, int], Document],
+) -> list[ValidationIssue]:
     issues: list[ValidationIssue] = []
+    study_ref = document.data.get("study_ref", {})
+    _study, resolution_issues = _resolve_study(document, study_ref, studies, "study_ref")
+    issues.extend(resolution_issues)
+    issues.extend(_validate_reference_hash(document, study_ref, "study_ref"))
     measurement_ids: list[str] = []
     for index, measurement in enumerate(document.data.get("measurements", [])):
         measurement_ids.append(measurement.get("measurement_id"))
@@ -339,32 +384,25 @@ def _validate_measurements(document: Document, runs: dict[str, Document]) -> lis
 
 def _validate_receipt(
     document: Document,
-    studies: dict[str, Document],
+    studies: dict[tuple[str, int], Document],
     runs: dict[str, Document],
     measurement_sets: dict[str, Document],
 ) -> list[ValidationIssue]:
     data = document.data
     issues: list[ValidationIssue] = []
     study_ref = data.get("study_ref", {})
-    study = studies.get(study_ref.get("study_id"))
-    if study:
-        expected_hash = study_ref.get("sha256")
-        if expected_hash and sha256_path(study.path) != expected_hash:
-            issues.append(
-                ValidationIssue(
-                    document.path, "study_ref.sha256", "referenced study hash does not match"
-                )
-            )
-        if study.data.get("comparison_mode") == "operational_stack":
-            for index, claim in enumerate(data.get("evaluated_claims", [])):
-                if claim.get("claim_level") in {"model_only", "factor_causal"}:
-                    issues.append(
-                        ValidationIssue(
-                            document.path,
-                            f"evaluated_claims.{index}.claim_level",
-                            "operational stack study cannot support model-only or factor-causal claim",
-                        )
+    study, resolution_issues = _resolve_study(document, study_ref, studies, "study_ref")
+    issues.extend(resolution_issues)
+    if study and study.data.get("comparison_mode") == "operational_stack":
+        for index, claim in enumerate(data.get("evaluated_claims", [])):
+            if claim.get("claim_level") in {"model_only", "factor_causal"}:
+                issues.append(
+                    ValidationIssue(
+                        document.path,
+                        f"evaluated_claims.{index}.claim_level",
+                        "operational stack study cannot support model-only or factor-causal claim",
                     )
+                )
     independence = data.get("independence", {})
     if independence.get("label") == "independently_verified" and independence.get("role_overlaps"):
         issues.append(
@@ -400,7 +438,7 @@ def _validate_receipt(
 def validate(paths: Iterable[Path]) -> tuple[list[Document], list[ValidationIssue]]:
     documents, issues = load_documents(paths)
     format_checker = FormatChecker()
-    identities: dict[tuple[str, str], Path] = {}
+    identities: dict[tuple[str, str, int | None], Path] = {}
 
     for document in documents:
         validator = Draft202012Validator(
@@ -412,7 +450,7 @@ def validate(paths: Iterable[Path]) -> tuple[list[Document], list[ValidationIssu
             issues.append(
                 ValidationIssue(document.path, _location(error.absolute_path), error.message)
             )
-        key = (document.object_type, document.identity)
+        key = document.identity_key
         if key in identities:
             issues.append(
                 ValidationIssue(
@@ -434,7 +472,11 @@ def validate(paths: Iterable[Path]) -> tuple[list[Document], list[ValidationIssu
                     )
                 )
 
-    studies = {doc.identity: doc for doc in documents if doc.object_type == "study_manifest"}
+    studies = {
+        (doc.identity, int(doc.data["revision"])): doc
+        for doc in documents
+        if doc.object_type == "study_manifest" and isinstance(doc.data.get("revision"), int)
+    }
     runs = {doc.identity: doc for doc in documents if doc.object_type == "run_record"}
     measurements = {doc.identity: doc for doc in documents if doc.object_type == "measurement_set"}
 
@@ -444,7 +486,7 @@ def validate(paths: Iterable[Path]) -> tuple[list[Document], list[ValidationIssu
         elif document.object_type == "run_record":
             issues.extend(_validate_run(document, studies))
         elif document.object_type == "measurement_set":
-            issues.extend(_validate_measurements(document, runs))
+            issues.extend(_validate_measurements(document, runs, studies))
         elif document.object_type == "evidence_receipt":
             issues.extend(_validate_receipt(document, studies, runs, measurements))
 

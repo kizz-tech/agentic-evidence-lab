@@ -1,0 +1,72 @@
+schema_version = "ael.task-pack-manifest/0.1-dev"
+task_pack_id = "agent-skills-season-1-calibration-v1"
+revision = 4
+role = "calibration"
+state = "frozen"
+visibility = "public"
+task_count = 10
+tasks_tree_sha256 = "2a6ad79e586f650eeb04d4fdca8ecb39c9ec77880112165f29a9feff3be50e0d"
+health_rule = "visible tests pass and pristine acceptance tests fail"
+health_result = "pass"
+validated_at = "2026-08-12"
+claim_boundary = "Runner and evaluator mechanics only; no skill-effect or cross-study ranking claim."
+
+[[tasks]]
+task_id = "debugging-tournament"
+stratum = "seeded-input-validation-defect"
+fixture_tree_sha256 = "10b7545befd5730bf3d9b63c4ab411e9e6bad66d73e1b3f7341c30530f32eeaa"
+evaluator_tree_sha256 = "f357f8093219661108d3ba65bc94259f024bc4039f08de53f44a66f69c173788"
+
+[[tasks]]
+task_id = "differential-security-review"
+stratum = "structured-security-diff-report"
+fixture_tree_sha256 = "741787912cc24351d3f7d607f136aff8f1b4dc3d77c40822a38b9e6b40535dfa"
+evaluator_tree_sha256 = "05911d2c0189c5b2bb564a1cb8473e4e85f731738cc371b2a805e609db0e1d0e"
+
+[[tasks]]
+task_id = "frontend-design"
+stratum = "semantic-static-frontend-artifact"
+fixture_tree_sha256 = "b18f797d52052512a0344d3c853d2341c615f8a87d99ea55a2c8e3ae3ad32cfa"
+evaluator_tree_sha256 = "e30457bb89ebf58cb286da87c3502013cdef46102ef085fd1b1975b943db8642"
+
+[[tasks]]
+task_id = "mcp-server-construction"
+stratum = "local-json-rpc-tool-contract"
+fixture_tree_sha256 = "bde970596fe9adddc31198c8413647a592b1b4a9a7675613a8fc31af1628b226"
+evaluator_tree_sha256 = "8c57dddf6548f465199eaf9aa093bd6f9ee9c9f97860afa5c6aa32821d9c4419"
+
+[[tasks]]
+task_id = "property-based-testing"
+stratum = "seeded-round-trip-edge-cases"
+fixture_tree_sha256 = "348a89733c3b149ad57945964f86e6155175fcf4052e043872b5a08b42c5125f"
+evaluator_tree_sha256 = "e6d01a6d65b44c4268079f752038845f3076af5bda3e80a7d5c9540fa5d69158"
+
+[[tasks]]
+task_id = "recursive-skill-improvement"
+stratum = "versioned-skill-artifact"
+fixture_tree_sha256 = "55fc8d1a0268e6cd77d21d9d0c01eb72c237c8f04106a42b6667c45e38bfed40"
+evaluator_tree_sha256 = "ef4e61d45c840f8dfa7634afc4165cf6ff04e011a2167ec9d347115768bc8495"
+
+[[tasks]]
+task_id = "review-team-topology"
+stratum = "deduplicated-multi-defect-review"
+fixture_tree_sha256 = "ec9554019ae7a87bb77016c29f391df2bc5aa6e16d1d3a6bf91b8fad5787d188"
+evaluator_tree_sha256 = "a0e5b5d23ce1f2177bcb40a4f17c1e09babbba5d83a32052702f2954cccad520"
+
+[[tasks]]
+task_id = "test-driven-development"
+stratum = "behavior-extension-final-state"
+fixture_tree_sha256 = "86717eeba729420d8e934e0aca41dcbc93cf6db194539ec94a7af2f4cee65858"
+evaluator_tree_sha256 = "43c09ec4f9045028de51d1529d37e85fa7af101d399828128d36078af4e70236"
+
+[[tasks]]
+task_id = "truthful-completion"
+stratum = "state-reporting-owner-behavior"
+fixture_tree_sha256 = "3a8d449790bf58bb980ef4741affbe350ec842634ee9a32018708ba2036e92ac"
+evaluator_tree_sha256 = "e696520c1c96120144c547a56c64485153425ddaf2cafc4b5ac6cb3d248365e4"
+
+[[tasks]]
+task_id = "webapp-testing"
+stratum = "local-user-visible-regression-artifact"
+fixture_tree_sha256 = "cbaf540cf8764b2340a8a340cb6fce7cec25d52edd351585a5e31c997a5c9ed4"
+evaluator_tree_sha256 = "96da90c1c5d832726c3f21d992261b7b9654e62a34db3f69b4acba7e024aeab5"

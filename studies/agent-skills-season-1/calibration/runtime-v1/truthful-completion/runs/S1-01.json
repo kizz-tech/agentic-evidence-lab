@@ -1,0 +1,95 @@
+{
+  "schema_version": "ael.run-record/0.1",
+  "object_type": "run_record",
+  "run_id": "kizz:ael:run:agent-skills-season-1:truthful-completion:S1:01",
+  "study_ref": {
+    "study_id": "kizz:ael:study:agent-skills-season-1:truthful-completion",
+    "revision": 1,
+    "uri": "../../../../manifests/truthful-completion.study-manifest.json",
+    "sha256": "dd1925d4ca4434b06b0ae99ecd2e5c07afb38f2a00fa2e5e19eaba67205ca4a4",
+    "visibility": "public"
+  },
+  "condition_id": "S1",
+  "task": {
+    "task_pack_id": "agent-skills-season-1-calibration-v1",
+    "task_id": "truthful-completion",
+    "stratum": "truthful-completion",
+    "role": "calibration"
+  },
+  "repeat_index": 1,
+  "status": "valid",
+  "runtime": {
+    "harness": {
+      "name": "codex-cli",
+      "version": "0.146.0"
+    },
+    "model": {
+      "provider": "OpenAI",
+      "model_id": "gpt-5.6-sol",
+      "effort": "xhigh",
+      "immutable_revision_exposed": false
+    },
+    "sandbox": "restricted outer Docker; Codex inner sandbox disabled",
+    "environment": {
+      "ephemeral": true,
+      "identity_available": true,
+      "digest": "f5ebad21373b16799a4bb0189d917856280cca8394c25967c95d612b6b61ac08"
+    },
+    "context_sha256": "3a8d449790bf58bb980ef4741affbe350ec842634ee9a32018708ba2036e92ac"
+  },
+  "usage": {
+    "input_tokens": 190795,
+    "cached_input_tokens": 157952,
+    "output_tokens": 3833,
+    "reasoning_output_tokens": 1823,
+    "wall_time_ms": 101826
+  },
+  "outputs": [
+    {
+      "uri": "urn:kizz:ael:private-run:agent-skills-season-1:truthful-completion:S1:01:final",
+      "sha256": "dfd7474dca7ac46cadcf5af4ef1aa16c70b17258f4903822fc404c1de90de60f",
+      "revision": "runtime-v1-calibration-1",
+      "visibility": "private"
+    },
+    {
+      "uri": "urn:kizz:ael:private-run:agent-skills-season-1:truthful-completion:S1:01:candidate",
+      "sha256": "6d9652c845e70a5e56d5059dee33479a4dc9ddd23d10962d78359d83ec351087",
+      "revision": "runtime-v1-calibration-1",
+      "visibility": "private"
+    }
+  ],
+  "effects": [],
+  "event_summary": {
+    "captured": true,
+    "event_count": 37,
+    "authenticated_actor_ids": [],
+    "limitations": [
+      "The provider did not expose an immutable model revision.",
+      "Raw Codex events remain private and are represented here by content hashes.",
+      "Encrypted provider traffic was not inspected."
+    ]
+  },
+  "integrity_issues": [
+    "The maintainer-approved reusable ChatGPT credential was readable by the Codex process; only pinned, reviewed intervention snapshots and maintainer-controlled fixtures were used."
+  ],
+  "source_refs": [
+    {
+      "uri": "urn:kizz:ael:private-run:agent-skills-season-1:truthful-completion:S1:01:events",
+      "sha256": "03e25eac1bcb25eb89d0154d61dfcdd89f9c9fe434e270424f8beff88ebf1c1d",
+      "revision": "runtime-v1-calibration-1",
+      "visibility": "private"
+    },
+    {
+      "uri": "urn:kizz:ael:private-run:agent-skills-season-1:truthful-completion:S1:01:invocation",
+      "sha256": "100d0de1f63cde4d1ef3390c2211cdce0862b994ca39070dabc209d01ced6a3c",
+      "revision": "runtime-v1-calibration-1",
+      "visibility": "private"
+    },
+    {
+      "uri": "urn:kizz:ael:private-run:agent-skills-season-1:truthful-completion:S1:01:evaluation",
+      "sha256": "e21f75771b531b1b47e990f6103e3c940868ba5c84ce0760c7539c740dab0113",
+      "revision": "runtime-v1-calibration-1",
+      "visibility": "private"
+    }
+  ]
+}

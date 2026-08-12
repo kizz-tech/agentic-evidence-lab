@@ -9,6 +9,7 @@ from ael import __version__
 
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED_FILES = {
+    ".gitattributes",
     ".github/CODEOWNERS",
     ".github/workflows/ci.yml",
     ".gitignore",
@@ -28,6 +29,7 @@ REQUIRED_FILES = {
     "uv.lock",
 }
 ALLOWED_TOP_LEVEL = {
+    ".gitattributes",
     ".github",
     ".gitignore",
     "AGENTS.md",
@@ -67,6 +69,7 @@ SECRET_PATTERNS = {
     "private key": re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
 }
 MAX_PUBLIC_FILE_BYTES = 2 * 1024 * 1024
+PRIVATE_EVIDENCE_CANARY_PREFIX = "AEL-HIDDEN-" + "CANARY:"
 
 
 def public_files() -> list[Path]:
@@ -77,6 +80,20 @@ def public_files() -> list[Path]:
         capture_output=True,
     )
     return [ROOT / item.decode("utf-8") for item in result.stdout.split(b"\0") if item]
+
+
+def payload_failures(relative: str, payload: str) -> list[str]:
+    failures: list[str] = []
+    personal_root = "/" + "Users/"
+    workspace_marker = "codex" + "-work1"
+    if personal_root in payload or workspace_marker in payload:
+        failures.append(f"personal absolute path or workspace marker: {relative}")
+    if PRIVATE_EVIDENCE_CANARY_PREFIX in payload:
+        failures.append(f"private evidence canary leaked into public tree: {relative}")
+    for label, pattern in SECRET_PATTERNS.items():
+        if pattern.search(payload):
+            failures.append(f"{label} shaped value: {relative}")
+    return failures
 
 
 def main() -> int:
@@ -113,20 +130,14 @@ def main() -> int:
         except UnicodeDecodeError:
             failures.append(f"public release file is not UTF-8 text: {relative}")
             continue
-        personal_root = "/" + "Users/"
-        workspace_marker = "codex" + "-work1"
-        if personal_root in payload or workspace_marker in payload:
-            failures.append(f"personal absolute path or workspace marker: {relative}")
-        for label, pattern in SECRET_PATTERNS.items():
-            if pattern.search(payload):
-                failures.append(f"{label} shaped value: {relative}")
+        failures.extend(payload_failures(relative, payload))
 
-    expected_version = "0.1.0a1"
+    expected_version = "0.1.0a2"
     if __version__ != expected_version:
         failures.append(f"package version is {__version__}, expected {expected_version}")
     citation = (ROOT / "CITATION.cff").read_text(encoding="utf-8")
-    if 'version: "0.1.0-alpha.1"' not in citation:
-        failures.append("CITATION.cff release version is not 0.1.0-alpha.1")
+    if 'version: "0.1.0-alpha.2"' not in citation:
+        failures.append("CITATION.cff release version is not 0.1.0-alpha.2")
 
     if failures:
         for failure in failures:

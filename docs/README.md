@@ -38,6 +38,8 @@ must not promote a stack result into a model-only claim.
   for the pre-stable contract.
 - [Release notes](release-notes/v0.1.0-alpha.1.md) — exact first-alpha contents
   and known limits.
+- [Release notes](release-notes/v0.1.0-alpha.2.md) — Agent Skills Season 1
+  activation evidence and exact study-revision validation.
 - [Changelog](../CHANGELOG.md) — user-visible project history.
 
 Machine-readable manifests, runs, measurements, and receipts live under
@@ -83,6 +85,9 @@ These documents describe planned or gated work, not completed evidence:
 - [Council Generation 2](../studies/council-generation-2/README.md)
 - [Focused Change Verification](../studies/focused-change-verification/README.md)
 - [Structural Search research program](structural-search.md)
+- [Agent Skills Season 1](../studies/agent-skills-season-1/README.md) — ten
+  bounded public-skill protocols, exact source locks, an executable public
+  calibration pack, and 22 activation records; no skill-effect result yet.
 
 Their draft manifests, simulations, and task-pack briefs must not be cited as
 successful experimental results.
@@ -95,6 +100,7 @@ Decision records preserve why important boundaries changed:
 - [Hosted Codex calibration boundary](decisions/2026-08-12-hosted-codex-calibration-boundary.md)
 - [External review and v0 direction](decisions/2026-08-12-review-intake-and-v0-direction.md)
 - [Structural Search roadmap](decisions/2026-08-12-structural-search-roadmap.md)
+- [Agent Skills Season 1 architecture](decisions/2026-08-12-agent-skills-season-1.md)
 
 [The Contract v0 drafting brief](contract-v0-brief.md) is retained as design
 history. It does not replace the executable [current Contract v0](contract-v0.md).
