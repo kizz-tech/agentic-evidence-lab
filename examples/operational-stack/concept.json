@@ -1,0 +1,27 @@
+{
+  "schema_version": "ael.concept/0.1",
+  "object_type": "concept",
+  "concept_id": "kizz:ael:example:configured-coding-stack-choice",
+  "revision": 1,
+  "owner": {
+    "owner_id": "kizz-ael-maintainer",
+    "meaning_authority": "maintainer"
+  },
+  "idea": "Compare two complete coding-agent stacks as users can actually configure them for one engineering task stratum.",
+  "mechanism_hypothesis": "Differences in the combined model, runtime, tools, skills, context policy, permissions, and workflow may produce a practically useful stack choice even when their individual causal contributions cannot be isolated.",
+  "intended_scope": [
+    "operational coding-stack selection",
+    "matched total budget",
+    "one declared repository and task stratum"
+  ],
+  "known_non_goals": [
+    "model-only superiority",
+    "causal attribution to one component",
+    "universal cross-repository leaderboard",
+    "claims outside the exact configured stacks"
+  ],
+  "lineage": {
+    "predecessor": null,
+    "change_summary": "Operational-stack claim-scope fixture for Contract v0."
+  }
+}

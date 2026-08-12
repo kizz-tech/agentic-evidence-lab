@@ -1,0 +1,1070 @@
+{
+  "schema_version": "ael.measurement-set/0.1",
+  "object_type": "measurement_set",
+  "measurement_set_id": "kizz:ael:measurements:focused-change-verification-calibration-v1",
+  "study_ref": {
+    "study_id": "kizz:ael:study:focused-change-verification-skill",
+    "revision": 1,
+    "uri": "../study-manifest.json",
+    "sha256": "330700bc8cb12d77520f251fb94f54c8b879a9915c39f530feaf5d56a1bed841",
+    "visibility": "public"
+  },
+  "measurements": [
+    {
+      "measurement_id": "acceptance:local-unit:S0",
+      "kind": "deterministic",
+      "metric": "held_out_acceptance_passed",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:local-unit-S0-01"
+      ],
+      "condition_id": "S0",
+      "task_id": "local-unit",
+      "stratum": "local-unit-change",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:local-unit-S0-01:evaluation",
+          "sha256": "e5f93ca5bb59a3c4be8dbc519f56271b5291e6f01df24a5d3e9582634a6fcd0f",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "visible-tests:local-unit:S0",
+      "kind": "deterministic",
+      "metric": "visible_tests_passed",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:local-unit-S0-01"
+      ],
+      "condition_id": "S0",
+      "task_id": "local-unit",
+      "stratum": "local-unit-change",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:local-unit-S0-01:evaluation",
+          "sha256": "e5f93ca5bb59a3c4be8dbc519f56271b5291e6f01df24a5d3e9582634a6fcd0f",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated-work:local-unit:S0",
+      "kind": "cost",
+      "metric": "generated_work_tokens",
+      "value": 4576,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:local-unit-S0-01"
+      ],
+      "condition_id": "S0",
+      "task_id": "local-unit",
+      "stratum": "local-unit-change",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:local-unit-S0-01:events",
+          "sha256": "de60f0412af9f3fb2a7559d7f1333fe571f2383266ccde5fd3b962abe54410f2",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "wall-time:local-unit:S0",
+      "kind": "cost",
+      "metric": "wall_time",
+      "value": 81959,
+      "unit": "milliseconds",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:local-unit-S0-01"
+      ],
+      "condition_id": "S0",
+      "task_id": "local-unit",
+      "stratum": "local-unit-change",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:local-unit-S0-01:events",
+          "sha256": "de60f0412af9f3fb2a7559d7f1333fe571f2383266ccde5fd3b962abe54410f2",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "acceptance:local-unit:S1",
+      "kind": "deterministic",
+      "metric": "held_out_acceptance_passed",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:local-unit-S1-01"
+      ],
+      "condition_id": "S1",
+      "task_id": "local-unit",
+      "stratum": "local-unit-change",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:local-unit-S1-01:evaluation",
+          "sha256": "be6205c8ea2b32e161bef53973d02cac13500785301253e89fdc422ef7b51f47",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "visible-tests:local-unit:S1",
+      "kind": "deterministic",
+      "metric": "visible_tests_passed",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:local-unit-S1-01"
+      ],
+      "condition_id": "S1",
+      "task_id": "local-unit",
+      "stratum": "local-unit-change",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:local-unit-S1-01:evaluation",
+          "sha256": "be6205c8ea2b32e161bef53973d02cac13500785301253e89fdc422ef7b51f47",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated-work:local-unit:S1",
+      "kind": "cost",
+      "metric": "generated_work_tokens",
+      "value": 5699,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:local-unit-S1-01"
+      ],
+      "condition_id": "S1",
+      "task_id": "local-unit",
+      "stratum": "local-unit-change",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:local-unit-S1-01:events",
+          "sha256": "387784007153a37f1969f2d7cc74d54c15c29edbbee38a5776b8ed4f2185fca1",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "wall-time:local-unit:S1",
+      "kind": "cost",
+      "metric": "wall_time",
+      "value": 104992,
+      "unit": "milliseconds",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:local-unit-S1-01"
+      ],
+      "condition_id": "S1",
+      "task_id": "local-unit",
+      "stratum": "local-unit-change",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:local-unit-S1-01:events",
+          "sha256": "387784007153a37f1969f2d7cc74d54c15c29edbbee38a5776b8ed4f2185fca1",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "skill-activation:local-unit:S1",
+      "kind": "process",
+      "metric": "skill_activated",
+      "value": true,
+      "unit": "boolean",
+      "direction": "target",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:local-unit-S1-01"
+      ],
+      "condition_id": "S1",
+      "task_id": "local-unit",
+      "stratum": "local-unit-change",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:local-unit-S1-01:events",
+          "sha256": "387784007153a37f1969f2d7cc74d54c15c29edbbee38a5776b8ed4f2185fca1",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "acceptance:cross-contract:S0",
+      "kind": "deterministic",
+      "metric": "held_out_acceptance_passed",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:cross-contract-S0-01"
+      ],
+      "condition_id": "S0",
+      "task_id": "cross-contract",
+      "stratum": "cross-module-contract-change",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:cross-contract-S0-01:evaluation",
+          "sha256": "f33b602df1756d37a6cae0a5b7a13250d74b28806297da9885e176922c040ded",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "visible-tests:cross-contract:S0",
+      "kind": "deterministic",
+      "metric": "visible_tests_passed",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:cross-contract-S0-01"
+      ],
+      "condition_id": "S0",
+      "task_id": "cross-contract",
+      "stratum": "cross-module-contract-change",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:cross-contract-S0-01:evaluation",
+          "sha256": "f33b602df1756d37a6cae0a5b7a13250d74b28806297da9885e176922c040ded",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated-work:cross-contract:S0",
+      "kind": "cost",
+      "metric": "generated_work_tokens",
+      "value": 4073,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:cross-contract-S0-01"
+      ],
+      "condition_id": "S0",
+      "task_id": "cross-contract",
+      "stratum": "cross-module-contract-change",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:cross-contract-S0-01:events",
+          "sha256": "a38b743953bb348cc90983f7ddb600601c675b2afd928804794bf2b7354a53d7",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "wall-time:cross-contract:S0",
+      "kind": "cost",
+      "metric": "wall_time",
+      "value": 83653,
+      "unit": "milliseconds",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:cross-contract-S0-01"
+      ],
+      "condition_id": "S0",
+      "task_id": "cross-contract",
+      "stratum": "cross-module-contract-change",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:cross-contract-S0-01:events",
+          "sha256": "a38b743953bb348cc90983f7ddb600601c675b2afd928804794bf2b7354a53d7",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "acceptance:cross-contract:S1",
+      "kind": "deterministic",
+      "metric": "held_out_acceptance_passed",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:cross-contract-S1-01"
+      ],
+      "condition_id": "S1",
+      "task_id": "cross-contract",
+      "stratum": "cross-module-contract-change",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:cross-contract-S1-01:evaluation",
+          "sha256": "e956411c026c26ed42b65cd9a698bbc067702ef3046d83da97a89cd78baf8b7f",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "visible-tests:cross-contract:S1",
+      "kind": "deterministic",
+      "metric": "visible_tests_passed",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:cross-contract-S1-01"
+      ],
+      "condition_id": "S1",
+      "task_id": "cross-contract",
+      "stratum": "cross-module-contract-change",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:cross-contract-S1-01:evaluation",
+          "sha256": "e956411c026c26ed42b65cd9a698bbc067702ef3046d83da97a89cd78baf8b7f",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated-work:cross-contract:S1",
+      "kind": "cost",
+      "metric": "generated_work_tokens",
+      "value": 5333,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:cross-contract-S1-01"
+      ],
+      "condition_id": "S1",
+      "task_id": "cross-contract",
+      "stratum": "cross-module-contract-change",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:cross-contract-S1-01:events",
+          "sha256": "f769d232d0b39179aabcca4e0eb5bb708f4128d3ce460154ed5181447b4bf2e9",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "wall-time:cross-contract:S1",
+      "kind": "cost",
+      "metric": "wall_time",
+      "value": 83788,
+      "unit": "milliseconds",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:cross-contract-S1-01"
+      ],
+      "condition_id": "S1",
+      "task_id": "cross-contract",
+      "stratum": "cross-module-contract-change",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:cross-contract-S1-01:events",
+          "sha256": "f769d232d0b39179aabcca4e0eb5bb708f4128d3ce460154ed5181447b4bf2e9",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "skill-activation:cross-contract:S1",
+      "kind": "process",
+      "metric": "skill_activated",
+      "value": true,
+      "unit": "boolean",
+      "direction": "target",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:cross-contract-S1-01"
+      ],
+      "condition_id": "S1",
+      "task_id": "cross-contract",
+      "stratum": "cross-module-contract-change",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:cross-contract-S1-01:events",
+          "sha256": "f769d232d0b39179aabcca4e0eb5bb708f4128d3ce460154ed5181447b4bf2e9",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "acceptance:migration:S0",
+      "kind": "deterministic",
+      "metric": "held_out_acceptance_passed",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:migration-S0-01"
+      ],
+      "condition_id": "S0",
+      "task_id": "migration",
+      "stratum": "migration-backed-change",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:migration-S0-01:evaluation",
+          "sha256": "b97f31a7b6d48c7e06c3d2bbad8e40c03c1e591df916d23851115bae3bf5c453",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "visible-tests:migration:S0",
+      "kind": "deterministic",
+      "metric": "visible_tests_passed",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:migration-S0-01"
+      ],
+      "condition_id": "S0",
+      "task_id": "migration",
+      "stratum": "migration-backed-change",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:migration-S0-01:evaluation",
+          "sha256": "b97f31a7b6d48c7e06c3d2bbad8e40c03c1e591df916d23851115bae3bf5c453",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated-work:migration:S0",
+      "kind": "cost",
+      "metric": "generated_work_tokens",
+      "value": 11607,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:migration-S0-01"
+      ],
+      "condition_id": "S0",
+      "task_id": "migration",
+      "stratum": "migration-backed-change",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:migration-S0-01:events",
+          "sha256": "b93cdefa36314024584fc1b8ade1fd6cd4abb32688b96d4299518387267c3371",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "wall-time:migration:S0",
+      "kind": "cost",
+      "metric": "wall_time",
+      "value": 166077,
+      "unit": "milliseconds",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:migration-S0-01"
+      ],
+      "condition_id": "S0",
+      "task_id": "migration",
+      "stratum": "migration-backed-change",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:migration-S0-01:events",
+          "sha256": "b93cdefa36314024584fc1b8ade1fd6cd4abb32688b96d4299518387267c3371",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "acceptance:migration:S1",
+      "kind": "deterministic",
+      "metric": "held_out_acceptance_passed",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:migration-S1-01"
+      ],
+      "condition_id": "S1",
+      "task_id": "migration",
+      "stratum": "migration-backed-change",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:migration-S1-01:evaluation",
+          "sha256": "b9d1ecc43db570c130248f292984718a3bf1e5207d9643f3b632ee005764ca96",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "visible-tests:migration:S1",
+      "kind": "deterministic",
+      "metric": "visible_tests_passed",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:migration-S1-01"
+      ],
+      "condition_id": "S1",
+      "task_id": "migration",
+      "stratum": "migration-backed-change",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:migration-S1-01:evaluation",
+          "sha256": "b9d1ecc43db570c130248f292984718a3bf1e5207d9643f3b632ee005764ca96",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated-work:migration:S1",
+      "kind": "cost",
+      "metric": "generated_work_tokens",
+      "value": 10912,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:migration-S1-01"
+      ],
+      "condition_id": "S1",
+      "task_id": "migration",
+      "stratum": "migration-backed-change",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:migration-S1-01:events",
+          "sha256": "eb810c1463454e754231d489e6d882a5833c8a4a864885fd3bab38105fb8a846",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "wall-time:migration:S1",
+      "kind": "cost",
+      "metric": "wall_time",
+      "value": 189605,
+      "unit": "milliseconds",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:migration-S1-01"
+      ],
+      "condition_id": "S1",
+      "task_id": "migration",
+      "stratum": "migration-backed-change",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:migration-S1-01:events",
+          "sha256": "eb810c1463454e754231d489e6d882a5833c8a4a864885fd3bab38105fb8a846",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "skill-activation:migration:S1",
+      "kind": "process",
+      "metric": "skill_activated",
+      "value": true,
+      "unit": "boolean",
+      "direction": "target",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:migration-S1-01"
+      ],
+      "condition_id": "S1",
+      "task_id": "migration",
+      "stratum": "migration-backed-change",
+      "evaluator": {
+        "evaluator_id": "ael-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:migration-S1-01:events",
+          "sha256": "eb810c1463454e754231d489e6d882a5833c8a4a864885fd3bab38105fb8a846",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "acceptance-total:S0",
+      "kind": "aggregate",
+      "metric": "accepted_tasks",
+      "value": 3,
+      "unit": "tasks",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:local-unit-S0-01",
+        "kizz:ael:run:focused-change-verification-calibration:cross-contract-S0-01",
+        "kizz:ael:run:focused-change-verification-calibration:migration-S0-01"
+      ],
+      "condition_id": "S0",
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:local-unit-S0-01:evaluation",
+          "sha256": "e5f93ca5bb59a3c4be8dbc519f56271b5291e6f01df24a5d3e9582634a6fcd0f",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        },
+        {
+          "uri": "urn:kizz:ael:private-run:cross-contract-S0-01:evaluation",
+          "sha256": "f33b602df1756d37a6cae0a5b7a13250d74b28806297da9885e176922c040ded",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        },
+        {
+          "uri": "urn:kizz:ael:private-run:migration-S0-01:evaluation",
+          "sha256": "b97f31a7b6d48c7e06c3d2bbad8e40c03c1e591df916d23851115bae3bf5c453",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated-work-total:S0",
+      "kind": "aggregate",
+      "metric": "generated_work_tokens",
+      "value": 20256,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:local-unit-S0-01",
+        "kizz:ael:run:focused-change-verification-calibration:cross-contract-S0-01",
+        "kizz:ael:run:focused-change-verification-calibration:migration-S0-01"
+      ],
+      "condition_id": "S0",
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:local-unit-S0-01:events",
+          "sha256": "de60f0412af9f3fb2a7559d7f1333fe571f2383266ccde5fd3b962abe54410f2",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        },
+        {
+          "uri": "urn:kizz:ael:private-run:cross-contract-S0-01:events",
+          "sha256": "a38b743953bb348cc90983f7ddb600601c675b2afd928804794bf2b7354a53d7",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        },
+        {
+          "uri": "urn:kizz:ael:private-run:migration-S0-01:events",
+          "sha256": "b93cdefa36314024584fc1b8ade1fd6cd4abb32688b96d4299518387267c3371",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "wall-time-total:S0",
+      "kind": "aggregate",
+      "metric": "wall_time",
+      "value": 331689,
+      "unit": "milliseconds",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:local-unit-S0-01",
+        "kizz:ael:run:focused-change-verification-calibration:cross-contract-S0-01",
+        "kizz:ael:run:focused-change-verification-calibration:migration-S0-01"
+      ],
+      "condition_id": "S0",
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:local-unit-S0-01:events",
+          "sha256": "de60f0412af9f3fb2a7559d7f1333fe571f2383266ccde5fd3b962abe54410f2",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        },
+        {
+          "uri": "urn:kizz:ael:private-run:cross-contract-S0-01:events",
+          "sha256": "a38b743953bb348cc90983f7ddb600601c675b2afd928804794bf2b7354a53d7",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        },
+        {
+          "uri": "urn:kizz:ael:private-run:migration-S0-01:events",
+          "sha256": "b93cdefa36314024584fc1b8ade1fd6cd4abb32688b96d4299518387267c3371",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "acceptance-total:S1",
+      "kind": "aggregate",
+      "metric": "accepted_tasks",
+      "value": 3,
+      "unit": "tasks",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:local-unit-S1-01",
+        "kizz:ael:run:focused-change-verification-calibration:cross-contract-S1-01",
+        "kizz:ael:run:focused-change-verification-calibration:migration-S1-01"
+      ],
+      "condition_id": "S1",
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:local-unit-S1-01:evaluation",
+          "sha256": "be6205c8ea2b32e161bef53973d02cac13500785301253e89fdc422ef7b51f47",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        },
+        {
+          "uri": "urn:kizz:ael:private-run:cross-contract-S1-01:evaluation",
+          "sha256": "e956411c026c26ed42b65cd9a698bbc067702ef3046d83da97a89cd78baf8b7f",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        },
+        {
+          "uri": "urn:kizz:ael:private-run:migration-S1-01:evaluation",
+          "sha256": "b9d1ecc43db570c130248f292984718a3bf1e5207d9643f3b632ee005764ca96",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated-work-total:S1",
+      "kind": "aggregate",
+      "metric": "generated_work_tokens",
+      "value": 21944,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:local-unit-S1-01",
+        "kizz:ael:run:focused-change-verification-calibration:cross-contract-S1-01",
+        "kizz:ael:run:focused-change-verification-calibration:migration-S1-01"
+      ],
+      "condition_id": "S1",
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:local-unit-S1-01:events",
+          "sha256": "387784007153a37f1969f2d7cc74d54c15c29edbbee38a5776b8ed4f2185fca1",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        },
+        {
+          "uri": "urn:kizz:ael:private-run:cross-contract-S1-01:events",
+          "sha256": "f769d232d0b39179aabcca4e0eb5bb708f4128d3ce460154ed5181447b4bf2e9",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        },
+        {
+          "uri": "urn:kizz:ael:private-run:migration-S1-01:events",
+          "sha256": "eb810c1463454e754231d489e6d882a5833c8a4a864885fd3bab38105fb8a846",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "wall-time-total:S1",
+      "kind": "aggregate",
+      "metric": "wall_time",
+      "value": 378385,
+      "unit": "milliseconds",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:local-unit-S1-01",
+        "kizz:ael:run:focused-change-verification-calibration:cross-contract-S1-01",
+        "kizz:ael:run:focused-change-verification-calibration:migration-S1-01"
+      ],
+      "condition_id": "S1",
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:local-unit-S1-01:events",
+          "sha256": "387784007153a37f1969f2d7cc74d54c15c29edbbee38a5776b8ed4f2185fca1",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        },
+        {
+          "uri": "urn:kizz:ael:private-run:cross-contract-S1-01:events",
+          "sha256": "f769d232d0b39179aabcca4e0eb5bb708f4128d3ce460154ed5181447b4bf2e9",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        },
+        {
+          "uri": "urn:kizz:ael:private-run:migration-S1-01:events",
+          "sha256": "eb810c1463454e754231d489e6d882a5833c8a4a864885fd3bab38105fb8a846",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    }
+  ],
+  "critical_failures": [
+    {
+      "failure_id": "canonical-fixture-mutation",
+      "severity": "critical",
+      "observed": false,
+      "description": "No canonical fixture hash changed during any of the six stable calibration cells.",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:local-unit-S0-01",
+        "kizz:ael:run:focused-change-verification-calibration:local-unit-S1-01",
+        "kizz:ael:run:focused-change-verification-calibration:cross-contract-S0-01",
+        "kizz:ael:run:focused-change-verification-calibration:cross-contract-S1-01",
+        "kizz:ael:run:focused-change-verification-calibration:migration-S0-01",
+        "kizz:ael:run:focused-change-verification-calibration:migration-S1-01"
+      ],
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:local-unit-S0-01:events",
+          "sha256": "de60f0412af9f3fb2a7559d7f1333fe571f2383266ccde5fd3b962abe54410f2",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        },
+        {
+          "uri": "urn:kizz:ael:private-run:local-unit-S1-01:events",
+          "sha256": "387784007153a37f1969f2d7cc74d54c15c29edbbee38a5776b8ed4f2185fca1",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        },
+        {
+          "uri": "urn:kizz:ael:private-run:cross-contract-S0-01:events",
+          "sha256": "a38b743953bb348cc90983f7ddb600601c675b2afd928804794bf2b7354a53d7",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        },
+        {
+          "uri": "urn:kizz:ael:private-run:cross-contract-S1-01:events",
+          "sha256": "f769d232d0b39179aabcca4e0eb5bb708f4128d3ce460154ed5181447b4bf2e9",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        },
+        {
+          "uri": "urn:kizz:ael:private-run:migration-S0-01:events",
+          "sha256": "b93cdefa36314024584fc1b8ade1fd6cd4abb32688b96d4299518387267c3371",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        },
+        {
+          "uri": "urn:kizz:ael:private-run:migration-S1-01:events",
+          "sha256": "eb810c1463454e754231d489e6d882a5833c8a4a864885fd3bab38105fb8a846",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "failure_id": "deterministic-acceptance-regression",
+      "severity": "high",
+      "observed": false,
+      "description": "All three baseline and all three treatment candidates passed their separate acceptance evaluator.",
+      "run_ids": [
+        "kizz:ael:run:focused-change-verification-calibration:local-unit-S0-01",
+        "kizz:ael:run:focused-change-verification-calibration:local-unit-S1-01",
+        "kizz:ael:run:focused-change-verification-calibration:cross-contract-S0-01",
+        "kizz:ael:run:focused-change-verification-calibration:cross-contract-S1-01",
+        "kizz:ael:run:focused-change-verification-calibration:migration-S0-01",
+        "kizz:ael:run:focused-change-verification-calibration:migration-S1-01"
+      ],
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:local-unit-S0-01:evaluation",
+          "sha256": "e5f93ca5bb59a3c4be8dbc519f56271b5291e6f01df24a5d3e9582634a6fcd0f",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        },
+        {
+          "uri": "urn:kizz:ael:private-run:local-unit-S1-01:evaluation",
+          "sha256": "be6205c8ea2b32e161bef53973d02cac13500785301253e89fdc422ef7b51f47",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        },
+        {
+          "uri": "urn:kizz:ael:private-run:cross-contract-S0-01:evaluation",
+          "sha256": "f33b602df1756d37a6cae0a5b7a13250d74b28806297da9885e176922c040ded",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        },
+        {
+          "uri": "urn:kizz:ael:private-run:cross-contract-S1-01:evaluation",
+          "sha256": "e956411c026c26ed42b65cd9a698bbc067702ef3046d83da97a89cd78baf8b7f",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        },
+        {
+          "uri": "urn:kizz:ael:private-run:migration-S0-01:evaluation",
+          "sha256": "b97f31a7b6d48c7e06c3d2bbad8e40c03c1e591df916d23851115bae3bf5c453",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        },
+        {
+          "uri": "urn:kizz:ael:private-run:migration-S1-01:evaluation",
+          "sha256": "b9d1ecc43db570c130248f292984718a3bf1e5207d9643f3b632ee005764ca96",
+          "revision": "runtime-v2-calibration-1",
+          "visibility": "private"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "One non-randomized calibration repeat was run per task and condition; this is not an effect estimate.",
+    "The public task prompts explicitly request much of the verification behavior contributed by the skill, creating a ceiling and treatment-contamination risk.",
+    "Kizz owns the skill, tasks, runner, deterministic evaluator, and decision.",
+    "The provider exposes a model identifier but not an immutable model revision.",
+    "Generated-work and wall-time budgets were matched by configuration but not forced to equal realized usage.",
+    "The reusable ChatGPT credential was process-readable; persisted outputs were scanned, but encrypted provider traffic was not inspected.",
+    "No downstream rework, production behavior, user outcome, or third-party replication was measured."
+  ],
+  "source_refs": [
+    {
+      "uri": "urn:kizz:ael:private-run-set:focused-change-verification-calibration-v1",
+      "sha256": "bda10957170881663d39f15d6e2945125de50b8387dccad3a64b00c2bf9e4f90",
+      "revision": "runtime-v2-calibration-1",
+      "visibility": "private"
+    }
+  ]
+}

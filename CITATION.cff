@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use Agentic Evidence Lab, cite the software and the specific evidence receipt you relied on."
+title: "Agentic Evidence Lab"
+abstract: "File-first evidence contracts for versioned agent interventions."
+type: software
+authors:
+  - family-names: "Ryuhmanov"
+    given-names: "M"
+    alias: "ryuhmanov-m"
+version: "0.1.0-alpha.1"
+date-released: "2026-08-12"
+license: Apache-2.0
+repository-code: "https://github.com/kizz-tech/agentic-evidence-lab"
+url: "https://github.com/kizz-tech/agentic-evidence-lab"
+keywords:
+  - ai agents
+  - evaluation
+  - benchmarking
+  - reproducibility

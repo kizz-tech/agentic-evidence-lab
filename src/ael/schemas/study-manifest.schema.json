@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:kizz:ael:schema:study-manifest:0.1",
+  "title": "Agentic Evidence Lab Study Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "object_type",
+    "study_id",
+    "revision",
+    "status",
+    "decision_question",
+    "comparison_mode",
+    "primary_estimand",
+    "concept_ref",
+    "conditions",
+    "task_packs",
+    "budget",
+    "adaptation_boundary",
+    "selection_rules",
+    "stop_rules",
+    "roles",
+    "independence_claim",
+    "analysis_plan"
+  ],
+  "properties": {
+    "schema_version": {"const": "ael.study-manifest/0.1"},
+    "object_type": {"const": "study_manifest"},
+    "study_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:/-]+$"},
+    "revision": {"type": "integer", "minimum": 1},
+    "status": {"enum": ["draft", "frozen", "executing", "completed", "invalidated"]},
+    "frozen_at": {"type": "string", "format": "date-time"},
+    "decision_question": {"type": "string", "minLength": 1},
+    "comparison_mode": {"enum": ["controlled_factor", "operational_stack"]},
+    "primary_estimand": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "description", "unit_of_analysis", "aggregation"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "description": {"type": "string", "minLength": 1},
+        "unit_of_analysis": {"type": "string", "minLength": 1},
+        "aggregation": {"type": "string", "minLength": 1}
+      }
+    },
+    "concept_ref": {
+      "allOf": [
+        {"$ref": "#/$defs/artifact_ref"},
+        {
+          "type": "object",
+          "required": ["concept_id", "revision"],
+          "properties": {
+            "concept_id": {"type": "string", "minLength": 1},
+            "revision": {"type": "integer", "minimum": 1}
+          }
+        }
+      ]
+    },
+    "conditions": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "condition_id",
+          "label",
+          "role",
+          "intervention_class",
+          "intervention_ref",
+          "changed_factors",
+          "delta_from_baseline"
+        ],
+        "properties": {
+          "condition_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]+$"},
+          "label": {"type": "string", "minLength": 1},
+          "role": {"enum": ["baseline", "treatment", "control"]},
+          "intervention_class": {
+            "enum": ["skill", "prompt", "model", "runtime", "tool", "roster", "topology", "context_policy", "permission_policy", "workflow", "composed_stack"]
+          },
+          "intervention_ref": {"$ref": "#/$defs/artifact_ref"},
+          "configuration_refs": {
+            "type": "array",
+            "items": {"$ref": "#/$defs/artifact_ref"}
+          },
+          "changed_factors": {
+            "type": "array",
+            "items": {"type": "string", "minLength": 1},
+            "uniqueItems": true
+          },
+          "delta_from_baseline": {"type": "string"}
+        }
+      }
+    },
+    "task_packs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["task_pack_id", "revision", "role", "artifact_ref"],
+        "properties": {
+          "task_pack_id": {"type": "string", "minLength": 1},
+          "revision": {"type": "integer", "minimum": 1},
+          "role": {"enum": ["calibration", "adaptation", "screening", "holdout", "real_shadow", "negative_control", "transfer"]},
+          "strata": {
+            "type": "array",
+            "items": {"type": "string", "minLength": 1},
+            "uniqueItems": true
+          },
+          "artifact_ref": {"$ref": "#/$defs/artifact_ref"},
+          "contamination_notes": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "description", "dimensions"],
+      "properties": {
+        "status": {"enum": ["uncalibrated", "matched_policy", "calibrated", "observed_only"]},
+        "description": {"type": "string", "minLength": 1},
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["metric", "unit", "scope", "rule"],
+            "properties": {
+              "metric": {"type": "string", "minLength": 1},
+              "unit": {"type": "string", "minLength": 1},
+              "scope": {"type": "string", "minLength": 1},
+              "rule": {"type": "string", "minLength": 1},
+              "limit": {"type": "number", "minimum": 0},
+              "source": {"type": "string", "minLength": 1}
+            }
+          }
+        }
+      }
+    },
+    "adaptation_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["candidate_freeze_required", "runner_up_substitution", "description"],
+      "properties": {
+        "candidate_freeze_required": {"type": "boolean"},
+        "runner_up_substitution": {"enum": ["forbidden", "predeclared", "not_applicable"]},
+        "description": {"type": "string", "minLength": 1}
+      }
+    },
+    "selection_rules": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "stop_rules": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "roles": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["role", "actor_id"],
+        "properties": {
+          "role": {"enum": ["concept_owner", "artifact_author", "task_pack_owner", "runner_operator", "evaluator", "decision_owner", "receipt_signer"]},
+          "actor_id": {"type": "string", "minLength": 1},
+          "organization": {"type": "string", "minLength": 1},
+          "independence_group": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "independence_claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "role_overlaps"],
+      "properties": {
+        "label": {"enum": ["self_review", "model_critique", "maintainer_evaluated", "reproduced_third_party", "independently_verified"]},
+        "role_overlaps": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "analysis_plan": {"$ref": "#/$defs/artifact_ref"},
+    "source_refs": {"type": "array", "items": {"$ref": "#/$defs/artifact_ref"}}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"status": {"enum": ["frozen", "executing", "completed"]}}, "required": ["status"]},
+      "then": {"required": ["frozen_at"]}
+    }
+  ],
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "artifact_ref": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["uri", "visibility"],
+      "properties": {
+        "uri": {"type": "string", "minLength": 1, "format": "uri-reference"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "revision": {"oneOf": [{"type": "string", "minLength": 1}, {"type": "integer", "minimum": 1}]},
+        "visibility": {"enum": ["public", "private", "hidden", "embargoed"]}
+      }
+    }
+  }
+}

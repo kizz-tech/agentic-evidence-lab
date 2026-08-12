@@ -1,0 +1,27 @@
+{
+  "schema_version": "ael.concept/0.1",
+  "object_type": "concept",
+  "concept_id": "kizz:ael:example:prompt-only-migration-preflight",
+  "revision": 1,
+  "owner": {
+    "owner_id": "kizz-ael-maintainer",
+    "meaning_authority": "maintainer"
+  },
+  "idea": "Add a short migration preflight prompt before an agent proposes a database migration.",
+  "mechanism_hypothesis": "Explicitly asking for data-loss, rollback, compatibility, and deployment constraints before design will reduce critical migration omissions without changing the model, tools, or execution topology.",
+  "intended_scope": [
+    "software migration planning",
+    "single-agent prompt-only intervention",
+    "repositories with deterministic migration and compatibility checks"
+  ],
+  "known_non_goals": [
+    "general model superiority",
+    "autonomous production migration",
+    "security certification",
+    "improvement outside the declared migration task strata"
+  ],
+  "lineage": {
+    "predecessor": null,
+    "change_summary": "Deliberately simple Contract v0 transfer fixture."
+  }
+}

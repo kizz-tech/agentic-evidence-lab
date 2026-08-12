@@ -1,0 +1,175 @@
+{
+  "schema_version": "ael.study-manifest/0.1",
+  "object_type": "study_manifest",
+  "study_id": "kizz:ael:study:council-generation-1-heldout",
+  "revision": 1,
+  "status": "completed",
+  "frozen_at": "2026-08-11T00:00:00Z",
+  "decision_question": "Should the historical Engineering Council workflow be replaced by the frozen adaptive candidate, retained unchanged, or replaced by a fixed sequential workflow on the measured local Codex surface?",
+  "comparison_mode": "controlled_factor",
+  "primary_estimand": {
+    "name": "heldout decision quality and process acceptability",
+    "description": "Compare the frozen candidate with direct, sequential, and historical-skill conditions on held-out engineering cases while preserving critical-anchor, routing, and generated-work constraints.",
+    "unit_of_analysis": "held-out engineering case",
+    "aggregation": "mean blinded weighted rubric by condition, with case-level critical failures and process gates reported separately"
+  },
+  "concept_ref": {
+    "concept_id": "kizz:council:adaptive-engineering-deliberation",
+    "revision": 1,
+    "uri": "concept.json",
+    "sha256": "e9ea287b7c92822c0ca9f10edf93ac0882aa225e1006bf7ff05cf5e90f15db5e",
+    "visibility": "public"
+  },
+  "conditions": [
+    {
+      "condition_id": "C0",
+      "label": "Direct single pass",
+      "role": "baseline",
+      "intervention_class": "workflow",
+      "intervention_ref": {
+        "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:analysis-plan",
+        "sha256": "c13a7013025d79d2be936f3ede26b7cd8b63885a5fc3eb0665a41c59a21f19da",
+        "revision": "2026-08-11",
+        "visibility": "private"
+      },
+      "changed_factors": [],
+      "delta_from_baseline": "Reference condition: one parent answer without skill or subagent."
+    },
+    {
+      "condition_id": "C1",
+      "label": "Fixed sequential revision",
+      "role": "control",
+      "intervention_class": "workflow",
+      "intervention_ref": {
+        "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:analysis-plan",
+        "sha256": "c13a7013025d79d2be936f3ede26b7cd8b63885a5fc3eb0665a41c59a21f19da",
+        "revision": "2026-08-11",
+        "visibility": "private"
+      },
+      "changed_factors": ["workflow_topology", "number_of_model_stages"],
+      "delta_from_baseline": "Three fixed stages: draft, critique with draft visibility, and revision with both prior outputs."
+    },
+    {
+      "condition_id": "C2",
+      "label": "Historical skill-routed workflow",
+      "role": "control",
+      "intervention_class": "skill",
+      "intervention_ref": {
+        "uri": "urn:kizz:council:skill:engineering-council:historical-v1",
+        "sha256": "a29e0357297c461599fc989abfc408c80d6714b70dd74de68097fc2e23686528",
+        "revision": "generation-1-baseline",
+        "visibility": "private"
+      },
+      "changed_factors": ["routing_policy", "workflow_topology", "advisor_profiles"],
+      "delta_from_baseline": "Historical skill may route direct, use one advisor, or form a council."
+    },
+    {
+      "condition_id": "C3",
+      "label": "Frozen adaptive council candidate",
+      "role": "treatment",
+      "intervention_class": "skill",
+      "intervention_ref": {
+        "uri": "urn:kizz:council:skill:engineering-council:candidate-v2",
+        "sha256": "a22a1371711509778985bdbae999929903419355332645e299bdb38ce01432fe",
+        "revision": "generation-1-candidate",
+        "visibility": "private"
+      },
+      "configuration_refs": [
+        {
+          "uri": "urn:kizz:git:council:roster:engineering-council:generation-1",
+          "sha256": "ff93c97be413a2d6b951c627b06a0c87cf00cbf176a8107feb36c74005aed738",
+          "revision": "0fac95c119b0c37d72fe9f98eef218e002fc4395",
+          "visibility": "public"
+        }
+      ],
+      "changed_factors": ["routing_policy", "fork_context_policy", "consultation_provenance", "integration_and_stop_rules"],
+      "delta_from_baseline": "Adaptive direct/single/council routing with independent context-free first passes, attributable findings, accountable synthesis, and at most one targeted challenge."
+    }
+  ],
+  "task_packs": [
+    {
+      "task_pack_id": "engineering-council-generation-1-heldout",
+      "revision": 1,
+      "role": "holdout",
+      "strata": ["routine-local", "consequential-domain-policy", "consequential-performance"],
+      "artifact_ref": {
+        "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:evaluator-cases",
+        "sha256": "c74fe12e74527c0e0084001fee4e440130d5337bfbc731d6a5ca7ee12f898067",
+        "revision": "2026-08-11",
+        "visibility": "hidden"
+      },
+      "contamination_notes": [
+        "The integrating parent and protocol reviewers were not blind to evaluator-only anchors.",
+        "The candidate author received no held-out brief, anchor, trap, or expected profile before freeze."
+      ]
+    }
+  ],
+  "budget": {
+    "status": "matched_policy",
+    "description": "Conditions shared the same model family, task facts, answer contract, output limits, and read-only target. Total input compute was not equalized, so generated-work and latency results are descriptive for this exact surface.",
+    "dimensions": [
+      {
+        "metric": "generated_work_tokens",
+        "unit": "tokens",
+        "scope": "each consequential held-out case",
+        "rule": "Candidate must be no more than 20 percent above historical skill unless it recovers a documented critical omission.",
+        "source": "frozen pilot decision rule"
+      }
+    ]
+  },
+  "adaptation_boundary": {
+    "candidate_freeze_required": true,
+    "runner_up_substitution": "forbidden",
+    "description": "Adaptation cases were inspected before authoring; the candidate artifact was frozen before C3 received any held-out case."
+  },
+  "selection_rules": [
+    "Candidate wins or ties C2 on at least two of three held-out cases.",
+    "Candidate wins or ties C1 on at least two of three held-out cases.",
+    "Candidate introduces no new critical-anchor miss relative to C2.",
+    "Candidate routes the routine held-out case away from a council.",
+    "Candidate satisfies the declared consequential generated-work rule.",
+    "Deterministic skill validation and state-truth checks pass."
+  ],
+  "stop_rules": [
+    "Stop on unauthorized mutation, secret exposure, or scope escape.",
+    "Retry only an operationally invalid cell and only under the frozen byte-equivalent retry policy.",
+    "Do not revise the candidate after a held-out result.",
+    "Do not expand after a decisive failure merely to rescue the candidate."
+  ],
+  "roles": [
+    {"role": "concept_owner", "actor_id": "kizz-council-maintainer", "organization": "Kizz", "independence_group": "maintainer"},
+    {"role": "artifact_author", "actor_id": "isolated-codex-author", "organization": "Kizz", "independence_group": "maintainer-operated-model"},
+    {"role": "task_pack_owner", "actor_id": "kizz-council-maintainer", "organization": "Kizz", "independence_group": "maintainer"},
+    {"role": "runner_operator", "actor_id": "kizz-council-maintainer", "organization": "Kizz", "independence_group": "maintainer"},
+    {"role": "evaluator", "actor_id": "isolated-codex-judge", "organization": "Kizz", "independence_group": "same-model-family"},
+    {"role": "decision_owner", "actor_id": "kizz-council-maintainer", "organization": "Kizz", "independence_group": "maintainer"},
+    {"role": "receipt_signer", "actor_id": "kizz-ael-maintainer", "organization": "Kizz", "independence_group": "maintainer"}
+  ],
+  "independence_claim": {
+    "label": "maintainer_evaluated",
+    "role_overlaps": [
+      "The capability maintainer owned the task pack, runner operation, integration audit, and adoption decision.",
+      "Contestants and judge used correlated variants of the same model family."
+    ]
+  },
+  "analysis_plan": {
+    "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:analysis-plan",
+    "sha256": "c13a7013025d79d2be936f3ede26b7cd8b63885a5fc3eb0665a41c59a21f19da",
+    "revision": "2026-08-11",
+    "visibility": "private"
+  },
+  "source_refs": [
+    {
+      "uri": "urn:kizz:git:council:provenance:engineering-council:generation-1",
+      "sha256": "3d0712562c3db115cfabe15e02c43940e9fd626b6ee862cf630fbc31141db6ed",
+      "revision": "0fac95c119b0c37d72fe9f98eef218e002fc4395",
+      "visibility": "public"
+    },
+    {
+      "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:package",
+      "sha256": "dd1716d04484c62b0348f8b329d2967da840582462c662c53650d0c4e3656656",
+      "revision": "2026-08-11",
+      "visibility": "private"
+    }
+  ]
+}

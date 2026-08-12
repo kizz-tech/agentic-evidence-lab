@@ -1,0 +1,1248 @@
+{
+  "schema_version": "ael.measurement-set/0.1",
+  "object_type": "measurement_set",
+  "measurement_set_id": "kizz:ael:measurements:council-generation-1-heldout",
+  "study_ref": {
+    "study_id": "kizz:ael:study:council-generation-1-heldout",
+    "revision": 1,
+    "uri": "study-manifest.json",
+    "sha256": "aad0f01c68fc7346f0a834e7039f0650af31a04f65ceee927312468b335e9206",
+    "visibility": "public"
+  },
+  "measurements": [
+    {
+      "measurement_id": "score:E1:C2",
+      "kind": "subjective",
+      "metric": "blinded_weighted_decision_score",
+      "value": 4.0,
+      "unit": "score_0_to_4",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E1-C2"
+      ],
+      "condition_id": "C2",
+      "task_id": "E1",
+      "stratum": "routine-local",
+      "evaluator": {
+        "evaluator_id": "isolated-codex-judge",
+        "kind": "model",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E1:judgment",
+          "sha256": "2b046f37cedb2dce7a5c4ca063be1ae8c486736aca18d0f6e1361eb3f37babb1",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "critical-anchor-misses:E1:C2",
+      "kind": "subjective",
+      "metric": "critical_anchor_misses",
+      "value": 0,
+      "unit": "count",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E1-C2"
+      ],
+      "condition_id": "C2",
+      "task_id": "E1",
+      "stratum": "routine-local",
+      "evaluator": {
+        "evaluator_id": "isolated-codex-judge",
+        "kind": "model",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E1:judgment",
+          "sha256": "2b046f37cedb2dce7a5c4ca063be1ae8c486736aca18d0f6e1361eb3f37babb1",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "score:E1:C3",
+      "kind": "subjective",
+      "metric": "blinded_weighted_decision_score",
+      "value": 4.0,
+      "unit": "score_0_to_4",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E1-C3"
+      ],
+      "condition_id": "C3",
+      "task_id": "E1",
+      "stratum": "routine-local",
+      "evaluator": {
+        "evaluator_id": "isolated-codex-judge",
+        "kind": "model",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E1:judgment",
+          "sha256": "2b046f37cedb2dce7a5c4ca063be1ae8c486736aca18d0f6e1361eb3f37babb1",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "critical-anchor-misses:E1:C3",
+      "kind": "subjective",
+      "metric": "critical_anchor_misses",
+      "value": 0,
+      "unit": "count",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E1-C3"
+      ],
+      "condition_id": "C3",
+      "task_id": "E1",
+      "stratum": "routine-local",
+      "evaluator": {
+        "evaluator_id": "isolated-codex-judge",
+        "kind": "model",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E1:judgment",
+          "sha256": "2b046f37cedb2dce7a5c4ca063be1ae8c486736aca18d0f6e1361eb3f37babb1",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "score:E1:C0",
+      "kind": "subjective",
+      "metric": "blinded_weighted_decision_score",
+      "value": 4.0,
+      "unit": "score_0_to_4",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E1-C0"
+      ],
+      "condition_id": "C0",
+      "task_id": "E1",
+      "stratum": "routine-local",
+      "evaluator": {
+        "evaluator_id": "isolated-codex-judge",
+        "kind": "model",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E1:judgment",
+          "sha256": "2b046f37cedb2dce7a5c4ca063be1ae8c486736aca18d0f6e1361eb3f37babb1",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "critical-anchor-misses:E1:C0",
+      "kind": "subjective",
+      "metric": "critical_anchor_misses",
+      "value": 0,
+      "unit": "count",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E1-C0"
+      ],
+      "condition_id": "C0",
+      "task_id": "E1",
+      "stratum": "routine-local",
+      "evaluator": {
+        "evaluator_id": "isolated-codex-judge",
+        "kind": "model",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E1:judgment",
+          "sha256": "2b046f37cedb2dce7a5c4ca063be1ae8c486736aca18d0f6e1361eb3f37babb1",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "score:E1:C1",
+      "kind": "subjective",
+      "metric": "blinded_weighted_decision_score",
+      "value": 3.9,
+      "unit": "score_0_to_4",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E1-C1"
+      ],
+      "condition_id": "C1",
+      "task_id": "E1",
+      "stratum": "routine-local",
+      "evaluator": {
+        "evaluator_id": "isolated-codex-judge",
+        "kind": "model",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E1:judgment",
+          "sha256": "2b046f37cedb2dce7a5c4ca063be1ae8c486736aca18d0f6e1361eb3f37babb1",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "critical-anchor-misses:E1:C1",
+      "kind": "subjective",
+      "metric": "critical_anchor_misses",
+      "value": 0,
+      "unit": "count",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E1-C1"
+      ],
+      "condition_id": "C1",
+      "task_id": "E1",
+      "stratum": "routine-local",
+      "evaluator": {
+        "evaluator_id": "isolated-codex-judge",
+        "kind": "model",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E1:judgment",
+          "sha256": "2b046f37cedb2dce7a5c4ca063be1ae8c486736aca18d0f6e1361eb3f37babb1",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "score:E4:C1",
+      "kind": "subjective",
+      "metric": "blinded_weighted_decision_score",
+      "value": 4.0,
+      "unit": "score_0_to_4",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E4-C1"
+      ],
+      "condition_id": "C1",
+      "task_id": "E4",
+      "stratum": "consequential-domain-policy",
+      "evaluator": {
+        "evaluator_id": "isolated-codex-judge",
+        "kind": "model",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E4:judgment",
+          "sha256": "a75b45ff72208ffdfb335d97bad3ed46532a8c8b1ed8d170d2d90b66f5107c7a",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "critical-anchor-misses:E4:C1",
+      "kind": "subjective",
+      "metric": "critical_anchor_misses",
+      "value": 0,
+      "unit": "count",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E4-C1"
+      ],
+      "condition_id": "C1",
+      "task_id": "E4",
+      "stratum": "consequential-domain-policy",
+      "evaluator": {
+        "evaluator_id": "isolated-codex-judge",
+        "kind": "model",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E4:judgment",
+          "sha256": "a75b45ff72208ffdfb335d97bad3ed46532a8c8b1ed8d170d2d90b66f5107c7a",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "score:E4:C2",
+      "kind": "subjective",
+      "metric": "blinded_weighted_decision_score",
+      "value": 3.8,
+      "unit": "score_0_to_4",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E4-C2"
+      ],
+      "condition_id": "C2",
+      "task_id": "E4",
+      "stratum": "consequential-domain-policy",
+      "evaluator": {
+        "evaluator_id": "isolated-codex-judge",
+        "kind": "model",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E4:judgment",
+          "sha256": "a75b45ff72208ffdfb335d97bad3ed46532a8c8b1ed8d170d2d90b66f5107c7a",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "critical-anchor-misses:E4:C2",
+      "kind": "subjective",
+      "metric": "critical_anchor_misses",
+      "value": 0,
+      "unit": "count",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E4-C2"
+      ],
+      "condition_id": "C2",
+      "task_id": "E4",
+      "stratum": "consequential-domain-policy",
+      "evaluator": {
+        "evaluator_id": "isolated-codex-judge",
+        "kind": "model",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E4:judgment",
+          "sha256": "a75b45ff72208ffdfb335d97bad3ed46532a8c8b1ed8d170d2d90b66f5107c7a",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "score:E4:C3",
+      "kind": "subjective",
+      "metric": "blinded_weighted_decision_score",
+      "value": 4.0,
+      "unit": "score_0_to_4",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E4-C3"
+      ],
+      "condition_id": "C3",
+      "task_id": "E4",
+      "stratum": "consequential-domain-policy",
+      "evaluator": {
+        "evaluator_id": "isolated-codex-judge",
+        "kind": "model",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E4:judgment",
+          "sha256": "a75b45ff72208ffdfb335d97bad3ed46532a8c8b1ed8d170d2d90b66f5107c7a",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "critical-anchor-misses:E4:C3",
+      "kind": "subjective",
+      "metric": "critical_anchor_misses",
+      "value": 0,
+      "unit": "count",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E4-C3"
+      ],
+      "condition_id": "C3",
+      "task_id": "E4",
+      "stratum": "consequential-domain-policy",
+      "evaluator": {
+        "evaluator_id": "isolated-codex-judge",
+        "kind": "model",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E4:judgment",
+          "sha256": "a75b45ff72208ffdfb335d97bad3ed46532a8c8b1ed8d170d2d90b66f5107c7a",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "score:E4:C0",
+      "kind": "subjective",
+      "metric": "blinded_weighted_decision_score",
+      "value": 3.6,
+      "unit": "score_0_to_4",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E4-C0"
+      ],
+      "condition_id": "C0",
+      "task_id": "E4",
+      "stratum": "consequential-domain-policy",
+      "evaluator": {
+        "evaluator_id": "isolated-codex-judge",
+        "kind": "model",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E4:judgment",
+          "sha256": "a75b45ff72208ffdfb335d97bad3ed46532a8c8b1ed8d170d2d90b66f5107c7a",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "critical-anchor-misses:E4:C0",
+      "kind": "subjective",
+      "metric": "critical_anchor_misses",
+      "value": 0,
+      "unit": "count",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E4-C0"
+      ],
+      "condition_id": "C0",
+      "task_id": "E4",
+      "stratum": "consequential-domain-policy",
+      "evaluator": {
+        "evaluator_id": "isolated-codex-judge",
+        "kind": "model",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E4:judgment",
+          "sha256": "a75b45ff72208ffdfb335d97bad3ed46532a8c8b1ed8d170d2d90b66f5107c7a",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "score:E7:C0",
+      "kind": "subjective",
+      "metric": "blinded_weighted_decision_score",
+      "value": 3.9,
+      "unit": "score_0_to_4",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E7-C0"
+      ],
+      "condition_id": "C0",
+      "task_id": "E7",
+      "stratum": "consequential-performance",
+      "evaluator": {
+        "evaluator_id": "isolated-codex-judge",
+        "kind": "model",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E7:judgment",
+          "sha256": "473d6f7a9bd45fac2681d45217ad961e3098067f541f1d0fe1f956092d929bc1",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "critical-anchor-misses:E7:C0",
+      "kind": "subjective",
+      "metric": "critical_anchor_misses",
+      "value": 0,
+      "unit": "count",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E7-C0"
+      ],
+      "condition_id": "C0",
+      "task_id": "E7",
+      "stratum": "consequential-performance",
+      "evaluator": {
+        "evaluator_id": "isolated-codex-judge",
+        "kind": "model",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E7:judgment",
+          "sha256": "473d6f7a9bd45fac2681d45217ad961e3098067f541f1d0fe1f956092d929bc1",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "score:E7:C1",
+      "kind": "subjective",
+      "metric": "blinded_weighted_decision_score",
+      "value": 3.9,
+      "unit": "score_0_to_4",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E7-C1"
+      ],
+      "condition_id": "C1",
+      "task_id": "E7",
+      "stratum": "consequential-performance",
+      "evaluator": {
+        "evaluator_id": "isolated-codex-judge",
+        "kind": "model",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E7:judgment",
+          "sha256": "473d6f7a9bd45fac2681d45217ad961e3098067f541f1d0fe1f956092d929bc1",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "critical-anchor-misses:E7:C1",
+      "kind": "subjective",
+      "metric": "critical_anchor_misses",
+      "value": 0,
+      "unit": "count",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E7-C1"
+      ],
+      "condition_id": "C1",
+      "task_id": "E7",
+      "stratum": "consequential-performance",
+      "evaluator": {
+        "evaluator_id": "isolated-codex-judge",
+        "kind": "model",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E7:judgment",
+          "sha256": "473d6f7a9bd45fac2681d45217ad961e3098067f541f1d0fe1f956092d929bc1",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "score:E7:C2",
+      "kind": "subjective",
+      "metric": "blinded_weighted_decision_score",
+      "value": 4.0,
+      "unit": "score_0_to_4",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E7-C2"
+      ],
+      "condition_id": "C2",
+      "task_id": "E7",
+      "stratum": "consequential-performance",
+      "evaluator": {
+        "evaluator_id": "isolated-codex-judge",
+        "kind": "model",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E7:judgment",
+          "sha256": "473d6f7a9bd45fac2681d45217ad961e3098067f541f1d0fe1f956092d929bc1",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "critical-anchor-misses:E7:C2",
+      "kind": "subjective",
+      "metric": "critical_anchor_misses",
+      "value": 0,
+      "unit": "count",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E7-C2"
+      ],
+      "condition_id": "C2",
+      "task_id": "E7",
+      "stratum": "consequential-performance",
+      "evaluator": {
+        "evaluator_id": "isolated-codex-judge",
+        "kind": "model",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E7:judgment",
+          "sha256": "473d6f7a9bd45fac2681d45217ad961e3098067f541f1d0fe1f956092d929bc1",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "score:E7:C3",
+      "kind": "subjective",
+      "metric": "blinded_weighted_decision_score",
+      "value": 3.8,
+      "unit": "score_0_to_4",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E7-C3"
+      ],
+      "condition_id": "C3",
+      "task_id": "E7",
+      "stratum": "consequential-performance",
+      "evaluator": {
+        "evaluator_id": "isolated-codex-judge",
+        "kind": "model",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E7:judgment",
+          "sha256": "473d6f7a9bd45fac2681d45217ad961e3098067f541f1d0fe1f956092d929bc1",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "critical-anchor-misses:E7:C3",
+      "kind": "subjective",
+      "metric": "critical_anchor_misses",
+      "value": 0,
+      "unit": "count",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E7-C3"
+      ],
+      "condition_id": "C3",
+      "task_id": "E7",
+      "stratum": "consequential-performance",
+      "evaluator": {
+        "evaluator_id": "isolated-codex-judge",
+        "kind": "model",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E7:judgment",
+          "sha256": "473d6f7a9bd45fac2681d45217ad961e3098067f541f1d0fe1f956092d929bc1",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated-work:E1-C0",
+      "kind": "cost",
+      "metric": "generated_work_tokens",
+      "value": 411,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E1-C0"
+      ],
+      "condition_id": "C0",
+      "task_id": "E1",
+      "stratum": "routine-local",
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E1-C0:capture",
+          "sha256": "f6b0397ef5ae3c5f18bc54b0cdafcf35ebaf57f2a5562855172e0927669f3a26",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated-work:E1-C1",
+      "kind": "cost",
+      "metric": "generated_work_tokens",
+      "value": 1755,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E1-C1"
+      ],
+      "condition_id": "C1",
+      "task_id": "E1",
+      "stratum": "routine-local",
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E1-C1:capture",
+          "sha256": "016527889359de35849bce732b9bbadc52aa226574704ff01d2eadc4b13321e0",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated-work:E1-C2",
+      "kind": "cost",
+      "metric": "generated_work_tokens",
+      "value": 627,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E1-C2"
+      ],
+      "condition_id": "C2",
+      "task_id": "E1",
+      "stratum": "routine-local",
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E1-C2:capture",
+          "sha256": "b267b5a135ed7c4bf25983aaad90e2eece0def2edca69afa17de08738ef162c4",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated-work:E1-C3",
+      "kind": "cost",
+      "metric": "generated_work_tokens",
+      "value": 659,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E1-C3"
+      ],
+      "condition_id": "C3",
+      "task_id": "E1",
+      "stratum": "routine-local",
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E1-C3:capture",
+          "sha256": "95c560a2dffc364ccc8da9b0dc8d440ce9d4fc2788cf096b375cb5e297c17856",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated-work:E4-C0",
+      "kind": "cost",
+      "metric": "generated_work_tokens",
+      "value": 1605,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E4-C0"
+      ],
+      "condition_id": "C0",
+      "task_id": "E4",
+      "stratum": "consequential-domain-policy",
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E4-C0:capture",
+          "sha256": "a9336b6a068c6d6c2098b380cf673e2eb9d297fb3aa1c1ccbc4981a81de649a4",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated-work:E4-C1",
+      "kind": "cost",
+      "metric": "generated_work_tokens",
+      "value": 9081,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E4-C1"
+      ],
+      "condition_id": "C1",
+      "task_id": "E4",
+      "stratum": "consequential-domain-policy",
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E4-C1:capture",
+          "sha256": "ec4d9a99de888067c47f805171de3755b3f4009ed40d9418549bc4e900656c6a",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated-work:E4-C2",
+      "kind": "cost",
+      "metric": "generated_work_tokens",
+      "value": 7295,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E4-C2"
+      ],
+      "condition_id": "C2",
+      "task_id": "E4",
+      "stratum": "consequential-domain-policy",
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E4-C2:capture",
+          "sha256": "5d85aafde35d55c49e9c8bbe7aa263745316a06836de7da013e23c9a9f60b130",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated-work:E4-C3",
+      "kind": "cost",
+      "metric": "generated_work_tokens",
+      "value": 5803,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E4-C3"
+      ],
+      "condition_id": "C3",
+      "task_id": "E4",
+      "stratum": "consequential-domain-policy",
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E4-C3:capture",
+          "sha256": "334b757a9a0450c04bc91f8a4ab4659713528fbb67f5bba37d1049dd8160e00e",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated-work:E7-C0",
+      "kind": "cost",
+      "metric": "generated_work_tokens",
+      "value": 1621,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E7-C0"
+      ],
+      "condition_id": "C0",
+      "task_id": "E7",
+      "stratum": "consequential-performance",
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E7-C0:capture",
+          "sha256": "aad1ffba79aa440c5477da7f33bf11b6416c7f5f0b257a721cc62e0faf2117da",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated-work:E7-C1",
+      "kind": "cost",
+      "metric": "generated_work_tokens",
+      "value": 6383,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E7-C1"
+      ],
+      "condition_id": "C1",
+      "task_id": "E7",
+      "stratum": "consequential-performance",
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E7-C1:capture",
+          "sha256": "21fad7e321ec350f6fdb62a5e9e82a043d767321246805fccf5f7e4c6a2dca6c",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated-work:E7-C2",
+      "kind": "cost",
+      "metric": "generated_work_tokens",
+      "value": 5265,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E7-C2"
+      ],
+      "condition_id": "C2",
+      "task_id": "E7",
+      "stratum": "consequential-performance",
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E7-C2:capture",
+          "sha256": "b44ea3fc4c300b218d6a8539c2fd37ad2c50adf47dbf0a8f783c24173d5f5d11",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated-work:E7-C3",
+      "kind": "cost",
+      "metric": "generated_work_tokens",
+      "value": 3795,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E7-C3"
+      ],
+      "condition_id": "C3",
+      "task_id": "E7",
+      "stratum": "consequential-performance",
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E7-C3:capture",
+          "sha256": "af2cf35b121caf4d6c2a67dc223ed7fa26473eb19cbc4375ea89e86374900ec4",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "heldout-mean-score:C0",
+      "kind": "aggregate",
+      "metric": "heldout_mean_blinded_weighted_decision_score",
+      "value": 3.83,
+      "unit": "score_0_to_4",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E1-C0",
+        "kizz:ael:run:council-generation-1:E4-C0",
+        "kizz:ael:run:council-generation-1:E7-C0"
+      ],
+      "condition_id": "C0",
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E1:judgment",
+          "sha256": "2b046f37cedb2dce7a5c4ca063be1ae8c486736aca18d0f6e1361eb3f37babb1",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        },
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E4:judgment",
+          "sha256": "a75b45ff72208ffdfb335d97bad3ed46532a8c8b1ed8d170d2d90b66f5107c7a",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        },
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E7:judgment",
+          "sha256": "473d6f7a9bd45fac2681d45217ad961e3098067f541f1d0fe1f956092d929bc1",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        },
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:parent-audit",
+          "sha256": "ef809a9323f80346e27f76c8ffcef3755ab671c41bde808a4a8a2551ca0faa8b",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "heldout-mean-score:C1",
+      "kind": "aggregate",
+      "metric": "heldout_mean_blinded_weighted_decision_score",
+      "value": 3.93,
+      "unit": "score_0_to_4",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E1-C1",
+        "kizz:ael:run:council-generation-1:E4-C1",
+        "kizz:ael:run:council-generation-1:E7-C1"
+      ],
+      "condition_id": "C1",
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E1:judgment",
+          "sha256": "2b046f37cedb2dce7a5c4ca063be1ae8c486736aca18d0f6e1361eb3f37babb1",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        },
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E4:judgment",
+          "sha256": "a75b45ff72208ffdfb335d97bad3ed46532a8c8b1ed8d170d2d90b66f5107c7a",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        },
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E7:judgment",
+          "sha256": "473d6f7a9bd45fac2681d45217ad961e3098067f541f1d0fe1f956092d929bc1",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        },
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:parent-audit",
+          "sha256": "ef809a9323f80346e27f76c8ffcef3755ab671c41bde808a4a8a2551ca0faa8b",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "heldout-mean-score:C2",
+      "kind": "aggregate",
+      "metric": "heldout_mean_blinded_weighted_decision_score",
+      "value": 3.93,
+      "unit": "score_0_to_4",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E1-C2",
+        "kizz:ael:run:council-generation-1:E4-C2",
+        "kizz:ael:run:council-generation-1:E7-C2"
+      ],
+      "condition_id": "C2",
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E1:judgment",
+          "sha256": "2b046f37cedb2dce7a5c4ca063be1ae8c486736aca18d0f6e1361eb3f37babb1",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        },
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E4:judgment",
+          "sha256": "a75b45ff72208ffdfb335d97bad3ed46532a8c8b1ed8d170d2d90b66f5107c7a",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        },
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E7:judgment",
+          "sha256": "473d6f7a9bd45fac2681d45217ad961e3098067f541f1d0fe1f956092d929bc1",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        },
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:parent-audit",
+          "sha256": "ef809a9323f80346e27f76c8ffcef3755ab671c41bde808a4a8a2551ca0faa8b",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "heldout-mean-score:C3",
+      "kind": "aggregate",
+      "metric": "heldout_mean_blinded_weighted_decision_score",
+      "value": 3.93,
+      "unit": "score_0_to_4",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E1-C3",
+        "kizz:ael:run:council-generation-1:E4-C3",
+        "kizz:ael:run:council-generation-1:E7-C3"
+      ],
+      "condition_id": "C3",
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E1:judgment",
+          "sha256": "2b046f37cedb2dce7a5c4ca063be1ae8c486736aca18d0f6e1361eb3f37babb1",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        },
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E4:judgment",
+          "sha256": "a75b45ff72208ffdfb335d97bad3ed46532a8c8b1ed8d170d2d90b66f5107c7a",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        },
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:E7:judgment",
+          "sha256": "473d6f7a9bd45fac2681d45217ad961e3098067f541f1d0fe1f956092d929bc1",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        },
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:parent-audit",
+          "sha256": "ef809a9323f80346e27f76c8ffcef3755ab671c41bde808a4a8a2551ca0faa8b",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "consequential-generated-work:C3",
+      "kind": "aggregate",
+      "metric": "consequential_generated_work_tokens",
+      "value": 9598,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E4-C3",
+        "kizz:ael:run:council-generation-1:E7-C3"
+      ],
+      "condition_id": "C3",
+      "stratum": "consequential",
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:parent-audit",
+          "sha256": "ef809a9323f80346e27f76c8ffcef3755ab671c41bde808a4a8a2551ca0faa8b",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "consequential-generated-work:C2",
+      "kind": "aggregate",
+      "metric": "consequential_generated_work_tokens",
+      "value": 12560,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E4-C2",
+        "kizz:ael:run:council-generation-1:E7-C2"
+      ],
+      "condition_id": "C2",
+      "stratum": "consequential",
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:parent-audit",
+          "sha256": "ef809a9323f80346e27f76c8ffcef3755ab671c41bde808a4a8a2551ca0faa8b",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "consequential-generated-work-reduction:C3-vs-C2",
+      "kind": "aggregate",
+      "metric": "relative_generated_work_reduction",
+      "value": 0.2358,
+      "unit": "proportion",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E4-C3",
+        "kizz:ael:run:council-generation-1:E7-C3",
+        "kizz:ael:run:council-generation-1:E4-C2",
+        "kizz:ael:run:council-generation-1:E7-C2"
+      ],
+      "stratum": "consequential",
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:parent-audit",
+          "sha256": "ef809a9323f80346e27f76c8ffcef3755ab671c41bde808a4a8a2551ca0faa8b",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "routine-direct-routing:C3",
+      "kind": "process",
+      "metric": "correctly_declined_council",
+      "value": true,
+      "unit": "boolean",
+      "direction": "target",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E1-C3"
+      ],
+      "condition_id": "C3",
+      "task_id": "E1",
+      "stratum": "routine-local",
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:parent-audit",
+          "sha256": "ef809a9323f80346e27f76c8ffcef3755ab671c41bde808a4a8a2551ca0faa8b",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "historical-profile-fork-error:E4-C2",
+      "kind": "process",
+      "metric": "named_profile_fork_error_observed",
+      "value": true,
+      "unit": "boolean",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E4-C2"
+      ],
+      "condition_id": "C2",
+      "task_id": "E4",
+      "stratum": "consequential-domain-policy",
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:parent-audit",
+          "sha256": "ef809a9323f80346e27f76c8ffcef3755ab671c41bde808a4a8a2551ca0faa8b",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "candidate-profile-id-omission:E7-C3",
+      "kind": "process",
+      "metric": "required_profile_identity_omitted",
+      "value": true,
+      "unit": "boolean",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:council-generation-1:E7-C3"
+      ],
+      "condition_id": "C3",
+      "task_id": "E7",
+      "stratum": "consequential-performance",
+      "evidence_refs": [
+        {
+          "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:parent-audit",
+          "sha256": "ef809a9323f80346e27f76c8ffcef3755ab671c41bde808a4a8a2551ca0faa8b",
+          "revision": "2026-08-11",
+          "visibility": "private"
+        }
+      ]
+    }
+  ],
+  "critical_failures": [],
+  "limitations": [
+    "One stochastic sample per case and condition does not estimate run variance.",
+    "The blinded judge used a correlated variant of the same model family as contestants.",
+    "The task pack used synthetic engineering briefs rather than observed production decisions.",
+    "Total input compute was not equalized; generated-work tokens do not establish universal cost reduction.",
+    "No downstream implementation, rework, production, or user outcome was measured.",
+    "Subagent receiver identities were not authenticated by the retained CLI event stream."
+  ],
+  "source_refs": [
+    {
+      "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:run-summary",
+      "sha256": "4b7dce6aa9d083e76a4305ce3a3abc74d9e90fc191615c2c3d25da383baf15bc",
+      "revision": "2026-08-11",
+      "visibility": "private"
+    },
+    {
+      "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:heldout:parent-audit",
+      "sha256": "ef809a9323f80346e27f76c8ffcef3755ab671c41bde808a4a8a2551ca0faa8b",
+      "revision": "2026-08-11",
+      "visibility": "private"
+    },
+    {
+      "uri": "lifeos:labs:experiment:engineering-council-evaluation:2026-08-11:integrated-result",
+      "sha256": "2f2424f9c8d0e992c5d944d9979c096aad455421c79f352d9c03ad93f23aa215",
+      "revision": "2026-08-11",
+      "visibility": "private"
+    }
+  ]
+}

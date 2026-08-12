@@ -1,0 +1,91 @@
+{
+  "schema_version": "ael.study-manifest/0.1",
+  "object_type": "study_manifest",
+  "study_id": "kizz:ael:study:configured-coding-stack-choice",
+  "revision": 1,
+  "status": "draft",
+  "decision_question": "Which of two exact configured coding-agent stacks should be used for this repository and task stratum under the same total budget?",
+  "comparison_mode": "operational_stack",
+  "primary_estimand": {
+    "name": "usable implementation rate by configured stack",
+    "description": "Practical comparison of complete configured systems; component differences are preserved and no model-only causal attribution is permitted.",
+    "unit_of_analysis": "repository implementation task",
+    "aggregation": "task-stratified usable implementation rate with cost, latency, critical failures, and rework reported as a Pareto frontier"
+  },
+  "concept_ref": {
+    "concept_id": "kizz:ael:example:configured-coding-stack-choice",
+    "revision": 1,
+    "uri": "concept.json",
+    "sha256": "5a2ab49fbc6281cd2a50e06bf6e64f573327dcbc15800df1e6502c34c46e1e65",
+    "visibility": "public"
+  },
+  "conditions": [
+    {
+      "condition_id": "STACK-A",
+      "label": "Configured coding stack A",
+      "role": "baseline",
+      "intervention_class": "composed_stack",
+      "intervention_ref": {"uri": "urn:kizz:ael:stack:a:unfrozen", "visibility": "private"},
+      "changed_factors": [],
+      "delta_from_baseline": "Reference stack with a frozen model, runtime, prompt, tools, skills, context policy, permissions, workflow, and budget."
+    },
+    {
+      "condition_id": "STACK-B",
+      "label": "Configured coding stack B",
+      "role": "treatment",
+      "intervention_class": "composed_stack",
+      "intervention_ref": {"uri": "urn:kizz:ael:stack:b:unfrozen", "visibility": "private"},
+      "changed_factors": ["model", "runtime", "system_prompt", "tools", "skills", "context_policy", "permission_policy", "workflow"],
+      "delta_from_baseline": "Alternative complete stack. The study asks which exact system to use, not which individual component caused the difference."
+    }
+  ],
+  "task_packs": [
+    {
+      "task_pack_id": "configured-coding-stack-fixture",
+      "revision": 1,
+      "role": "holdout",
+      "strata": ["repository-feature", "repository-bugfix", "repository-refactor"],
+      "artifact_ref": {"uri": "urn:kizz:ael:task-pack:configured-stack:unfrozen", "visibility": "hidden"},
+      "contamination_notes": ["Tuning may use adaptation repositories but not holdout repositories or hidden acceptance tests."
+      ]
+    }
+  ],
+  "budget": {
+    "status": "uncalibrated",
+    "description": "Match the complete stack budget rather than per-call budgets; count every model call, tool action, retry, critique, and integration stage.",
+    "dimensions": [
+      {"metric": "actual_cost", "unit": "currency", "scope": "whole task", "rule": "same maximum total-system spend", "source": "current route pricing required"},
+      {"metric": "wall_time", "unit": "seconds", "scope": "whole task", "rule": "same user-facing deadline", "source": "operational target required"}
+    ]
+  },
+  "adaptation_boundary": {
+    "candidate_freeze_required": true,
+    "runner_up_substitution": "not_applicable",
+    "description": "Freeze both complete stack manifests and tuning allowance before holdout execution."
+  },
+  "selection_rules": [
+    "Select a stack only for the declared task strata and budget.",
+    "Report a Pareto result when quality, cost, latency, and rework do not yield one dominant stack.",
+    "Never restate the stack comparison as model-only superiority."
+  ],
+  "stop_rules": [
+    "Stop on unauthorized effects, unmatched task access, or unbounded retries.",
+    "Retry only operational invalidity under the same frozen stack.",
+    "Do not tune either stack after holdout inspection."
+  ],
+  "roles": [
+    {"role": "concept_owner", "actor_id": "kizz-ael-maintainer", "organization": "Kizz", "independence_group": "maintainer"},
+    {"role": "artifact_author", "actor_id": "stack-configurators-unassigned", "organization": "Kizz", "independence_group": "maintainer-operated"},
+    {"role": "task_pack_owner", "actor_id": "task-pack-owner-unassigned", "organization": "Kizz", "independence_group": "maintainer"},
+    {"role": "runner_operator", "actor_id": "runner-operator-unassigned", "organization": "Kizz", "independence_group": "maintainer"},
+    {"role": "evaluator", "actor_id": "deterministic-and-human-evaluator-unassigned", "organization": "Kizz", "independence_group": "maintainer-evaluation"},
+    {"role": "decision_owner", "actor_id": "kizz-ael-maintainer", "organization": "Kizz", "independence_group": "maintainer"},
+    {"role": "receipt_signer", "actor_id": "kizz-ael-maintainer", "organization": "Kizz", "independence_group": "maintainer"}
+  ],
+  "independence_claim": {
+    "label": "maintainer_evaluated",
+    "role_overlaps": ["Kizz owns the stack configurations, fixture, runner, and practical selection decision."
+    ]
+  },
+  "analysis_plan": {"uri": "urn:kizz:ael:analysis-plan:configured-stack:unfrozen", "visibility": "public"}
+}

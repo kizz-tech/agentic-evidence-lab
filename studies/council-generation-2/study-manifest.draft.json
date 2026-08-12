@@ -1,0 +1,173 @@
+{
+  "schema_version": "ael.study-manifest/0.1",
+  "object_type": "study_manifest",
+  "study_id": "kizz:ael:study:council-generation-2",
+  "revision": 1,
+  "status": "draft",
+  "decision_question": "Does one frozen Council Generation 2 roster improve usable consequential engineering decisions relative to a strong sequential non-Council baseline with the same factual knowledge union under a calibrated total-system budget?",
+  "comparison_mode": "controlled_factor",
+  "primary_estimand": {
+    "name": "equal-stratum usable-decision difference",
+    "description": "Difference in binary usable-decision rate between one frozen Council finalist and the strong sequential baseline, averaged equally across prespecified engineering task strata; critical failures, cost, latency, and downstream rework remain separate gates.",
+    "unit_of_analysis": "engineering task cluster",
+    "aggregation": "equal-stratum paired difference with task-cluster resampling; exact interval and decision threshold remain calibration-blocked"
+  },
+  "concept_ref": {
+    "concept_id": "kizz:council:adaptive-engineering-deliberation",
+    "revision": 1,
+    "uri": "../../examples/council-generation-1/concept.json",
+    "sha256": "e9ea287b7c92822c0ca9f10edf93ac0882aa225e1006bf7ff05cf5e90f15db5e",
+    "visibility": "public"
+  },
+  "conditions": [
+    {
+      "condition_id": "G2-B0",
+      "label": "Strong sequential non-Council baseline",
+      "role": "baseline",
+      "intervention_class": "workflow",
+      "intervention_ref": {
+        "uri": "urn:kizz:council:g2:baseline:sequential-same-knowledge",
+        "visibility": "private"
+      },
+      "changed_factors": [],
+      "delta_from_baseline": "Reference workflow: one accountable agent receives the same factual knowledge union and performs a frozen sequential analysis/revision process without independent advisor fan-out."
+    },
+    {
+      "condition_id": "G2-R1",
+      "label": "Historical four-lens roster",
+      "role": "treatment",
+      "intervention_class": "roster",
+      "intervention_ref": {
+        "uri": "urn:kizz:git:council:roster:engineering-council:generation-1",
+        "sha256": "ff93c97be413a2d6b951c627b06a0c87cf00cbf176a8107feb36c74005aed738",
+        "revision": "0fac95c119b0c37d72fe9f98eef218e002fc4395",
+        "visibility": "public"
+      },
+      "changed_factors": ["independent_first_passes", "roster_assignment", "integration_topology"],
+      "delta_from_baseline": "Adaptive independent-first-pass Council using the historical four responsibility lenses and the same factual knowledge union."
+    },
+    {
+      "condition_id": "G2-R2",
+      "label": "Alternative four-lens roster",
+      "role": "treatment",
+      "intervention_class": "roster",
+      "intervention_ref": {
+        "uri": "urn:kizz:council:g2:roster:alternative-four:unfrozen",
+        "visibility": "private"
+      },
+      "changed_factors": ["independent_first_passes", "roster_decomposition", "prompt_form", "integration_topology"],
+      "delta_from_baseline": "A not-yet-authored four-lens decomposition that must be frozen without access to confirmation tasks."
+    },
+    {
+      "condition_id": "G2-R3",
+      "label": "Six narrow responsibility lenses",
+      "role": "treatment",
+      "intervention_class": "roster",
+      "intervention_ref": {
+        "uri": "urn:kizz:council:g2:roster:six-narrow:unfrozen",
+        "visibility": "private"
+      },
+      "changed_factors": ["independent_first_passes", "roster_size", "roster_decomposition", "routing_policy", "integration_topology"],
+      "delta_from_baseline": "A not-yet-authored six-lens decomposition with a matched total-system resource envelope and no assumption that more lenses are better."
+    }
+  ],
+  "task_packs": [
+    {
+      "task_pack_id": "council-generation-2-screening",
+      "revision": 1,
+      "role": "screening",
+      "strata": ["consequential-design", "diagnosis-review", "routine-negative-control"],
+      "artifact_ref": {"uri": "urn:kizz:council:g2:task-pack:screening:unfrozen", "visibility": "hidden"},
+      "contamination_notes": ["Screening task families must not appear in the confirmatory holdout."]
+    },
+    {
+      "task_pack_id": "council-generation-2-failed-profile-diagnostic",
+      "revision": 1,
+      "role": "adaptation",
+      "strata": ["advisor-unavailable", "advisor-timeout", "malformed-advisor-result"],
+      "artifact_ref": {"uri": "urn:kizz:council:g2:task-pack:failed-profile:unfrozen", "visibility": "hidden"},
+      "contamination_notes": ["Diagnostic outcomes may reject the finalist but cannot promote a runner-up."
+      ]
+    },
+    {
+      "task_pack_id": "council-generation-2-confirmation",
+      "revision": 1,
+      "role": "holdout",
+      "strata": ["consequential-design", "diagnosis-review", "routine-negative-control"],
+      "artifact_ref": {"uri": "urn:kizz:council:g2:task-pack:confirmation:unfrozen", "visibility": "hidden"},
+      "contamination_notes": ["Candidate authors, screening evaluators, and adaptation agents must not access confirmation tasks or rubrics before finalist freeze."
+      ]
+    },
+    {
+      "task_pack_id": "council-generation-2-implementation",
+      "revision": 1,
+      "role": "real_shadow",
+      "strata": ["implementation-and-rework"],
+      "artifact_ref": {"uri": "urn:kizz:council:g2:task-pack:implementation:unfrozen", "visibility": "private"},
+      "contamination_notes": ["Implementation sentinels are diagnostic until their gate stability is calibrated."
+      ]
+    }
+  ],
+  "budget": {
+    "status": "uncalibrated",
+    "description": "No numeric cap is frozen. Gen1 supplies only sparse generated-work and wall-time anchors; the final envelope must include every parent, advisor, integration, retry, and evaluator call.",
+    "dimensions": [
+      {"metric": "generated_work_tokens", "unit": "tokens", "scope": "whole condition per task", "rule": "derive candidate and baseline caps from telemetry and decision error tolerance", "source": "calibration required"},
+      {"metric": "wall_time", "unit": "seconds", "scope": "whole condition per task", "rule": "derive a practical cap from Gen1 and pilot distributions", "source": "calibration required"},
+      {"metric": "model_cost", "unit": "currency", "scope": "whole study", "rule": "record actual route-specific cost when provider pricing is available", "source": "runtime evidence required"},
+      {"metric": "human_evaluation", "unit": "hours", "scope": "whole study", "rule": "freeze only after evaluator capacity and adjudication load are known", "source": "owner capacity required"}
+    ]
+  },
+  "adaptation_boundary": {
+    "candidate_freeze_required": true,
+    "runner_up_substitution": "forbidden",
+    "description": "Screening may reject candidates or select exactly one finalist. After freeze, a failed-profile or holdout failure rejects or narrows that finalist; it never promotes the runner-up."
+  },
+  "selection_rules": [
+    "Use screening first for admissibility and critical-failure removal; rank candidates only if calibration demonstrates acceptable selection error.",
+    "Select exactly one finalist or reject all candidates before failed-profile and holdout access.",
+    "Freeze the finalist artifact, knowledge union, runtime configuration, budget, analysis plan, and receipt rules before confirmation.",
+    "Do not use evaluator feedback to improve a candidate inside the same generation."
+  ],
+  "stop_rules": [
+    "Stop and reject a candidate on an unauthorized effect, invented consultation, hidden role substitution, or critical safety/state-truth failure.",
+    "Treat poor model output as experiment data; retry only an operationally invalid byte-equivalent run under a predeclared rule.",
+    "Stop if task-family separation, evaluator blinding, or matched knowledge access cannot be established.",
+    "Do not start paid model execution until task supply, operating characteristics, and total budget are frozen.",
+    "Do not call the study confirmatory if any exact numeric rule remains inherited from the illustrative review or simulation."
+  ],
+  "roles": [
+    {"role": "concept_owner", "actor_id": "kizz-council-maintainer", "organization": "Kizz", "independence_group": "maintainer"},
+    {"role": "artifact_author", "actor_id": "candidate-authors-unassigned", "organization": "Kizz", "independence_group": "maintainer-operated"},
+    {"role": "task_pack_owner", "actor_id": "task-pack-owner-unassigned", "organization": "Kizz", "independence_group": "maintainer"},
+    {"role": "runner_operator", "actor_id": "runner-operator-unassigned", "organization": "Kizz", "independence_group": "maintainer"},
+    {"role": "evaluator", "actor_id": "human-and-model-evaluators-unassigned", "organization": "Kizz", "independence_group": "maintainer-evaluation"},
+    {"role": "decision_owner", "actor_id": "kizz-council-maintainer", "organization": "Kizz", "independence_group": "maintainer"},
+    {"role": "receipt_signer", "actor_id": "kizz-ael-maintainer", "organization": "Kizz", "independence_group": "maintainer"}
+  ],
+  "independence_claim": {
+    "label": "maintainer_evaluated",
+    "role_overlaps": [
+      "The Council capability and AEL study are controlled inside Kizz.",
+      "External evaluator and replication roles have not been assigned."
+    ]
+  },
+  "analysis_plan": {
+    "uri": "calibration/calibration-config.json",
+    "sha256": "379279ea1ef11abff62897342654cab0512bf1a0088cbda23c334cc5b45bfabb",
+    "visibility": "public"
+  },
+  "source_refs": [
+    {
+      "uri": "../../docs/decisions/2026-08-12-review-intake-and-v0-direction.md",
+      "sha256": "39929f04673e19d48f87b828588576c28934616bc926be503b9cbca06827c621",
+      "visibility": "public"
+    },
+    {
+      "uri": "urn:kizz:git:council:experiment:representative-lens-roster-evaluation",
+      "sha256": "29db7e517105155da94288e237f8740e9fb6e8c23f8e49439fc49c2702fab4bb",
+      "revision": "0fac95c119b0c37d72fe9f98eef218e002fc4395",
+      "visibility": "public"
+    }
+  ]
+}

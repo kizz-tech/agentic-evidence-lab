@@ -1,0 +1,22 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+
+# Local execution and private evidence
+/runs/
+/artifacts/private/
+reviews/private/
+*.log
+
+# Common caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+*.egg-info/
+node_modules/
+dist/
+build/

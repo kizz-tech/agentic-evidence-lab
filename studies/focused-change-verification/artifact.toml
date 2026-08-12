@@ -1,0 +1,19 @@
+schema_version = "ael.artifact-manifest/0.1-dev"
+artifact_id = "kizz:ael:artifact:focused-change-verification"
+artifact_kind = "codex_skill"
+version = "0.1.0-dev"
+state = "frozen_for_task_pack_design"
+entrypoint = "artifacts/focused-change-verification/SKILL.md"
+tree_sha256 = "dcd01f1c480cac9efc9434eba55b7f9f07fd82815621633ce3586390a3ff9fea"
+validator = "Codex skill-creator quick_validate.py"
+validator_result = "pass"
+validated_at = "2026-08-12"
+
+[[files]]
+path = "artifacts/focused-change-verification/SKILL.md"
+sha256 = "09e0d2ca3c3cc261229c427a3ad80a307db3c01c324e5df09ed8da9c32b94203"
+
+[[files]]
+path = "artifacts/focused-change-verification/agents/openai.yaml"
+sha256 = "b7b10925005e6b86c5e20f3db4d18e8908a83ffe3372c82d936f6d9711db2a07"
+

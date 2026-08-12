@@ -1,0 +1,182 @@
+{
+  "schema_version": "ael.calibration-simulation-result/0.1",
+  "simulation_id": "kizz:ael:calibration:council-generation-2:illustrative-v1",
+  "generated_at": "2026-08-11T21:45:00Z",
+  "config_canonical_sha256": "4ea4792a53a235acad6507eccdf7852fc9cde0c1ab8630df800334a6863452ff",
+  "assumption_state": "illustrative_not_calibrated",
+  "iterations": 1000,
+  "seed": 20260812,
+  "screening": [
+    {
+      "task_clusters": 3,
+      "repeats": 2,
+      "probability_select_true_best": 0.437,
+      "probability_select_other": 0.555,
+      "probability_reject_all": 0.008,
+      "probability_top_score_tie": 0.355
+    },
+    {
+      "task_clusters": 6,
+      "repeats": 2,
+      "probability_select_true_best": 0.439,
+      "probability_select_other": 0.553,
+      "probability_reject_all": 0.008,
+      "probability_top_score_tie": 0.228
+    },
+    {
+      "task_clusters": 9,
+      "repeats": 2,
+      "probability_select_true_best": 0.46,
+      "probability_select_other": 0.527,
+      "probability_reject_all": 0.013,
+      "probability_top_score_tie": 0.164
+    },
+    {
+      "task_clusters": 12,
+      "repeats": 2,
+      "probability_select_true_best": 0.454,
+      "probability_select_other": 0.529,
+      "probability_reject_all": 0.017,
+      "probability_top_score_tie": 0.15
+    }
+  ],
+  "confirmation": [
+    {
+      "task_clusters": 12,
+      "repeats": 3,
+      "absolute_effect": 0.0,
+      "probability_observed_difference_positive": 0.453,
+      "probability_bootstrap_lower_bound_above_zero": 0.046
+    },
+    {
+      "task_clusters": 12,
+      "repeats": 3,
+      "absolute_effect": 0.05,
+      "probability_observed_difference_positive": 0.646,
+      "probability_bootstrap_lower_bound_above_zero": 0.145
+    },
+    {
+      "task_clusters": 12,
+      "repeats": 3,
+      "absolute_effect": 0.1,
+      "probability_observed_difference_positive": 0.842,
+      "probability_bootstrap_lower_bound_above_zero": 0.307
+    },
+    {
+      "task_clusters": 12,
+      "repeats": 3,
+      "absolute_effect": 0.15,
+      "probability_observed_difference_positive": 0.949,
+      "probability_bootstrap_lower_bound_above_zero": 0.545
+    },
+    {
+      "task_clusters": 18,
+      "repeats": 3,
+      "absolute_effect": 0.0,
+      "probability_observed_difference_positive": 0.45,
+      "probability_bootstrap_lower_bound_above_zero": 0.049
+    },
+    {
+      "task_clusters": 18,
+      "repeats": 3,
+      "absolute_effect": 0.05,
+      "probability_observed_difference_positive": 0.726,
+      "probability_bootstrap_lower_bound_above_zero": 0.168
+    },
+    {
+      "task_clusters": 18,
+      "repeats": 3,
+      "absolute_effect": 0.1,
+      "probability_observed_difference_positive": 0.908,
+      "probability_bootstrap_lower_bound_above_zero": 0.396
+    },
+    {
+      "task_clusters": 18,
+      "repeats": 3,
+      "absolute_effect": 0.15,
+      "probability_observed_difference_positive": 0.986,
+      "probability_bootstrap_lower_bound_above_zero": 0.678
+    },
+    {
+      "task_clusters": 24,
+      "repeats": 3,
+      "absolute_effect": 0.0,
+      "probability_observed_difference_positive": 0.438,
+      "probability_bootstrap_lower_bound_above_zero": 0.039
+    },
+    {
+      "task_clusters": 24,
+      "repeats": 3,
+      "absolute_effect": 0.05,
+      "probability_observed_difference_positive": 0.787,
+      "probability_bootstrap_lower_bound_above_zero": 0.201
+    },
+    {
+      "task_clusters": 24,
+      "repeats": 3,
+      "absolute_effect": 0.1,
+      "probability_observed_difference_positive": 0.927,
+      "probability_bootstrap_lower_bound_above_zero": 0.47
+    },
+    {
+      "task_clusters": 24,
+      "repeats": 3,
+      "absolute_effect": 0.15,
+      "probability_observed_difference_positive": 0.992,
+      "probability_bootstrap_lower_bound_above_zero": 0.771
+    },
+    {
+      "task_clusters": 36,
+      "repeats": 3,
+      "absolute_effect": 0.0,
+      "probability_observed_difference_positive": 0.431,
+      "probability_bootstrap_lower_bound_above_zero": 0.036
+    },
+    {
+      "task_clusters": 36,
+      "repeats": 3,
+      "absolute_effect": 0.05,
+      "probability_observed_difference_positive": 0.848,
+      "probability_bootstrap_lower_bound_above_zero": 0.249
+    },
+    {
+      "task_clusters": 36,
+      "repeats": 3,
+      "absolute_effect": 0.1,
+      "probability_observed_difference_positive": 0.977,
+      "probability_bootstrap_lower_bound_above_zero": 0.623
+    },
+    {
+      "task_clusters": 36,
+      "repeats": 3,
+      "absolute_effect": 0.15,
+      "probability_observed_difference_positive": 1.0,
+      "probability_bootstrap_lower_bound_above_zero": 0.911
+    }
+  ],
+  "implementation_sentinels": [
+    {
+      "true_task_success_rate": 0.5,
+      "probability_gate_passes": 0.5
+    },
+    {
+      "true_task_success_rate": 0.6,
+      "probability_gate_passes": 0.648
+    },
+    {
+      "true_task_success_rate": 0.7,
+      "probability_gate_passes": 0.784
+    },
+    {
+      "true_task_success_rate": 0.8,
+      "probability_gate_passes": 0.896
+    }
+  ],
+  "limitations": [
+    "Illustrative assumptions are not estimates from Council Generation 1.",
+    "Usable-decision outcomes are simulated as binary and do not reproduce the full Council rubric.",
+    "The task-difficulty and within-task dependence model is deliberately simple.",
+    "Stratum heterogeneity, evaluator disagreement, critical-failure severity, cost, and rework are not jointly modeled.",
+    "The output diagnoses design sensitivity and cannot freeze a confirmatory manifest."
+  ]
+}

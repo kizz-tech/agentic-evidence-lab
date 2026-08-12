@@ -1,0 +1,90 @@
+{
+  "schema_version": "ael.study-manifest/0.1",
+  "object_type": "study_manifest",
+  "study_id": "kizz:ael:study:prompt-only-migration-preflight",
+  "revision": 1,
+  "status": "draft",
+  "decision_question": "Does the exact migration-preflight prompt reduce critical migration-plan omissions relative to no preflight under the same model, runtime, tools, context, and budget?",
+  "comparison_mode": "controlled_factor",
+  "primary_estimand": {
+    "name": "critical migration omission difference",
+    "description": "Paired difference in deterministic critical-omission count between no-preflight and preflight-prompt conditions.",
+    "unit_of_analysis": "repository migration task",
+    "aggregation": "paired task-level difference by migration stratum with critical failures reported separately"
+  },
+  "concept_ref": {
+    "concept_id": "kizz:ael:example:prompt-only-migration-preflight",
+    "revision": 1,
+    "uri": "concept.json",
+    "sha256": "2c8307ab84b3603d5c7314fdcd38e04b98b057058e32e9b8f2eec488c4820440",
+    "visibility": "public"
+  },
+  "conditions": [
+    {
+      "condition_id": "P0",
+      "label": "No migration preflight",
+      "role": "baseline",
+      "intervention_class": "prompt",
+      "intervention_ref": {"uri": "urn:kizz:ael:prompt:none", "visibility": "public"},
+      "changed_factors": [],
+      "delta_from_baseline": "Reference condition with the frozen task prompt only."
+    },
+    {
+      "condition_id": "P1",
+      "label": "Migration preflight prompt",
+      "role": "treatment",
+      "intervention_class": "prompt",
+      "intervention_ref": {"uri": "urn:kizz:ael:prompt:migration-preflight:unfrozen", "visibility": "public"},
+      "changed_factors": ["developer_prompt"],
+      "delta_from_baseline": "Adds only the exact preflight prompt; model, runtime, tools, context, permissions, task facts, and budget remain fixed."
+    }
+  ],
+  "task_packs": [
+    {
+      "task_pack_id": "prompt-only-migration-fixture",
+      "revision": 1,
+      "role": "holdout",
+      "strata": ["additive-migration", "destructive-migration", "rolling-compatibility"],
+      "artifact_ref": {"uri": "urn:kizz:ael:task-pack:prompt-only-migration:unfrozen", "visibility": "hidden"},
+      "contamination_notes": ["Prompt authors must not receive hidden postconditions or critical-failure rules."
+      ]
+    }
+  ],
+  "budget": {
+    "status": "uncalibrated",
+    "description": "Hold the single-agent runtime and total generated-work cap equal; exact cap awaits a small direct-run pilot.",
+    "dimensions": [
+      {"metric": "generated_work_tokens", "unit": "tokens", "scope": "whole task", "rule": "same hard cap for P0 and P1", "source": "pilot calibration required"},
+      {"metric": "wall_time", "unit": "seconds", "scope": "whole task", "rule": "same timeout for P0 and P1", "source": "pilot calibration required"}
+    ]
+  },
+  "adaptation_boundary": {
+    "candidate_freeze_required": true,
+    "runner_up_substitution": "not_applicable",
+    "description": "Freeze the exact preflight prompt before any held-out migration fixture is exposed."
+  },
+  "selection_rules": [
+    "One prompt candidate is frozen after public/adaptation fixtures.",
+    "Adoption requires fewer critical omissions without a material correctness or cost regression."
+  ],
+  "stop_rules": [
+    "Stop on unauthorized repository mutation or an invalid migration safety claim.",
+    "Retry only operationally invalid runs.",
+    "Do not revise the prompt after holdout inspection."
+  ],
+  "roles": [
+    {"role": "concept_owner", "actor_id": "kizz-ael-maintainer", "organization": "Kizz", "independence_group": "maintainer"},
+    {"role": "artifact_author", "actor_id": "prompt-author-unassigned", "organization": "Kizz", "independence_group": "maintainer-operated"},
+    {"role": "task_pack_owner", "actor_id": "task-pack-owner-unassigned", "organization": "Kizz", "independence_group": "maintainer"},
+    {"role": "runner_operator", "actor_id": "runner-operator-unassigned", "organization": "Kizz", "independence_group": "maintainer"},
+    {"role": "evaluator", "actor_id": "deterministic-and-human-evaluator-unassigned", "organization": "Kizz", "independence_group": "maintainer-evaluation"},
+    {"role": "decision_owner", "actor_id": "kizz-ael-maintainer", "organization": "Kizz", "independence_group": "maintainer"},
+    {"role": "receipt_signer", "actor_id": "kizz-ael-maintainer", "organization": "Kizz", "independence_group": "maintainer"}
+  ],
+  "independence_claim": {
+    "label": "maintainer_evaluated",
+    "role_overlaps": ["Kizz owns the intervention, study, and adoption decision."
+    ]
+  },
+  "analysis_plan": {"uri": "urn:kizz:ael:analysis-plan:prompt-only-migration:unfrozen", "visibility": "public"}
+}

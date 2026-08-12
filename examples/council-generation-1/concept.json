@@ -1,0 +1,36 @@
+{
+  "schema_version": "ael.concept/0.1",
+  "object_type": "concept",
+  "concept_id": "kizz:council:adaptive-engineering-deliberation",
+  "revision": 1,
+  "owner": {
+    "owner_id": "kizz-council-maintainer",
+    "meaning_authority": "maintainer"
+  },
+  "idea": "Route routine engineering work directly and use independent, responsibility-bounded engineering lenses only when multiple decision-changing axes justify them.",
+  "mechanism_hypothesis": "Independent first passes can expose consequential omissions before an accountable integrator chooses a design, while direct and single-advisor routes avoid ritual multi-agent overhead on simpler work.",
+  "intended_scope": [
+    "software-engineering decisions with multiple credible designs",
+    "costly-to-reverse boundary, data, security, reliability, or operational decisions",
+    "Codex-native read-only engineering consultation"
+  ],
+  "known_non_goals": [
+    "universal multi-agent superiority",
+    "mandatory debate for routine work",
+    "authority by persona, vote count, or named school",
+    "automatic implementation authority",
+    "transfer to research, product, design, or personal decisions"
+  ],
+  "lineage": {
+    "predecessor": null,
+    "change_summary": "First content-addressed concept reconstruction for the completed Council Generation 1 study."
+  },
+  "source_refs": [
+    {
+      "uri": "urn:kizz:git:council:provenance:engineering-council:generation-1",
+      "sha256": "3d0712562c3db115cfabe15e02c43940e9fd626b6ee862cf630fbc31141db6ed",
+      "revision": "0fac95c119b0c37d72fe9f98eef218e002fc4395",
+      "visibility": "public"
+    }
+  ]
+}

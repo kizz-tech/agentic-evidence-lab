@@ -1,0 +1,42 @@
+{
+  "schema_version": "ael.calibration-simulation/0.1",
+  "simulation_id": "kizz:ael:calibration:council-generation-2:illustrative-v1",
+  "assumption_state": "illustrative_not_calibrated",
+  "generated_at": "2026-08-11T21:45:00Z",
+  "seed": 20260812,
+  "iterations": 1000,
+  "empirical_context": {
+    "source": "Council Generation 1 held-out measurement set",
+    "task_clusters": 3,
+    "repeats_per_cell": 1,
+    "candidate_consequential_generated_work_tokens": 9598,
+    "historical_consequential_generated_work_tokens": 12560,
+    "usable_decision_rate_available": false,
+    "task_variance_estimate_available": false,
+    "human_evaluator_variance_available": false,
+    "note": "Generation 1 supplies execution and cost anchors but is insufficient to estimate binary usable-decision rates or confirmatory power."
+  },
+  "screening": {
+    "task_counts": [3, 6, 9, 12],
+    "repeats": 2,
+    "candidate_usable_rates": [0.66, 0.7, 0.74],
+    "candidate_critical_failure_rates": [0.01, 0.01, 0.01],
+    "admissibility_rate": 0.5,
+    "task_difficulty_logit_sd": 0.75
+  },
+  "confirmation": {
+    "task_counts": [12, 18, 24, 36],
+    "repeats": 3,
+    "baseline_usable_rate": 0.65,
+    "absolute_effects": [0.0, 0.05, 0.1, 0.15],
+    "task_difficulty_logit_sd": 0.75,
+    "within_task_pair_correlation": 0.55,
+    "confidence": 0.9,
+    "bootstrap_samples": 200
+  },
+  "implementation_sentinels": {
+    "task_count": 3,
+    "required_successes": 2,
+    "true_success_rates": [0.5, 0.6, 0.7, 0.8]
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "schema_version": "ael.study-manifest/0.1",
+  "object_type": "study_manifest",
+  "study_id": "kizz:ael:study:focused-change-verification-skill",
+  "revision": 1,
+  "status": "draft",
+  "decision_question": "Does the exact installable verification skill improve owner-layer test selection and state-truth reporting relative to the same coding agent without the skill?",
+  "comparison_mode": "controlled_factor",
+  "primary_estimand": {
+    "name": "verified change completion difference",
+    "description": "Paired difference in deterministic repository acceptance and critical validation omissions with downstream correction effort reported separately.",
+    "unit_of_analysis": "repository change task",
+    "aggregation": "paired task-level difference by change-risk stratum"
+  },
+  "concept_ref": {
+    "concept_id": "kizz:ael:example:focused-change-verification-skill",
+    "revision": 1,
+    "uri": "concept.json",
+    "sha256": "056da8f4a9bd5f90140f3440e7c283b0c172f64adfa5606f783a8223372d48b8",
+    "visibility": "public"
+  },
+  "conditions": [
+    {
+      "condition_id": "S0",
+      "label": "Coding agent without verification skill",
+      "role": "baseline",
+      "intervention_class": "skill",
+      "intervention_ref": {"uri": "urn:kizz:ael:skill:none", "visibility": "public"},
+      "changed_factors": [],
+      "delta_from_baseline": "Reference coding-agent configuration without the installable skill."
+    },
+    {
+      "condition_id": "S1",
+      "label": "Coding agent with focused verification skill",
+      "role": "treatment",
+      "intervention_class": "skill",
+      "intervention_ref": {
+        "uri": "../../studies/focused-change-verification/artifact.toml",
+        "sha256": "a252318bddedb58dd069956b453fa373efb3798ed95593299d8ea52cb282c3d4",
+        "revision": "0.1.0-dev",
+        "visibility": "public"
+      },
+      "changed_factors": ["installed_skill", "validation_routing_policy", "state_reporting_contract"],
+      "delta_from_baseline": "Adds the exact skill while holding model, runtime, repository state, task prompt, tools, permissions, and budget fixed."
+    }
+  ],
+  "task_packs": [
+    {
+      "task_pack_id": "focused-change-verification-adaptation-v1",
+      "revision": 1,
+      "role": "adaptation",
+      "strata": ["local-unit-change", "cross-module-contract-change", "migration-backed-change"],
+      "artifact_ref": {
+        "uri": "../../studies/focused-change-verification/task-pack/adaptation-v1/task-pack.toml",
+        "sha256": "fcd6052e6e54d065f785f2c8f29557bd40d8eac2e96f182e2ac4b1fc83a50ed4",
+        "revision": 1,
+        "visibility": "public"
+      },
+      "contamination_notes": ["This public adaptation pack was authored after the skill freeze and cannot serve as untouched confirmation evidence. Evaluator files are not mounted during an agent run."
+      ]
+    }
+  ],
+  "budget": {
+    "status": "uncalibrated",
+    "description": "Use equal total-system generated-work and wall-time caps after a small operational pilot.",
+    "dimensions": [
+      {"metric": "generated_work_tokens", "unit": "tokens", "scope": "whole task", "rule": "same hard cap for S0 and S1", "source": "pilot calibration required"},
+      {"metric": "wall_time", "unit": "seconds", "scope": "whole task", "rule": "same timeout for S0 and S1", "source": "pilot calibration required"},
+      {"metric": "downstream_corrections", "unit": "count", "scope": "post-handoff implementation review", "rule": "measure rather than cap", "source": "domain outcome"}
+    ]
+  },
+  "adaptation_boundary": {
+    "candidate_freeze_required": true,
+    "runner_up_substitution": "not_applicable",
+    "description": "The skill package was frozen before adaptation-pack authoring. Any later skill change creates a new version and cannot replace this candidate."
+  },
+  "selection_rules": [
+    "This adaptation pack can authorize continued hidden-pack design, not general adoption.",
+    "Continuation requires no new critical validation omission and enough telemetry to distinguish verification behavior.",
+    "Report deterministic repository acceptance, selected checks, unnecessary checks, generated work, and downstream corrections separately."
+  ],
+  "stop_rules": [
+    "Stop on scope escape, unauthorized external effect, secret exposure, or destructive repository action.",
+    "Retry only an operationally invalid run from a byte-equivalent frozen state.",
+    "Do not change the skill after holdout inspection."
+  ],
+  "roles": [
+    {"role": "concept_owner", "actor_id": "kizz-ael-maintainer", "organization": "Kizz", "independence_group": "maintainer"},
+    {"role": "artifact_author", "actor_id": "kizz-ael-maintainer", "organization": "Kizz", "independence_group": "maintainer"},
+    {"role": "task_pack_owner", "actor_id": "kizz-ael-maintainer", "organization": "Kizz", "independence_group": "maintainer"},
+    {"role": "runner_operator", "actor_id": "kizz-ael-maintainer", "organization": "Kizz", "independence_group": "maintainer"},
+    {"role": "evaluator", "actor_id": "ael-deterministic-evaluator", "organization": "Kizz", "independence_group": "maintainer-evaluation"},
+    {"role": "decision_owner", "actor_id": "kizz-ael-maintainer", "organization": "Kizz", "independence_group": "maintainer"},
+    {"role": "receipt_signer", "actor_id": "kizz-ael-maintainer", "organization": "Kizz", "independence_group": "maintainer"}
+  ],
+  "independence_claim": {
+    "label": "maintainer_evaluated",
+    "role_overlaps": ["Kizz owns the skill, benchmark fixture, runner, and adoption decision."
+    ]
+  },
+  "analysis_plan": {
+    "uri": "../../studies/focused-change-verification/analysis-plan.md",
+    "sha256": "9905f70cfab883a09d0910b964dbc1e36c2139e3cd175307e38bfb898c71da21",
+    "revision": 1,
+    "visibility": "public"
+  }
+}

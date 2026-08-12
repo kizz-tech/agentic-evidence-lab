@@ -1,0 +1,56 @@
+name: Bug report
+description: Report a reproducible defect in AEL code, schemas, or documentation
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not report vulnerabilities or include secrets/private fixtures here. Use the Security tab instead.
+  - type: input
+    id: version
+    attributes:
+      label: Version or revision
+      placeholder: v0.1.0-alpha.1 or commit SHA
+    validations:
+      required: true
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      options:
+        - Evidence contract or validation
+        - Receipt rendering or calibration
+        - Offline Docker runner
+        - Hosted Codex adapter
+        - Task-pack tooling
+        - Documentation
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Include exact commands and sanitized inputs.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed behavior
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: I removed credentials, private data, raw reasoning traces, and unpublished holdouts.
+          required: true

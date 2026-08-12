@@ -1,0 +1,147 @@
+{
+  "schema_version": "ael.evidence-receipt/0.1",
+  "object_type": "evidence_receipt",
+  "receipt_id": "kizz:ael:receipt:council-generation-1:2026-08-12",
+  "generated_at": "2026-08-11T21:40:12Z",
+  "concept_ref": {
+    "concept_id": "kizz:council:adaptive-engineering-deliberation",
+    "revision": 1,
+    "uri": "concept.json",
+    "sha256": "e9ea287b7c92822c0ca9f10edf93ac0882aa225e1006bf7ff05cf5e90f15db5e",
+    "visibility": "public"
+  },
+  "study_ref": {
+    "study_id": "kizz:ael:study:council-generation-1-heldout",
+    "revision": 1,
+    "uri": "study-manifest.json",
+    "sha256": "aad0f01c68fc7346f0a834e7039f0650af31a04f65ceee927312468b335e9206",
+    "visibility": "public"
+  },
+  "run_record_refs": [
+    {"run_id": "kizz:ael:run:council-generation-1:E1-C0", "uri": "runs/E1-C0.json", "sha256": "eaef94912e9091823c5fbd27908f93b64e4274804466566aae5fa95fbdcbcc82", "visibility": "public"},
+    {"run_id": "kizz:ael:run:council-generation-1:E1-C1", "uri": "runs/E1-C1.json", "sha256": "58aef5720b516e097b9b300ca2f06058f56d85359723defd4f9d50754bc22cc4", "visibility": "public"},
+    {"run_id": "kizz:ael:run:council-generation-1:E1-C2", "uri": "runs/E1-C2.json", "sha256": "4d4c05cf3830c0949b4b503120b3fed7f0632bac75dad092142506056e2d274e", "visibility": "public"},
+    {"run_id": "kizz:ael:run:council-generation-1:E1-C3", "uri": "runs/E1-C3.json", "sha256": "e14a5b5d01e3c612cfdb3c2164a82a15a07d5b40c28c9967f2e02edd786bce5b", "visibility": "public"},
+    {"run_id": "kizz:ael:run:council-generation-1:E4-C0", "uri": "runs/E4-C0.json", "sha256": "0dc3e03de0059cbe72363a1ba5eaa7ebc6ba29e03c964efafb8cd9b925dc9183", "visibility": "public"},
+    {"run_id": "kizz:ael:run:council-generation-1:E4-C1", "uri": "runs/E4-C1.json", "sha256": "2d2d00c657cdea42b0b43b65e851438b5ef5f17804f5beb7b72ff617ccb6b4d2", "visibility": "public"},
+    {"run_id": "kizz:ael:run:council-generation-1:E4-C2", "uri": "runs/E4-C2.json", "sha256": "7100e198b510544f25af46882f336ed4b6f3ef542aeb8d2f6cfe6f837849dd0f", "visibility": "public"},
+    {"run_id": "kizz:ael:run:council-generation-1:E4-C3", "uri": "runs/E4-C3.json", "sha256": "aa0917d3a74fa4772857ec0cfa2e4a4c4ba0a83e38f53dd995f8af69df2f5fa3", "visibility": "public"},
+    {"run_id": "kizz:ael:run:council-generation-1:E7-C0", "uri": "runs/E7-C0.json", "sha256": "a85ece89eecc2b264f9e149483f5a439dee4b555645bb0eafe5e00d16c4fcca1", "visibility": "public"},
+    {"run_id": "kizz:ael:run:council-generation-1:E7-C1", "uri": "runs/E7-C1.json", "sha256": "e2206759b9e59f7e1cd6e4993c933c5ee7f8dfec2e20c947e09c42c8d6db86e4", "visibility": "public"},
+    {"run_id": "kizz:ael:run:council-generation-1:E7-C2", "uri": "runs/E7-C2.json", "sha256": "39a50aa93d760066b9b031d828f9aff443f64b51329cf92bc99365aaff62cd0e", "visibility": "public"},
+    {"run_id": "kizz:ael:run:council-generation-1:E7-C3", "uri": "runs/E7-C3.json", "sha256": "fbc585cadc103cdd9726c9d8584cf06ba1727170f4b98d5202db146c726cd141", "visibility": "public"}
+  ],
+  "measurement_set_ref": {
+    "measurement_set_id": "kizz:ael:measurements:council-generation-1-heldout",
+    "uri": "measurement-set.json",
+    "sha256": "6f2f0a1b9af8605cabd2894bc587d14d38fb5c3b6024f6e1dcbc5cd4761cb5b0",
+    "visibility": "public"
+  },
+  "evidence_level": "controlled_effect_observed",
+  "reproducibility": "rerunnable",
+  "independence": {
+    "label": "maintainer_evaluated",
+    "role_overlaps": [
+      "The capability maintainer owned the task pack, runner operation, parent audit, and adoption decision.",
+      "Contestants and blinded judge used correlated variants of the same model family.",
+      "The AEL receipt signer and Council maintainer are inside the same Kizz project boundary."
+    ],
+    "disclosure": "The receipt is a content-addressed maintainer evaluation, not independent certification."
+  },
+  "decision": {
+    "disposition": "adopt",
+    "summary": "Adopt the frozen adaptive routing and integration semantics for the local Engineering Council because the candidate preserved measured held-out quality, repaired an observed profile-execution defect, routed the routine case directly, and cleared the predeclared generated-work gate on the two consequential cases.",
+    "scope": [
+      "the exact Council Generation 1 candidate artifact",
+      "the measured Codex CLI and gpt-5.6-sol configuration",
+      "three synthetic held-out engineering cases",
+      "local replacement of the historical engineering-council skill"
+    ],
+    "reversal_trigger": "Reopen the decision if the artifact, model/runtime surface, task pack, or execution contract changes, or if repeated real-shadow evidence exposes a quality, conformance, or downstream-rework regression."
+  },
+  "evaluated_claims": [
+    {
+      "claim_id": "AEL-CG1-01",
+      "statement": "The frozen candidate repaired the observed full-history named-profile execution and consultation-provenance defect on the measured local runtime surface.",
+      "status": "supported",
+      "claim_level": "workflow",
+      "scope": ["historical C2 versus frozen C3", "measured local Codex runtime", "held-out consequential cases"],
+      "evidence_refs": ["historical-profile-fork-error:E4-C2", "candidate-profile-id-omission:E7-C3"],
+      "falsifier": "A hash-equivalent rerun reproduces the same full-history fork failure in the candidate or cannot authenticate any claimed consultation."
+    },
+    {
+      "claim_id": "AEL-CG1-02",
+      "statement": "The candidate preserved measured held-out decision quality relative to the historical skill and fixed sequential revision under the frozen tie rule.",
+      "status": "bounded",
+      "claim_level": "workflow",
+      "scope": ["one run per cell", "three synthetic held-out engineering cases", "same-model-family blinded judge", "0.25 tie threshold on a 0-to-4 rubric"],
+      "evidence_refs": ["heldout-mean-score:C1", "heldout-mean-score:C2", "heldout-mean-score:C3"],
+      "falsifier": "Repeated held-out or real-shadow runs show a material quality or critical-failure regression against either strong control."
+    },
+    {
+      "claim_id": "AEL-CG1-03",
+      "statement": "The candidate used 9,598 generated-work tokens on the two consequential held-out cases versus 12,560 for the historical skill, an observed reduction of about 23.6 percent.",
+      "status": "bounded",
+      "claim_level": "workflow",
+      "scope": ["E4 and E7 only", "output plus reasoning tokens", "one sample per condition", "total input compute not equalized"],
+      "evidence_refs": ["consequential-generated-work:C3", "consequential-generated-work:C2", "consequential-generated-work-reduction:C3-vs-C2"],
+      "falsifier": "Repeated matched-budget runs do not preserve the generated-work advantage or show that total cost moves in the opposite direction."
+    },
+    {
+      "claim_id": "AEL-CG1-04",
+      "statement": "The adaptive candidate correctly declined council consultation on the routine local bug case.",
+      "status": "supported",
+      "claim_level": "workflow",
+      "scope": ["E1 routine held-out case", "candidate C3", "measured local runtime"],
+      "evidence_refs": ["routine-direct-routing:C3"],
+      "falsifier": "A hash-equivalent rerun invokes advisors or adds disproportionate architecture work on the same routine fixture."
+    },
+    {
+      "claim_id": "AEL-CG1-05",
+      "statement": "Consultation identity and trace attribution remained incomplete even though the candidate improved process accountability.",
+      "status": "supported",
+      "claim_level": "artifact",
+      "scope": ["retained Codex CLI events", "E7-C3 final reporting"],
+      "evidence_refs": ["candidate-profile-id-omission:E7-C3"],
+      "falsifier": "A future runtime and candidate revision provide authenticated receiver IDs and complete profile-scoped finding IDs on every applicable run."
+    }
+  ],
+  "unsupported_inferences": [
+    "Universal multi-agent or debate superiority",
+    "Advisor-roster or prompt optimality",
+    "Small-model councils replacing one capable model",
+    "Research, product, design, or personal-domain transfer",
+    "Universal compute or monetary cost reduction",
+    "Production or downstream implementation outcome improvement",
+    "Public reproducibility or independent verification"
+  ],
+  "limitations": [
+    "One stochastic sample was collected per case and condition.",
+    "The study used synthetic briefs rather than observed production decisions.",
+    "Contestants and judge were correlated variants of the same model family.",
+    "Total input compute was not equalized across conditions.",
+    "No downstream implementation, rework, regression, or user outcome was measured.",
+    "The retained event stream did not expose authenticated subagent receiver IDs.",
+    "The candidate omitted exact profile identities and finding IDs in one held-out final."
+  ],
+  "invalidation_triggers": [
+    "Any change to the candidate skill hash or roster/configuration hash",
+    "A model, Codex CLI, tool-policy, or sandbox revision that changes observable behavior",
+    "A task-pack, rubric, tie rule, or judge revision",
+    "New repeated or real-shadow evidence showing a quality, safety, conformance, or rework regression",
+    "A change in evaluator or maintainer role overlap that alters the evidence-strength claim"
+  ],
+  "state": {
+    "experiment": "completed",
+    "artifact": "locally_implemented_and_validated",
+    "repository": "included_in_v0.1.0-alpha.1_release_candidate",
+    "publication": "prepared_for_public_alpha_release",
+    "deployment": "not_deployed",
+    "outcome": "not_observed"
+  },
+  "publication_state": "public_ready",
+  "generator": {
+    "name": "agentic-evidence-lab",
+    "version": "0.1.0a1"
+  }
+}

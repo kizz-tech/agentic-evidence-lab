@@ -1,0 +1,29 @@
+schema_version = "ael.task-pack-manifest/0.1-dev"
+task_pack_id = "focused-change-verification-adaptation-v1"
+revision = 1
+role = "adaptation"
+state = "frozen"
+visibility = "public"
+task_count = 3
+tasks_tree_sha256 = "42d9d24262fbe7a887bbb9cf622b3a3ee92aecc63c295f47c3aff34bfa35f81f"
+health_rule = "visible tests pass and pristine acceptance tests fail"
+health_result = "pass"
+validated_at = "2026-08-12"
+
+[[tasks]]
+task_id = "local-unit"
+stratum = "local-unit-change"
+fixture_tree_sha256 = "4c6c4ab757a216fac6021188fb0ad6387bf9ed5966a87a3fb7fb1d6098ade775"
+evaluator_tree_sha256 = "1554abc8121a5836f7574faf8005d08094ccf1d4303c590987aeebdcc51235c4"
+
+[[tasks]]
+task_id = "cross-contract"
+stratum = "cross-module-contract-change"
+fixture_tree_sha256 = "c2c0f7e7108c88d2e7c2d8545825ace67186323f3d6678d00ecdb1c04b97c507"
+evaluator_tree_sha256 = "ef5dec3bf2bebb904dca9c468f9c9e2f41022701eceb94926e3d2d26317e349a"
+
+[[tasks]]
+task_id = "migration"
+stratum = "migration-backed-change"
+fixture_tree_sha256 = "0a4b75ff7a7eea3a3b0d3693edce010c8dceb08caf5e4e808f91c0010c983769"
+evaluator_tree_sha256 = "cc375e099ef30c0fb6ac84a03531de16d77a7a735faaa72cd80b02eea936754d"

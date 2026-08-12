@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:kizz:ael:schema:measurement-set:0.1",
+  "title": "Agentic Evidence Lab Measurement Set",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "object_type",
+    "measurement_set_id",
+    "study_ref",
+    "measurements",
+    "critical_failures",
+    "limitations",
+    "source_refs"
+  ],
+  "properties": {
+    "schema_version": {"const": "ael.measurement-set/0.1"},
+    "object_type": {"const": "measurement_set"},
+    "measurement_set_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]+$"},
+    "study_ref": {
+      "allOf": [
+        {"$ref": "#/$defs/artifact_ref"},
+        {
+          "type": "object",
+          "required": ["study_id", "revision"],
+          "properties": {
+            "study_id": {"type": "string", "minLength": 1},
+            "revision": {"type": "integer", "minimum": 1}
+          }
+        }
+      ]
+    },
+    "measurements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["measurement_id", "kind", "metric", "value", "unit", "direction", "run_ids", "evidence_refs"],
+        "properties": {
+          "measurement_id": {"type": "string", "minLength": 1},
+          "kind": {"enum": ["deterministic", "outcome", "subjective", "process", "cost", "aggregate"]},
+          "metric": {"type": "string", "minLength": 1},
+          "value": {"type": ["number", "integer", "boolean", "string", "null"]},
+          "unit": {"type": "string", "minLength": 1},
+          "direction": {"enum": ["higher_better", "lower_better", "target", "descriptive"]},
+          "run_ids": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+          "condition_id": {"type": "string", "minLength": 1},
+          "task_id": {"type": "string", "minLength": 1},
+          "stratum": {"type": "string", "minLength": 1},
+          "evaluator": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["evaluator_id", "kind", "blinded"],
+            "properties": {
+              "evaluator_id": {"type": "string", "minLength": 1},
+              "kind": {"enum": ["deterministic", "model", "human", "hybrid"]},
+              "blinded": {"type": "boolean"}
+            }
+          },
+          "uncertainty": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["method", "level"],
+            "properties": {
+              "method": {"type": "string", "minLength": 1},
+              "level": {"type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1},
+              "lower": {"type": "number"},
+              "upper": {"type": "number"}
+            }
+          },
+          "evidence_refs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/artifact_ref"}}
+        }
+      }
+    },
+    "critical_failures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["failure_id", "severity", "observed", "description", "run_ids", "evidence_refs"],
+        "properties": {
+          "failure_id": {"type": "string", "minLength": 1},
+          "severity": {"enum": ["critical", "high", "medium", "low"]},
+          "observed": {"type": "boolean"},
+          "description": {"type": "string", "minLength": 1},
+          "run_ids": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+          "evidence_refs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/artifact_ref"}}
+        }
+      }
+    },
+    "limitations": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "source_refs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/artifact_ref"}}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "artifact_ref": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["uri", "visibility"],
+      "properties": {
+        "uri": {"type": "string", "minLength": 1, "format": "uri-reference"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "revision": {"oneOf": [{"type": "string", "minLength": 1}, {"type": "integer", "minimum": 1}]},
+        "visibility": {"enum": ["public", "private", "hidden", "embargoed"]}
+      }
+    }
+  }
+}

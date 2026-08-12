@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:kizz:ael:schema:concept:0.1",
+  "title": "Agentic Evidence Lab Concept",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "object_type",
+    "concept_id",
+    "revision",
+    "owner",
+    "idea",
+    "mechanism_hypothesis",
+    "intended_scope",
+    "known_non_goals",
+    "lineage"
+  ],
+  "properties": {
+    "schema_version": {"const": "ael.concept/0.1"},
+    "object_type": {"const": "concept"},
+    "concept_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:/-]+$"},
+    "revision": {"type": "integer", "minimum": 1},
+    "owner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["owner_id", "meaning_authority"],
+      "properties": {
+        "owner_id": {"type": "string", "minLength": 1},
+        "meaning_authority": {"enum": ["human", "organization", "maintainer", "external_author"]}
+      }
+    },
+    "idea": {"type": "string", "minLength": 1},
+    "mechanism_hypothesis": {"type": "string", "minLength": 1},
+    "intended_scope": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "known_non_goals": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "lineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["change_summary"],
+      "properties": {
+        "predecessor": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "required": ["concept_id", "revision"],
+          "properties": {
+            "concept_id": {"type": "string", "minLength": 1},
+            "revision": {"type": "integer", "minimum": 1},
+            "sha256": {"$ref": "#/$defs/sha256"}
+          }
+        },
+        "change_summary": {"type": "string", "minLength": 1}
+      }
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/artifact_ref"}
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "artifact_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["uri", "visibility"],
+      "properties": {
+        "uri": {"type": "string", "minLength": 1, "format": "uri-reference"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "revision": {"oneOf": [{"type": "string", "minLength": 1}, {"type": "integer", "minimum": 1}]},
+        "visibility": {"enum": ["public", "private", "hidden", "embargoed"]}
+      }
+    }
+  }
+}

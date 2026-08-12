@@ -1,0 +1,27 @@
+{
+  "schema_version": "ael.concept/0.1",
+  "object_type": "concept",
+  "concept_id": "kizz:ael:example:focused-change-verification-skill",
+  "revision": 1,
+  "owner": {
+    "owner_id": "kizz-ael-maintainer",
+    "meaning_authority": "maintainer"
+  },
+  "idea": "Provide an installable coding skill that maps a small repository change to the narrowest owner-layer tests and records exact local validation state.",
+  "mechanism_hypothesis": "A reusable skill with explicit ownership, scope, and state-language rules will reduce missed regression checks and false deployment claims relative to the same agent without the skill.",
+  "intended_scope": [
+    "small and medium software changes",
+    "installable agent skill",
+    "repositories with executable deterministic checks"
+  ],
+  "known_non_goals": [
+    "replacing repository-specific test knowledge",
+    "guaranteeing production correctness",
+    "authorizing deployment or external mutation",
+    "universal benefit across models and runtimes"
+  ],
+  "lineage": {
+    "predecessor": null,
+    "change_summary": "Ordinary coding-skill Contract v0 transfer fixture."
+  }
+}

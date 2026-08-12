@@ -1,0 +1,67 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agentic-evidence-lab"
+version = "0.1.0a1"
+description = "File-first evidence contracts for versioned agent interventions"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+authors = [
+  { name = "Ryuhmanov M" },
+]
+keywords = ["ai-agents", "benchmarking", "evaluation", "reproducibility"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+  "jsonschema>=4.23,<5",
+]
+
+[project.urls]
+Homepage = "https://github.com/kizz-tech/agentic-evidence-lab"
+Documentation = "https://github.com/kizz-tech/agentic-evidence-lab#readme"
+Issues = "https://github.com/kizz-tech/agentic-evidence-lab/issues"
+Source = "https://github.com/kizz-tech/agentic-evidence-lab"
+
+[project.scripts]
+ael = "ael.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+ael = ["schemas/*.json"]
+
+[tool.unittest]
+start-directory = "tests"
+
+[dependency-groups]
+dev = [
+  "build>=1.2.2,<2",
+  "ruff>=0.12,<0.13",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["studies/focused-change-verification/task-pack/adaptation-v1/tasks"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"studies/**/evaluator/test_acceptance.py" = ["E402"]
+
+[tool.ruff.format]
+quote-style = "double"

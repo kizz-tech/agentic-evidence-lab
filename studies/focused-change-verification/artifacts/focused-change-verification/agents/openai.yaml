@@ -1,0 +1,4 @@
+interface:
+  display_name: "Focused Change Verification"
+  short_description: "Route changes to the narrowest sufficient checks"
+  default_prompt: "Use $focused-change-verification to verify this repository change and report its exact evidence state."

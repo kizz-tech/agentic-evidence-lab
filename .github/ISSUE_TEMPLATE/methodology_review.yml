@@ -1,0 +1,44 @@
+name: Methodology review
+description: Challenge an AEL design, inference, report, or evidence claim
+title: "[Methodology]: "
+labels: ["methodology", "triage"]
+body:
+  - type: input
+    id: target
+    attributes:
+      label: Target artifact and revision
+      description: Link a manifest, receipt, report, schema, or exact commit.
+    validations:
+      required: true
+  - type: textarea
+    id: claim
+    attributes:
+      label: Claim or decision under review
+    validations:
+      required: true
+  - type: textarea
+    id: objection
+    attributes:
+      label: Objection
+      description: Separate observed fact, inference, and uncertainty where possible.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Supporting evidence or falsifier
+      description: What evidence would change the conclusion in either direction?
+    validations:
+      required: true
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Claimed impact
+      options:
+        - Invalidates a result
+        - Narrows a result
+        - Changes the next experiment
+        - Improves clarity only
+        - Unsure
+    validations:
+      required: true
