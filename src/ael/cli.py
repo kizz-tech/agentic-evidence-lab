@@ -15,6 +15,7 @@ from ael.codex_runner import (
     run_codex_task,
 )
 from ael.render import render_receipt
+from ael.result_surface import materialize_result_surface
 from ael.sandbox import (
     DEFAULT_CODEX_IMAGE,
     DEFAULT_EGRESS_IMAGE,
@@ -99,6 +100,23 @@ def _calibrate(args: argparse.Namespace) -> int:
     print(
         f"calibration complete: {result['simulation_id']}; "
         f"iterations={result['iterations']}; assumptions={result['assumption_state']}"
+    )
+    return 0
+
+
+def _results(args: argparse.Namespace) -> int:
+    try:
+        summary = materialize_result_surface(
+            Path(args.profile),
+            check=args.results_command == "check",
+            require_git_proof=args.require_git_proof,
+        )
+    except SandboxError as exc:
+        print(f"result projection failed: {exc}", file=sys.stderr)
+        return 1
+    print(
+        f"result projection {summary['status']}: {len(summary['outputs'])} output(s); "
+        f"generator={summary['generator']['version']}"
     )
     return 0
 
@@ -345,6 +363,23 @@ def build_parser() -> argparse.ArgumentParser:
     calibrate_parser.add_argument("--output", required=True, help="simulation result JSON")
     calibrate_parser.add_argument("--report", help="optional Markdown report")
     calibrate_parser.set_defaults(handler=_calibrate)
+
+    results_parser = subparsers.add_parser(
+        "results", help="build or check deterministic public result projections"
+    )
+    results_subparsers = results_parser.add_subparsers(dest="results_command", required=True)
+    for command, help_text in (
+        ("build", "materialize the public Results Index and study cards"),
+        ("check", "fail when committed result projections differ from source evidence"),
+    ):
+        command_parser = results_subparsers.add_parser(command, help=help_text)
+        command_parser.add_argument("profile", help="public-results profile JSON")
+        command_parser.add_argument(
+            "--require-git-proof",
+            action="store_true",
+            help="require Git proof for frozen-bundle cards",
+        )
+        command_parser.set_defaults(handler=_results)
 
     sandbox_parser = subparsers.add_parser(
         "sandbox", help="build and run the isolated Docker adapter"

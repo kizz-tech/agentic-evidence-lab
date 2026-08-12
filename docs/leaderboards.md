@@ -55,17 +55,26 @@ No overall rank may hide a critical failure. When candidates trade quality,
 cost, latency, or safety, AEL shows a Pareto frontier or separate columns instead
 of inventing undisclosed weights.
 
+Evidence level, reproducibility, independence, freshness, action, and outcome
+are orthogonal facets. A board or result card must show them separately; one
+facet never upgrades another. Missing historical action or outcome is rendered
+as `not_declared_historical`, not as a claim that no action or outcome occurred.
+
 ## Update and correction policy
 
 Boards are generated from immutable receipts. New evidence creates a new board
 revision; it does not rewrite old receipts. A candidate becomes stale or
 ineligible when an explicit invalidation trigger fires. Corrections retain the
-superseded view and explain the change.
+superseded view and explain the change. The generated [Results
+Index](../RESULTS.md) and [machine study index](results/index.json) expose
+derived current cards and counts; they are projections for navigation, not
+additional evidence authority.
 
 ## First-board gate
 
 The first public board is blocked until one study has at least two eligible
 candidates on the same frozen contract, repeated observations sufficient for
 the preregistered uncertainty method, and a completed factual-correction pass.
-The current 18 public runs span two incomparable studies, so the alpha publishes
-a [Results Index](../RESULTS.md) instead.
+Until that condition exists, the alpha publishes separate contextual result
+cards in the [Results Index](../RESULTS.md) instead. Run totals are derived
+from the referenced evidence graph and must not be hard-coded into this policy.

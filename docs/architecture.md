@@ -25,6 +25,39 @@ references, evidence-role consistency, and claim-level restrictions.
 `ael.render` turns an already decided receipt into Markdown; it does not infer a
 verdict from scores.
 
+Alpha.5 keeps those five Contract v0 schemas and the receipt renderer unchanged.
+Its public result surface is projection-first:
+
+```text
+validated Contract v0 evidence graph
+              + publication profile
+                         │
+                         ▼
+       deterministic public result projection
+              ├─ RESULTS.md (human cards)
+              ├─ docs/results/index.json (machine index)
+              └─ docs/results/<slug>.md (card projections)
+```
+
+The profile selects public receipts and claims, declares replication
+instructions and unavailable-material categories, and preserves explicit
+historical unknowns. The projection may enforce a claim ceiling, but it cannot
+create evidence, change a receipt, or become a second authority. Evidence
+level, reproducibility, independence, freshness, action, and outcome remain
+separate axes; a card renders unavailable historical action or outcome as
+`not_declared_historical` or `unassessed` rather than guessing.
+
+No stable Decision Case, admission, or Outcome Follow-up schema is introduced
+in alpha.5. Those are distinct owner lifecycles for a prospective pilot in the
+next decision-governing study. The pilot must hash-bind admission before scored
+work and exercise one complete decision/action/outcome lifecycle before a
+schema is stabilized.
+
+Git ancestry or a tag can prove repository artifact ordering—for example, that
+freeze bytes are present in an ancestor. It cannot prove that private model
+calls occurred before a result, reconstruct private events, or establish
+independent replication.
+
 ## Execution adapters
 
 `ael.sandbox` invokes Docker with a read-only canonical fixture, a tmpfs working
@@ -58,7 +91,9 @@ its reusable credential is readable by the agent process.
 
 The first multi-study use is [Agent Skills Season 1](../studies/agent-skills-season-1/README.md).
 Its ten dossiers share the evidence envelope and isolation policy while keeping
-their metrics, task semantics, and evaluators local.
+their metrics, task semantics, and evaluators local. The completed bounded
+negative PBT v2 result is one study-level effect decision; activation-only and
+unrun studies remain distinct cards rather than entries in a global score.
 
 ## Ownership boundaries
 

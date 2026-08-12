@@ -1,0 +1,998 @@
+{
+  "as_of": "2026-08-12",
+  "generator": {
+    "name": "agentic-evidence-lab",
+    "version": "0.1.0a5"
+  },
+  "projection_policy": "ael.publication-projection/0.1",
+  "schema_version": "ael.public-results/0.1",
+  "source_hashes": {
+    "studies/public-results.json": "6ce9dd76a68d966b916637ea93c102f9796865f9c4707aaa5f1ddd59f5eb8d76"
+  },
+  "studies": [
+    {
+      "card_id": "council-generation-1",
+      "claim_ids": [
+        "AEL-CG1-01",
+        "AEL-CG1-02",
+        "AEL-CG1-05"
+      ],
+      "claims": [
+        {
+          "claim_id": "AEL-CG1-01",
+          "claim_level": "workflow",
+          "evidence_refs": [
+            "historical-profile-fork-error:E4-C2",
+            "candidate-profile-id-omission:E7-C3"
+          ],
+          "falsifier": "A hash-equivalent rerun reproduces the same full-history fork failure in the candidate or cannot authenticate any claimed consultation.",
+          "scope": [
+            "historical C2 versus frozen C3",
+            "measured local Codex runtime",
+            "held-out consequential cases"
+          ],
+          "statement": "The frozen candidate repaired the observed full-history named-profile execution and consultation-provenance defect on the measured local runtime surface.",
+          "status": "supported"
+        },
+        {
+          "claim_id": "AEL-CG1-02",
+          "claim_level": "workflow",
+          "evidence_refs": [
+            "heldout-mean-score:C1",
+            "heldout-mean-score:C2",
+            "heldout-mean-score:C3"
+          ],
+          "falsifier": "Repeated held-out or real-shadow runs show a material quality or critical-failure regression against either strong control.",
+          "scope": [
+            "one run per cell",
+            "three synthetic held-out engineering cases",
+            "same-model-family blinded judge",
+            "0.25 tie threshold on a 0-to-4 rubric"
+          ],
+          "statement": "The candidate preserved measured held-out decision quality relative to the historical skill and fixed sequential revision under the frozen tie rule.",
+          "status": "bounded"
+        },
+        {
+          "claim_id": "AEL-CG1-05",
+          "claim_level": "artifact",
+          "evidence_refs": [
+            "candidate-profile-id-omission:E7-C3"
+          ],
+          "falsifier": "A future runtime and candidate revision provide authenticated receiver IDs and complete profile-scoped finding IDs on every applicable run.",
+          "scope": [
+            "retained Codex CLI events",
+            "E7-C3 final reporting"
+          ],
+          "statement": "Consultation identity and trace attribution remained incomplete even though the candidate improved process accountability.",
+          "status": "supported"
+        }
+      ],
+      "decision": {
+        "disposition": "adopt",
+        "reversal_trigger": "Reopen the decision if the artifact, model/runtime surface, task pack, or execution contract changes, or if repeated real-shadow evidence exposes a quality, conformance, or downstream-rework regression.",
+        "scope": [
+          "the exact Council Generation 1 candidate artifact",
+          "the measured Codex CLI and gpt-5.6-sol configuration",
+          "three synthetic held-out engineering cases",
+          "local replacement of the historical engineering-council skill"
+        ],
+        "summary": "Adopt the frozen adaptive routing and integration semantics for the local Engineering Council because the candidate preserved measured held-out quality, repaired an observed profile-execution defect, routed the routine case directly, and cleared the predeclared generated-work gate on the two consequential cases."
+      },
+      "evidence_level": "controlled_effect_observed",
+      "generator": {
+        "name": "agentic-evidence-lab",
+        "version": "0.1.0a5"
+      },
+      "history": {
+        "action": "not_declared_historical",
+        "admission": "not_declared_historical",
+        "freshness": "unassessed",
+        "outcome_follow_up": "not_declared_historical"
+      },
+      "independence": {
+        "disclosure": "The receipt is a content-addressed maintainer evaluation, not independent certification.",
+        "label": "maintainer_evaluated",
+        "role_overlaps": [
+          "The capability maintainer owned the task pack, runner operation, parent audit, and adoption decision.",
+          "Contestants and blinded judge used correlated variants of the same model family.",
+          "The AEL receipt signer and Council maintainer are inside the same Kizz project boundary."
+        ]
+      },
+      "invalidation_triggers": [
+        "Any change to the candidate skill hash or roster/configuration hash",
+        "A model, Codex CLI, tool-policy, or sandbox revision that changes observable behavior",
+        "A task-pack, rubric, tie rule, or judge revision",
+        "New repeated or real-shadow evidence showing a quality, safety, conformance, or rework regression",
+        "A change in evaluator or maintainer role overlap that alters the evidence-strength claim"
+      ],
+      "limitations": [
+        "One stochastic sample was collected per case and condition.",
+        "The study used synthetic briefs rather than observed production decisions.",
+        "Contestants and judge were correlated variants of the same model family.",
+        "Total input compute was not equalized across conditions.",
+        "No downstream implementation, rework, regression, or user outcome was measured.",
+        "The retained event stream did not expose authenticated subagent receiver IDs.",
+        "The candidate omitted exact profile identities and finding IDs in one held-out final."
+      ],
+      "materials": [
+        {
+          "availability": "withheld",
+          "label": "Synthetic held-out briefs and evaluator anchors",
+          "reason": "The retained evaluation package is private and only its provenance hashes are public.",
+          "reproduction_impact": "A public checkout can inspect normalized runs and measurements but cannot rerun the exact held-out cases."
+        },
+        {
+          "availability": "not_collected",
+          "label": "Authenticated subagent receiver identities",
+          "reason": "The measured runtime event surface did not expose authenticated receiver identities.",
+          "reproduction_impact": "Consultation identity and complete trace attribution cannot be independently reconstructed."
+        }
+      ],
+      "measurements": {
+        "by_kind": {
+          "aggregate": 7,
+          "cost": 12,
+          "process": 3,
+          "subjective": 24
+        },
+        "count": 46,
+        "measurement_set_id": "kizz:ael:measurements:council-generation-1-heldout",
+        "selected_summaries": [
+          {
+            "aggregation_basis": "aggregate_measurements",
+            "category": "cost_or_latency",
+            "condition_id": "C2",
+            "metric": "consequential_generated_work_tokens",
+            "observations": 1,
+            "total": 12560.0,
+            "unit": "tokens"
+          },
+          {
+            "aggregation_basis": "aggregate_measurements",
+            "category": "cost_or_latency",
+            "condition_id": "C3",
+            "metric": "consequential_generated_work_tokens",
+            "observations": 1,
+            "total": 9598.0,
+            "unit": "tokens"
+          },
+          {
+            "aggregation_basis": "non_aggregate_measurements",
+            "category": "critical_failure",
+            "condition_id": "C0",
+            "metric": "critical_anchor_misses",
+            "observations": 3,
+            "total": 0.0,
+            "unit": "count"
+          },
+          {
+            "aggregation_basis": "non_aggregate_measurements",
+            "category": "critical_failure",
+            "condition_id": "C1",
+            "metric": "critical_anchor_misses",
+            "observations": 3,
+            "total": 0.0,
+            "unit": "count"
+          },
+          {
+            "aggregation_basis": "non_aggregate_measurements",
+            "category": "critical_failure",
+            "condition_id": "C2",
+            "metric": "critical_anchor_misses",
+            "observations": 3,
+            "total": 0.0,
+            "unit": "count"
+          },
+          {
+            "aggregation_basis": "non_aggregate_measurements",
+            "category": "critical_failure",
+            "condition_id": "C3",
+            "metric": "critical_anchor_misses",
+            "observations": 3,
+            "total": 0.0,
+            "unit": "count"
+          },
+          {
+            "aggregation_basis": "non_aggregate_measurements",
+            "category": "cost_or_latency",
+            "condition_id": "C0",
+            "metric": "generated_work_tokens",
+            "observations": 3,
+            "total": 3637.0,
+            "unit": "tokens"
+          },
+          {
+            "aggregation_basis": "non_aggregate_measurements",
+            "category": "cost_or_latency",
+            "condition_id": "C1",
+            "metric": "generated_work_tokens",
+            "observations": 3,
+            "total": 17219.0,
+            "unit": "tokens"
+          },
+          {
+            "aggregation_basis": "non_aggregate_measurements",
+            "category": "cost_or_latency",
+            "condition_id": "C2",
+            "metric": "generated_work_tokens",
+            "observations": 3,
+            "total": 13187.0,
+            "unit": "tokens"
+          },
+          {
+            "aggregation_basis": "non_aggregate_measurements",
+            "category": "cost_or_latency",
+            "condition_id": "C3",
+            "metric": "generated_work_tokens",
+            "observations": 3,
+            "total": 10257.0,
+            "unit": "tokens"
+          }
+        ]
+      },
+      "publication": "published",
+      "receipt": {
+        "sha256": "8cb13547dda6dc8a8805fe65587c6f3c8712ca81a32cff45a57874c76a59a757",
+        "uri": "examples/council-generation-1/evidence-receipt.json"
+      },
+      "receipt_id": "kizz:ael:receipt:council-generation-1:2026-08-12",
+      "report": {
+        "sha256": "9e9114b8c42cc135890fba800257ea405df8ef7b68928bd6e405b4ff3844313a",
+        "uri": "reports/2026-08-12-council-generation-1.md"
+      },
+      "reproducibility": "rerunnable",
+      "runs": {
+        "by_condition": {
+          "C0": 3,
+          "C1": 3,
+          "C2": 3,
+          "C3": 3
+        },
+        "by_status": {
+          "valid": 12
+        },
+        "count": 12
+      },
+      "source_hashes": {
+        "examples/council-generation-1/concept.json": "e9ea287b7c92822c0ca9f10edf93ac0882aa225e1006bf7ff05cf5e90f15db5e",
+        "examples/council-generation-1/evidence-receipt.json": "8cb13547dda6dc8a8805fe65587c6f3c8712ca81a32cff45a57874c76a59a757",
+        "examples/council-generation-1/measurement-set.json": "6f2f0a1b9af8605cabd2894bc587d14d38fb5c3b6024f6e1dcbc5cd4761cb5b0",
+        "examples/council-generation-1/runs/E1-C0.json": "eaef94912e9091823c5fbd27908f93b64e4274804466566aae5fa95fbdcbcc82",
+        "examples/council-generation-1/runs/E1-C1.json": "58aef5720b516e097b9b300ca2f06058f56d85359723defd4f9d50754bc22cc4",
+        "examples/council-generation-1/runs/E1-C2.json": "4d4c05cf3830c0949b4b503120b3fed7f0632bac75dad092142506056e2d274e",
+        "examples/council-generation-1/runs/E1-C3.json": "e14a5b5d01e3c612cfdb3c2164a82a15a07d5b40c28c9967f2e02edd786bce5b",
+        "examples/council-generation-1/runs/E4-C0.json": "0dc3e03de0059cbe72363a1ba5eaa7ebc6ba29e03c964efafb8cd9b925dc9183",
+        "examples/council-generation-1/runs/E4-C1.json": "2d2d00c657cdea42b0b43b65e851438b5ef5f17804f5beb7b72ff617ccb6b4d2",
+        "examples/council-generation-1/runs/E4-C2.json": "7100e198b510544f25af46882f336ed4b6f3ef542aeb8d2f6cfe6f837849dd0f",
+        "examples/council-generation-1/runs/E4-C3.json": "aa0917d3a74fa4772857ec0cfa2e4a4c4ba0a83e38f53dd995f8af69df2f5fa3",
+        "examples/council-generation-1/runs/E7-C0.json": "a85ece89eecc2b264f9e149483f5a439dee4b555645bb0eafe5e00d16c4fcca1",
+        "examples/council-generation-1/runs/E7-C1.json": "e2206759b9e59f7e1cd6e4993c933c5ee7f8dfec2e20c947e09c42c8d6db86e4",
+        "examples/council-generation-1/runs/E7-C2.json": "39a50aa93d760066b9b031d828f9aff443f64b51329cf92bc99365aaff62cd0e",
+        "examples/council-generation-1/runs/E7-C3.json": "fbc585cadc103cdd9726c9d8584cf06ba1727170f4b98d5202db146c726cd141",
+        "examples/council-generation-1/study-manifest.json": "aad0f01c68fc7346f0a834e7039f0650af31a04f65ceee927312468b335e9206",
+        "reports/2026-08-12-council-generation-1.md": "9e9114b8c42cc135890fba800257ea405df8ef7b68928bd6e405b4ff3844313a",
+        "studies/public-results.json": "6ce9dd76a68d966b916637ea93c102f9796865f9c4707aaa5f1ddd59f5eb8d76"
+      },
+      "state": {
+        "artifact": "locally_implemented_and_validated",
+        "deployment": "not_deployed",
+        "experiment": "completed",
+        "outcome": "not_observed",
+        "publication": "prepared_for_public_alpha_release",
+        "repository": "included_in_v0.1.0-alpha.1_release_candidate"
+      },
+      "study": {
+        "comparison_mode": "controlled_factor",
+        "conditions": [
+          {
+            "condition_id": "C0",
+            "label": "Direct single pass",
+            "role": "baseline"
+          },
+          {
+            "condition_id": "C1",
+            "label": "Fixed sequential revision",
+            "role": "control"
+          },
+          {
+            "condition_id": "C2",
+            "label": "Historical skill-routed workflow",
+            "role": "control"
+          },
+          {
+            "condition_id": "C3",
+            "label": "Frozen adaptive council candidate",
+            "role": "treatment"
+          }
+        ],
+        "decision_owners": [
+          "kizz-council-maintainer"
+        ],
+        "decision_question": "Should the historical Engineering Council workflow be replaced by the frozen adaptive candidate, retained unchanged, or replaced by a fixed sequential workflow on the measured local Codex surface?",
+        "primary_estimand": {
+          "aggregation": "mean blinded weighted rubric by condition, with case-level critical failures and process gates reported separately",
+          "description": "Compare the frozen candidate with direct, sequential, and historical-skill conditions on held-out engineering cases while preserving critical-anchor, routing, and generated-work constraints.",
+          "name": "heldout decision quality and process acceptability",
+          "unit_of_analysis": "held-out engineering case"
+        },
+        "revision": 1,
+        "status": "completed",
+        "study_id": "kizz:ael:study:council-generation-1-heldout",
+        "task_packs": [
+          {
+            "role": "holdout",
+            "strata": [
+              "routine-local",
+              "consequential-domain-policy",
+              "consequential-performance"
+            ],
+            "task_pack_id": "engineering-council-generation-1-heldout"
+          }
+        ]
+      },
+      "title": "Council Generation 1",
+      "unsupported_inferences": [
+        "Universal multi-agent or debate superiority",
+        "Advisor-roster or prompt optimality",
+        "Small-model councils replacing one capable model",
+        "Research, product, design, or personal-domain transfer",
+        "Universal compute or monetary cost reduction",
+        "Production or downstream implementation outcome improvement",
+        "Public reproducibility or independent verification"
+      ],
+      "verification": {
+        "boundary": "Validates the published Contract v0 graph and exact local reference hashes. It does not rerun the Council workflows, recover private held-out material, or independently reproduce the decision.",
+        "command": [
+          "uv run ael validate examples/council-generation-1"
+        ],
+        "kind": "evidence_graph"
+      }
+    },
+    {
+      "card_id": "focused-change-verification-calibration",
+      "claim_ids": [
+        "AEL-FCV-CAL-01",
+        "AEL-FCV-CAL-02",
+        "AEL-FCV-CAL-03",
+        "AEL-FCV-CAL-04"
+      ],
+      "claims": [
+        {
+          "claim_id": "AEL-FCV-CAL-01",
+          "claim_level": "workflow",
+          "evidence_refs": [
+            "canonical-fixture-mutation",
+            "acceptance-total:S0",
+            "acceptance-total:S1"
+          ],
+          "falsifier": "A byte-equivalent rerun mutates a fixture, cannot export a candidate, or cannot bind telemetry to the evaluated workspace.",
+          "scope": [
+            "six runtime-v2 calibration cells",
+            "maintainer-controlled fixtures"
+          ],
+          "statement": "The controlled-egress Docker adapter executed six stable Codex cells without changing any canonical fixture and captured enough telemetry for deterministic post-run evaluation.",
+          "status": "supported"
+        },
+        {
+          "claim_id": "AEL-FCV-CAL-02",
+          "claim_level": "artifact",
+          "evidence_refs": [
+            "skill-activation:local-unit:S1",
+            "skill-activation:cross-contract:S1",
+            "skill-activation:migration:S1"
+          ],
+          "falsifier": "A retained treatment trace lacks the exact skill read or a baseline trace loads it.",
+          "scope": [
+            "S1 treatment cells",
+            "retained private Codex event streams"
+          ],
+          "statement": "The frozen skill was installed and explicitly read in all three treatment cells and in no baseline cell.",
+          "status": "supported"
+        },
+        {
+          "claim_id": "AEL-FCV-CAL-03",
+          "claim_level": "workflow",
+          "evidence_refs": [
+            "acceptance-total:S0",
+            "acceptance-total:S1"
+          ],
+          "falsifier": "Repeated matched runs on a discriminating pack produce a stable acceptance or critical-omission difference.",
+          "scope": [
+            "one calibration repeat",
+            "three public tasks",
+            "deterministic acceptance only"
+          ],
+          "statement": "No deterministic implementation-acceptance difference was observed: baseline and treatment each passed three of three tasks.",
+          "status": "bounded"
+        },
+        {
+          "claim_id": "AEL-FCV-CAL-04",
+          "claim_level": "workflow",
+          "evidence_refs": [
+            "acceptance-total:S0",
+            "acceptance-total:S1"
+          ],
+          "falsifier": "A preregistered repeated study on the unchanged pack exhibits reliable non-ceiling discrimination on the primary behavioral estimand.",
+          "scope": [
+            "current task wording",
+            "observed 6-of-6 acceptance ceiling"
+          ],
+          "statement": "The current public prompts are too explicit to isolate the skill's verification-routing contribution and should remain smoke tests rather than become the first confirmatory pack.",
+          "status": "bounded"
+        }
+      ],
+      "decision": {
+        "disposition": "narrow",
+        "reversal_trigger": "Reconsider after a frozen discriminating pack, preregistered behavioral rubric, randomized order, repeated cells, and a safer credential boundary are available.",
+        "scope": [
+          "Codex CLI 0.146.0 with gpt-5.6-sol at xhigh effort",
+          "the exact pinned runtime and proxy image IDs in the six run records",
+          "three public maintainer-authored calibration tasks",
+          "one non-randomized repeat per condition and task"
+        ],
+        "summary": "Keep the Codex runner and current pack as an operational smoke surface, but do not spend the planned 18-cell budget on this ceiling-limited pack; design tasks that do not restate the skill before estimating an effect."
+      },
+      "evidence_level": "runtime_conformant",
+      "generator": {
+        "name": "agentic-evidence-lab",
+        "version": "0.1.0a5"
+      },
+      "history": {
+        "action": "not_declared_historical",
+        "admission": "not_declared_historical",
+        "freshness": "unassessed",
+        "outcome_follow_up": "not_declared_historical"
+      },
+      "independence": {
+        "disclosure": "This is maintainer calibration evidence, not independent certification or a confirmatory skill-effect study.",
+        "label": "maintainer_evaluated",
+        "role_overlaps": [
+          "Kizz owns the intervention, task pack, runner, evaluator, analysis, and continuation decision."
+        ]
+      },
+      "invalidation_triggers": [
+        "A change to the frozen skill, task pack, prompt, Codex version, model/effort, runner image, proxy policy, or evaluator",
+        "New evidence that credential content entered persisted artifacts or unauthorized traffic",
+        "A repeated or real-shadow study contradicting the calibration observations",
+        "A public claim that omits the maintainer-evaluated and calibration-only scope"
+      ],
+      "limitations": [
+        "One non-randomized calibration repeat was run per task and condition; this is not an effect estimate.",
+        "The public task prompts explicitly request much of the verification behavior contributed by the skill, creating a ceiling and treatment-contamination risk.",
+        "Kizz owns the skill, tasks, runner, deterministic evaluator, and decision.",
+        "The provider exposes a model identifier but not an immutable model revision.",
+        "Generated-work and wall-time budgets were matched by configuration but not forced to equal realized usage.",
+        "The reusable ChatGPT credential was process-readable; persisted outputs were scanned, but encrypted provider traffic was not inspected.",
+        "No downstream rework, production behavior, user outcome, or third-party replication was measured."
+      ],
+      "materials": [
+        {
+          "availability": "withheld",
+          "label": "Hosted Codex event streams and exported workspaces",
+          "reason": "Raw hosted execution artifacts remain in the private evidence boundary.",
+          "reproduction_impact": "A public checkout can validate normalized records but cannot replay the exact six hosted calls."
+        },
+        {
+          "availability": "not_collected",
+          "label": "Discriminating holdout pack",
+          "reason": "The completed work was an operational calibration; the discriminating pack was not run.",
+          "reproduction_impact": "The public evidence cannot estimate a skill effect."
+        }
+      ],
+      "measurements": {
+        "by_kind": {
+          "aggregate": 6,
+          "cost": 12,
+          "deterministic": 12,
+          "process": 3
+        },
+        "count": 33,
+        "measurement_set_id": "kizz:ael:measurements:focused-change-verification-calibration-v1",
+        "selected_summaries": [
+          {
+            "aggregation_basis": "aggregate_measurements",
+            "category": "cost_or_latency",
+            "condition_id": "S0",
+            "metric": "generated_work_tokens",
+            "observations": 1,
+            "total": 20256.0,
+            "unit": "tokens"
+          },
+          {
+            "aggregation_basis": "aggregate_measurements",
+            "category": "cost_or_latency",
+            "condition_id": "S1",
+            "metric": "generated_work_tokens",
+            "observations": 1,
+            "total": 21944.0,
+            "unit": "tokens"
+          },
+          {
+            "aggregation_basis": "non_aggregate_measurements",
+            "category": "activation",
+            "condition_id": "S1",
+            "false": 0,
+            "metric": "skill_activated",
+            "observations": 3,
+            "true": 3,
+            "unit": "boolean"
+          },
+          {
+            "aggregation_basis": "aggregate_measurements",
+            "category": "cost_or_latency",
+            "condition_id": "S0",
+            "metric": "wall_time",
+            "observations": 1,
+            "total": 331689.0,
+            "unit": "milliseconds"
+          },
+          {
+            "aggregation_basis": "aggregate_measurements",
+            "category": "cost_or_latency",
+            "condition_id": "S1",
+            "metric": "wall_time",
+            "observations": 1,
+            "total": 378385.0,
+            "unit": "milliseconds"
+          }
+        ]
+      },
+      "publication": "published",
+      "receipt": {
+        "sha256": "7a770b0b177a313f6b042d67d2aaab62919d333b6d1625fcd7b3eff766c3e581",
+        "uri": "examples/coding-skill/calibration-v1/evidence-receipt.json"
+      },
+      "receipt_id": "kizz:ael:receipt:focused-change-verification-calibration-v1",
+      "report": {
+        "sha256": "0d5159f51fbe4be863be1feb319ffd0ef1364ddbd859f12d49cfabef15d15d2c",
+        "uri": "reports/2026-08-12-focused-change-verification-codex-calibration.md"
+      },
+      "reproducibility": "rerunnable",
+      "runs": {
+        "by_condition": {
+          "S0": 3,
+          "S1": 3
+        },
+        "by_status": {
+          "valid": 6
+        },
+        "count": 6
+      },
+      "source_hashes": {
+        "examples/coding-skill/calibration-v1/evidence-receipt.json": "7a770b0b177a313f6b042d67d2aaab62919d333b6d1625fcd7b3eff766c3e581",
+        "examples/coding-skill/calibration-v1/measurement-set.json": "5172087b3082098af68655e23b496d9f53f2f43406ff3c7bd2503ec453e30978",
+        "examples/coding-skill/calibration-v1/runs/cross-contract-S0-01.json": "d68662c9e3fc296b91d20cc826aeeaf44d22b5e1e38778e67ebf9cab6e50f929",
+        "examples/coding-skill/calibration-v1/runs/cross-contract-S1-01.json": "6abeea0eb521ba1bf8548c9329d56dd651e4369d4ccdd10279062055f3579828",
+        "examples/coding-skill/calibration-v1/runs/local-unit-S0-01.json": "2d1af1c992511cc015d2d3624b617cfc20545659748eb2d4e19218408404638a",
+        "examples/coding-skill/calibration-v1/runs/local-unit-S1-01.json": "8adc6c3a3cd041255d91e75efedcfa412cde4f781f4ddc62b369f2fd1644d1fc",
+        "examples/coding-skill/calibration-v1/runs/migration-S0-01.json": "195d089f6a892add9f6197d60fb197d88325e8b234ae83b62b99849a113094a0",
+        "examples/coding-skill/calibration-v1/runs/migration-S1-01.json": "47dd47a0a3d908cfd1e30d3fd75cd5b459e4ca7e1e6f6f8a698a52187b3a78d6",
+        "examples/coding-skill/concept.json": "056da8f4a9bd5f90140f3440e7c283b0c172f64adfa5606f783a8223372d48b8",
+        "examples/coding-skill/study-manifest.json": "330700bc8cb12d77520f251fb94f54c8b879a9915c39f530feaf5d56a1bed841",
+        "reports/2026-08-12-focused-change-verification-codex-calibration.md": "0d5159f51fbe4be863be1feb319ffd0ef1364ddbd859f12d49cfabef15d15d2c",
+        "studies/public-results.json": "6ce9dd76a68d966b916637ea93c102f9796865f9c4707aaa5f1ddd59f5eb8d76"
+      },
+      "state": {
+        "artifact": "frozen skill and public task pack locally validated",
+        "deployment": "not deployed",
+        "experiment": "six-cell runner calibration completed; planned 18-cell adaptation study not run",
+        "outcome": "not observed",
+        "publication": "prepared for public alpha release",
+        "repository": "included in the v0.1.0-alpha.1 release candidate"
+      },
+      "study": {
+        "comparison_mode": "controlled_factor",
+        "conditions": [
+          {
+            "condition_id": "S0",
+            "label": "Coding agent without verification skill",
+            "role": "baseline"
+          },
+          {
+            "condition_id": "S1",
+            "label": "Coding agent with focused verification skill",
+            "role": "treatment"
+          }
+        ],
+        "decision_owners": [
+          "kizz-ael-maintainer"
+        ],
+        "decision_question": "Does the exact installable verification skill improve owner-layer test selection and state-truth reporting relative to the same coding agent without the skill?",
+        "primary_estimand": {
+          "aggregation": "paired task-level difference by change-risk stratum",
+          "description": "Paired difference in deterministic repository acceptance and critical validation omissions with downstream correction effort reported separately.",
+          "name": "verified change completion difference",
+          "unit_of_analysis": "repository change task"
+        },
+        "revision": 1,
+        "status": "draft",
+        "study_id": "kizz:ael:study:focused-change-verification-skill",
+        "task_packs": [
+          {
+            "role": "adaptation",
+            "strata": [
+              "local-unit-change",
+              "cross-module-contract-change",
+              "migration-backed-change"
+            ],
+            "task_pack_id": "focused-change-verification-adaptation-v1"
+          }
+        ]
+      },
+      "title": "Focused Change Verification calibration",
+      "unsupported_inferences": [
+        "The skill improves implementation correctness or code quality.",
+        "The skill is cost-effective or faster.",
+        "The skill transfers to real repositories or other models and agent runtimes.",
+        "Codex or gpt-5.6-sol is superior to Claude Code, Cursor, another CLI, or another model.",
+        "The current credential boundary is safe for untrusted third-party tasks or skills.",
+        "Three acceptance passes per condition establish equivalence."
+      ],
+      "verification": {
+        "boundary": "Validates the published Contract v0 graph and exact local reference hashes. It does not rerun hosted Codex calls or turn this calibration into skill-effect evidence.",
+        "command": [
+          "uv run ael validate examples/coding-skill"
+        ],
+        "kind": "evidence_graph"
+      }
+    },
+    {
+      "card_id": "property-based-testing-v2",
+      "claim_ids": [
+        "AEL-PBT-V2-01",
+        "AEL-PBT-V2-02"
+      ],
+      "claims": [
+        {
+          "claim_id": "AEL-PBT-V2-01",
+          "claim_level": "factor_causal",
+          "evidence_refs": [
+            "hidden_acceptance:P-S01:B0:R01",
+            "hidden_acceptance:P-S01:S1:R01",
+            "hidden_acceptance:P-S02:B0:R01",
+            "hidden_acceptance:P-S02:S1:R01",
+            "hidden_acceptance:P-S03:B0:R01",
+            "hidden_acceptance:P-S03:S1:R01",
+            "hidden_acceptance:P-S04:B0:R01",
+            "hidden_acceptance:P-S04:S1:R01"
+          ],
+          "falsifier": "A retained cell, frozen-rule recomputation, or untouched confirmation result contradicts the published counts or outcome.",
+          "scope": [
+            "exact matched serialization and normalization pilot cells"
+          ],
+          "statement": "S1 changed hidden-edge acceptance enough to satisfy the frozen terminal rule on the exact pilot cells.",
+          "status": "contradicted"
+        },
+        {
+          "claim_id": "AEL-PBT-V2-02",
+          "claim_level": "workflow",
+          "evidence_refs": [
+            "screening-decision.json",
+            "decision.json"
+          ],
+          "falsifier": "Git history or retained private evidence shows a scored call preceding the freeze or a pack hash mismatch.",
+          "scope": [
+            "freeze and result artifacts in this repository"
+          ],
+          "statement": "The public decision is bound to a preregistered freeze and private pack composites that preceded scored calls.",
+          "status": "supported"
+        }
+      ],
+      "decision": {
+        "disposition": "reject",
+        "reversal_trigger": "Re-evaluate after any intervention, task, evaluator, runtime, model, prompt, budget, or provider-behavior change.",
+        "scope": [
+          "the exact frozen PBT v2 serialization and normalization tasks",
+          "Codex CLI 0.146.0 with gpt-5.6-sol at xhigh effort",
+          "preregistration commit 610f0d9e1e19d9c89dd6beba8fab7900222df5dd"
+        ],
+        "summary": "S1 did not meet the frozen selection or confirmation rule on this pilot surface."
+      },
+      "evidence_level": "controlled_effect_observed",
+      "generator": {
+        "name": "agentic-evidence-lab",
+        "version": "0.1.0a5"
+      },
+      "history": {
+        "action": "not_declared_historical",
+        "admission": "not_declared_historical",
+        "freshness": "unassessed",
+        "outcome_follow_up": "not_declared_historical"
+      },
+      "independence": {
+        "disclosure": "This is a preregistered maintainer pilot, not independent verification.",
+        "label": "maintainer_evaluated",
+        "role_overlaps": [
+          "Kizz authored the tasks, operated the runner, evaluated deterministic outcomes, and owns the decision."
+        ]
+      },
+      "invalidation_triggers": [
+        "A pack hash, freeze hash, preregistration SHA, observation hash, or published count fails verification",
+        "A scored call is shown to predate preregistration",
+        "A task, evaluator, prompt, source, model, effort, image, budget, or decision rule changed after freeze",
+        "Public language promotes this bounded pilot into a general skill or model claim"
+      ],
+      "limitations": [
+        "The terminal decision used 4 matched pairs and has wide task-sampling uncertainty.",
+        "Tasks, raw events, candidates, and deterministic evaluator outputs remain private and are represented by opaque hashes.",
+        "Kizz authored, operated, and evaluated this pilot; no independent replication exists.",
+        "The provider exposed a model identifier but not an immutable model revision.",
+        "The reusable ChatGPT credential was process-readable; persisted output was exact-value scanned, but encrypted provider traffic was not inspected."
+      ],
+      "materials": [
+        {
+          "availability": "withheld",
+          "label": "Private screening task bytes",
+          "reason": "The task pack is retained outside the public repository to preserve holdout value.",
+          "reproduction_impact": "A public checkout can verify frozen digests and recompute the published decision, but cannot independently rerun the exact tasks."
+        },
+        {
+          "availability": "withheld",
+          "label": "Private confirmation task bytes",
+          "reason": "The unopened confirmation pack remains private and was not executed.",
+          "reproduction_impact": "The public package cannot run confirmation; the receipt makes no confirmation claim."
+        },
+        {
+          "availability": "not_retained",
+          "label": "Hosted model calls",
+          "reason": "The public evidence contains normalized run records rather than a replayable provider execution service.",
+          "reproduction_impact": "The exact historical model calls cannot be replayed from the repository."
+        }
+      ],
+      "measurements": {
+        "by_kind": {
+          "cost": 16,
+          "deterministic": 24,
+          "outcome": 32,
+          "process": 16
+        },
+        "count": 88,
+        "measurement_set_id": "kizz:ael:measurements:agent-skills-season-1:pbt-v2",
+        "selected_summaries": [
+          {
+            "aggregation_basis": "non_aggregate_measurements",
+            "category": "critical_failure",
+            "condition_id": "B0",
+            "false": 2,
+            "metric": "critical_failure",
+            "observations": 4,
+            "true": 2,
+            "unit": "boolean"
+          },
+          {
+            "aggregation_basis": "non_aggregate_measurements",
+            "category": "critical_failure",
+            "condition_id": "S1",
+            "false": 2,
+            "metric": "critical_failure",
+            "observations": 4,
+            "true": 2,
+            "unit": "boolean"
+          },
+          {
+            "aggregation_basis": "non_aggregate_measurements",
+            "category": "cost_or_latency",
+            "condition_id": "B0",
+            "metric": "generated_tokens",
+            "observations": 4,
+            "total": 37341.0,
+            "unit": "tokens"
+          },
+          {
+            "aggregation_basis": "non_aggregate_measurements",
+            "category": "cost_or_latency",
+            "condition_id": "S1",
+            "metric": "generated_tokens",
+            "observations": 4,
+            "total": 47330.0,
+            "unit": "tokens"
+          },
+          {
+            "aggregation_basis": "non_aggregate_measurements",
+            "category": "activation",
+            "condition_id": "B0",
+            "false": 4,
+            "metric": "skill_activated",
+            "observations": 4,
+            "true": 0,
+            "unit": "boolean"
+          },
+          {
+            "aggregation_basis": "non_aggregate_measurements",
+            "category": "activation",
+            "condition_id": "S1",
+            "false": 0,
+            "metric": "skill_activated",
+            "observations": 4,
+            "true": 4,
+            "unit": "boolean"
+          },
+          {
+            "aggregation_basis": "non_aggregate_measurements",
+            "category": "cost_or_latency",
+            "condition_id": "B0",
+            "metric": "wall_time_ms",
+            "observations": 4,
+            "total": 752432.0,
+            "unit": "milliseconds"
+          },
+          {
+            "aggregation_basis": "non_aggregate_measurements",
+            "category": "cost_or_latency",
+            "condition_id": "S1",
+            "metric": "wall_time_ms",
+            "observations": 4,
+            "total": 857633.0,
+            "unit": "milliseconds"
+          }
+        ]
+      },
+      "publication": "published",
+      "receipt": {
+        "sha256": "07c52812f97fe0c6333fbe919b6d1f99ca409e9d0d44cbeb375c0a43ea43f3f6",
+        "uri": "studies/agent-skills-season-1/results/property-based-testing-v2/evidence-receipt.json"
+      },
+      "receipt_id": "kizz:ael:receipt:agent-skills-season-1:pbt-v2",
+      "report": {
+        "sha256": "018e28ce8a8e63ed05903182836336a8e3b0ca91bb8360f9b8c68fe3e5bf30bb",
+        "uri": "reports/2026-08-12-property-based-testing-v2.md"
+      },
+      "reproducibility": "rerunnable",
+      "runs": {
+        "by_condition": {
+          "B0": 4,
+          "S1": 4
+        },
+        "by_status": {
+          "valid": 8
+        },
+        "count": 8
+      },
+      "source_hashes": {
+        "reports/2026-08-12-property-based-testing-v2.md": "018e28ce8a8e63ed05903182836336a8e3b0ca91bb8360f9b8c68fe3e5bf30bb",
+        "studies/agent-skills-season-1/concept.json": "832391e453e62d7615ec67d150534a074d043a76346a9d3b8e83e21a45aac5a6",
+        "studies/agent-skills-season-1/manifests/property-based-testing-v2.study-manifest.json": "48b4d8211412ad06123a27cee10cc7051a6a5d9e5d79d055fe98715ff36f6d62",
+        "studies/agent-skills-season-1/results/property-based-testing-v2/evidence-receipt.json": "07c52812f97fe0c6333fbe919b6d1f99ca409e9d0d44cbeb375c0a43ea43f3f6",
+        "studies/agent-skills-season-1/results/property-based-testing-v2/measurement-set.json": "e77974bec757ed9af6280dd95ce1899897f11aa3c9c8dd1c2891ee49445251a5",
+        "studies/agent-skills-season-1/results/property-based-testing-v2/runs/P-S01-B0-R01.json": "f92768de66234e5c0b7bc00bbc2e067054ae3c1ca4da14cede89101a7d4ccf37",
+        "studies/agent-skills-season-1/results/property-based-testing-v2/runs/P-S01-S1-R01.json": "848d294a13583f25b5d709993f76aebb6d1f2f2d2a66d34bed5a088cb460817d",
+        "studies/agent-skills-season-1/results/property-based-testing-v2/runs/P-S02-B0-R01.json": "cf070ab2c8b166276e4e0dc8102cf990cf68b1454b152f2fe3abccf1ae4d87b3",
+        "studies/agent-skills-season-1/results/property-based-testing-v2/runs/P-S02-S1-R01.json": "de96eef924e54995a1dd3b06c4559e1942db29283dc49a09b8737730c2deaffe",
+        "studies/agent-skills-season-1/results/property-based-testing-v2/runs/P-S03-B0-R01.json": "aea819bbf1e01c29b383911a6a1121a6cf4b2e44b27f9742c32236a7cd8851ab",
+        "studies/agent-skills-season-1/results/property-based-testing-v2/runs/P-S03-S1-R01.json": "3b19adc51fb12ea80ecff8530679c95b28fd15477af1e26d218a0fc6062472a4",
+        "studies/agent-skills-season-1/results/property-based-testing-v2/runs/P-S04-B0-R01.json": "ee11abaed993f8083a267346470c3f743f56b2f8b10287b8b78c62ed59684b13",
+        "studies/agent-skills-season-1/results/property-based-testing-v2/runs/P-S04-S1-R01.json": "5ca5ed0127590840c6e2bec4dd174cec01a5be6ce38610c23390b78f12ad7c72",
+        "studies/public-results.json": "6ce9dd76a68d966b916637ea93c102f9796865f9c4707aaa5f1ddd59f5eb8d76"
+      },
+      "state": {
+        "artifact": "frozen private task composites represented by hashes; sanitized evidence materialized",
+        "deployment": "not deployed",
+        "experiment": "PBT v2 terminal outcome: reject_all_critical_failure",
+        "outcome": "hidden-edge acceptance observed on exact pilot cells; downstream production outcome unmeasured",
+        "publication": "prepared, not published",
+        "repository": "result package prepared in the local release candidate"
+      },
+      "study": {
+        "comparison_mode": "controlled_factor",
+        "conditions": [
+          {
+            "condition_id": "B0",
+            "label": "Frozen strong Codex baseline",
+            "role": "baseline"
+          },
+          {
+            "condition_id": "S1",
+            "label": "trailofbits-property-based-testing",
+            "role": "treatment"
+          }
+        ],
+        "decision_owners": [
+          "kizz-ael-maintainer"
+        ],
+        "decision_question": "On the exact hidden serialization-roundtrip and normalization-idempotence pilot tasks, does adding the pinned property-based-testing skill to an otherwise identical Codex stack increase binary hidden-adversarial acceptance?",
+        "primary_estimand": {
+          "aggregation": "Prespecified favorable, unfavorable, and tied matched-pair counts under the frozen continuation, selection, and confirmation thresholds.",
+          "description": "Matched-condition difference in binary final hidden acceptance; invalid properties, flakiness, activation, invalid runs, cost, and latency remain separate measurements or gates.",
+          "name": "hidden-adversarial acceptance",
+          "unit_of_analysis": "matched task-repeat pair"
+        },
+        "revision": 2,
+        "status": "frozen",
+        "study_id": "kizz:ael:study:agent-skills-season-1:property-based-testing",
+        "task_packs": [
+          {
+            "role": "calibration",
+            "strata": [
+              "property-based-testing"
+            ],
+            "task_pack_id": "agent-skills-season-1-calibration-v1"
+          },
+          {
+            "role": "screening",
+            "strata": [
+              "serialization-roundtrip",
+              "normalization-idempotence"
+            ],
+            "task_pack_id": "property-based-testing-v2-screening"
+          },
+          {
+            "role": "holdout",
+            "strata": [
+              "serialization-roundtrip",
+              "normalization-idempotence"
+            ],
+            "task_pack_id": "property-based-testing-v2-confirmation"
+          }
+        ]
+      },
+      "title": "Property-based Testing v2",
+      "unsupported_inferences": [
+        "Property-based-testing skills work in general.",
+        "The skill independently caused defect discovery or prevention rather than a final hidden-acceptance difference.",
+        "The result transfers to other defect families, tasks, models, CLIs, repositories, or production systems.",
+        "The maintainer-evaluated result is independent verification.",
+        "A token or latency difference from this small pilot is a stable cost effect."
+      ],
+      "verification": {
+        "audit": {
+          "audit_id": "kizz:ael:freeze:agent-skills-season-1:property-based-testing:v2-pilot-1:public-bundle",
+          "decision": {
+            "adapter": "pbt-v2",
+            "counts": {
+              "activation_failures": 0,
+              "baseline_hidden_failures": 2,
+              "complete_pairs": 4,
+              "favorable_pairs": 0,
+              "invalid_observations": 0,
+              "tied_pairs": 4,
+              "treatment_critical_failures": 2,
+              "treatment_hidden_failures": 2,
+              "unfavorable_pairs": 0,
+              "valid_observations": 8
+            },
+            "outcome": "reject_all_critical_failure",
+            "public_counts_recomputed": true,
+            "stage": "continuation"
+          },
+          "evidence": {
+            "contract_documents": 12,
+            "measurements": 88,
+            "run_records": 8,
+            "terminal_decision_sha256": "90f792419b4b2d64ecc49d10afd54e9f3e7f9f597f7981a299a027fac6a192d1"
+          },
+          "freeze": {
+            "freeze_id": "kizz:ael:freeze:agent-skills-season-1:property-based-testing:v2-pilot-1",
+            "private_packs_verified": [],
+            "sha256": "a1fac08b84e35f412de04f37a1d3eb3ac3ce2711df474febd9a64b2fb4e3fb05"
+          },
+          "limitations": [
+            "Private task-pack bytes were not supplied for confirmation, screening; only their frozen digests were checked.",
+            "The decision observation payload was not supplied in this public bundle; the audit verifies its published hash and, with a decision adapter, recomputes counts from public records rather than its hidden bytes.",
+            "Structural and lineage checks do not establish external validity, independent replication, or production impact."
+          ],
+          "preregistration": {
+            "freeze_bytes_verified": true,
+            "git_verified": true,
+            "sha": "610f0d9e1e19d9c89dd6beba8fab7900222df5dd",
+            "tags": [
+              "property-based-testing-v2-freeze"
+            ],
+            "terminal_decision_absent_at_freeze": true,
+            "terminal_decision_committed_after_freeze": true
+          },
+          "schema_version": "ael.study-audit/0.1",
+          "status": "passed",
+          "study": {
+            "revision": 2,
+            "study_id": "kizz:ael:study:agent-skills-season-1:property-based-testing"
+          }
+        },
+        "boundary": "Verifies the published Contract v0 graph, frozen public bundle, recomputed PBT decision counts, and repository artifact ordering. It does not rerun model calls, reveal private tasks, or constitute independent replication.",
+        "command": [
+          "uv run ael study audit --freeze studies/agent-skills-season-1/screening/property-based-testing-v2.freeze.json --result studies/agent-skills-season-1/results/property-based-testing-v2 --decision-adapter pbt-v2 --require-git-proof"
+        ],
+        "kind": "frozen_public_bundle"
+      }
+    }
+  ]
+}

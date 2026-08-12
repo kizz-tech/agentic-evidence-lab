@@ -5,8 +5,12 @@ entire evidence contract or runner design.
 
 ## I want to see what works
 
-- [Results Index](../RESULTS.md) — current findings, practical decisions,
-  evidence strength, limitations, and links to supporting artifacts.
+- [Results Index](../RESULTS.md) — the generated human result projection with
+  current bounded decisions, evidence strength, limitations, and links to
+  supporting artifacts.
+- [Machine-readable study index](results/index.json) — the generated catalog
+  consumed by tooling; cards are disposable projections, not a second evidence
+  authority.
 - [Council Generation 1](../reports/2026-08-12-council-generation-1.md) — why
   the adaptive workflow was adopted locally without claiming general Council
   superiority.
@@ -44,11 +48,13 @@ must not promote a stack result into a model-only claim.
   effectiveness pilot and negative-result evidence.
 - [Release notes](release-notes/v0.1.0-alpha.4.md) — one-command frozen-study
   bundle audit and stricter Codex skill-activation evidence.
+- [Release notes](release-notes/v0.1.0-alpha.5.md) — generated result cards,
+  replication handoff, and release-evidence hardening.
 - [Changelog](../CHANGELOG.md) — user-visible project history.
 
-Machine-readable manifests, runs, measurements, and receipts live under
-[`examples/`](../examples). Start from a narrative report or result card before
-opening those raw records.
+Machine-readable manifests, runs, measurements, and receipts live under both
+[`examples/`](../examples) and [`studies/`](../studies). Start from the generated
+result projection or a narrative report before opening those raw records.
 
 ## I want to run agent code safely
 
@@ -80,18 +86,23 @@ safe runner for untrusted third-party skills or repositories.
   contract for `v0.1.0-alpha.1`; not an onboarding guide.
 
 There is no public leaderboard yet because the completed studies do not share
-one frozen task pack, estimand, budget, and comparison mode.
+one frozen task pack, estimand, budget, and comparison mode. The generated
+result cards remain separate and contextual; see the [leaderboard contract](leaderboards.md)
+for the admission rule.
 
 ## Active research
 
-These documents describe planned or gated work, not completed evidence:
+These documents describe planned or gated work, not completed evidence unless
+they link to a completed result:
 
 - [Council Generation 2](../studies/council-generation-2/README.md)
 - [Focused Change Verification](../studies/focused-change-verification/README.md)
 - [Structural Search research program](structural-search.md)
 - [Agent Skills Season 1](../studies/agent-skills-season-1/README.md) — ten
   bounded public-skill protocols, exact source locks, an executable public
-  calibration pack, and 22 activation records; no skill-effect result yet.
+  calibration pack, 22 activation records, and the completed bounded negative
+  Property-based Testing v2 skill-effect result. The remaining protocols are
+  still calibration, design, or unrun work.
 
 Their draft manifests, simulations, and task-pack briefs must not be cited as
 successful experimental results.

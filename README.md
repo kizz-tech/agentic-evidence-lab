@@ -21,26 +21,19 @@ The goal is not a universal agent score. It is a cumulative public map of which
 agent configurations work for particular task classes, budgets, and risk
 boundaries.
 
-## Latest findings
+## Results
 
-| Study | What was tested | Result | Decision |
-| --- | --- | --- | --- |
-| [Property-based Testing v2](reports/2026-08-12-property-based-testing-v2.md) | Exact Codex stack with and without one pinned public skill; eight valid cells across four private tasks | All four matched pairs tied on hidden acceptance. Treatment activated 4/4 but had two critical added-test incompatibilities, as did baseline. | Reject this exact skill injection for this exact pilot surface. Repeat 2 and confirmation remained locked. |
-| [Council Generation 1](reports/2026-08-12-council-generation-1.md) | Four engineering-decision workflows; 12 runs across three synthetic held-out cases | The adaptive candidate did not show a general quality advantage. It did repair a reproduced execution-conformance defect while preserving measured quality. | Adopt the exact workflow only for the measured local surface. Do not claim that councils are generally superior. |
-| [Focused Change Verification calibration](reports/2026-08-12-focused-change-verification-codex-calibration.md) | The same Codex stack with and without one skill; six runs across three public coding tasks | All six runs passed, so the task pack could not distinguish the skill from baseline. The runner and skill activation worked. | Keep the pack as an operational smoke test. Do not infer that the skill improves code quality. |
-| [Agent Skills Season 1 activation](reports/2026-08-12-agent-skills-season-1-activation.md) | 22 retained Codex cells across ten public-skill studies | The controlled runner and evaluators worked; ten of twelve treatment skills were explicitly read. MCP-builder and webapp-testing were injected but did not activate. Two benchmark defects were found and invalidated before publication. | Advance the ten activated snapshots to discriminating screening. Redesign MCP and webapp activation tasks first. Do not publish a skill-effect leaderboard. |
-
-These studies answer different questions and cannot be combined into a global
-ranking. See the [Results Index](RESULTS.md) for direct usage guidance,
-limitations, evidence strength, and links to every public artifact.
+The generated [Results Index](RESULTS.md) is the public result projection. It
+contains deterministic result cards derived from the validated evidence graph;
+it is disposable navigation, not a second evidence authority. Start there for
+the current bounded decisions, limitations, and links to every public artifact.
 
 Active research: [Agent Skills Season 1](studies/agent-skills-season-1/README.md)
-now has ten bounded protocols, exact upstream source locks, a healthy public
-calibration pack, 22 formal activation records, and a completed
-[Property-based Testing v2 pathfinder](reports/2026-08-12-property-based-testing-v2.md).
-The pathfinder is the first preregistered third-party skill-effect result and is
-negative for its exact surface; arbitrary submissions remain outside the
-maintainer-controlled execution boundary.
+has ten bounded protocols, exact upstream source locks, a healthy public
+calibration pack, 22 formal activation records, and a completed bounded
+negative [Property-based Testing v2 pathfinder](reports/2026-08-12-property-based-testing-v2.md).
+Arbitrary submissions remain outside the maintainer-controlled execution
+boundary.
 
 ## What AEL helps answer
 
@@ -83,14 +76,16 @@ not by itself prove task quality, causality, transfer, or real-world impact.
 
 Every completed study can expose four levels of detail:
 
-1. **Decision summary** — what to use, avoid, or test next in [RESULTS.md](RESULTS.md).
+1. **Decision summary** — what to use, avoid, or test next in the generated
+   [Results Index](RESULTS.md).
 2. **Narrative report** — comparison, measurements, limitations, and reasoning.
 3. **Evidence receipt** — machine-readable claims, decisions, provenance, and
    invalidation triggers.
 4. **Study records** — frozen manifest, individual runs, and measurement set.
 
-Start with the decision summary. Open raw evidence only when you need to audit,
-reproduce, or reuse the result.
+Start with the generated cards. They are projections over the full validated
+graph, not authority; open raw evidence only when you need to audit, reproduce,
+or reuse the result.
 
 ## Run the public checks
 
@@ -104,6 +99,7 @@ uv sync --locked
 
 uv run ael validate examples
 uv run ael render examples/council-generation-1/evidence-receipt.json
+uv run ael results check studies/public-results.json --require-git-proof
 uv run ael study audit \
   --freeze studies/agent-skills-season-1/screening/property-based-testing-v2.freeze.json \
   --result studies/agent-skills-season-1/results/property-based-testing-v2 \
@@ -120,11 +116,13 @@ measurement_set=2, run_record=18, study_manifest=4
 ```
 
 The study audit additionally checks the freeze, terminal decision, public runs,
-measurements, receipt, and Git preregistration order as one bundle. The explicit
-PBT v2 decision adapter also recomputes its exact counts and terminal outcome.
-These commands do not rerun historical model calls or independently reproduce
-the research result. See [Reproducibility](docs/reproducibility.md) for those
-boundaries.
+measurements, receipt, and repository artifact ordering as one bundle. The
+explicit PBT v2 decision adapter also recomputes its exact counts and terminal
+outcome. Git ancestry proves repository artifact ordering only; it does not
+prove that private model calls occurred before results or reconstruct private
+events. These commands do not rerun historical model calls or independently
+reproduce the research result. See [Reproducibility](docs/reproducibility.md)
+for the exact boundaries and commands.
 
 ## Evaluate your own system
 
@@ -168,7 +166,7 @@ maintainer-reviewed snapshots and maintainer-controlled fixtures; arbitrary
 submissions remain blocked. Read [SECURITY.md](SECURITY.md) and
 [Container runner isolation](docs/runner-isolation.md) before execution.
 
-`v0.1.0-alpha.4` is pre-stable. It does not claim universal benchmarking,
+`v0.1.0-alpha.5` is pre-stable. It does not claim universal benchmarking,
 independent verification of Kizz-authored capabilities, model-only superiority
 from stack comparisons, or downstream production impact.
 

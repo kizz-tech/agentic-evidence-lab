@@ -44,6 +44,10 @@ jobs:
         run: uv run python -m unittest discover -s tests -v
       - name: Validate public examples
         run: uv run ael validate examples
+      - name: Check generated public results and frozen evidence
+        run: |
+          uv run ael results check studies/public-results.json --require-git-proof
+          uv run python tools/check_frozen_artifacts.py
       - name: Validate Agent Skills Season 1
         run: |
           uv run ael source-lock check studies/agent-skills-season-1/sources.lock.toml
@@ -68,7 +72,11 @@ jobs:
       - name: Check public release tree
         run: uv run python tools/release_check.py
       - name: Build distributions
-        run: uv build
+        run: |
+          uv build
+          uv run python tools/verify_release_artifacts.py \
+            --expected-version 0.1.0a5 \
+            dist/*.whl dist/*.tar.gz
 
   clean-wheel:
     name: clean wheel install
@@ -91,7 +99,9 @@ jobs:
           test -n "$wheel"
           uv venv .release-venv
           uv pip install --python .release-venv/bin/python "$wheel"
-          .release-venv/bin/ael --version
+          test "$(.release-venv/bin/ael --version)" = "0.1.0a5"
+          test "$(.release-venv/bin/python -c 'import importlib.metadata; print(importlib.metadata.version("agentic-evidence-lab"))')" = "0.1.0a5"
+          .release-venv/bin/ael results check studies/public-results.json --require-git-proof
           .release-venv/bin/ael validate examples
           .release-venv/bin/ael validate \
             studies/agent-skills-season-1/concept.json \

@@ -1,0 +1,154 @@
+{
+  "schema_version": "ael.public-results/0.1",
+  "as_of": "2026-08-12",
+  "projection_policy": "ael.publication-projection/0.1",
+  "studies": [
+    {
+      "card_id": "property-based-testing-v2",
+      "title": "Property-based Testing v2",
+      "publication": "published",
+      "receipt_ref": {
+        "uri": "studies/agent-skills-season-1/results/property-based-testing-v2/evidence-receipt.json",
+        "sha256": "07c52812f97fe0c6333fbe919b6d1f99ca409e9d0d44cbeb375c0a43ea43f3f6"
+      },
+      "report_ref": {
+        "uri": "reports/2026-08-12-property-based-testing-v2.md",
+        "sha256": "018e28ce8a8e63ed05903182836336a8e3b0ca91bb8360f9b8c68fe3e5bf30bb"
+      },
+      "claim_ids": [
+        "AEL-PBT-V2-01",
+        "AEL-PBT-V2-02"
+      ],
+      "verification": {
+        "kind": "frozen_public_bundle",
+        "command": [
+          "uv run ael study audit --freeze studies/agent-skills-season-1/screening/property-based-testing-v2.freeze.json --result studies/agent-skills-season-1/results/property-based-testing-v2 --decision-adapter pbt-v2 --require-git-proof"
+        ],
+        "boundary": "Verifies the published Contract v0 graph, frozen public bundle, recomputed PBT decision counts, and repository artifact ordering. It does not rerun model calls, reveal private tasks, or constitute independent replication.",
+        "freeze_ref": {
+          "uri": "studies/agent-skills-season-1/screening/property-based-testing-v2.freeze.json",
+          "sha256": "a1fac08b84e35f412de04f37a1d3eb3ac3ce2711df474febd9a64b2fb4e3fb05"
+        },
+        "result_root": "studies/agent-skills-season-1/results/property-based-testing-v2",
+        "adapter": "pbt-v2"
+      },
+      "materials": [
+        {
+          "label": "Private screening task bytes",
+          "availability": "withheld",
+          "reason": "The task pack is retained outside the public repository to preserve holdout value.",
+          "reproduction_impact": "A public checkout can verify frozen digests and recompute the published decision, but cannot independently rerun the exact tasks."
+        },
+        {
+          "label": "Private confirmation task bytes",
+          "availability": "withheld",
+          "reason": "The unopened confirmation pack remains private and was not executed.",
+          "reproduction_impact": "The public package cannot run confirmation; the receipt makes no confirmation claim."
+        },
+        {
+          "label": "Hosted model calls",
+          "availability": "not_retained",
+          "reason": "The public evidence contains normalized run records rather than a replayable provider execution service.",
+          "reproduction_impact": "The exact historical model calls cannot be replayed from the repository."
+        }
+      ],
+      "history": {
+        "admission": "not_declared_historical",
+        "action": "not_declared_historical",
+        "outcome_follow_up": "not_declared_historical",
+        "freshness": "unassessed"
+      }
+    },
+    {
+      "card_id": "council-generation-1",
+      "title": "Council Generation 1",
+      "publication": "published",
+      "receipt_ref": {
+        "uri": "examples/council-generation-1/evidence-receipt.json",
+        "sha256": "8cb13547dda6dc8a8805fe65587c6f3c8712ca81a32cff45a57874c76a59a757"
+      },
+      "report_ref": {
+        "uri": "reports/2026-08-12-council-generation-1.md",
+        "sha256": "9e9114b8c42cc135890fba800257ea405df8ef7b68928bd6e405b4ff3844313a"
+      },
+      "claim_ids": [
+        "AEL-CG1-01",
+        "AEL-CG1-02",
+        "AEL-CG1-05"
+      ],
+      "verification": {
+        "kind": "evidence_graph",
+        "command": [
+          "uv run ael validate examples/council-generation-1"
+        ],
+        "boundary": "Validates the published Contract v0 graph and exact local reference hashes. It does not rerun the Council workflows, recover private held-out material, or independently reproduce the decision."
+      },
+      "materials": [
+        {
+          "label": "Synthetic held-out briefs and evaluator anchors",
+          "availability": "withheld",
+          "reason": "The retained evaluation package is private and only its provenance hashes are public.",
+          "reproduction_impact": "A public checkout can inspect normalized runs and measurements but cannot rerun the exact held-out cases."
+        },
+        {
+          "label": "Authenticated subagent receiver identities",
+          "availability": "not_collected",
+          "reason": "The measured runtime event surface did not expose authenticated receiver identities.",
+          "reproduction_impact": "Consultation identity and complete trace attribution cannot be independently reconstructed."
+        }
+      ],
+      "history": {
+        "admission": "not_declared_historical",
+        "action": "not_declared_historical",
+        "outcome_follow_up": "not_declared_historical",
+        "freshness": "unassessed"
+      }
+    },
+    {
+      "card_id": "focused-change-verification-calibration",
+      "title": "Focused Change Verification calibration",
+      "publication": "published",
+      "receipt_ref": {
+        "uri": "examples/coding-skill/calibration-v1/evidence-receipt.json",
+        "sha256": "7a770b0b177a313f6b042d67d2aaab62919d333b6d1625fcd7b3eff766c3e581"
+      },
+      "report_ref": {
+        "uri": "reports/2026-08-12-focused-change-verification-codex-calibration.md",
+        "sha256": "0d5159f51fbe4be863be1feb319ffd0ef1364ddbd859f12d49cfabef15d15d2c"
+      },
+      "claim_ids": [
+        "AEL-FCV-CAL-01",
+        "AEL-FCV-CAL-02",
+        "AEL-FCV-CAL-03",
+        "AEL-FCV-CAL-04"
+      ],
+      "verification": {
+        "kind": "evidence_graph",
+        "command": [
+          "uv run ael validate examples/coding-skill"
+        ],
+        "boundary": "Validates the published Contract v0 graph and exact local reference hashes. It does not rerun hosted Codex calls or turn this calibration into skill-effect evidence."
+      },
+      "materials": [
+        {
+          "label": "Hosted Codex event streams and exported workspaces",
+          "availability": "withheld",
+          "reason": "Raw hosted execution artifacts remain in the private evidence boundary.",
+          "reproduction_impact": "A public checkout can validate normalized records but cannot replay the exact six hosted calls."
+        },
+        {
+          "label": "Discriminating holdout pack",
+          "availability": "not_collected",
+          "reason": "The completed work was an operational calibration; the discriminating pack was not run.",
+          "reproduction_impact": "The public evidence cannot estimate a skill effect."
+        }
+      ],
+      "history": {
+        "admission": "not_declared_historical",
+        "action": "not_declared_historical",
+        "outcome_follow_up": "not_declared_historical",
+        "freshness": "unassessed"
+      }
+    }
+  ]
+}

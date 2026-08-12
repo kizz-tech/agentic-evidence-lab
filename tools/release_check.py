@@ -3,9 +3,11 @@ from __future__ import annotations
 import re
 import subprocess
 import sys
+import tomllib
 from pathlib import Path
 
 from ael import __version__
+from ael.result_surface import ResultSurfaceError, materialize_result_surface
 
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED_FILES = {
@@ -25,7 +27,10 @@ REQUIRED_FILES = {
     "RESULTS.md",
     "SECURITY.md",
     "SUPPORT.md",
+    "docs/release-notes/v0.1.0-alpha.5.md",
+    "docs/results/index.json",
     "pyproject.toml",
+    "studies/public-results.json",
     "uv.lock",
 }
 ALLOWED_TOP_LEVEL = {
@@ -67,7 +72,15 @@ SECRET_PATTERNS = {
     "OpenAI-style API key": re.compile(r"\bsk-[A-Za-z0-9_-]{20,}\b"),
     "GitHub token": re.compile(r"\b(?:gh[opsu]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,})\b"),
     "private key": re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
+    "AWS-style access key": re.compile(r"\b(?:AKIA|ASIA)[A-Z0-9]{16}\b"),
+    "signed URL query": re.compile(
+        r"(?i)(?:X-Amz-Signature|X-Goog-Signature|Signature)=[A-Fa-f0-9%]{16,}"
+    ),
 }
+PERSONAL_PATH_PATTERNS = (
+    re.compile(r"(?<![A-Za-z0-9_.-])/(?:Users|home)/[^./\s][^/\s]*/"),
+    re.compile(r"[A-Za-z]:\\Users\\[^\s]+\\"),
+)
 MAX_PUBLIC_FILE_BYTES = 2 * 1024 * 1024
 PRIVATE_EVIDENCE_CANARY_PREFIX = "AEL-HIDDEN-" + "CANARY:"
 
@@ -84,9 +97,11 @@ def public_files() -> list[Path]:
 
 def payload_failures(relative: str, payload: str) -> list[str]:
     failures: list[str] = []
-    personal_root = "/" + "Users/"
     workspace_marker = "codex" + "-work1"
-    if personal_root in payload or workspace_marker in payload:
+    if (
+        any(pattern.search(payload) for pattern in PERSONAL_PATH_PATTERNS)
+        or workspace_marker in payload
+    ):
         failures.append(f"personal absolute path or workspace marker: {relative}")
     if PRIVATE_EVIDENCE_CANARY_PREFIX in payload:
         failures.append(f"private evidence canary leaked into public tree: {relative}")
@@ -132,12 +147,45 @@ def main() -> int:
             continue
         failures.extend(payload_failures(relative, payload))
 
-    expected_version = "0.1.0a4"
+    expected_version = "0.1.0a5"
+    expected_release = "0.1.0-alpha.5"
     if __version__ != expected_version:
         failures.append(f"package version is {__version__}, expected {expected_version}")
+    try:
+        project = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))["project"]
+        project_version = project["version"]
+    except (OSError, UnicodeError, tomllib.TOMLDecodeError, KeyError, TypeError) as exc:
+        failures.append(f"cannot read pyproject project.version: {exc}")
+    else:
+        if project_version != expected_version:
+            failures.append(
+                f"pyproject project.version is {project_version}, expected {expected_version}"
+            )
     citation = (ROOT / "CITATION.cff").read_text(encoding="utf-8")
-    if 'version: "0.1.0-alpha.4"' not in citation:
-        failures.append("CITATION.cff release version is not 0.1.0-alpha.4")
+    if f'version: "{expected_release}"' not in citation:
+        failures.append(f"CITATION.cff release version is not {expected_release}")
+    changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+    if f"## [{expected_release}]" not in changelog:
+        failures.append(f"CHANGELOG.md has no {expected_release} release section")
+
+    try:
+        materialize_result_surface(
+            ROOT / "studies/public-results.json",
+            repository_root=ROOT,
+            check=True,
+        )
+    except ResultSurfaceError as exc:
+        failures.append(f"generated result projection is stale or invalid: {exc}")
+    frozen_check = subprocess.run(
+        [sys.executable, str(ROOT / "tools/check_frozen_artifacts.py")],
+        cwd=ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if frozen_check.returncode:
+        detail = frozen_check.stderr.strip() or frozen_check.stdout.strip()
+        failures.append(f"frozen evidence check failed: {detail}")
 
     if failures:
         for failure in failures:

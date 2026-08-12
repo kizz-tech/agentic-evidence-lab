@@ -6,6 +6,37 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.0-alpha.5] - 2026-08-12
+
+### Added
+
+- An explicit public-results profile and deterministic `ael results` projection
+  that generate the human Results Index, per-study cards, and a machine-readable
+  index from hash-bound Contract v0 evidence.
+- Per-study verification boundaries and unavailable-material disclosures that
+  distinguish evidence-graph checks from model reruns and independent
+  replication.
+- Release gates for frozen historical result bytes and the contents, metadata,
+  checksums, and provenance manifest of built wheel and source archives.
+
+### Changed
+
+- Current public navigation is now derived from three deliberately admitted
+  result families instead of duplicate hand-maintained finding tables.
+- Publication status, freshness, decision admission, actual action, and outcome
+  follow-up are displayed as separate facets; unavailable historical facts stay
+  explicitly undeclared instead of being inferred from old receipt prose.
+- Season 1 navigation now distinguishes activation compatibility from
+  effectiveness and records the completed bounded negative PBT v2 result.
+
+### Research integrity
+
+- Contract v0's five schemas, the receipt renderer, and the alpha.3/alpha.4
+  frozen evidence remain unchanged. Result cards are disposable projections and
+  cannot raise the evidence level or claim level recorded by a receipt.
+- Git verification is described as repository artifact ordering, not as
+  independent proof of when private model execution occurred.
+
 ## [0.1.0-alpha.4] - 2026-08-12
 
 ### Added
@@ -108,7 +139,8 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   process can read the reusable credential.
 - Contract v0 remains pre-stable and may change incompatibly before `1.0`.
 
-[Unreleased]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.4...HEAD
+[Unreleased]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.5...HEAD
+[0.1.0-alpha.5]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.4...v0.1.0-alpha.5
 [0.1.0-alpha.4]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.3...v0.1.0-alpha.4
 [0.1.0-alpha.3]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.2...v0.1.0-alpha.3
 [0.1.0-alpha.2]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.1...v0.1.0-alpha.2

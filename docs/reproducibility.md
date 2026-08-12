@@ -1,11 +1,15 @@
 # Reproducibility
 
-Reproduction starts from an immutable Git revision and ends with a scoped
-comparison, not a claim that stochastic model behavior is byte-identical.
+Reproducibility has separate operations. **Graph verification** checks the
+hash-linked public records and deterministic projections. A **rerun** executes
+the declared protocol again when its inputs are available. **Independent
+replication** adds a new executor and role-separated evidence production. None
+of these operations implies either of the others, and stochastic model
+behavior is not expected to be byte-identical.
 
-## Deterministic release checks
+## Graph verification: deterministic public checks
 
-From a clean checkout of `v0.1.0-alpha.4`:
+From a clean checkout of the exact alpha.5 source revision under review:
 
 ```bash
 uv sync --locked --all-groups
@@ -24,19 +28,25 @@ uv run ael validate \
   studies/agent-skills-season-1/manifests \
   studies/agent-skills-season-1/calibration/runtime-v1
 uv run python tools/materialize_agent_skills_season.py --check
+uv run ael results check studies/public-results.json --require-git-proof
+uv run python tools/check_frozen_artifacts.py
 uv run python tools/release_check.py
 uv build
+uv run python tools/verify_release_artifacts.py \
+  --expected-version 0.1.0a5 dist/*.whl dist/*.tar.gz
 ```
 
 These checks establish package, schema, cross-reference, committed-fixture,
-rendering, simulation, and public-tree consistency. They do not establish that
-an experimental conclusion is true outside its receipt scope.
+rendering, simulation, generated-publication, and public-tree consistency. They
+verify the published evidence graph; they do not establish that an experimental
+conclusion is true outside its receipt scope.
 
 The public Season 1 activation evidence is reproducible from retained private
 run inputs only by the maintainer. Public consumers can validate every exposed
 document, source lock, and content hash, but cannot reconstruct private Codex
 events from their hashes. This is verification of the published evidence graph,
-not independent reproduction of the hosted-agent executions.
+not a historical model-call rerun or independent reproduction of the
+hosted-agent executions.
 
 ## Frozen study-bundle audit
 
@@ -55,6 +65,10 @@ Optional `--screening-root` and `--confirmation-root` arguments verify retained
 private task-pack bytes against their frozen tree digests without publishing
 them. `--json-output` writes a machine-readable audit summary.
 
+This Git proof is limited to repository artifact ordering. A tag or ancestor
+does not prove that private model calls occurred before results, and it does not
+reconstruct private events or establish independent replication.
+
 The private observation payload remains opaque. The audit checks its published
 hash and, with the explicit adapter, recomputes the exposed counts and outcome;
 it cannot reconstruct hidden task or event bytes that were not published.
@@ -65,7 +79,7 @@ non-empty content from the exact installed `SKILL.md`. A path mentioned in an
 agent message, an in-progress command, a failed command, or empty output is not
 activation evidence. This stricter parser does not rewrite historical records.
 
-## Receipt reproduction
+## Receipt and projection reproduction
 
 ```bash
 uv run ael render \
@@ -76,6 +90,17 @@ diff -u examples/council-generation-1/evidence-receipt.md /tmp/receipt.md
 
 Every receipt binds its concept, study, runs, and measurements by SHA-256.
 `ael validate` resolves relative public references and checks those hashes.
+The generated [Results Index](../RESULTS.md) and machine index are deterministic
+projections over those validated references; regeneration does not change the
+underlying receipt or its authority.
+
+To regenerate intentionally, use:
+
+```bash
+uv run ael results build studies/public-results.json --require-git-proof
+```
+
+Review the generated diff, then run the corresponding `results check` command.
 
 ## Calibration reproduction
 
@@ -107,10 +132,31 @@ prompt, and budget are fixed. Preserve each run as a separate observation,
 record exposed provider/runtime identity, and do not retry poor answers as if
 they were operational failures.
 
-## Independent reproduction
+## Rerun versus independent replication
 
-Forking the repository or rerunning a receipt is not automatically independent
-verification. Disclose intervention ownership, task authorship, evaluation,
-analysis, and decision roles. Use `reproducible_third_party` or
-`independently_verified` only when the receipt's role and evidence requirements
-are actually satisfied.
+The exact PBT v2 graph-verification command is the audit command shown above:
+
+```bash
+uv run ael study audit \
+  --freeze studies/agent-skills-season-1/screening/property-based-testing-v2.freeze.json \
+  --result studies/agent-skills-season-1/results/property-based-testing-v2 \
+  --decision-adapter pbt-v2 \
+  --require-git-proof
+```
+
+It recomputes the exposed counts and checks the hash-linked bundle; it does not
+rerun the private model calls. A historical PBT v2 rerun has no public command
+in alpha.5 because its task packs, raw Codex events, candidate workspaces, and
+evaluator outputs are withheld. Do not label the audit, receipt rendering, or
+projection regeneration as a rerun.
+
+An independent replication requires a new executor to obtain the frozen
+protocol and permitted inputs, run the study through the declared adapter, and
+publish a new receipt with disclosed intervention ownership, task authorship,
+evaluation, analysis, and decision roles. Forking the repository, rerunning a
+receipt, or checking a Git tag is not automatically independent verification.
+Use `reproducible_third_party` or `independently_verified` only when the
+receipt's role and evidence requirements are actually satisfied. Evidence
+level, reproducibility, independence, freshness, action, and outcome remain
+orthogonal; missing historical action or outcome is `not_declared_historical`,
+not a negative observation.
