@@ -1,8 +1,9 @@
 # Agentic Evidence Contract v0 — drafting and review brief
 
-Status: implemented development brief. The current schemas and CLI are
-executable and locally validated, but nothing in this document is a stable
-public contract.
+Status: retained design history. For the executable public contract, read
+[`contract-v0.md`](contract-v0.md). The current schemas and CLI are executable
+and locally validated, but nothing in this drafting brief is a stable public
+contract.
 
 ## Objective
 

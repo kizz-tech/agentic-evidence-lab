@@ -6,6 +6,11 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Changed
+
+- Reorganized the public documentation around decision-ready results, direct
+  usage guidance, layered evidence access, and goal-based navigation.
+
 ## [0.1.0-alpha.1] - 2026-08-12
 
 ### Added

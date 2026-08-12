@@ -1,73 +1,88 @@
 # Agentic Evidence Lab
 
-**An open research lab for finding out which agent systems work, where, and
-why — backed by a file-first evidence toolkit.**
+**Open, task-specific evidence for deciding which agent systems work, where,
+and under what conditions.**
 
 [![CI](https://github.com/kizz-tech/agentic-evidence-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/kizz-tech/agentic-evidence-lab/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/status-alpha-orange.svg)](https://github.com/kizz-tech/agentic-evidence-lab/releases)
 
-Agentic Evidence Lab (AEL) runs and publishes reproducible studies of versioned
-skills, prompts, models, tools, agent topologies, context policies, runtimes,
-and complete workflows. Its long-term goal is a cumulative public map of which
-agent configurations work for which task classes, budgets, and risk boundaries
-— and a mechanism for recursively improving the capabilities we build.
+[**Browse results**](RESULTS.md) ·
+[**Understand the method**](docs/contract-v0.md) ·
+[**Evaluate a system**](#evaluate-your-own-system) ·
+[**Read the documentation**](docs/README.md)
 
-Instead of asking only whether the final answer scored higher, AEL records the
-exact system that ran, what changed, what stayed fixed, what it cost, which
-failures appeared, and what conclusion the evidence actually permits.
+Agentic Evidence Lab (AEL) compares versioned skills, prompts, models, tools,
+agent topologies, context policies, runtimes, and complete workflows. It records
+the exact system that ran, what changed, what stayed fixed, what failed, what it
+cost, and what decision the evidence actually supports.
 
-```text
-concept → frozen study → matched runs → measurements → evidence receipt
-```
+The goal is not a universal agent score. It is a cumulative public map of which
+agent configurations work for particular task classes, budgets, and risk
+boundaries.
 
-The goal is not one context-free score. It is reusable knowledge and honest,
-task-specific comparisons.
+## Latest findings
 
-## What the Lab publishes
+| Study | What was tested | Result | Decision |
+| --- | --- | --- | --- |
+| [Council Generation 1](reports/2026-08-12-council-generation-1.md) | Four engineering-decision workflows; 12 runs across three synthetic held-out cases | The adaptive candidate did not show a general quality advantage. It did repair a reproduced execution-conformance defect while preserving measured quality. | Adopt the exact workflow only for the measured local surface. Do not claim that councils are generally superior. |
+| [Focused Change Verification calibration](reports/2026-08-12-focused-change-verification-codex-calibration.md) | The same Codex stack with and without one skill; six runs across three public coding tasks | All six runs passed, so the task pack could not distinguish the skill from baseline. The runner and skill activation worked. | Keep the pack as an operational smoke test. Do not infer that the skill improves code quality. |
 
-- **Runs** — versioned observations bound to the exact agent stack, task,
-  runtime, budget, output, and operational state.
-- **Studies and conclusions** — human-readable reports plus machine-readable
-  receipts that say what is supported, unsupported, and invalidating.
-- **Benchmarks and task packs** — public evaluation surfaces with deterministic
-  postconditions where possible.
-- **Contextual leaderboards** — comparisons within the same frozen task pack,
-  budget, evaluation contract, and comparison mode.
-- **Capabilities** — skills, councils, environments, and workflows developed
-  from the accumulated evidence, released on their own lifecycles.
+These studies answer different questions and cannot be combined into a global
+ranking. See the [Results Index](RESULTS.md) for direct usage guidance,
+limitations, evidence strength, and links to every public artifact.
 
-See the current [Results Index](RESULTS.md). The first alpha contains 18 public
-run records across two completed studies. They answer different questions and
-therefore are not collapsed into a fake global ranking.
+## What AEL helps answer
 
-## Why AEL exists
-
-An “agent” result is produced by a whole stack:
+An agent result is produced by a whole stack:
 
 ```text
 model + runtime + prompt + tools + skills + context + permissions + workflow
 ```
 
-Change several parts at once and a model-only claim is no longer justified.
-Look only at the final answer and you can miss broken tool execution, unused
-skills, secret exposure, excess work, invalid retries, or a workflow that merely
-looks sophisticated.
+AEL supports two kinds of practical question:
 
-AEL makes those distinctions explicit and machine-readable.
+- **Which complete stack should I use for this task?** Compare runnable systems
+  under the same task pack, budget, and evaluation contract.
+- **Did this exact change help?** Hold the surrounding stack fixed and vary a
+  declared skill, prompt, tool, model, or workflow factor.
 
-## What is included
+It also exposes failures that a final-answer score can hide: a skill that never
+loaded, a workflow that did not execute as claimed, invalid retries, critical
+omissions, excessive generated work, or a result that cannot support the
+headline written about it.
 
-- Five JSON document types: `Concept`, `Study Manifest`, `Run Record`,
-  `Measurement Set`, and `Evidence Receipt`.
-- JSON Schema plus cross-document validation, hash binding, and deterministic
-  receipt rendering.
-- Controlled-factor and complete operational-stack comparison modes.
-- An offline Docker runner for executable fixtures and task-pack evaluation.
-- A controlled-egress Codex adapter for maintainer-controlled inputs.
-- Public examples that preserve negative, narrow, and inconclusive results.
+## How a test works
 
-## Five-minute start
+```text
+idea → frozen comparison → matched runs → measurements → bounded decision
+```
+
+1. Define the intervention and the claim being tested.
+2. Freeze the baseline, changed factors, tasks, budget, roles, and stop rule.
+3. Run matched conditions and retain poor answers, failures, and invalid runs.
+4. Measure task outcomes, critical failures, process behavior, cost, and
+   limitations separately.
+5. Publish a human report and a machine-readable evidence receipt stating what
+   is supported, unsupported, and invalidating.
+
+The receipt is bound to exact artifacts by SHA-256. Structural validity does
+not by itself prove task quality, causality, transfer, or real-world impact.
+
+## Inspect the evidence
+
+Every completed study can expose four levels of detail:
+
+1. **Decision summary** — what to use, avoid, or test next in [RESULTS.md](RESULTS.md).
+2. **Narrative report** — comparison, measurements, limitations, and reasoning.
+3. **Evidence receipt** — machine-readable claims, decisions, provenance, and
+   invalidation triggers.
+4. **Study records** — frozen manifest, individual runs, and measurement set.
+
+Start with the decision summary. Open raw evidence only when you need to audit,
+reproduce, or reuse the result.
+
+## Run the public checks
 
 Requirements: Python 3.11 or later and [`uv`](https://docs.astral.sh/uv/).
 Docker is optional.
@@ -77,7 +92,6 @@ git clone https://github.com/kizz-tech/agentic-evidence-lab.git
 cd agentic-evidence-lab
 uv sync --locked
 
-uv run ael --version
 uv run ael validate examples
 uv run ael render examples/council-generation-1/evidence-receipt.json
 uv run python -m unittest discover -s tests -v
@@ -90,143 +104,72 @@ validation passed: 30 document(s); concept=4, evidence_receipt=2,
 measurement_set=2, run_record=18, study_manifest=4
 ```
 
-To test the offline execution boundary:
+These commands validate the public evidence contract and content integrity.
+They do not rerun historical model calls or independently reproduce the
+research result. See [Reproducibility](docs/reproducibility.md) for those
+boundaries.
 
-```bash
-uv run ael sandbox doctor
-uv run ael sandbox build --context docker/runner
+## Evaluate your own system
 
-output=$(mktemp -d)
-uv run ael sandbox run \
-  --fixture docker/runner/smoke-fixture \
-  --output "$output/result" \
-  -- python mutate.py
-```
+The smallest study starts from an existing example:
 
-## How a study works
+1. Write a `Concept` describing the idea and proposed mechanism.
+2. Freeze a `Study Manifest` with baseline, treatment, tasks, budget, and
+   analysis rules.
+3. Produce one `Run Record` for every condition, task, and repeat.
+4. Record evaluator-owned outcomes in a `Measurement Set`.
+5. Author an `Evidence Receipt`, then validate and render it with the CLI.
 
-1. Define the intervention's idea and proposed mechanism without silently
-   rewriting it after seeing results.
-2. Freeze the baseline, treatment, changed factors, tasks, budget, roles,
-   analysis, selection rule, and stop rule.
-3. Execute matched runs and preserve operational failures separately from poor
-   answers.
-4. Measure deterministic outcomes, process behavior, critical failures, cost,
-   and limitations without forcing them into one global score.
-5. Emit a receipt with supported claims, unsupported inferences, role overlap,
-   invalidation triggers, and an adopt/reject/narrow/inconclusive decision.
+Use [Contract v0](docs/contract-v0.md) for the five document types and
+[the public examples](examples) as executable starting points. The contract is
+runner-independent: AEL can describe results from Codex, Claude Code, Cursor,
+bare model APIs, or another execution system when their actual configuration
+and limitations are recorded honestly.
 
-The contract binds the artifacts by SHA-256. It does not pretend that schema
-validity proves task quality, causal identification, or real-world transfer.
-
-## Current evidence
-
-### Council Generation 1
-
-The first mapping compared direct, sequential, historical Council, and a frozen
-adaptive Council workflow on three held-out synthetic engineering cases. It did
-**not** establish a general quality win. It did expose an execution-conformance
-failure in the historical skill and supported only a narrow local workflow
-decision.
-
-- [Council capability repository](https://github.com/kizz-tech/council)
-- [Council v0.2.0-alpha.1](https://github.com/kizz-tech/council/releases/tag/v0.2.0-alpha.1)
-- [Machine-readable receipt](examples/council-generation-1/evidence-receipt.json)
-- [Sanitized report](reports/2026-08-12-council-generation-1.md)
-
-The public Council alpha is the separately versioned product successor at
-commit `f13a06163d448a317e264a9b987a3271c5423d26`. Its canonical engineering
-skill has SHA-256
-`fe4b1a7c7cb272c92b94fb2239cb904dfb0a3d272027d317f918c13451a2719f`.
-Generation 1 evaluated the earlier frozen candidate hash
-`a22a1371711509778985bdbae999929903419355332645e299bdb38ce01432fe`;
-the release link establishes product lineage, not a claim that the complete
-public bundle was used in that historical study.
-
-### Codex skill calibration
-
-Six maintainer-controlled Codex cells verified the runner and treatment
-activation path. Baseline and treatment both passed all three tasks, producing
-a ceiling effect. The result is therefore an operational calibration, not proof
-that the skill improves code quality.
-
-- [Machine-readable receipt](examples/coding-skill/calibration-v1/evidence-receipt.json)
-- [Calibration report](reports/2026-08-12-focused-change-verification-codex-calibration.md)
-
-Publishing an inconclusive result is part of the method, not a failed launch.
+The included Docker adapter is available for executable fixtures. Read the
+[runner boundary](docs/runner-isolation.md) before model or third-party code.
 
 ## Leaderboards
 
-AEL will publish leaderboards when multiple eligible candidates have been run
-against the same frozen evaluation contract. Each board must expose:
+AEL will publish a leaderboard only when multiple eligible candidates share the
+same frozen task pack, evaluator, budget rule, and comparison mode. Until that
+condition exists, the project publishes separate result cards and receipts
+rather than a misleading global rank.
 
-- task pack, strata, comparison mode, and eligibility rules;
-- exact model/runtime/tool/skill configuration and revision;
-- matched budget, run count, uncertainty, and data freshness;
-- primary outcome, critical failures, cost, and Pareto tradeoffs;
-- maintainer/evaluator role overlap and replication state.
+See the [leaderboard contract](docs/leaderboards.md) for eligibility,
+uncertainty, critical-failure, cost, freshness, and correction rules.
 
-Operational-stack boards answer “what should I use for this job?” Controlled-
-factor boards investigate “which changed component caused the difference?” The
-two are never mixed into a model-only claim. See
-[`docs/leaderboards.md`](docs/leaderboards.md).
+## Security and alpha limits
 
-## Security boundary
+The offline Docker runner is the default for untrusted executable fixtures. It
+uses a disposable workspace, read-only canonical input, bounded resources, and
+no network by default.
 
-The offline runner is the default for untrusted executable fixtures. It uses a
-read-only canonical fixture, tmpfs workspace, disposable output staging,
-read-only container root, dropped capabilities, resource limits, and no network
-by default.
+The hosted Codex adapter is **not safe for third-party submissions** because the
+agent process can read its reusable credential. It is restricted to
+maintainer-controlled content. Read [SECURITY.md](SECURITY.md) and
+[Container runner isolation](docs/runner-isolation.md) before execution.
 
-The hosted Codex adapter is **not safe for third-party submissions**. Its agent
-process can read the reusable credential. Exact-host egress filtering cannot
-prevent exfiltration to an allowed provider host, so the CLI refuses to run
-without the explicit `--trusted-input-only` acknowledgement.
-
-Read [`SECURITY.md`](SECURITY.md) and
-[`docs/runner-isolation.md`](docs/runner-isolation.md) before executing model or
-third-party code.
-
-## Alpha status
-
-`v0.1.0-alpha.1` is the first public alpha. The Python package, schemas, and CLI
-may change incompatibly before `1.0`. Pin an exact release and preserve the
-receipt and artifact hashes used by your study.
-
-This release does not claim:
-
-- a universal agent benchmark or certification system;
-- independent verification of Kizz-authored capabilities;
-- safety for hosted execution of untrusted skills or repositories;
-- model superiority from comparisons where the surrounding stack differs;
-- downstream production or business impact.
+`v0.1.0-alpha.1` is pre-stable. It does not claim universal benchmarking,
+independent verification of Kizz-authored capabilities, model-only superiority
+from stack comparisons, or downstream production impact.
 
 ## Documentation
 
-- [Contract v0](docs/contract-v0.md) — document types and enforced invariants.
-- [Architecture](docs/architecture.md) — components and ownership boundaries.
-- [Reproducibility](docs/reproducibility.md) — clean-checkout verification.
-- [Schema versioning](docs/schema-versioning.md) — alpha compatibility policy.
-- [Review intake](docs/reviews/README.md) — how external criticism becomes a
-  traceable decision rather than an instruction.
-- [Leaderboard contract](docs/leaderboards.md) — eligibility and publication
-  rules for contextual rankings.
-- [Release notes](docs/release-notes/v0.1.0-alpha.1.md) — exact first-alpha
-  scope and limitations.
+Use the [documentation map](docs/README.md) to find the right level of detail:
+results, evaluation, reproducibility, execution, methodology, active research,
+governance, and release history.
 
 ## Contributing
 
-Methodology criticism, replications, adapters, task packs, and narrowly scoped
-fixes are welcome. Start with [`CONTRIBUTING.md`](CONTRIBUTING.md) and use the
-methodology-review issue template for evidence or inference challenges.
-
-Security reports belong in GitHub Private Vulnerability Reporting, not public
-issues.
+Replications, methodology criticism, adapters, task packs, and narrowly scoped
+fixes are welcome. Start with [CONTRIBUTING.md](CONTRIBUTING.md). Security
+reports belong in GitHub Private Vulnerability Reporting, not public issues.
 
 ## Citation and license
 
 Created by **Ryuhmanov M** under the **Kizz** organization. Cite the software
-using [`CITATION.cff`](CITATION.cff) and cite the exact evidence receipt used in
+using [CITATION.cff](CITATION.cff) and cite the exact evidence receipt used in
 your work.
 
 Licensed under the [Apache License 2.0](LICENSE).

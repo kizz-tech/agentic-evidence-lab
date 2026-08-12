@@ -14,22 +14,23 @@ skill on the two consequential cases.
 That evidence justified a local workflow replacement. It did not justify a
 claim that multi-agent councils are universally better.
 
-## Published capability lineage
+| Decision question | Answer |
+| --- | --- |
+| Did the adaptive candidate produce better answers? | No demonstrated general advantage; the three structured workflows remained inside the frozen tie threshold. |
+| Did it improve the execution process? | Yes, on the measured surface: it repaired a reproduced profile-execution defect and routed routine work directly. |
+| Should it replace the historical local workflow? | Yes, narrowly, with the exact measured semantics and stated limitations. |
+| Is this independently verified or production-proven? | No. It is maintainer-evaluated synthetic evidence with one run per case and condition. |
 
-Council is now published as a separately versioned capability product:
+## Should I use Council?
 
-- [repository](https://github.com/kizz-tech/council);
-- [v0.2.0-alpha.1](https://github.com/kizz-tech/council/releases/tag/v0.2.0-alpha.1);
-- release commit: `f13a06163d448a317e264a9b987a3271c5423d26`;
-- current engineering-skill SHA-256:
-  `fe4b1a7c7cb272c92b94fb2239cb904dfb0a3d272027d317f918c13451a2719f`.
+Use the published Council alpha as an experimental successor when the measured
+engineering-decision workflow matches your need and you can validate it in your
+own environment. Do not use this study as proof that councils outperform direct
+or sequential approaches across tasks, models, runtimes, or domains.
 
-Generation 1 evaluated the earlier frozen candidate SHA-256
-`a22a1371711509778985bdbae999929903419355332645e299bdb38ce01432fe`.
-The released product preserves the adopted mechanism and contains the
-historical provenance bindings, but its complete bundle was assembled later.
-The release is therefore a product-lineage target, not a retrospective claim
-that the study executed `v0.2.0-alpha.1`.
+The evidence supports the mechanism used by the successor, not the complete
+later release bundle. See [Published capability lineage](#published-capability-lineage)
+for the exact revision boundary.
 
 ## What was compared
 
@@ -90,7 +91,7 @@ The observed reduction was about 23.6%. The candidate exposed a larger total
 input surface, so this must not be restated as a universal compute, latency, or
 monetary-cost reduction.
 
-## Decision
+## Decision and limits
 
 Adopt the exact frozen adaptive semantics for the measured local Engineering
 Council surface, while retaining these boundaries:
@@ -102,9 +103,30 @@ Council surface, while retaining these boundaries:
 - no downstream implementation or rework measurement;
 - no cross-model, cross-runtime, or cross-domain transfer claim.
 
+The result must be reconsidered when the artifact, model, runtime, task pack,
+evaluator, or intended use moves outside this measured boundary.
+
+## Published capability lineage
+
+Council is published as a separately versioned capability product:
+
+- [repository](https://github.com/kizz-tech/council);
+- [v0.2.0-alpha.1](https://github.com/kizz-tech/council/releases/tag/v0.2.0-alpha.1);
+- release commit: `f13a06163d448a317e264a9b987a3271c5423d26`;
+- current engineering-skill SHA-256:
+  `fe4b1a7c7cb272c92b94fb2239cb904dfb0a3d272027d317f918c13451a2719f`.
+
+Generation 1 evaluated the earlier frozen candidate SHA-256
+`a22a1371711509778985bdbae999929903419355332645e299bdb38ce01432fe`.
+The released product preserves the adopted mechanism and contains the
+historical provenance bindings, but its complete bundle was assembled later.
+The release is therefore a product-lineage target, not a retrospective claim
+that the study executed `v0.2.0-alpha.1`.
+
 ## Machine-readable evidence
 
 - [Study manifest](../examples/council-generation-1/study-manifest.json)
+- [Individual run records](../examples/council-generation-1/runs)
 - [Measurement set](../examples/council-generation-1/measurement-set.json)
 - [Evidence receipt](../examples/council-generation-1/evidence-receipt.json)
 - [Rendered receipt](../examples/council-generation-1/evidence-receipt.md)
