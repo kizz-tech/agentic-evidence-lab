@@ -30,6 +30,11 @@ from ael.source_lock import (
     validate_source_lock,
     verify_checkout,
 )
+from ael.study_freeze import (
+    load_json_object,
+    validate_freeze_bundle,
+    verify_private_pack,
+)
 from ael.taskpack import check_adaptation_pack, evaluate_candidate
 from ael.validation import sha256_path, validate
 
@@ -245,6 +250,26 @@ def _source_lock_verify(args: argparse.Namespace) -> int:
     return 0
 
 
+def _study_freeze_check(args: argparse.Namespace) -> int:
+    try:
+        bundle_path = Path(args.bundle).resolve()
+        bundle = load_json_object(bundle_path)
+        issues = validate_freeze_bundle(bundle)
+        if issues:
+            for issue in issues:
+                print(issue, file=sys.stderr)
+            return 1
+        if args.screening_root:
+            verify_private_pack(bundle, "screening", Path(args.screening_root))
+        if args.confirmation_root:
+            verify_private_pack(bundle, "confirmation", Path(args.confirmation_root))
+    except SandboxError as exc:
+        print(f"study freeze check failed: {exc}", file=sys.stderr)
+        return 1
+    print(f"study freeze check passed: {bundle['freeze_id']}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="ael", description="Agentic Evidence Lab contract tools")
     parser.add_argument("--version", action="version", version=__version__)
@@ -378,6 +403,16 @@ def build_parser() -> argparse.ArgumentParser:
     source_lock_verify_parser.add_argument("--source-id", required=True)
     source_lock_verify_parser.add_argument("--checkout", required=True)
     source_lock_verify_parser.set_defaults(handler=_source_lock_verify)
+
+    study_parser = subparsers.add_parser("study", help="validate frozen study contracts")
+    study_subparsers = study_parser.add_subparsers(dest="study_command", required=True)
+    freeze_parser = study_subparsers.add_parser(
+        "freeze-check", help="validate a public study freeze and optional private pack hashes"
+    )
+    freeze_parser.add_argument("bundle")
+    freeze_parser.add_argument("--screening-root")
+    freeze_parser.add_argument("--confirmation-root")
+    freeze_parser.set_defaults(handler=_study_freeze_check)
     return parser
 
 

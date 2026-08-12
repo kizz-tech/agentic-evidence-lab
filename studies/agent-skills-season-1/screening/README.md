@@ -1,20 +1,29 @@
 # Agent Skills Season 1 — first-wave screening boundary
 
-State: public design contract; private task packs do not yet exist and no
-effectiveness screening has run.
+State: one preregistered pathfinder; no effectiveness screening has run.
 
-Activation calibration is the completed `v0.1.0-alpha.2` milestone. Screening
-is a separate experiment and begins only after its private inputs, evaluator,
-budget, order, repeat rule, and stop rule are frozen.
+Activation calibration is the completed `v0.1.0-alpha.2` milestone. The
+Property-based Testing v2 pilot now has private screening and confirmation
+packs outside Git plus a public freeze that binds their digests, evaluator
+boundary, budget, order, repeat rules, code, prompt, and stop rules. It was
+frozen with zero scored calls.
 
 ## Scope
 
-The first wave contains only the three studies already marked `first_wave` in
-`season.toml`, in this order:
+The first wave still contains the three studies marked `first_wave` in
+`season.toml`, but calibration changed the execution order:
 
-1. truthful completion;
-2. debugging tournament;
-3. property-based testing.
+1. Property-based Testing v2 is the first frozen pathfinder.
+2. Truthful completion returns to task design after two sacrificial prompt
+   variants produced a baseline ceiling; no scored calls were made.
+3. The debugging tournament remains the next distinct study after the
+   pathfinder closes.
+
+The PBT [analysis plan](property-based-testing-v2-analysis-plan.md),
+[freeze](property-based-testing-v2.freeze.json), and immutable
+[study-manifest revision 2](../manifests/property-based-testing-v2.study-manifest.json)
+are the preregistration record. Private task and evaluator bytes remain outside
+the repository.
 
 MCP construction and webapp testing retain their activation-inconclusive
 receipts. They do not block the first wave and will be redesigned in their own

@@ -32,7 +32,7 @@ class AgentSkillsSeasonOneTests(unittest.TestCase):
     def test_all_season_manifests_validate(self) -> None:
         documents, issues = validate([SEASON_ROOT / "concept.json", SEASON_ROOT / "manifests"])
         self.assertEqual([], [str(issue) for issue in issues])
-        self.assertEqual(11, len(documents))
+        self.assertEqual(12, len(documents))
 
     def test_manifest_hashes_bind_protocol_source_lock_and_calibration_pack(self) -> None:
         for path in sorted((SEASON_ROOT / "manifests").glob("*.json")):
@@ -105,7 +105,7 @@ class AgentSkillsSeasonOneTests(unittest.TestCase):
         self.assertEqual(
             {
                 "concept": 1,
-                "study_manifest": 10,
+                "study_manifest": 11,
                 "run_record": 22,
                 "measurement_set": 10,
                 "evidence_receipt": 10,

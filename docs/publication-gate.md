@@ -1,13 +1,13 @@
-# First public release gate
+# Public release gate
 
-State: release contract for `v0.1.0-alpha.1`; owner decisions resolved and
-mechanical checks required before publication.
+State: standing release contract; owner decisions resolved and mechanical
+checks required before every publication.
 
-The first release candidate should contain the method, validator, sanitized
-Council Generation 1 mapping, bounded receipt, calibration tooling, draft G2
-manifest, and transfer fixtures. It must not contain private review text,
-hidden task anchors, raw model answers, raw reasoning traces, secrets, personal
-filesystem paths, or claims of independent verification.
+Every release candidate may contain the method, validators, public study
+contracts, sanitized evidence, bounded receipts, and calibration tooling. It
+must not contain private review text, hidden task anchors, raw model answers,
+raw reasoning traces, secrets, personal filesystem paths, or claims of
+independent verification.
 
 ## Resolved owner decisions
 
@@ -24,8 +24,7 @@ filesystem paths, or claims of independent verification.
 - `uv sync --locked` succeeds from a clean checkout;
 - all five JSON Schemas pass Draft 2020-12 meta-validation;
 - `uv run ael validate examples` passes;
-- the Council Generation 1 importer reproduces twelve run records and the
-  frozen private source-package composite;
+- committed generators reproduce their governed public artifacts;
 - deterministic receipt rendering matches the committed Markdown;
 - the calibration result reproduces from its frozen seed and config;
 - the offline container runner rebuilds and passes its isolation smoke checks;
@@ -41,10 +40,10 @@ requires `--trusted-input-only`; third-party hosted execution remains blocked.
 ## Release sequence
 
 1. Validate the positive-allowlist public tree and clean install.
-2. Create the GitHub remote under `kizz-tech` and push the reviewed commit.
-3. Enable CI and repository security settings.
-4. Create a draft prerelease against the exact green SHA.
-5. Verify assets and checksums, then publish `v0.1.0-alpha.1`.
+2. Push the reviewed commit to the existing `kizz-tech` repository.
+3. Require green CI for the exact release SHA.
+4. Create a prerelease against that SHA.
+5. Verify assets and checksums, then publish the declared version tag.
 6. Publish one bounded X thread from the verified `@mar_kizzme` account.
 7. Invite methodological criticism and replications without calling the result
    independently verified.

@@ -92,7 +92,8 @@ These are plans, not completed evidence.
 | --- | --- | --- |
 | [Council Generation 2](studies/council-generation-2/README.md) | Draft and illustratively calibrated; not run | Test whether a frozen adaptive Council candidate beats a strong sequential baseline with the same knowledge and matched budget. |
 | [Focused Change Verification discriminating pack](studies/focused-change-verification/discriminating-pack-brief.md) | Design required | Test whether the skill changes verification routing and truthful state reporting when the task does not reveal the desired checks. |
-| [Agent Skills Season 1 screening](studies/agent-skills-season-1/README.md) | Activation calibration completed: 22 formal run records, ten receipts, ten of twelve skills explicitly read; effectiveness unrun | Test verification, debugging, TDD, PBT, security review, review topology, MCP, web testing, frontend design, and recursive improvement without a false global score. |
+| [Property-based Testing v2 pathfinder](studies/agent-skills-season-1/screening/property-based-testing-v2-analysis-plan.md) | Preregistered: exact baseline and skill snapshot, four screening tasks, two locked confirmation tasks, schedules, budgets, hashes, and stop rules frozen with zero scored calls | Test whether this exact skill injection improves hidden-adversarial acceptance on two bounded defect families. |
+| [Remaining Agent Skills Season 1 studies](studies/agent-skills-season-1/README.md) | Activation calibration completed: 22 formal run records, ten receipts, ten of twelve skills explicitly read; other effectiveness studies unrun | Continue task-specific screening without a false global score. |
 
 ## Why there is no leaderboard yet
 

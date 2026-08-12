@@ -1,0 +1,236 @@
+{
+  "schema_version": "ael.study-manifest/0.1",
+  "object_type": "study_manifest",
+  "study_id": "kizz:ael:study:agent-skills-season-1:property-based-testing",
+  "revision": 2,
+  "status": "frozen",
+  "frozen_at": "2026-08-12T16:48:04+03:00",
+  "decision_question": "On the exact hidden serialization-roundtrip and normalization-idempotence pilot tasks, does adding the pinned property-based-testing skill to an otherwise identical Codex stack increase binary hidden-adversarial acceptance?",
+  "comparison_mode": "controlled_factor",
+  "primary_estimand": {
+    "name": "hidden-adversarial acceptance",
+    "description": "Matched-condition difference in binary final hidden acceptance; invalid properties, flakiness, activation, invalid runs, cost, and latency remain separate measurements or gates.",
+    "unit_of_analysis": "matched task-repeat pair",
+    "aggregation": "Prespecified favorable, unfavorable, and tied matched-pair counts under the frozen continuation, selection, and confirmation thresholds."
+  },
+  "concept_ref": {
+    "concept_id": "kizz:ael:concept:public-agent-skill-effectiveness",
+    "revision": 1,
+    "uri": "../concept.json",
+    "sha256": "832391e453e62d7615ec67d150534a074d043a76346a9d3b8e83e21a45aac5a6",
+    "visibility": "public"
+  },
+  "conditions": [
+    {
+      "condition_id": "B0",
+      "label": "Frozen strong Codex baseline",
+      "role": "baseline",
+      "intervention_class": "skill",
+      "intervention_ref": {
+        "uri": "urn:kizz:ael:season1:baseline:property-based-testing:v2",
+        "sha256": "a27e8f240af4f94a04d2d416443711ebcfb85b325663cce2b2c32510e9256e23",
+        "revision": "pbt-v2-prompt-1",
+        "visibility": "private"
+      },
+      "configuration_refs": [
+        {
+          "uri": "../screening/property-based-testing-v2.freeze.json",
+          "sha256": "a1fac08b84e35f412de04f37a1d3eb3ac3ce2711df474febd9a64b2fb4e3fb05",
+          "visibility": "public"
+        }
+      ],
+      "changed_factors": [],
+      "delta_from_baseline": "Reference condition; no study skill is injected."
+    },
+    {
+      "condition_id": "S1",
+      "label": "trailofbits-property-based-testing",
+      "role": "treatment",
+      "intervention_class": "skill",
+      "intervention_ref": {
+        "uri": "https://github.com/trailofbits/skills/tree/304c81a8cefb6e3c029ebd0d12940ccf0713eccb/plugins/property-based-testing/skills/property-based-testing",
+        "sha256": "1697527a56b9e7b5cc47bb4dadd3fd26c3cb0f4af69ffc65205a19cbcc9d95d1",
+        "revision": "304c81a8cefb6e3c029ebd0d12940ccf0713eccb",
+        "visibility": "public"
+      },
+      "configuration_refs": [
+        {
+          "uri": "../screening/property-based-testing-v2.freeze.json",
+          "sha256": "a1fac08b84e35f412de04f37a1d3eb3ac3ce2711df474febd9a64b2fb4e3fb05",
+          "visibility": "public"
+        }
+      ],
+      "changed_factors": [
+        "installed_skill_tree",
+        "instruction_context"
+      ],
+      "delta_from_baseline": "Adds only the exact source-locked property-based-testing skill tree to B0."
+    }
+  ],
+  "task_packs": [
+    {
+      "task_pack_id": "agent-skills-season-1-calibration-v1",
+      "revision": 4,
+      "role": "calibration",
+      "strata": [
+        "property-based-testing"
+      ],
+      "artifact_ref": {
+        "uri": "../task-pack/calibration-v1/task-pack.toml",
+        "sha256": "c5ae7c9d8b31878f0f8079fe8d79f0a0d676b8111e895f28d25f96b6abeefa4d",
+        "visibility": "public"
+      },
+      "contamination_notes": [
+        "Public mechanics task only; excluded from every effect count."
+      ]
+    },
+    {
+      "task_pack_id": "property-based-testing-v2-screening",
+      "revision": 1,
+      "role": "screening",
+      "strata": [
+        "serialization-roundtrip",
+        "normalization-idempotence"
+      ],
+      "artifact_ref": {
+        "uri": "urn:kizz:ael:private-pack:property-based-testing-v2:screening",
+        "sha256": "968db26b2ac6378e3792830a14cd7e4e9f29924ce479b44277f99ed1125b6f95",
+        "revision": "pbt-v2-pilot-1",
+        "visibility": "hidden"
+      },
+      "contamination_notes": [
+        "Private task and evaluator bytes remain outside Git; prompts do not name property-based testing or disclose hidden counterexamples."
+      ]
+    },
+    {
+      "task_pack_id": "property-based-testing-v2-confirmation",
+      "revision": 1,
+      "role": "holdout",
+      "strata": [
+        "serialization-roundtrip",
+        "normalization-idempotence"
+      ],
+      "artifact_ref": {
+        "uri": "urn:kizz:ael:private-pack:property-based-testing-v2:confirmation",
+        "sha256": "349e44906c4bc522e4fc65a42643c94c2bc670f82946c401b2854ba6fd35a0c8",
+        "revision": "pbt-v2-pilot-1",
+        "visibility": "hidden"
+      },
+      "contamination_notes": [
+        "Unavailable to agent execution and unopened unless the hash-bound screening decision selects S1."
+      ]
+    }
+  ],
+  "budget": {
+    "status": "matched_policy",
+    "description": "Both conditions share a 900-second and 30000 generated-token per-cell cap; repeat 2 and confirmation are conditional under the frozen rules; the total cap is 24 scored calls.",
+    "dimensions": [
+      {
+        "metric": "generated_work_tokens",
+        "unit": "tokens",
+        "scope": "whole condition per task-repeat",
+        "rule": "count output plus reasoning-output tokens and invalidate a cell above the cap",
+        "limit": 30000,
+        "source": "frozen pilot budget"
+      },
+      {
+        "metric": "wall_time",
+        "unit": "seconds",
+        "scope": "whole condition per task-repeat",
+        "rule": "remove a container exceeding the per-cell timeout",
+        "limit": 900,
+        "source": "frozen pilot budget"
+      },
+      {
+        "metric": "scored_calls",
+        "unit": "calls",
+        "scope": "screening plus conditional confirmation",
+        "rule": "never exceed the full frozen schedule",
+        "limit": 24,
+        "source": "frozen pilot budget"
+      }
+    ]
+  },
+  "adaptation_boundary": {
+    "candidate_freeze_required": true,
+    "runner_up_substitution": "forbidden",
+    "description": "The upstream skill tree is used without content adaptation. Screening selects S1 or rejects/stops; a holdout failure cannot substitute another candidate."
+  },
+  "selection_rules": [
+    "Run every repeat-1 screening pair before applying the frozen continuation rule.",
+    "Continue only with at least one favorable pair, zero unfavorable pairs, baseline headroom, successful treatment activation, zero invalid cells, and zero treatment critical failures.",
+    "After both repeats, select S1 only with at least three favorable pairs and at most one unfavorable pair under all integrity gates.",
+    "Unlock untouched confirmation only from the exact hash-bound select-S1 record."
+  ],
+  "stop_rules": [
+    "Stop on any invalid cell, treatment activation failure, absence of baseline headroom, treatment critical failure, or failed frozen threshold.",
+    "Do not retry model outcomes; only an infrastructure failure before persisted model output may be rerun byte-equivalently.",
+    "Retain negative and invalid evidence; do not change tasks, evaluator, source, prompt, code, runtime, budget, schedule, or thresholds after freeze."
+  ],
+  "roles": [
+    {
+      "role": "concept_owner",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    },
+    {
+      "role": "artifact_author",
+      "actor_id": "trailofbits-upstream-authors",
+      "independence_group": "external-source"
+    },
+    {
+      "role": "task_pack_owner",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    },
+    {
+      "role": "runner_operator",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    },
+    {
+      "role": "evaluator",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer-evaluation"
+    },
+    {
+      "role": "decision_owner",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    },
+    {
+      "role": "receipt_signer",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    }
+  ],
+  "independence_claim": {
+    "label": "maintainer_evaluated",
+    "role_overlaps": [
+      "Kizz authored the private tasks and evaluator, operates the runner, and owns the decision."
+    ]
+  },
+  "analysis_plan": {
+    "uri": "../screening/property-based-testing-v2-analysis-plan.md",
+    "sha256": "9932f48be6b54dae29a15ed928effc433e71c44f070a93448ff7c63c82bc5eb7",
+    "visibility": "public"
+  },
+  "source_refs": [
+    {
+      "uri": "../sources.lock.toml",
+      "sha256": "0c78e3ebc1431df7a99508b0cb149777d1cb3c79c9e2e4db2388bc63595ba806",
+      "visibility": "public"
+    },
+    {
+      "uri": "../screening/property-based-testing-v2.freeze.json",
+      "sha256": "a1fac08b84e35f412de04f37a1d3eb3ac3ce2711df474febd9a64b2fb4e3fb05",
+      "visibility": "public"
+    }
+  ]
+}

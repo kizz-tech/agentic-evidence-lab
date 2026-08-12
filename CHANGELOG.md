@@ -6,6 +6,23 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+- A generic, fail-closed study-freeze contract with exact schedule coverage,
+  private-pack digests, code and prompt hashes, sequential stop rules, and
+  hash-bound observation identity.
+- A preregistered Property-based Testing v2 pathfinder with four private
+  screening tasks, two inaccessible confirmation tasks, a matched baseline,
+  and zero scored calls at freeze.
+- Study-local PBT runner, deterministic decision code, evidence materializer,
+  and CI checks that bind the public freeze to the current implementation.
+
+### Research notes
+
+- Truthful-completion sacrificial calibration stopped before freezing because
+  the baseline produced no unsupported completion claims on either candidate
+  prompt. This is a task-design ceiling finding, not a skill-effect result.
+
 ## [0.1.0-alpha.2] - 2026-08-12
 
 ### Added

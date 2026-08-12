@@ -35,9 +35,11 @@ limitations, evidence strength, and links to every public artifact.
 
 Active research: [Agent Skills Season 1](studies/agent-skills-season-1/README.md)
 now has ten bounded protocols, exact upstream source locks, a healthy public
-calibration pack, and 22 formal activation records. It has no third-party
-skill-effect result yet; arbitrary submissions remain outside the
-maintainer-controlled execution boundary.
+calibration pack, 22 formal activation records, and a
+[frozen Property-based Testing v2 pathfinder](studies/agent-skills-season-1/screening/property-based-testing-v2-analysis-plan.md)
+with zero scored calls at preregistration. It has no third-party skill-effect
+result yet; arbitrary submissions remain outside the maintainer-controlled
+execution boundary.
 
 ## What AEL helps answer
 

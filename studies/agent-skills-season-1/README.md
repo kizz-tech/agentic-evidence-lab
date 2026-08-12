@@ -1,9 +1,11 @@
 # Do Agent Skills Actually Work? — Season 1
 
-State: ten protocols drafted, twelve exact upstream source trees verified, and
-22 public activation cells represented by ten evidence receipts. Ten treatment
-skills were explicitly read; MCP-builder and webapp-testing were injected but
-did not activate. No effectiveness result or leaderboard is claimed. See the
+State: ten protocols drafted, twelve exact upstream source trees verified, 22
+public activation cells represented by ten evidence receipts, and the
+Property-based Testing v2 pathfinder preregistered with zero scored calls. Ten
+treatment skills were explicitly read; MCP-builder and webapp-testing were
+injected but did not activate. No effectiveness result or leaderboard is
+claimed. See the
 [activation report](../../reports/2026-08-12-agent-skills-season-1-activation.md)
 and [machine-readable matrix](calibration/runtime-v1/README.md).
 
@@ -16,10 +18,10 @@ records, and evidence receipts—not a universal score.
 
 | # | Study | Candidate intervention | Primary question | First wave |
 | --- | --- | --- | --- | --- |
-| 1 | [Truthful completion](protocols/01-truthful-completion.md) | Superpowers verification-before-completion | Does the skill reduce unsupported success claims after coding work? | Yes |
-| 2 | [Debugging tournament](protocols/02-debugging-tournament.md) | Superpowers systematic-debugging; Every ce-debug | Which exact workflow most often repairs the real root cause without symptom patches? | Yes |
+| 1 | [Truthful completion](protocols/01-truthful-completion.md) | Superpowers verification-before-completion | Does the skill reduce unsupported success claims after coding work? | Redesign after sacrificial ceiling |
+| 2 | [Debugging tournament](protocols/02-debugging-tournament.md) | Superpowers systematic-debugging; Every ce-debug | Which exact workflow most often repairs the real root cause without symptom patches? | Later |
 | 3 | [Test-driven development](protocols/03-test-driven-development.md) | Superpowers test-driven-development | Does the skill change test-first behavior and reduce regressions? | Later |
-| 4 | [Property-based testing](protocols/04-property-based-testing.md) | Trail of Bits property-based-testing | Does the skill expose edge-case defects missed by example tests? | Yes |
+| 4 | [Property-based testing](protocols/04-property-based-testing.md) | Trail of Bits property-based-testing | Does the skill expose edge-case defects missed by example tests? | Frozen pathfinder |
 | 5 | [Differential security review](protocols/05-differential-security-review.md) | Trail of Bits differential-review | Does the skill improve critical regression recall without unusable noise? | Later |
 | 6 | [Review-team topology](protocols/06-review-team-topology.md) | Every ce-code-review | Does a bounded review team find more actionable defects than one strong reviewer at matched total budget? | Later |
 | 7 | [MCP server construction](protocols/07-mcp-server-construction.md) | Anthropic mcp-builder | Does the skill improve protocol conformance and tool usability? | Later |
@@ -94,6 +96,13 @@ during an agent run.
   remain activation-inconclusive because Codex never read their `SKILL.md`.
 - Two invalidated benchmark revisions are retained: one underdetermined task
   contract and one evaluator false positive.
+- Truthful-completion sacrificial calibration reached a baseline ceiling on two
+  prompt variants. It used no scored calls and supports only a task-redesign
+  decision.
+- Property-based Testing v2 is frozen before scored execution. Its private
+  screening and locked confirmation composites, exact schedule, runtime,
+  prompt, analysis, decision code, and stop rules are hash-bound in the
+  [public freeze](screening/property-based-testing-v2.freeze.json).
 - Negative and inconclusive outcomes will be retained.
 - Results remain separate study cards until one frozen contract has multiple
   eligible candidates, repeated observations, uncertainty, and no unresolved
