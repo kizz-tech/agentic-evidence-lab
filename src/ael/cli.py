@@ -7,6 +7,7 @@ from pathlib import Path
 
 from ael import __version__
 from ael.calibration import run_calibration
+from ael.codex_events import audit_skill_activation
 from ael.codex_runner import (
     DEFAULT_CODEX_MODEL,
     DEFAULT_CODEX_TIMEOUT_SECONDS,
@@ -30,6 +31,7 @@ from ael.source_lock import (
     validate_source_lock,
     verify_checkout,
 )
+from ael.study_audit import audit_study_bundle
 from ael.study_freeze import (
     load_json_object,
     validate_freeze_bundle,
@@ -270,6 +272,52 @@ def _study_freeze_check(args: argparse.Namespace) -> int:
     return 0
 
 
+def _study_audit(args: argparse.Namespace) -> int:
+    try:
+        summary = audit_study_bundle(
+            Path(args.freeze),
+            Path(args.result),
+            screening_root=Path(args.screening_root) if args.screening_root else None,
+            confirmation_root=Path(args.confirmation_root) if args.confirmation_root else None,
+            git_root=Path(args.git_root) if args.git_root else None,
+            require_git_proof=args.require_git_proof,
+            decision_adapter=args.decision_adapter,
+        )
+    except SandboxError as exc:
+        print(str(exc), file=sys.stderr)
+        return 1
+    if args.json_output:
+        output_path = Path(args.json_output).resolve()
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
+    print(
+        "study audit passed: "
+        f"{summary['study']['study_id']} revision={summary['study']['revision']} "
+        f"stage={summary['decision']['stage']} outcome={summary['decision']['outcome']} "
+        f"runs={summary['evidence']['run_records']} measurements={summary['evidence']['measurements']} "
+        f"git_preregistered={str(summary['preregistration']['git_verified']).lower()}"
+    )
+    return 0
+
+
+def _study_activation_check(args: argparse.Namespace) -> int:
+    try:
+        summary = audit_skill_activation(Path(args.events), args.skill_name)
+    except SandboxError as exc:
+        print(f"skill activation check failed: {exc}", file=sys.stderr)
+        return 1
+    if args.json_output:
+        output_path = Path(args.json_output).resolve()
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
+    print(
+        "skill activation check complete: "
+        f"skill={summary['skill_name']} activated={str(summary['activated']).lower()} "
+        f"matching_commands={len(summary['matched_commands'])} events={summary['event_count']}"
+    )
+    return 0 if summary["activated"] else 1
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="ael", description="Agentic Evidence Lab contract tools")
     parser.add_argument("--version", action="version", version=__version__)
@@ -413,6 +461,30 @@ def build_parser() -> argparse.ArgumentParser:
     freeze_parser.add_argument("--screening-root")
     freeze_parser.add_argument("--confirmation-root")
     freeze_parser.set_defaults(handler=_study_freeze_check)
+    audit_parser = study_subparsers.add_parser(
+        "audit", help="audit one freeze, public result bundle, and optional private packs"
+    )
+    audit_parser.add_argument("--freeze", required=True)
+    audit_parser.add_argument("--result", required=True)
+    audit_parser.add_argument("--screening-root")
+    audit_parser.add_argument("--confirmation-root")
+    audit_parser.add_argument("--git-root")
+    audit_parser.add_argument("--require-git-proof", action="store_true")
+    audit_parser.add_argument(
+        "--decision-adapter",
+        choices=["pbt-v2"],
+        help="study-specific public count and outcome recomputation",
+    )
+    audit_parser.add_argument("--json-output")
+    audit_parser.set_defaults(handler=_study_audit)
+    activation_parser = study_subparsers.add_parser(
+        "activation-check",
+        help="require successful Codex retrieval of one installed SKILL.md from JSON events",
+    )
+    activation_parser.add_argument("events")
+    activation_parser.add_argument("--skill-name", required=True)
+    activation_parser.add_argument("--json-output")
+    activation_parser.set_defaults(handler=_study_activation_check)
     return parser
 
 

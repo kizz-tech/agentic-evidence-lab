@@ -24,6 +24,8 @@ jobs:
     steps:
       - name: Check out source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
       - name: Set up Python
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
@@ -47,6 +49,11 @@ jobs:
           uv run ael source-lock check studies/agent-skills-season-1/sources.lock.toml
           uv run ael study freeze-check \
             studies/agent-skills-season-1/screening/property-based-testing-v2.freeze.json
+          uv run ael study audit \
+            --freeze studies/agent-skills-season-1/screening/property-based-testing-v2.freeze.json \
+            --result studies/agent-skills-season-1/results/property-based-testing-v2 \
+            --decision-adapter pbt-v2 \
+            --require-git-proof
           uv run ael validate \
             studies/agent-skills-season-1/concept.json \
             studies/agent-skills-season-1/manifests \
@@ -69,6 +76,8 @@ jobs:
     steps:
       - name: Check out source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
       - name: Set up Python
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
@@ -90,6 +99,11 @@ jobs:
             studies/agent-skills-season-1/calibration/runtime-v1
           .release-venv/bin/ael study freeze-check \
             studies/agent-skills-season-1/screening/property-based-testing-v2.freeze.json
+          .release-venv/bin/ael study audit \
+            --freeze studies/agent-skills-season-1/screening/property-based-testing-v2.freeze.json \
+            --result studies/agent-skills-season-1/results/property-based-testing-v2 \
+            --decision-adapter pbt-v2 \
+            --require-git-proof
           .release-venv/bin/ael validate \
             studies/agent-skills-season-1/concept.json \
             studies/agent-skills-season-1/manifests/property-based-testing-v2.study-manifest.json \

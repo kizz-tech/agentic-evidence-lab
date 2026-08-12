@@ -6,6 +6,32 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.0-alpha.4] - 2026-08-12
+
+### Added
+
+- `ael study audit`, a single fail-closed verifier for a frozen study and its
+  terminal public result bundle, including exact schedule, reference, receipt,
+  decision-alias, private-pack digest, and Git preregistration lineage checks.
+- An explicit `pbt-v2` decision adapter that reconstructs counts and the
+  terminal outcome from individual run records, evaluator-owned measurements,
+  and the frozen rule instead of trusting aggregate fields alone.
+- `ael study activation-check`, which treats only successful completed Codex
+  commands with non-empty exact `SKILL.md` retrieval as activation evidence.
+
+### Changed
+
+- CI and clean-wheel validation now audit the published Property-based Testing
+  v2 bundle with full Git history and require preregistration proof.
+- Ruff's supported maintenance range now extends through `0.16.x`; the lockfile
+  is updated with the release.
+
+### Research integrity
+
+- The alpha.3 freeze, result bytes, runner, decision code, and private raw packs
+  remain unchanged. Alpha.4 adds verification around the historical negative
+  result and does not reinterpret it as new experimental evidence.
+
 ## [0.1.0-alpha.3] - 2026-08-12
 
 ### Added
@@ -82,7 +108,8 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   process can read the reusable credential.
 - Contract v0 remains pre-stable and may change incompatibly before `1.0`.
 
-[Unreleased]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.3...HEAD
+[Unreleased]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.4...HEAD
+[0.1.0-alpha.4]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.3...v0.1.0-alpha.4
 [0.1.0-alpha.3]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.2...v0.1.0-alpha.3
 [0.1.0-alpha.2]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.1...v0.1.0-alpha.2
 [0.1.0-alpha.1]: https://github.com/kizz-tech/agentic-evidence-lab/releases/tag/v0.1.0-alpha.1

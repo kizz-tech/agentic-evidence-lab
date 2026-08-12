@@ -46,6 +46,17 @@ the frozen budget.
 - [Public preregistration freeze](studies/agent-skills-season-1/screening/property-based-testing-v2.freeze.json)
 - [Run records and measurements](studies/agent-skills-season-1/results/property-based-testing-v2)
 
+From a full Git checkout, audit the complete published bundle and
+preregistration lineage with:
+
+```bash
+uv run ael study audit \
+  --freeze studies/agent-skills-season-1/screening/property-based-testing-v2.freeze.json \
+  --result studies/agent-skills-season-1/results/property-based-testing-v2 \
+  --decision-adapter pbt-v2 \
+  --require-git-proof
+```
+
 ## Council Generation 1
 
 ### Should I use it?

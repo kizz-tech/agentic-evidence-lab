@@ -104,6 +104,11 @@ uv sync --locked
 
 uv run ael validate examples
 uv run ael render examples/council-generation-1/evidence-receipt.json
+uv run ael study audit \
+  --freeze studies/agent-skills-season-1/screening/property-based-testing-v2.freeze.json \
+  --result studies/agent-skills-season-1/results/property-based-testing-v2 \
+  --decision-adapter pbt-v2 \
+  --require-git-proof
 uv run python -m unittest discover -s tests -v
 ```
 
@@ -114,9 +119,11 @@ validation passed: 30 document(s); concept=4, evidence_receipt=2,
 measurement_set=2, run_record=18, study_manifest=4
 ```
 
-These commands validate the public evidence contract and content integrity.
-They do not rerun historical model calls or independently reproduce the
-research result. See [Reproducibility](docs/reproducibility.md) for those
+The study audit additionally checks the freeze, terminal decision, public runs,
+measurements, receipt, and Git preregistration order as one bundle. The explicit
+PBT v2 decision adapter also recomputes its exact counts and terminal outcome.
+These commands do not rerun historical model calls or independently reproduce
+the research result. See [Reproducibility](docs/reproducibility.md) for those
 boundaries.
 
 ## Evaluate your own system
@@ -161,7 +168,7 @@ maintainer-reviewed snapshots and maintainer-controlled fixtures; arbitrary
 submissions remain blocked. Read [SECURITY.md](SECURITY.md) and
 [Container runner isolation](docs/runner-isolation.md) before execution.
 
-`v0.1.0-alpha.3` is pre-stable. It does not claim universal benchmarking,
+`v0.1.0-alpha.4` is pre-stable. It does not claim universal benchmarking,
 independent verification of Kizz-authored capabilities, model-only superiority
 from stack comparisons, or downstream production impact.
 

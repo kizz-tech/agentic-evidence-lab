@@ -25,6 +25,11 @@ uv run ruff check .
 uv run ruff format --check .
 uv run python -m unittest discover -s tests -v
 uv run ael validate examples
+uv run ael study audit \
+  --freeze studies/agent-skills-season-1/screening/property-based-testing-v2.freeze.json \
+  --result studies/agent-skills-season-1/results/property-based-testing-v2 \
+  --decision-adapter pbt-v2 \
+  --require-git-proof
 uv build
 ```
 

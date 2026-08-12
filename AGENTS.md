@@ -13,7 +13,7 @@ separate repositories, provenance, versions, and release authority.
 
 ## Current state
 
-The repository is preparing or maintaining the public `v0.1.0-alpha.3` line.
+The repository is preparing or maintaining the public `v0.1.0-alpha.4` line.
 It is Apache-2.0 licensed but remains pre-stable. Do not claim that a commit is
 pushed, a tag is released, CI is green, a result is independently reviewed, or
 a schema is compatible until the corresponding action and evidence exist.

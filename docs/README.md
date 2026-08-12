@@ -42,6 +42,8 @@ must not promote a stack result into a model-only claim.
   activation evidence and exact study-revision validation.
 - [Release notes](release-notes/v0.1.0-alpha.3.md) — first preregistered
   effectiveness pilot and negative-result evidence.
+- [Release notes](release-notes/v0.1.0-alpha.4.md) — one-command frozen-study
+  bundle audit and stricter Codex skill-activation evidence.
 - [Changelog](../CHANGELOG.md) — user-visible project history.
 
 Machine-readable manifests, runs, measurements, and receipts live under

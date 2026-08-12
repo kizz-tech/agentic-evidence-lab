@@ -5,7 +5,7 @@ comparison, not a claim that stochastic model behavior is byte-identical.
 
 ## Deterministic release checks
 
-From a clean checkout of `v0.1.0-alpha.3`:
+From a clean checkout of `v0.1.0-alpha.4`:
 
 ```bash
 uv sync --locked --all-groups
@@ -14,6 +14,11 @@ uv run ruff format --check .
 uv run python -m unittest discover -s tests -v
 uv run ael validate examples
 uv run ael source-lock check studies/agent-skills-season-1/sources.lock.toml
+uv run ael study audit \
+  --freeze studies/agent-skills-season-1/screening/property-based-testing-v2.freeze.json \
+  --result studies/agent-skills-season-1/results/property-based-testing-v2 \
+  --decision-adapter pbt-v2 \
+  --require-git-proof
 uv run ael validate \
   studies/agent-skills-season-1/concept.json \
   studies/agent-skills-season-1/manifests \
@@ -32,6 +37,33 @@ run inputs only by the maintainer. Public consumers can validate every exposed
 document, source lock, and content hash, but cannot reconstruct private Codex
 events from their hashes. This is verification of the published evidence graph,
 not independent reproduction of the hosted-agent executions.
+
+## Frozen study-bundle audit
+
+`ael study audit` is the fail-closed verifier for a completed frozen study. It
+checks the freeze contract; exact terminal-decision alias; freeze, private-pack,
+and decision hashes; Contract v0 references; terminal schedule coverage; and
+receipt coverage. A study-specific decision adapter can additionally reconstruct
+decision counts and the terminal outcome from public run and measurement
+records instead of trusting the published aggregate. The current adapter is
+explicitly named `pbt-v2`; omitting it leaves those semantic checks unclaimed.
+
+With `--require-git-proof`, the audit requires the preregistration commit to be
+an ancestor of the checkout, requires that commit to contain the exact current
+freeze bytes, and requires the terminal decision to be absent from that commit.
+Optional `--screening-root` and `--confirmation-root` arguments verify retained
+private task-pack bytes against their frozen tree digests without publishing
+them. `--json-output` writes a machine-readable audit summary.
+
+The private observation payload remains opaque. The audit checks its published
+hash and, with the explicit adapter, recomputes the exposed counts and outcome;
+it cannot reconstruct hidden task or event bytes that were not published.
+
+For future Codex runs, `ael study activation-check` accepts Codex JSONL events
+and counts activation only when a completed, exit-zero command retrieved
+non-empty content from the exact installed `SKILL.md`. A path mentioned in an
+agent message, an in-progress command, a failed command, or empty output is not
+activation evidence. This stricter parser does not rewrite historical records.
 
 ## Receipt reproduction
 
