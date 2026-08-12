@@ -13,11 +13,21 @@ universal rank.
 
 ### Council Generation 1
 
+- [Council capability repository](https://github.com/kizz-tech/council)
+- [Council v0.2.0-alpha.1](https://github.com/kizz-tech/council/releases/tag/v0.2.0-alpha.1)
 - [Study manifest](examples/council-generation-1/study-manifest.json)
 - [Run records](examples/council-generation-1/runs)
 - [Measurements](examples/council-generation-1/measurement-set.json)
 - [Evidence receipt](examples/council-generation-1/evidence-receipt.json)
 - [Narrative report](reports/2026-08-12-council-generation-1.md)
+
+Capability release: `v0.2.0-alpha.1` at commit
+`f13a06163d448a317e264a9b987a3271c5423d26`; current engineering-skill
+SHA-256: `fe4b1a7c7cb272c92b94fb2239cb904dfb0a3d272027d317f918c13451a2719f`.
+The study evaluated the earlier frozen candidate SHA-256
+`a22a1371711509778985bdbae999929903419355332645e299bdb38ce01432fe`.
+This is a lineage link, not evidence that Generation 1 executed the later full
+release bundle.
 
 ### Focused Change Verification calibration
 

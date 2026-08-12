@@ -129,8 +129,19 @@ adaptive Council workflow on three held-out synthetic engineering cases. It did
 failure in the historical skill and supported only a narrow local workflow
 decision.
 
+- [Council capability repository](https://github.com/kizz-tech/council)
+- [Council v0.2.0-alpha.1](https://github.com/kizz-tech/council/releases/tag/v0.2.0-alpha.1)
 - [Machine-readable receipt](examples/council-generation-1/evidence-receipt.json)
 - [Sanitized report](reports/2026-08-12-council-generation-1.md)
+
+The public Council alpha is the separately versioned product successor at
+commit `f13a06163d448a317e264a9b987a3271c5423d26`. Its canonical engineering
+skill has SHA-256
+`fe4b1a7c7cb272c92b94fb2239cb904dfb0a3d272027d317f918c13451a2719f`.
+Generation 1 evaluated the earlier frozen candidate hash
+`a22a1371711509778985bdbae999929903419355332645e299bdb38ce01432fe`;
+the release link establishes product lineage, not a claim that the complete
+public bundle was used in that historical study.
 
 ### Codex skill calibration
 

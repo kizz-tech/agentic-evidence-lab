@@ -1,6 +1,6 @@
 # Council Generation 1: a process repair, not a general quality win
 
-Status: sanitized public-ready draft. Not published or independently reviewed.
+Status: published maintainer-evaluated evidence. Not independently reproduced.
 
 ## Answer first
 
@@ -13,6 +13,23 @@ skill on the two consequential cases.
 
 That evidence justified a local workflow replacement. It did not justify a
 claim that multi-agent councils are universally better.
+
+## Published capability lineage
+
+Council is now published as a separately versioned capability product:
+
+- [repository](https://github.com/kizz-tech/council);
+- [v0.2.0-alpha.1](https://github.com/kizz-tech/council/releases/tag/v0.2.0-alpha.1);
+- release commit: `f13a06163d448a317e264a9b987a3271c5423d26`;
+- current engineering-skill SHA-256:
+  `fe4b1a7c7cb272c92b94fb2239cb904dfb0a3d272027d317f918c13451a2719f`.
+
+Generation 1 evaluated the earlier frozen candidate SHA-256
+`a22a1371711509778985bdbae999929903419355332645e299bdb38ce01432fe`.
+The released product preserves the adopted mechanism and contains the
+historical provenance bindings, but its complete bundle was assembled later.
+The release is therefore a product-lineage target, not a retrospective claim
+that the study executed `v0.2.0-alpha.1`.
 
 ## What was compared
 
