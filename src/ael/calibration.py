@@ -3,10 +3,59 @@ from __future__ import annotations
 import hashlib
 import json
 import math
-import random
+from collections.abc import Sequence
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, TypeVar
+
+_T = TypeVar("_T")
+
+
+class _StableRandom:
+    """Small version-stable PRNG for reproducible public simulations.
+
+    Python deliberately does not promise that helpers such as ``choice`` and
+    ``gauss`` keep producing identical streams across interpreter releases.
+    This generator seeds SplitMix64 from SHA-256 and approximates a standard
+    normal with the centred sum of 12 uniforms. The algorithm is part of the
+    evidence artifact contract and must be versioned before changing.
+    """
+
+    algorithm = "ael-splitmix64-irwin-hall12/v1"
+    _mask = (1 << 64) - 1
+
+    def __init__(self, seed: int) -> None:
+        digest = hashlib.sha256(f"ael-calibration:{seed}".encode()).digest()
+        self._state = int.from_bytes(digest[:8], byteorder="big")
+
+    def _word(self) -> int:
+        self._state = (self._state + 0x9E3779B97F4A7C15) & self._mask
+        word = self._state
+        word = ((word ^ (word >> 30)) * 0xBF58476D1CE4E5B9) & self._mask
+        word = ((word ^ (word >> 27)) * 0x94D049BB133111EB) & self._mask
+        return word ^ (word >> 31)
+
+    def random(self) -> float:
+        return self._word() / (1 << 64)
+
+    def randrange(self, stop: int) -> int:
+        if stop <= 0:
+            raise ValueError("stop must be positive")
+        ceiling = 1 << 64
+        limit = ceiling - (ceiling % stop)
+        while True:
+            word = self._word()
+            if word < limit:
+                return word % stop
+
+    def choice(self, values: Sequence[_T]) -> _T:
+        if not values:
+            raise IndexError("cannot choose from an empty sequence")
+        return values[self.randrange(len(values))]
+
+    def gauss(self, mean: float, standard_deviation: float) -> float:
+        standard_normal = sum(self.random() for _ in range(12)) - 6.0
+        return mean + standard_deviation * standard_normal
 
 
 def _logit(probability: float) -> float:
@@ -17,17 +66,17 @@ def _logistic(value: float) -> float:
     return 1.0 / (1.0 + math.exp(-value))
 
 
-def _quantile(values: list[float], probability: float) -> float:
+def _quantile(values: list[int], probability: float) -> int:
     ordered = sorted(values)
     index = max(0, min(len(ordered) - 1, math.floor(probability * (len(ordered) - 1))))
     return ordered[index]
 
 
-def _bernoulli(rng: random.Random, probability: float) -> int:
+def _bernoulli(rng: _StableRandom, probability: float) -> int:
     return int(rng.random() < probability)
 
 
-def _screening(config: dict[str, Any], rng: random.Random, iterations: int) -> list[dict[str, Any]]:
+def _screening(config: dict[str, Any], rng: _StableRandom, iterations: int) -> list[dict[str, Any]]:
     candidate_rates = [float(item) for item in config["candidate_usable_rates"]]
     best_index = max(range(len(candidate_rates)), key=candidate_rates.__getitem__)
     critical_rates = [float(item) for item in config["candidate_critical_failure_rates"]]
@@ -82,19 +131,19 @@ def _screening(config: dict[str, Any], rng: random.Random, iterations: int) -> l
 
 def _paired_task_differences(
     config: dict[str, Any],
-    rng: random.Random,
+    rng: _StableRandom,
     task_count: int,
     effect: float,
-) -> list[float]:
+) -> list[int]:
     baseline_rate = float(config["baseline_usable_rate"])
     treatment_rate = min(0.999, max(0.001, baseline_rate + effect))
     correlation = float(config["within_task_pair_correlation"])
-    differences: list[float] = []
+    differences: list[int] = []
     for _task in range(task_count):
         difficulty = rng.gauss(0.0, float(config["task_difficulty_logit_sd"]))
         baseline_probability = _logistic(_logit(baseline_rate) - difficulty)
         treatment_probability = _logistic(_logit(treatment_rate) - difficulty)
-        paired: list[float] = []
+        paired: list[int] = []
         for _repeat in range(int(config["repeats"])):
             if rng.random() < correlation:
                 shared = rng.random()
@@ -103,27 +152,26 @@ def _paired_task_differences(
             else:
                 baseline = _bernoulli(rng, baseline_probability)
                 treatment = _bernoulli(rng, treatment_probability)
-            paired.append(float(treatment - baseline))
-        differences.append(sum(paired) / len(paired))
+            paired.append(treatment - baseline)
+        differences.append(sum(paired))
     return differences
 
 
 def _bootstrap_lower_bound(
-    differences: list[float],
-    rng: random.Random,
+    differences: list[int],
+    rng: _StableRandom,
     samples: int,
     confidence: float,
-) -> float:
+) -> int:
     size = len(differences)
-    means = [
-        sum(differences[rng.randrange(size)] for _ in range(size)) / size
-        for _sample in range(samples)
+    totals = [
+        sum(differences[rng.randrange(size)] for _ in range(size)) for _sample in range(samples)
     ]
-    return _quantile(means, (1.0 - confidence) / 2.0)
+    return _quantile(totals, (1.0 - confidence) / 2.0)
 
 
 def _confirmation(
-    config: dict[str, Any], rng: random.Random, iterations: int
+    config: dict[str, Any], rng: _StableRandom, iterations: int
 ) -> list[dict[str, Any]]:
     results: list[dict[str, Any]] = []
     for task_count in config["task_counts"]:
@@ -132,7 +180,7 @@ def _confirmation(
             observed_positive = 0
             for _ in range(iterations):
                 differences = _paired_task_differences(config, rng, int(task_count), float(effect))
-                observed = sum(differences) / len(differences)
+                observed = sum(differences)
                 if observed > 0:
                     observed_positive += 1
                 lower = _bootstrap_lower_bound(
@@ -181,7 +229,7 @@ def _sentinels(config: dict[str, Any]) -> list[dict[str, Any]]:
 
 def simulate(config: dict[str, Any]) -> dict[str, Any]:
     iterations = int(config["iterations"])
-    rng = random.Random(int(config["seed"]))
+    rng = _StableRandom(int(config["seed"]))
     canonical = json.dumps(config, sort_keys=True, separators=(",", ":")).encode("utf-8")
     return {
         "schema_version": "ael.calibration-simulation-result/0.1",
@@ -194,6 +242,7 @@ def simulate(config: dict[str, Any]) -> dict[str, Any]:
         "assumption_state": config["assumption_state"],
         "iterations": iterations,
         "seed": int(config["seed"]),
+        "rng_algorithm": rng.algorithm,
         "screening": _screening(config["screening"], rng, iterations),
         "confirmation": _confirmation(config["confirmation"], rng, iterations),
         "implementation_sentinels": _sentinels(config["implementation_sentinels"]),
@@ -214,6 +263,7 @@ def render_report(result: dict[str, Any]) -> str:
         f"Assumption state: **{result['assumption_state']}**  ",
         f"Iterations: `{result['iterations']}`  ",
         f"Seed: `{result['seed']}`  ",
+        f"RNG algorithm: `{result['rng_algorithm']}`  ",
         f"Config canonical SHA-256: `{result['config_canonical_sha256']}`",
         "",
         "## Screening selection risk",

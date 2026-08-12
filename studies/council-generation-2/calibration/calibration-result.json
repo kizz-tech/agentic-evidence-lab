@@ -6,38 +6,39 @@
   "assumption_state": "illustrative_not_calibrated",
   "iterations": 1000,
   "seed": 20260812,
+  "rng_algorithm": "ael-splitmix64-irwin-hall12/v1",
   "screening": [
     {
       "task_clusters": 3,
       "repeats": 2,
-      "probability_select_true_best": 0.437,
-      "probability_select_other": 0.555,
-      "probability_reject_all": 0.008,
-      "probability_top_score_tie": 0.355
+      "probability_select_true_best": 0.407,
+      "probability_select_other": 0.588,
+      "probability_reject_all": 0.005,
+      "probability_top_score_tie": 0.333
     },
     {
       "task_clusters": 6,
       "repeats": 2,
-      "probability_select_true_best": 0.439,
+      "probability_select_true_best": 0.44,
       "probability_select_other": 0.553,
-      "probability_reject_all": 0.008,
-      "probability_top_score_tie": 0.228
+      "probability_reject_all": 0.007,
+      "probability_top_score_tie": 0.205
     },
     {
       "task_clusters": 9,
       "repeats": 2,
-      "probability_select_true_best": 0.46,
-      "probability_select_other": 0.527,
-      "probability_reject_all": 0.013,
-      "probability_top_score_tie": 0.164
+      "probability_select_true_best": 0.446,
+      "probability_select_other": 0.543,
+      "probability_reject_all": 0.011,
+      "probability_top_score_tie": 0.167
     },
     {
       "task_clusters": 12,
       "repeats": 2,
-      "probability_select_true_best": 0.454,
-      "probability_select_other": 0.529,
-      "probability_reject_all": 0.017,
-      "probability_top_score_tie": 0.15
+      "probability_select_true_best": 0.471,
+      "probability_select_other": 0.52,
+      "probability_reject_all": 0.009,
+      "probability_top_score_tie": 0.115
     }
   ],
   "confirmation": [
@@ -45,113 +46,113 @@
       "task_clusters": 12,
       "repeats": 3,
       "absolute_effect": 0.0,
-      "probability_observed_difference_positive": 0.453,
-      "probability_bootstrap_lower_bound_above_zero": 0.046
+      "probability_observed_difference_positive": 0.408,
+      "probability_bootstrap_lower_bound_above_zero": 0.062
     },
     {
       "task_clusters": 12,
       "repeats": 3,
       "absolute_effect": 0.05,
-      "probability_observed_difference_positive": 0.646,
-      "probability_bootstrap_lower_bound_above_zero": 0.145
+      "probability_observed_difference_positive": 0.668,
+      "probability_bootstrap_lower_bound_above_zero": 0.163
     },
     {
       "task_clusters": 12,
       "repeats": 3,
       "absolute_effect": 0.1,
-      "probability_observed_difference_positive": 0.842,
-      "probability_bootstrap_lower_bound_above_zero": 0.307
+      "probability_observed_difference_positive": 0.825,
+      "probability_bootstrap_lower_bound_above_zero": 0.281
     },
     {
       "task_clusters": 12,
       "repeats": 3,
       "absolute_effect": 0.15,
-      "probability_observed_difference_positive": 0.949,
-      "probability_bootstrap_lower_bound_above_zero": 0.545
+      "probability_observed_difference_positive": 0.955,
+      "probability_bootstrap_lower_bound_above_zero": 0.536
     },
     {
       "task_clusters": 18,
       "repeats": 3,
       "absolute_effect": 0.0,
-      "probability_observed_difference_positive": 0.45,
-      "probability_bootstrap_lower_bound_above_zero": 0.049
+      "probability_observed_difference_positive": 0.428,
+      "probability_bootstrap_lower_bound_above_zero": 0.042
     },
     {
       "task_clusters": 18,
       "repeats": 3,
       "absolute_effect": 0.05,
       "probability_observed_difference_positive": 0.726,
-      "probability_bootstrap_lower_bound_above_zero": 0.168
+      "probability_bootstrap_lower_bound_above_zero": 0.183
     },
     {
       "task_clusters": 18,
       "repeats": 3,
       "absolute_effect": 0.1,
-      "probability_observed_difference_positive": 0.908,
-      "probability_bootstrap_lower_bound_above_zero": 0.396
+      "probability_observed_difference_positive": 0.894,
+      "probability_bootstrap_lower_bound_above_zero": 0.39
     },
     {
       "task_clusters": 18,
       "repeats": 3,
       "absolute_effect": 0.15,
-      "probability_observed_difference_positive": 0.986,
-      "probability_bootstrap_lower_bound_above_zero": 0.678
+      "probability_observed_difference_positive": 0.971,
+      "probability_bootstrap_lower_bound_above_zero": 0.674
     },
     {
       "task_clusters": 24,
       "repeats": 3,
       "absolute_effect": 0.0,
-      "probability_observed_difference_positive": 0.438,
-      "probability_bootstrap_lower_bound_above_zero": 0.039
+      "probability_observed_difference_positive": 0.47,
+      "probability_bootstrap_lower_bound_above_zero": 0.051
     },
     {
       "task_clusters": 24,
       "repeats": 3,
       "absolute_effect": 0.05,
-      "probability_observed_difference_positive": 0.787,
-      "probability_bootstrap_lower_bound_above_zero": 0.201
+      "probability_observed_difference_positive": 0.763,
+      "probability_bootstrap_lower_bound_above_zero": 0.218
     },
     {
       "task_clusters": 24,
       "repeats": 3,
       "absolute_effect": 0.1,
-      "probability_observed_difference_positive": 0.927,
-      "probability_bootstrap_lower_bound_above_zero": 0.47
+      "probability_observed_difference_positive": 0.943,
+      "probability_bootstrap_lower_bound_above_zero": 0.472
     },
     {
       "task_clusters": 24,
       "repeats": 3,
       "absolute_effect": 0.15,
-      "probability_observed_difference_positive": 0.992,
-      "probability_bootstrap_lower_bound_above_zero": 0.771
+      "probability_observed_difference_positive": 0.999,
+      "probability_bootstrap_lower_bound_above_zero": 0.775
     },
     {
       "task_clusters": 36,
       "repeats": 3,
       "absolute_effect": 0.0,
-      "probability_observed_difference_positive": 0.431,
-      "probability_bootstrap_lower_bound_above_zero": 0.036
+      "probability_observed_difference_positive": 0.44,
+      "probability_bootstrap_lower_bound_above_zero": 0.049
     },
     {
       "task_clusters": 36,
       "repeats": 3,
       "absolute_effect": 0.05,
-      "probability_observed_difference_positive": 0.848,
-      "probability_bootstrap_lower_bound_above_zero": 0.249
+      "probability_observed_difference_positive": 0.826,
+      "probability_bootstrap_lower_bound_above_zero": 0.262
     },
     {
       "task_clusters": 36,
       "repeats": 3,
       "absolute_effect": 0.1,
-      "probability_observed_difference_positive": 0.977,
-      "probability_bootstrap_lower_bound_above_zero": 0.623
+      "probability_observed_difference_positive": 0.966,
+      "probability_bootstrap_lower_bound_above_zero": 0.596
     },
     {
       "task_clusters": 36,
       "repeats": 3,
       "absolute_effect": 0.15,
-      "probability_observed_difference_positive": 1.0,
-      "probability_bootstrap_lower_bound_above_zero": 0.911
+      "probability_observed_difference_positive": 0.999,
+      "probability_bootstrap_lower_bound_above_zero": 0.888
     }
   ],
   "implementation_sentinels": [

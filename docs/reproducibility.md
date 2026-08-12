@@ -46,7 +46,11 @@ diff -u studies/council-generation-2/calibration/calibration-report.md \
   /tmp/calibration-report.md
 ```
 
-The simulation is deterministic because the configuration pins its seed.
+The simulation is deterministic because the configuration pins its seed and
+the result records a versioned SplitMix64 PRNG seeded from SHA-256. Discrete
+paired outcomes are aggregated as integers, so the result does not depend on
+Python's cross-version behavior for `random.choice`, `random.gauss`, or
+floating-point `sum`.
 
 ## Container reproduction
 
