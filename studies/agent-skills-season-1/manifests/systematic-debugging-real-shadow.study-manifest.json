@@ -1,0 +1,201 @@
+{
+  "schema_version": "ael.study-manifest/0.1",
+  "object_type": "study_manifest",
+  "study_id": "kizz:ael:study:agent-skills-season-1:systematic-debugging-real-shadow",
+  "revision": 1,
+  "status": "frozen",
+  "frozen_at": "2026-08-13T00:36:01Z",
+  "decision_question": "On four exact sanitized real-shadow debugging incidents, does adding the pinned Superpowers systematic-debugging skill to an otherwise identical Codex stack change deterministic root-cause-correct repair enough to justify a preregistered reversible owner action?",
+  "comparison_mode": "controlled_factor",
+  "primary_estimand": {
+    "name": "root-cause-correct hidden acceptance",
+    "description": "Matched-condition difference in binary deterministic acceptance; activation, invalidity, critical failures, cost, and latency remain separate measurements or gates.",
+    "unit_of_analysis": "matched task pair",
+    "aggregation": "Prespecified favorable, unfavorable, and tied pair counts, with two-of-two favorable tasks required within a stratum and zero unfavorable pairs for selective routing eligibility."
+  },
+  "concept_ref": {
+    "concept_id": "kizz:ael:concept:public-agent-skill-effectiveness",
+    "revision": 1,
+    "uri": "../concept.json",
+    "sha256": "832391e453e62d7615ec67d150534a074d043a76346a9d3b8e83e21a45aac5a6",
+    "visibility": "public"
+  },
+  "conditions": [
+    {
+      "condition_id": "B0",
+      "label": "Frozen strong Codex baseline",
+      "role": "baseline",
+      "intervention_class": "skill",
+      "intervention_ref": {
+        "uri": "urn:kizz:ael:season1:baseline:systematic-debugging-real-shadow:v1",
+        "sha256": "43c3ad7f4a9fa465d4e7fcaeed47506806459ab92459c753af8320537133ec6e",
+        "revision": "debug-shadow-prompt-1",
+        "visibility": "private"
+      },
+      "changed_factors": [],
+      "delta_from_baseline": "Reference condition; no study skill is injected."
+    },
+    {
+      "condition_id": "S1",
+      "label": "superpowers-systematic-debugging",
+      "role": "treatment",
+      "intervention_class": "skill",
+      "intervention_ref": {
+        "uri": "https://github.com/obra/superpowers/tree/44c9b2d6e889982ac18c27d05a19fefe335194e1/skills/systematic-debugging",
+        "sha256": "46da4917c596a8c90ca03cc1f91992cee66eaec9208cb9be2edb3fbd2a0c746f",
+        "revision": "44c9b2d6e889982ac18c27d05a19fefe335194e1",
+        "visibility": "public"
+      },
+      "changed_factors": [
+        "installed_skill_tree",
+        "instruction_context"
+      ],
+      "delta_from_baseline": "Adds only the exact source-locked systematic-debugging skill tree to B0."
+    }
+  ],
+  "task_packs": [
+    {
+      "task_pack_id": "agent-skills-season-1-calibration-v1",
+      "revision": 4,
+      "role": "calibration",
+      "strata": [
+        "debugging-tournament"
+      ],
+      "artifact_ref": {
+        "uri": "../task-pack/calibration-v1/task-pack.toml",
+        "sha256": "c5ae7c9d8b31878f0f8079fe8d79f0a0d676b8111e895f28d25f96b6abeefa4d",
+        "visibility": "public"
+      },
+      "contamination_notes": [
+        "Public mechanics and activation task only; excluded from every effect count."
+      ]
+    },
+    {
+      "task_pack_id": "systematic-debugging-real-shadow-v1-screening",
+      "revision": 1,
+      "role": "real_shadow",
+      "strata": [
+        "cross-boundary-contract",
+        "state-order-lifecycle"
+      ],
+      "artifact_ref": {
+        "uri": "urn:kizz:ael:private-pack:systematic-debugging-real-shadow:v1:screening",
+        "sha256": "a17c35a8743c914164d7e9fac49d23e0dd1d6c8fe77dba86ac22becf65c72359",
+        "revision": "systematic-debugging-real-shadow-v1",
+        "visibility": "hidden"
+      },
+      "contamination_notes": [
+        "Private sanitized task, dossier, reference repair, and evaluator bytes remain outside Git.",
+        "Task prompts do not name the treatment skill or disclose the hidden causal invariant.",
+        "The pack is maintainer-authored after observing the originating incidents; it is not independent task selection."
+      ]
+    }
+  ],
+  "budget": {
+    "status": "matched_policy",
+    "description": "Both conditions share a 900-second and 30000 generated-token per-cell cap. The complete frozen schedule is eight scored calls with no model-outcome retry.",
+    "dimensions": [
+      {
+        "metric": "generated_work_tokens",
+        "unit": "tokens",
+        "scope": "whole condition per task",
+        "rule": "count output plus reasoning-output tokens and invalidate a cell above the cap",
+        "limit": 30000,
+        "source": "frozen pilot budget"
+      },
+      {
+        "metric": "wall_time",
+        "unit": "seconds",
+        "scope": "whole condition per task",
+        "rule": "remove a container exceeding the per-cell timeout",
+        "limit": 900,
+        "source": "frozen pilot budget"
+      },
+      {
+        "metric": "scored_calls",
+        "unit": "calls",
+        "scope": "complete real-shadow screening",
+        "rule": "execute the eight frozen cells at most once; a non-empty cell path blocks silent resume",
+        "limit": 8,
+        "source": "frozen pilot budget"
+      }
+    ]
+  },
+  "adaptation_boundary": {
+    "candidate_freeze_required": true,
+    "runner_up_substitution": "forbidden",
+    "description": "The exact upstream skill tree is used without content adaptation. No runner-up, prompt repair, task repair, or post-outcome threshold change is permitted."
+  },
+  "selection_rules": [
+    "Classify every complete matched pair as favorable, unfavorable, or tied from deterministic acceptance.",
+    "A stratum is selectively route-eligible only when both of its tasks are favorable, every treatment activated, every cell is valid, and there are zero unfavorable pairs and zero treatment critical failures.",
+    "At least two unfavorable pairs, any treatment critical failure, or treatment activation failure rejects the exact candidate on this stack; every other valid result remains optional.",
+    "Global installation is ineligible regardless of the observed result."
+  ],
+  "stop_rules": [
+    "Stop after any invalid cell, credential persistence, fixture mutation, unsafe path, pack/hash drift, or failed pre-call authorization binding.",
+    "Do not retry model outcomes or replace an existing scored cell; ambiguous execution requires manual reconciliation outside this freeze.",
+    "Retain negative and invalid evidence; do not change tasks, evaluator, source, prompt, code, runtime, budget, schedule, or rules after freeze."
+  ],
+  "roles": [
+    {
+      "role": "concept_owner",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    },
+    {
+      "role": "artifact_author",
+      "actor_id": "obra-superpowers-upstream-authors",
+      "independence_group": "external-source"
+    },
+    {
+      "role": "task_pack_owner",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    },
+    {
+      "role": "runner_operator",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    },
+    {
+      "role": "evaluator",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer-evaluation"
+    },
+    {
+      "role": "decision_owner",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    },
+    {
+      "role": "receipt_signer",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    }
+  ],
+  "independence_claim": {
+    "label": "maintainer_evaluated",
+    "role_overlaps": [
+      "Kizz authored the sanitized private tasks and evaluator, operates the runner, and owns the evidence interpretation and action policy."
+    ]
+  },
+  "analysis_plan": {
+    "uri": "../screening/systematic-debugging-real-shadow-analysis-plan.md",
+    "sha256": "0cfd50bb7854d77acbb2f061dd6b41aa6a561222d3bcb8d5a4b66c49c56ca76a",
+    "visibility": "public"
+  },
+  "source_refs": [
+    {
+      "uri": "../sources.lock.toml",
+      "sha256": "0c78e3ebc1431df7a99508b0cb149777d1cb3c79c9e2e4db2388bc63595ba806",
+      "visibility": "public"
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "schema_version": "ael.study-admission/0.1-pilot",
+  "admission_id": "kizz:ael:study:agent-skills-season-1:systematic-debugging-real-shadow:admission:1",
+  "case_id": "kizz:ael:decision-case:systematic-debugging-real-shadow:1",
+  "case_revision": 1,
+  "status": "admitted",
+  "admitted_at": "2026-08-13T00:36:01Z",
+  "expires_at": "2026-08-20T23:59:59Z",
+  "decision_question": "Should Kizz route any bounded class of Codex debugging work through the exact source-locked systematic-debugging snapshot, keep it optional, or reject that exact snapshot on the frozen stack?",
+  "study_manifest_ref": {
+    "study_id": "kizz:ael:study:agent-skills-season-1:systematic-debugging-real-shadow",
+    "uri": "../manifests/systematic-debugging-real-shadow.study-manifest.json",
+    "sha256": "2e4773cd9d06a0abbd92f32ffbb5fab9bfd0a1c06aed5534a86393ed0067e5a3"
+  },
+  "candidate": {
+    "source_id": "superpowers-systematic-debugging",
+    "repository": "https://github.com/obra/superpowers",
+    "revision": "44c9b2d6e889982ac18c27d05a19fefe335194e1",
+    "path": "skills/systematic-debugging",
+    "tree_sha256": "46da4917c596a8c90ca03cc1f91992cee66eaec9208cb9be2edb3fbd2a0c746f",
+    "license": "MIT"
+  },
+  "execution_authority": {
+    "credential_mode": "owner_accepted_reusable_local_auth",
+    "risk_accepted_by": "kizz-ael-maintainer",
+    "risk_accepted_at": "2026-08-13T00:36:01Z",
+    "risk_scope": "The owner explicitly authorized local Codex authentication for public-skill testing. This admission narrows that authority to the exact reviewed snapshot, four sanitized maintainer-controlled fixtures, eight scored calls, and the declared proxy host allowlist.",
+    "exact_candidate_only": true,
+    "sanitized_private_fixtures_only": true,
+    "max_scored_calls": 8,
+    "network_policy": "openai-proxy",
+    "allowed_hosts": [
+      "api.openai.com",
+      "auth.openai.com",
+      "chatgpt.com"
+    ]
+  },
+  "evidence_boundary": {
+    "task_material": "Synthetic sanitized fixtures and private root-cause dossiers; no customer, production, credential, or proprietary repository data.",
+    "provider_transfer": "Fixture and task prompt bytes may be sent to the hosted OpenAI Codex service under the owner's account authorization.",
+    "public_projection": "Only allowlisted Contract v0 scalars, bounded prose, source identity, and opaque hashes; never raw task, dossier, evaluator, event, candidate, score, authentication, canary, or private path bytes.",
+    "chronology_claim": "Git proves artifact ordering and the runner records per-cell UTC metadata; neither independently timestamps every private model call.",
+    "claim_ceiling": "Screening-derived bounded internal routing signal for the exact candidate, stack, tasks, and qualifying stratum; no global effectiveness, leaderboard, transfer, or production-outcome claim."
+  },
+  "owner_action_policy": {
+    "policy_id": "kizz:ael:owner-policy:systematic-debugging-real-shadow:1",
+    "owner_id": "kizz-ael-maintainer",
+    "global_install_eligible": false,
+    "rules": [
+      {
+        "rule_id": "route-bounded-strata",
+        "effect_outcomes": [
+          "bounded_favorable_signal"
+        ],
+        "disposition": "route_selectively",
+        "scope": "Opt-in routing only for exact qualifying strata on the frozen Kizz Codex stack; baseline fallback remains available.",
+        "action_kind": "record_selective_routing_policy"
+      },
+      {
+        "rule_id": "reject-exact-treatment",
+        "effect_outcomes": [
+          "treatment_harm_signal",
+          "treatment_critical_failure",
+          "treatment_activation_failure"
+        ],
+        "disposition": "reject_exact_version",
+        "scope": "Block only revision 44c9b2d6e889982ac18c27d05a19fefe335194e1 / tree 46da4917... on the frozen Codex stack.",
+        "action_kind": "record_exact_version_block"
+      },
+      {
+        "rule_id": "retain-explicit-option",
+        "effect_outcomes": [
+          "mixed_or_no_headroom"
+        ],
+        "disposition": "keep_optional",
+        "scope": "Retain the exact snapshot as an explicit research option; do not route to it by default and do not install it globally.",
+        "action_kind": "record_optional_only_policy"
+      }
+    ],
+    "fallback": "manual_review"
+  },
+  "roles": {
+    "task_author": "kizz-ael-maintainer",
+    "operator": "kizz-ael-maintainer",
+    "evaluator": "kizz-ael-maintainer-deterministic-evaluator",
+    "decision_owner": "kizz-ael-maintainer",
+    "action_owner": "kizz-ael-maintainer"
+  },
+  "role_overlaps": [
+    "Kizz authored and sanitized the private tasks, operates the hosted-model runner, owns the deterministic evaluator and evidence interpretation, and precommits the downstream action policy.",
+    "The candidate artifact is externally authored, but no independent task selection, execution, evaluation, or replication exists."
+  ],
+  "stop_rules": [
+    "Stop before a call if admission, manifest, source lock, candidate, pack, code, prompt, or image identity differs from the freeze.",
+    "Stop after credential persistence, fixture mutation, invalid output, evaluator failure, missing treatment activation, budget breach, or non-empty scored cell path.",
+    "Do not retry model outcomes or modify tasks, evaluators, rules, prompts, runtime, or action mapping after observing scored output.",
+    "Any private canary or private task/evaluator content in a public projection blocks publication and invalidates the publication package."
+  ],
+  "follow_up_plan": {
+    "owner_id": "kizz-ael-maintainer",
+    "due_at": "2026-09-12T23:59:59Z",
+    "window": "Next ten naturally eligible internal debugging cases or 30 days after the recorded action, whichever comes first.",
+    "signals": [
+      "root-cause-correct repair acceptance",
+      "rework or regression after repair",
+      "wall-time cost",
+      "critical failure or unsafe scope expansion"
+    ],
+    "reversal_trigger": "One critical failure, material regression, private-data incident, candidate/source drift, or evidence that selective routing increases rework disables the policy pending a new admission."
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "schema_version": "ael.study-freeze/0.2-dev",
+  "freeze_id": "kizz:ael:freeze:systematic-debugging-real-shadow:1",
+  "study_id": "kizz:ael:study:agent-skills-season-1:systematic-debugging-real-shadow",
+  "study_revision": 1,
+  "frozen_at": "2026-08-13T00:36:01Z",
+  "scored_calls_executed": 0,
+  "study_manifest_ref": {
+    "study_id": "kizz:ael:study:agent-skills-season-1:systematic-debugging-real-shadow",
+    "uri": "../manifests/systematic-debugging-real-shadow.study-manifest.json",
+    "sha256": "2e4773cd9d06a0abbd92f32ffbb5fab9bfd0a1c06aed5534a86393ed0067e5a3"
+  },
+  "admission_ref": {
+    "admission_id": "kizz:ael:study:agent-skills-season-1:systematic-debugging-real-shadow:admission:1",
+    "uri": "systematic-debugging-real-shadow.admission.pilot.json",
+    "sha256": "ecf001fb6c03757621ed7159875c2801056aa869891281baae4bf04f0125d94c"
+  },
+  "source_lock_ref": {
+    "source_id": "superpowers-systematic-debugging",
+    "uri": "../sources.lock.toml",
+    "sha256": "0c78e3ebc1431df7a99508b0cb149777d1cb3c79c9e2e4db2388bc63595ba806"
+  },
+  "candidate": {
+    "source_id": "superpowers-systematic-debugging",
+    "revision": "44c9b2d6e889982ac18c27d05a19fefe335194e1",
+    "path": "skills/systematic-debugging",
+    "tree_sha256": "46da4917c596a8c90ca03cc1f91992cee66eaec9208cb9be2edb3fbd2a0c746f"
+  },
+  "conditions": [
+    {
+      "condition_id": "B0",
+      "role": "baseline",
+      "intervention_sha256": null
+    },
+    {
+      "condition_id": "S1",
+      "role": "treatment",
+      "intervention_sha256": "46da4917c596a8c90ca03cc1f91992cee66eaec9208cb9be2edb3fbd2a0c746f"
+    }
+  ],
+  "private_pack": {
+    "uri": "urn:kizz:ael:private-pack:systematic-debugging-real-shadow:v1:screening",
+    "sha256": "a17c35a8743c914164d7e9fac49d23e0dd1d6c8fe77dba86ac22becf65c72359",
+    "task_ids": [
+      "D-S01",
+      "D-S02",
+      "D-S03",
+      "D-S04"
+    ],
+    "strata": {
+      "D-S01": "cross-boundary-contract",
+      "D-S02": "cross-boundary-contract",
+      "D-S03": "state-order-lifecycle",
+      "D-S04": "state-order-lifecycle"
+    }
+  },
+  "code_hashes": {
+    "runner": "75ccdf4b3b2303fdc2413a1ec228243c90d1236c223a2a0700d62a87429b881c",
+    "decision": "168fc0c71315153ae1520db98fb2668cdf54b56b31550d6568224d7f95cf706c",
+    "materializer": "f79dae06c3f0de85d913155ec41ee0e3f2ad10f54f006defcab5c4e390611f24",
+    "execution": "c4d44f4c19a1bcc26c4b2b4069adfb8e42473874978c02ab9db826c39b6fd3e7"
+  },
+  "prompt_sha256": "fb7742d852af34eb0b993786cdaf9058059b084b8933da9c81c046e1df1f95a2",
+  "runtime": {
+    "harness": "codex-cli",
+    "harness_version": "0.146.0",
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "xhigh",
+    "runner_image": "kizz/ael-codex-runner:0.146.0",
+    "runner_image_id": "sha256:f5ebad21373b16799a4bb0189d917856280cca8394c25967c95d612b6b61ac08",
+    "proxy_image": "kizz/ael-egress-proxy:0.1.0-alpha.1",
+    "proxy_image_id": "sha256:69a5e44397a2e752507076cf12b30b7609c47711bd6d3f342c612dba7d968e35",
+    "evaluator_image": "kizz/ael-runner:0.1.0-alpha.1",
+    "evaluator_image_id": "sha256:4f136124c94206f2becf356de995094096cb04fe8a68bfaaa070f7b8f7a29f02",
+    "network_policy": "openai-proxy"
+  },
+  "budget": {
+    "max_scored_calls": 8,
+    "per_run_timeout_seconds": 900,
+    "max_generated_tokens": 30000
+  },
+  "schedule": [
+    {
+      "sequence": 1,
+      "task_id": "D-S02",
+      "condition_id": "B0",
+      "repeat_index": 1
+    },
+    {
+      "sequence": 2,
+      "task_id": "D-S02",
+      "condition_id": "S1",
+      "repeat_index": 1
+    },
+    {
+      "sequence": 3,
+      "task_id": "D-S01",
+      "condition_id": "B0",
+      "repeat_index": 1
+    },
+    {
+      "sequence": 4,
+      "task_id": "D-S04",
+      "condition_id": "S1",
+      "repeat_index": 1
+    },
+    {
+      "sequence": 5,
+      "task_id": "D-S01",
+      "condition_id": "S1",
+      "repeat_index": 1
+    },
+    {
+      "sequence": 6,
+      "task_id": "D-S03",
+      "condition_id": "S1",
+      "repeat_index": 1
+    },
+    {
+      "sequence": 7,
+      "task_id": "D-S04",
+      "condition_id": "B0",
+      "repeat_index": 1
+    },
+    {
+      "sequence": 8,
+      "task_id": "D-S03",
+      "condition_id": "B0",
+      "repeat_index": 1
+    }
+  ],
+  "decision_rule": {
+    "route_requires_favorable_tasks_per_stratum": 2,
+    "maximum_unfavorable_for_route": 0,
+    "reject_at_unfavorable_pairs": 2,
+    "require_zero_treatment_critical_failures": true,
+    "require_all_treatment_activations": true,
+    "invalid_outcome": "invalid_manual_review"
+  },
+  "roles": {
+    "task_author": "kizz-ael-maintainer",
+    "operator": "kizz-ael-maintainer",
+    "evaluator": "kizz-ael-maintainer-deterministic-evaluator",
+    "decision_owner": "kizz-ael-maintainer",
+    "action_owner": "kizz-ael-maintainer"
+  }
+}
