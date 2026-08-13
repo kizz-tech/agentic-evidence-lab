@@ -17,6 +17,9 @@ entire evidence contract or runner design.
 - [Focused Change Verification calibration](../reports/2026-08-12-focused-change-verification-codex-calibration.md)
   — why the runner passed but the first skill task pack was rejected as an
   effect test.
+- [Systematic Debugging real-shadow v1](../reports/2026-08-13-systematic-debugging-real-shadow-v1.md)
+  — a prospective matched pilot whose frozen safety gate triggered an
+  exact-version block and an explicit follow-up.
 
 ## I want to evaluate a skill, model, or workflow
 
@@ -50,6 +53,8 @@ must not promote a stack result into a model-only claim.
   bundle audit and stricter Codex skill-activation evidence.
 - [Release notes](release-notes/v0.1.0-alpha.5.md) — generated result cards,
   replication handoff, and release-evidence hardening.
+- [Release notes](release-notes/v0.1.0-alpha.6.md) — prospective admission,
+  public lifecycle projection, and the first decision-governing skill pilot.
 - [Changelog](../CHANGELOG.md) — user-visible project history.
 
 Machine-readable manifests, runs, measurements, and receipts live under both
@@ -100,9 +105,10 @@ they link to a completed result:
 - [Structural Search research program](structural-search.md)
 - [Agent Skills Season 1](../studies/agent-skills-season-1/README.md) — ten
   bounded public-skill protocols, exact source locks, an executable public
-  calibration pack, 22 activation records, and the completed bounded negative
-  Property-based Testing v2 skill-effect result. The remaining protocols are
-  still calibration, design, or unrun work.
+  calibration pack, 22 activation records, and two completed bounded negative
+  skill-effect results. The real-shadow study also exercises prospective
+  admission, owner action, and follow-up; the remaining protocols are still
+  calibration, design, or unrun work.
 
 Their draft manifests, simulations, and task-pack briefs must not be cited as
 successful experimental results.

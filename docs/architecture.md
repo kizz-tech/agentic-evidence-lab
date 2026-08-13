@@ -40,18 +40,21 @@ validated Contract v0 evidence graph
 ```
 
 The profile selects public receipts and claims, declares replication
-instructions and unavailable-material categories, and preserves explicit
-historical unknowns. The projection may enforce a claim ceiling, but it cannot
-create evidence, change a receipt, or become a second authority. Evidence
-level, reproducibility, independence, freshness, action, and outcome remain
-separate axes; a card renders unavailable historical action or outcome as
-`not_declared_historical` or `unassessed` rather than guessing.
+instructions and unavailable-material categories, preserves explicit historical
+unknowns, and may select exact lifecycle refs. Lifecycle status is derived from
+those hash-bound records rather than profile prose. The projection may enforce
+a claim ceiling, but it cannot create evidence, change a receipt, or become a
+second authority. Evidence level, reproducibility, independence, freshness,
+action, and outcome remain separate axes; a card renders unavailable historical
+action or outcome as `not_declared_historical` or `unassessed` rather than
+guessing.
 
-No stable Decision Case, admission, or Outcome Follow-up schema is introduced
-in alpha.5. Those are distinct owner lifecycles for a prospective pilot in the
-next decision-governing study. The pilot must hash-bind admission before scored
-work and exercise one complete decision/action/outcome lifecycle before a
-schema is stabilized.
+Alpha.6 exercises one complete prospective admission → effect → adoption →
+action → follow-up lifecycle in the Systematic Debugging real-shadow pilot.
+Those record shapes remain study-local and experimental; Contract v0 still has
+five stable document types. Public result cards may derive lifecycle status
+only from exact hash-bound refs. One completed pilot is not enough to stabilize
+a generic Decision Case or Outcome Follow-up schema.
 
 Git ancestry or a tag can prove repository artifact ordering—for example, that
 freeze bytes are present in an ancestor. It cannot prove that private model

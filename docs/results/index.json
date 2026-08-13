@@ -1,13 +1,13 @@
 {
-  "as_of": "2026-08-12",
+  "as_of": "2026-08-13",
   "generator": {
     "name": "agentic-evidence-lab",
-    "version": "0.1.0a5"
+    "version": "0.1.0a6"
   },
-  "projection_policy": "ael.publication-projection/0.1",
-  "schema_version": "ael.public-results/0.1",
+  "projection_policy": "ael.publication-projection/0.2",
+  "schema_version": "ael.public-results/0.2",
   "source_hashes": {
-    "studies/public-results.json": "6ce9dd76a68d966b916637ea93c102f9796865f9c4707aaa5f1ddd59f5eb8d76"
+    "studies/public-results.json": "20b524b3068ec5f21e2f8901872352f5f4fb765b6b3b772301cc06454621e678"
   },
   "studies": [
     {
@@ -81,7 +81,7 @@
       "evidence_level": "controlled_effect_observed",
       "generator": {
         "name": "agentic-evidence-lab",
-        "version": "0.1.0a5"
+        "version": "0.1.0a6"
       },
       "history": {
         "action": "not_declared_historical",
@@ -271,7 +271,7 @@
         "examples/council-generation-1/runs/E7-C3.json": "fbc585cadc103cdd9726c9d8584cf06ba1727170f4b98d5202db146c726cd141",
         "examples/council-generation-1/study-manifest.json": "aad0f01c68fc7346f0a834e7039f0650af31a04f65ceee927312468b335e9206",
         "reports/2026-08-12-council-generation-1.md": "9e9114b8c42cc135890fba800257ea405df8ef7b68928bd6e405b4ff3844313a",
-        "studies/public-results.json": "6ce9dd76a68d966b916637ea93c102f9796865f9c4707aaa5f1ddd59f5eb8d76"
+        "studies/public-results.json": "20b524b3068ec5f21e2f8901872352f5f4fb765b6b3b772301cc06454621e678"
       },
       "state": {
         "artifact": "locally_implemented_and_validated",
@@ -435,7 +435,7 @@
       "evidence_level": "runtime_conformant",
       "generator": {
         "name": "agentic-evidence-lab",
-        "version": "0.1.0a5"
+        "version": "0.1.0a6"
       },
       "history": {
         "action": "not_declared_historical",
@@ -570,7 +570,7 @@
         "examples/coding-skill/concept.json": "056da8f4a9bd5f90140f3440e7c283b0c172f64adfa5606f783a8223372d48b8",
         "examples/coding-skill/study-manifest.json": "330700bc8cb12d77520f251fb94f54c8b879a9915c39f530feaf5d56a1bed841",
         "reports/2026-08-12-focused-change-verification-codex-calibration.md": "0d5159f51fbe4be863be1feb319ffd0ef1364ddbd859f12d49cfabef15d15d2c",
-        "studies/public-results.json": "6ce9dd76a68d966b916637ea93c102f9796865f9c4707aaa5f1ddd59f5eb8d76"
+        "studies/public-results.json": "20b524b3068ec5f21e2f8901872352f5f4fb765b6b3b772301cc06454621e678"
       },
       "state": {
         "artifact": "frozen skill and public task pack locally validated",
@@ -691,7 +691,7 @@
       "evidence_level": "controlled_effect_observed",
       "generator": {
         "name": "agentic-evidence-lab",
-        "version": "0.1.0a5"
+        "version": "0.1.0a6"
       },
       "history": {
         "action": "not_declared_historical",
@@ -862,7 +862,7 @@
         "studies/agent-skills-season-1/results/property-based-testing-v2/runs/P-S03-S1-R01.json": "3b19adc51fb12ea80ecff8530679c95b28fd15477af1e26d218a0fc6062472a4",
         "studies/agent-skills-season-1/results/property-based-testing-v2/runs/P-S04-B0-R01.json": "ee11abaed993f8083a267346470c3f743f56b2f8b10287b8b78c62ed59684b13",
         "studies/agent-skills-season-1/results/property-based-testing-v2/runs/P-S04-S1-R01.json": "5ca5ed0127590840c6e2bec4dd174cec01a5be6ce38610c23390b78f12ad7c72",
-        "studies/public-results.json": "6ce9dd76a68d966b916637ea93c102f9796865f9c4707aaa5f1ddd59f5eb8d76"
+        "studies/public-results.json": "20b524b3068ec5f21e2f8901872352f5f4fb765b6b3b772301cc06454621e678"
       },
       "state": {
         "artifact": "frozen private task composites represented by hashes; sanitized evidence materialized",
@@ -990,6 +990,374 @@
         "boundary": "Verifies the published Contract v0 graph, frozen public bundle, recomputed PBT decision counts, and repository artifact ordering. It does not rerun model calls, reveal private tasks, or constitute independent replication.",
         "command": [
           "uv run ael study audit --freeze studies/agent-skills-season-1/screening/property-based-testing-v2.freeze.json --result studies/agent-skills-season-1/results/property-based-testing-v2 --decision-adapter pbt-v2 --require-git-proof"
+        ],
+        "kind": "frozen_public_bundle"
+      }
+    },
+    {
+      "card_id": "systematic-debugging-real-shadow-v1",
+      "claim_ids": [
+        "AEL-DEBUG-SHADOW-01",
+        "AEL-DEBUG-SHADOW-02"
+      ],
+      "claims": [
+        {
+          "claim_id": "AEL-DEBUG-SHADOW-01",
+          "claim_level": "factor_causal",
+          "evidence_refs": [
+            "hidden_acceptance:D-S02:B0:R01",
+            "hidden_acceptance:D-S02:S1:R01",
+            "hidden_acceptance:D-S01:B0:R01",
+            "hidden_acceptance:D-S04:S1:R01",
+            "hidden_acceptance:D-S01:S1:R01",
+            "hidden_acceptance:D-S03:S1:R01",
+            "hidden_acceptance:D-S04:B0:R01",
+            "hidden_acceptance:D-S03:B0:R01"
+          ],
+          "falsifier": "Frozen-rule recomputation, a retained cell, or the operational follow-up contradicts the published classifications.",
+          "scope": [
+            "exact four-cell matched pilot surface"
+          ],
+          "statement": "The exact skill changed root-cause-correct hidden acceptance enough to satisfy the frozen bounded routing rule on at least one admitted stratum.",
+          "status": "contradicted"
+        },
+        {
+          "claim_id": "AEL-DEBUG-SHADOW-02",
+          "claim_level": "workflow",
+          "evidence_refs": [
+            "freeze-ref.json",
+            "effect-decision.json"
+          ],
+          "falsifier": "A binding differs, the freeze did not precede result artifacts, or private records show an unadmitted scored call.",
+          "scope": [
+            "recorded runner invocations and Git artifact ordering"
+          ],
+          "statement": "The recorded runner checked admission, manifest, source, pack, code, prompt, and image bindings before every recorded scored call.",
+          "status": "supported"
+        }
+      ],
+      "decision": {
+        "disposition": "reject",
+        "reversal_trigger": "Re-evaluate after any task, evaluator, prompt, skill, model, CLI, image, budget, rule, or provider behavior change.",
+        "scope": [
+          "four exact sanitized debugging fixtures across two declared strata",
+          "the exact Superpowers systematic-debugging source snapshot",
+          "Codex CLI 0.146.0 with gpt-5.6-sol at xhigh effort",
+          "Git artifact-ordering anchor 58c73ab76630002145599ddb7b3837aa27018bc9"
+        ],
+        "summary": "The exact treatment did not satisfy the frozen safety or delivery rule on this pilot surface."
+      },
+      "evidence_level": "controlled_effect_observed",
+      "generator": {
+        "name": "agentic-evidence-lab",
+        "version": "0.1.0a6"
+      },
+      "history": {
+        "action": "verified",
+        "admission": "admitted",
+        "freshness": "within_declared_window",
+        "outcome_follow_up": "scheduled:not_due"
+      },
+      "independence": {
+        "disclosure": "Kizz authored sanitized tasks, operated the runner, evaluated deterministic outcomes, and owns the action policy; no independent replication exists.",
+        "label": "maintainer_evaluated",
+        "role_overlaps": [
+          "Kizz authored and sanitized the private tasks, operates the hosted-model runner, owns the deterministic evaluator and evidence interpretation, and precommits the downstream action policy.",
+          "The candidate artifact is externally authored, but no independent task selection, execution, evaluation, or replication exists."
+        ]
+      },
+      "invalidation_triggers": [
+        "Any admission, manifest, freeze, source, pack, code, prompt, image, observation, or decision hash fails",
+        "A scored call is shown to predate admission or freeze",
+        "A task/evaluator was tuned after observing a scored candidate",
+        "Private material or authentication escaped its declared boundary",
+        "Public wording exceeds the bounded screening-derived claim ceiling"
+      ],
+      "lifecycle": {
+        "action_kind": "record_exact_version_block",
+        "adoption_disposition": "reject_exact_version",
+        "follow_up_due_at": "2026-09-12T23:59:59Z",
+        "refs": {
+          "action_record_ref": {
+            "sha256": "fa7c243157ca30a2482961184420942fa9e3274b8ca836b60bd9e5af76fd4616",
+            "uri": "studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/action-record.pilot.json"
+          },
+          "admission_ref": {
+            "sha256": "ecf001fb6c03757621ed7159875c2801056aa869891281baae4bf04f0125d94c",
+            "uri": "studies/agent-skills-season-1/screening/systematic-debugging-real-shadow.admission.pilot.json"
+          },
+          "adoption_decision_ref": {
+            "sha256": "d5427cff89b5112b22d9db3b83f6607184403e3ec147af0272ab62590096dc48",
+            "uri": "studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/adoption-decision.pilot.json"
+          },
+          "outcome_follow_up_ref": {
+            "sha256": "510d764f68eaf02cb043a0cf45d5217f66da06d0d5a29c4b1d673f775f63a9fe",
+            "uri": "studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/outcome-follow-up.pilot.json"
+          }
+        }
+      },
+      "limitations": [
+        "Only four maintainer-selected sanitized incidents and one stochastic draw per condition were used.",
+        "No untouched confirmation pack was run; the maximum owner action is reversible selective routing.",
+        "Task sanitization may not preserve every causal property of the originating incidents.",
+        "The provider exposed a model identifier but not an immutable model revision.",
+        "Reusable local Codex authentication was process-readable under explicit owner acceptance; persisted outputs were exact-value scanned, while encrypted provider traffic was not inspected.",
+        "Git proves repository artifact ordering, not absolute time of all private model calls.",
+        "The frozen materializer emitted a non-Contract reproducibility enum after scored work; a transparent post-run projection repair mapped only that value to `rerunnable`, recomputed dependent hashes, and did not change observations or the effect decision."
+      ],
+      "materials": [
+        {
+          "availability": "withheld",
+          "label": "Private sanitized real-shadow task and raw execution bytes",
+          "reason": "The four sanitized fixtures, raw Codex events, candidates, and evaluator outputs remain in the private evidence boundary.",
+          "reproduction_impact": "A public checkout can recompute the decision from normalized measurements and verify opaque hashes but cannot rerun the exact tasks."
+        },
+        {
+          "availability": "not_retained",
+          "label": "Hosted model calls",
+          "reason": "The public graph retains normalized run records rather than a replayable provider execution service.",
+          "reproduction_impact": "The exact historical model calls cannot be replayed and the provider exposed no immutable model revision."
+        },
+        {
+          "availability": "public",
+          "label": "Post-run projection deviation",
+          "ref": {
+            "sha256": "6494c5c6488de672cef007ab4c9dd8ae47aa43a6af320fa3b05c36dedd4fb5b3",
+            "uri": "studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/projection-deviation.pilot.json"
+          }
+        }
+      ],
+      "measurements": {
+        "by_kind": {
+          "cost": 16,
+          "deterministic": 32,
+          "outcome": 24,
+          "process": 8
+        },
+        "count": 80,
+        "measurement_set_id": "kizz:ael:measurements:agent-skills-season-1:systematic-debugging-real-shadow-v1",
+        "selected_summaries": [
+          {
+            "aggregation_basis": "non_aggregate_measurements",
+            "category": "critical_failure",
+            "condition_id": "B0",
+            "false": 3,
+            "metric": "critical_failure",
+            "observations": 4,
+            "true": 1,
+            "unit": "boolean"
+          },
+          {
+            "aggregation_basis": "non_aggregate_measurements",
+            "category": "critical_failure",
+            "condition_id": "S1",
+            "false": 3,
+            "metric": "critical_failure",
+            "observations": 4,
+            "true": 1,
+            "unit": "boolean"
+          },
+          {
+            "aggregation_basis": "non_aggregate_measurements",
+            "category": "cost_or_latency",
+            "condition_id": "B0",
+            "metric": "generated_tokens",
+            "observations": 4,
+            "total": 33106.0,
+            "unit": "tokens"
+          },
+          {
+            "aggregation_basis": "non_aggregate_measurements",
+            "category": "cost_or_latency",
+            "condition_id": "S1",
+            "metric": "generated_tokens",
+            "observations": 4,
+            "total": 32109.0,
+            "unit": "tokens"
+          },
+          {
+            "aggregation_basis": "non_aggregate_measurements",
+            "category": "activation",
+            "condition_id": "B0",
+            "false": 4,
+            "metric": "skill_activated",
+            "observations": 4,
+            "true": 0,
+            "unit": "boolean"
+          },
+          {
+            "aggregation_basis": "non_aggregate_measurements",
+            "category": "activation",
+            "condition_id": "S1",
+            "false": 0,
+            "metric": "skill_activated",
+            "observations": 4,
+            "true": 4,
+            "unit": "boolean"
+          },
+          {
+            "aggregation_basis": "non_aggregate_measurements",
+            "category": "cost_or_latency",
+            "condition_id": "B0",
+            "metric": "wall_time_ms",
+            "observations": 4,
+            "total": 676315.0,
+            "unit": "milliseconds"
+          },
+          {
+            "aggregation_basis": "non_aggregate_measurements",
+            "category": "cost_or_latency",
+            "condition_id": "S1",
+            "metric": "wall_time_ms",
+            "observations": 4,
+            "total": 616685.0,
+            "unit": "milliseconds"
+          }
+        ]
+      },
+      "publication": "unpublished",
+      "receipt": {
+        "sha256": "210a1398e51c230c7329cbf362d26f41d0ade3fb01458e5e27fb222e9c878a0e",
+        "uri": "studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/evidence-receipt.json"
+      },
+      "receipt_id": "kizz:ael:receipt:agent-skills-season-1:systematic-debugging-real-shadow-v1",
+      "report": {
+        "sha256": "e3c5628b92f7e8cd98c028022e6a86175dc099c3987d97071f53f9dd14e2e7b3",
+        "uri": "reports/2026-08-13-systematic-debugging-real-shadow-v1.md"
+      },
+      "reproducibility": "rerunnable",
+      "runs": {
+        "by_condition": {
+          "B0": 4,
+          "S1": 4
+        },
+        "by_status": {
+          "valid": 8
+        },
+        "count": 8
+      },
+      "source_hashes": {
+        "reports/2026-08-13-systematic-debugging-real-shadow-v1.md": "e3c5628b92f7e8cd98c028022e6a86175dc099c3987d97071f53f9dd14e2e7b3",
+        "studies/agent-skills-season-1/concept.json": "832391e453e62d7615ec67d150534a074d043a76346a9d3b8e83e21a45aac5a6",
+        "studies/agent-skills-season-1/manifests/systematic-debugging-real-shadow.study-manifest.json": "2e4773cd9d06a0abbd92f32ffbb5fab9bfd0a1c06aed5534a86393ed0067e5a3",
+        "studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/action-record.pilot.json": "fa7c243157ca30a2482961184420942fa9e3274b8ca836b60bd9e5af76fd4616",
+        "studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/adoption-decision.pilot.json": "d5427cff89b5112b22d9db3b83f6607184403e3ec147af0272ab62590096dc48",
+        "studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/evidence-receipt.json": "210a1398e51c230c7329cbf362d26f41d0ade3fb01458e5e27fb222e9c878a0e",
+        "studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/measurement-set.json": "0ffb16db80bd59811ad492fa22929c7c398fd90844604f0b9cf74eef1029df01",
+        "studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/outcome-follow-up.pilot.json": "510d764f68eaf02cb043a0cf45d5217f66da06d0d5a29c4b1d673f775f63a9fe",
+        "studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/projection-deviation.pilot.json": "6494c5c6488de672cef007ab4c9dd8ae47aa43a6af320fa3b05c36dedd4fb5b3",
+        "studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/runs/D-S01-B0-R01.json": "8e24ba191a8ade6bfb05925c11ac520c9fa82535be1ac2f61c63c3d4b99ce950",
+        "studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/runs/D-S01-S1-R01.json": "bbb70ba5058117ba43b2db8841c8d8a206666164722351eff10fd1d45ad0b7d1",
+        "studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/runs/D-S02-B0-R01.json": "c300895980c99f71b2a10e6864bc75969ed35424e4a069600e55e3eb261e85e9",
+        "studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/runs/D-S02-S1-R01.json": "10520560ce141293be250a33fdbcdee0f178042aacd8e89d534cba1f1596d25b",
+        "studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/runs/D-S03-B0-R01.json": "37a13940e24f70363795bd8995ad8c78091e2e9ec25f868f2ce6067267058a69",
+        "studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/runs/D-S03-S1-R01.json": "1974bea8eaefb1b27fc8b7815e3ebddc1f705968d9d6918fc80c172ae4cc105b",
+        "studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/runs/D-S04-B0-R01.json": "469c6bca89e9d476b9b43fe1c24f4a1b68d3aebb2101ee948ed94586e2240e9b",
+        "studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/runs/D-S04-S1-R01.json": "c7aab7465d82d775021d72c9b97b764e55077281526c95fe3135a35e9a745be8",
+        "studies/agent-skills-season-1/screening/systematic-debugging-real-shadow.admission.pilot.json": "ecf001fb6c03757621ed7159875c2801056aa869891281baae4bf04f0125d94c",
+        "studies/public-results.json": "20b524b3068ec5f21e2f8901872352f5f4fb765b6b3b772301cc06454621e678"
+      },
+      "state": {
+        "artifact": "sanitized public Contract v0 projection; private materials represented by hashes",
+        "deployment": "owner policy action recorded separately; no global installation",
+        "experiment": "real-shadow effect outcome: treatment_critical_failure",
+        "outcome": "operational follow-up scheduled; downstream outcome not yet observed",
+        "publication": "prepared, not published",
+        "repository": "result package prepared in the local branch"
+      },
+      "study": {
+        "comparison_mode": "controlled_factor",
+        "conditions": [
+          {
+            "condition_id": "B0",
+            "label": "Frozen strong Codex baseline",
+            "role": "baseline"
+          },
+          {
+            "condition_id": "S1",
+            "label": "superpowers-systematic-debugging",
+            "role": "treatment"
+          }
+        ],
+        "decision_owners": [
+          "kizz-ael-maintainer"
+        ],
+        "decision_question": "On four exact sanitized real-shadow debugging incidents, does adding the pinned Superpowers systematic-debugging skill to an otherwise identical Codex stack change deterministic root-cause-correct repair enough to justify a preregistered reversible owner action?",
+        "primary_estimand": {
+          "aggregation": "Prespecified favorable, unfavorable, and tied pair counts, with two-of-two favorable tasks required within a stratum and zero unfavorable pairs for selective routing eligibility.",
+          "description": "Matched-condition difference in binary deterministic acceptance; activation, invalidity, critical failures, cost, and latency remain separate measurements or gates.",
+          "name": "root-cause-correct hidden acceptance",
+          "unit_of_analysis": "matched task pair"
+        },
+        "revision": 1,
+        "status": "frozen",
+        "study_id": "kizz:ael:study:agent-skills-season-1:systematic-debugging-real-shadow",
+        "task_packs": [
+          {
+            "role": "calibration",
+            "strata": [
+              "debugging-tournament"
+            ],
+            "task_pack_id": "agent-skills-season-1-calibration-v1"
+          },
+          {
+            "role": "real_shadow",
+            "strata": [
+              "cross-boundary-contract",
+              "state-order-lifecycle"
+            ],
+            "task_pack_id": "systematic-debugging-real-shadow-v1-screening"
+          }
+        ]
+      },
+      "title": "Systematic Debugging real-shadow v1",
+      "unsupported_inferences": [
+        "Systematic debugging skills work in general.",
+        "This exact skill is superior across debugging tasks, models, CLIs, repositories, or teams.",
+        "A four-task screening surface supports global installation or a public leaderboard rank.",
+        "Git ancestry independently proves private model-call chronology.",
+        "Maintainer evaluation is independent replication.",
+        "Token or latency differences in eight calls are stable cost effects."
+      ],
+      "verification": {
+        "audit": {
+          "decision": {
+            "claim_ceiling": "screening-derived bounded internal routing signal",
+            "outcome": "treatment_critical_failure",
+            "stage": "terminal"
+          },
+          "evidence": {
+            "contract_documents": 12,
+            "measurements": 80,
+            "private_observations_sha256": "4ecaafc6f0711a83734fec3a5a621274be6114addd15d63857a2a1f116b65a0a",
+            "public_recomputation": true,
+            "run_records": 8
+          },
+          "lifecycle": {
+            "action": "verified",
+            "admission": "admitted",
+            "adoption": "reject_exact_version",
+            "follow_up": "scheduled"
+          },
+          "preregistration": {
+            "boundary": "Git proof is an optional fail-closed build gate and is not projected as evidence; when required, it establishes repository artifact ordering only.",
+            "preregistration_sha": "58c73ab76630002145599ddb7b3837aa27018bc9"
+          },
+          "projection_deviation": {
+            "decision_impact": "none; observations and effect-decision.json remained byte-identical",
+            "deviation_id": "kizz:ael:projection-deviation:systematic-debugging-real-shadow-v1:1",
+            "status": "disclosed_and_verified"
+          },
+          "schema_version": "ael.debugging-shadow-audit/0.1-pilot",
+          "status": "passed",
+          "study": {
+            "revision": 1,
+            "study_id": "kizz:ael:study:agent-skills-season-1:systematic-debugging-real-shadow"
+          }
+        },
+        "boundary": "Validates the public Contract v0 graph, reconstructs the frozen effect from public measurements, checks the prospective admission-to-action chain and disclosed projection repair, and verifies repository artifact ordering. It does not rerun private tasks or hosted calls, prove their wall-clock chronology, or constitute independent replication.",
+        "command": [
+          "uv run ael study audit --freeze studies/agent-skills-season-1/screening/systematic-debugging-real-shadow.freeze.json --result studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1 --decision-adapter systematic-debugging-real-shadow-v1 --require-git-proof"
         ],
         "kind": "frozen_public_bundle"
       }

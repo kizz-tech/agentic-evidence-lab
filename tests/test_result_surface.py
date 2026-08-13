@@ -47,9 +47,9 @@ class ResultSurfaceTests(unittest.TestCase):
         shutil.copytree(EXAMPLE, example)
         receipt = example / "evidence-receipt.json"
         profile: dict[str, object] = {
-            "schema_version": "ael.public-results/0.1",
+            "schema_version": "ael.public-results/0.2",
             "as_of": "2026-08-12",
-            "projection_policy": "ael.publication-projection/0.1",
+            "projection_policy": "ael.publication-projection/0.2",
             "studies": [
                 {
                     "card_id": "council-generation-1",
@@ -80,7 +80,7 @@ class ResultSurfaceTests(unittest.TestCase):
         profile_path.write_text(json.dumps(profile, indent=2), encoding="utf-8")
         return profile_path, profile, receipt
 
-    def test_current_three_card_projection_is_deterministic(self) -> None:
+    def test_current_four_card_projection_is_deterministic(self) -> None:
         first = build_result_surface(PROFILE)
         second = build_result_surface(PROFILE)
         self.assertEqual(first, second)
@@ -91,16 +91,18 @@ class ResultSurfaceTests(unittest.TestCase):
                 "docs/results/council-generation-1.md",
                 "docs/results/focused-change-verification-calibration.md",
                 "docs/results/property-based-testing-v2.md",
+                "docs/results/systematic-debugging-real-shadow-v1.md",
             },
             set(first),
         )
         index = json.loads(first["docs/results/index.json"])
-        self.assertEqual("ael.public-results/0.1", index["schema_version"])
+        self.assertEqual("ael.public-results/0.2", index["schema_version"])
         self.assertEqual(
             [
                 "council-generation-1",
                 "focused-change-verification-calibration",
                 "property-based-testing-v2",
+                "systematic-debugging-real-shadow-v1",
             ],
             [card["card_id"] for card in index["studies"]],
         )
@@ -120,6 +122,20 @@ class ResultSurfaceTests(unittest.TestCase):
         self.assertEqual(21944, totals[("generated_work_tokens", "S1")])
         self.assertEqual(331689, totals[("wall_time", "S0")])
         self.assertEqual(378385, totals[("wall_time", "S1")])
+        real_shadow = next(
+            card
+            for card in index["studies"]
+            if card["card_id"] == "systematic-debugging-real-shadow-v1"
+        )
+        self.assertEqual("admitted", real_shadow["history"]["admission"])
+        self.assertEqual("verified", real_shadow["history"]["action"])
+        self.assertEqual("scheduled:not_due", real_shadow["history"]["outcome_follow_up"])
+        self.assertEqual("within_declared_window", real_shadow["history"]["freshness"])
+        self.assertEqual("reject_exact_version", real_shadow["lifecycle"]["adoption_disposition"])
+        self.assertIn(
+            "projection repair",
+            " ".join(real_shadow["limitations"]),
+        )
 
     def test_profile_unknown_keys_and_historical_values_fail_closed(self) -> None:
         profile = load_public_profile(PROFILE)
@@ -130,7 +146,9 @@ class ResultSurfaceTests(unittest.TestCase):
 
         invalid_history = copy.deepcopy(profile)
         invalid_history["studies"][0]["history"]["action"] = "completed"  # type: ignore[index]
-        with self.assertRaisesRegex(ResultSurfaceError, "not_declared_historical"):
+        with self.assertRaisesRegex(
+            ResultSurfaceError, "derived_from_lifecycle|not_declared_historical"
+        ):
             validate_public_profile(invalid_history)
 
         invalid_publication = copy.deepcopy(profile)

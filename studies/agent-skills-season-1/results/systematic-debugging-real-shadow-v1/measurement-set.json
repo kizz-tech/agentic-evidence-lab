@@ -1,0 +1,2211 @@
+{
+  "schema_version": "ael.measurement-set/0.1",
+  "object_type": "measurement_set",
+  "measurement_set_id": "kizz:ael:measurements:agent-skills-season-1:systematic-debugging-real-shadow-v1",
+  "study_ref": {
+    "study_id": "kizz:ael:study:agent-skills-season-1:systematic-debugging-real-shadow",
+    "revision": 1,
+    "uri": "../../manifests/systematic-debugging-real-shadow.study-manifest.json",
+    "sha256": "2e4773cd9d06a0abbd92f32ffbb5fab9bfd0a1c06aed5534a86393ed0067e5a3",
+    "visibility": "public"
+  },
+  "measurements": [
+    {
+      "measurement_id": "visible_tests_pass:D-S02:B0:R01",
+      "kind": "deterministic",
+      "metric": "visible_tests_pass",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S02:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S02",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S02:B0:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "hidden_acceptance:D-S02:B0:R01",
+      "kind": "outcome",
+      "metric": "hidden_acceptance",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S02:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S02",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S02:B0:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "root_cause_invariant_pass:D-S02:B0:R01",
+      "kind": "outcome",
+      "metric": "root_cause_invariant_pass",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S02:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S02",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S02:B0:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "reference_compatible_tests:D-S02:B0:R01",
+      "kind": "deterministic",
+      "metric": "reference_compatible_tests",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S02:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S02",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S02:B0:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "safe_change_scope:D-S02:B0:R01",
+      "kind": "deterministic",
+      "metric": "safe_change_scope",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S02:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S02",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S02:B0:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "critical_failure:D-S02:B0:R01",
+      "kind": "outcome",
+      "metric": "critical_failure",
+      "value": false,
+      "unit": "boolean",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S02:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S02",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S02:B0:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "accepted:D-S02:B0:R01",
+      "kind": "deterministic",
+      "metric": "accepted",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S02:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S02",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S02:B0:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "skill_activated:D-S02:B0:R01",
+      "kind": "process",
+      "metric": "skill_activated",
+      "value": false,
+      "unit": "boolean",
+      "direction": "target",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S02:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S02",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S02:B0:1:events",
+          "sha256": "b8662260b602de955825a0967bf5b0c53b89be93668031383a87e1c3e596d3c9",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated_tokens:D-S02:B0:R01",
+      "kind": "cost",
+      "metric": "generated_tokens",
+      "value": 5519,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S02:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S02",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S02:B0:1:events",
+          "sha256": "b8662260b602de955825a0967bf5b0c53b89be93668031383a87e1c3e596d3c9",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "wall_time_ms:D-S02:B0:R01",
+      "kind": "cost",
+      "metric": "wall_time_ms",
+      "value": 115326,
+      "unit": "milliseconds",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S02:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S02",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S02:B0:1:events",
+          "sha256": "b8662260b602de955825a0967bf5b0c53b89be93668031383a87e1c3e596d3c9",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "visible_tests_pass:D-S02:S1:R01",
+      "kind": "deterministic",
+      "metric": "visible_tests_pass",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S02:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S02",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S02:S1:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "hidden_acceptance:D-S02:S1:R01",
+      "kind": "outcome",
+      "metric": "hidden_acceptance",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S02:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S02",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S02:S1:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "root_cause_invariant_pass:D-S02:S1:R01",
+      "kind": "outcome",
+      "metric": "root_cause_invariant_pass",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S02:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S02",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S02:S1:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "reference_compatible_tests:D-S02:S1:R01",
+      "kind": "deterministic",
+      "metric": "reference_compatible_tests",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S02:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S02",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S02:S1:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "safe_change_scope:D-S02:S1:R01",
+      "kind": "deterministic",
+      "metric": "safe_change_scope",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S02:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S02",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S02:S1:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "critical_failure:D-S02:S1:R01",
+      "kind": "outcome",
+      "metric": "critical_failure",
+      "value": false,
+      "unit": "boolean",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S02:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S02",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S02:S1:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "accepted:D-S02:S1:R01",
+      "kind": "deterministic",
+      "metric": "accepted",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S02:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S02",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S02:S1:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "skill_activated:D-S02:S1:R01",
+      "kind": "process",
+      "metric": "skill_activated",
+      "value": true,
+      "unit": "boolean",
+      "direction": "target",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S02:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S02",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S02:S1:1:events",
+          "sha256": "e374de1277afb271dcd5a6a31c0c27e40bf1b8e2e4d7b53402db4fbcd2bf950b",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated_tokens:D-S02:S1:R01",
+      "kind": "cost",
+      "metric": "generated_tokens",
+      "value": 7879,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S02:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S02",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S02:S1:1:events",
+          "sha256": "e374de1277afb271dcd5a6a31c0c27e40bf1b8e2e4d7b53402db4fbcd2bf950b",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "wall_time_ms:D-S02:S1:R01",
+      "kind": "cost",
+      "metric": "wall_time_ms",
+      "value": 135180,
+      "unit": "milliseconds",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S02:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S02",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S02:S1:1:events",
+          "sha256": "e374de1277afb271dcd5a6a31c0c27e40bf1b8e2e4d7b53402db4fbcd2bf950b",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "visible_tests_pass:D-S01:B0:R01",
+      "kind": "deterministic",
+      "metric": "visible_tests_pass",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S01:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S01",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S01:B0:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "hidden_acceptance:D-S01:B0:R01",
+      "kind": "outcome",
+      "metric": "hidden_acceptance",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S01:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S01",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S01:B0:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "root_cause_invariant_pass:D-S01:B0:R01",
+      "kind": "outcome",
+      "metric": "root_cause_invariant_pass",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S01:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S01",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S01:B0:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "reference_compatible_tests:D-S01:B0:R01",
+      "kind": "deterministic",
+      "metric": "reference_compatible_tests",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S01:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S01",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S01:B0:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "safe_change_scope:D-S01:B0:R01",
+      "kind": "deterministic",
+      "metric": "safe_change_scope",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S01:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S01",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S01:B0:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "critical_failure:D-S01:B0:R01",
+      "kind": "outcome",
+      "metric": "critical_failure",
+      "value": false,
+      "unit": "boolean",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S01:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S01",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S01:B0:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "accepted:D-S01:B0:R01",
+      "kind": "deterministic",
+      "metric": "accepted",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S01:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S01",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S01:B0:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "skill_activated:D-S01:B0:R01",
+      "kind": "process",
+      "metric": "skill_activated",
+      "value": false,
+      "unit": "boolean",
+      "direction": "target",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S01:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S01",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S01:B0:1:events",
+          "sha256": "72486b6a154301fd8fc2e2b841f5091a0db42f0e7529d3f83860890f713d716e",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated_tokens:D-S01:B0:R01",
+      "kind": "cost",
+      "metric": "generated_tokens",
+      "value": 9794,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S01:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S01",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S01:B0:1:events",
+          "sha256": "72486b6a154301fd8fc2e2b841f5091a0db42f0e7529d3f83860890f713d716e",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "wall_time_ms:D-S01:B0:R01",
+      "kind": "cost",
+      "metric": "wall_time_ms",
+      "value": 177855,
+      "unit": "milliseconds",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S01:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S01",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S01:B0:1:events",
+          "sha256": "72486b6a154301fd8fc2e2b841f5091a0db42f0e7529d3f83860890f713d716e",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "visible_tests_pass:D-S04:S1:R01",
+      "kind": "deterministic",
+      "metric": "visible_tests_pass",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S04:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S04",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S04:S1:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "hidden_acceptance:D-S04:S1:R01",
+      "kind": "outcome",
+      "metric": "hidden_acceptance",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S04:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S04",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S04:S1:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "root_cause_invariant_pass:D-S04:S1:R01",
+      "kind": "outcome",
+      "metric": "root_cause_invariant_pass",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S04:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S04",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S04:S1:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "reference_compatible_tests:D-S04:S1:R01",
+      "kind": "deterministic",
+      "metric": "reference_compatible_tests",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S04:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S04",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S04:S1:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "safe_change_scope:D-S04:S1:R01",
+      "kind": "deterministic",
+      "metric": "safe_change_scope",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S04:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S04",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S04:S1:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "critical_failure:D-S04:S1:R01",
+      "kind": "outcome",
+      "metric": "critical_failure",
+      "value": false,
+      "unit": "boolean",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S04:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S04",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S04:S1:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "accepted:D-S04:S1:R01",
+      "kind": "deterministic",
+      "metric": "accepted",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S04:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S04",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S04:S1:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "skill_activated:D-S04:S1:R01",
+      "kind": "process",
+      "metric": "skill_activated",
+      "value": true,
+      "unit": "boolean",
+      "direction": "target",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S04:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S04",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S04:S1:1:events",
+          "sha256": "addc41fcfd42153ddb07ecadd62b4a9ad1a68f19fc1e6063ecd2f0a54a0681ea",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated_tokens:D-S04:S1:R01",
+      "kind": "cost",
+      "metric": "generated_tokens",
+      "value": 8765,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S04:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S04",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S04:S1:1:events",
+          "sha256": "addc41fcfd42153ddb07ecadd62b4a9ad1a68f19fc1e6063ecd2f0a54a0681ea",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "wall_time_ms:D-S04:S1:R01",
+      "kind": "cost",
+      "metric": "wall_time_ms",
+      "value": 183473,
+      "unit": "milliseconds",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S04:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S04",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S04:S1:1:events",
+          "sha256": "addc41fcfd42153ddb07ecadd62b4a9ad1a68f19fc1e6063ecd2f0a54a0681ea",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "visible_tests_pass:D-S01:S1:R01",
+      "kind": "deterministic",
+      "metric": "visible_tests_pass",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S01:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S01",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S01:S1:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "hidden_acceptance:D-S01:S1:R01",
+      "kind": "outcome",
+      "metric": "hidden_acceptance",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S01:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S01",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S01:S1:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "root_cause_invariant_pass:D-S01:S1:R01",
+      "kind": "outcome",
+      "metric": "root_cause_invariant_pass",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S01:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S01",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S01:S1:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "reference_compatible_tests:D-S01:S1:R01",
+      "kind": "deterministic",
+      "metric": "reference_compatible_tests",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S01:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S01",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S01:S1:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "safe_change_scope:D-S01:S1:R01",
+      "kind": "deterministic",
+      "metric": "safe_change_scope",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S01:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S01",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S01:S1:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "critical_failure:D-S01:S1:R01",
+      "kind": "outcome",
+      "metric": "critical_failure",
+      "value": false,
+      "unit": "boolean",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S01:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S01",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S01:S1:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "accepted:D-S01:S1:R01",
+      "kind": "deterministic",
+      "metric": "accepted",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S01:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S01",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S01:S1:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "skill_activated:D-S01:S1:R01",
+      "kind": "process",
+      "metric": "skill_activated",
+      "value": true,
+      "unit": "boolean",
+      "direction": "target",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S01:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S01",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S01:S1:1:events",
+          "sha256": "d978fcaf406bc5a154c39a3f1997c4b84ab10bf540411d512102d501d343bfee",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated_tokens:D-S01:S1:R01",
+      "kind": "cost",
+      "metric": "generated_tokens",
+      "value": 8905,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S01:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S01",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S01:S1:1:events",
+          "sha256": "d978fcaf406bc5a154c39a3f1997c4b84ab10bf540411d512102d501d343bfee",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "wall_time_ms:D-S01:S1:R01",
+      "kind": "cost",
+      "metric": "wall_time_ms",
+      "value": 177455,
+      "unit": "milliseconds",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S01:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S01",
+      "stratum": "cross-boundary-contract",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S01:S1:1:events",
+          "sha256": "d978fcaf406bc5a154c39a3f1997c4b84ab10bf540411d512102d501d343bfee",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "visible_tests_pass:D-S03:S1:R01",
+      "kind": "deterministic",
+      "metric": "visible_tests_pass",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S03:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S03",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S03:S1:1:score",
+          "sha256": "aaa6c36732b3b96cf20989e9aea7b08cca740c72c50c989c28bd688a95e9d37c",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "hidden_acceptance:D-S03:S1:R01",
+      "kind": "outcome",
+      "metric": "hidden_acceptance",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S03:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S03",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S03:S1:1:score",
+          "sha256": "aaa6c36732b3b96cf20989e9aea7b08cca740c72c50c989c28bd688a95e9d37c",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "root_cause_invariant_pass:D-S03:S1:R01",
+      "kind": "outcome",
+      "metric": "root_cause_invariant_pass",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S03:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S03",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S03:S1:1:score",
+          "sha256": "aaa6c36732b3b96cf20989e9aea7b08cca740c72c50c989c28bd688a95e9d37c",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "reference_compatible_tests:D-S03:S1:R01",
+      "kind": "deterministic",
+      "metric": "reference_compatible_tests",
+      "value": false,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S03:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S03",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S03:S1:1:score",
+          "sha256": "aaa6c36732b3b96cf20989e9aea7b08cca740c72c50c989c28bd688a95e9d37c",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "safe_change_scope:D-S03:S1:R01",
+      "kind": "deterministic",
+      "metric": "safe_change_scope",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S03:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S03",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S03:S1:1:score",
+          "sha256": "aaa6c36732b3b96cf20989e9aea7b08cca740c72c50c989c28bd688a95e9d37c",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "critical_failure:D-S03:S1:R01",
+      "kind": "outcome",
+      "metric": "critical_failure",
+      "value": true,
+      "unit": "boolean",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S03:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S03",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S03:S1:1:score",
+          "sha256": "aaa6c36732b3b96cf20989e9aea7b08cca740c72c50c989c28bd688a95e9d37c",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "accepted:D-S03:S1:R01",
+      "kind": "deterministic",
+      "metric": "accepted",
+      "value": false,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S03:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S03",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S03:S1:1:score",
+          "sha256": "aaa6c36732b3b96cf20989e9aea7b08cca740c72c50c989c28bd688a95e9d37c",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "skill_activated:D-S03:S1:R01",
+      "kind": "process",
+      "metric": "skill_activated",
+      "value": true,
+      "unit": "boolean",
+      "direction": "target",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S03:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S03",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S03:S1:1:events",
+          "sha256": "cdb0c0d7fdca2c055bfe46dc36c15cb2defc56e285cbe9b32419dafc00f8b531",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated_tokens:D-S03:S1:R01",
+      "kind": "cost",
+      "metric": "generated_tokens",
+      "value": 6560,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S03:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S03",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S03:S1:1:events",
+          "sha256": "cdb0c0d7fdca2c055bfe46dc36c15cb2defc56e285cbe9b32419dafc00f8b531",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "wall_time_ms:D-S03:S1:R01",
+      "kind": "cost",
+      "metric": "wall_time_ms",
+      "value": 120577,
+      "unit": "milliseconds",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S03:S1:R01"
+      ],
+      "condition_id": "S1",
+      "task_id": "D-S03",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S03:S1:1:events",
+          "sha256": "cdb0c0d7fdca2c055bfe46dc36c15cb2defc56e285cbe9b32419dafc00f8b531",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "visible_tests_pass:D-S04:B0:R01",
+      "kind": "deterministic",
+      "metric": "visible_tests_pass",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S04:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S04",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S04:B0:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "hidden_acceptance:D-S04:B0:R01",
+      "kind": "outcome",
+      "metric": "hidden_acceptance",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S04:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S04",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S04:B0:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "root_cause_invariant_pass:D-S04:B0:R01",
+      "kind": "outcome",
+      "metric": "root_cause_invariant_pass",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S04:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S04",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S04:B0:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "reference_compatible_tests:D-S04:B0:R01",
+      "kind": "deterministic",
+      "metric": "reference_compatible_tests",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S04:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S04",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S04:B0:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "safe_change_scope:D-S04:B0:R01",
+      "kind": "deterministic",
+      "metric": "safe_change_scope",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S04:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S04",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S04:B0:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "critical_failure:D-S04:B0:R01",
+      "kind": "outcome",
+      "metric": "critical_failure",
+      "value": false,
+      "unit": "boolean",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S04:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S04",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S04:B0:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "accepted:D-S04:B0:R01",
+      "kind": "deterministic",
+      "metric": "accepted",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S04:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S04",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S04:B0:1:score",
+          "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "skill_activated:D-S04:B0:R01",
+      "kind": "process",
+      "metric": "skill_activated",
+      "value": false,
+      "unit": "boolean",
+      "direction": "target",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S04:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S04",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S04:B0:1:events",
+          "sha256": "bc16f8cd5d9d2ba79e79fec05f857ad1ede7d31bae74cf5bcef69bcaf07b859b",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated_tokens:D-S04:B0:R01",
+      "kind": "cost",
+      "metric": "generated_tokens",
+      "value": 10286,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S04:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S04",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S04:B0:1:events",
+          "sha256": "bc16f8cd5d9d2ba79e79fec05f857ad1ede7d31bae74cf5bcef69bcaf07b859b",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "wall_time_ms:D-S04:B0:R01",
+      "kind": "cost",
+      "metric": "wall_time_ms",
+      "value": 205266,
+      "unit": "milliseconds",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S04:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S04",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S04:B0:1:events",
+          "sha256": "bc16f8cd5d9d2ba79e79fec05f857ad1ede7d31bae74cf5bcef69bcaf07b859b",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "visible_tests_pass:D-S03:B0:R01",
+      "kind": "deterministic",
+      "metric": "visible_tests_pass",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S03:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S03",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S03:B0:1:score",
+          "sha256": "aaa6c36732b3b96cf20989e9aea7b08cca740c72c50c989c28bd688a95e9d37c",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "hidden_acceptance:D-S03:B0:R01",
+      "kind": "outcome",
+      "metric": "hidden_acceptance",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S03:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S03",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S03:B0:1:score",
+          "sha256": "aaa6c36732b3b96cf20989e9aea7b08cca740c72c50c989c28bd688a95e9d37c",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "root_cause_invariant_pass:D-S03:B0:R01",
+      "kind": "outcome",
+      "metric": "root_cause_invariant_pass",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S03:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S03",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S03:B0:1:score",
+          "sha256": "aaa6c36732b3b96cf20989e9aea7b08cca740c72c50c989c28bd688a95e9d37c",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "reference_compatible_tests:D-S03:B0:R01",
+      "kind": "deterministic",
+      "metric": "reference_compatible_tests",
+      "value": false,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S03:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S03",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S03:B0:1:score",
+          "sha256": "aaa6c36732b3b96cf20989e9aea7b08cca740c72c50c989c28bd688a95e9d37c",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "safe_change_scope:D-S03:B0:R01",
+      "kind": "deterministic",
+      "metric": "safe_change_scope",
+      "value": true,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S03:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S03",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S03:B0:1:score",
+          "sha256": "aaa6c36732b3b96cf20989e9aea7b08cca740c72c50c989c28bd688a95e9d37c",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "critical_failure:D-S03:B0:R01",
+      "kind": "outcome",
+      "metric": "critical_failure",
+      "value": true,
+      "unit": "boolean",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S03:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S03",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S03:B0:1:score",
+          "sha256": "aaa6c36732b3b96cf20989e9aea7b08cca740c72c50c989c28bd688a95e9d37c",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "accepted:D-S03:B0:R01",
+      "kind": "deterministic",
+      "metric": "accepted",
+      "value": false,
+      "unit": "boolean",
+      "direction": "higher_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S03:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S03",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S03:B0:1:score",
+          "sha256": "aaa6c36732b3b96cf20989e9aea7b08cca740c72c50c989c28bd688a95e9d37c",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "skill_activated:D-S03:B0:R01",
+      "kind": "process",
+      "metric": "skill_activated",
+      "value": false,
+      "unit": "boolean",
+      "direction": "target",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S03:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S03",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S03:B0:1:events",
+          "sha256": "83baa3fcea86ca11dc8fa516828cd79d71224858c87ba45f36b9d1ec18f875a8",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "generated_tokens:D-S03:B0:R01",
+      "kind": "cost",
+      "metric": "generated_tokens",
+      "value": 7507,
+      "unit": "tokens",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S03:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S03",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S03:B0:1:events",
+          "sha256": "83baa3fcea86ca11dc8fa516828cd79d71224858c87ba45f36b9d1ec18f875a8",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    },
+    {
+      "measurement_id": "wall_time_ms:D-S03:B0:R01",
+      "kind": "cost",
+      "metric": "wall_time_ms",
+      "value": 177868,
+      "unit": "milliseconds",
+      "direction": "lower_better",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S03:B0:R01"
+      ],
+      "condition_id": "B0",
+      "task_id": "D-S03",
+      "stratum": "state-order-lifecycle",
+      "evaluator": {
+        "evaluator_id": "ael-debugging-shadow-v1-deterministic-evaluator",
+        "kind": "deterministic",
+        "blinded": true
+      },
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S03:B0:1:events",
+          "sha256": "83baa3fcea86ca11dc8fa516828cd79d71224858c87ba45f36b9d1ec18f875a8",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    }
+  ],
+  "critical_failures": [
+    {
+      "failure_id": "treatment-critical-or-scope-failure",
+      "severity": "critical",
+      "observed": true,
+      "description": "A treatment cell violated deterministic reference compatibility or safe-change scope.",
+      "run_ids": [
+        "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S03:S1:R01"
+      ],
+      "evidence_refs": [
+        {
+          "uri": "urn:kizz:ael:private-effect-decision:debug-shadow-v1",
+          "sha256": "7a611e43c8bccc54a325796616616fdfae84183ade5b67901b676251396a17bf",
+          "revision": "systematic-debugging-real-shadow-v1",
+          "visibility": "private"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "The pilot contains four maintainer-selected sanitized incidents and no untouched confirmation phase.",
+    "Private task, evaluator, raw event, and candidate bytes are represented by opaque hashes."
+  ],
+  "source_refs": [
+    {
+      "uri": "urn:kizz:ael:private-observations:debug-shadow-v1",
+      "sha256": "4ecaafc6f0711a83734fec3a5a621274be6114addd15d63857a2a1f116b65a0a",
+      "revision": "systematic-debugging-real-shadow-v1",
+      "visibility": "private"
+    },
+    {
+      "uri": "urn:kizz:ael:private-effect-decision:debug-shadow-v1",
+      "sha256": "7a611e43c8bccc54a325796616616fdfae84183ade5b67901b676251396a17bf",
+      "revision": "systematic-debugging-real-shadow-v1",
+      "visibility": "private"
+    }
+  ]
+}

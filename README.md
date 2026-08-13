@@ -30,8 +30,12 @@ the current bounded decisions, limitations, and links to every public artifact.
 
 Active research: [Agent Skills Season 1](studies/agent-skills-season-1/README.md)
 has ten bounded protocols, exact upstream source locks, a healthy public
-calibration pack, 22 formal activation records, and a completed bounded
-negative [Property-based Testing v2 pathfinder](reports/2026-08-12-property-based-testing-v2.md).
+calibration pack, 22 formal activation records, and two completed bounded
+negative studies: the
+[Property-based Testing v2 pathfinder](reports/2026-08-12-property-based-testing-v2.md)
+and the prospective
+[Systematic Debugging real-shadow pilot](reports/2026-08-13-systematic-debugging-real-shadow-v1.md),
+which records an exact-version owner block and scheduled follow-up.
 Arbitrary submissions remain outside the maintainer-controlled execution
 boundary.
 
@@ -105,6 +109,11 @@ uv run ael study audit \
   --result studies/agent-skills-season-1/results/property-based-testing-v2 \
   --decision-adapter pbt-v2 \
   --require-git-proof
+uv run ael study audit \
+  --freeze studies/agent-skills-season-1/screening/systematic-debugging-real-shadow.freeze.json \
+  --result studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1 \
+  --decision-adapter systematic-debugging-real-shadow-v1 \
+  --require-git-proof
 uv run python -m unittest discover -s tests -v
 ```
 
@@ -166,7 +175,7 @@ maintainer-reviewed snapshots and maintainer-controlled fixtures; arbitrary
 submissions remain blocked. Read [SECURITY.md](SECURITY.md) and
 [Container runner isolation](docs/runner-isolation.md) before execution.
 
-`v0.1.0-alpha.5` is pre-stable. It does not claim universal benchmarking,
+`v0.1.0-alpha.6` is pre-stable. It does not claim universal benchmarking,
 independent verification of Kizz-authored capabilities, model-only superiority
 from stack comparisons, or downstream production impact.
 

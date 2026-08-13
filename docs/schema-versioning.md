@@ -39,6 +39,24 @@ the next decision-governing study. The pilot must hash-bind admission before
 scored work and complete one decision/action/outcome lifecycle before a schema
 is stabilized.
 
+## Alpha.6 prospective lifecycle boundary
+
+Alpha.6 completes that first pilot without adding a sixth stable Contract v0
+document. Experimental `study-admission`, `study-freeze/0.2-dev`, effect,
+adoption, action, follow-up, routing-policy, and projection-deviation records
+remain pilot-local. The public-results profile moves to
+`ael.public-results/0.2` and the projection policy to
+`ael.publication-projection/0.2` because cards may now derive admission, action,
+follow-up, and freshness from exact public lifecycle refs rather than accepting
+profile-authored status text.
+
+Contract v0's five `0.1` schemas remain unchanged. The completed lifecycle is
+evidence for designing a future generic owner-decision contract, not permission
+to stabilize the pilot shapes without comparison across more than one study.
+The disclosed materialization repair is similarly pilot-specific: it preserves
+the frozen analysis and records a post-run projection defect instead of
+silently changing preregistered code.
+
 ## Migration requirement
 
 The first incompatible schema change must include:

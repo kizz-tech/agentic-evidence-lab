@@ -27,7 +27,7 @@ REQUIRED_FILES = {
     "RESULTS.md",
     "SECURITY.md",
     "SUPPORT.md",
-    "docs/release-notes/v0.1.0-alpha.5.md",
+    "docs/release-notes/v0.1.0-alpha.6.md",
     "docs/results/index.json",
     "pyproject.toml",
     "studies/public-results.json",
@@ -147,8 +147,8 @@ def main() -> int:
             continue
         failures.extend(payload_failures(relative, payload))
 
-    expected_version = "0.1.0a5"
-    expected_release = "0.1.0-alpha.5"
+    expected_version = "0.1.0a6"
+    expected_release = "0.1.0-alpha.6"
     if __version__ != expected_version:
         failures.append(f"package version is {__version__}, expected {expected_version}")
     try:

@@ -1,0 +1,25 @@
+{
+  "schema_version": "ael.outcome-follow-up/0.1-pilot",
+  "follow_up_id": "kizz:ael:decision-case:systematic-debugging-real-shadow:1:follow-up:1",
+  "action_ref": {
+    "action_id": "kizz:ael:decision-case:systematic-debugging-real-shadow:1:action:1",
+    "sha256": "fa7c243157ca30a2482961184420942fa9e3274b8ca836b60bd9e5af76fd4616"
+  },
+  "owner_id": "kizz-ael-maintainer",
+  "status": "scheduled",
+  "planned_due_at": "2026-09-12T23:59:59Z",
+  "observation_window": "Next ten naturally eligible internal debugging cases or 30 days after the recorded action, whichever comes first.",
+  "signals": [
+    "root-cause-correct repair acceptance",
+    "rework or regression after repair",
+    "wall-time cost",
+    "critical failure or unsafe scope expansion"
+  ],
+  "conclusion": "not_due",
+  "observations": [],
+  "limitations": [
+    "This record schedules a future owner observation; it is not downstream outcome evidence.",
+    "If no eligible natural cases occur, the follow-up must report not_observed rather than infer no effect."
+  ],
+  "reversal_trigger": "One critical failure, material regression, private-data incident, candidate/source drift, or evidence that selective routing increases rework disables the policy pending a new admission."
+}

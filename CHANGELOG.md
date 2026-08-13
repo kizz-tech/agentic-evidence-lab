@@ -6,6 +6,40 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.0-alpha.6] - 2026-08-13
+
+### Added
+
+- A prospective admission and `study-freeze/0.2-dev` pilot contract that binds
+  the decision question, exact skill source, private-pack digest, execution
+  authority, schedule, budget, analysis rule, owner action policy, and follow-up
+  before scored work.
+- The Systematic Debugging real-shadow v1 matched pilot: eight valid Codex cells,
+  80 public measurements, a bounded negative effect decision, an exact-version
+  owner block, and a scheduled operational follow-up.
+- A study-specific public audit that reconstructs the effect from individual
+  measurements, validates the admission-to-action chain, verifies Git artifact
+  ordering, and fails closed on lifecycle or evidence tampering.
+
+### Changed
+
+- The public results profile and projection policy move to `0.2`. Result cards
+  can derive admission, action, outcome-follow-up, and freshness from exact
+  public lifecycle refs; profile-authored lifecycle status is rejected.
+- Package, release metadata, clean-wheel checks, and generated result surfaces
+  now identify `0.1.0a6`.
+
+### Research integrity
+
+- The exact tested Superpowers snapshot is blocked because the frozen absolute
+  treatment safety gate observed one critical failure. All four acceptance
+  pairs tied and the baseline failed the same task, so the result is not a
+  treatment-harm claim or a general verdict on Superpowers.
+- A frozen materializer emitted one invalid Contract v0 reproducibility enum.
+  The public bundle discloses a one-field post-run projection repair, preserves
+  the observation and effect-decision hashes, and lets the audit reconstruct
+  the original invalid receipt. The preregistered analysis was not rewritten.
+
 ## [0.1.0-alpha.5] - 2026-08-12
 
 ### Added
@@ -139,7 +173,8 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   process can read the reusable credential.
 - Contract v0 remains pre-stable and may change incompatibly before `1.0`.
 
-[Unreleased]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.5...HEAD
+[Unreleased]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.6...HEAD
+[0.1.0-alpha.6]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.5...v0.1.0-alpha.6
 [0.1.0-alpha.5]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.4...v0.1.0-alpha.5
 [0.1.0-alpha.4]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.3...v0.1.0-alpha.4
 [0.1.0-alpha.3]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.2...v0.1.0-alpha.3

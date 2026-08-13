@@ -1,0 +1,170 @@
+{
+  "schema_version": "ael.evidence-receipt/0.1",
+  "object_type": "evidence_receipt",
+  "receipt_id": "kizz:ael:receipt:agent-skills-season-1:systematic-debugging-real-shadow-v1",
+  "generated_at": "2026-08-13T01:05:29Z",
+  "concept_ref": {
+    "concept_id": "kizz:ael:concept:public-agent-skill-effectiveness",
+    "revision": 1,
+    "uri": "../../concept.json",
+    "sha256": "832391e453e62d7615ec67d150534a074d043a76346a9d3b8e83e21a45aac5a6",
+    "visibility": "public"
+  },
+  "study_ref": {
+    "study_id": "kizz:ael:study:agent-skills-season-1:systematic-debugging-real-shadow",
+    "revision": 1,
+    "uri": "../../manifests/systematic-debugging-real-shadow.study-manifest.json",
+    "sha256": "2e4773cd9d06a0abbd92f32ffbb5fab9bfd0a1c06aed5534a86393ed0067e5a3",
+    "visibility": "public"
+  },
+  "run_record_refs": [
+    {
+      "run_id": "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S02:B0:R01",
+      "uri": "runs/D-S02-B0-R01.json",
+      "sha256": "c300895980c99f71b2a10e6864bc75969ed35424e4a069600e55e3eb261e85e9",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S02:S1:R01",
+      "uri": "runs/D-S02-S1-R01.json",
+      "sha256": "10520560ce141293be250a33fdbcdee0f178042aacd8e89d534cba1f1596d25b",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S01:B0:R01",
+      "uri": "runs/D-S01-B0-R01.json",
+      "sha256": "8e24ba191a8ade6bfb05925c11ac520c9fa82535be1ac2f61c63c3d4b99ce950",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S04:S1:R01",
+      "uri": "runs/D-S04-S1-R01.json",
+      "sha256": "c7aab7465d82d775021d72c9b97b764e55077281526c95fe3135a35e9a745be8",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S01:S1:R01",
+      "uri": "runs/D-S01-S1-R01.json",
+      "sha256": "bbb70ba5058117ba43b2db8841c8d8a206666164722351eff10fd1d45ad0b7d1",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S03:S1:R01",
+      "uri": "runs/D-S03-S1-R01.json",
+      "sha256": "1974bea8eaefb1b27fc8b7815e3ebddc1f705968d9d6918fc80c172ae4cc105b",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S04:B0:R01",
+      "uri": "runs/D-S04-B0-R01.json",
+      "sha256": "469c6bca89e9d476b9b43fe1c24f4a1b68d3aebb2101ee948ed94586e2240e9b",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S03:B0:R01",
+      "uri": "runs/D-S03-B0-R01.json",
+      "sha256": "37a13940e24f70363795bd8995ad8c78091e2e9ec25f868f2ce6067267058a69",
+      "visibility": "public"
+    }
+  ],
+  "measurement_set_ref": {
+    "measurement_set_id": "kizz:ael:measurements:agent-skills-season-1:systematic-debugging-real-shadow-v1",
+    "uri": "measurement-set.json",
+    "sha256": "0ffb16db80bd59811ad492fa22929c7c398fd90844604f0b9cf74eef1029df01",
+    "visibility": "public"
+  },
+  "evidence_level": "controlled_effect_observed",
+  "reproducibility": "rerunnable",
+  "independence": {
+    "label": "maintainer_evaluated",
+    "role_overlaps": [
+      "Kizz authored and sanitized the private tasks, operates the hosted-model runner, owns the deterministic evaluator and evidence interpretation, and precommits the downstream action policy.",
+      "The candidate artifact is externally authored, but no independent task selection, execution, evaluation, or replication exists."
+    ],
+    "disclosure": "Kizz authored sanitized tasks, operated the runner, evaluated deterministic outcomes, and owns the action policy; no independent replication exists."
+  },
+  "decision": {
+    "disposition": "reject",
+    "summary": "The exact treatment did not satisfy the frozen safety or delivery rule on this pilot surface.",
+    "scope": [
+      "four exact sanitized debugging fixtures across two declared strata",
+      "the exact Superpowers systematic-debugging source snapshot",
+      "Codex CLI 0.146.0 with gpt-5.6-sol at xhigh effort",
+      "Git artifact-ordering anchor 58c73ab76630002145599ddb7b3837aa27018bc9"
+    ],
+    "reversal_trigger": "Re-evaluate after any task, evaluator, prompt, skill, model, CLI, image, budget, rule, or provider behavior change."
+  },
+  "evaluated_claims": [
+    {
+      "claim_id": "AEL-DEBUG-SHADOW-01",
+      "statement": "The exact skill changed root-cause-correct hidden acceptance enough to satisfy the frozen bounded routing rule on at least one admitted stratum.",
+      "status": "contradicted",
+      "claim_level": "factor_causal",
+      "scope": [
+        "exact four-cell matched pilot surface"
+      ],
+      "evidence_refs": [
+        "hidden_acceptance:D-S02:B0:R01",
+        "hidden_acceptance:D-S02:S1:R01",
+        "hidden_acceptance:D-S01:B0:R01",
+        "hidden_acceptance:D-S04:S1:R01",
+        "hidden_acceptance:D-S01:S1:R01",
+        "hidden_acceptance:D-S03:S1:R01",
+        "hidden_acceptance:D-S04:B0:R01",
+        "hidden_acceptance:D-S03:B0:R01"
+      ],
+      "falsifier": "Frozen-rule recomputation, a retained cell, or the operational follow-up contradicts the published classifications."
+    },
+    {
+      "claim_id": "AEL-DEBUG-SHADOW-02",
+      "statement": "The recorded runner checked admission, manifest, source, pack, code, prompt, and image bindings before every recorded scored call.",
+      "status": "supported",
+      "claim_level": "workflow",
+      "scope": [
+        "recorded runner invocations and Git artifact ordering"
+      ],
+      "evidence_refs": [
+        "freeze-ref.json",
+        "effect-decision.json"
+      ],
+      "falsifier": "A binding differs, the freeze did not precede result artifacts, or private records show an unadmitted scored call."
+    }
+  ],
+  "unsupported_inferences": [
+    "Systematic debugging skills work in general.",
+    "This exact skill is superior across debugging tasks, models, CLIs, repositories, or teams.",
+    "A four-task screening surface supports global installation or a public leaderboard rank.",
+    "Git ancestry independently proves private model-call chronology.",
+    "Maintainer evaluation is independent replication.",
+    "Token or latency differences in eight calls are stable cost effects."
+  ],
+  "limitations": [
+    "Only four maintainer-selected sanitized incidents and one stochastic draw per condition were used.",
+    "No untouched confirmation pack was run; the maximum owner action is reversible selective routing.",
+    "Task sanitization may not preserve every causal property of the originating incidents.",
+    "The provider exposed a model identifier but not an immutable model revision.",
+    "Reusable local Codex authentication was process-readable under explicit owner acceptance; persisted outputs were exact-value scanned, while encrypted provider traffic was not inspected.",
+    "Git proves repository artifact ordering, not absolute time of all private model calls.",
+    "The frozen materializer emitted a non-Contract reproducibility enum after scored work; a transparent post-run projection repair mapped only that value to `rerunnable`, recomputed dependent hashes, and did not change observations or the effect decision."
+  ],
+  "invalidation_triggers": [
+    "Any admission, manifest, freeze, source, pack, code, prompt, image, observation, or decision hash fails",
+    "A scored call is shown to predate admission or freeze",
+    "A task/evaluator was tuned after observing a scored candidate",
+    "Private material or authentication escaped its declared boundary",
+    "Public wording exceeds the bounded screening-derived claim ceiling"
+  ],
+  "state": {
+    "experiment": "real-shadow effect outcome: treatment_critical_failure",
+    "artifact": "sanitized public Contract v0 projection; private materials represented by hashes",
+    "repository": "result package prepared in the local branch",
+    "publication": "prepared, not published",
+    "deployment": "owner policy action recorded separately; no global installation",
+    "outcome": "operational follow-up scheduled; downstream outcome not yet observed"
+  },
+  "publication_state": "public_ready",
+  "generator": {
+    "name": "agentic-evidence-lab",
+    "version": "0.1.0a5"
+  }
+}

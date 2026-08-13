@@ -1,0 +1,89 @@
+{
+  "schema_version": "ael.run-record/0.1",
+  "object_type": "run_record",
+  "run_id": "kizz:ael:run:agent-skills-season-1:systematic-debugging-real-shadow:D-S04:S1:R01",
+  "study_ref": {
+    "study_id": "kizz:ael:study:agent-skills-season-1:systematic-debugging-real-shadow",
+    "revision": 1,
+    "uri": "../../../manifests/systematic-debugging-real-shadow.study-manifest.json",
+    "sha256": "2e4773cd9d06a0abbd92f32ffbb5fab9bfd0a1c06aed5534a86393ed0067e5a3",
+    "visibility": "public"
+  },
+  "condition_id": "S1",
+  "task": {
+    "task_pack_id": "systematic-debugging-real-shadow-v1-screening",
+    "task_id": "D-S04",
+    "stratum": "state-order-lifecycle",
+    "role": "screening"
+  },
+  "repeat_index": 1,
+  "status": "valid",
+  "runtime": {
+    "harness": {
+      "name": "codex-cli",
+      "version": "0.146.0"
+    },
+    "model": {
+      "provider": "OpenAI",
+      "model_id": "gpt-5.6-sol",
+      "effort": "xhigh",
+      "immutable_revision_exposed": false
+    },
+    "sandbox": "restricted outer Docker; Codex inner sandbox disabled",
+    "environment": {
+      "ephemeral": true,
+      "identity_available": true,
+      "digest": "f5ebad21373b16799a4bb0189d917856280cca8394c25967c95d612b6b61ac08"
+    },
+    "context_sha256": "12e4b1f80f3965263506092806123c59e1f94937814b0b6dae56859c10d26f64"
+  },
+  "usage": {
+    "input_tokens": 268486,
+    "cached_input_tokens": 242944,
+    "output_tokens": 5755,
+    "reasoning_output_tokens": 3010,
+    "wall_time_ms": 183473
+  },
+  "outputs": [
+    {
+      "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S04:S1:1:candidate",
+      "sha256": "12e4b1f80f3965263506092806123c59e1f94937814b0b6dae56859c10d26f64",
+      "revision": "systematic-debugging-real-shadow-v1",
+      "visibility": "private"
+    }
+  ],
+  "effects": [],
+  "event_summary": {
+    "captured": true,
+    "event_count": 38,
+    "authenticated_actor_ids": [],
+    "limitations": [
+      "The provider did not expose an immutable model revision.",
+      "Raw task content, events, candidates, and evaluator outputs remain private.",
+      "Operator-recorded timestamps are chronology metadata, not trusted timestamps."
+    ]
+  },
+  "integrity_issues": [
+    "The owner accepted use of reusable local Codex authentication for this exact reviewed skill and sanitized private pack; persisted output was scanned, while encrypted provider traffic was not inspected."
+  ],
+  "source_refs": [
+    {
+      "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S04:S1:1:events",
+      "sha256": "addc41fcfd42153ddb07ecadd62b4a9ad1a68f19fc1e6063ecd2f0a54a0681ea",
+      "revision": "systematic-debugging-real-shadow-v1",
+      "visibility": "private"
+    },
+    {
+      "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S04:S1:1:invocation",
+      "sha256": "51fe6f1fa95d777042fd4c6f330127ef5a4f9b8bf763dd51845ec3058a684b65",
+      "revision": "systematic-debugging-real-shadow-v1",
+      "visibility": "private"
+    },
+    {
+      "uri": "urn:kizz:ael:private-run:debug-shadow:debug-shadow:D-S04:S1:1:score",
+      "sha256": "fb26b095b2d273fdd28f7c036c694481a370386abac833158bdc263896905673",
+      "revision": "systematic-debugging-real-shadow-v1",
+      "visibility": "private"
+    }
+  ]
+}

@@ -25,12 +25,13 @@ from urllib.parse import urlparse
 from jsonschema import Draft202012Validator, FormatChecker
 
 from ael import __version__
+from ael.debugging_shadow_audit import audit_debugging_shadow_bundle
 from ael.sandbox import SandboxError
 from ael.study_audit import audit_study_bundle
 from ael.validation import MAX_JSON_BYTES, SCHEMA_FILES, sha256_path, validate
 
-PUBLIC_RESULTS_SCHEMA_VERSION = "ael.public-results/0.1"
-PUBLICATION_PROJECTION_POLICY = "ael.publication-projection/0.1"
+PUBLIC_RESULTS_SCHEMA_VERSION = "ael.public-results/0.2"
+PUBLICATION_PROJECTION_POLICY = "ael.publication-projection/0.2"
 GENERATOR_NAME = "agentic-evidence-lab"
 GENERATOR_VERSION = __version__
 
@@ -42,7 +43,8 @@ _VISIBILITIES = {"public", "private", "hidden", "embargoed"}
 _MATERIAL_AVAILABILITY = {"public", "withheld", "not_retained", "not_collected"}
 _HISTORY_UNKNOWN = "not_declared_historical"
 _HISTORY_FRESHNESS_UNKNOWN = "unassessed"
-_ADAPTERS = {"pbt-v2"}
+_HISTORY_DERIVED = "derived_from_lifecycle"
+_ADAPTERS = {"pbt-v2", "systematic-debugging-real-shadow-v1"}
 
 # Contract v0 has two independent ladders: claim levels describe what a
 # statement says, while evidence levels describe what the receipt established.
@@ -300,7 +302,7 @@ def validate_public_profile(profile: Mapping[str, Any]) -> dict[str, Any]:
                 "history",
                 "publication",
             },
-            {"report_ref"},
+            {"report_ref", "lifecycle"},
             location,
         )
         card_id = _nonempty_string(study.get("card_id"), f"{location}.card_id")
@@ -316,7 +318,10 @@ def validate_public_profile(profile: Mapping[str, Any]) -> dict[str, Any]:
         _validate_claim_ids(study.get("claim_ids"), f"{location}.claim_ids")
         _validate_verification(study.get("verification"), f"{location}.verification")
         _validate_materials(study.get("materials"), f"{location}.materials")
-        _validate_history(study.get("history"), f"{location}.history")
+        lifecycle = study.get("lifecycle")
+        _validate_history(study.get("history"), f"{location}.history", lifecycle is not None)
+        if lifecycle is not None:
+            _validate_lifecycle(lifecycle, f"{location}.lifecycle")
         publication = study.get("publication")
         if publication not in {"published", "unpublished", "withdrawn"}:
             _fail(f"{location}.publication must be published, unpublished, or withdrawn")
@@ -418,15 +423,35 @@ def _validate_materials(value: Any, location: str) -> None:
             )
 
 
-def _validate_history(value: Any, location: str) -> None:
+def _validate_history(value: Any, location: str, has_lifecycle: bool = False) -> None:
     if not isinstance(value, Mapping):
         _fail(f"{location} must be an object")
     _require_keys(value, {"admission", "action", "outcome_follow_up", "freshness"}, set(), location)
+    expected = _HISTORY_DERIVED if has_lifecycle else _HISTORY_UNKNOWN
     for key in ("admission", "action", "outcome_follow_up"):
-        if value.get(key) != _HISTORY_UNKNOWN:
-            _fail(f"{location}.{key} must equal {_HISTORY_UNKNOWN}")
-    if value.get("freshness") != _HISTORY_FRESHNESS_UNKNOWN:
-        _fail(f"{location}.freshness must equal {_HISTORY_FRESHNESS_UNKNOWN}")
+        if value.get(key) != expected:
+            _fail(f"{location}.{key} must equal {expected}")
+    freshness = _HISTORY_DERIVED if has_lifecycle else _HISTORY_FRESHNESS_UNKNOWN
+    if value.get("freshness") != freshness:
+        _fail(f"{location}.freshness must equal {freshness}")
+
+
+def _validate_lifecycle(value: Any, location: str) -> None:
+    if not isinstance(value, Mapping):
+        _fail(f"{location} must be an object")
+    _require_keys(
+        value,
+        {"admission_ref", "adoption_decision_ref", "action_record_ref", "outcome_follow_up_ref"},
+        set(),
+        location,
+    )
+    for key in (
+        "admission_ref",
+        "adoption_decision_ref",
+        "action_record_ref",
+        "outcome_follow_up_ref",
+    ):
+        _validate_profile_ref_shape(value.get(key), f"{location}.{key}")
 
 
 def load_public_profile(profile_path: Path) -> dict[str, Any]:
@@ -589,6 +614,100 @@ def _material_projection(
             item["reproduction_impact"] = material["reproduction_impact"]
         projected.append(item)
     return projected
+
+
+def _lifecycle_projection(
+    lifecycle: Mapping[str, Any],
+    owner: Path,
+    repository_root: Path,
+    source_hashes: dict[str, str],
+    as_of: str,
+) -> tuple[dict[str, str], dict[str, Any]]:
+    refs: dict[str, dict[str, str]] = {}
+    documents: dict[str, dict[str, Any]] = {}
+    for key in (
+        "admission_ref",
+        "adoption_decision_ref",
+        "action_record_ref",
+        "outcome_follow_up_ref",
+    ):
+        refs[key] = _source_ref(
+            owner,
+            lifecycle[key],
+            repository_root,
+            f"lifecycle.{key}",
+            source_hashes,
+        )
+        documents[key] = _load_json_object(repository_root / refs[key]["uri"])
+
+    admission = documents["admission_ref"]
+    adoption = documents["adoption_decision_ref"]
+    action = documents["action_record_ref"]
+    follow_up = documents["outcome_follow_up_ref"]
+    expected_schemas = {
+        "admission_ref": "ael.study-admission/0.1-pilot",
+        "adoption_decision_ref": "ael.adoption-decision/0.1-pilot",
+        "action_record_ref": "ael.action-record/0.1-pilot",
+        "outcome_follow_up_ref": "ael.outcome-follow-up/0.1-pilot",
+    }
+    for key, expected in expected_schemas.items():
+        if documents[key].get("schema_version") != expected:
+            _fail(f"lifecycle.{key} must use {expected}")
+    if admission.get("status") != "admitted":
+        _fail("lifecycle admission must have admitted status")
+    if adoption.get("admission_ref", {}).get("sha256") != refs["admission_ref"]["sha256"]:
+        _fail("lifecycle adoption decision does not bind the admission")
+    if (
+        action.get("adoption_decision_ref", {}).get("sha256")
+        != refs["adoption_decision_ref"]["sha256"]
+    ):
+        _fail("lifecycle action record does not bind the adoption decision")
+    if follow_up.get("action_ref", {}).get("sha256") != refs["action_record_ref"]["sha256"]:
+        _fail("lifecycle follow-up does not bind the action record")
+    roles = admission.get("roles")
+    follow_up_plan = admission.get("follow_up_plan")
+    if not isinstance(roles, Mapping) or not isinstance(follow_up_plan, Mapping):
+        _fail("lifecycle admission lacks owner roles or follow-up plan")
+    action_owner = roles.get("action_owner")
+    if adoption.get("owner_id") != action_owner or action.get("actor_id") != action_owner:
+        _fail("lifecycle action ownership differs from the admission")
+    if follow_up.get("owner_id") != follow_up_plan.get("owner_id"):
+        _fail("lifecycle follow-up ownership differs from the admission")
+    if adoption.get("candidate") != admission.get("candidate"):
+        _fail("lifecycle adoption candidate differs from the admission")
+
+    action_state = action.get("state")
+    follow_up_status = follow_up.get("status")
+    follow_up_conclusion = follow_up.get("conclusion")
+    if action_state not in {"verified", "blocked"}:
+        _fail("lifecycle action has an unsupported state")
+    if follow_up_status not in {"scheduled", "completed", "cancelled"}:
+        _fail("lifecycle follow-up has an unsupported status")
+    due_at = follow_up.get("planned_due_at")
+    if not isinstance(due_at, str):
+        _fail("lifecycle follow-up lacks planned_due_at")
+    try:
+        due_date = _datetime.datetime.fromisoformat(due_at.replace("Z", "+00:00")).date()
+        as_of_date = _datetime.date.fromisoformat(as_of)
+    except ValueError:
+        _fail("lifecycle follow-up uses an invalid timestamp")
+    if follow_up_status == "scheduled":
+        freshness = "within_declared_window" if as_of_date <= due_date else "past_declared_due_date"
+    else:
+        freshness = "resolved"
+    history = {
+        "admission": str(admission["status"]),
+        "action": str(action_state),
+        "outcome_follow_up": f"{follow_up_status}:{follow_up_conclusion}",
+        "freshness": freshness,
+    }
+    projected = {
+        "refs": refs,
+        "adoption_disposition": adoption.get("disposition"),
+        "action_kind": action.get("action_kind"),
+        "follow_up_due_at": due_at,
+    }
+    return history, projected
 
 
 def _study_and_measurement_projection(
@@ -758,6 +877,22 @@ def _audit_projection(
         _fail("verification.result_root escapes repository root")
     _regular_directory(result_root, "verification.result_root")
     try:
+        if verification["adapter"] == "systematic-debugging-real-shadow-v1":
+            summary = audit_debugging_shadow_bundle(
+                freeze_path,
+                result_root,
+                git_root=repository_root,
+                require_git_proof=require_git_proof,
+            )
+            # Git proof is a fail-closed build gate, not publication content.
+            # Project only stable preregistration identity/boundary fields so
+            # `results check` has identical bytes with or without the gate.
+            summary["preregistration"].pop("git_verified", None)
+            summary["preregistration"]["boundary"] = (
+                "Git proof is an optional fail-closed build gate and is not projected as evidence; "
+                "when required, it establishes repository artifact ordering only."
+            )
+            return summary
         return audit_study_bundle(
             freeze_path,
             result_root,
@@ -819,6 +954,16 @@ def _build_card(
     materials = _material_projection(
         entry["materials"], profile_reference_owner, repository_root, source_hashes
     )
+    history = dict(entry["history"])
+    lifecycle_projection: dict[str, Any] | None = None
+    if "lifecycle" in entry:
+        history, lifecycle_projection = _lifecycle_projection(
+            entry["lifecycle"],
+            profile_reference_owner,
+            repository_root,
+            source_hashes,
+            str(profile["as_of"]),
+        )
     # ``graph_paths`` is intentionally consumed here: source_hashes includes
     # every graph byte, and this assertion prevents accidental partial graph
     # construction if the validator's implementation changes.
@@ -846,7 +991,7 @@ def _build_card(
         "limitations": receipt["limitations"],
         "invalidation_triggers": receipt["invalidation_triggers"],
         "state": receipt["state"],
-        "history": entry["history"],
+        "history": history,
         "materials": materials,
         "verification": verification_projection,
         "source_hashes": dict(sorted(source_hashes.items())),
@@ -856,6 +1001,8 @@ def _build_card(
         "measurements": measurement_projection,
         "generator": {"name": GENERATOR_NAME, "version": GENERATOR_VERSION},
     }
+    if lifecycle_projection is not None:
+        card["lifecycle"] = lifecycle_projection
     if report_projection is not None:
         card["report"] = report_projection
     # Keep an explicit selected-ID field so a consumer can distinguish the
@@ -1000,6 +1147,17 @@ def _render_card(card: Mapping[str, Any]) -> str:
     lines.extend(["## Historical status", ""])
     for key in ("admission", "action", "outcome_follow_up", "freshness"):
         lines.append(f"- {key}: `{card['history'][key]}`")
+    if "lifecycle" in card:
+        lines.extend(["", "Declared lifecycle:"])
+        for key, reference in card["lifecycle"]["refs"].items():
+            lines.append(f"- `{key}`: `{reference['uri']}` (SHA-256 `{reference['sha256']}`)")
+        lines.extend(
+            [
+                f"- adoption disposition: `{card['lifecycle']['adoption_disposition']}`",
+                f"- action kind: `{card['lifecycle']['action_kind']}`",
+                f"- follow-up due: `{card['lifecycle']['follow_up_due_at']}`",
+            ]
+        )
     lines.extend(["", "## Materials", ""])
     for material in card["materials"]:
         lines.append(f"- **{material['label']}** — `{material['availability']}`")

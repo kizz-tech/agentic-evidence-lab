@@ -11,17 +11,17 @@ from pathlib import Path
 
 from tools.verify_release_artifacts import main, verify_archives, write_release_metadata
 
-VERSION = "0.1.0a5"
+VERSION = "0.1.0a6"
 
 
 def _wheel(path: Path, *, payload: bytes = b"", extra: dict[str, bytes] | None = None) -> None:
     files = {
-        "ael/__init__.py": b'__version__ = "0.1.0a5"\n',
-        "agentic_evidence_lab-0.1.0a5.dist-info/METADATA": (
-            b"Metadata-Version: 2.3\nName: agentic-evidence-lab\nVersion: 0.1.0a5\n"
+        "ael/__init__.py": b'__version__ = "0.1.0a6"\n',
+        "agentic_evidence_lab-0.1.0a6.dist-info/METADATA": (
+            b"Metadata-Version: 2.3\nName: agentic-evidence-lab\nVersion: 0.1.0a6\n"
         ),
-        "agentic_evidence_lab-0.1.0a5.dist-info/WHEEL": b"Wheel-Version: 1.0\n",
-        "agentic_evidence_lab-0.1.0a5.dist-info/RECORD": b"",
+        "agentic_evidence_lab-0.1.0a6.dist-info/WHEEL": b"Wheel-Version: 1.0\n",
+        "agentic_evidence_lab-0.1.0a6.dist-info/RECORD": b"",
     }
     if payload:
         files["ael/payload.txt"] = payload
@@ -34,12 +34,12 @@ def _wheel(path: Path, *, payload: bytes = b"", extra: dict[str, bytes] | None =
 def _sdist(
     path: Path, *, payload: bytes = b"", extra: list[tuple[str, bytes]] | None = None
 ) -> None:
-    root = "agentic_evidence_lab-0.1.0a5"
+    root = "agentic_evidence_lab-0.1.0a6"
     files = {
-        "pyproject.toml": b'[project]\nname = "agentic-evidence-lab"\nversion = "0.1.0a5"\n',
+        "pyproject.toml": b'[project]\nname = "agentic-evidence-lab"\nversion = "0.1.0a6"\n',
         "README.md": b"Public README\n",
         "LICENSE": b"Apache-2.0\n",
-        "src/ael/__init__.py": b'__version__ = "0.1.0a5"\n',
+        "src/ael/__init__.py": b'__version__ = "0.1.0a6"\n',
     }
     if payload:
         files["src/ael/payload.txt"] = payload
@@ -58,8 +58,8 @@ class ReleaseArtifactTests(unittest.TestCase):
     def test_safe_wheel_and_sdist_pass_and_metadata_is_deterministic(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            wheel = root / "agentic_evidence_lab-0.1.0a5-py3-none-any.whl"
-            sdist = root / "agentic_evidence_lab-0.1.0a5.tar.gz"
+            wheel = root / "agentic_evidence_lab-0.1.0a6-py3-none-any.whl"
+            sdist = root / "agentic_evidence_lab-0.1.0a6.tar.gz"
             _wheel(wheel)
             _sdist(sdist)
             self.assertEqual([], verify_archives([sdist, wheel], VERSION))
@@ -68,10 +68,10 @@ class ReleaseArtifactTests(unittest.TestCase):
             write_release_metadata(
                 [sdist, wheel],
                 output,
-                tag="v0.1.0-alpha.5",
+                tag="v0.1.0-alpha.6",
                 commit="A" * 40,
                 version=VERSION,
-                projection_policy="ael.publication-projection/0.1",
+                projection_policy="ael.publication-projection/0.2",
             )
             manifest = json.loads((output / "release-manifest.json").read_text(encoding="utf-8"))
             self.assertEqual("ael.release-manifest/0.1", manifest["format"])
@@ -102,7 +102,7 @@ class ReleaseArtifactTests(unittest.TestCase):
                     b"X-Amz-Sig" + b"nature=abcdef0123456789 "
                     b"/" + b"home/private/ C:\\Users" + b"\\private\\"
                 ),
-                extra={"agentic_evidence_lab-0.1.0a5/.env": b"private"},
+                extra={"agentic_evidence_lab-0.1.0a6/.env": b"private"},
             )
             failures = verify_archives([archive], VERSION)
             self.assertTrue(any("forbidden private/generated member" in item for item in failures))
@@ -113,7 +113,7 @@ class ReleaseArtifactTests(unittest.TestCase):
 
     def test_container_home_path_is_not_treated_as_personal(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
-            archive = Path(directory) / "agentic_evidence_lab-0.1.0a5-py3-none-any.whl"
+            archive = Path(directory) / "agentic_evidence_lab-0.1.0a6-py3-none-any.whl"
             _wheel(archive, payload=b"/workspace/home/container/project.txt")
             self.assertEqual([], verify_archives([archive], VERSION))
 
@@ -136,7 +136,7 @@ class ReleaseArtifactTests(unittest.TestCase):
                 for member in source_archive.getmembers():
                     if member.isfile():
                         archive.addfile(member, source_archive.extractfile(member))
-                info = tarfile.TarInfo("agentic_evidence_lab-0.1.0a5/src/ael/link")
+                info = tarfile.TarInfo("agentic_evidence_lab-0.1.0a6/src/ael/link")
                 info.type = tarfile.SYMTYPE
                 info.linkname = "/Users" + "/private"
                 archive.addfile(info)
@@ -152,7 +152,7 @@ class ReleaseArtifactTests(unittest.TestCase):
                 for info in source.infolist():
                     payload = source.read(info)
                     if info.filename.endswith("METADATA"):
-                        payload = payload.replace(b"Version: 0.1.0a5", b"Version: 0.1.0a4")
+                        payload = payload.replace(b"Version: 0.1.0a6", b"Version: 0.1.0a4")
                     target.writestr(info, payload)
             failures = verify_archives([rewritten], VERSION)
             self.assertTrue(any("does not match expected" in item for item in failures))
@@ -194,7 +194,7 @@ class ReleaseArtifactTests(unittest.TestCase):
 
     def test_cli_requires_metadata_options_when_output_requested(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
-            archive = Path(directory) / "agentic_evidence_lab-0.1.0a5-py3-none-any.whl"
+            archive = Path(directory) / "agentic_evidence_lab-0.1.0a6-py3-none-any.whl"
             _wheel(archive)
             result = main(["--expected-version", VERSION, "--output-dir", directory, str(archive)])
             self.assertEqual(2, result)

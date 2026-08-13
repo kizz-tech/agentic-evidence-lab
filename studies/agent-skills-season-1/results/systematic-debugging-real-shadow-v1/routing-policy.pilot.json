@@ -1,0 +1,22 @@
+{
+  "schema_version": "ael.debugging-routing-policy/0.1-pilot",
+  "policy_id": "kizz:ael:decision-case:systematic-debugging-real-shadow:1:routing:1",
+  "adoption_decision_ref": {
+    "adoption_decision_id": "kizz:ael:decision-case:systematic-debugging-real-shadow:1:adoption:1",
+    "sha256": "d5427cff89b5112b22d9db3b83f6607184403e3ec147af0272ab62590096dc48"
+  },
+  "candidate": {
+    "source_id": "superpowers-systematic-debugging",
+    "repository": "https://github.com/obra/superpowers",
+    "revision": "44c9b2d6e889982ac18c27d05a19fefe335194e1",
+    "path": "skills/systematic-debugging",
+    "tree_sha256": "46da4917c596a8c90ca03cc1f91992cee66eaec9208cb9be2edb3fbd2a0c746f",
+    "license": "MIT"
+  },
+  "mode": "reject_exact_version",
+  "eligible_strata": [],
+  "scope": "Block only revision 44c9b2d6e889982ac18c27d05a19fefe335194e1 / tree 46da4917... on the frozen Codex stack.",
+  "default_enabled": false,
+  "global_installation": false,
+  "reversal_trigger": "One critical failure, material regression, private-data incident, candidate/source drift, or evidence that selective routing increases rework disables the policy pending a new admission."
+}

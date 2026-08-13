@@ -1,8 +1,84 @@
 {
-  "schema_version": "ael.public-results/0.1",
-  "as_of": "2026-08-12",
-  "projection_policy": "ael.publication-projection/0.1",
+  "schema_version": "ael.public-results/0.2",
+  "as_of": "2026-08-13",
+  "projection_policy": "ael.publication-projection/0.2",
   "studies": [
+    {
+      "card_id": "systematic-debugging-real-shadow-v1",
+      "title": "Systematic Debugging real-shadow v1",
+      "publication": "unpublished",
+      "receipt_ref": {
+        "uri": "studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/evidence-receipt.json",
+        "sha256": "210a1398e51c230c7329cbf362d26f41d0ade3fb01458e5e27fb222e9c878a0e"
+      },
+      "report_ref": {
+        "uri": "reports/2026-08-13-systematic-debugging-real-shadow-v1.md",
+        "sha256": "e3c5628b92f7e8cd98c028022e6a86175dc099c3987d97071f53f9dd14e2e7b3"
+      },
+      "claim_ids": [
+        "AEL-DEBUG-SHADOW-01",
+        "AEL-DEBUG-SHADOW-02"
+      ],
+      "verification": {
+        "kind": "frozen_public_bundle",
+        "command": [
+          "uv run ael study audit --freeze studies/agent-skills-season-1/screening/systematic-debugging-real-shadow.freeze.json --result studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1 --decision-adapter systematic-debugging-real-shadow-v1 --require-git-proof"
+        ],
+        "boundary": "Validates the public Contract v0 graph, reconstructs the frozen effect from public measurements, checks the prospective admission-to-action chain and disclosed projection repair, and verifies repository artifact ordering. It does not rerun private tasks or hosted calls, prove their wall-clock chronology, or constitute independent replication.",
+        "freeze_ref": {
+          "uri": "studies/agent-skills-season-1/screening/systematic-debugging-real-shadow.freeze.json",
+          "sha256": "b5c63ce49c594c7345a242b72f1156c8aef0558466f9b72291e8bc18c7aafdd7"
+        },
+        "result_root": "studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1",
+        "adapter": "systematic-debugging-real-shadow-v1"
+      },
+      "materials": [
+        {
+          "label": "Private sanitized real-shadow task and raw execution bytes",
+          "availability": "withheld",
+          "reason": "The four sanitized fixtures, raw Codex events, candidates, and evaluator outputs remain in the private evidence boundary.",
+          "reproduction_impact": "A public checkout can recompute the decision from normalized measurements and verify opaque hashes but cannot rerun the exact tasks."
+        },
+        {
+          "label": "Hosted model calls",
+          "availability": "not_retained",
+          "reason": "The public graph retains normalized run records rather than a replayable provider execution service.",
+          "reproduction_impact": "The exact historical model calls cannot be replayed and the provider exposed no immutable model revision."
+        },
+        {
+          "label": "Post-run projection deviation",
+          "availability": "public",
+          "ref": {
+            "uri": "studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/projection-deviation.pilot.json",
+            "sha256": "6494c5c6488de672cef007ab4c9dd8ae47aa43a6af320fa3b05c36dedd4fb5b3"
+          }
+        }
+      ],
+      "history": {
+        "admission": "derived_from_lifecycle",
+        "action": "derived_from_lifecycle",
+        "outcome_follow_up": "derived_from_lifecycle",
+        "freshness": "derived_from_lifecycle"
+      },
+      "lifecycle": {
+        "admission_ref": {
+          "uri": "studies/agent-skills-season-1/screening/systematic-debugging-real-shadow.admission.pilot.json",
+          "sha256": "ecf001fb6c03757621ed7159875c2801056aa869891281baae4bf04f0125d94c"
+        },
+        "adoption_decision_ref": {
+          "uri": "studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/adoption-decision.pilot.json",
+          "sha256": "d5427cff89b5112b22d9db3b83f6607184403e3ec147af0272ab62590096dc48"
+        },
+        "action_record_ref": {
+          "uri": "studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/action-record.pilot.json",
+          "sha256": "fa7c243157ca30a2482961184420942fa9e3274b8ca836b60bd9e5af76fd4616"
+        },
+        "outcome_follow_up_ref": {
+          "uri": "studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/outcome-follow-up.pilot.json",
+          "sha256": "510d764f68eaf02cb043a0cf45d5217f66da06d0d5a29c4b1d673f775f63a9fe"
+        }
+      }
+    },
     {
       "card_id": "property-based-testing-v2",
       "title": "Property-based Testing v2",

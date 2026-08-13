@@ -1,0 +1,21 @@
+{
+  "schema_version": "ael.action-record/0.1-pilot",
+  "action_id": "kizz:ael:decision-case:systematic-debugging-real-shadow:1:action:1",
+  "adoption_decision_ref": {
+    "adoption_decision_id": "kizz:ael:decision-case:systematic-debugging-real-shadow:1:adoption:1",
+    "sha256": "d5427cff89b5112b22d9db3b83f6607184403e3ec147af0272ab62590096dc48"
+  },
+  "action_kind": "record_exact_version_block",
+  "state": "verified",
+  "target_scope": "Block only revision 44c9b2d6e889982ac18c27d05a19fefe335194e1 / tree 46da4917... on the frozen Codex stack.",
+  "actor_id": "kizz-ael-maintainer",
+  "acted_at": "2026-08-13T01:05:29Z",
+  "owner_system_ref": {
+    "uri": "routing-policy.pilot.json",
+    "sha256": "a41f42676a2d5e5477b25d4aacd4d33b608c2042fe2e71adc596a1f19ae30eb4"
+  },
+  "limitations": [
+    "This routing policy governs AEL/Kizz Codex process guidance only; it is not proof of automatic enforcement in every client.",
+    "No skill was globally installed by this action."
+  ]
+}

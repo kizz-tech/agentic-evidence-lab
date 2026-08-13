@@ -1,0 +1,13 @@
+{
+  "freeze_id": "kizz:ael:freeze:systematic-debugging-real-shadow:1",
+  "freeze_sha256": "b5c63ce49c594c7345a242b72f1156c8aef0558466f9b72291e8bc18c7aafdd7",
+  "admission_sha256": "ecf001fb6c03757621ed7159875c2801056aa869891281baae4bf04f0125d94c",
+  "manifest_sha256": "2e4773cd9d06a0abbd92f32ffbb5fab9bfd0a1c06aed5534a86393ed0067e5a3",
+  "private_pack_sha256": "a17c35a8743c914164d7e9fac49d23e0dd1d6c8fe77dba86ac22becf65c72359",
+  "preregistration_sha": "58c73ab76630002145599ddb7b3837aa27018bc9",
+  "effect_decision_sha256": "7a611e43c8bccc54a325796616616fdfae84183ade5b67901b676251396a17bf",
+  "receipt_sha256": "210a1398e51c230c7329cbf362d26f41d0ade3fb01458e5e27fb222e9c878a0e",
+  "adoption_decision_sha256": "d5427cff89b5112b22d9db3b83f6607184403e3ec147af0272ab62590096dc48",
+  "action_record_sha256": "fa7c243157ca30a2482961184420942fa9e3274b8ca836b60bd9e5af76fd4616",
+  "projection_deviation_sha256": "6494c5c6488de672cef007ab4c9dd8ae47aa43a6af320fa3b05c36dedd4fb5b3"
+}

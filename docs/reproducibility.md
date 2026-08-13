@@ -9,7 +9,7 @@ behavior is not expected to be byte-identical.
 
 ## Graph verification: deterministic public checks
 
-From a clean checkout of the exact alpha.5 source revision under review:
+From a clean checkout of the exact alpha.6 source revision under review:
 
 ```bash
 uv sync --locked --all-groups
@@ -23,6 +23,11 @@ uv run ael study audit \
   --result studies/agent-skills-season-1/results/property-based-testing-v2 \
   --decision-adapter pbt-v2 \
   --require-git-proof
+uv run ael study audit \
+  --freeze studies/agent-skills-season-1/screening/systematic-debugging-real-shadow.freeze.json \
+  --result studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1 \
+  --decision-adapter systematic-debugging-real-shadow-v1 \
+  --require-git-proof
 uv run ael validate \
   studies/agent-skills-season-1/concept.json \
   studies/agent-skills-season-1/manifests \
@@ -33,7 +38,7 @@ uv run python tools/check_frozen_artifacts.py
 uv run python tools/release_check.py
 uv build
 uv run python tools/verify_release_artifacts.py \
-  --expected-version 0.1.0a5 dist/*.whl dist/*.tar.gz
+  --expected-version 0.1.0a6 dist/*.whl dist/*.tar.gz
 ```
 
 These checks establish package, schema, cross-reference, committed-fixture,
@@ -72,6 +77,14 @@ reconstruct private events or establish independent replication.
 The private observation payload remains opaque. The audit checks its published
 hash and, with the explicit adapter, recomputes the exposed counts and outcome;
 it cannot reconstruct hidden task or event bytes that were not published.
+
+The `systematic-debugging-real-shadow-v1` adapter additionally verifies the
+prospective admission-to-action chain and reconstructs the terminal effect from
+80 public measurements rather than trusting the aggregate decision. It also
+verifies the disclosed one-field projection repair by reconstructing the
+original invalid receipt bytes. That repair occurred after scored work and did
+not change observations or the effect decision; it is not represented as
+preregistered analysis.
 
 For future Codex runs, `ael study activation-check` accepts Codex JSONL events
 and counts activation only when a completed, exit-zero command retrieved

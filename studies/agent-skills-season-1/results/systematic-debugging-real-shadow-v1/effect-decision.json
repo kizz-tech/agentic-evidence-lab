@@ -1,0 +1,66 @@
+{
+  "claim_ceiling": "screening-derived bounded internal routing signal",
+  "counts": {
+    "activation_failures": 0,
+    "complete_pairs": 4,
+    "favorable_pairs": 0,
+    "invalid_observations": 0,
+    "tied_pairs": 4,
+    "treatment_critical_failures": 1,
+    "unfavorable_pairs": 0,
+    "valid_observations": 8
+  },
+  "effect_decision_id": "kizz:ael:freeze:systematic-debugging-real-shadow:1:effect",
+  "effect_outcome": "treatment_critical_failure",
+  "eligible_strata": [],
+  "favorable_by_stratum": {
+    "cross-boundary-contract": 0,
+    "state-order-lifecycle": 0
+  },
+  "freeze_ref": {
+    "freeze_id": "kizz:ael:freeze:systematic-debugging-real-shadow:1",
+    "sha256": "b5c63ce49c594c7345a242b72f1156c8aef0558466f9b72291e8bc18c7aafdd7"
+  },
+  "observations_sha256": "4ecaafc6f0711a83734fec3a5a621274be6114addd15d63857a2a1f116b65a0a",
+  "pair_classifications": [
+    {
+      "baseline_accepted": true,
+      "pair_outcome": "tie",
+      "stratum": "cross-boundary-contract",
+      "task_id": "D-S01",
+      "treatment_accepted": true
+    },
+    {
+      "baseline_accepted": true,
+      "pair_outcome": "tie",
+      "stratum": "cross-boundary-contract",
+      "task_id": "D-S02",
+      "treatment_accepted": true
+    },
+    {
+      "baseline_accepted": false,
+      "pair_outcome": "tie",
+      "stratum": "state-order-lifecycle",
+      "task_id": "D-S03",
+      "treatment_accepted": false
+    },
+    {
+      "baseline_accepted": true,
+      "pair_outcome": "tie",
+      "stratum": "state-order-lifecycle",
+      "task_id": "D-S04",
+      "treatment_accepted": true
+    }
+  ],
+  "rule": {
+    "invalid_outcome": "invalid_manual_review",
+    "maximum_unfavorable_for_route": 0,
+    "reject_at_unfavorable_pairs": 2,
+    "require_all_treatment_activations": true,
+    "require_zero_treatment_critical_failures": true,
+    "route_requires_favorable_tasks_per_stratum": 2
+  },
+  "schema_version": "ael.study-effect-decision/0.1-pilot",
+  "study_id": "kizz:ael:study:agent-skills-season-1:systematic-debugging-real-shadow",
+  "study_revision": 1
+}

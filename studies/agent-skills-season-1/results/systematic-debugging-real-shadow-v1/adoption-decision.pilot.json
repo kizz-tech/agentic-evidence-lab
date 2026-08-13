@@ -1,0 +1,34 @@
+{
+  "schema_version": "ael.adoption-decision/0.1-pilot",
+  "adoption_decision_id": "kizz:ael:decision-case:systematic-debugging-real-shadow:1:adoption:1",
+  "admission_ref": {
+    "admission_id": "kizz:ael:study:agent-skills-season-1:systematic-debugging-real-shadow:admission:1",
+    "sha256": "ecf001fb6c03757621ed7159875c2801056aa869891281baae4bf04f0125d94c"
+  },
+  "effect_decision_ref": {
+    "effect_decision_id": "kizz:ael:freeze:systematic-debugging-real-shadow:1:effect",
+    "sha256": "7a611e43c8bccc54a325796616616fdfae84183ade5b67901b676251396a17bf"
+  },
+  "evidence_receipt_ref": {
+    "receipt_id": "kizz:ael:receipt:agent-skills-season-1:systematic-debugging-real-shadow-v1",
+    "sha256": "210a1398e51c230c7329cbf362d26f41d0ade3fb01458e5e27fb222e9c878a0e"
+  },
+  "matched_rule_id": "reject-exact-treatment",
+  "resolution_status": "applied_policy",
+  "disposition": "reject_exact_version",
+  "scope": "Block only revision 44c9b2d6e889982ac18c27d05a19fefe335194e1 / tree 46da4917... on the frozen Codex stack.",
+  "resolved_at": "2026-08-13T01:05:29Z",
+  "owner_id": "kizz-ael-maintainer",
+  "candidate": {
+    "source_id": "superpowers-systematic-debugging",
+    "repository": "https://github.com/obra/superpowers",
+    "revision": "44c9b2d6e889982ac18c27d05a19fefe335194e1",
+    "path": "skills/systematic-debugging",
+    "tree_sha256": "46da4917c596a8c90ca03cc1f91992cee66eaec9208cb9be2edb3fbd2a0c746f",
+    "license": "MIT"
+  },
+  "limitations": [
+    "This is execution of a preregistered owner policy, not an automatically inferred universal product recommendation.",
+    "Global installation was ineligible under the admitted policy."
+  ]
+}

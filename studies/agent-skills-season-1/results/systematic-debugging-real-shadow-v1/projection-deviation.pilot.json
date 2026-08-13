@@ -1,0 +1,27 @@
+{
+  "schema_version": "ael.projection-deviation/0.1-pilot",
+  "deviation_id": "kizz:ael:projection-deviation:systematic-debugging-real-shadow-v1:1",
+  "detected_stage": "post-run Contract v0 validation",
+  "detected_failure": "materialized Contract v0 bundle is invalid: evidence-receipt.json at reproducibility: 'partially_rerunnable' is not one of the Contract v0 enum values",
+  "repaired_at": "2026-08-13T01:09:20Z",
+  "preregistration_sha": "58c73ab76630002145599ddb7b3837aa27018bc9",
+  "frozen_materializer_sha256": "f79dae06c3f0de85d913155ec41ee0e3f2ad10f54f006defcab5c4e390611f24",
+  "repair_tool_sha256": "5d9afd1ba385782dae326d449c4ec504359be6b46ec8bc02a980043f96069cbb",
+  "original_receipt_sha256": "8d4f7328eec31e67635ea252344739e75280032a874a3a6cd16af7850c635214",
+  "repaired_receipt_sha256": "210a1398e51c230c7329cbf362d26f41d0ade3fb01458e5e27fb222e9c878a0e",
+  "effect_decision_sha256": "7a611e43c8bccc54a325796616616fdfae84183ade5b67901b676251396a17bf",
+  "allowed_change": {
+    "path": "evidence-receipt.json.reproducibility",
+    "before": "partially_rerunnable",
+    "after": "rerunnable"
+  },
+  "dependent_hashes_recomputed": [
+    "adoption-decision.pilot.json",
+    "routing-policy.pilot.json",
+    "action-record.pilot.json",
+    "outcome-follow-up.pilot.json",
+    "freeze-ref.json"
+  ],
+  "decision_impact": "none; observations and effect-decision.json remained byte-identical",
+  "claim_boundary": "This repairs a public projection contract violation. It is not a preregistered analysis change and does not strengthen the empirical claim."
+}

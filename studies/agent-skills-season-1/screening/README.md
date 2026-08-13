@@ -1,6 +1,6 @@
 # Agent Skills Season 1 — first-wave screening boundary
 
-State: one preregistered pathfinder completed with a bounded negative result.
+State: two preregistered pilots completed with bounded negative results.
 
 Activation calibration is the completed `v0.1.0-alpha.2` milestone. The
 Property-based Testing v2 pilot used private screening and confirmation packs
@@ -18,14 +18,24 @@ The first wave still contains the three studies marked `first_wave` in
    intervention was rejected on the measured surface.
 2. Truthful completion returns to task design after two sacrificial prompt
    variants produced a baseline ceiling; no scored calls were made.
-3. The debugging tournament remains the next distinct study after the
-   pathfinder closes.
+3. The broader debugging tournament remains a later distinct study. Its
+   narrower Superpowers-only real-shadow pilot is complete: four matched pairs
+   tied, an absolute treatment safety gate triggered, and the owner policy
+   blocked only the exact tested snapshot.
 
 The PBT [analysis plan](property-based-testing-v2-analysis-plan.md),
 [freeze](property-based-testing-v2.freeze.json), and immutable
 [study-manifest revision 2](../manifests/property-based-testing-v2.study-manifest.json)
 are the preregistration record. Private task and evaluator bytes remain outside
 the repository.
+
+The Systematic Debugging real-shadow
+[analysis plan](systematic-debugging-real-shadow-analysis-plan.md),
+[prospective admission](systematic-debugging-real-shadow.admission.pilot.json),
+[freeze](systematic-debugging-real-shadow.freeze.json), and
+[result bundle](../results/systematic-debugging-real-shadow-v1/) exercise the
+experimental admission → effect → adoption → action → follow-up chain. These
+pilot lifecycle shapes are not yet promoted into stable Contract v0 schemas.
 
 MCP construction and webapp testing retain their activation-inconclusive
 receipts. They do not block the first wave and will be redesigned in their own

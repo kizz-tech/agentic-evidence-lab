@@ -58,6 +58,11 @@ jobs:
             --result studies/agent-skills-season-1/results/property-based-testing-v2 \
             --decision-adapter pbt-v2 \
             --require-git-proof
+          uv run ael study audit \
+            --freeze studies/agent-skills-season-1/screening/systematic-debugging-real-shadow.freeze.json \
+            --result studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1 \
+            --decision-adapter systematic-debugging-real-shadow-v1 \
+            --require-git-proof
           uv run ael validate \
             studies/agent-skills-season-1/concept.json \
             studies/agent-skills-season-1/manifests \
@@ -75,7 +80,7 @@ jobs:
         run: |
           uv build
           uv run python tools/verify_release_artifacts.py \
-            --expected-version 0.1.0a5 \
+            --expected-version 0.1.0a6 \
             dist/*.whl dist/*.tar.gz
 
   clean-wheel:
@@ -99,8 +104,8 @@ jobs:
           test -n "$wheel"
           uv venv .release-venv
           uv pip install --python .release-venv/bin/python "$wheel"
-          test "$(.release-venv/bin/ael --version)" = "0.1.0a5"
-          test "$(.release-venv/bin/python -c 'import importlib.metadata; print(importlib.metadata.version("agentic-evidence-lab"))')" = "0.1.0a5"
+          test "$(.release-venv/bin/ael --version)" = "0.1.0a6"
+          test "$(.release-venv/bin/python -c 'import importlib.metadata; print(importlib.metadata.version("agentic-evidence-lab"))')" = "0.1.0a6"
           .release-venv/bin/ael results check studies/public-results.json --require-git-proof
           .release-venv/bin/ael validate examples
           .release-venv/bin/ael validate \
@@ -113,6 +118,11 @@ jobs:
             --freeze studies/agent-skills-season-1/screening/property-based-testing-v2.freeze.json \
             --result studies/agent-skills-season-1/results/property-based-testing-v2 \
             --decision-adapter pbt-v2 \
+            --require-git-proof
+          .release-venv/bin/ael study audit \
+            --freeze studies/agent-skills-season-1/screening/systematic-debugging-real-shadow.freeze.json \
+            --result studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1 \
+            --decision-adapter systematic-debugging-real-shadow-v1 \
             --require-git-proof
           .release-venv/bin/ael validate \
             studies/agent-skills-season-1/concept.json \
