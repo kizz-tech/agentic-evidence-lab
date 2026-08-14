@@ -48,9 +48,9 @@ class ResultSurfaceTests(unittest.TestCase):
         shutil.copytree(EXAMPLE, example)
         receipt = example / "evidence-receipt.json"
         profile: dict[str, object] = {
-            "schema_version": "ael.public-results/0.3",
+            "schema_version": "ael.public-results/0.4",
             "as_of": "2026-08-12",
-            "projection_policy": "ael.publication-projection/0.3",
+            "projection_policy": "ael.publication-projection/0.4",
             "studies": [
                 {
                     "card_id": "council-generation-1",
@@ -73,7 +73,11 @@ class ResultSurfaceTests(unittest.TestCase):
                         "freshness": "unassessed",
                     },
                     "quality": {"assessment": "not_assessed_historical"},
-                    "publication": "published",
+                    "catalog_state": "listed",
+                    "maintainer_rerun": {
+                        "status": "not_assessed",
+                        "boundary": "No maintainer rerun package is asserted.",
+                    },
                 }
             ],
         }
@@ -98,7 +102,7 @@ class ResultSurfaceTests(unittest.TestCase):
             set(first),
         )
         index = json.loads(first["docs/results/index.json"])
-        self.assertEqual("ael.public-results/0.3", index["schema_version"])
+        self.assertEqual("ael.public-results/0.4", index["schema_version"])
         self.assertEqual(
             [
                 "council-generation-1",
@@ -108,7 +112,11 @@ class ResultSurfaceTests(unittest.TestCase):
             ],
             [card["card_id"] for card in index["studies"]],
         )
-        self.assertIn("Current publication", first["docs/results/council-generation-1.md"])
+        self.assertIn("Catalog state", first["docs/results/council-generation-1.md"])
+        self.assertNotIn(
+            "Reproducibility: `rerunnable`",
+            first["docs/results/council-generation-1.md"],
+        )
         self.assertIn("not_declared_historical", first["docs/results/property-based-testing-v2.md"])
         self.assertIn("not_assessed_historical", first["docs/results/property-based-testing-v2.md"])
         for card in index["studies"]:
@@ -140,9 +148,28 @@ class ResultSurfaceTests(unittest.TestCase):
         self.assertEqual("scheduled:not_due", real_shadow["history"]["outcome_follow_up"])
         self.assertEqual("within_declared_window", real_shadow["history"]["freshness"])
         self.assertEqual("reject_exact_version", real_shadow["lifecycle"]["adoption_disposition"])
+        self.assertEqual("listed", real_shadow["catalog_state"])
+        self.assertEqual("rerunnable", real_shadow["receipt_reproducibility"])
+        self.assertEqual(
+            "decision_recomputable",
+            real_shadow["reproduction"]["public_graph_verification"]["status"],
+        )
+        self.assertEqual(
+            "maintainer_only_new_observation",
+            real_shadow["reproduction"]["study_rerun"]["status"],
+        )
+        self.assertEqual(
+            "none_linked",
+            real_shadow["reproduction"]["independent_replication"]["status"],
+        )
         self.assertIn(
             "projection repair",
             " ".join(real_shadow["limitations"]),
+        )
+        real_shadow_markdown = first["docs/results/systematic-debugging-real-shadow-v1.md"]
+        self.assertLess(
+            real_shadow_markdown.index("Audit status: `passed`."),
+            real_shadow_markdown.index("## Maintainer rerun boundary"),
         )
 
     def test_profile_unknown_keys_and_historical_values_fail_closed(self) -> None:
@@ -159,10 +186,20 @@ class ResultSurfaceTests(unittest.TestCase):
         ):
             validate_public_profile(invalid_history)
 
-        invalid_publication = copy.deepcopy(profile)
-        invalid_publication["studies"][0]["publication"] = "public_ready"  # type: ignore[index]
-        with self.assertRaisesRegex(ResultSurfaceError, "publication"):
-            validate_public_profile(invalid_publication)
+        invalid_catalog = copy.deepcopy(profile)
+        invalid_catalog["studies"][0]["catalog_state"] = "published"  # type: ignore[index]
+        with self.assertRaisesRegex(ResultSurfaceError, "catalog_state"):
+            validate_public_profile(invalid_catalog)
+
+        invalid_rerun = copy.deepcopy(profile)
+        invalid_rerun["studies"][0]["maintainer_rerun"]["status"] = "public"  # type: ignore[index]
+        with self.assertRaisesRegex(ResultSurfaceError, "maintainer_rerun.status"):
+            validate_public_profile(invalid_rerun)
+
+        missing_rerun = copy.deepcopy(profile)
+        del missing_rerun["studies"][0]["maintainer_rerun"]  # type: ignore[index]
+        with self.assertRaisesRegex(ResultSurfaceError, "missing required key"):
+            validate_public_profile(missing_rerun)
 
         missing_quality = copy.deepcopy(profile)
         del missing_quality["studies"][0]["quality"]  # type: ignore[index]

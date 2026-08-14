@@ -35,7 +35,11 @@ independent verification.
 - links and content hashes resolve;
 - wheel and source archives are inspected for unsafe members and payloads, and
   their metadata agrees with the package, citation, changelog, tag, and CLI;
-- release state is described as local/public-ready/published exactly.
+- release state is described as local/public-ready/published exactly;
+- deterministic result-catalog membership is never presented as evidence that
+  a Git tag, GitHub release, or package publication has succeeded;
+- public graph verification, maintainer rerun capability, and linked
+  independent replication are checked as separate result-card facets.
 
 Hosted-model execution is included only as a maintainer-controlled adapter. It
 requires `--trusted-input-only`; third-party hosted execution remains blocked.

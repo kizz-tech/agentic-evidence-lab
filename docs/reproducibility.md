@@ -7,6 +7,20 @@ replication** adds a new executor and role-separated evidence production. None
 of these operations implies either of the others, and stochastic model
 behavior is not expected to be byte-identical.
 
+Public result cards use three explicit facets:
+
+| Facet | Meaning | What it does not prove |
+| --- | --- | --- |
+| Public graph verification | A public checkout can validate hashes or recompute the published decision, depending on the named adapter. | A new model execution or independent replication. |
+| Maintainer rerun | The maintainer can perform a new observation with the declared retained inputs, when assessed. | Replay of historical provider behavior or outside ownership. |
+| Independent replication | A separately owned replication is linked by the evidence graph. | Transfer beyond the replicated scope. |
+
+Contract v0 receipts retain their original `reproducibility` enum for source
+compatibility. Generated machine cards expose it as
+`receipt_reproducibility`, and technical cards explain its boundary; it is not
+used as a shortcut for any row above. Catalog membership is likewise distinct
+from Git tag, GitHub release, or package-publication state.
+
 ## Graph verification: deterministic public checks
 
 From a clean checkout of the exact alpha.7 source revision under review:
@@ -110,7 +124,9 @@ Every receipt binds its concept, study, runs, and measurements by SHA-256.
 `ael validate` resolves relative public references and checks those hashes.
 The generated [Results Index](../RESULTS.md) and machine index are deterministic
 projections over those validated references; regeneration does not change the
-underlying receipt or its authority.
+underlying receipt or its authority. The exact public handoff for each result
+is visible in those projections without implying that hidden inputs became
+public.
 
 To regenerate intentionally, use:
 
@@ -164,17 +180,18 @@ uv run ael study audit \
 
 It recomputes the exposed counts and checks the hash-linked bundle; it does not
 rerun the private model calls. A historical PBT v2 rerun has no public command
-in alpha.5 because its task packs, raw Codex events, candidate workspaces, and
-evaluator outputs are withheld. Do not label the audit, receipt rendering, or
-projection regeneration as a rerun.
+in the current alpha because its task packs, raw Codex events, candidate
+workspaces, and evaluator outputs are withheld. Do not label the audit, receipt
+rendering, or projection regeneration as a rerun.
 
 An independent replication requires a new executor to obtain the frozen
 protocol and permitted inputs, run the study through the declared adapter, and
 publish a new receipt with disclosed intervention ownership, task authorship,
 evaluation, analysis, and decision roles. Forking the repository, rerunning a
 receipt, or checking a Git tag is not automatically independent verification.
-Use `reproducible_third_party` or `independently_verified` only when the
+Use `reproduced_third_party` or `independently_verified` only when the
 receipt's role and evidence requirements are actually satisfied. Evidence
-level, reproducibility, independence, freshness, action, and outcome remain
-orthogonal; missing historical action or outcome is `not_declared_historical`,
-not a negative observation.
+level, public graph verification, maintainer rerun capability, linked
+independent replication, freshness, action, and outcome remain orthogonal;
+missing historical action or outcome is `not_declared_historical`, not a
+negative observation.

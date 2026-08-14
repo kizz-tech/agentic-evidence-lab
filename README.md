@@ -1,44 +1,60 @@
 # Agentic Evidence Lab
 
-**Open, task-specific evidence for deciding which agent systems work, where,
-and under what conditions.**
+**Evidence for better agent systems.**
 
 [![CI](https://github.com/kizz-tech/agentic-evidence-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/kizz-tech/agentic-evidence-lab/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/status-alpha-orange.svg)](https://github.com/kizz-tech/agentic-evidence-lab/releases)
 
-[**Browse results**](RESULTS.md) ·
+[**Browse decisions**](RESULTS.md) ·
 [**Understand the method**](docs/contract-v0.md) ·
 [**Evaluate a system**](#evaluate-your-own-system) ·
 [**See the roadmap**](ROADMAP.md) ·
 [**Read the documentation**](docs/README.md)
 
-Agentic Evidence Lab (AEL) compares versioned skills, prompts, models, tools,
-agent topologies, context policies, runtimes, and complete workflows. It records
-the exact system that ran, what changed, what stayed fixed, what failed, what it
-cost, and what decision the evidence actually supports.
+Better agent systems need more than bigger models. Agentic Evidence Lab (AEL)
+tests exact changes to the system around a model: skills, prompts, tools,
+context, models, runtimes, agent topologies, and complete workflows.
 
-The goal is not a universal agent score. It is a cumulative public map of which
-agent configurations work for particular task classes, budgets, and risk
-boundaries.
+Each study is built to answer a practical question: should this exact change be
+adopted, rejected, narrowed to a task class, or tested again? The result links
+the decision to the tested configuration, task scope, observed cost and
+failures, reliability evidence when measured, and the conditions that require
+revalidation.
 
-## Results
+The long-term goal is a cumulative public map of how to get more useful work
+from available models through better agent-system design. Today, AEL is an
+open-source research alpha for producing bounded, auditable decisions about
+versioned agent-stack changes. It is not a universal agent score or a claim
+that one configuration works everywhere.
 
-The generated [Results Index](RESULTS.md) is the public result projection. It
-contains deterministic result cards derived from the validated evidence graph;
-it is disposable navigation, not a second evidence authority. Start there for
-the current bounded decisions, limitations, and links to every public artifact.
+## What AEL publishes
 
-Active research: [Agent Skills Season 1](studies/agent-skills-season-1/README.md)
-has ten bounded protocols, exact upstream source locks, a healthy public
-calibration pack, 22 formal activation records, and two completed bounded
-negative studies: the
-[Property-based Testing v2 pathfinder](reports/2026-08-12-property-based-testing-v2.md)
-and the prospective
-[Systematic Debugging real-shadow pilot](reports/2026-08-13-systematic-debugging-real-shadow-v1.md),
-which records an exact-version owner block and scheduled follow-up.
-Arbitrary submissions remain outside the maintainer-controlled execution
-boundary.
+```text
+decision → exact change → task scope → observed outcomes and cost
+         → revalidation trigger → evidence receipt
+```
+
+- **A practical verdict** — adopt, reject, narrow, or gather more evidence.
+- **The exact tested system** — artifact versions, surrounding stack, budget,
+  permissions, and evaluator identity.
+- **The evidence boundary** — what improved or failed, what was not measured,
+  and where the conclusion stops.
+- **An audit path** — a human result card, machine-readable receipt, and the
+  study records that support it.
+
+## Start with the decisions
+
+The generated [Results Index](RESULTS.md) is the fastest way to see what was
+tested, the decision each study supports, and the scope where that decision
+applies. Open the linked report or receipt when you want to inspect the full
+comparison.
+
+The index is generated from the validated evidence graph. It is navigation,
+not a second source of research truth. Catalog membership is not GitHub release
+state, and every card separates what a public checkout can verify, what only the
+maintainer can rerun as a new observation, and what has independent replication
+evidence.
 
 ## What AEL helps answer
 
@@ -92,6 +108,12 @@ Start with the generated cards. They are projections over the full validated
 graph, not authority; open raw evidence only when you need to audit, reproduce,
 or reuse the result.
 
+The active [Agent Skills Season 1](studies/agent-skills-season-1/README.md)
+program contains ten bounded protocols, exact source locks, activation records,
+and the completed Property-based Testing and Systematic Debugging studies.
+Arbitrary submissions remain outside the maintainer-controlled execution
+boundary.
+
 ## Run the public checks
 
 Requirements: Python 3.11 or later and [`uv`](https://docs.astral.sh/uv/).
@@ -123,7 +145,7 @@ uv run ael study audit \
 uv run python -m unittest discover -s tests -v
 ```
 
-Expected validation summary for this release:
+Expected validation summary for alpha.7:
 
 ```text
 validation passed: 30 document(s); concept=4, evidence_receipt=2,
@@ -141,7 +163,10 @@ for the exact boundaries and commands.
 
 ## Evaluate your own system
 
-The smallest study starts from an existing example:
+The current alpha supports maintainer-controlled study authoring and evidence
+audit. It is not a hosted submission service, and arbitrary third-party
+execution remains blocked. The smallest local study starts from an existing
+example:
 
 1. Write a `Concept` describing the idea and proposed mechanism.
 2. Freeze a `Study Manifest` with baseline, treatment, tasks, budget, and
@@ -184,9 +209,10 @@ maintainer-reviewed snapshots and maintainer-controlled fixtures; arbitrary
 submissions remain blocked. Read [SECURITY.md](SECURITY.md) and
 [Container runner isolation](docs/runner-isolation.md) before execution.
 
-`v0.1.0-alpha.7` is pre-stable. It does not claim universal benchmarking,
-independent verification of Kizz-authored capabilities, model-only superiority
-from stack comparisons, or downstream production impact.
+The `0.1.0a7` development line is pre-stable. It does not claim universal
+benchmarking, independent verification of Kizz-authored capabilities,
+model-only superiority from stack comparisons, or downstream production
+impact.
 
 ## Documentation
 

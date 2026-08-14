@@ -78,6 +78,21 @@ declares either `not_assessed_historical` or an exact profiled assessment.
 Quality metadata cannot raise receipt evidence or claim ceilings, and the four
 pre-alpha.7 studies are not retrospectively assessed.
 
+Before release, the same alpha.7 candidate advances those projection-only
+versions to `ael.public-results/0.4` and
+`ael.publication-projection/0.4`. The profile replaces mutable-looking
+`publication` metadata with repository-owned `catalog_state` and an explicit
+maintainer-rerun handoff. Generated cards separate public graph verification,
+maintainer rerun capability, and linked independent replication; the raw
+Contract v0 value is retained as `receipt_reproducibility` but no longer used as
+a headline.
+
+The `0.3` projection existed only on the unreleased alpha.7 development branch.
+Migration is therefore a documented mechanical profile transformation plus
+regeneration, not a compatibility promise to released consumers. Mixed
+versions fail closed. The five Contract v0 `0.1` schemas and frozen evidence
+remain unchanged.
+
 ## Migration requirement
 
 The first incompatible schema change must include:

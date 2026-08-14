@@ -1,10 +1,10 @@
 """Fail-closed projection of Contract v0 receipts into public result cards.
 
-The publication profile in ``studies/public-results.json`` is deliberately
-small.  It selects immutable receipt/report bytes and supplies only publication
-metadata that Contract v0 does not own.  Every empirical value in generated
-views is copied from a validated receipt; profile text cannot author a finding
-or raise its proof level.
+The result-catalog profile in ``studies/public-results.json`` is deliberately
+small. It selects immutable receipt/report bytes and supplies only catalog and
+handoff metadata that Contract v0 does not own. Every empirical value in
+generated views is copied from a validated receipt; profile text cannot author
+a finding, claim an external release, or raise a proof level.
 """
 
 from __future__ import annotations
@@ -31,8 +31,8 @@ from ael.study_audit import audit_study_bundle
 from ael.study_quality import public_projection as project_study_quality
 from ael.validation import MAX_JSON_BYTES, SCHEMA_FILES, sha256_path, validate
 
-PUBLIC_RESULTS_SCHEMA_VERSION = "ael.public-results/0.3"
-PUBLICATION_PROJECTION_POLICY = "ael.publication-projection/0.3"
+PUBLIC_RESULTS_SCHEMA_VERSION = "ael.public-results/0.4"
+PUBLICATION_PROJECTION_POLICY = "ael.publication-projection/0.4"
 GENERATOR_NAME = "agentic-evidence-lab"
 GENERATOR_VERSION = __version__
 
@@ -46,6 +46,23 @@ _HISTORY_UNKNOWN = "not_declared_historical"
 _HISTORY_FRESHNESS_UNKNOWN = "unassessed"
 _HISTORY_DERIVED = "derived_from_lifecycle"
 _ADAPTERS = {"pbt-v2", "systematic-debugging-real-shadow-v1"}
+_CATALOG_STATES = {"listed", "withdrawn"}
+_MAINTAINER_RERUN_STATES = {
+    "maintainer_only_new_observation",
+    "not_assessed",
+    "unavailable",
+}
+_PUBLIC_GRAPH_STATUS = {
+    "evidence_graph": "graph_validatable",
+    "frozen_public_bundle": "decision_recomputable",
+}
+_INDEPENDENT_REPLICATION_STATUS = {
+    "self_review": "none_linked",
+    "model_critique": "none_linked",
+    "maintainer_evaluated": "none_linked",
+    "reproduced_third_party": "third_party_reproduced",
+    "independently_verified": "independently_verified",
+}
 
 # Contract v0 has two independent ladders: claim levels describe what a
 # statement says, while evidence levels describe what the receipt established.
@@ -75,7 +92,7 @@ _EVIDENCE_CEILING = {
 
 
 class ResultSurfaceError(SandboxError):
-    """Raised when a publication profile or its source graph is unsafe."""
+    """Raised when a result-catalog profile or its source graph is unsafe."""
 
 
 def _fail(message: str) -> NoReturn:
@@ -177,7 +194,7 @@ def _repository_root(profile_path: Path, explicit: Path | None) -> Path:
             _fail("could not locate repository root with pyproject.toml")
     profile_resolved = Path(profile_path).resolve()
     if not profile_resolved.is_relative_to(root):
-        _fail("publication profile must be inside the repository root")
+        _fail("result-catalog profile must be inside the repository root")
     return root
 
 
@@ -267,14 +284,14 @@ def _load_profile(profile_path: Path) -> dict[str, Any]:
 
 
 def validate_public_profile(profile: Mapping[str, Any]) -> dict[str, Any]:
-    """Validate a decoded publication profile and return it unchanged.
+    """Validate a decoded result-catalog profile and return it unchanged.
 
     This function performs schema-like checks without touching the filesystem;
     source hash/path checks are performed by :func:`build_result_surface`.
     """
 
     if not isinstance(profile, Mapping):
-        _fail("publication profile must be an object")
+        _fail("result-catalog profile must be an object")
     _require_keys(
         profile, {"schema_version", "as_of", "projection_policy", "studies"}, set(), "profile"
     )
@@ -302,7 +319,8 @@ def validate_public_profile(profile: Mapping[str, Any]) -> dict[str, Any]:
                 "materials",
                 "history",
                 "quality",
-                "publication",
+                "catalog_state",
+                "maintainer_rerun",
             },
             {"report_ref", "lifecycle"},
             location,
@@ -320,14 +338,15 @@ def validate_public_profile(profile: Mapping[str, Any]) -> dict[str, Any]:
         _validate_claim_ids(study.get("claim_ids"), f"{location}.claim_ids")
         _validate_verification(study.get("verification"), f"{location}.verification")
         _validate_materials(study.get("materials"), f"{location}.materials")
+        _validate_maintainer_rerun(study.get("maintainer_rerun"), f"{location}.maintainer_rerun")
         lifecycle = study.get("lifecycle")
         _validate_history(study.get("history"), f"{location}.history", lifecycle is not None)
         _validate_quality(study.get("quality"), f"{location}.quality")
         if lifecycle is not None:
             _validate_lifecycle(lifecycle, f"{location}.lifecycle")
-        publication = study.get("publication")
-        if publication not in {"published", "unpublished", "withdrawn"}:
-            _fail(f"{location}.publication must be published, unpublished, or withdrawn")
+        catalog_state = study.get("catalog_state")
+        if catalog_state not in _CATALOG_STATES:
+            _fail(f"{location}.catalog_state must be one of {sorted(_CATALOG_STATES)}")
     return dict(profile)
 
 
@@ -426,6 +445,16 @@ def _validate_materials(value: Any, location: str) -> None:
             )
 
 
+def _validate_maintainer_rerun(value: Any, location: str) -> None:
+    if not isinstance(value, Mapping):
+        _fail(f"{location} must be an object")
+    _require_keys(value, {"status", "boundary"}, set(), location)
+    status = value.get("status")
+    if status not in _MAINTAINER_RERUN_STATES:
+        _fail(f"{location}.status must be one of {sorted(_MAINTAINER_RERUN_STATES)}")
+    _nonempty_string(value.get("boundary"), f"{location}.boundary")
+
+
 def _validate_history(value: Any, location: str, has_lifecycle: bool = False) -> None:
     if not isinstance(value, Mapping):
         _fail(f"{location} must be an object")
@@ -472,7 +501,7 @@ def _validate_lifecycle(value: Any, location: str) -> None:
 
 
 def load_public_profile(profile_path: Path) -> dict[str, Any]:
-    """Load and validate a publication profile without resolving its sources."""
+    """Load and validate a result-catalog profile without resolving its sources."""
 
     profile_path = Path(profile_path).absolute()
     profile = _load_profile(profile_path)
@@ -974,6 +1003,32 @@ def _quality_projection(
     return projection
 
 
+def _reproduction_projection(
+    entry: Mapping[str, Any], receipt: Mapping[str, Any]
+) -> dict[str, Any]:
+    verification = entry["verification"]
+    verification_kind = verification["kind"]
+    public_status = _PUBLIC_GRAPH_STATUS.get(verification_kind)
+    if public_status is None:
+        _fail(f"unsupported public verification kind: {verification_kind}")
+    independence = receipt["independence"]
+    independence_label = independence["label"]
+    independent_status = _INDEPENDENT_REPLICATION_STATUS.get(independence_label)
+    if independent_status is None:
+        _fail(f"unsupported independence label: {independence_label}")
+    return {
+        "public_graph_verification": {
+            "status": public_status,
+            "boundary": verification["boundary"],
+        },
+        "study_rerun": dict(entry["maintainer_rerun"]),
+        "independent_replication": {
+            "status": independent_status,
+            "boundary": independence["disclosure"],
+        },
+    }
+
+
 def _build_card(
     profile_path: Path,
     profile: Mapping[str, Any],
@@ -1032,6 +1087,7 @@ def _build_card(
         source_hashes,
         str(profile["as_of"]),
     )
+    reproduction = _reproduction_projection(entry, receipt)
     history = dict(entry["history"])
     lifecycle_projection: dict[str, Any] | None = None
     if "lifecycle" in entry:
@@ -1054,11 +1110,12 @@ def _build_card(
     card: dict[str, Any] = {
         "card_id": entry["card_id"],
         "title": entry["title"],
-        "publication": entry["publication"],
+        "catalog_state": entry["catalog_state"],
         "receipt": receipt_ref_projection,
         "decision": receipt["decision"],
         "evidence_level": receipt["evidence_level"],
-        "reproducibility": receipt["reproducibility"],
+        "receipt_reproducibility": receipt["reproducibility"],
+        "reproduction": reproduction,
         "independence": receipt["independence"],
         "claims": selected_claims,
         "unsupported_inferences": receipt["unsupported_inferences"],
@@ -1107,16 +1164,19 @@ def _markdown_link(label: str, path: str, from_dir: str) -> str:
 
 def _render_card(card: Mapping[str, Any]) -> str:
     card_directory = "docs/results"
+    reproduction = card["reproduction"]
     lines = [
         f"# {card['title']}",
         "",
         f"- Card ID: `{card['card_id']}`",
-        f"- Current publication: **{card['publication']}**",
+        f"- Catalog state: **{card['catalog_state']}**",
         f"- Receipt: {_markdown_link('machine-readable evidence', card['receipt']['uri'], card_directory)}",
         f"- Receipt SHA-256: `{card['receipt']['sha256']}`",
         f"- Evidence level: `{card['evidence_level']}`",
-        f"- Reproducibility: `{card['reproducibility']}`",
-        f"- Independence: `{card['independence']['label']}`",
+        f"- Public graph verification: `{reproduction['public_graph_verification']['status']}`",
+        f"- Maintainer rerun: `{reproduction['study_rerun']['status']}`",
+        f"- Independent replication: `{reproduction['independent_replication']['status']}`",
+        f"- Evaluation ownership: `{card['independence']['label']}`",
         "",
         "## Decision",
         "",
@@ -1218,6 +1278,18 @@ def _render_card(card: Mapping[str, Any]) -> str:
                 "",
             ]
         )
+    lines.extend(
+        [
+            "Receipt Contract v0 reproducibility label: "
+            f"`{card['receipt_reproducibility']}`. This retained source field is not a claim "
+            "of a public task rerun or independent replication.",
+            "",
+            "## Maintainer rerun boundary",
+            "",
+            reproduction["study_rerun"]["boundary"],
+            "",
+        ]
+    )
     lines.extend(["## Measurement quality", ""])
     lines.append(f"Status: `{card['quality']['status']}`; scope: `{card['quality']['scope']}`.")
     if "as_of" in card["quality"]:
@@ -1279,19 +1351,22 @@ def _render_results(results: list[Mapping[str, Any]], as_of: str) -> str:
     lines = [
         "# Results Index",
         "",
-        f"Generated as of `{as_of}` from the explicit publication profile.",
+        f"Generated as of `{as_of}` from the explicit result-catalog profile.",
         "",
-        "This page is a deterministic projection. Decisions, evidence levels, claims, reproducibility, independence, and state are copied from hash-bound Contract v0 receipts; profile publication status is current metadata and is not proof.",
+        "This page is a deterministic catalog projection. `listed` means the result is selected for this catalog; it is not proof of a Git tag or GitHub release. Decisions, evidence levels, claims, evaluation ownership, and receipt state remain bound to the source evidence graph.",
         "",
-        "| Study | Publication | Evidence | Quality preflight | Reproducibility | Decision |",
-        "| --- | --- | --- | --- | --- | --- |",
+        "| Study | Catalog | Evidence | Quality | Public graph | Maintainer rerun | Independent replication | Decision |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
     for card in results:
         decision = card["decision"]["disposition"]
+        reproduction = card["reproduction"]
         lines.append(
-            f"| [{card['title']}](docs/results/{card['card_id']}.md) | {card['publication']} | "
+            f"| [{card['title']}](docs/results/{card['card_id']}.md) | `{card['catalog_state']}` | "
             f"`{card['evidence_level']}` | `{card['quality']['status']}` | "
-            f"`{card['reproducibility']}` | `{decision}` |"
+            f"`{reproduction['public_graph_verification']['status']}` | "
+            f"`{reproduction['study_rerun']['status']}` | "
+            f"`{reproduction['independent_replication']['status']}` | `{decision}` |"
         )
     lines.extend(
         [
@@ -1311,7 +1386,7 @@ def build_result_surface(
     """Build deterministic output bytes without writing any files."""
 
     profile_path = Path(profile_path).absolute()
-    _regular_file(profile_path, "publication profile")
+    _regular_file(profile_path, "result-catalog profile")
     root = _repository_root(profile_path, repository_root)
     profile = load_public_profile(profile_path)
     cards: list[dict[str, Any]] = []

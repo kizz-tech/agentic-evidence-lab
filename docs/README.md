@@ -3,6 +3,17 @@
 Start with the question you are trying to answer. Most readers do not need the
 entire evidence contract or runner design.
 
+## I want to understand why AEL exists
+
+- [Public mission and value decision](decisions/2026-08-14-public-mission-and-value.md)
+  — why user-facing decisions lead the public story while scientific rigor
+  remains in the evidence layer.
+- [Result catalog and reproduction semantics](decisions/2026-08-14-result-catalog-and-reproduction-semantics.md)
+  — why catalog membership, public graph checks, maintainer reruns, independent
+  replication, and external release state remain separate predicates.
+- [Roadmap](../ROADMAP.md) — the next user-visible research question, trust
+  work, beta gates, and explicit non-goals.
+
 ## I want to see what works
 
 - [Results Index](../RESULTS.md) — the generated human result projection with
@@ -11,9 +22,9 @@ entire evidence contract or runner design.
 - [Machine-readable study index](results/index.json) — the generated catalog
   consumed by tooling; cards are disposable projections, not a second evidence
   authority.
-- [Council Generation 1](../reports/2026-08-12-council-generation-1.md) — why
-  the adaptive workflow was adopted locally without claiming general Council
-  superiority.
+- [Council Generation 1](../reports/2026-08-12-council-generation-1.md) — the
+  bounded adopt decision without claiming implemented adoption, downstream
+  outcome, or general Council superiority.
 - [Focused Change Verification calibration](../reports/2026-08-12-focused-change-verification-codex-calibration.md)
   — why the runner passed but the first skill task pack was rejected as an
   effect test.
@@ -55,10 +66,13 @@ must not promote a stack result into a model-only claim.
   bundle audit and stricter Codex skill-activation evidence.
 - [Release notes](release-notes/v0.1.0-alpha.5.md) — generated result cards,
   replication handoff, and release-evidence hardening.
-- [Release notes](release-notes/v0.1.0-alpha.6.md) — prospective admission,
-  public lifecycle projection, and the first decision-governing skill pilot.
-- [Release notes](release-notes/v0.1.0-alpha.7.md) — measurement-quality
-  preflight, historical quality disclosure, and the public roadmap.
+- [Development-line notes](release-notes/v0.1.0-alpha.6.md) — prospective
+  admission, public lifecycle projection, and the first decision-governing
+  skill pilot.
+- [Alpha.7 notes](release-notes/v0.1.0-alpha.7.md) —
+  measurement-quality preflight, explicit reproduction facets, historical
+  quality disclosure, and the public roadmap. A note file is not proof that its
+  tag or release exists.
 - [Changelog](../CHANGELOG.md) — user-visible project history.
 - [Roadmap](../ROADMAP.md) — evidence-gated direction, beta criteria, and
   explicit non-goals; it is not a delivery promise.
@@ -129,6 +143,7 @@ Decision records preserve why important boundaries changed:
 - [Structural Search roadmap](decisions/2026-08-12-structural-search-roadmap.md)
 - [Agent Skills Season 1 architecture](decisions/2026-08-12-agent-skills-season-1.md)
 - [Measurement-quality preflight](decisions/2026-08-14-measurement-quality-preflight.md)
+- [Public mission and value](decisions/2026-08-14-public-mission-and-value.md)
 
 [The Contract v0 drafting brief](contract-v0-brief.md) is retained as design
 history. It does not replace the executable [current Contract v0](contract-v0.md).

@@ -1,12 +1,16 @@
 {
-  "schema_version": "ael.public-results/0.3",
+  "schema_version": "ael.public-results/0.4",
   "as_of": "2026-08-14",
-  "projection_policy": "ael.publication-projection/0.3",
+  "projection_policy": "ael.publication-projection/0.4",
   "studies": [
     {
       "card_id": "systematic-debugging-real-shadow-v1",
       "title": "Systematic Debugging real-shadow v1",
-      "publication": "unpublished",
+      "catalog_state": "listed",
+      "maintainer_rerun": {
+        "status": "maintainer_only_new_observation",
+        "boundary": "A new maintainer-controlled execution can use retained private inputs, but it cannot replay the historical provider behavior or constitute independent replication."
+      },
       "receipt_ref": {
         "uri": "studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/evidence-receipt.json",
         "sha256": "210a1398e51c230c7329cbf362d26f41d0ade3fb01458e5e27fb222e9c878a0e"
@@ -85,7 +89,11 @@
     {
       "card_id": "property-based-testing-v2",
       "title": "Property-based Testing v2",
-      "publication": "published",
+      "catalog_state": "listed",
+      "maintainer_rerun": {
+        "status": "maintainer_only_new_observation",
+        "boundary": "A new maintainer-controlled execution can use retained private screening inputs, but it cannot replay the historical provider behavior or constitute independent replication."
+      },
       "receipt_ref": {
         "uri": "studies/agent-skills-season-1/results/property-based-testing-v2/evidence-receipt.json",
         "sha256": "07c52812f97fe0c6333fbe919b6d1f99ca409e9d0d44cbeb375c0a43ea43f3f6"
@@ -144,7 +152,11 @@
     {
       "card_id": "council-generation-1",
       "title": "Council Generation 1",
-      "publication": "published",
+      "catalog_state": "listed",
+      "maintainer_rerun": {
+        "status": "not_assessed",
+        "boundary": "No current maintainer rerun package is asserted; the public package supports evidence-graph validation only."
+      },
       "receipt_ref": {
         "uri": "examples/council-generation-1/evidence-receipt.json",
         "sha256": "8cb13547dda6dc8a8805fe65587c6f3c8712ca81a32cff45a57874c76a59a757"
@@ -192,7 +204,11 @@
     {
       "card_id": "focused-change-verification-calibration",
       "title": "Focused Change Verification calibration",
-      "publication": "published",
+      "catalog_state": "listed",
+      "maintainer_rerun": {
+        "status": "not_assessed",
+        "boundary": "No current maintainer rerun package is asserted; the public package supports evidence-graph validation only."
+      },
       "receipt_ref": {
         "uri": "examples/coding-skill/calibration-v1/evidence-receipt.json",
         "sha256": "7a770b0b177a313f6b042d67d2aaab62919d333b6d1625fcd7b3eff766c3e581"

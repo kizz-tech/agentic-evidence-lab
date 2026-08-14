@@ -9,7 +9,13 @@ import unittest
 import zipfile
 from pathlib import Path
 
-from tools.verify_release_artifacts import main, verify_archives, write_release_metadata
+from ael.result_surface import PUBLICATION_PROJECTION_POLICY
+from tools.verify_release_artifacts import (
+    EXPECTED_PROJECTION_POLICY,
+    main,
+    verify_archives,
+    write_release_metadata,
+)
 
 VERSION = "0.1.0a7"
 
@@ -55,6 +61,9 @@ def _sdist(
 
 
 class ReleaseArtifactTests(unittest.TestCase):
+    def test_release_projection_policy_matches_generator(self) -> None:
+        self.assertEqual(PUBLICATION_PROJECTION_POLICY, EXPECTED_PROJECTION_POLICY)
+
     def test_safe_wheel_and_sdist_pass_and_metadata_is_deterministic(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -68,10 +77,10 @@ class ReleaseArtifactTests(unittest.TestCase):
             write_release_metadata(
                 [sdist, wheel],
                 output,
-                tag="v0.1.0-alpha.6",
+                tag="v0.1.0-alpha.7",
                 commit="A" * 40,
                 version=VERSION,
-                projection_policy="ael.publication-projection/0.3",
+                projection_policy="ael.publication-projection/0.4",
             )
             manifest = json.loads((output / "release-manifest.json").read_text(encoding="utf-8"))
             self.assertEqual("ael.release-manifest/0.1", manifest["format"])
@@ -89,6 +98,36 @@ class ReleaseArtifactTests(unittest.TestCase):
                     for path in sorted((sdist, wheel), key=lambda item: item.name)
                 ),
             )
+
+    def test_release_metadata_rejects_tag_or_projection_drift(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            wheel = root / "agentic_evidence_lab-0.1.0a7-py3-none-any.whl"
+            _wheel(wheel)
+            for tag, policy, message in (
+                (
+                    "v0.1.0-alpha.6",
+                    "ael.publication-projection/0.4",
+                    "tag must be v0.1.0-alpha.7",
+                ),
+                (
+                    "v0.1.0-alpha.7",
+                    "ael.publication-projection/0.3",
+                    "projection policy must be ael.publication-projection/0.4",
+                ),
+            ):
+                with (
+                    self.subTest(tag=tag, policy=policy),
+                    self.assertRaisesRegex(ValueError, message),
+                ):
+                    write_release_metadata(
+                        [wheel],
+                        root / "metadata",
+                        tag=tag,
+                        commit="a" * 40,
+                        version=VERSION,
+                        projection_policy=policy,
+                    )
 
     def test_payload_patterns_and_forbidden_members_fail(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

@@ -30,7 +30,7 @@ Its public result surface is projection-first:
 
 ```text
 validated Contract v0 evidence graph
-              + publication profile
+              + result-catalog profile
                          │
                          ▼
        deterministic public result projection
@@ -39,15 +39,16 @@ validated Contract v0 evidence graph
               └─ docs/results/<slug>.md (card projections)
 ```
 
-The profile selects public receipts and claims, declares replication
-instructions and unavailable-material categories, preserves explicit historical
-unknowns, and may select exact lifecycle refs. Lifecycle status is derived from
-those hash-bound records rather than profile prose. The projection may enforce
-a claim ceiling, but it cannot create evidence, change a receipt, or become a
-second authority. Evidence level, reproducibility, independence, freshness,
-action, and outcome remain separate axes; a card renders unavailable historical
-action or outcome as `not_declared_historical` or `unassessed` rather than
-guessing.
+The profile selects public receipts and claims, declares unavailable-material
+categories and a bounded maintainer-rerun handoff, preserves explicit
+historical unknowns, and may select exact lifecycle refs. Lifecycle status is
+derived from those hash-bound records rather than profile prose. The projection
+may enforce a claim ceiling, but it cannot create evidence, change a receipt,
+claim an external release, or become a second authority. Evidence level,
+catalog membership, public graph verification, maintainer rerun capability,
+linked independent replication, freshness, action, and outcome remain separate
+axes; a card renders unavailable historical action or outcome as
+`not_declared_historical` or `unassessed` rather than guessing.
 
 Alpha.6 exercises one complete prospective admission → effect → adoption →
 action → follow-up lifecycle in the Systematic Debugging real-shadow pilot.
@@ -71,6 +72,13 @@ not depend on the quality module. Historical receipts remain unchanged and
 project `not_assessed_historical`; a future profiled card must match the
 receipt's exact study ID, revision, and manifest hash. Preflight conformance is
 design evidence, not a quality score or an empirical result.
+
+Alpha.7 projection `0.4` also treats GitHub release state as an external-system
+predicate. Committed catalog bytes can say that a result is `listed` or
+`withdrawn`; they cannot truthfully say that a future tag or release action has
+succeeded. The original receipt `reproducibility` enum remains source metadata,
+while public cards separately expose graph verification, maintainer rerun, and
+independent replication.
 
 Git ancestry or a tag can prove repository artifact ordering—for example, that
 freeze bytes are present in an ancestor. It cannot prove that private model

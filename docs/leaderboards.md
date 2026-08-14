@@ -55,10 +55,13 @@ No overall rank may hide a critical failure. When candidates trade quality,
 cost, latency, or safety, AEL shows a Pareto frontier or separate columns instead
 of inventing undisclosed weights.
 
-Evidence level, reproducibility, independence, freshness, action, and outcome
-are orthogonal facets. A board or result card must show them separately; one
-facet never upgrades another. Missing historical action or outcome is rendered
-as `not_declared_historical`, not as a claim that no action or outcome occurred.
+Evidence level, public graph verification, maintainer rerun capability, linked
+independent replication, freshness, action, and outcome are orthogonal facets.
+A board or result card must show them separately; one facet never upgrades
+another. The raw Contract v0 reproducibility enum may remain in technical
+metadata but cannot replace those explicit public facets. Missing historical
+action or outcome is rendered as `not_declared_historical`, not as a claim that
+no action or outcome occurred.
 
 ## Update and correction policy
 

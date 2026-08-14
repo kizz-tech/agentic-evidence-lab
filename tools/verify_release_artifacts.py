@@ -51,6 +51,7 @@ PERSONAL_PATH_PATTERNS = (
 WORKSPACE_MARKER = b"codex" + b"-work1"
 EXPECTED_PROJECT_NAME = "agentic-evidence-lab"
 EXPECTED_DISTRIBUTION_NAME = "agentic_evidence_lab"
+EXPECTED_PROJECTION_POLICY = "ael.publication-projection/0.4"
 
 WHEEL_REQUIRED_SUFFIXES = ("ael/__init__.py",)
 WHEEL_REQUIRED_DIST_INFO = ("METADATA", "WHEEL", "RECORD")
@@ -419,6 +420,13 @@ def _archive_records(archives: Sequence[str | Path]) -> list[dict[str, object]]:
     return records
 
 
+def _release_tag(version: str) -> str:
+    alpha = re.fullmatch(r"([0-9]+\.[0-9]+\.[0-9]+)a([0-9]+)", version)
+    if alpha is not None:
+        return f"v{alpha.group(1)}-alpha.{alpha.group(2)}"
+    return f"v{version}"
+
+
 def write_release_metadata(
     archives: Sequence[str | Path],
     output_dir: str | Path,
@@ -430,14 +438,15 @@ def write_release_metadata(
 ) -> None:
     """Write deterministic checksum and release-manifest files for archives."""
 
-    if not tag.strip():
-        raise ValueError("tag must not be empty")
-    if not re.fullmatch(r"[0-9a-fA-F]{40}", commit):
-        raise ValueError("commit must be a full 40-character hexadecimal SHA")
     if not version.strip():
         raise ValueError("version must not be empty")
-    if not projection_policy.strip():
-        raise ValueError("projection policy must not be empty")
+    expected_tag = _release_tag(version.strip())
+    if tag != expected_tag:
+        raise ValueError(f"tag must be {expected_tag} for version {version}")
+    if not re.fullmatch(r"[0-9a-fA-F]{40}", commit):
+        raise ValueError("commit must be a full 40-character hexadecimal SHA")
+    if projection_policy != EXPECTED_PROJECTION_POLICY:
+        raise ValueError(f"projection policy must be {EXPECTED_PROJECTION_POLICY}")
     paths = [Path(item) for item in archives]
     records = _archive_records(paths)
     output = Path(output_dir)

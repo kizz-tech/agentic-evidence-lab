@@ -6,7 +6,7 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-## [0.1.0-alpha.7] - 2026-08-14
+## [0.1.0-alpha.7]
 
 ### Added
 
@@ -18,11 +18,18 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   drift, claim overreach, warning order, and deterministic output.
 - A public evidence-gated roadmap with beta criteria, next research steps, and
   explicit non-goals.
+- A result-catalog and reproduction-semantics decision that keeps deterministic
+  repository membership separate from externally owned release state.
 
 ### Changed
 
-- Public-results and projection policy move to `0.3`; every result card exposes
+- Public-results and projection policy move to `0.4`; every result card exposes
   seven design-preflight quality facets without a composite score.
+- Result cards now distinguish public graph verification, a maintainer-only new
+  run, and linked independent replication. The raw Contract v0
+  `reproducibility` value remains available only as bounded receipt metadata.
+- Systematic Debugging is deliberately listed alongside the other three public
+  result families; catalog membership is not a Git tag or GitHub release claim.
 - All four existing studies declare `not_assessed_historical` instead of being
   retrospectively certified from current files.
 - Admission `0.2-pilot` can bind the exact quality-profile hash before a future
@@ -38,7 +45,7 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   is not scientific certification, chronology proof, independent replication,
   observed reliability, transfer, or downstream outcome.
 
-## [0.1.0-alpha.6] - 2026-08-13
+## [0.1.0-alpha.6] - Unreleased development line
 
 ### Added
 
@@ -206,8 +213,8 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Contract v0 remains pre-stable and may change incompatibly before `1.0`.
 
 [Unreleased]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.7...HEAD
-[0.1.0-alpha.7]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.6...v0.1.0-alpha.7
-[0.1.0-alpha.6]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.5...v0.1.0-alpha.6
+[0.1.0-alpha.7]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.5...v0.1.0-alpha.7
+[0.1.0-alpha.6]: docs/release-notes/v0.1.0-alpha.6.md
 [0.1.0-alpha.5]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.4...v0.1.0-alpha.5
 [0.1.0-alpha.4]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.3...v0.1.0-alpha.4
 [0.1.0-alpha.3]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.2...v0.1.0-alpha.3
