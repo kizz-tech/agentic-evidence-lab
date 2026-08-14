@@ -107,6 +107,9 @@ safe runner for untrusted third-party skills or repositories.
 ## I want to contribute or challenge the method
 
 - [Contributing](../CONTRIBUTING.md) — setup, validation, and pull-request rules.
+- [Community workflow](community-workflow.md) — how Discussions, Issues, pull
+  requests, frozen studies, and canonical evidence fit together without
+  upgrading coordination state into a research claim.
 - [External review intake](reviews/README.md) — how criticism is captured,
   verified, accepted, rejected, or deferred without silently becoming project
   authority.

@@ -1,0 +1,72 @@
+name: Study proposal
+description: Propose a decision-governing comparison before any scored execution
+title: "[Study]: "
+labels: ["research", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A proposal is not an admitted or preregistered study. Do not run scored calls until the canonical protocol is reviewed and frozen.
+  - type: textarea
+    id: decision
+    attributes:
+      label: Owner decision
+      description: What real use, skip, escalation, or design decision would the result govern?
+    validations:
+      required: true
+  - type: textarea
+    id: claim
+    attributes:
+      label: Primary claim and estimand
+      description: State one exact claim, outcome, unit of analysis, and direction where applicable.
+    validations:
+      required: true
+  - type: textarea
+    id: comparison
+    attributes:
+      label: Intervention, baseline, and held-fixed stack
+      description: Separate a controlled factor comparison from a complete operational stack comparison.
+    validations:
+      required: true
+  - type: textarea
+    id: population
+    attributes:
+      label: Task population and strata
+      description: Define which work the claim covers, the sampling boundary, and important strata.
+    validations:
+      required: true
+  - type: textarea
+    id: evaluator
+    attributes:
+      label: Evaluator and failure opportunity
+      description: Explain deterministic ownership, calibration evidence, and how both candidates can fail.
+    validations:
+      required: true
+  - type: textarea
+    id: budget
+    attributes:
+      label: Budget, repeats, uncertainty, and stop rule
+      description: Include run budget, blocking or randomization, retained failures, and invalidation conditions.
+    validations:
+      required: true
+  - type: textarea
+    id: prior
+    attributes:
+      label: Prior evidence and why a new study is needed
+      description: Link exact revisions and identify the unresolved decision rather than repeating a generic benchmark.
+    validations:
+      required: true
+  - type: textarea
+    id: safety
+    attributes:
+      label: Data, license, execution, and credential boundary
+      description: State redistribution rights, fixture sensitivity, isolation, network, and secret requirements.
+    validations:
+      required: true
+  - type: checkboxes
+    id: acknowledgement
+    attributes:
+      label: Admission boundary
+      options:
+        - label: I understand that opening this issue neither preregisters the study nor authorizes scored execution.
+          required: true

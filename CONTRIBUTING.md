@@ -5,7 +5,14 @@ contract, validators, runners, task packs, and reports.
 
 ## Before opening a change
 
-Use an issue for consequential contract or methodology changes. Describe the
+Start with the [community workflow](docs/community-workflow.md). Use Discussions
+for open questions and nominations; use the matching Issue Form when the work
+has a bounded deliverable and acceptance criteria. Consequential contract,
+methodology, study, and replication proposals require an issue before a pull
+request or scored run.
+
+An issue is a mutable coordination record. It is not preregistration, study
+admission, a published result, or independent replication. Describe the
 decision question, affected claim, alternative designs, and what evidence could
 falsify the proposal. Security reports belong in GitHub Private Vulnerability
 Reporting, not public issues.
@@ -52,6 +59,7 @@ validation.
 
 ## Pull requests
 
+- Link the admitted issue or explain why a small repair did not require one.
 - Keep one coherent change per pull request.
 - Add or update deterministic tests for behavior changes.
 - Preserve provenance, content hashes, negative results, and inconclusive

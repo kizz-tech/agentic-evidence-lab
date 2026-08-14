@@ -1,0 +1,67 @@
+name: Scoped implementation
+description: Propose a bounded code, tooling, adapter, task-pack, or documentation change
+title: "[Contribution]: "
+labels: ["triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form when the output and acceptance criteria are already concrete. Open-ended ideas belong in Discussions; scored comparisons and replications have dedicated forms.
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      options:
+        - Evidence contract or validation
+        - Result publication or audit
+        - Offline runner or isolation
+        - Runner adapter or importer
+        - Task pack or evaluator
+        - Documentation or community tooling
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem and decision unlocked
+      description: What observed limitation does this solve, and what becomes possible if it is fixed?
+    validations:
+      required: true
+  - type: textarea
+    id: deliverable
+    attributes:
+      label: Bounded deliverable
+      description: Name the files, interface, fixture, or documentation outcome you expect.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Provide observable checks. Prefer a Markdown checklist.
+    validations:
+      required: true
+  - type: textarea
+    id: non_goals
+    attributes:
+      label: Non-goals and compatibility constraints
+      description: State what this change must not broaden, weaken, or claim.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Starting evidence
+      description: Link relevant code, docs, issues, or a minimal sanitized reproduction.
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Contribution checks
+      options:
+        - label: I removed credentials, private data, raw reasoning traces, unpublished holdouts, and personal paths.
+          required: true
+        - label: I have the right to share every linked or attached artifact.
+          required: true

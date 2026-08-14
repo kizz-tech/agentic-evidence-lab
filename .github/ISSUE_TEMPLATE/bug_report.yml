@@ -11,7 +11,7 @@ body:
     id: version
     attributes:
       label: Version or revision
-      placeholder: v0.1.0-alpha.1 or commit SHA
+      placeholder: release tag or full commit SHA
     validations:
       required: true
   - type: dropdown
@@ -20,7 +20,7 @@ body:
       label: Component
       options:
         - Evidence contract or validation
-        - Receipt rendering or calibration
+        - Receipt, result projection, or calibration
         - Offline Docker runner
         - Hosted Codex adapter
         - Task-pack tooling
