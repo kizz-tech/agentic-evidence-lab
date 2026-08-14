@@ -77,8 +77,8 @@ must not promote a stack result into a model-only claim.
 - [Alpha.7 notes](release-notes/v0.1.0-alpha.7.md) —
   measurement-quality preflight, explicit reproduction facets, historical
   quality disclosure, and the public roadmap. This development line was not
-  published and can be superseded by alpha.8.
-- [Alpha.8 notes](release-notes/v0.1.0-alpha.8.md) — the claim-first method,
+  published and was superseded by alpha.8.
+- [Release notes](release-notes/v0.1.0-alpha.8.md) — the claim-first method,
   explicit non-ordinal claim admission, observed repeat/uncertainty disclosure,
   and the regenerated projection. A note file is not proof of a tag or release.
 - [Changelog](../CHANGELOG.md) — user-visible project history.

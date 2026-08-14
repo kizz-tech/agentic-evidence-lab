@@ -13,11 +13,12 @@ separate repositories, provenance, versions, and release authority.
 
 ## Current state
 
-The repository is preparing the `v0.1.0-alpha.8` claim-first development line;
-the latest externally released line may be older. It is Apache-2.0 licensed but
-remains pre-stable. Do not claim that a commit is pushed, a tag is released, CI
-is green, a result is independently reviewed, or a schema is compatible until
-the corresponding action and evidence exist.
+The current package line is `v0.1.0-alpha.8`, the claim-first method release.
+GitHub Releases owns the latest externally published state; repository prose
+does not prove publication. The project is Apache-2.0 licensed but remains
+pre-stable. Do not claim that a commit is pushed, a tag is released, CI is
+green, a result is independently reviewed, or a schema is compatible until the
+corresponding action and evidence exist.
 
 Publishing artifacts, posting results, contacting reviewers, or changing an
 external account requires explicit task-specific authority.

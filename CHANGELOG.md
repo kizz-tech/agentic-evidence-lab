@@ -6,7 +6,7 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-## [0.1.0-alpha.8] - Unreleased candidate
+## [0.1.0-alpha.8] - 2026-08-14
 
 ### Added
 
@@ -268,8 +268,8 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   process can read the reusable credential.
 - Contract v0 remains pre-stable and may change incompatibly before `1.0`.
 
-[Unreleased]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.5...HEAD
-[0.1.0-alpha.8]: docs/release-notes/v0.1.0-alpha.8.md
+[Unreleased]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.8...HEAD
+[0.1.0-alpha.8]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.5...v0.1.0-alpha.8
 [0.1.0-alpha.7]: docs/release-notes/v0.1.0-alpha.7.md
 [0.1.0-alpha.6]: docs/release-notes/v0.1.0-alpha.6.md
 [0.1.0-alpha.5]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.4...v0.1.0-alpha.5
