@@ -1,0 +1,114 @@
+{
+  "schema_version": "ael.completion-integrity-admission/0.1-pilot",
+  "admission_id": "kizz:ael:admission:completion-integrity-prompt-policy-v1:1",
+  "status": "admitted",
+  "admitted_at": "2026-08-14T21:36:00Z",
+  "expires_at": "2026-08-22T23:59:59Z",
+  "scored_calls_executed": 0,
+  "decision_question": "Should Kizz enable, selectively route, reject, or redesign the exact Completion Integrity prompt policy on the frozen Codex stack and task population?",
+  "study_manifest_ref": {
+    "uri": "studies/completion-integrity/study-manifest.json",
+    "sha256": "1c78faa58522277bbe0f9a932768a171aa523eba8f504b9d70865d4cca22d26d"
+  },
+  "quality_profile_ref": {
+    "uri": "studies/completion-integrity/quality-profile.json",
+    "sha256": "9cd4ac799b49e2a21505f8e25afd01a541327d6fbe35852fa27dce0329322f05"
+  },
+  "preflight_ref": {
+    "uri": "studies/completion-integrity/preflight.json",
+    "sha256": "4347c00f477380fdcff5d58e95e22955722101167f54355af4b937d7baf995e4"
+  },
+  "gate_ref": {
+    "uri": "studies/completion-integrity/no-call-gate.json",
+    "sha256": "41d389f53104fc42a3bfc2ac1fa0365e3a047813dabd0b050c993e168a2b4f0e"
+  },
+  "headroom_ref": {
+    "uri": "studies/completion-integrity/baseline-headroom.json",
+    "sha256": "8b486a38fdf3d303929a6e3f848f64a7e496193f4e566626a2f1dd80361eeca4"
+  },
+  "candidate": {
+    "candidate_id": "completion-policy-v1",
+    "intervention_class": "prompt",
+    "baseline_prompt_ref": {
+      "uri": "studies/completion-integrity/prompts/common-v1.txt",
+      "sha256": "fc5ae69318057586f09fb270736e8b413f56c5a40ad1f0b4628821894541f71d"
+    },
+    "policy_prompt_ref": {
+      "uri": "studies/completion-integrity/prompts/completion-policy-v1.txt",
+      "sha256": "efdf3831be901858e6ff057b868fee65d054174d7109d45f4f19dfe2b3f7507c"
+    },
+    "assembly": "Treatment equals baseline plus two newlines plus the exact policy segment; no other factor changes."
+  },
+  "private_pack": {
+    "uri": "urn:kizz:ael:private-pack:completion-integrity-v1:revision:4",
+    "revision": 4,
+    "sha256": "06d9d476dd56c322a798eef865dd1576bea7a22daa2687717f2af94877610c72",
+    "screening_tasks": 6,
+    "confirmation_tasks": 2,
+    "sacrificial_tasks": 2
+  },
+  "runtime": {
+    "harness": "codex-cli",
+    "harness_version": "0.146.0",
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "xhigh",
+    "credential_mode": "owner_accepted_reusable_local_auth",
+    "risk_accepted_by": "kizz-ael-maintainer",
+    "risk_scope": "Exact reviewed synthetic task pack, prompt pair, 52 sequential scored calls, proxy-only OpenAI egress, and public/private canary scan. Reusable authentication remains process-readable inside the ephemeral runner; exact-value persistence is scanned.",
+    "network_policy": "openai-proxy",
+    "allowed_hosts": [
+      "api.openai.com",
+      "auth.openai.com",
+      "chatgpt.com"
+    ]
+  },
+  "max_scored_calls": 52,
+  "outcome_retries": 0,
+  "owner_action_policy": {
+    "owner_id": "kizz-ael-maintainer",
+    "global_transfer_eligible": false,
+    "rules": [
+      {
+        "effect_disposition": "enable_default",
+        "owner_action": "record_exact_policy_as_default_for_admitted_internal_scope"
+      },
+      {
+        "effect_disposition": "route_selectively",
+        "owner_action": "record_exact_policy_for_named_eligible_mechanisms_only"
+      },
+      {
+        "effect_disposition": "reject_exact_policy",
+        "owner_action": "record_exact_policy_rejection"
+      },
+      {
+        "effect_disposition": "retest_design",
+        "owner_action": "record_no_adoption_and_require_new_revision"
+      }
+    ],
+    "fallback": "manual_review_without_deployment"
+  },
+  "evidence_boundary": {
+    "task_material": "Private synthetic fixtures, dossiers, references, regressions, oracles, raw events, candidate workspaces, and reusable authentication remain outside Git.",
+    "provider_transfer": "One task fixture and its instruction may be sent to the hosted OpenAI Codex service under the owner's account authorization.",
+    "public_projection": "Only Contract v0 records, bounded decision prose, normalized scalar outcomes, and opaque hashes may be public.",
+    "chronology_claim": "Git proves repository artifact ordering; the append-only attempt ledger and UTC metadata record private execution but do not independently timestamp provider calls.",
+    "claim_ceiling": "Controlled prompt-factor effect for the exact task population, stack, budget, and observation window; no transfer or downstream outcome."
+  },
+  "roles": {
+    "study_owner": "kizz-ael-maintainer",
+    "task_pack_owner": "kizz-ael-maintainer",
+    "runner_operator": "kizz-ael-maintainer",
+    "evaluator": "kizz-ael-maintainer-completion-integrity-oracle",
+    "decision_owner": "kizz-ael-maintainer",
+    "replication_owner": "unassigned"
+  },
+  "role_overlaps": [
+    "Kizz authored the policy, tasks, and deterministic evaluator, operates the runner, and owns the decision; no independent replication exists."
+  ],
+  "stop_rules": [
+    "Stop before any scored call if a freeze-bound byte, image, private-pack identity, or owner admission differs.",
+    "Stop after any ambiguous or operationally invalid attempt and never retry a submitted or ambiguous cell.",
+    "Stop publication on any private canary, exact private-file match, credential marker, unsafe path, or independent recomputation mismatch.",
+    "Retain and publish negative, null, harmful, inconclusive, and protocol-invalid terminal outcomes."
+  ]
+}

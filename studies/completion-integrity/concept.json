@@ -1,0 +1,27 @@
+{
+  "schema_version": "ael.concept/0.1",
+  "object_type": "concept",
+  "concept_id": "kizz:ael:concept:completion-integrity",
+  "revision": 1,
+  "owner": {
+    "owner_id": "kizz-ael-maintainer",
+    "meaning_authority": "maintainer"
+  },
+  "idea": "A coding agent should declare work complete only when the requested final repository state is actually supported by owner-level acceptance evidence.",
+  "mechanism_hypothesis": "An exact prompt-only requirement-ledger and final-state reconciliation policy can reduce false completion without materially reducing accepted work or replacing honest completion with abstention.",
+  "intended_scope": [
+    "prompt-only completion policy on one pinned Codex coding stack",
+    "small deterministic Python repository tasks with owner-controlled acceptance predicates",
+    "bounded internal enable, selective-route, reject, or retest decision"
+  ],
+  "known_non_goals": [
+    "general prompt superiority",
+    "intrinsic model improvement",
+    "transfer to other models, CLIs, repositories, organizations, or task populations",
+    "independent replication or downstream production outcome",
+    "a generic lifecycle framework or Contract v1"
+  ],
+  "lineage": {
+    "change_summary": "First concept revision for the alpha.9 Completion Integrity controlled-factor study; distinct from the historical Truthful Completion skill protocol."
+  }
+}

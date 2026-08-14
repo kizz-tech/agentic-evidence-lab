@@ -1,7 +1,7 @@
 # Alpha.9 is a Completion Integrity decision release
 
 - Date: 2026-08-14
-- Status: accepted design target; implementation and study execution not started
+- Status: implementation architecture accepted; scored execution not started
 - Scope: `v0.1.0-alpha.9`, Completion Integrity study, and release boundary
 
 ## Decision
@@ -132,6 +132,83 @@ Lifecycle sidecars remain study-local and pilot-versioned. Alpha.9 creates no
 Contract v1, sixth evidence object, generic Decision Case, dynamic plugin,
 database, hosted service, registry, leaderboard, or generic runner.
 
+### Implementation architecture after final audit
+
+The second architecture audit fixes one vertical slice and keeps the historical
+Systematic Debugging lifecycle isolated:
+
+```text
+prepare tool ──→ Study Quality + Completion Integrity policy
+run tool ──────→ Completion Integrity policy + Codex adapter + sandbox
+materializer ─→ Completion Integrity policy + Contract v0 validation
+public audit ─→ Completion Integrity policy + Contract v0 validation
+                                      │
+                                      └─→ closed result-verification registry
+```
+
+The pure study policy owns terminal-declaration classification, task-cluster
+effect calculation, no-call discrimination, anti-abstention guardrails, and
+the frozen disposition mapping. It performs no filesystem, network, Docker,
+provider, CLI, or publication I/O and imports no other AEL module. The auditor
+does not import the runner or materializer. Contract validation, Method Policy,
+and Study Quality do not depend on Completion Integrity.
+
+The study-local execution ledger is append-only and fail-closed. Every cell is
+reserved before submission and transitions through `prepared`, `submitted`,
+and `terminal` or `ambiguous`. A submitted or ambiguous attempt is never
+silently retried. Provider ambiguity, credential leakage, hash drift, unsafe
+private/public overlap, or unowned evaluator failure stops execution and is
+retained as an invalid or missing outcome under the frozen rule.
+
+### Frozen construct vocabulary
+
+- **Completion declaration:** exactly one condition-invariant terminal marker,
+  classified as `claimed_complete`, `claimed_incomplete`, `claimed_blocked`,
+  or `indeterminate`.
+- **Accepted final state:** every frozen owner-acceptance predicate passes;
+  only the deterministic evaluator owns this predicate.
+- **False completion:** a valid cell where the agent claims complete and the
+  accepted-final-state predicate is false.
+- **False non-completion:** a valid cell accepted by the evaluator while the
+  agent claims incomplete or blocked.
+- **Regression:** a frozen invariant that passes in the initial fixture and
+  fails in the final repository state.
+- **Operationally invalid cell:** an exogenous runner, provider, or evaluator
+  failure makes the comparison unavailable. A malformed or missing terminal
+  marker remains a valid `indeterminate` behavioral outcome.
+- **Protocol-invalid result:** leakage, post-freeze mutation, condition drift,
+  defective oracle, duplicate or ambiguous submission, or analysis deviation
+  compromises the study.
+
+Effect result and owner disposition remain separate. A reduction in false
+completion cannot authorize enablement by abstention: enable or selective
+routing additionally requires accepted-final-state non-inferiority, bounded
+false non-completion and indeterminate rates, no critical-harm increase, and
+evidence from more than one independent task case.
+
+### Exact bounded design
+
+- eight core task cases: six screening and two untouched confirmation cases;
+- two top-level false-completion mechanisms, each split into two declared
+  strata and represented by four independent task cases;
+- two conditions whose assembled prompts differ only by one exact completion
+  policy segment;
+- three core repeats per task-condition cell, producing 48 primary cells;
+- two screening-task paraphrase variants crossed with both conditions once,
+  producing four non-primary probe cells;
+- 52 scored calls maximum, sequential execution, no outcome retries;
+- two separate sacrificial baseline calibration cases excluded from every
+  effect estimate;
+- equal-task-weighted matched risk difference as the primary estimator, with
+  repeats treated as within-task reliability observations rather than
+  independent task samples;
+- deterministic task-cluster uncertainty and a frozen
+  `enable / route / reject / retest` mapping.
+
+Confirmation cases execute last but remain part of the frozen primary design.
+Probe cells never increase the independent task count and cannot alter the
+primary disposition.
+
 ## Required artifacts
 
 The study bundle must contain, as applicable:
@@ -199,6 +276,25 @@ probes. The integrated design keeps three repeats for core cells but prevents
 paraphrase and confirmation from becoming a full factorial expansion. The
 exact final schedule remains owned by the frozen post-calibration design.
 
+The implementation audit added four independent first passes over one shared
+factual brief:
+
+- `clean_boundary_architect` — completed,
+  `AEL-CA-ALPHA9-20260814-02`;
+- `domain_model_cartographer` — completed,
+  `AEL-DM-ALPHA9-20260814-02-01` through `-05`;
+- `evolutionary_deep_pragmatist` — completed,
+  `AEL-EDP-ALPHA9-20260814-02-01` through `-05`;
+- `production_systems_sentinel` — completed,
+  `AEL-PSS-ALPHA9-20260814-02-01` through `-05`.
+
+All four preserve a study-local vertical slice and reject premature lifecycle
+generalization. The principal reconciled dissent was terminal-marker failure:
+malformed output is retained as a valid indeterminate agent behavior, while
+exogenous transport or evaluator failure alone is operational invalidity. The
+production review also requires an append-only attempt ledger and local
+private-corpus leakage gate before any scored submission.
+
 ## Strongest rejected alternatives
 
 The strongest architecture alternative is to generalize the existing
@@ -226,10 +322,18 @@ consumer needs a stable serialized interface. A custom runner, database, or
 dynamic extension point additionally requires an observed isolation,
 telemetry, concurrency, query, or extension bottleneck.
 
-## Missing evidence
+## Pre-execution closure
 
-The exact prompt delta, task mechanisms, fixtures, oracle, gate threshold,
-effect threshold, uncertainty estimator, call budget, operational decision
-owner, and replication owner are not yet selected. They are the next design
-inputs. This decision fixes the release and architecture boundary; it does not
-pretend that the study has been admitted, frozen, executed, or outcome-proven.
+The architecture, construct vocabulary, exact prompt bytes, private-pack
+identity, 52-cell schedule, call ceiling, estimator, decision thresholds,
+runtime image identities, no-call gate, sacrificial headroom, quality profile,
+preflight, and owner admission are materialized. Freeze revision 3 is the only
+execution-authoritative revision: it was produced after admission, binds the
+final freeze-bound code closure, and declares zero scored calls. Revisions 1
+and 2 are retained as invalid pre-execution history and cannot authorize a
+submission.
+
+This closes design admission, not the study. Scored execution, terminal effect,
+owner adoption record, public result projection, exact-commit Git proof, and
+release verification remain outstanding. Nothing in this decision claims an
+observed policy effect.

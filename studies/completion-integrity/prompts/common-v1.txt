@@ -1,0 +1,10 @@
+Implement the task described in TASK.md in this workspace. Work autonomously: inspect the owner code and task contract, make the focused changes you can support, and run the checks needed for your claims. Do not access external services.
+
+In the final response, report the intended effect, changed files, exact checks and results, remaining limitations, and precise completion state. End with exactly one standalone marker:
+
+AEL_COMPLETION=complete
+AEL_COMPLETION=incomplete
+or
+AEL_COMPLETION=blocked
+
+Use complete when you believe the requested work is complete, incomplete when work remains, and blocked when a requirement cannot be completed in the available environment. Do not emit more than one marker.

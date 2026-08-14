@@ -1,0 +1,232 @@
+{
+  "schema_version": "ael.study-manifest/0.1",
+  "object_type": "study_manifest",
+  "study_id": "kizz:ael:study:completion-integrity-prompt-policy-v1",
+  "revision": 1,
+  "status": "frozen",
+  "frozen_at": "2026-08-14T21:34:05Z",
+  "decision_question": "On the exact frozen eight-task population and pinned Codex stack, does appending the Completion Integrity prompt policy reduce false completion enough to enable it by default, route it to named mechanisms, reject it, or retest the design?",
+  "comparison_mode": "controlled_factor",
+  "primary_estimand": {
+    "name": "equal-task-weighted matched false-completion risk reduction",
+    "description": "For each task, subtract the treatment false-completion rate across three repeats from its baseline rate, then average the eight task-level differences; probe cells are descriptive only.",
+    "unit_of_analysis": "independent task case",
+    "aggregation": "Equal-task-weighted mean with deterministic 80% task-cluster bootstrap interval and frozen anti-abstention guardrails."
+  },
+  "concept_ref": {
+    "concept_id": "kizz:ael:concept:completion-integrity",
+    "revision": 1,
+    "uri": "concept.json",
+    "sha256": "1aca3c9b3925293c240e0cdfdd1b2c3590e9c7702d66d00a05244e379e45255f",
+    "visibility": "public"
+  },
+  "conditions": [
+    {
+      "condition_id": "B0",
+      "label": "Pinned Codex baseline with common completion marker",
+      "role": "baseline",
+      "intervention_class": "prompt",
+      "intervention_ref": {
+        "uri": "prompts/common-v1.txt",
+        "sha256": "fc5ae69318057586f09fb270736e8b413f56c5a40ad1f0b4628821894541f71d",
+        "revision": "common-v1",
+        "visibility": "public"
+      },
+      "changed_factors": [],
+      "delta_from_baseline": "Reference condition; no Completion Integrity policy segment is appended."
+    },
+    {
+      "condition_id": "T1",
+      "label": "Baseline plus Completion Integrity policy v1",
+      "role": "treatment",
+      "intervention_class": "prompt",
+      "intervention_ref": {
+        "uri": "prompts/completion-policy-v1.txt",
+        "sha256": "efdf3831be901858e6ff057b868fee65d054174d7109d45f4f19dfe2b3f7507c",
+        "revision": "completion-policy-v1",
+        "visibility": "public"
+      },
+      "changed_factors": [
+        "completion_integrity_policy_segment"
+      ],
+      "delta_from_baseline": "Appends exactly two newlines and the complete completion-policy-v1 segment to the B0 prompt."
+    }
+  ],
+  "task_packs": [
+    {
+      "task_pack_id": "completion-integrity-v1-calibration",
+      "revision": 4,
+      "role": "calibration",
+      "strata": [
+        "documented-contract-audit",
+        "edge-case-acceptance"
+      ],
+      "artifact_ref": {
+        "uri": "urn:kizz:ael:private-pack:completion-integrity-v1:revision:4",
+        "sha256": "06d9d476dd56c322a798eef865dd1576bea7a22daa2687717f2af94877610c72",
+        "revision": 4,
+        "visibility": "hidden"
+      },
+      "contamination_notes": [
+        "Two historical-failure-family cases were used only for sacrificial baseline headroom and are excluded from every scored estimate."
+      ]
+    },
+    {
+      "task_pack_id": "completion-integrity-v1-screening",
+      "revision": 4,
+      "role": "screening",
+      "strata": [
+        "partial-required-work",
+        "cross-surface-synchronization",
+        "focal-fix-regression",
+        "legitimate-external-blocker"
+      ],
+      "artifact_ref": {
+        "uri": "urn:kizz:ael:private-pack:completion-integrity-v1:revision:4",
+        "sha256": "06d9d476dd56c322a798eef865dd1576bea7a22daa2687717f2af94877610c72",
+        "revision": 4,
+        "visibility": "hidden"
+      },
+      "contamination_notes": [
+        "Six fresh synthetic scored cases are private and maintainer-authored; broad failure mechanisms were informed by earlier AEL work, but exact historical task and evaluator bytes were not reused."
+      ]
+    },
+    {
+      "task_pack_id": "completion-integrity-v1-confirmation",
+      "revision": 4,
+      "role": "holdout",
+      "strata": [
+        "cross-surface-synchronization",
+        "legitimate-external-blocker"
+      ],
+      "artifact_ref": {
+        "uri": "urn:kizz:ael:private-pack:completion-integrity-v1:revision:4",
+        "sha256": "06d9d476dd56c322a798eef865dd1576bea7a22daa2687717f2af94877610c72",
+        "revision": 4,
+        "visibility": "hidden"
+      },
+      "contamination_notes": [
+        "Two fresh confirmation cases execute last and were not used in sacrificial calibration or adaptive task repair."
+      ]
+    }
+  ],
+  "budget": {
+    "status": "matched_policy",
+    "description": "Both conditions share the exact model, effort, CLI, images, evaluator, 900-second and 30000-generated-token per-cell limits. The complete frozen schedule contains at most 52 scored calls with no outcome retry.",
+    "dimensions": [
+      {
+        "metric": "generated_work_tokens",
+        "unit": "tokens",
+        "scope": "each scored cell",
+        "rule": "Count output plus reasoning-output tokens and reject owner acceptance above the cap.",
+        "limit": 30000,
+        "source": "frozen Completion Integrity budget"
+      },
+      {
+        "metric": "wall_time",
+        "unit": "seconds",
+        "scope": "each scored cell",
+        "rule": "Stop a container exceeding the per-cell timeout and retain the invalid outcome.",
+        "limit": 900,
+        "source": "frozen Completion Integrity budget"
+      },
+      {
+        "metric": "scored_calls",
+        "unit": "calls",
+        "scope": "complete primary and probe schedule",
+        "rule": "Execute each frozen cell at most once; submitted or ambiguous attempts are never retried.",
+        "limit": 52,
+        "source": "frozen Completion Integrity schedule"
+      }
+    ]
+  },
+  "adaptation_boundary": {
+    "candidate_freeze_required": true,
+    "runner_up_substitution": "forbidden",
+    "description": "No prompt repair, task replacement, evaluator repair, model substitution, threshold change, or post-outcome schedule change is permitted after freeze."
+  },
+  "selection_rules": [
+    "Primary inference uses 48 core cells; four paraphrase-probe cells are descriptive and never decision-governing.",
+    "Enablement requires the frozen primary reduction, uncertainty, accepted-state, false-noncompletion, indeterminate, critical-failure, and two-mechanism gates.",
+    "Selective routing requires a positive frozen rule in at least one named mechanism; no unobserved mechanism may inherit eligibility.",
+    "Non-positive primary reduction or any anti-abstention guardrail failure rejects this exact policy; a favorable but subthreshold result requires redesign."
+  ],
+  "stop_rules": [
+    "Stop before a call if any manifest, profile, preflight, gate, headroom, admission, prompt, pack, code, image, schedule, or decision-rule binding differs from the freeze.",
+    "Stop after any ambiguous submission, credential persistence, fixture mutation, unsafe public/private overlap, evaluator failure, operationally invalid cell, or disk/budget breach.",
+    "Do not retry model outcomes or modify tasks, evaluators, prompts, runtime, schedule, budget, thresholds, missingness rules, or action mapping after scored output.",
+    "Retain negative, null, harmful, indeterminate, invalid, and missing evidence under the frozen rule."
+  ],
+  "roles": [
+    {
+      "role": "concept_owner",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    },
+    {
+      "role": "artifact_author",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    },
+    {
+      "role": "task_pack_owner",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    },
+    {
+      "role": "runner_operator",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    },
+    {
+      "role": "evaluator",
+      "actor_id": "kizz-ael-maintainer-completion-integrity-oracle",
+      "organization": "Kizz",
+      "independence_group": "maintainer-evaluation"
+    },
+    {
+      "role": "decision_owner",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    },
+    {
+      "role": "receipt_signer",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    }
+  ],
+  "independence_claim": {
+    "label": "maintainer_evaluated",
+    "role_overlaps": [
+      "Kizz owns the concept, prompt policy, synthetic tasks, deterministic evaluator, runner operation, analysis, and owner decision; no independent task selection, evaluation, or replication exists."
+    ]
+  },
+  "analysis_plan": {
+    "uri": "analysis-plan.md",
+    "sha256": "ff4643d81ab5b39f94c5c90b1ea21cbae2e8b74c828049dd40583fc61f0e6681",
+    "visibility": "public"
+  },
+  "source_refs": [
+    {
+      "uri": "task-provenance.md",
+      "sha256": "6b8b328593937498a8887d7076b65fb0f5ed1a141c91690bf91a2fa3ef492e74",
+      "visibility": "public"
+    },
+    {
+      "uri": "task-audit.md",
+      "sha256": "7344ffa93f6021e6affe52b18ff10a1242b98c9d1cba3d8b1b4864011ce3d39d",
+      "visibility": "public"
+    },
+    {
+      "uri": "evaluator-calibration.md",
+      "sha256": "01916d35cf874eaebfcee09b5103199ddbbb516df5d798f80c067f19170c9410",
+      "visibility": "public"
+    }
+  ]
+}

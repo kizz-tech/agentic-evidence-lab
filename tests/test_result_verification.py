@@ -20,7 +20,11 @@ PBT_RESULT = ROOT / "studies/agent-skills-season-1/results/property-based-testin
 class ResultVerificationTests(unittest.TestCase):
     def test_registry_is_immutable_and_has_one_canonical_name_source(self) -> None:
         self.assertEqual(
-            ("pbt-v2", "systematic-debugging-real-shadow-v1"),
+            (
+                "completion-integrity-prompt-policy-v1",
+                "pbt-v2",
+                "systematic-debugging-real-shadow-v1",
+            ),
             audit_adapter_names(),
         )
         with self.assertRaises(TypeError):
