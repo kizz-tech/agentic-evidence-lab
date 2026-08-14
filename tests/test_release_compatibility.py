@@ -77,10 +77,13 @@ class ReleaseCompatibilityTests(unittest.TestCase):
         self.assertTrue(any("source tag path unavailable" in failure for failure in failures))
 
     def test_default_locks_are_explicit_and_do_not_use_directory_globs(self) -> None:
-        self.assertEqual(2, len(DEFAULT_LOCKS))
-        for lock in DEFAULT_LOCKS:
+        self.assertEqual(3, len(DEFAULT_LOCKS))
+        for lock in DEFAULT_LOCKS[:2]:
             self.assertEqual(15, len(lock.paths))
             self.assertTrue(all("*" not in path and "?" not in path for path in lock.paths))
+        self.assertEqual("v0.1.0-alpha.5", DEFAULT_LOCKS[2].source_tag)
+        self.assertEqual(5, len(DEFAULT_LOCKS[2].paths))
+        self.assertTrue(all("*" not in path and "?" not in path for path in DEFAULT_LOCKS[2].paths))
 
         self.assertEqual(
             (

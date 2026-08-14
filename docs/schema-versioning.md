@@ -57,6 +57,27 @@ The disclosed materialization repair is similarly pilot-specific: it preserves
 the frozen analysis and records a post-run projection defect instead of
 silently changing preregistered code.
 
+## Alpha.7 measurement-quality boundary
+
+Alpha.7 adds `ael.study-quality-profile/0.1-pilot` and a deterministic
+preflight without registering a sixth Contract v0 type. The profile references
+one exact Contract manifest and adds pre-run construct, task-audit,
+evaluator-calibration, analysis, execution, and declared reliability evidence.
+Manifest-owned estimand, aggregation, tasks, roles, and independence are reused
+rather than copied into a second authority.
+
+Admission `ael.study-admission/0.2-pilot` adds a hash-bound
+`quality_profile_ref`; the legacy `0.1-pilot` validator remains available and
+rejects the new field. A future freeze binds the admission hash transitively.
+These pilot versions can evolve without changing the five stable Contract v0
+`0.1` schemas.
+
+The public-results profile and projection policy move to
+`ael.public-results/0.3` and `ael.publication-projection/0.3`. Every result now
+declares either `not_assessed_historical` or an exact profiled assessment.
+Quality metadata cannot raise receipt evidence or claim ceilings, and the four
+pre-alpha.7 studies are not retrospectively assessed.
+
 ## Migration requirement
 
 The first incompatible schema change must include:

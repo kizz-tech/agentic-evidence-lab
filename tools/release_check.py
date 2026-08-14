@@ -8,6 +8,8 @@ from pathlib import Path
 
 from ael import __version__
 from ael.result_surface import ResultSurfaceError, materialize_result_surface
+from ael.sandbox import SandboxError
+from ael.study_quality import materialize_preflight
 
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED_FILES = {
@@ -24,13 +26,18 @@ REQUIRED_FILES = {
     "LICENSE",
     "NOTICE",
     "README.md",
+    "ROADMAP.md",
     "RESULTS.md",
     "SECURITY.md",
     "SUPPORT.md",
-    "docs/release-notes/v0.1.0-alpha.6.md",
+    "docs/release-notes/v0.1.0-alpha.7.md",
     "docs/results/index.json",
+    "docs/study-quality-preflight.md",
     "pyproject.toml",
     "studies/public-results.json",
+    "studies/quality-preflight/examples/pass/preflight.json",
+    "studies/quality-preflight/examples/pass/preflight.md",
+    "studies/quality-preflight/examples/pass/quality-profile.json",
     "uv.lock",
 }
 ALLOWED_TOP_LEVEL = {
@@ -46,6 +53,7 @@ ALLOWED_TOP_LEVEL = {
     "LICENSE",
     "NOTICE",
     "README.md",
+    "ROADMAP.md",
     "RESULTS.md",
     "SECURITY.md",
     "SUPPORT.md",
@@ -147,8 +155,8 @@ def main() -> int:
             continue
         failures.extend(payload_failures(relative, payload))
 
-    expected_version = "0.1.0a6"
-    expected_release = "0.1.0-alpha.6"
+    expected_version = "0.1.0a7"
+    expected_release = "0.1.0-alpha.7"
     if __version__ != expected_version:
         failures.append(f"package version is {__version__}, expected {expected_version}")
     try:
@@ -167,6 +175,17 @@ def main() -> int:
     changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
     if f"## [{expected_release}]" not in changelog:
         failures.append(f"CHANGELOG.md has no {expected_release} release section")
+
+    try:
+        materialize_preflight(
+            ROOT / "studies/quality-preflight/examples/pass/quality-profile.json",
+            json_output=ROOT / "studies/quality-preflight/examples/pass/preflight.json",
+            markdown_output=ROOT / "studies/quality-preflight/examples/pass/preflight.md",
+            check=True,
+            repository_root=ROOT,
+        )
+    except SandboxError as exc:
+        failures.append(f"study quality preflight example is stale or invalid: {exc}")
 
     try:
         materialize_result_surface(

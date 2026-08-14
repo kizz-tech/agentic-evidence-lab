@@ -39,6 +39,7 @@ from ael.study_freeze import (
     validate_freeze_bundle,
     verify_private_pack,
 )
+from ael.study_quality import materialize_preflight
 from ael.taskpack import check_adaptation_pack, evaluate_candidate
 from ael.validation import sha256_path, validate
 
@@ -350,6 +351,33 @@ def _study_activation_check(args: argparse.Namespace) -> int:
     return 0 if summary["activated"] else 1
 
 
+def _study_preflight(args: argparse.Namespace) -> int:
+    try:
+        summary = materialize_preflight(
+            Path(args.profile),
+            json_output=Path(args.json_output) if args.json_output else None,
+            markdown_output=Path(args.markdown_output) if args.markdown_output else None,
+            check=args.check,
+            as_of=args.as_of,
+        )
+    except SandboxError as exc:
+        print(f"study quality preflight failed: {exc}", file=sys.stderr)
+        return 1
+    for issue in summary["issues"]:
+        stream = sys.stderr if issue["severity"] == "error" else sys.stdout
+        print(
+            f"{issue['severity']} {issue['code']} {issue['location']}: {issue['message']}",
+            file=stream,
+        )
+    print(
+        "study quality preflight complete: "
+        f"profile={summary['profile_id']} status={summary['status']} "
+        f"errors={sum(issue['severity'] == 'error' for issue in summary['issues'])} "
+        f"warnings={sum(issue['severity'] == 'warning' for issue in summary['issues'])}"
+    )
+    return 1 if summary["status"] == "blocked" else 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="ael", description="Agentic Evidence Lab contract tools")
     parser.add_argument("--version", action="version", version=__version__)
@@ -534,6 +562,23 @@ def build_parser() -> argparse.ArgumentParser:
     activation_parser.add_argument("--skill-name", required=True)
     activation_parser.add_argument("--json-output")
     activation_parser.set_defaults(handler=_study_activation_check)
+    preflight_parser = study_subparsers.add_parser(
+        "preflight",
+        help="check a hash-bound pilot Study Quality Profile before scored work",
+    )
+    preflight_parser.add_argument("profile")
+    preflight_parser.add_argument("--json-output")
+    preflight_parser.add_argument("--markdown-output")
+    preflight_parser.add_argument(
+        "--as-of",
+        help="explicit YYYY-MM-DD used to derive assessment freshness; defaults to assessed_at",
+    )
+    preflight_parser.add_argument(
+        "--check",
+        action="store_true",
+        help="fail when an existing deterministic output differs",
+    )
+    preflight_parser.set_defaults(handler=_study_preflight)
     return parser
 
 

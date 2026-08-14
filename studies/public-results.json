@@ -1,7 +1,7 @@
 {
-  "schema_version": "ael.public-results/0.2",
-  "as_of": "2026-08-13",
-  "projection_policy": "ael.publication-projection/0.2",
+  "schema_version": "ael.public-results/0.3",
+  "as_of": "2026-08-14",
+  "projection_policy": "ael.publication-projection/0.3",
   "studies": [
     {
       "card_id": "systematic-debugging-real-shadow-v1",
@@ -59,6 +59,9 @@
         "action": "derived_from_lifecycle",
         "outcome_follow_up": "derived_from_lifecycle",
         "freshness": "derived_from_lifecycle"
+      },
+      "quality": {
+        "assessment": "not_assessed_historical"
       },
       "lifecycle": {
         "admission_ref": {
@@ -133,6 +136,9 @@
         "action": "not_declared_historical",
         "outcome_follow_up": "not_declared_historical",
         "freshness": "unassessed"
+      },
+      "quality": {
+        "assessment": "not_assessed_historical"
       }
     },
     {
@@ -178,6 +184,9 @@
         "action": "not_declared_historical",
         "outcome_follow_up": "not_declared_historical",
         "freshness": "unassessed"
+      },
+      "quality": {
+        "assessment": "not_assessed_historical"
       }
     },
     {
@@ -224,6 +233,9 @@
         "action": "not_declared_historical",
         "outcome_follow_up": "not_declared_historical",
         "freshness": "unassessed"
+      },
+      "quality": {
+        "assessment": "not_assessed_historical"
       }
     }
   ]

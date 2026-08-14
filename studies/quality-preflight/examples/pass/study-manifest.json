@@ -1,0 +1,141 @@
+{
+  "schema_version": "ael.study-manifest/0.1",
+  "object_type": "study_manifest",
+  "study_id": "kizz:ael:study:quality-preflight-synthetic",
+  "revision": 1,
+  "status": "frozen",
+  "frozen_at": "2026-08-14T00:00:00Z",
+  "decision_question": "Does one frozen prompt change improve deterministic repair acceptance on the synthetic screening pack?",
+  "comparison_mode": "controlled_factor",
+  "primary_estimand": {
+    "name": "matched deterministic acceptance difference",
+    "description": "Treatment-minus-baseline difference in accepted task pairs under one frozen evaluator.",
+    "unit_of_analysis": "matched task pair",
+    "aggregation": "Prespecified favorable, unfavorable, and tied pair counts with a critical-failure gate."
+  },
+  "concept_ref": {
+    "concept_id": "kizz:ael:concept:quality-preflight-synthetic",
+    "revision": 1,
+    "uri": "urn:kizz:ael:concept:quality-preflight-synthetic:1",
+    "sha256": "320aba00de7acb9bc5d1ee0db8f8274d03d2844044c6a461f3f422be3f19ec42",
+    "visibility": "public"
+  },
+  "conditions": [
+    {
+      "condition_id": "B0",
+      "label": "Frozen baseline",
+      "role": "baseline",
+      "intervention_class": "prompt",
+      "intervention_ref": {
+        "uri": "urn:kizz:ael:prompt:quality-preflight-baseline:1",
+        "sha256": "e9308134fe7a9762c4b79cf528e530fa06d4d43862b45efb0af3cf5f5a04b8db",
+        "visibility": "public"
+      },
+      "changed_factors": [],
+      "delta_from_baseline": "Reference condition."
+    },
+    {
+      "condition_id": "P1",
+      "label": "Frozen prompt change",
+      "role": "treatment",
+      "intervention_class": "prompt",
+      "intervention_ref": {
+        "uri": "urn:kizz:ael:prompt:quality-preflight-treatment:1",
+        "sha256": "57e360b663a5bd4e4478c6ebc7cb0d3b44dab9933f62ac22fc6e35d32a5df99a",
+        "visibility": "public"
+      },
+      "changed_factors": [
+        "instruction_prompt"
+      ],
+      "delta_from_baseline": "Changes only the frozen instruction prompt."
+    }
+  ],
+  "task_packs": [
+    {
+      "task_pack_id": "quality-preflight-synthetic-screening",
+      "revision": 1,
+      "role": "screening",
+      "strata": [
+        "state-order",
+        "boundary-contract"
+      ],
+      "artifact_ref": {
+        "uri": "urn:kizz:ael:private-pack:quality-preflight-synthetic:1",
+        "sha256": "4d48e2f4ad9607269d98502410a92711feeb39b0e1f13009fab66ceb173fc275",
+        "visibility": "hidden"
+      },
+      "contamination_notes": [
+        "Synthetic public example only; no scored model calls exist.",
+        "The example demonstrates the quality preflight contract, not an effect result."
+      ]
+    }
+  ],
+  "budget": {
+    "status": "matched_policy",
+    "description": "Both conditions share the same declared token, time, and call limits.",
+    "dimensions": [
+      {
+        "metric": "scored_calls",
+        "unit": "calls",
+        "scope": "complete synthetic study",
+        "rule": "Execute every frozen cell once at most.",
+        "limit": 16,
+        "source": "synthetic example policy"
+      }
+    ]
+  },
+  "adaptation_boundary": {
+    "candidate_freeze_required": true,
+    "runner_up_substitution": "forbidden",
+    "description": "No prompt, task, evaluator, threshold, or schedule change is allowed after freeze."
+  },
+  "selection_rules": [
+    "Classify every complete matched pair from deterministic evaluator output."
+  ],
+  "stop_rules": [
+    "Stop on hash drift, an invalid cell, or a critical evaluator failure."
+  ],
+  "roles": [
+    {
+      "role": "concept_owner",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    },
+    {
+      "role": "task_pack_owner",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    },
+    {
+      "role": "runner_operator",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    },
+    {
+      "role": "evaluator",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer-evaluation"
+    },
+    {
+      "role": "decision_owner",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    }
+  ],
+  "independence_claim": {
+    "label": "maintainer_evaluated",
+    "role_overlaps": [
+      "The synthetic example uses one maintainer for task, run, evaluation, and decision roles."
+    ]
+  },
+  "analysis_plan": {
+    "uri": "urn:kizz:ael:analysis-plan:quality-preflight-synthetic:1",
+    "sha256": "a139a192c93e6b55fb3d17ae84b5496a36f181de1c94687578781b646a1f6bc8",
+    "visibility": "public"
+  }
+}

@@ -46,6 +46,11 @@ jobs:
         run: uv run ael validate examples
       - name: Check generated public results and frozen evidence
         run: |
+          uv run ael study preflight \
+            studies/quality-preflight/examples/pass/quality-profile.json \
+            --json-output studies/quality-preflight/examples/pass/preflight.json \
+            --markdown-output studies/quality-preflight/examples/pass/preflight.md \
+            --check
           uv run ael results check studies/public-results.json --require-git-proof
           uv run python tools/check_frozen_artifacts.py
       - name: Validate Agent Skills Season 1
@@ -80,7 +85,7 @@ jobs:
         run: |
           uv build
           uv run python tools/verify_release_artifacts.py \
-            --expected-version 0.1.0a6 \
+            --expected-version 0.1.0a7 \
             dist/*.whl dist/*.tar.gz
 
   clean-wheel:
@@ -104,8 +109,13 @@ jobs:
           test -n "$wheel"
           uv venv .release-venv
           uv pip install --python .release-venv/bin/python "$wheel"
-          test "$(.release-venv/bin/ael --version)" = "0.1.0a6"
-          test "$(.release-venv/bin/python -c 'import importlib.metadata; print(importlib.metadata.version("agentic-evidence-lab"))')" = "0.1.0a6"
+          test "$(.release-venv/bin/ael --version)" = "0.1.0a7"
+          test "$(.release-venv/bin/python -c 'import importlib.metadata; print(importlib.metadata.version("agentic-evidence-lab"))')" = "0.1.0a7"
+          .release-venv/bin/ael study preflight \
+            studies/quality-preflight/examples/pass/quality-profile.json \
+            --json-output studies/quality-preflight/examples/pass/preflight.json \
+            --markdown-output studies/quality-preflight/examples/pass/preflight.md \
+            --check
           .release-venv/bin/ael results check studies/public-results.json --require-git-proof
           .release-venv/bin/ael validate examples
           .release-venv/bin/ael validate \

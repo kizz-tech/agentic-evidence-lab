@@ -3,7 +3,8 @@
 This guard deliberately keeps a small, explicit path allowlist.  It does not
 maintain a second checksum registry and does not lock shared implementation
 source forever: the study audit and freeze checks own executable bindings,
-while this tool protects the released PBT freeze and result bytes.
+while this tool protects released PBT evidence and the five Contract v0 schema
+bytes that alpha.7 promises unchanged.
 """
 
 from __future__ import annotations
@@ -34,6 +35,13 @@ PBT_RESULT_PATHS = (
     "studies/agent-skills-season-1/results/property-based-testing-v2/screening-decision.json",
 )
 PBT_FROZEN_PATHS = (PBT_FREEZE, *PBT_RESULT_PATHS)
+CONTRACT_SCHEMA_PATHS = (
+    "src/ael/schemas/concept.schema.json",
+    "src/ael/schemas/study-manifest.schema.json",
+    "src/ael/schemas/run-record.schema.json",
+    "src/ael/schemas/measurement-set.schema.json",
+    "src/ael/schemas/evidence-receipt.schema.json",
+)
 
 
 @dataclass(frozen=True)
@@ -58,6 +66,7 @@ class GitAnchor:
 DEFAULT_LOCKS: tuple[FrozenLock, ...] = (
     FrozenLock("v0.1.0-alpha.3", PBT_FROZEN_PATHS),
     FrozenLock("v0.1.0-alpha.4", PBT_FROZEN_PATHS),
+    FrozenLock("v0.1.0-alpha.5", CONTRACT_SCHEMA_PATHS),
 )
 DEFAULT_ANCHORS: tuple[GitAnchor, ...] = (
     GitAnchor(

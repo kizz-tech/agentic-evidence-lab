@@ -20,6 +20,7 @@ from ael.result_surface import (
 ROOT = Path(__file__).resolve().parents[1]
 PROFILE = ROOT / "studies" / "public-results.json"
 EXAMPLE = ROOT / "examples" / "council-generation-1"
+QUALITY_EXAMPLE = ROOT / "studies" / "quality-preflight" / "examples" / "pass"
 
 
 def _sha256(path: Path) -> str:
@@ -47,9 +48,9 @@ class ResultSurfaceTests(unittest.TestCase):
         shutil.copytree(EXAMPLE, example)
         receipt = example / "evidence-receipt.json"
         profile: dict[str, object] = {
-            "schema_version": "ael.public-results/0.2",
+            "schema_version": "ael.public-results/0.3",
             "as_of": "2026-08-12",
-            "projection_policy": "ael.publication-projection/0.2",
+            "projection_policy": "ael.publication-projection/0.3",
             "studies": [
                 {
                     "card_id": "council-generation-1",
@@ -71,6 +72,7 @@ class ResultSurfaceTests(unittest.TestCase):
                         "outcome_follow_up": "not_declared_historical",
                         "freshness": "unassessed",
                     },
+                    "quality": {"assessment": "not_assessed_historical"},
                     "publication": "published",
                 }
             ],
@@ -96,7 +98,7 @@ class ResultSurfaceTests(unittest.TestCase):
             set(first),
         )
         index = json.loads(first["docs/results/index.json"])
-        self.assertEqual("ael.public-results/0.2", index["schema_version"])
+        self.assertEqual("ael.public-results/0.3", index["schema_version"])
         self.assertEqual(
             [
                 "council-generation-1",
@@ -108,6 +110,12 @@ class ResultSurfaceTests(unittest.TestCase):
         )
         self.assertIn("Current publication", first["docs/results/council-generation-1.md"])
         self.assertIn("not_declared_historical", first["docs/results/property-based-testing-v2.md"])
+        self.assertIn("not_assessed_historical", first["docs/results/property-based-testing-v2.md"])
+        for card in index["studies"]:
+            self.assertEqual("not_assessed_historical", card["quality"]["status"])
+            self.assertEqual(
+                {"not_assessed_historical"}, set(card["quality"]["quality_axes"].values())
+            )
         focused = next(
             card
             for card in index["studies"]
@@ -156,6 +164,18 @@ class ResultSurfaceTests(unittest.TestCase):
         with self.assertRaisesRegex(ResultSurfaceError, "publication"):
             validate_public_profile(invalid_publication)
 
+        missing_quality = copy.deepcopy(profile)
+        del missing_quality["studies"][0]["quality"]  # type: ignore[index]
+        with self.assertRaisesRegex(ResultSurfaceError, "missing required key"):
+            validate_public_profile(missing_quality)
+
+        malformed_quality = copy.deepcopy(profile)
+        malformed_quality["studies"][0]["quality"] = {  # type: ignore[index]
+            "assessment": "profiled"
+        }
+        with self.assertRaisesRegex(ResultSurfaceError, "profile_ref"):
+            validate_public_profile(malformed_quality)
+
     def test_duplicate_cards_and_claims_are_rejected(self) -> None:
         profile = load_public_profile(PROFILE)
         duplicate_cards = copy.deepcopy(profile)
@@ -194,6 +214,66 @@ class ResultSurfaceTests(unittest.TestCase):
             profile_path.write_text(json.dumps(profile), encoding="utf-8")
             with self.assertRaisesRegex(ResultSurfaceError, "exceeds evidence ceiling"):
                 build_result_surface(profile_path, Path(temporary))
+
+    def test_profiled_quality_is_hash_bound_and_study_bound(self) -> None:
+        with self._temporary_directory() as temporary:
+            profile_path, profile, receipt = self._profile_tree(temporary)
+            root = Path(temporary)
+            example = root / "examples" / "council-generation-1"
+            manifest = example / "study-manifest.json"
+            manifest_data = json.loads(manifest.read_text(encoding="utf-8"))
+            manifest_data["status"] = "frozen"
+            manifest.write_text(json.dumps(manifest_data, indent=2) + "\n", encoding="utf-8")
+            manifest_digest = _sha256(manifest)
+
+            receipt_data = json.loads(receipt.read_text(encoding="utf-8"))
+            receipt_data["study_ref"]["sha256"] = manifest_digest
+            for run_ref in receipt_data["run_record_refs"]:
+                run_path = example / run_ref["uri"]
+                run = json.loads(run_path.read_text(encoding="utf-8"))
+                run["study_ref"]["sha256"] = manifest_digest
+                run_path.write_text(json.dumps(run, indent=2) + "\n", encoding="utf-8")
+                run_ref["sha256"] = _sha256(run_path)
+            measurement_path = example / receipt_data["measurement_set_ref"]["uri"]
+            measurement = json.loads(measurement_path.read_text(encoding="utf-8"))
+            measurement["study_ref"]["sha256"] = manifest_digest
+            measurement_path.write_text(json.dumps(measurement, indent=2) + "\n", encoding="utf-8")
+            receipt_data["measurement_set_ref"]["sha256"] = _sha256(measurement_path)
+            receipt.write_text(json.dumps(receipt_data, indent=2) + "\n", encoding="utf-8")
+            profile["studies"][0]["receipt_ref"]["sha256"] = _sha256(receipt)  # type: ignore[index]
+
+            for filename in ("task-provenance.md", "task-audit.md", "evaluator-calibration.md"):
+                shutil.copy2(QUALITY_EXAMPLE / filename, example / filename)
+            quality = json.loads((QUALITY_EXAMPLE / "quality-profile.json").read_text())
+            quality["profile_id"] = "kizz:ael:quality-profile:council-test:1"
+            quality["study_ref"] = {
+                "study_id": manifest_data["study_id"],
+                "revision": manifest_data["revision"],
+                "uri": "study-manifest.json",
+                "sha256": manifest_digest,
+            }
+            quality_path = example / "quality-profile.json"
+            quality_path.write_text(json.dumps(quality, indent=2) + "\n", encoding="utf-8")
+            profile["studies"][0]["quality"] = {  # type: ignore[index]
+                "assessment": "profiled",
+                "profile_ref": {
+                    "uri": _root_relative(quality_path, root),
+                    "sha256": _sha256(quality_path),
+                },
+            }
+            profile["as_of"] = "2026-08-14"
+            profile_path.write_text(json.dumps(profile, indent=2) + "\n", encoding="utf-8")
+
+            outputs = build_result_surface(profile_path, root)
+            index = json.loads(outputs["docs/results/index.json"])
+            projected = index["studies"][0]["quality"]
+            self.assertEqual("conformant_with_warnings", projected["status"])
+            self.assertEqual("controlled_pilot", projected["quality_axes"]["design_class"])
+            self.assertEqual(
+                _root_relative(quality_path, root),
+                projected["profile"]["uri"],
+            )
+            self.assertIn(_root_relative(quality_path, root), index["studies"][0]["source_hashes"])
 
     def test_traversal_symlink_and_special_file_references_fail(self) -> None:
         with self._temporary_directory() as temporary:

@@ -10,6 +10,7 @@ and under what conditions.**
 [**Browse results**](RESULTS.md) ·
 [**Understand the method**](docs/contract-v0.md) ·
 [**Evaluate a system**](#evaluate-your-own-system) ·
+[**See the roadmap**](ROADMAP.md) ·
 [**Read the documentation**](docs/README.md)
 
 Agentic Evidence Lab (AEL) compares versioned skills, prompts, models, tools,
@@ -103,6 +104,11 @@ uv sync --locked
 
 uv run ael validate examples
 uv run ael render examples/council-generation-1/evidence-receipt.json
+uv run ael study preflight \
+  studies/quality-preflight/examples/pass/quality-profile.json \
+  --json-output studies/quality-preflight/examples/pass/preflight.json \
+  --markdown-output studies/quality-preflight/examples/pass/preflight.md \
+  --check
 uv run ael results check studies/public-results.json --require-git-proof
 uv run ael study audit \
   --freeze studies/agent-skills-season-1/screening/property-based-testing-v2.freeze.json \
@@ -140,9 +146,12 @@ The smallest study starts from an existing example:
 1. Write a `Concept` describing the idea and proposed mechanism.
 2. Freeze a `Study Manifest` with baseline, treatment, tasks, budget, and
    analysis rules.
-3. Produce one `Run Record` for every condition, task, and repeat.
-4. Record evaluator-owned outcomes in a `Measurement Set`.
-5. Author an `Evidence Receipt`, then validate and render it with the CLI.
+3. Run the pilot [Study Quality Preflight](docs/study-quality-preflight.md) to
+   bind task/evaluator evidence, claim limits, decision rules, uncertainty, and
+   execution declarations before scored work.
+4. Produce one `Run Record` for every condition, task, and repeat.
+5. Record evaluator-owned outcomes in a `Measurement Set`.
+6. Author an `Evidence Receipt`, then validate and render it with the CLI.
 
 Use [Contract v0](docs/contract-v0.md) for the five document types and
 [the public examples](examples) as executable starting points. The contract is
@@ -175,7 +184,7 @@ maintainer-reviewed snapshots and maintainer-controlled fixtures; arbitrary
 submissions remain blocked. Read [SECURITY.md](SECURITY.md) and
 [Container runner isolation](docs/runner-isolation.md) before execution.
 
-`v0.1.0-alpha.6` is pre-stable. It does not claim universal benchmarking,
+`v0.1.0-alpha.7` is pre-stable. It does not claim universal benchmarking,
 independent verification of Kizz-authored capabilities, model-only superiority
 from stack comparisons, or downstream production impact.
 

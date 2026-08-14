@@ -6,6 +6,7 @@ import unittest
 from pathlib import Path
 
 from ael.prospective_study import (
+    ADMISSION_SCHEMA_VERSION_V2,
     authorize_scored_run,
     load_json_object,
     validate_admission,
@@ -44,6 +45,23 @@ class ProspectiveStudyTests(unittest.TestCase):
         self.assertTrue(
             any(issue.location == "execution_authority.exact_candidate_only" for issue in issues)
         )
+
+    def test_admission_v2_requires_hash_bound_quality_profile(self) -> None:
+        admission = load_json_object(ADMISSION)
+        admission["schema_version"] = ADMISSION_SCHEMA_VERSION_V2
+        missing = validate_admission(admission)
+        self.assertTrue(any("quality_profile_ref" in issue.message for issue in missing))
+
+        admission["quality_profile_ref"] = {
+            "profile_id": "kizz:ael:quality-profile:future:1",
+            "uri": "future.quality-profile.json",
+            "sha256": "a" * 64,
+        }
+        self.assertEqual([], validate_admission(admission))
+
+        admission["schema_version"] = "ael.study-admission/0.1-pilot"
+        legacy_with_new_field = validate_admission(admission)
+        self.assertTrue(any("unknown keys" in issue.message for issue in legacy_with_new_field))
 
     def test_freeze_requires_manifest_and_admission_hashes(self) -> None:
         freeze = load_json_object(FREEZE)

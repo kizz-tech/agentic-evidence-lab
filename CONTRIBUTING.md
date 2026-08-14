@@ -25,6 +25,12 @@ uv run ruff check .
 uv run ruff format --check .
 uv run python -m unittest discover -s tests -v
 uv run ael validate examples
+uv run ael study preflight \
+  studies/quality-preflight/examples/pass/quality-profile.json \
+  --json-output studies/quality-preflight/examples/pass/preflight.json \
+  --markdown-output studies/quality-preflight/examples/pass/preflight.md \
+  --check
+uv run ael results check studies/public-results.json --require-git-proof
 uv run ael study audit \
   --freeze studies/agent-skills-season-1/screening/property-based-testing-v2.freeze.json \
   --result studies/agent-skills-season-1/results/property-based-testing-v2 \

@@ -19,6 +19,7 @@ from typing import Any
 from ael.sandbox import SandboxError
 
 ADMISSION_SCHEMA_VERSION = "ael.study-admission/0.1-pilot"
+ADMISSION_SCHEMA_VERSION_V2 = "ael.study-admission/0.2-pilot"
 FREEZE_SCHEMA_VERSION = "ael.study-freeze/0.2-dev"
 EFFECT_DECISION_SCHEMA_VERSION = "ael.study-effect-decision/0.1-pilot"
 ADOPTION_DECISION_SCHEMA_VERSION = "ael.adoption-decision/0.1-pilot"
@@ -163,35 +164,47 @@ def _ref(
 
 def validate_admission(data: Mapping[str, Any]) -> list[StudyIssue]:
     issues: list[StudyIssue] = []
+    schema_version = data.get("schema_version")
+    required = {
+        "schema_version",
+        "admission_id",
+        "case_id",
+        "case_revision",
+        "status",
+        "admitted_at",
+        "expires_at",
+        "decision_question",
+        "study_manifest_ref",
+        "candidate",
+        "execution_authority",
+        "evidence_boundary",
+        "owner_action_policy",
+        "roles",
+        "role_overlaps",
+        "stop_rules",
+        "follow_up_plan",
+    }
+    if schema_version == ADMISSION_SCHEMA_VERSION_V2:
+        required.add("quality_profile_ref")
     root = _keys(
         data,
-        {
-            "schema_version",
-            "admission_id",
-            "case_id",
-            "case_revision",
-            "status",
-            "admitted_at",
-            "expires_at",
-            "decision_question",
-            "study_manifest_ref",
-            "candidate",
-            "execution_authority",
-            "evidence_boundary",
-            "owner_action_policy",
-            "roles",
-            "role_overlaps",
-            "stop_rules",
-            "follow_up_plan",
-        },
+        required,
         set(),
         "admission",
         issues,
     )
     if root is None:
         return issues
-    if root.get("schema_version") != ADMISSION_SCHEMA_VERSION:
-        issues.append(StudyIssue("schema_version", f"must equal {ADMISSION_SCHEMA_VERSION}"))
+    if root.get("schema_version") not in {
+        ADMISSION_SCHEMA_VERSION,
+        ADMISSION_SCHEMA_VERSION_V2,
+    }:
+        issues.append(
+            StudyIssue(
+                "schema_version",
+                f"must equal {ADMISSION_SCHEMA_VERSION} or {ADMISSION_SCHEMA_VERSION_V2}",
+            )
+        )
     for key in ("admission_id", "case_id", "decision_question"):
         _string(root.get(key), key, issues)
     _positive_int(root.get("case_revision"), "case_revision", issues)
@@ -200,6 +213,13 @@ def validate_admission(data: Mapping[str, Any]) -> list[StudyIssue]:
     _timestamp(root.get("admitted_at"), "admitted_at", issues)
     _timestamp(root.get("expires_at"), "expires_at", issues)
     _ref(root.get("study_manifest_ref"), "study_manifest_ref", issues, identity_key="study_id")
+    if schema_version == ADMISSION_SCHEMA_VERSION_V2:
+        _ref(
+            root.get("quality_profile_ref"),
+            "quality_profile_ref",
+            issues,
+            identity_key="profile_id",
+        )
 
     candidate = _keys(
         root.get("candidate"),

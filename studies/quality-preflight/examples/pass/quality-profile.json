@@ -1,0 +1,86 @@
+{
+  "schema_version": "ael.study-quality-profile/0.1-pilot",
+  "profile_id": "kizz:ael:quality-profile:synthetic-controlled-pilot:1",
+  "assessed_at": "2026-08-14",
+  "revalidate_after": "2026-09-14",
+  "valid_through": "2026-11-14",
+  "study_ref": {
+    "study_id": "kizz:ael:study:quality-preflight-synthetic",
+    "revision": 1,
+    "uri": "study-manifest.json",
+    "sha256": "ad36dd2b49c5c662b9137ac468f5449cd889cb0b05186eb5db31eabebcfdd105"
+  },
+  "prospective_state": {
+    "scored_calls_executed": 0,
+    "declaration": "Synthetic example only; no scored model call has been executed."
+  },
+  "construct": {
+    "operational_definition": "A repair is successful only when deterministic hidden acceptance verifies the declared causal invariant without a critical regression.",
+    "target_claim": "On the frozen synthetic pack and stack, the prompt change meets the preregistered matched-pair decision rule.",
+    "claim_ceiling": "factor_causal",
+    "falsifier": "The claim is false when the frozen matched-pair threshold is not met or any treatment critical-failure gate fires."
+  },
+  "task_quality": {
+    "status": "audited",
+    "construct_alignment": "Every task requires a repair whose hidden acceptance checks the declared state-order or boundary-contract invariant.",
+    "provenance_ref": {
+      "uri": "task-provenance.md",
+      "sha256": "92cf02eedc423f97bd7b1621d35d6c034b422a0b5588f3d36836c0ac70acf36f"
+    },
+    "audit_ref": {
+      "uri": "task-audit.md",
+      "sha256": "8ebeefebd7a53e85d7d33381ceca3b81d22ec76bf765b0ab7d9be92c56b126ee"
+    },
+    "audit_checks": {
+      "instruction_test_alignment": "pass",
+      "oracle_validation": "pass",
+      "alternative_valid_solutions": "pass",
+      "shortcut_rejection": "pass",
+      "environment_validation": "pass"
+    },
+    "confirmation_role": "active_confirmation",
+    "disclosure_state": "active_sequestered",
+    "adaptive_uses": 0
+  },
+  "evaluator_quality": {
+    "status": "calibrated",
+    "scoring_rule": "Run the frozen deterministic acceptance suite and classify a cell only from its exit status and declared critical checks.",
+    "calibration_ref": {
+      "uri": "evaluator-calibration.md",
+      "sha256": "64d655f84ca52113d1edb884ab2fe5e918bc7dca1c36055e6d74fd7bcc758c25"
+    },
+    "known_pass_cases": 2,
+    "known_fail_cases": 2,
+    "known_error_profile": "The example evaluator can miss defects outside the frozen acceptance surface and has no human inter-rater estimate.",
+    "adjudication": "Any ambiguous or infrastructure-invalid cell stops the study and is not silently scored."
+  },
+  "analysis_quality": {
+    "decision_threshold": "At least three favorable matched pairs, zero unfavorable pairs, and zero treatment critical failures.",
+    "missing_invalid_rule": "Any missing or invalid cell blocks the terminal effect decision; no outcome retry or imputation is allowed.",
+    "uncertainty": {
+      "status": "planned",
+      "method": "Report the exact paired outcome table and an exact two-sided interval for the matched binary contrast."
+    }
+  },
+  "execution_declaration": {
+    "task_count": 4,
+    "repeats_per_cell": 2,
+    "repeat_rationale": "Two frozen repeats expose immediate run instability without pretending to estimate broad transfer.",
+    "order_policy": "randomized",
+    "order_rationale": "Randomize condition order inside task-repeat blocks from a frozen seed and retain the schedule.",
+    "nuisance_factors": [
+      "task",
+      "repeat",
+      "execution_window"
+    ],
+    "reliability": {
+      "coverage": "repeated",
+      "pass_k": [
+        1,
+        2
+      ],
+      "perturbation_plan": "No paraphrase perturbation is claimed in this alpha example.",
+      "fault_plan": "The calibration includes one plausible shortcut failure; broader fault injection is deferred."
+    }
+  }
+}

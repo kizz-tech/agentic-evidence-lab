@@ -31,6 +31,8 @@ entire evidence contract or runner design.
   and six-cell operational calibration.
 - [Architecture](architecture.md) — how the evidence core, execution adapters,
   evaluators, and capability repositories divide ownership.
+- [Study Quality Preflight](study-quality-preflight.md) — the pilot hash-bound
+  design preflight, hard gates, warnings, public facets, and scientific boundary.
 
 The contract is runner-independent. AEL can describe a complete operational
 stack comparison or a controlled change to one declared factor, but the receipt
@@ -55,7 +57,11 @@ must not promote a stack result into a model-only claim.
   replication handoff, and release-evidence hardening.
 - [Release notes](release-notes/v0.1.0-alpha.6.md) — prospective admission,
   public lifecycle projection, and the first decision-governing skill pilot.
+- [Release notes](release-notes/v0.1.0-alpha.7.md) — measurement-quality
+  preflight, historical quality disclosure, and the public roadmap.
 - [Changelog](../CHANGELOG.md) — user-visible project history.
+- [Roadmap](../ROADMAP.md) — evidence-gated direction, beta criteria, and
+  explicit non-goals; it is not a delivery promise.
 
 Machine-readable manifests, runs, measurements, and receipts live under both
 [`examples/`](../examples) and [`studies/`](../studies). Start from the generated
@@ -122,6 +128,7 @@ Decision records preserve why important boundaries changed:
 - [External review and v0 direction](decisions/2026-08-12-review-intake-and-v0-direction.md)
 - [Structural Search roadmap](decisions/2026-08-12-structural-search-roadmap.md)
 - [Agent Skills Season 1 architecture](decisions/2026-08-12-agent-skills-season-1.md)
+- [Measurement-quality preflight](decisions/2026-08-14-measurement-quality-preflight.md)
 
 [The Contract v0 drafting brief](contract-v0-brief.md) is retained as design
 history. It does not replace the executable [current Contract v0](contract-v0.md).

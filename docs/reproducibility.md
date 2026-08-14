@@ -9,7 +9,7 @@ behavior is not expected to be byte-identical.
 
 ## Graph verification: deterministic public checks
 
-From a clean checkout of the exact alpha.6 source revision under review:
+From a clean checkout of the exact alpha.7 source revision under review:
 
 ```bash
 uv sync --locked --all-groups
@@ -17,6 +17,11 @@ uv run ruff check .
 uv run ruff format --check .
 uv run python -m unittest discover -s tests -v
 uv run ael validate examples
+uv run ael study preflight \
+  studies/quality-preflight/examples/pass/quality-profile.json \
+  --json-output studies/quality-preflight/examples/pass/preflight.json \
+  --markdown-output studies/quality-preflight/examples/pass/preflight.md \
+  --check
 uv run ael source-lock check studies/agent-skills-season-1/sources.lock.toml
 uv run ael study audit \
   --freeze studies/agent-skills-season-1/screening/property-based-testing-v2.freeze.json \
@@ -38,7 +43,7 @@ uv run python tools/check_frozen_artifacts.py
 uv run python tools/release_check.py
 uv build
 uv run python tools/verify_release_artifacts.py \
-  --expected-version 0.1.0a6 dist/*.whl dist/*.tar.gz
+  --expected-version 0.1.0a7 dist/*.whl dist/*.tar.gz
 ```
 
 These checks establish package, schema, cross-reference, committed-fixture,

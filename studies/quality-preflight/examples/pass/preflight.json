@@ -1,0 +1,32 @@
+{
+  "as_of": "2026-08-14",
+  "assessed_at": "2026-08-14",
+  "boundary": "Conformance checks declared, hash-bound pre-run design evidence only; they do not prove scientific validity, chronology of execution, replication, transfer, or outcome.",
+  "issues": [
+    {
+      "code": "QP-W004",
+      "location": "study_ref.independence_claim",
+      "message": "maintainer-only evaluation is not independent replication",
+      "severity": "warning"
+    }
+  ],
+  "profile_id": "kizz:ael:quality-profile:synthetic-controlled-pilot:1",
+  "profile_sha256": "d502c2f04e8427f234389f7bd19f13a99278303d174a468d5d202d1c64056296",
+  "quality_axes": {
+    "design_class": "controlled_pilot",
+    "evaluator_validity": "calibrated",
+    "freshness": "current",
+    "independence": "maintainer_only",
+    "reliability_coverage": "repeated",
+    "sampling_strength": "decision_thresholded_pilot",
+    "task_validity": "audited"
+  },
+  "schema_version": "ael.study-quality-preflight/0.1-pilot",
+  "scope": "design_preflight",
+  "status": "conformant_with_warnings",
+  "study": {
+    "manifest_sha256": "ad36dd2b49c5c662b9137ac468f5449cd889cb0b05186eb5db31eabebcfdd105",
+    "revision": 1,
+    "study_id": "kizz:ael:study:quality-preflight-synthetic"
+  }
+}

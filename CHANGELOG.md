@@ -6,6 +6,38 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.0-alpha.7] - 2026-08-14
+
+### Added
+
+- A pilot hash-bound Study Quality Profile and deterministic `ael study
+  preflight` command for construct, task, evaluator, analysis, execution, and
+  declared reliability evidence before scored work.
+- Checked synthetic JSON/Markdown preflight projections and mutation tests for
+  retrospective use, task/evaluator gaps, unsafe confirmation reuse, hash
+  drift, claim overreach, warning order, and deterministic output.
+- A public evidence-gated roadmap with beta criteria, next research steps, and
+  explicit non-goals.
+
+### Changed
+
+- Public-results and projection policy move to `0.3`; every result card exposes
+  seven design-preflight quality facets without a composite score.
+- All four existing studies declare `not_assessed_historical` instead of being
+  retrospectively certified from current files.
+- Admission `0.2-pilot` can bind the exact quality-profile hash before a future
+  freeze, while legacy admission `0.1-pilot` remains valid unchanged.
+- Package, release metadata, CI, clean-wheel checks, and generated public
+  surfaces now identify `0.1.0a7`.
+
+### Research integrity
+
+- Alpha.7 runs no new scored model calls and changes none of the five Contract
+  v0 schemas or frozen historical evidence bytes.
+- Preflight conformance is explicitly bounded to declared design evidence. It
+  is not scientific certification, chronology proof, independent replication,
+  observed reliability, transfer, or downstream outcome.
+
 ## [0.1.0-alpha.6] - 2026-08-13
 
 ### Added
@@ -173,7 +205,8 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   process can read the reusable credential.
 - Contract v0 remains pre-stable and may change incompatibly before `1.0`.
 
-[Unreleased]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.6...HEAD
+[Unreleased]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.7...HEAD
+[0.1.0-alpha.7]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.6...v0.1.0-alpha.7
 [0.1.0-alpha.6]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.5...v0.1.0-alpha.6
 [0.1.0-alpha.5]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.4...v0.1.0-alpha.5
 [0.1.0-alpha.4]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.3...v0.1.0-alpha.4

@@ -56,6 +56,22 @@ five stable document types. Public result cards may derive lifecycle status
 only from exact hash-bound refs. One completed pilot is not enough to stabilize
 a generic Decision Case or Outcome Follow-up schema.
 
+Alpha.7 adds one adjacent methodological sidecar:
+
+```text
+Contract v0 manifest ─┐
+task/evaluator refs ──┼→ ael.study_quality → deterministic preflight
+explicit as_of ───────┘          │
+                                 └→ bounded public quality facets
+```
+
+`ael.study_quality` owns the pilot profile rules. The CLI and result surface
+depend on that module and do not duplicate its policy. Contract validation does
+not depend on the quality module. Historical receipts remain unchanged and
+project `not_assessed_historical`; a future profiled card must match the
+receipt's exact study ID, revision, and manifest hash. Preflight conformance is
+design evidence, not a quality score or an empirical result.
+
 Git ancestry or a tag can prove repository artifact ordering—for example, that
 freeze bytes are present in an ancestor. It cannot prove that private model
 calls occurred before a result, reconstruct private events, or establish

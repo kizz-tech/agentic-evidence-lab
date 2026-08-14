@@ -28,10 +28,11 @@ from ael import __version__
 from ael.debugging_shadow_audit import audit_debugging_shadow_bundle
 from ael.sandbox import SandboxError
 from ael.study_audit import audit_study_bundle
+from ael.study_quality import public_projection as project_study_quality
 from ael.validation import MAX_JSON_BYTES, SCHEMA_FILES, sha256_path, validate
 
-PUBLIC_RESULTS_SCHEMA_VERSION = "ael.public-results/0.2"
-PUBLICATION_PROJECTION_POLICY = "ael.publication-projection/0.2"
+PUBLIC_RESULTS_SCHEMA_VERSION = "ael.public-results/0.3"
+PUBLICATION_PROJECTION_POLICY = "ael.publication-projection/0.3"
 GENERATOR_NAME = "agentic-evidence-lab"
 GENERATOR_VERSION = __version__
 
@@ -300,6 +301,7 @@ def validate_public_profile(profile: Mapping[str, Any]) -> dict[str, Any]:
                 "verification",
                 "materials",
                 "history",
+                "quality",
                 "publication",
             },
             {"report_ref", "lifecycle"},
@@ -320,6 +322,7 @@ def validate_public_profile(profile: Mapping[str, Any]) -> dict[str, Any]:
         _validate_materials(study.get("materials"), f"{location}.materials")
         lifecycle = study.get("lifecycle")
         _validate_history(study.get("history"), f"{location}.history", lifecycle is not None)
+        _validate_quality(study.get("quality"), f"{location}.quality")
         if lifecycle is not None:
             _validate_lifecycle(lifecycle, f"{location}.lifecycle")
         publication = study.get("publication")
@@ -434,6 +437,20 @@ def _validate_history(value: Any, location: str, has_lifecycle: bool = False) ->
     freshness = _HISTORY_DERIVED if has_lifecycle else _HISTORY_FRESHNESS_UNKNOWN
     if value.get("freshness") != freshness:
         _fail(f"{location}.freshness must equal {freshness}")
+
+
+def _validate_quality(value: Any, location: str) -> None:
+    if not isinstance(value, Mapping):
+        _fail(f"{location} must be an object")
+    assessment = value.get("assessment")
+    if assessment == "not_assessed_historical":
+        _require_keys(value, {"assessment"}, set(), location)
+        return
+    if assessment == "profiled":
+        _require_keys(value, {"assessment", "profile_ref"}, set(), location)
+        _validate_profile_ref_shape(value.get("profile_ref"), f"{location}.profile_ref")
+        return
+    _fail(f"{location}.assessment must be not_assessed_historical or profiled")
 
 
 def _validate_lifecycle(value: Any, location: str) -> None:
@@ -904,6 +921,59 @@ def _audit_projection(
         _fail(f"frozen public bundle audit failed: {exc}")
 
 
+def _quality_projection(
+    value: Mapping[str, Any],
+    receipt: Mapping[str, Any],
+    reference_owner: Path,
+    repository_root: Path,
+    source_hashes: dict[str, str],
+    as_of: str,
+) -> dict[str, Any]:
+    if value["assessment"] == "not_assessed_historical":
+        return {
+            "scope": "design_preflight",
+            "status": "not_assessed_historical",
+            "quality_axes": {
+                "design_class": "not_assessed_historical",
+                "task_validity": "not_assessed_historical",
+                "evaluator_validity": "not_assessed_historical",
+                "sampling_strength": "not_assessed_historical",
+                "reliability_coverage": "not_assessed_historical",
+                "independence": "not_assessed_historical",
+                "freshness": "not_assessed_historical",
+            },
+            "issues": [],
+            "boundary": (
+                "The study predates the pilot Study Quality Profile. No retrospective "
+                "measurement-quality assessment is inferred from current artifacts."
+            ),
+        }
+    quality_path, quality_digest = _local_reference(
+        reference_owner,
+        value["profile_ref"],
+        repository_root,
+        "quality.profile_ref",
+    )
+    assert quality_path is not None
+    try:
+        projection = project_study_quality(quality_path, repository_root, as_of=as_of)
+    except SandboxError as exc:
+        _fail(f"quality profile preflight failed: {exc}")
+    study_ref = receipt.get("study_ref")
+    if not isinstance(study_ref, Mapping):
+        _fail("quality profile requires a receipt study_ref")
+    if projection["study"]["study_id"] != study_ref.get("study_id"):
+        _fail("quality profile study_id does not match receipt study_ref")
+    if projection["study"]["revision"] != study_ref.get("revision"):
+        _fail("quality profile revision does not match receipt study_ref")
+    if projection["study"]["manifest_sha256"] != study_ref.get("sha256"):
+        _fail("quality profile manifest hash does not match receipt study_ref")
+    relative = _relative_path(quality_path, repository_root)
+    source_hashes[relative] = quality_digest
+    projection["profile"] = {"uri": relative, "sha256": quality_digest}
+    return projection
+
+
 def _build_card(
     profile_path: Path,
     profile: Mapping[str, Any],
@@ -954,6 +1024,14 @@ def _build_card(
     materials = _material_projection(
         entry["materials"], profile_reference_owner, repository_root, source_hashes
     )
+    quality = _quality_projection(
+        entry["quality"],
+        receipt,
+        profile_reference_owner,
+        repository_root,
+        source_hashes,
+        str(profile["as_of"]),
+    )
     history = dict(entry["history"])
     lifecycle_projection: dict[str, Any] | None = None
     if "lifecycle" in entry:
@@ -964,15 +1042,11 @@ def _build_card(
             source_hashes,
             str(profile["as_of"]),
         )
-    # ``graph_paths`` is intentionally consumed here: source_hashes includes
-    # every graph byte, and this assertion prevents accidental partial graph
-    # construction if the validator's implementation changes.
-    if len(graph_paths) != len(source_hashes) - 1 - (1 if report_projection else 0):
-        # The count can differ when two references intentionally point at one
-        # immutable file; compare by path rather than failing for aliases.
-        source_hashes.update(
-            {_relative_path(path, repository_root): sha256_path(path) for path in graph_paths}
-        )
+    # Always include every Contract graph byte. Additional profile-owned refs,
+    # such as the Study Quality Profile, remain separate projection sources.
+    source_hashes.update(
+        {_relative_path(path, repository_root): sha256_path(path) for path in graph_paths}
+    )
     receipt_ref_projection = {
         "uri": _relative_path(receipt_path, repository_root),
         "sha256": receipt_digest,
@@ -992,6 +1066,7 @@ def _build_card(
         "invalidation_triggers": receipt["invalidation_triggers"],
         "state": receipt["state"],
         "history": history,
+        "quality": quality,
         "materials": materials,
         "verification": verification_projection,
         "source_hashes": dict(sorted(source_hashes.items())),
@@ -1143,6 +1218,20 @@ def _render_card(card: Mapping[str, Any]) -> str:
                 "",
             ]
         )
+    lines.extend(["## Measurement quality", ""])
+    lines.append(f"Status: `{card['quality']['status']}`; scope: `{card['quality']['scope']}`.")
+    if "as_of" in card["quality"]:
+        lines.append(f"Assessment as of: `{card['quality']['as_of']}`.")
+    lines.append("")
+    for key, value in card["quality"]["quality_axes"].items():
+        lines.append(f"- `{key}`: `{value}`")
+    if card["quality"]["issues"]:
+        lines.extend(["", "Preflight findings:"])
+        for issue in card["quality"]["issues"]:
+            lines.append(
+                f"- `{issue['severity']} {issue['code']}` `{issue['location']}` — {issue['message']}"
+            )
+    lines.extend(["", card["quality"]["boundary"], ""])
     lines.extend(["## Independence", "", card["independence"]["disclosure"], ""])
     lines.extend(["## Historical status", ""])
     for key in ("admission", "action", "outcome_follow_up", "freshness"):
@@ -1194,14 +1283,15 @@ def _render_results(results: list[Mapping[str, Any]], as_of: str) -> str:
         "",
         "This page is a deterministic projection. Decisions, evidence levels, claims, reproducibility, independence, and state are copied from hash-bound Contract v0 receipts; profile publication status is current metadata and is not proof.",
         "",
-        "| Study | Publication | Evidence | Reproducibility | Decision |",
-        "| --- | --- | --- | --- | --- |",
+        "| Study | Publication | Evidence | Quality preflight | Reproducibility | Decision |",
+        "| --- | --- | --- | --- | --- | --- |",
     ]
     for card in results:
         decision = card["decision"]["disposition"]
         lines.append(
             f"| [{card['title']}](docs/results/{card['card_id']}.md) | {card['publication']} | "
-            f"`{card['evidence_level']}` | `{card['reproducibility']}` | `{decision}` |"
+            f"`{card['evidence_level']}` | `{card['quality']['status']}` | "
+            f"`{card['reproducibility']}` | `{decision}` |"
         )
     lines.extend(
         [
