@@ -1,5 +1,11 @@
-blank_issues_enabled: true
+blank_issues_enabled: false
 contact_links:
+  - name: Open idea or research nomination
+    url: https://github.com/kizz-tech/agentic-evidence-lab/discussions/categories/ideas
+    about: Explore an idea before it is bounded enough for an issue
+  - name: Usage and methodology questions
+    url: https://github.com/kizz-tech/agentic-evidence-lab/discussions/categories/q-a
+    about: Ask for help without opening an implementation issue
   - name: Private security report
     url: https://github.com/kizz-tech/agentic-evidence-lab/security/advisories/new
     about: Report vulnerabilities without disclosing them publicly

@@ -1,5 +1,5 @@
-name: Methodology review
-description: Challenge an AEL design, inference, report, or evidence claim
+name: Evidence or methodology challenge
+description: Challenge an AEL design, inference, report, result, or evidence claim
 title: "[Methodology]: "
 labels: ["methodology", "triage"]
 body:
@@ -42,3 +42,17 @@ body:
         - Unsure
     validations:
       required: true
+  - type: textarea
+    id: disposition
+    attributes:
+      label: Requested disposition
+      description: Describe the correction, narrowing, invalidation, or follow-up that would resolve this issue.
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: I removed credentials, private data, raw reasoning traces, and unpublished holdouts.
+          required: true
