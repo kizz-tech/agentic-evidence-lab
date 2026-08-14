@@ -15,6 +15,9 @@ entire evidence contract or runner design.
   replication, and external release state remain separate predicates.
 - [Roadmap](../ROADMAP.md) — the next user-visible research question, trust
   work, beta gates, and explicit non-goals.
+- [Alpha.9 Completion Integrity release design](decisions/2026-08-14-alpha9-completion-integrity-release-design.md)
+  — the empirical release boundary, no-call admission gate, core comparison,
+  architecture constraints, and stop rules.
 
 ## I want to see what works
 

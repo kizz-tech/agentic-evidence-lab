@@ -50,15 +50,20 @@ inspectable; they do not replace it.
   one closed audit-adapter registry, pure rendering and a stable orchestration
   facade. Architecture tests preserve dependency direction.
 
-## Current release target: alpha.8 Claim-First Decision Method
+## Released foundation: alpha.8 Claim-First Decision Method
 
-Alpha.8 is a bounded method correction before the next scored study. It is
+Alpha.8 was published as `v0.1.0-alpha.8` from commit
+`6ce7a83ede289ad65f404c7cab10b324b2610d25`. Its exact-SHA CI, annotated tag,
+tag-built archives, release manifest, downloaded checksums, and GitHub
+prerelease are the release evidence; this roadmap does not replace them.
+
+It is a bounded method correction before the next scored study. It is
 justified by a known executable defect: the earlier result projection treated
 heterogeneous Contract evidence states as one numeric claim ceiling and
 headlined that value, even though transfer, use, reliability, replication, and
 outcome are independent predicates.
 
-The local release candidate delivers:
+The released line delivers:
 
 - replace ordinal claim admission with explicit claim-specific predicates;
 - lead every public card with the decision and explicitly identified
@@ -76,12 +81,14 @@ Alpha.8 does not run a model study, create a Decision Case schema, stabilize a
 sixth object, or claim that claim-first cards improve decisions. A reader
 comprehension test and the first prospective use remain empirical falsifiers.
 
-The unpublished alpha.7 candidate is an implementation input, not a required
-historical release. Alpha.8 can supersede it as the next prerelease; publication
-still requires a green exact-SHA CI run, verified tag-built artifacts, and a
-separate release action.
+The unpublished alpha.7 candidate is retained as an implementation input, not a
+fabricated historical release. Alpha.8 superseded it.
 
-## Next flagship question: Completion Integrity
+## Next release target: alpha.9 Completion Integrity
+
+Alpha.9 is admitted only as a terminal empirical study release, not another
+method, framework, or preparation release. Its accepted design is recorded in
+[the Completion Integrity release decision](docs/decisions/2026-08-14-alpha9-completion-integrity-release-design.md).
 
 > Can a coding agent reliably tell when the requested work is actually complete?
 
@@ -104,7 +111,7 @@ Before any scored call, unscored calibration must demonstrate:
   retained failures, uncertainty, and an untouched confirmation subset.
 
 If discrimination fails, redesign or stop. Do not turn a ceiling into an
-effectiveness result.
+effectiveness result or publish a preflight-only alpha.9.
 
 ## Evidence sequence after alpha.8
 

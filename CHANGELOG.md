@@ -6,6 +6,12 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+- An accepted alpha.9 Completion Integrity release design that requires a
+  terminal prospective study, keeps study-family policy local, and blocks
+  another framework-only release.
+
 ## [0.1.0-alpha.8] - 2026-08-14
 
 ### Added
