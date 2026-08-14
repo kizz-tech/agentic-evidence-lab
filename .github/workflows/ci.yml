@@ -85,7 +85,7 @@ jobs:
         run: |
           uv build
           uv run python tools/verify_release_artifacts.py \
-            --expected-version 0.1.0a7 \
+            --expected-version 0.1.0a8 \
             dist/*.whl dist/*.tar.gz
 
   clean-wheel:
@@ -109,8 +109,8 @@ jobs:
           test -n "$wheel"
           uv venv .release-venv
           uv pip install --python .release-venv/bin/python "$wheel"
-          test "$(.release-venv/bin/ael --version)" = "0.1.0a7"
-          test "$(.release-venv/bin/python -c 'import importlib.metadata; print(importlib.metadata.version("agentic-evidence-lab"))')" = "0.1.0a7"
+          test "$(.release-venv/bin/ael --version)" = "0.1.0a8"
+          test "$(.release-venv/bin/python -c 'import importlib.metadata; print(importlib.metadata.version("agentic-evidence-lab"))')" = "0.1.0a8"
           .release-venv/bin/ael study preflight \
             studies/quality-preflight/examples/pass/quality-profile.json \
             --json-output studies/quality-preflight/examples/pass/preflight.json \

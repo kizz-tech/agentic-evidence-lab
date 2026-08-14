@@ -48,9 +48,9 @@ class ResultSurfaceTests(unittest.TestCase):
         shutil.copytree(EXAMPLE, example)
         receipt = example / "evidence-receipt.json"
         profile: dict[str, object] = {
-            "schema_version": "ael.public-results/0.4",
+            "schema_version": "ael.public-results/0.5",
             "as_of": "2026-08-12",
-            "projection_policy": "ael.publication-projection/0.4",
+            "projection_policy": "ael.publication-projection/0.5",
             "studies": [
                 {
                     "card_id": "council-generation-1",
@@ -60,6 +60,7 @@ class ResultSurfaceTests(unittest.TestCase):
                         "sha256": _sha256(receipt),
                     },
                     "claim_ids": ["AEL-CG1-01", "AEL-CG1-05"],
+                    "decision_claim_ids": ["AEL-CG1-01"],
                     "verification": {
                         "kind": "evidence_graph",
                         "command": ["uv run ael validate examples/council-generation-1"],
@@ -102,7 +103,10 @@ class ResultSurfaceTests(unittest.TestCase):
             set(first),
         )
         index = json.loads(first["docs/results/index.json"])
-        self.assertEqual("ael.public-results/0.4", index["schema_version"])
+        profile_entries = {
+            entry["card_id"]: entry for entry in load_public_profile(PROFILE)["studies"]
+        }
+        self.assertEqual("ael.public-results/0.5", index["schema_version"])
         self.assertEqual(
             [
                 "council-generation-1",
@@ -113,6 +117,25 @@ class ResultSurfaceTests(unittest.TestCase):
             [card["card_id"] for card in index["studies"]],
         )
         self.assertIn("Catalog state", first["docs/results/council-generation-1.md"])
+        council_markdown = first["docs/results/council-generation-1.md"]
+        self.assertLess(
+            council_markdown.index("## Decision"),
+            council_markdown.index("## Decision-governing claims"),
+        )
+        self.assertLess(
+            council_markdown.index("## Decision-governing claims"),
+            council_markdown.index("## Technical evidence"),
+        )
+        self.assertIn("## Additional selected claims", council_markdown)
+        self.assertIn("Evidence references:", council_markdown)
+        self.assertIn("`heldout-mean-score:C1`", council_markdown)
+        self.assertNotIn("- Evidence level:", council_markdown)
+        self.assertIn("Receipt evidence state: `controlled_effect_observed`", council_markdown)
+        self.assertIn("`planned_reliability_coverage`", council_markdown)
+        self.assertNotIn("| Evidence |", first["RESULTS.md"])
+        self.assertIn("1 valid run / retained cell", first["RESULTS.md"])
+        self.assertIn("1 contradicted", first["RESULTS.md"])
+        self.assertNotIn("single_valid_observation_per_retained_cell", first["RESULTS.md"])
         self.assertNotIn(
             "Reproducibility: `rerunnable`",
             first["docs/results/council-generation-1.md"],
@@ -124,6 +147,26 @@ class ResultSurfaceTests(unittest.TestCase):
             self.assertEqual(
                 {"not_assessed_historical"}, set(card["quality"]["quality_axes"].values())
             )
+            self.assertEqual(
+                "single_valid_observation_per_retained_cell",
+                card["runs"]["repeat_evidence"]["status"],
+            )
+            self.assertEqual("not_reported", card["measurements"]["uncertainty"]["status"])
+            sources = card["source_hashes"]
+            self.assertEqual(card["receipt"]["sha256"], sources[card["receipt"]["uri"]])
+            if "report" in card:
+                self.assertEqual(card["report"]["sha256"], sources[card["report"]["uri"]])
+            for material in card["materials"]:
+                if material["availability"] == "public":
+                    self.assertEqual(material["ref"]["sha256"], sources[material["ref"]["uri"]])
+            for claim in card["claims"]:
+                for binding in claim["evidence_bindings"]:
+                    if binding["binding"] == "public_sidecar":
+                        self.assertEqual(binding["sha256"], sources[binding["uri"]])
+            verification = profile_entries[card["card_id"]]["verification"]
+            if verification["kind"] == "frozen_public_bundle":
+                freeze_ref = verification["freeze_ref"]
+                self.assertEqual(freeze_ref["sha256"], sources[freeze_ref["uri"]])
         focused = next(
             card
             for card in index["studies"]
@@ -138,6 +181,17 @@ class ResultSurfaceTests(unittest.TestCase):
         self.assertEqual(21944, totals[("generated_work_tokens", "S1")])
         self.assertEqual(331689, totals[("wall_time", "S0")])
         self.assertEqual(378385, totals[("wall_time", "S1")])
+        pbt = next(
+            card for card in index["studies"] if card["card_id"] == "property-based-testing-v2"
+        )
+        self.assertIn(
+            "studies/agent-skills-season-1/results/property-based-testing-v2/decision.json",
+            pbt["source_hashes"],
+        )
+        self.assertIn(
+            "studies/agent-skills-season-1/results/property-based-testing-v2/freeze-ref.json",
+            pbt["source_hashes"],
+        )
         real_shadow = next(
             card
             for card in index["studies"]
@@ -166,10 +220,14 @@ class ResultSurfaceTests(unittest.TestCase):
             "projection repair",
             " ".join(real_shadow["limitations"]),
         )
+        self.assertIn(
+            "studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/effect-decision.json",
+            real_shadow["source_hashes"],
+        )
         real_shadow_markdown = first["docs/results/systematic-debugging-real-shadow-v1.md"]
         self.assertLess(
+            real_shadow_markdown.index("## Decision"),
             real_shadow_markdown.index("Audit status: `passed`."),
-            real_shadow_markdown.index("## Maintainer rerun boundary"),
         )
 
     def test_profile_unknown_keys_and_historical_values_fail_closed(self) -> None:
@@ -225,12 +283,76 @@ class ResultSurfaceTests(unittest.TestCase):
         with self.assertRaisesRegex(ResultSurfaceError, "unique claim"):
             validate_public_profile(duplicate_claims)
 
+        unrelated_decision_claim = copy.deepcopy(profile)
+        unrelated_decision_claim["studies"][0]["decision_claim_ids"] = ["not-selected"]  # type: ignore[index]
+        with self.assertRaisesRegex(ResultSurfaceError, "must be a subset"):
+            validate_public_profile(unrelated_decision_claim)
+
     def test_bad_receipt_hash_is_rejected(self) -> None:
         with self._temporary_directory() as temporary:
             profile_path, profile, _receipt = self._profile_tree(temporary)
             profile["studies"][0]["receipt_ref"]["sha256"] = "0" * 64  # type: ignore[index]
             profile_path.write_text(json.dumps(profile), encoding="utf-8")
             with self.assertRaisesRegex(ResultSurfaceError, "sha256 does not match"):
+                build_result_surface(profile_path, Path(temporary))
+
+    def test_selected_claim_references_are_classified_and_path_safe(self) -> None:
+        with self._temporary_directory() as temporary:
+            profile_path, profile, receipt = self._profile_tree(temporary)
+            receipt_data = json.loads(receipt.read_text(encoding="utf-8"))
+            claim = next(
+                item
+                for item in receipt_data["evaluated_claims"]
+                if item["claim_id"] == "AEL-CG1-05"
+            )
+            claim["evidence_refs"] = [
+                "logical-observation-id",
+                "candidate-profile-id-omission:E7-C3",
+            ]
+            receipt.write_text(json.dumps(receipt_data), encoding="utf-8")
+            profile["studies"][0]["receipt_ref"]["sha256"] = _sha256(receipt)  # type: ignore[index]
+            profile["studies"][0]["claim_ids"] = ["AEL-CG1-05"]  # type: ignore[index]
+            profile["studies"][0]["decision_claim_ids"] = ["AEL-CG1-05"]  # type: ignore[index]
+            profile_path.write_text(json.dumps(profile), encoding="utf-8")
+            outputs = build_result_surface(profile_path, Path(temporary))
+            index = json.loads(outputs["docs/results/index.json"])
+            binding = index["studies"][0]["claims"][0]["evidence_bindings"][0]
+            self.assertEqual("opaque_receipt_reference", binding["binding"])
+
+        with self._temporary_directory() as temporary:
+            profile_path, profile, receipt = self._profile_tree(temporary)
+            receipt_data = json.loads(receipt.read_text(encoding="utf-8"))
+            claim = next(
+                item
+                for item in receipt_data["evaluated_claims"]
+                if item["claim_id"] == "AEL-CG1-05"
+            )
+            claim["evidence_refs"] = ["../outside.json"]
+            receipt.write_text(json.dumps(receipt_data), encoding="utf-8")
+            profile["studies"][0]["receipt_ref"]["sha256"] = _sha256(receipt)  # type: ignore[index]
+            profile["studies"][0]["claim_ids"] = ["AEL-CG1-05"]  # type: ignore[index]
+            profile["studies"][0]["decision_claim_ids"] = ["AEL-CG1-05"]  # type: ignore[index]
+            profile_path.write_text(json.dumps(profile), encoding="utf-8")
+            with self.assertRaisesRegex(ResultSurfaceError, "contains traversal"):
+                build_result_surface(profile_path, Path(temporary))
+
+        with self._temporary_directory() as temporary:
+            profile_path, profile, receipt = self._profile_tree(temporary)
+            sidecar = receipt.parent / "linked-sidecar.json"
+            sidecar.symlink_to(receipt)
+            receipt_data = json.loads(receipt.read_text(encoding="utf-8"))
+            claim = next(
+                item
+                for item in receipt_data["evaluated_claims"]
+                if item["claim_id"] == "AEL-CG1-05"
+            )
+            claim["evidence_refs"] = [sidecar.name]
+            receipt.write_text(json.dumps(receipt_data), encoding="utf-8")
+            profile["studies"][0]["receipt_ref"]["sha256"] = _sha256(receipt)  # type: ignore[index]
+            profile["studies"][0]["claim_ids"] = ["AEL-CG1-05"]  # type: ignore[index]
+            profile["studies"][0]["decision_claim_ids"] = ["AEL-CG1-05"]  # type: ignore[index]
+            profile_path.write_text(json.dumps(profile), encoding="utf-8")
+            with self.assertRaisesRegex(ResultSurfaceError, "must not use symlinks"):
                 build_result_surface(profile_path, Path(temporary))
 
     def test_overflow_json_number_is_rejected(self) -> None:
@@ -240,7 +362,7 @@ class ResultSurfaceTests(unittest.TestCase):
             with self.assertRaisesRegex(ResultSurfaceError, "non-finite JSON number"):
                 load_public_profile(profile_path)
 
-    def test_claim_ceiling_is_derived_from_receipt(self) -> None:
+    def test_claim_support_is_explicit_not_ordinal(self) -> None:
         with self._temporary_directory() as temporary:
             profile_path, profile, receipt = self._profile_tree(temporary)
             receipt_data = json.loads(receipt.read_text(encoding="utf-8"))
@@ -249,7 +371,103 @@ class ResultSurfaceTests(unittest.TestCase):
             profile["studies"][0]["receipt_ref"]["sha256"] = _sha256(receipt)  # type: ignore[index]
             profile["studies"][0]["claim_ids"] = ["AEL-CG1-01"]  # type: ignore[index]
             profile_path.write_text(json.dumps(profile), encoding="utf-8")
-            with self.assertRaisesRegex(ResultSurfaceError, "exceeds evidence ceiling"):
+            with self.assertRaisesRegex(ResultSurfaceError, "requires its own support predicate"):
+                build_result_surface(profile_path, Path(temporary))
+
+        with self._temporary_directory() as temporary:
+            profile_path, profile, receipt = self._profile_tree(temporary)
+            receipt_data = json.loads(receipt.read_text(encoding="utf-8"))
+            receipt_data["evidence_level"] = "externally_decision_changing"
+            receipt_data["evaluated_claims"][0]["claim_level"] = "transfer"
+            receipt.write_text(json.dumps(receipt_data), encoding="utf-8")
+            profile["studies"][0]["receipt_ref"]["sha256"] = _sha256(receipt)  # type: ignore[index]
+            profile["studies"][0]["claim_ids"] = ["AEL-CG1-01"]  # type: ignore[index]
+            profile_path.write_text(json.dumps(profile), encoding="utf-8")
+            with self.assertRaisesRegex(ResultSurfaceError, "requires its own support predicate"):
+                build_result_surface(profile_path, Path(temporary))
+
+        with self._temporary_directory() as temporary:
+            profile_path, profile, receipt = self._profile_tree(temporary)
+            receipt_data = json.loads(receipt.read_text(encoding="utf-8"))
+            receipt_data["evidence_level"] = "paid_repeated_use"
+            receipt_data["evaluated_claims"][0]["claim_level"] = "outcome"
+            receipt.write_text(json.dumps(receipt_data), encoding="utf-8")
+            profile["studies"][0]["receipt_ref"]["sha256"] = _sha256(receipt)  # type: ignore[index]
+            profile["studies"][0]["claim_ids"] = ["AEL-CG1-01"]  # type: ignore[index]
+            profile_path.write_text(json.dumps(profile), encoding="utf-8")
+            with self.assertRaisesRegex(ResultSurfaceError, "requires its own support predicate"):
+                build_result_surface(profile_path, Path(temporary))
+
+        with self._temporary_directory() as temporary:
+            profile_path, profile, receipt = self._profile_tree(temporary)
+            receipt_data = json.loads(receipt.read_text(encoding="utf-8"))
+            receipt_data["evidence_level"] = "downstream_outcome_observed"
+            receipt_data["evaluated_claims"][0]["claim_level"] = "factor_causal"
+            receipt.write_text(json.dumps(receipt_data), encoding="utf-8")
+            profile["studies"][0]["receipt_ref"]["sha256"] = _sha256(receipt)  # type: ignore[index]
+            profile["studies"][0]["claim_ids"] = ["AEL-CG1-01"]  # type: ignore[index]
+            profile_path.write_text(json.dumps(profile), encoding="utf-8")
+            with self.assertRaisesRegex(ResultSurfaceError, "requires its own support predicate"):
+                build_result_surface(profile_path, Path(temporary))
+
+        with self._temporary_directory() as temporary:
+            profile_path, profile, receipt = self._profile_tree(temporary)
+            receipt_data = json.loads(receipt.read_text(encoding="utf-8"))
+            receipt_data["evidence_level"] = "downstream_outcome_observed"
+            receipt_data["evaluated_claims"][0]["claim_level"] = "outcome"
+            receipt_data["evaluated_claims"][0]["evidence_refs"] = ["outcome-test"]
+            measurement_path = receipt.parent / receipt_data["measurement_set_ref"]["uri"]
+            measurement_data = json.loads(measurement_path.read_text(encoding="utf-8"))
+            outcome_measurement = copy.deepcopy(measurement_data["measurements"][0])
+            outcome_measurement["measurement_id"] = "outcome-test"
+            outcome_measurement["kind"] = "outcome"
+            measurement_data["measurements"].append(outcome_measurement)
+            measurement_path.write_text(json.dumps(measurement_data), encoding="utf-8")
+            receipt_data["measurement_set_ref"]["sha256"] = _sha256(measurement_path)
+            receipt.write_text(json.dumps(receipt_data), encoding="utf-8")
+            profile["studies"][0]["receipt_ref"]["sha256"] = _sha256(receipt)  # type: ignore[index]
+            profile["studies"][0]["claim_ids"] = ["AEL-CG1-01"]  # type: ignore[index]
+            profile_path.write_text(json.dumps(profile), encoding="utf-8")
+            outputs = build_result_surface(profile_path, Path(temporary))
+            self.assertIn("Claim class: `outcome`", outputs["docs/results/council-generation-1.md"])
+
+        with self._temporary_directory() as temporary:
+            profile_path, profile, receipt = self._profile_tree(temporary)
+            receipt_data = json.loads(receipt.read_text(encoding="utf-8"))
+            receipt_data["evidence_level"] = "transferred"
+            receipt_data["evaluated_claims"][0]["claim_level"] = "transfer"
+            receipt.write_text(json.dumps(receipt_data), encoding="utf-8")
+            profile["studies"][0]["receipt_ref"]["sha256"] = _sha256(receipt)  # type: ignore[index]
+            profile["studies"][0]["claim_ids"] = ["AEL-CG1-01"]  # type: ignore[index]
+            profile_path.write_text(json.dumps(profile), encoding="utf-8")
+            with self.assertRaisesRegex(ResultSurfaceError, "bound to a transfer task pack"):
+                build_result_surface(profile_path, Path(temporary))
+
+        with self._temporary_directory() as temporary:
+            profile_path, profile, receipt = self._profile_tree(temporary)
+            receipt_data = json.loads(receipt.read_text(encoding="utf-8"))
+            receipt_data["evidence_level"] = "independently_outcome_verified"
+            receipt_data["evaluated_claims"][0]["claim_level"] = "outcome"
+            receipt.write_text(json.dumps(receipt_data), encoding="utf-8")
+            profile["studies"][0]["receipt_ref"]["sha256"] = _sha256(receipt)  # type: ignore[index]
+            profile["studies"][0]["claim_ids"] = ["AEL-CG1-01"]  # type: ignore[index]
+            profile_path.write_text(json.dumps(profile), encoding="utf-8")
+            with self.assertRaisesRegex(ResultSurfaceError, "independence is maintainer_evaluated"):
+                build_result_surface(profile_path, Path(temporary))
+
+        with self._temporary_directory() as temporary:
+            profile_path, profile, receipt = self._profile_tree(temporary)
+            receipt_data = json.loads(receipt.read_text(encoding="utf-8"))
+            additional_claim = next(
+                claim
+                for claim in receipt_data["evaluated_claims"]
+                if claim["claim_id"] == "AEL-CG1-05"
+            )
+            additional_claim["claim_level"] = "factor_causal"
+            receipt.write_text(json.dumps(receipt_data), encoding="utf-8")
+            profile["studies"][0]["receipt_ref"]["sha256"] = _sha256(receipt)  # type: ignore[index]
+            profile_path.write_text(json.dumps(profile), encoding="utf-8")
+            with self.assertRaisesRegex(ResultSurfaceError, "must be an artifact or workflow"):
                 build_result_surface(profile_path, Path(temporary))
 
     def test_profiled_quality_is_hash_bound_and_study_bound(self) -> None:

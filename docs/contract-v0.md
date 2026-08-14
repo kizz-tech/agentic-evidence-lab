@@ -60,9 +60,9 @@ Schema: [`measurement-set.schema.json`](../src/ael/schemas/measurement-set.schem
 
 ### Evidence Receipt
 
-The bounded decision output: evidence level, reproducibility, independence,
-adopt/reject/narrow/inconclusive disposition, evaluated claims, unsupported
-inferences, limitations, invalidation triggers, and exact state.
+The bounded decision output: receipt evidence state, reproducibility,
+independence, adopt/reject/narrow/inconclusive disposition, evaluated claims,
+unsupported inferences, limitations, invalidation triggers, and exact state.
 
 Schema: [`evidence-receipt.schema.json`](../src/ael/schemas/evidence-receipt.schema.json)
 
@@ -95,21 +95,22 @@ The receipt keeps these dimensions separate:
 experiment → artifact → repository → publication → deployment → outcome
 ```
 
-Likewise, the evidence ladder is explicit:
+The receipt also retains a coarse evidence-state vocabulary:
 
 ```text
-structurally valid
-→ runtime conformant
-→ controlled effect observed
-→ effect reproduced
-→ downstream outcome observed
-→ transferred
-→ externally decision-changing
-→ paid repeated use
-→ independently outcome-verified
+integrity: structurally valid · runtime conformant
+effect: controlled effect observed · effect reproduced
+generality: transferred
+use: externally decision-changing · paid repeated use
+outcome: downstream outcome observed · independently outcome-verified
 ```
 
-Later states must not be inferred from earlier ones.
+These values are retained for Contract v0 compatibility; they are not a score
+or total order. Alpha.8 public projection uses explicit claim-specific
+predicates instead of converting them into numeric ranks. External use does not
+stand in for transfer, payment does not stand in for measured outcome, and no
+state upgrades task validity, evaluator calibration, reliability, independence,
+or freshness. See the [AEL Method](method.md).
 
 ## Deterministic CLI
 
@@ -124,7 +125,9 @@ uv run ael hash examples/council-generation-1/evidence-receipt.json
 
 Rendering never derives a verdict from scores. The machine-readable receipt
 already contains an accountable decision; the CLI only validates and presents
-it.
+it. Contract v0 retains the JSON keys `evidence_level` and `claim_level` for
+compatibility; the live renderer labels them **receipt evidence state** and
+**claim class** so its human output does not imply an ordinal scale.
 
 The optional Docker adapter runs deterministic fixtures without writable access
 to their canonical source. It does not change the five documents or make a run

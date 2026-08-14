@@ -30,9 +30,11 @@ REQUIRED_FILES = {
     "RESULTS.md",
     "SECURITY.md",
     "SUPPORT.md",
-    "docs/release-notes/v0.1.0-alpha.7.md",
+    "docs/release-notes/v0.1.0-alpha.8.md",
+    "docs/decisions/2026-08-14-claim-first-decision-method.md",
     "docs/decisions/2026-08-14-public-mission-and-value.md",
     "docs/decisions/2026-08-14-result-catalog-and-reproduction-semantics.md",
+    "docs/method.md",
     "docs/reproducibility.md",
     "docs/results/index.json",
     "docs/study-quality-preflight.md",
@@ -158,8 +160,8 @@ def main() -> int:
             continue
         failures.extend(payload_failures(relative, payload))
 
-    expected_version = "0.1.0a7"
-    expected_release = "0.1.0-alpha.7"
+    expected_version = "0.1.0a8"
+    expected_release = "0.1.0-alpha.8"
     if __version__ != expected_version:
         failures.append(f"package version is {__version__}, expected {expected_version}")
     try:

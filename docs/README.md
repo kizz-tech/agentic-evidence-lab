@@ -5,6 +5,8 @@ entire evidence contract or runner design.
 
 ## I want to understand why AEL exists
 
+- [AEL Method](method.md) — the claim-to-decision workflow, non-compensation
+  rule, claim-specific support predicates, and public reading order.
 - [Public mission and value decision](decisions/2026-08-14-public-mission-and-value.md)
   — why user-facing decisions lead the public story while scientific rigor
   remains in the evidence layer.
@@ -17,8 +19,8 @@ entire evidence contract or runner design.
 ## I want to see what works
 
 - [Results Index](../RESULTS.md) — the generated human result projection with
-  current bounded decisions, evidence strength, limitations, and links to
-  supporting artifacts.
+  bounded decisions, decision-governing claim states, observed
+  repeat/uncertainty facts, limitations, and links to supporting artifacts.
 - [Machine-readable study index](results/index.json) — the generated catalog
   consumed by tooling; cards are disposable projections, not a second evidence
   authority.
@@ -42,6 +44,9 @@ entire evidence contract or runner design.
   and six-cell operational calibration.
 - [Architecture](architecture.md) — how the evidence core, execution adapters,
   evaluators, and capability repositories divide ownership.
+- [Publication kernel decision](decisions/2026-08-14-publication-kernel-boundaries.md)
+  — provenance ledger, closed audit adapters, pure rendering, dependency rules,
+  and explicit scale triggers.
 - [Study Quality Preflight](study-quality-preflight.md) — the pilot hash-bound
   design preflight, hard gates, warnings, public facets, and scientific boundary.
 
@@ -71,8 +76,11 @@ must not promote a stack result into a model-only claim.
   skill pilot.
 - [Alpha.7 notes](release-notes/v0.1.0-alpha.7.md) —
   measurement-quality preflight, explicit reproduction facets, historical
-  quality disclosure, and the public roadmap. A note file is not proof that its
-  tag or release exists.
+  quality disclosure, and the public roadmap. This development line was not
+  published and can be superseded by alpha.8.
+- [Alpha.8 notes](release-notes/v0.1.0-alpha.8.md) — the claim-first method,
+  explicit non-ordinal claim admission, observed repeat/uncertainty disclosure,
+  and the regenerated projection. A note file is not proof of a tag or release.
 - [Changelog](../CHANGELOG.md) — user-visible project history.
 - [Roadmap](../ROADMAP.md) — evidence-gated direction, beta criteria, and
   explicit non-goals; it is not a delivery promise.
@@ -144,6 +152,7 @@ Decision records preserve why important boundaries changed:
 - [Agent Skills Season 1 architecture](decisions/2026-08-12-agent-skills-season-1.md)
 - [Measurement-quality preflight](decisions/2026-08-14-measurement-quality-preflight.md)
 - [Public mission and value](decisions/2026-08-14-public-mission-and-value.md)
+- [Claim-first decision method](decisions/2026-08-14-claim-first-decision-method.md)
 
 [The Contract v0 drafting brief](contract-v0-brief.md) is retained as design
 history. It does not replace the executable [current Contract v0](contract-v0.md).

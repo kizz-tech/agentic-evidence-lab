@@ -2,7 +2,7 @@
 
 - Study: `kizz:ael:study:focused-change-verification-skill`
 - Decision: **narrow**
-- Evidence level: `runtime_conformant`
+- Receipt evidence state: `runtime_conformant`
 - Independence: `maintainer_evaluated`
 - Reproducibility: `rerunnable`
 - Publication state: `public_ready`
@@ -24,7 +24,7 @@ Keep the Codex runner and current pack as an operational smoke surface, but do n
 
 The controlled-egress Docker adapter executed six stable Codex cells without changing any canonical fixture and captured enough telemetry for deterministic post-run evaluation.
 
-Claim level: `workflow`
+Claim class: `workflow`
 
 Scope:
 - six runtime-v2 calibration cells
@@ -36,7 +36,7 @@ Falsifier: A byte-equivalent rerun mutates a fixture, cannot export a candidate,
 
 The frozen skill was installed and explicitly read in all three treatment cells and in no baseline cell.
 
-Claim level: `artifact`
+Claim class: `artifact`
 
 Scope:
 - S1 treatment cells
@@ -48,7 +48,7 @@ Falsifier: A retained treatment trace lacks the exact skill read or a baseline t
 
 No deterministic implementation-acceptance difference was observed: baseline and treatment each passed three of three tasks.
 
-Claim level: `workflow`
+Claim class: `workflow`
 
 Scope:
 - one calibration repeat
@@ -61,7 +61,7 @@ Falsifier: Repeated matched runs on a discriminating pack produce a stable accep
 
 The current public prompts are too explicit to isolate the skill's verification-routing contribution and should remain smoke tests rather than become the first confirmatory pack.
 
-Claim level: `workflow`
+Claim class: `workflow`
 
 Scope:
 - current task wording
@@ -73,7 +73,7 @@ Falsifier: A preregistered repeated study on the unchanged pack exhibits reliabl
 
 Treatment finals more consistently separated local validation from commit, push, deployment, and outcome state, but this observation was not scored by a preregistered rubric.
 
-Claim level: `workflow`
+Claim class: `workflow`
 
 Scope:
 - six final responses

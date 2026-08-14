@@ -6,7 +6,63 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-## [0.1.0-alpha.7]
+## [0.1.0-alpha.8] - Unreleased candidate
+
+### Added
+
+- A single claim-to-decision [AEL Method](docs/method.md) with an explicit
+  non-compensation rule, seven gates, owner boundaries, and empirical
+  falsifiers.
+- A claim-first method decision record and dependency-based roadmap that make
+  the next prospective profiled study, downstream follow-up, and role-separated
+  reproduction the evidence priorities.
+- Derived valid-repeat coverage and measurement-uncertainty presence on every
+  generated result card.
+
+### Changed
+
+- Split the public-result implementation around actual volatility seams:
+  strict source/provenance handling, a shared closed audit-adapter registry,
+  pure rendering, and the existing result-surface orchestration facade.
+- Route every dereferenced public projection source through one `SourceLedger`
+  and enforce publication dependency direction with architecture tests.
+- Public-results and projection policy advance to `0.5`; cards and the Results
+  Index now lead with bounded decisions and decision-governing claim states
+  instead of a scalar-looking evidence label. Additional selected
+  workflow/artifact claims remain disclosed separately.
+- Claim admission uses explicit evidence-state and comparison-design
+  predicates. External use does not authorize transfer, payment does not
+  authorize outcome, and downstream outcome does not authorize a causal
+  mechanism claim. Causal, stack, transfer, and outcome claims must bind their
+  own Measurement Set evidence; transfer measurements must resolve through runs
+  to a transfer task pack, and independent outcome requires independent
+  ownership.
+- Contract v0 `evidence_level` is retained as technical receipt compatibility
+  metadata and described as a receipt evidence state, not a score or total
+  order.
+- The live receipt renderer replaces legacy scalar-looking `Evidence level` /
+  `Claim level` labels with `Receipt evidence state` / `Claim class`; schemas,
+  JSON keys, and frozen historical Markdown remain unchanged.
+- Every selected claim evidence reference is classified as a Measurement Set
+  row, a hash-inventoried public sidecar, or an explicitly opaque historical
+  reference. At least one public binding is required per selected claim, and
+  causal, stack, transfer, and outcome claims require a measurement binding.
+- Study Quality is presented as prospective **Study design preflight**;
+  `reliability_coverage` is explicitly planned coverage and cannot substitute
+  for observed repeats or uncertainty.
+- Package, release metadata, CI, clean-wheel checks, and generated public
+  surfaces identify `0.1.0a8`.
+
+### Research integrity
+
+- Alpha.8 runs no new scored model calls and changes none of the five Contract
+  v0 schemas, historical receipts, reports, runs, measurements, freezes, or
+  study decisions.
+- The release corrects executable interpretation and presentation. It does not
+  prove that claim-first cards improve reader decisions, establish independent
+  replication, or close downstream outcomes.
+
+## [0.1.0-alpha.7] - Unreleased development line
 
 ### Added
 
@@ -212,8 +268,9 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   process can read the reusable credential.
 - Contract v0 remains pre-stable and may change incompatibly before `1.0`.
 
-[Unreleased]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.7...HEAD
-[0.1.0-alpha.7]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.5...v0.1.0-alpha.7
+[Unreleased]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.5...HEAD
+[0.1.0-alpha.8]: docs/release-notes/v0.1.0-alpha.8.md
+[0.1.0-alpha.7]: docs/release-notes/v0.1.0-alpha.7.md
 [0.1.0-alpha.6]: docs/release-notes/v0.1.0-alpha.6.md
 [0.1.0-alpha.5]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.4...v0.1.0-alpha.5
 [0.1.0-alpha.4]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.3...v0.1.0-alpha.4

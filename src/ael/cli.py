@@ -14,9 +14,9 @@ from ael.codex_runner import (
     DEFAULT_REASONING_EFFORT,
     run_codex_task,
 )
-from ael.debugging_shadow_audit import audit_debugging_shadow_bundle
 from ael.render import render_receipt
 from ael.result_surface import materialize_result_surface
+from ael.result_verification import AuditRequest, audit_adapter_names, audit_bundle
 from ael.sandbox import (
     DEFAULT_CODEX_IMAGE,
     DEFAULT_EGRESS_IMAGE,
@@ -33,7 +33,6 @@ from ael.source_lock import (
     validate_source_lock,
     verify_checkout,
 )
-from ael.study_audit import audit_study_bundle
 from ael.study_freeze import (
     load_json_object,
     validate_freeze_bundle,
@@ -294,28 +293,17 @@ def _study_freeze_check(args: argparse.Namespace) -> int:
 
 def _study_audit(args: argparse.Namespace) -> int:
     try:
-        if args.decision_adapter == "systematic-debugging-real-shadow-v1":
-            if args.screening_root or args.confirmation_root:
-                raise SandboxError(
-                    "the real-shadow adapter verifies opaque private-pack hashes; "
-                    "legacy screening/confirmation roots are unsupported"
-                )
-            summary = audit_debugging_shadow_bundle(
-                Path(args.freeze),
-                Path(args.result),
-                git_root=Path(args.git_root) if args.git_root else None,
-                require_git_proof=args.require_git_proof,
-            )
-        else:
-            summary = audit_study_bundle(
+        summary = audit_bundle(
+            args.decision_adapter,
+            AuditRequest(
                 Path(args.freeze),
                 Path(args.result),
                 screening_root=Path(args.screening_root) if args.screening_root else None,
                 confirmation_root=Path(args.confirmation_root) if args.confirmation_root else None,
                 git_root=Path(args.git_root) if args.git_root else None,
                 require_git_proof=args.require_git_proof,
-                decision_adapter=args.decision_adapter,
-            )
+            ),
+        )
     except SandboxError as exc:
         print(str(exc), file=sys.stderr)
         return 1
@@ -549,7 +537,7 @@ def build_parser() -> argparse.ArgumentParser:
     audit_parser.add_argument("--require-git-proof", action="store_true")
     audit_parser.add_argument(
         "--decision-adapter",
-        choices=["pbt-v2", "systematic-debugging-real-shadow-v1"],
+        choices=audit_adapter_names(),
         help="study-specific public count and outcome recomputation",
     )
     audit_parser.add_argument("--json-output")

@@ -4,7 +4,7 @@ This guard deliberately keeps a small, explicit path allowlist.  It does not
 maintain a second checksum registry and does not lock shared implementation
 source forever: the study audit and freeze checks own executable bindings,
 while this tool protects released PBT evidence and the five Contract v0 schema
-bytes that alpha.7 promises unchanged.
+bytes that alpha.8 promises unchanged.
 """
 
 from __future__ import annotations

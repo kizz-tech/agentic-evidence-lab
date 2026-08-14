@@ -2,14 +2,7 @@
 
 - Card ID: `council-generation-1`
 - Catalog state: **listed**
-- Receipt: [machine-readable evidence](../../examples/council-generation-1/evidence-receipt.json)
-- Receipt SHA-256: `8cb13547dda6dc8a8805fe65587c6f3c8712ca81a32cff45a57874c76a59a757`
-- Report: [narrative result](../../reports/2026-08-12-council-generation-1.md)
-- Evidence level: `controlled_effect_observed`
-- Public graph verification: `graph_validatable`
-- Maintainer rerun: `not_assessed`
-- Independent replication: `none_linked`
-- Evaluation ownership: `maintainer_evaluated`
+- Narrative report: [open](../../reports/2026-08-12-council-generation-1.md)
 
 ## Decision
 
@@ -23,6 +16,63 @@ Scope:
 
 Reversal trigger: Reopen the decision if the artifact, model/runtime surface, task pack, or execution contract changes, or if repeated real-shadow evidence exposes a quality, conformance, or downstream-rework regression.
 
+## Decision-governing claims
+
+### AEL-CG1-01 — supported
+
+The frozen candidate repaired the observed full-history named-profile execution and consultation-provenance defect on the measured local runtime surface.
+
+Claim class: `workflow`
+
+Scope:
+- historical C2 versus frozen C3
+- measured local Codex runtime
+- held-out consequential cases
+
+Evidence references:
+- `historical-profile-fork-error:E4-C2` — Measurement Set `process`; task-pack roles: `holdout`
+- `candidate-profile-id-omission:E7-C3` — Measurement Set `process`; task-pack roles: `holdout`
+
+Falsifier: A hash-equivalent rerun reproduces the same full-history fork failure in the candidate or cannot authenticate any claimed consultation.
+
+### AEL-CG1-02 — bounded
+
+The candidate preserved measured held-out decision quality relative to the historical skill and fixed sequential revision under the frozen tie rule.
+
+Claim class: `workflow`
+
+Scope:
+- one run per cell
+- three synthetic held-out engineering cases
+- same-model-family blinded judge
+- 0.25 tie threshold on a 0-to-4 rubric
+
+Evidence references:
+- `heldout-mean-score:C1` — Measurement Set `aggregate`; task-pack roles: `holdout`
+- `heldout-mean-score:C2` — Measurement Set `aggregate`; task-pack roles: `holdout`
+- `heldout-mean-score:C3` — Measurement Set `aggregate`; task-pack roles: `holdout`
+
+Falsifier: Repeated held-out or real-shadow runs show a material quality or critical-failure regression against either strong control.
+
+## Additional selected claims
+
+These claims disclose supporting workflow or artifact facts; they do not govern the displayed disposition.
+
+### AEL-CG1-05 — supported
+
+Consultation identity and trace attribution remained incomplete even though the candidate improved process accountability.
+
+Claim class: `artifact`
+
+Scope:
+- retained Codex CLI events
+- E7-C3 final reporting
+
+Evidence references:
+- `candidate-profile-id-omission:E7-C3` — Measurement Set `process`; task-pack roles: `holdout`
+
+Falsifier: A future runtime and candidate revision provide authenticated receiver IDs and complete profile-scoped finding IDs on every applicable run.
+
 ## What was tested
 
 Should the historical Engineering Council workflow be replaced by the frozen adaptive candidate, retained unchanged, or replaced by a fixed sequential workflow on the measured local Codex surface?
@@ -32,21 +82,29 @@ Comparison mode: `controlled_factor`. Study state: `completed`.
 Primary estimand: **heldout decision quality and process acceptability** — Compare the frozen candidate with direct, sequential, and historical-skill conditions on held-out engineering cases while preserving critical-anchor, routing, and generated-work constraints.
 
 Conditions:
-- `C0` — Direct single pass (`baseline`)
-- `C1` — Fixed sequential revision (`control`)
-- `C2` — Historical skill-routed workflow (`control`)
-- `C3` — Frozen adaptive council candidate (`treatment`)
+- `C0` — Direct single pass (`baseline`, `workflow`)
+- `C1` — Fixed sequential revision (`control`, `workflow`)
+- `C2` — Historical skill-routed workflow (`control`, `skill`)
+- `C3` — Frozen adaptive council candidate (`treatment`, `skill`)
 
 Task strata:
 - `engineering-council-generation-1-heldout` (`holdout`): routine-local, consequential-domain-policy, consequential-performance
 
 Decision owner(s): `kizz-council-maintainer`
 
-## Runs and measurements
+## Observed runs, measurements, and cost
 
 Runs: `12`; by status: `valid=12`.
 
 Measurements: `46`; by kind: `aggregate=7`, `cost=12`, `process=3`, `subjective=24`.
+
+### Repeat and uncertainty evidence
+
+- Repeat coverage: `single_valid_observation_per_retained_cell` across `12` retained task-condition cells.
+- Valid repeats per cell: minimum `1`, maximum `1`.
+- Measurement intervals: `not_reported` on `0` measurements.
+
+These are facts about retained observations. The projection cannot infer a completely absent planned cell from Run Records alone. They are not a reliability grade, and planned repeat or perturbation coverage cannot substitute for observed data.
 
 Selected descriptive totals (not stable effects):
 
@@ -61,33 +119,50 @@ Selected descriptive totals (not stable effects):
 - `generated_work_tokens` / `C2`: total `13187 tokens` (`cost_or_latency`)
 - `generated_work_tokens` / `C3`: total `10257 tokens` (`cost_or_latency`)
 
-## Claims
+## Study design preflight
 
-### AEL-CG1-01 — supported
+Status: `not_assessed_historical`; scope: `design_preflight`.
 
-The frozen candidate repaired the observed full-history named-profile execution and consultation-provenance defect on the measured local runtime surface.
+- `design_class`: `not_assessed_historical`
+- `task_validity`: `not_assessed_historical`
+- `evaluator_validity`: `not_assessed_historical`
+- `sampling_strength`: `not_assessed_historical`
+- `planned_reliability_coverage`: `not_assessed_historical`
+- `independence`: `not_assessed_historical`
+- `freshness`: `not_assessed_historical`
 
-Claim level: `workflow`
+The study predates the pilot Study Quality Profile. No retrospective measurement-quality assessment is inferred from current artifacts.
 
-Falsifier: A hash-equivalent rerun reproduces the same full-history fork failure in the candidate or cannot authenticate any claimed consultation.
+## Decision lifecycle
 
-### AEL-CG1-02 — bounded
+- admission: `not_declared_historical`
+- action: `not_declared_historical`
+- outcome_follow_up: `not_declared_historical`
+- freshness: `unassessed`
 
-The candidate preserved measured held-out decision quality relative to the historical skill and fixed sequential revision under the frozen tie rule.
+## Replication and independence
 
-Claim level: `workflow`
+- Public graph verification: `graph_validatable`
+- Maintainer rerun: `not_assessed`
+- Independent replication: `none_linked`
+- Evaluation ownership: `maintainer_evaluated`
 
-Falsifier: Repeated held-out or real-shadow runs show a material quality or critical-failure regression against either strong control.
+The receipt is a content-addressed maintainer evaluation, not independent certification.
 
-### AEL-CG1-05 — supported
+Maintainer rerun boundary:
 
-Consultation identity and trace attribution remained incomplete even though the candidate improved process accountability.
+No current maintainer rerun package is asserted; the public package supports evidence-graph validation only.
 
-Claim level: `artifact`
+## Technical evidence
 
-Falsifier: A future runtime and candidate revision provide authenticated receiver IDs and complete profile-scoped finding IDs on every applicable run.
+- Receipt: [machine-readable evidence](../../examples/council-generation-1/evidence-receipt.json)
+- Receipt SHA-256: `8cb13547dda6dc8a8805fe65587c6f3c8712ca81a32cff45a57874c76a59a757`
+- Receipt evidence state: `controlled_effect_observed`
+- Receipt Contract v0 reproducibility field: `rerunnable`
 
-## Verification boundary
+The receipt evidence state and reproducibility field are retained Contract v0 compatibility metadata. Neither is a score, a public task-rerun claim, or proof of independent replication.
+
+### Verification boundary
 
 Kind: `evidence_graph`
 
@@ -99,36 +174,6 @@ Command (presentation only; not executed by this generator):
 uv run ael validate examples/council-generation-1
 ```
 
-Receipt Contract v0 reproducibility label: `rerunnable`. This retained source field is not a claim of a public task rerun or independent replication.
-
-## Maintainer rerun boundary
-
-No current maintainer rerun package is asserted; the public package supports evidence-graph validation only.
-
-## Measurement quality
-
-Status: `not_assessed_historical`; scope: `design_preflight`.
-
-- `design_class`: `not_assessed_historical`
-- `task_validity`: `not_assessed_historical`
-- `evaluator_validity`: `not_assessed_historical`
-- `sampling_strength`: `not_assessed_historical`
-- `reliability_coverage`: `not_assessed_historical`
-- `independence`: `not_assessed_historical`
-- `freshness`: `not_assessed_historical`
-
-The study predates the pilot Study Quality Profile. No retrospective measurement-quality assessment is inferred from current artifacts.
-
-## Independence
-
-The receipt is a content-addressed maintainer evaluation, not independent certification.
-
-## Historical status
-
-- admission: `not_declared_historical`
-- action: `not_declared_historical`
-- outcome_follow_up: `not_declared_historical`
-- freshness: `unassessed`
 
 ## Materials
 
@@ -186,6 +231,6 @@ The receipt is a content-addressed maintainer evaluation, not independent certif
 - `examples/council-generation-1/runs/E7-C3.json` — `fbc585cadc103cdd9726c9d8584cf06ba1727170f4b98d5202db146c726cd141`
 - `examples/council-generation-1/study-manifest.json` — `aad0f01c68fc7346f0a834e7039f0650af31a04f65ceee927312468b335e9206`
 - `reports/2026-08-12-council-generation-1.md` — `9e9114b8c42cc135890fba800257ea405df8ef7b68928bd6e405b4ff3844313a`
-- `studies/public-results.json` — `d0f6f21f4591c84a9c1d17521756a01f57ba8a07b2459ad46ea0fabf165bcf25`
+- `studies/public-results.json` — `df0a8c164b1b9035be0d72bcd5e05873feff91a88516ebc06b1f35062bff3518`
 
-Generated by `agentic-evidence-lab` `0.1.0a7` under `ael.publication-projection/0.4`.
+Generated by `agentic-evidence-lab` `0.1.0a8` under `ael.publication-projection/0.5`.

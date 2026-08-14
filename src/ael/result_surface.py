@@ -12,40 +12,59 @@ from __future__ import annotations
 import datetime as _datetime
 import hashlib
 import json
-import math
 import os
 import re
-import stat
 import tempfile
 from collections.abc import Mapping
 from pathlib import Path
-from typing import Any, NoReturn
+from typing import Any
 from urllib.parse import urlparse
 
 from jsonschema import Draft202012Validator, FormatChecker
 
-from ael import __version__
-from ael.debugging_shadow_audit import audit_debugging_shadow_bundle
+from ael import result_core as _result_core
+from ael import result_rendering as _result_rendering
+from ael.method_policy import (
+    ClaimSupportContext,
+    EvidenceBinding,
+    MethodPolicyError,
+    validate_claim_support,
+)
+from ael.result_constants import (
+    GENERATOR_NAME,
+    GENERATOR_VERSION,
+    PUBLIC_RESULTS_SCHEMA_VERSION,
+    PUBLICATION_PROJECTION_POLICY,
+)
+from ael.result_verification import AuditRequest, audit_adapter_names, public_audit_projection
 from ael.sandbox import SandboxError
-from ael.study_audit import audit_study_bundle
 from ael.study_quality import public_projection as project_study_quality
-from ael.validation import MAX_JSON_BYTES, SCHEMA_FILES, sha256_path, validate
+from ael.validation import SCHEMA_FILES, sha256_path, validate
 
-PUBLIC_RESULTS_SCHEMA_VERSION = "ael.public-results/0.4"
-PUBLICATION_PROJECTION_POLICY = "ael.publication-projection/0.4"
-GENERATOR_NAME = "agentic-evidence-lab"
-GENERATOR_VERSION = __version__
+ResultSurfaceError = _result_core.ResultSurfaceError
+SourceLedger = _result_core.SourceLedger
+_contains_symlink = _result_core.contains_symlink
+_fail = _result_core.fail
+_load_json_object = _result_core.load_json_object
+_nonempty_string = _result_core.nonempty_string
+_regular_directory = _result_core.regular_directory
+_regular_file = _result_core.regular_file
+_relative_path = _result_core.relative_path
+_repository_root = _result_core.repository_root
+_require_keys = _result_core.require_keys
+_sha = _result_core.sha
+_validate_date = _result_core.validate_date
+_json_bytes = _result_rendering.json_bytes
+_render_card = _result_rendering.render_card
+_render_results = _result_rendering.render_results
 
-_SHA256 = re.compile(r"^[a-f0-9]{64}$")
 _CARD_ID = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
-_DATE = re.compile(r"^[0-9]{4}-[0-9]{2}-[0-9]{2}$")
 _SCHEMES = {"evidence_graph", "frozen_public_bundle"}
 _VISIBILITIES = {"public", "private", "hidden", "embargoed"}
 _MATERIAL_AVAILABILITY = {"public", "withheld", "not_retained", "not_collected"}
 _HISTORY_UNKNOWN = "not_declared_historical"
 _HISTORY_FRESHNESS_UNKNOWN = "unassessed"
 _HISTORY_DERIVED = "derived_from_lifecycle"
-_ADAPTERS = {"pbt-v2", "systematic-debugging-real-shadow-v1"}
 _CATALOG_STATES = {"listed", "withdrawn"}
 _MAINTAINER_RERUN_STATES = {
     "maintainer_only_new_observation",
@@ -63,220 +82,6 @@ _INDEPENDENT_REPLICATION_STATUS = {
     "reproduced_third_party": "third_party_reproduced",
     "independently_verified": "independently_verified",
 }
-
-# Contract v0 has two independent ladders: claim levels describe what a
-# statement says, while evidence levels describe what the receipt established.
-# A projection can only select a claim at or below this ceiling.  In
-# particular, operational-stack and factor-causal claims are not model-only
-# claims, and no receipt can acquire transfer/outcome proof from an audit.
-_CLAIM_RANK = {
-    "artifact": 0,
-    "workflow": 1,
-    "operational_stack": 2,
-    "factor_causal": 2,
-    "model_only": 2,
-    "transfer": 4,
-    "outcome": 5,
-}
-_EVIDENCE_CEILING = {
-    "structurally_valid": 0,
-    "runtime_conformant": 1,
-    "controlled_effect_observed": 2,
-    "effect_reproduced": 2,
-    "downstream_outcome_observed": 5,
-    "transferred": 4,
-    "externally_decision_changing": 4,
-    "paid_repeated_use": 5,
-    "independently_outcome_verified": 5,
-}
-
-
-class ResultSurfaceError(SandboxError):
-    """Raised when a result-catalog profile or its source graph is unsafe."""
-
-
-def _fail(message: str) -> NoReturn:
-    raise ResultSurfaceError(message)
-
-
-def _strict_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
-    result: dict[str, Any] = {}
-    for key, value in pairs:
-        if key in result:
-            raise ValueError(f"duplicate object member: {key}")
-        result[key] = value
-    return result
-
-
-def _reject_nonfinite(value: str) -> None:
-    raise ValueError(f"non-finite JSON number: {value}")
-
-
-def _strict_float(value: str) -> float:
-    parsed = float(value)
-    if not math.isfinite(parsed):
-        raise ValueError(f"non-finite JSON number: {value}")
-    return parsed
-
-
-def _load_json_object(path: Path) -> dict[str, Any]:
-    _regular_file(path, "JSON source")
-    if path.stat().st_size > MAX_JSON_BYTES:
-        _fail(f"JSON source exceeds {MAX_JSON_BYTES} bytes: {path}")
-    try:
-        value = json.loads(
-            path.read_text(encoding="utf-8"),
-            object_pairs_hook=_strict_object,
-            parse_constant=_reject_nonfinite,
-            parse_float=_strict_float,
-        )
-    except (OSError, UnicodeError, json.JSONDecodeError, ValueError, RecursionError) as exc:
-        _fail(f"JSON source is unreadable: {path}: {exc}")
-    if not isinstance(value, dict):
-        _fail(f"JSON source must contain an object: {path}")
-    return value
-
-
-def _regular_file(path: Path, label: str) -> None:
-    """Require a regular non-symlink file, including every parent component."""
-
-    candidate = Path(path)
-    absolute = candidate.absolute()
-    if _contains_symlink(absolute):
-        _fail(f"{label} must not use symlinks: {path}")
-    try:
-        info = absolute.lstat()
-    except OSError as exc:
-        _fail(f"{label} does not exist: {path}: {exc}")
-    if not stat.S_ISREG(info.st_mode):
-        _fail(f"{label} must be a regular file: {path}")
-
-
-def _regular_directory(path: Path, label: str) -> None:
-    absolute = Path(path).absolute()
-    if _contains_symlink(absolute):
-        _fail(f"{label} must not use symlinks: {path}")
-    try:
-        info = absolute.lstat()
-    except OSError as exc:
-        _fail(f"{label} does not exist: {path}: {exc}")
-    if not stat.S_ISDIR(info.st_mode):
-        _fail(f"{label} must be a directory: {path}")
-
-
-def _contains_symlink(path: Path) -> bool:
-    candidate = Path(path).absolute()
-    while True:
-        try:
-            if candidate.is_symlink():
-                return True
-        except OSError:
-            return True
-        parent = candidate.parent
-        if parent == candidate:
-            return False
-        candidate = parent
-
-
-def _repository_root(profile_path: Path, explicit: Path | None) -> Path:
-    if explicit is not None:
-        _regular_directory(explicit, "repository root")
-        root = Path(explicit).resolve()
-    else:
-        start = Path(profile_path).absolute()
-        for candidate in (start.parent, *start.parents):
-            if (candidate / "pyproject.toml").is_file() and not _contains_symlink(
-                candidate / "pyproject.toml"
-            ):
-                root = candidate.resolve()
-                break
-        else:
-            _fail("could not locate repository root with pyproject.toml")
-    profile_resolved = Path(profile_path).resolve()
-    if not profile_resolved.is_relative_to(root):
-        _fail("result-catalog profile must be inside the repository root")
-    return root
-
-
-def _require_keys(
-    value: Mapping[str, Any], required: set[str], optional: set[str], location: str
-) -> None:
-    unknown = set(value) - required - optional
-    missing = required - set(value)
-    if unknown:
-        _fail(f"{location} contains unknown key(s): {', '.join(sorted(unknown))}")
-    if missing:
-        _fail(f"{location} is missing required key(s): {', '.join(sorted(missing))}")
-
-
-def _nonempty_string(value: Any, location: str) -> str:
-    if not isinstance(value, str) or not value.strip():
-        _fail(f"{location} must be a non-empty string")
-    return value
-
-
-def _sha(value: Any, location: str) -> str:
-    if not isinstance(value, str) or _SHA256.fullmatch(value) is None:
-        _fail(f"{location} must be 64 lowercase hexadecimal characters")
-    return value
-
-
-def _validate_date(value: Any, location: str) -> str:
-    date = _nonempty_string(value, location)
-    if _DATE.fullmatch(date) is None:
-        _fail(f"{location} must use YYYY-MM-DD")
-    try:
-        _datetime.date.fromisoformat(date)
-    except ValueError:
-        _fail(f"{location} is not a calendar date: {date}")
-    return date
-
-
-def _local_reference(
-    owner: Path,
-    reference: Mapping[str, Any],
-    repository_root: Path,
-    location: str,
-    *,
-    dereference: bool = True,
-    strict: bool = True,
-) -> tuple[Path | None, str]:
-    if not isinstance(reference, Mapping):
-        _fail(f"{location} must be an object")
-    if strict:
-        _require_keys(reference, {"uri", "sha256"}, set(), location)
-    elif "uri" not in reference or "sha256" not in reference:
-        _fail(f"{location} requires uri and sha256")
-    uri = _nonempty_string(reference.get("uri"), f"{location}.uri")
-    digest = _sha(reference.get("sha256"), f"{location}.sha256")
-    parsed = urlparse(uri)
-    if parsed.scheme or parsed.netloc or parsed.query or parsed.fragment or uri.startswith("/"):
-        _fail(f"{location}.uri must be a repository-relative path")
-    if "\\" in uri or "\x00" in uri:
-        _fail(f"{location}.uri contains an unsafe path character")
-    if not parsed.path or parsed.path == ".":
-        _fail(f"{location}.uri must identify a file")
-    candidate = owner.parent / parsed.path
-    if _contains_symlink(candidate):
-        _fail(f"{location}.uri must not use symlinks")
-    target = candidate.resolve()
-    if not target.is_relative_to(repository_root):
-        _fail(f"{location}.uri escapes repository root")
-    if not dereference:
-        return None, digest
-    _regular_file(target, f"{location} target")
-    actual = sha256_path(target)
-    if actual != digest:
-        _fail(f"{location}.sha256 does not match {target}")
-    return target, digest
-
-
-def _relative_path(path: Path, repository_root: Path) -> str:
-    try:
-        return path.resolve().relative_to(repository_root).as_posix()
-    except ValueError as exc:
-        _fail(f"source path is outside repository root: {path}")
-        raise AssertionError from exc
 
 
 def _load_profile(profile_path: Path) -> dict[str, Any]:
@@ -315,6 +120,7 @@ def validate_public_profile(profile: Mapping[str, Any]) -> dict[str, Any]:
                 "title",
                 "receipt_ref",
                 "claim_ids",
+                "decision_claim_ids",
                 "verification",
                 "materials",
                 "history",
@@ -336,6 +142,11 @@ def validate_public_profile(profile: Mapping[str, Any]) -> dict[str, Any]:
         if "report_ref" in study:
             _validate_profile_ref_shape(study.get("report_ref"), f"{location}.report_ref")
         _validate_claim_ids(study.get("claim_ids"), f"{location}.claim_ids")
+        _validate_claim_ids(study.get("decision_claim_ids"), f"{location}.decision_claim_ids")
+        selected_claim_ids = set(study["claim_ids"])
+        decision_claim_ids = set(study["decision_claim_ids"])
+        if not decision_claim_ids.issubset(selected_claim_ids):
+            _fail(f"{location}.decision_claim_ids must be a subset of claim_ids")
         _validate_verification(study.get("verification"), f"{location}.verification")
         _validate_materials(study.get("materials"), f"{location}.materials")
         _validate_maintainer_rerun(study.get("maintainer_rerun"), f"{location}.maintainer_rerun")
@@ -395,8 +206,9 @@ def _validate_verification(value: Any, location: str) -> None:
         root = _nonempty_string(value.get("result_root"), f"{location}.result_root")
         _validate_relative_uri(root, f"{location}.result_root")
         adapter = value.get("adapter")
-        if adapter not in _ADAPTERS:
-            _fail(f"{location}.adapter must be one of {sorted(_ADAPTERS)}")
+        adapters = audit_adapter_names()
+        if adapter not in adapters:
+            _fail(f"{location}.adapter must be one of {list(adapters)}")
     elif optional_present:
         _fail(f"{location} evidence_graph must not include frozen-bundle fields")
 
@@ -530,8 +342,8 @@ def _receipt_schema() -> dict[str, Any]:
 def _receipt_graph(
     receipt_path: Path,
     receipt: dict[str, Any],
-    repository_root: Path,
-) -> tuple[list[Path], dict[str, str]]:
+    sources: SourceLedger,
+) -> list[Path]:
     """Resolve every public Contract v0 document owned by a receipt."""
 
     _validate_receipt_schema(receipt, receipt_path)
@@ -545,7 +357,7 @@ def _receipt_graph(
         for index, reference in enumerate(receipt["run_record_refs"])
     )
     paths = [receipt_path]
-    source_hashes = {_relative_path(receipt_path, repository_root): sha256_path(receipt_path)}
+    sources.add(receipt_path)
     for location, reference in refs:
         if not isinstance(reference, Mapping):
             _fail(f"receipt.{location} must be an object")
@@ -556,12 +368,13 @@ def _receipt_graph(
             # A public projection must not dereference private/hidden graph
             # material.  The receipt schema still records its opaque identity.
             continue
-        target, digest = _local_reference(
-            receipt_path, reference, repository_root, f"receipt.{location}", strict=False
+        target, _ = sources.resolve(
+            receipt_path,
+            reference,
+            f"receipt.{location}",
+            strict=False,
         )
-        assert target is not None
         paths.append(target)
-        source_hashes[_relative_path(target, repository_root)] = digest
     # Public cards must be backed by one complete public graph.  If an opaque
     # run/material reference exists, do not silently turn it into a partial
     # validation: make the boundary explicit in the profile instead.
@@ -584,11 +397,13 @@ def _receipt_graph(
     }
     if {document.object_type for document in documents} != expected_types:
         _fail("receipt graph does not contain all five Contract v0 document types")
-    return paths, source_hashes
+    return paths
 
 
-def _selected_claims(
-    receipt: Mapping[str, Any], claim_ids: list[str], card_id: str
+def _select_claim_records(
+    receipt: Mapping[str, Any],
+    claim_ids: list[str],
+    card_id: str,
 ) -> list[dict[str, Any]]:
     claims = receipt.get("evaluated_claims")
     if not isinstance(claims, list):
@@ -604,44 +419,47 @@ def _selected_claims(
             _fail(f"receipt for {card_id} contains duplicate claim ID {claim_id}")
         by_id[claim_id] = dict(claim)
     selected: list[dict[str, Any]] = []
-    ceiling = _EVIDENCE_CEILING.get(str(receipt.get("evidence_level")))
-    if ceiling is None:
-        _fail(f"receipt for {card_id} has unknown evidence level")
     for claim_id in claim_ids:
         claim = by_id.get(claim_id)
         if claim is None:
             _fail(f"selected claim {claim_id} is absent from receipt for {card_id}")
-        rank = _CLAIM_RANK.get(str(claim.get("claim_level")))
-        if rank is None:
-            _fail(f"claim {claim_id} has unknown claim level")
-        if rank > ceiling:
-            _fail(
-                f"claim {claim_id} exceeds evidence ceiling for {card_id}: "
-                f"{claim.get('claim_level')} > {receipt.get('evidence_level')}"
-            )
+        evidence_refs = claim.get("evidence_refs")
+        if not isinstance(evidence_refs, list) or not all(
+            isinstance(reference, str) for reference in evidence_refs
+        ):
+            _fail(f"claim {claim_id} has invalid evidence references")
         selected.append(claim)
     return selected
+
+
+def _admit_selected_claims(
+    claims: list[dict[str, Any]], card_id: str, support_context: ClaimSupportContext
+) -> None:
+    for claim in claims:
+        try:
+            validate_claim_support(
+                claim_id=str(claim["claim_id"]),
+                claim_level=str(claim["claim_level"]),
+                evidence_refs=claim["evidence_refs"],
+                context=support_context,
+            )
+        except MethodPolicyError as exc:
+            _fail(f"{card_id}: {exc}")
 
 
 def _source_ref(
     owner: Path,
     ref: Mapping[str, Any],
-    repository_root: Path,
     location: str,
-    source_hashes: dict[str, str],
+    sources: SourceLedger,
 ) -> dict[str, str]:
-    target, digest = _local_reference(owner, ref, repository_root, location)
-    assert target is not None
-    relative = _relative_path(target, repository_root)
-    source_hashes[relative] = digest
-    return {"uri": relative, "sha256": digest}
+    return sources.projected_ref(owner, ref, location)
 
 
 def _material_projection(
     materials: list[Mapping[str, Any]],
     owner: Path,
-    repository_root: Path,
-    source_hashes: dict[str, str],
+    sources: SourceLedger,
 ) -> list[dict[str, Any]]:
     projected: list[dict[str, Any]] = []
     for index, material in enumerate(materials):
@@ -651,9 +469,8 @@ def _material_projection(
             item["ref"] = _source_ref(
                 owner,
                 material["ref"],
-                repository_root,
                 f"materials.{index}.ref",
-                source_hashes,
+                sources,
             )
         else:
             item["reason"] = material["reason"]
@@ -665,8 +482,7 @@ def _material_projection(
 def _lifecycle_projection(
     lifecycle: Mapping[str, Any],
     owner: Path,
-    repository_root: Path,
-    source_hashes: dict[str, str],
+    sources: SourceLedger,
     as_of: str,
 ) -> tuple[dict[str, str], dict[str, Any]]:
     refs: dict[str, dict[str, str]] = {}
@@ -680,11 +496,10 @@ def _lifecycle_projection(
         refs[key] = _source_ref(
             owner,
             lifecycle[key],
-            repository_root,
             f"lifecycle.{key}",
-            source_hashes,
+            sources,
         )
-        documents[key] = _load_json_object(repository_root / refs[key]["uri"])
+        documents[key] = _load_json_object(sources.repository_root / refs[key]["uri"])
 
     admission = documents["admission_ref"]
     adoption = documents["adoption_decision_ref"]
@@ -759,23 +574,20 @@ def _lifecycle_projection(
 def _study_and_measurement_projection(
     receipt_path: Path,
     receipt: Mapping[str, Any],
-    repository_root: Path,
-) -> tuple[dict[str, Any], dict[str, Any]]:
-    study_path, _ = _local_reference(
+    sources: SourceLedger,
+) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
+    study_path, _ = sources.resolve(
         receipt_path,
         receipt["study_ref"],
-        repository_root,
         "receipt.study_ref",
         strict=False,
     )
-    measurement_path, _ = _local_reference(
+    measurement_path, _ = sources.resolve(
         receipt_path,
         receipt["measurement_set_ref"],
-        repository_root,
         "receipt.measurement_set_ref",
         strict=False,
     )
-    assert study_path is not None and measurement_path is not None
     study = _load_json_object(study_path)
     measurement_set = _load_json_object(measurement_path)
     decision_owners = [
@@ -795,6 +607,7 @@ def _study_and_measurement_projection(
                 "condition_id": condition["condition_id"],
                 "label": condition["label"],
                 "role": condition["role"],
+                "intervention_class": condition["intervention_class"],
             }
             for condition in study["conditions"]
         ],
@@ -808,15 +621,18 @@ def _study_and_measurement_projection(
         ],
         "decision_owners": decision_owners,
     }
-    return study_projection, _measurement_projection(measurement_set)
+    return study_projection, _measurement_projection(measurement_set), measurement_set
 
 
 def _measurement_projection(measurement_set: Mapping[str, Any]) -> dict[str, Any]:
     by_kind: dict[str, int] = {}
     grouped: dict[tuple[str, str, str], list[Mapping[str, Any]]] = {}
+    uncertainty_measurements = 0
     for measurement in measurement_set.get("measurements", []):
         kind = str(measurement["kind"])
         by_kind[kind] = by_kind.get(kind, 0) + 1
+        if "uncertainty" in measurement:
+            uncertainty_measurements += 1
         metric = str(measurement["metric"])
         condition = str(measurement.get("condition_id", "all"))
         unit = str(measurement["unit"])
@@ -869,82 +685,188 @@ def _measurement_projection(measurement_set: Mapping[str, Any]) -> dict[str, Any
         "measurement_set_id": measurement_set["measurement_set_id"],
         "count": len(measurement_set.get("measurements", [])),
         "by_kind": dict(sorted(by_kind.items())),
+        "uncertainty": {
+            "status": "reported" if uncertainty_measurements else "not_reported",
+            "measurement_count": uncertainty_measurements,
+        },
         "selected_summaries": summaries,
     }
 
 
 def _run_projection(
-    receipt_path: Path, receipt: Mapping[str, Any], repository_root: Path
-) -> dict[str, Any]:
+    receipt_path: Path,
+    receipt: Mapping[str, Any],
+    sources: SourceLedger,
+    task_pack_roles: Mapping[str, str],
+) -> tuple[dict[str, Any], dict[str, str]]:
     by_status: dict[str, int] = {}
     by_condition: dict[str, int] = {}
+    valid_repeats_by_cell: dict[tuple[str, str, str], set[int]] = {}
+    run_task_pack_roles: dict[str, str] = {}
     for index, reference in enumerate(receipt["run_record_refs"]):
-        run_path, _ = _local_reference(
+        run_path, _ = sources.resolve(
             receipt_path,
             reference,
-            repository_root,
             f"receipt.run_record_refs.{index}",
             strict=False,
         )
-        assert run_path is not None
         run = _load_json_object(run_path)
         status = str(run["status"])
         condition = str(run["condition_id"])
         by_status[status] = by_status.get(status, 0) + 1
         by_condition[condition] = by_condition.get(condition, 0) + 1
-    return {
+        task = run["task"]
+        task_pack_id = str(task["task_pack_id"])
+        task_pack_role = task_pack_roles.get(task_pack_id)
+        if task_pack_role is None:
+            _fail(f"run {run['run_id']} references unknown task pack {task_pack_id}")
+        run_id = str(run["run_id"])
+        if run_id in run_task_pack_roles:
+            _fail(f"receipt contains duplicate run ID {run_id}")
+        run_task_pack_roles[run_id] = task_pack_role
+        cell = (task_pack_id, str(task["task_id"]), condition)
+        valid_repeats_by_cell.setdefault(cell, set())
+        if status == "valid":
+            valid_repeats_by_cell[cell].add(int(run["repeat_index"]))
+    repeat_counts = [len(repeats) for repeats in valid_repeats_by_cell.values()]
+    minimum = min(repeat_counts) if repeat_counts else 0
+    maximum = max(repeat_counts) if repeat_counts else 0
+    if not repeat_counts or minimum == 0:
+        repeat_status = "retained_cell_without_valid_observation"
+    elif minimum == maximum == 1:
+        repeat_status = "single_valid_observation_per_retained_cell"
+    elif minimum >= 2:
+        repeat_status = "repeated_valid_observations_per_retained_cell"
+    else:
+        repeat_status = "mixed_valid_repeat_coverage"
+    projection = {
         "count": len(receipt["run_record_refs"]),
         "by_status": dict(sorted(by_status.items())),
         "by_condition": dict(sorted(by_condition.items())),
+        "repeat_evidence": {
+            "status": repeat_status,
+            "retained_task_condition_cells": len(repeat_counts),
+            "minimum_valid_repeats_per_cell": minimum,
+            "maximum_valid_repeats_per_cell": maximum,
+        },
     }
+    return projection, run_task_pack_roles
+
+
+def _measurement_evidence_bindings(
+    measurement_set: Mapping[str, Any], run_task_pack_roles: Mapping[str, str]
+) -> dict[str, EvidenceBinding]:
+    bindings: dict[str, EvidenceBinding] = {}
+    for measurement in measurement_set.get("measurements", []):
+        measurement_id = str(measurement["measurement_id"])
+        if measurement_id in bindings:
+            _fail(f"measurement set contains duplicate measurement ID {measurement_id}")
+        roles: set[str] = set()
+        for run_id in measurement["run_ids"]:
+            role = run_task_pack_roles.get(str(run_id))
+            if role is None:
+                _fail(f"measurement {measurement_id} references unknown run {run_id}")
+            roles.add(role)
+        bindings[measurement_id] = EvidenceBinding(
+            kind=str(measurement["kind"]),
+            task_pack_roles=frozenset(roles),
+        )
+    return bindings
+
+
+def _claim_evidence_bindings(
+    receipt_path: Path,
+    claims: list[Mapping[str, Any]],
+    measurement_bindings: Mapping[str, EvidenceBinding],
+    sources: SourceLedger,
+) -> tuple[dict[str, EvidenceBinding], dict[str, dict[str, Any]]]:
+    """Classify selected claim refs and bind resolvable public evidence."""
+
+    bindings = dict(measurement_bindings)
+    projections: dict[str, dict[str, Any]] = {
+        reference: {
+            "reference": reference,
+            "binding": "measurement",
+            "measurement_kind": binding.kind,
+            "task_pack_roles": sorted(binding.task_pack_roles),
+        }
+        for reference, binding in bindings.items()
+    }
+    for claim in claims:
+        for evidence_ref in claim["evidence_refs"]:
+            reference = str(evidence_ref)
+            if reference in projections:
+                continue
+            parsed = urlparse(reference)
+            if reference.startswith("/") or "\\" in reference or "\x00" in reference:
+                _fail(
+                    f"claim {claim['claim_id']} evidence reference contains an unsafe path: "
+                    f"{reference}"
+                )
+            if ".." in Path(parsed.path).parts:
+                _fail(f"claim {claim['claim_id']} evidence reference contains traversal")
+            if parsed.scheme or parsed.netloc or parsed.query or parsed.fragment:
+                projections[reference] = {
+                    "reference": reference,
+                    "binding": "opaque_receipt_reference",
+                }
+                continue
+            candidate = receipt_path.parent / parsed.path
+            if _contains_symlink(candidate):
+                _fail(f"claim {claim['claim_id']} evidence sidecar must not use symlinks")
+            target = candidate.resolve()
+            if not target.is_relative_to(sources.repository_root):
+                _fail(f"claim {claim['claim_id']} evidence sidecar escapes repository root")
+            if not target.exists():
+                projections[reference] = {
+                    "reference": reference,
+                    "binding": "opaque_receipt_reference",
+                }
+                continue
+            _regular_file(target, f"claim {claim['claim_id']} evidence sidecar")
+            relative = _relative_path(target, sources.repository_root)
+            digest = sources.add(target)
+            bindings[reference] = EvidenceBinding(kind="artifact", source="public_sidecar")
+            projections[reference] = {
+                "reference": reference,
+                "binding": "public_sidecar",
+                "uri": relative,
+                "sha256": digest,
+            }
+    return bindings, projections
 
 
 def _audit_projection(
     verification: Mapping[str, Any],
     profile_path: Path,
-    repository_root: Path,
+    sources: SourceLedger,
     require_git_proof: bool,
 ) -> dict[str, Any] | None:
     if verification["kind"] != "frozen_public_bundle":
         return None
-    freeze_path, _ = _local_reference(
+    freeze_path, _ = sources.resolve(
         profile_path,
         verification["freeze_ref"],
-        repository_root,
         "verification.freeze_ref",
     )
-    assert freeze_path is not None
     result_root_string = str(verification["result_root"])
-    result_candidate = repository_root / result_root_string
+    result_candidate = sources.repository_root / result_root_string
     if _contains_symlink(result_candidate):
         _fail("verification.result_root must not use symlinks")
     result_root = result_candidate.resolve()
-    if not result_root.is_relative_to(repository_root):
+    if not result_root.is_relative_to(sources.repository_root):
         _fail("verification.result_root escapes repository root")
     _regular_directory(result_root, "verification.result_root")
+    sources.add_tree(result_root, "verification.result_root")
     try:
-        if verification["adapter"] == "systematic-debugging-real-shadow-v1":
-            summary = audit_debugging_shadow_bundle(
+        return public_audit_projection(
+            str(verification["adapter"]),
+            AuditRequest(
                 freeze_path,
                 result_root,
-                git_root=repository_root,
+                git_root=sources.repository_root,
                 require_git_proof=require_git_proof,
-            )
-            # Git proof is a fail-closed build gate, not publication content.
-            # Project only stable preregistration identity/boundary fields so
-            # `results check` has identical bytes with or without the gate.
-            summary["preregistration"].pop("git_verified", None)
-            summary["preregistration"]["boundary"] = (
-                "Git proof is an optional fail-closed build gate and is not projected as evidence; "
-                "when required, it establishes repository artifact ordering only."
-            )
-            return summary
-        return audit_study_bundle(
-            freeze_path,
-            result_root,
-            git_root=repository_root,
-            require_git_proof=require_git_proof,
-            decision_adapter=verification["adapter"],
+            ),
         )
     except SandboxError as exc:
         _fail(f"frozen public bundle audit failed: {exc}")
@@ -954,8 +876,7 @@ def _quality_projection(
     value: Mapping[str, Any],
     receipt: Mapping[str, Any],
     reference_owner: Path,
-    repository_root: Path,
-    source_hashes: dict[str, str],
+    sources: SourceLedger,
     as_of: str,
 ) -> dict[str, Any]:
     if value["assessment"] == "not_assessed_historical":
@@ -977,15 +898,13 @@ def _quality_projection(
                 "measurement-quality assessment is inferred from current artifacts."
             ),
         }
-    quality_path, quality_digest = _local_reference(
+    quality_path, quality_digest = sources.resolve(
         reference_owner,
         value["profile_ref"],
-        repository_root,
         "quality.profile_ref",
     )
-    assert quality_path is not None
     try:
-        projection = project_study_quality(quality_path, repository_root, as_of=as_of)
+        projection = project_study_quality(quality_path, sources.repository_root, as_of=as_of)
     except SandboxError as exc:
         _fail(f"quality profile preflight failed: {exc}")
     study_ref = receipt.get("study_ref")
@@ -997,8 +916,7 @@ def _quality_projection(
         _fail("quality profile revision does not match receipt study_ref")
     if projection["study"]["manifest_sha256"] != study_ref.get("sha256"):
         _fail("quality profile manifest hash does not match receipt study_ref")
-    relative = _relative_path(quality_path, repository_root)
-    source_hashes[relative] = quality_digest
+    relative = _relative_path(quality_path, sources.repository_root)
     projection["profile"] = {"uri": relative, "sha256": quality_digest}
     return projection
 
@@ -1037,37 +955,90 @@ def _build_card(
     require_git_proof: bool,
 ) -> tuple[dict[str, Any], dict[str, str]]:
     profile_reference_owner = repository_root / ".ael-public-results-profile"
-    receipt_path, receipt_digest = _local_reference(
+    sources = SourceLedger(repository_root)
+    receipt_path, receipt_digest = sources.resolve(
         profile_reference_owner,
         entry["receipt_ref"],
-        repository_root,
         f"{entry['card_id']}.receipt_ref",
     )
-    assert receipt_path is not None
     receipt = _load_json_object(receipt_path)
-    graph_paths, source_hashes = _receipt_graph(receipt_path, receipt, repository_root)
-    source_hashes[_relative_path(profile_path, repository_root)] = sha256_path(profile_path)
+    _receipt_graph(receipt_path, receipt, sources)
+    sources.add(profile_path)
     report_projection: dict[str, str] | None = None
     if "report_ref" in entry:
-        report_path, report_digest = _local_reference(
+        report_path, report_digest = sources.resolve(
             profile_reference_owner,
             entry["report_ref"],
-            repository_root,
             f"{entry['card_id']}.report_ref",
         )
-        assert report_path is not None
         report_projection = {
             "uri": _relative_path(report_path, repository_root),
             "sha256": report_digest,
         }
-        source_hashes[report_projection["uri"]] = report_digest
-    selected_claims = _selected_claims(receipt, list(entry["claim_ids"]), str(entry["card_id"]))
-    study_projection, measurement_projection = _study_and_measurement_projection(
-        receipt_path, receipt, repository_root
+    study_projection, measurement_projection, measurement_set = _study_and_measurement_projection(
+        receipt_path, receipt, sources
     )
-    run_projection = _run_projection(receipt_path, receipt, repository_root)
+    task_pack_roles = {
+        str(task_pack["task_pack_id"]): str(task_pack["role"])
+        for task_pack in study_projection["task_packs"]
+    }
+    run_projection, run_task_pack_roles = _run_projection(
+        receipt_path,
+        receipt,
+        sources,
+        task_pack_roles,
+    )
+    nonbaseline_intervention_classes = {
+        str(condition["intervention_class"])
+        for condition in study_projection["conditions"]
+        if condition["role"] != "baseline"
+    }
+    selected_claims = _select_claim_records(
+        receipt,
+        list(entry["claim_ids"]),
+        str(entry["card_id"]),
+    )
+    measurement_bindings = _measurement_evidence_bindings(measurement_set, run_task_pack_roles)
+    claim_bindings, claim_binding_projection = _claim_evidence_bindings(
+        receipt_path,
+        selected_claims,
+        measurement_bindings,
+        sources,
+    )
+    support_context = ClaimSupportContext(
+        evidence_state=str(receipt["evidence_level"]),
+        comparison_mode=str(study_projection["comparison_mode"]),
+        nonbaseline_intervention_classes=frozenset(nonbaseline_intervention_classes),
+        independence_label=str(receipt["independence"]["label"]),
+        evidence_by_ref=claim_bindings,
+    )
+    _admit_selected_claims(selected_claims, str(entry["card_id"]), support_context)
+    selected_claims = [
+        {
+            **claim,
+            "evidence_bindings": [
+                claim_binding_projection[str(reference)] for reference in claim["evidence_refs"]
+            ],
+        }
+        for claim in selected_claims
+    ]
+    decision_claim_ids = set(entry["decision_claim_ids"])
+    selected_claims = [
+        {**claim, "decision_governing": claim["claim_id"] in decision_claim_ids}
+        for claim in selected_claims
+    ]
+    for claim in selected_claims:
+        if not claim["decision_governing"] and claim["claim_level"] not in {
+            "artifact",
+            "workflow",
+        }:
+            _fail(
+                f"additional claim {claim['claim_id']} for {entry['card_id']} must be an "
+                "artifact or workflow disclosure; causal, transfer, and outcome claims "
+                "must be decision-governing"
+            )
     audit = _audit_projection(
-        entry["verification"], profile_reference_owner, repository_root, require_git_proof
+        entry["verification"], profile_reference_owner, sources, require_git_proof
     )
     verification_projection: dict[str, Any] = {
         "kind": entry["verification"]["kind"],
@@ -1076,15 +1047,12 @@ def _build_card(
     }
     if audit is not None:
         verification_projection["audit"] = audit
-    materials = _material_projection(
-        entry["materials"], profile_reference_owner, repository_root, source_hashes
-    )
+    materials = _material_projection(entry["materials"], profile_reference_owner, sources)
     quality = _quality_projection(
         entry["quality"],
         receipt,
         profile_reference_owner,
-        repository_root,
-        source_hashes,
+        sources,
         str(profile["as_of"]),
     )
     reproduction = _reproduction_projection(entry, receipt)
@@ -1094,15 +1062,9 @@ def _build_card(
         history, lifecycle_projection = _lifecycle_projection(
             entry["lifecycle"],
             profile_reference_owner,
-            repository_root,
-            source_hashes,
+            sources,
             str(profile["as_of"]),
         )
-    # Always include every Contract graph byte. Additional profile-owned refs,
-    # such as the Study Quality Profile, remain separate projection sources.
-    source_hashes.update(
-        {_relative_path(path, repository_root): sha256_path(path) for path in graph_paths}
-    )
     receipt_ref_projection = {
         "uri": _relative_path(receipt_path, repository_root),
         "sha256": receipt_digest,
@@ -1126,7 +1088,7 @@ def _build_card(
         "quality": quality,
         "materials": materials,
         "verification": verification_projection,
-        "source_hashes": dict(sorted(source_hashes.items())),
+        "source_hashes": sources.snapshot(),
         "receipt_id": receipt["receipt_id"],
         "study": study_projection,
         "runs": run_projection,
@@ -1140,242 +1102,8 @@ def _build_card(
     # Keep an explicit selected-ID field so a consumer can distinguish the
     # profile's selection from the full receipt claim set.
     card["claim_ids"] = list(entry["claim_ids"])
-    return card, source_hashes
-
-
-def _json_bytes(value: Any) -> str:
-    return (
-        json.dumps(
-            value,
-            ensure_ascii=False,
-            sort_keys=True,
-            indent=2,
-            separators=(",", ": "),
-            allow_nan=False,
-        )
-        + "\n"
-    )
-
-
-def _markdown_link(label: str, path: str, from_dir: str) -> str:
-    target = Path(os.path.relpath(path, from_dir)).as_posix()
-    return f"[{label}]({target})"
-
-
-def _render_card(card: Mapping[str, Any]) -> str:
-    card_directory = "docs/results"
-    reproduction = card["reproduction"]
-    lines = [
-        f"# {card['title']}",
-        "",
-        f"- Card ID: `{card['card_id']}`",
-        f"- Catalog state: **{card['catalog_state']}**",
-        f"- Receipt: {_markdown_link('machine-readable evidence', card['receipt']['uri'], card_directory)}",
-        f"- Receipt SHA-256: `{card['receipt']['sha256']}`",
-        f"- Evidence level: `{card['evidence_level']}`",
-        f"- Public graph verification: `{reproduction['public_graph_verification']['status']}`",
-        f"- Maintainer rerun: `{reproduction['study_rerun']['status']}`",
-        f"- Independent replication: `{reproduction['independent_replication']['status']}`",
-        f"- Evaluation ownership: `{card['independence']['label']}`",
-        "",
-        "## Decision",
-        "",
-        f"**{card['decision']['disposition']}** — {card['decision']['summary']}",
-        "",
-        "Scope:",
-        *[f"- {item}" for item in card["decision"]["scope"]],
-        "",
-        f"Reversal trigger: {card['decision']['reversal_trigger']}",
-        "",
-    ]
-    if "report" in card:
-        lines.insert(
-            6,
-            f"- Report: {_markdown_link('narrative result', card['report']['uri'], card_directory)}",
-        )
-    study = card["study"]
-    lines.extend(
-        [
-            "## What was tested",
-            "",
-            study["decision_question"],
-            "",
-            f"Comparison mode: `{study['comparison_mode']}`. Study state: `{study['status']}`.",
-            "",
-            f"Primary estimand: **{study['primary_estimand']['name']}** — {study['primary_estimand']['description']}",
-            "",
-            "Conditions:",
-            *[
-                f"- `{condition['condition_id']}` — {condition['label']} (`{condition['role']}`)"
-                for condition in study["conditions"]
-            ],
-            "",
-            "Task strata:",
-            *[
-                f"- `{task_pack['task_pack_id']}` (`{task_pack['role']}`): "
-                + ", ".join(task_pack["strata"])
-                for task_pack in study["task_packs"]
-            ],
-            "",
-            "Decision owner(s): "
-            + (", ".join(f"`{owner}`" for owner in study["decision_owners"]) or "not declared"),
-            "",
-            "## Runs and measurements",
-            "",
-            f"Runs: `{card['runs']['count']}`; by status: "
-            + ", ".join(
-                f"`{status}={count}`" for status, count in card["runs"]["by_status"].items()
-            )
-            + ".",
-            "",
-            f"Measurements: `{card['measurements']['count']}`; by kind: "
-            + ", ".join(
-                f"`{kind}={count}`" for kind, count in card["measurements"]["by_kind"].items()
-            )
-            + ".",
-            "",
-        ]
-    )
-    if card["measurements"]["selected_summaries"]:
-        lines.extend(["Selected descriptive totals (not stable effects):", ""])
-        for summary in card["measurements"]["selected_summaries"]:
-            if "total" in summary:
-                value = f"total `{summary['total']:g} {summary['unit']}`"
-            elif "true" in summary:
-                value = f"true `{summary['true']}/{summary['observations']}`"
-            else:
-                value = str(summary["aggregation"])
-            lines.append(
-                f"- `{summary['metric']}` / `{summary['condition_id']}`: {value} "
-                f"(`{summary['category']}`)"
-            )
-        lines.append("")
-    lines.extend(["## Claims", ""])
-    for claim in card["claims"]:
-        lines.extend(
-            [
-                f"### {claim['claim_id']} — {claim['status']}",
-                "",
-                claim["statement"],
-                "",
-                f"Claim level: `{claim['claim_level']}`",
-                "",
-                f"Falsifier: {claim['falsifier']}",
-                "",
-            ]
-        )
-    lines.extend(["## Verification boundary", "", f"Kind: `{card['verification']['kind']}`", ""])
-    lines.append(card["verification"]["boundary"])
-    lines.extend(["", "Command (presentation only; not executed by this generator):", "", "```sh"])
-    lines.extend(str(item) for item in card["verification"]["command"])
-    lines.extend(["```", ""])
-    if "audit" in card["verification"]:
-        audit = card["verification"]["audit"]
-        lines.extend(
-            [
-                f"Audit status: `{audit['status']}`.",
-                f"Contract documents checked: `{audit['evidence']['contract_documents']}`; run records: `{audit['evidence']['run_records']}`.",
-                "",
-            ]
-        )
-    lines.extend(
-        [
-            "Receipt Contract v0 reproducibility label: "
-            f"`{card['receipt_reproducibility']}`. This retained source field is not a claim "
-            "of a public task rerun or independent replication.",
-            "",
-            "## Maintainer rerun boundary",
-            "",
-            reproduction["study_rerun"]["boundary"],
-            "",
-        ]
-    )
-    lines.extend(["## Measurement quality", ""])
-    lines.append(f"Status: `{card['quality']['status']}`; scope: `{card['quality']['scope']}`.")
-    if "as_of" in card["quality"]:
-        lines.append(f"Assessment as of: `{card['quality']['as_of']}`.")
-    lines.append("")
-    for key, value in card["quality"]["quality_axes"].items():
-        lines.append(f"- `{key}`: `{value}`")
-    if card["quality"]["issues"]:
-        lines.extend(["", "Preflight findings:"])
-        for issue in card["quality"]["issues"]:
-            lines.append(
-                f"- `{issue['severity']} {issue['code']}` `{issue['location']}` — {issue['message']}"
-            )
-    lines.extend(["", card["quality"]["boundary"], ""])
-    lines.extend(["## Independence", "", card["independence"]["disclosure"], ""])
-    lines.extend(["## Historical status", ""])
-    for key in ("admission", "action", "outcome_follow_up", "freshness"):
-        lines.append(f"- {key}: `{card['history'][key]}`")
-    if "lifecycle" in card:
-        lines.extend(["", "Declared lifecycle:"])
-        for key, reference in card["lifecycle"]["refs"].items():
-            lines.append(f"- `{key}`: `{reference['uri']}` (SHA-256 `{reference['sha256']}`)")
-        lines.extend(
-            [
-                f"- adoption disposition: `{card['lifecycle']['adoption_disposition']}`",
-                f"- action kind: `{card['lifecycle']['action_kind']}`",
-                f"- follow-up due: `{card['lifecycle']['follow_up_due_at']}`",
-            ]
-        )
-    lines.extend(["", "## Materials", ""])
-    for material in card["materials"]:
-        lines.append(f"- **{material['label']}** — `{material['availability']}`")
-        if material["availability"] == "public":
-            lines.append(
-                f"  - Ref: `{material['ref']['uri']}` (SHA-256 `{material['ref']['sha256']}`)"
-            )
-        else:
-            lines.append(f"  - Reason: {material['reason']}")
-            lines.append(f"  - Reproduction impact: {material['reproduction_impact']}")
-    lines.extend(["", "## Unsupported inferences", ""])
-    lines.extend(f"- {item}" for item in card["unsupported_inferences"])
-    lines.extend(["", "## Limitations", ""])
-    lines.extend(f"- {item}" for item in card["limitations"])
-    lines.extend(["", "## Invalidation triggers", ""])
-    lines.extend(f"- {item}" for item in card["invalidation_triggers"])
-    lines.extend(["", "## Source hashes", ""])
-    lines.extend(f"- `{path}` — `{digest}`" for path, digest in card["source_hashes"].items())
-    lines.extend(
-        [
-            "",
-            f"Generated by `{GENERATOR_NAME}` `{GENERATOR_VERSION}` under `{PUBLICATION_PROJECTION_POLICY}`.",
-            "",
-        ]
-    )
-    return "\n".join(lines)
-
-
-def _render_results(results: list[Mapping[str, Any]], as_of: str) -> str:
-    lines = [
-        "# Results Index",
-        "",
-        f"Generated as of `{as_of}` from the explicit result-catalog profile.",
-        "",
-        "This page is a deterministic catalog projection. `listed` means the result is selected for this catalog; it is not proof of a Git tag or GitHub release. Decisions, evidence levels, claims, evaluation ownership, and receipt state remain bound to the source evidence graph.",
-        "",
-        "| Study | Catalog | Evidence | Quality | Public graph | Maintainer rerun | Independent replication | Decision |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- |",
-    ]
-    for card in results:
-        decision = card["decision"]["disposition"]
-        reproduction = card["reproduction"]
-        lines.append(
-            f"| [{card['title']}](docs/results/{card['card_id']}.md) | `{card['catalog_state']}` | "
-            f"`{card['evidence_level']}` | `{card['quality']['status']}` | "
-            f"`{reproduction['public_graph_verification']['status']}` | "
-            f"`{reproduction['study_rerun']['status']}` | "
-            f"`{reproduction['independent_replication']['status']}` | `{decision}` |"
-        )
-    lines.extend(
-        [
-            "",
-            f"Generated by `{GENERATOR_NAME}` `{GENERATOR_VERSION}` under `{PUBLICATION_PROJECTION_POLICY}`.",
-            "",
-        ]
-    )
-    return "\n".join(lines)
+    card["decision_claim_ids"] = list(entry["decision_claim_ids"])
+    return card, sources.snapshot()
 
 
 def build_result_surface(

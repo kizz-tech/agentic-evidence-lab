@@ -43,12 +43,12 @@ The profile selects public receipts and claims, declares unavailable-material
 categories and a bounded maintainer-rerun handoff, preserves explicit
 historical unknowns, and may select exact lifecycle refs. Lifecycle status is
 derived from those hash-bound records rather than profile prose. The projection
-may enforce a claim ceiling, but it cannot create evidence, change a receipt,
-claim an external release, or become a second authority. Evidence level,
-catalog membership, public graph verification, maintainer rerun capability,
-linked independent replication, freshness, action, and outcome remain separate
-axes; a card renders unavailable historical action or outcome as
-`not_declared_historical` or `unassessed` rather than guessing.
+may enforce claim-specific support predicates, but it cannot create evidence,
+change a receipt, claim an external release, or become a second authority.
+Receipt evidence state, catalog membership, public graph verification,
+maintainer rerun capability, linked independent replication, freshness, action,
+and outcome remain separate axes; a card renders unavailable historical action
+or outcome as `not_declared_historical` or `unassessed` rather than guessing.
 
 Alpha.6 exercises one complete prospective admission → effect → adoption →
 action → follow-up lifecycle in the Systematic Debugging real-shadow pilot.
@@ -79,6 +79,71 @@ predicate. Committed catalog bytes can say that a result is `listed` or
 succeeded. The original receipt `reproducibility` enum remains source metadata,
 while public cards separately expose graph verification, maintainer rerun, and
 independent replication.
+
+Alpha.8 adds `ael.method_policy`, a pure policy module called by the existing
+result projection. It replaces numeric rank-based claim authorization with
+explicit evidence-state, comparison-design, and claim-local evidence-binding
+predicates, then orders cards around the bounded decision and selected claims.
+The result surface owns graph loading and projection; the policy receives only
+resolved facts and performs no I/O. Contract v0 `evidence_level` remains machine
+compatibility metadata but is no longer a public grade or index column.
+Completed run and measurement records expose observed repeat coverage and
+uncertainty presence; Study Quality continues to own prospective design
+declarations only.
+
+The result surface classifies every evidence reference of every selected claim.
+Measurement IDs bind to their typed row and contributing run/task-pack roles;
+safe public sidecar paths enter the generated source-hash inventory; historical
+logical refs that Contract v0 cannot resolve remain explicitly opaque.
+Every selected claim still needs at least one public binding, and causal,
+stack, transfer, and outcome classes need a Measurement Set binding rather than
+only a sidecar. Unselected receipt claims are not dereferenced. Resolution
+proves identity and graph linkage, not semantic entailment.
+
+```text
+Contract v0 claims + study design ─┐
+Study Quality preflight ───────────┼→ claim-first Method Policy
+run/measurement observations ─────┤          │
+replication/lifecycle refs ────────┘          ▼
+                                      public projection 0.5
+```
+
+The policy is not a persisted Claim-Support Envelope, a Decision Case, or a
+sixth Contract object. Study-local lifecycle adapters remain local until at
+least two materially different prospective studies expose a repeated
+consistency boundary.
+
+The raw receipt renderer now uses the same non-ordinal vocabulary—**receipt
+evidence state** and **claim class**—without changing any JSON field or
+historical rendered evidence byte. Frozen Markdown produced by older releases
+remains historical output and is not regenerated.
+
+### Publication kernel
+
+Alpha.8 also separates the public projection's observed volatility seams while
+retaining `ael.result_surface` as the compatibility facade:
+
+```text
+method_policy                  result_constants
+     ▲                              ▲
+     │                              │
+result_surface ──→ result_core      └── result_rendering
+     │
+     └──────────→ result_verification ──→ study-family audits
+```
+
+`result_core.SourceLedger` is the single owner of source hashes for one card.
+Every dereferenced receipt, Contract record, report, quality profile, lifecycle
+record, verification freeze or public claim sidecar enters that ledger; helpers
+cannot maintain an untracked parallel hash dictionary. `result_verification`
+owns one immutable allowlist of study-family adapters shared by the CLI and
+projection. `result_rendering` receives already-admitted values and performs no
+evidence I/O or claim authorization. Architecture tests keep these dependency
+arrows one-way.
+
+This is an information-hiding refactor, not a plugin system. Adapter names stay
+closed and code-owned; arbitrary profile input cannot load Python. See
+[`Publication kernel boundaries`](decisions/2026-08-14-publication-kernel-boundaries.md).
 
 Git ancestry or a tag can prove repository artifact ordering—for example, that
 freeze bytes are present in an ancestor. It cannot prove that private model

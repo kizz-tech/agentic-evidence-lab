@@ -2,14 +2,7 @@
 
 - Card ID: `systematic-debugging-real-shadow-v1`
 - Catalog state: **listed**
-- Receipt: [machine-readable evidence](../../studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/evidence-receipt.json)
-- Receipt SHA-256: `210a1398e51c230c7329cbf362d26f41d0ade3fb01458e5e27fb222e9c878a0e`
-- Report: [narrative result](../../reports/2026-08-13-systematic-debugging-real-shadow-v1.md)
-- Evidence level: `controlled_effect_observed`
-- Public graph verification: `decision_recomputable`
-- Maintainer rerun: `maintainer_only_new_observation`
-- Independent replication: `none_linked`
-- Evaluation ownership: `maintainer_evaluated`
+- Narrative report: [open](../../reports/2026-08-13-systematic-debugging-real-shadow-v1.md)
 
 ## Decision
 
@@ -23,6 +16,48 @@ Scope:
 
 Reversal trigger: Re-evaluate after any task, evaluator, prompt, skill, model, CLI, image, budget, rule, or provider behavior change.
 
+## Decision-governing claims
+
+### AEL-DEBUG-SHADOW-01 — contradicted
+
+The exact skill changed root-cause-correct hidden acceptance enough to satisfy the frozen bounded routing rule on at least one admitted stratum.
+
+Claim class: `factor_causal`
+
+Scope:
+- exact four-cell matched pilot surface
+
+Evidence references:
+- `hidden_acceptance:D-S02:B0:R01` — Measurement Set `outcome`; task-pack roles: `real_shadow`
+- `hidden_acceptance:D-S02:S1:R01` — Measurement Set `outcome`; task-pack roles: `real_shadow`
+- `hidden_acceptance:D-S01:B0:R01` — Measurement Set `outcome`; task-pack roles: `real_shadow`
+- `hidden_acceptance:D-S04:S1:R01` — Measurement Set `outcome`; task-pack roles: `real_shadow`
+- `hidden_acceptance:D-S01:S1:R01` — Measurement Set `outcome`; task-pack roles: `real_shadow`
+- `hidden_acceptance:D-S03:S1:R01` — Measurement Set `outcome`; task-pack roles: `real_shadow`
+- `hidden_acceptance:D-S04:B0:R01` — Measurement Set `outcome`; task-pack roles: `real_shadow`
+- `hidden_acceptance:D-S03:B0:R01` — Measurement Set `outcome`; task-pack roles: `real_shadow`
+
+Falsifier: Frozen-rule recomputation, a retained cell, or the operational follow-up contradicts the published classifications.
+
+## Additional selected claims
+
+These claims disclose supporting workflow or artifact facts; they do not govern the displayed disposition.
+
+### AEL-DEBUG-SHADOW-02 — supported
+
+The recorded runner checked admission, manifest, source, pack, code, prompt, and image bindings before every recorded scored call.
+
+Claim class: `workflow`
+
+Scope:
+- recorded runner invocations and Git artifact ordering
+
+Evidence references:
+- `freeze-ref.json` — public sidecar `studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/freeze-ref.json` (SHA-256 `afa7219ce6dd1e28e6c6e7087059a81ded3878edd2495e7a56f8ec3565928c44`)
+- `effect-decision.json` — public sidecar `studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/effect-decision.json` (SHA-256 `7a611e43c8bccc54a325796616616fdfae84183ade5b67901b676251396a17bf`)
+
+Falsifier: A binding differs, the freeze did not precede result artifacts, or private records show an unadmitted scored call.
+
 ## What was tested
 
 On four exact sanitized real-shadow debugging incidents, does adding the pinned Superpowers systematic-debugging skill to an otherwise identical Codex stack change deterministic root-cause-correct repair enough to justify a preregistered reversible owner action?
@@ -32,8 +67,8 @@ Comparison mode: `controlled_factor`. Study state: `frozen`.
 Primary estimand: **root-cause-correct hidden acceptance** — Matched-condition difference in binary deterministic acceptance; activation, invalidity, critical failures, cost, and latency remain separate measurements or gates.
 
 Conditions:
-- `B0` — Frozen strong Codex baseline (`baseline`)
-- `S1` — superpowers-systematic-debugging (`treatment`)
+- `B0` — Frozen strong Codex baseline (`baseline`, `skill`)
+- `S1` — superpowers-systematic-debugging (`treatment`, `skill`)
 
 Task strata:
 - `agent-skills-season-1-calibration-v1` (`calibration`): debugging-tournament
@@ -41,11 +76,19 @@ Task strata:
 
 Decision owner(s): `kizz-ael-maintainer`
 
-## Runs and measurements
+## Observed runs, measurements, and cost
 
 Runs: `8`; by status: `valid=8`.
 
 Measurements: `80`; by kind: `cost=16`, `deterministic=32`, `outcome=24`, `process=8`.
+
+### Repeat and uncertainty evidence
+
+- Repeat coverage: `single_valid_observation_per_retained_cell` across `8` retained task-condition cells.
+- Valid repeats per cell: minimum `1`, maximum `1`.
+- Measurement intervals: `not_reported` on `0` measurements.
+
+These are facts about retained observations. The projection cannot infer a completely absent planned cell from Run Records alone. They are not a reliability grade, and planned repeat or perturbation coverage cannot substitute for observed data.
 
 Selected descriptive totals (not stable effects):
 
@@ -58,46 +101,7 @@ Selected descriptive totals (not stable effects):
 - `wall_time_ms` / `B0`: total `676315 milliseconds` (`cost_or_latency`)
 - `wall_time_ms` / `S1`: total `616685 milliseconds` (`cost_or_latency`)
 
-## Claims
-
-### AEL-DEBUG-SHADOW-01 — contradicted
-
-The exact skill changed root-cause-correct hidden acceptance enough to satisfy the frozen bounded routing rule on at least one admitted stratum.
-
-Claim level: `factor_causal`
-
-Falsifier: Frozen-rule recomputation, a retained cell, or the operational follow-up contradicts the published classifications.
-
-### AEL-DEBUG-SHADOW-02 — supported
-
-The recorded runner checked admission, manifest, source, pack, code, prompt, and image bindings before every recorded scored call.
-
-Claim level: `workflow`
-
-Falsifier: A binding differs, the freeze did not precede result artifacts, or private records show an unadmitted scored call.
-
-## Verification boundary
-
-Kind: `frozen_public_bundle`
-
-Validates the public Contract v0 graph, reconstructs the frozen effect from public measurements, checks the prospective admission-to-action chain and disclosed projection repair, and verifies repository artifact ordering. It does not rerun private tasks or hosted calls, prove their wall-clock chronology, or constitute independent replication.
-
-Command (presentation only; not executed by this generator):
-
-```sh
-uv run ael study audit --freeze studies/agent-skills-season-1/screening/systematic-debugging-real-shadow.freeze.json --result studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1 --decision-adapter systematic-debugging-real-shadow-v1 --require-git-proof
-```
-
-Audit status: `passed`.
-Contract documents checked: `12`; run records: `8`.
-
-Receipt Contract v0 reproducibility label: `rerunnable`. This retained source field is not a claim of a public task rerun or independent replication.
-
-## Maintainer rerun boundary
-
-A new maintainer-controlled execution can use retained private inputs, but it cannot replay the historical provider behavior or constitute independent replication.
-
-## Measurement quality
+## Study design preflight
 
 Status: `not_assessed_historical`; scope: `design_preflight`.
 
@@ -105,17 +109,13 @@ Status: `not_assessed_historical`; scope: `design_preflight`.
 - `task_validity`: `not_assessed_historical`
 - `evaluator_validity`: `not_assessed_historical`
 - `sampling_strength`: `not_assessed_historical`
-- `reliability_coverage`: `not_assessed_historical`
+- `planned_reliability_coverage`: `not_assessed_historical`
 - `independence`: `not_assessed_historical`
 - `freshness`: `not_assessed_historical`
 
 The study predates the pilot Study Quality Profile. No retrospective measurement-quality assessment is inferred from current artifacts.
 
-## Independence
-
-Kizz authored sanitized tasks, operated the runner, evaluated deterministic outcomes, and owns the action policy; no independent replication exists.
-
-## Historical status
+## Decision lifecycle
 
 - admission: `admitted`
 - action: `verified`
@@ -130,6 +130,44 @@ Declared lifecycle:
 - adoption disposition: `reject_exact_version`
 - action kind: `record_exact_version_block`
 - follow-up due: `2026-09-12T23:59:59Z`
+
+## Replication and independence
+
+- Public graph verification: `decision_recomputable`
+- Maintainer rerun: `maintainer_only_new_observation`
+- Independent replication: `none_linked`
+- Evaluation ownership: `maintainer_evaluated`
+
+Kizz authored sanitized tasks, operated the runner, evaluated deterministic outcomes, and owns the action policy; no independent replication exists.
+
+Maintainer rerun boundary:
+
+A new maintainer-controlled execution can use retained private inputs, but it cannot replay the historical provider behavior or constitute independent replication.
+
+## Technical evidence
+
+- Receipt: [machine-readable evidence](../../studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/evidence-receipt.json)
+- Receipt SHA-256: `210a1398e51c230c7329cbf362d26f41d0ade3fb01458e5e27fb222e9c878a0e`
+- Receipt evidence state: `controlled_effect_observed`
+- Receipt Contract v0 reproducibility field: `rerunnable`
+
+The receipt evidence state and reproducibility field are retained Contract v0 compatibility metadata. Neither is a score, a public task-rerun claim, or proof of independent replication.
+
+### Verification boundary
+
+Kind: `frozen_public_bundle`
+
+Validates the public Contract v0 graph, reconstructs the frozen effect from public measurements, checks the prospective admission-to-action chain and disclosed projection repair, and verifies repository artifact ordering. It does not rerun private tasks or hosted calls, prove their wall-clock chronology, or constitute independent replication.
+
+Command (presentation only; not executed by this generator):
+
+```sh
+uv run ael study audit --freeze studies/agent-skills-season-1/screening/systematic-debugging-real-shadow.freeze.json --result studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1 --decision-adapter systematic-debugging-real-shadow-v1 --require-git-proof
+```
+
+Audit status: `passed`.
+Contract documents checked: `12`; run records: `8`.
+
 
 ## Materials
 
@@ -176,10 +214,14 @@ Declared lifecycle:
 - `studies/agent-skills-season-1/manifests/systematic-debugging-real-shadow.study-manifest.json` — `2e4773cd9d06a0abbd92f32ffbb5fab9bfd0a1c06aed5534a86393ed0067e5a3`
 - `studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/action-record.pilot.json` — `fa7c243157ca30a2482961184420942fa9e3274b8ca836b60bd9e5af76fd4616`
 - `studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/adoption-decision.pilot.json` — `d5427cff89b5112b22d9db3b83f6607184403e3ec147af0272ab62590096dc48`
+- `studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/effect-decision.json` — `7a611e43c8bccc54a325796616616fdfae84183ade5b67901b676251396a17bf`
 - `studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/evidence-receipt.json` — `210a1398e51c230c7329cbf362d26f41d0ade3fb01458e5e27fb222e9c878a0e`
+- `studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/evidence-receipt.md` — `bd9f4f6d2c669e00bc57150687aecdd873a73be2c4de339c7e79b60e84109780`
+- `studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/freeze-ref.json` — `afa7219ce6dd1e28e6c6e7087059a81ded3878edd2495e7a56f8ec3565928c44`
 - `studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/measurement-set.json` — `0ffb16db80bd59811ad492fa22929c7c398fd90844604f0b9cf74eef1029df01`
 - `studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/outcome-follow-up.pilot.json` — `510d764f68eaf02cb043a0cf45d5217f66da06d0d5a29c4b1d673f775f63a9fe`
 - `studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/projection-deviation.pilot.json` — `6494c5c6488de672cef007ab4c9dd8ae47aa43a6af320fa3b05c36dedd4fb5b3`
+- `studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/routing-policy.pilot.json` — `a41f42676a2d5e5477b25d4aacd4d33b608c2042fe2e71adc596a1f19ae30eb4`
 - `studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/runs/D-S01-B0-R01.json` — `8e24ba191a8ade6bfb05925c11ac520c9fa82535be1ac2f61c63c3d4b99ce950`
 - `studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/runs/D-S01-S1-R01.json` — `bbb70ba5058117ba43b2db8841c8d8a206666164722351eff10fd1d45ad0b7d1`
 - `studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/runs/D-S02-B0-R01.json` — `c300895980c99f71b2a10e6864bc75969ed35424e4a069600e55e3eb261e85e9`
@@ -189,6 +231,7 @@ Declared lifecycle:
 - `studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/runs/D-S04-B0-R01.json` — `469c6bca89e9d476b9b43fe1c24f4a1b68d3aebb2101ee948ed94586e2240e9b`
 - `studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/runs/D-S04-S1-R01.json` — `c7aab7465d82d775021d72c9b97b764e55077281526c95fe3135a35e9a745be8`
 - `studies/agent-skills-season-1/screening/systematic-debugging-real-shadow.admission.pilot.json` — `ecf001fb6c03757621ed7159875c2801056aa869891281baae4bf04f0125d94c`
-- `studies/public-results.json` — `d0f6f21f4591c84a9c1d17521756a01f57ba8a07b2459ad46ea0fabf165bcf25`
+- `studies/agent-skills-season-1/screening/systematic-debugging-real-shadow.freeze.json` — `b5c63ce49c594c7345a242b72f1156c8aef0558466f9b72291e8bc18c7aafdd7`
+- `studies/public-results.json` — `df0a8c164b1b9035be0d72bcd5e05873feff91a88516ebc06b1f35062bff3518`
 
-Generated by `agentic-evidence-lab` `0.1.0a7` under `ael.publication-projection/0.4`.
+Generated by `agentic-evidence-lab` `0.1.0a8` under `ael.publication-projection/0.5`.

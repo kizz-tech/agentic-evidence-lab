@@ -66,6 +66,10 @@ class ContractValidationTests(unittest.TestCase):
             encoding="utf-8"
         )
         self.assertEqual(calibration_expected, render_receipt(calibration))
+        self.assertIn("Receipt evidence state:", calibration_expected)
+        self.assertIn("Claim class:", calibration_expected)
+        self.assertNotIn("Evidence level:", calibration_expected)
+        self.assertNotIn("Claim level:", calibration_expected)
 
     def test_receipt_content_hashes_resolve(self) -> None:
         receipt = json.loads(

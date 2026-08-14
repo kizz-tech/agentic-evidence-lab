@@ -7,7 +7,7 @@
 [![Status](https://img.shields.io/badge/status-alpha-orange.svg)](https://github.com/kizz-tech/agentic-evidence-lab/releases)
 
 [**Browse decisions**](RESULTS.md) ·
-[**Understand the method**](docs/contract-v0.md) ·
+[**Understand the method**](docs/method.md) ·
 [**Evaluate a system**](#evaluate-your-own-system) ·
 [**See the roadmap**](ROADMAP.md) ·
 [**Read the documentation**](docs/README.md)
@@ -79,15 +79,18 @@ headline written about it.
 ## How a test works
 
 ```text
-idea → frozen comparison → matched runs → measurements → bounded decision
+question and claim → design preflight → frozen comparison → retained observations
+                   → evaluated claim → bounded decision
 ```
 
-1. Define the intervention and the claim being tested.
-2. Freeze the baseline, changed factors, tasks, budget, roles, and stop rule.
-3. Run matched conditions and retain poor answers, failures, and invalid runs.
-4. Measure task outcomes, critical failures, process behavior, cost, and
+1. Define the owner decision, intervention, counterfactual, and exact claim.
+2. Admit the measurement design: tasks, evaluator, decision rule, repeats,
+   uncertainty plan, roles, and strongest supportable claim.
+3. Freeze the baseline, changed factors, tasks, budget, schedule, and stop rule.
+4. Run matched conditions and retain poor answers, failures, and invalid runs.
+5. Measure task outcomes, critical failures, process behavior, cost, and
    limitations separately.
-5. Publish a human report and a machine-readable evidence receipt stating what
+6. Publish a human result and a machine-readable evidence receipt stating what
    is supported, unsupported, and invalidating.
 
 The receipt is bound to exact artifacts by SHA-256. Structural validity does
@@ -97,8 +100,13 @@ not by itself prove task quality, causality, transfer, or real-world impact.
 
 Every completed study can expose four levels of detail:
 
-1. **Decision summary** — what to use, avoid, or test next in the generated
-   [Results Index](RESULTS.md).
+1. **Decision and governing claims** — what to use, avoid, or test next, which
+   decision-governing statements were supported, contradicted, bounded, or
+   unresolved, and where the result reverses in the generated
+   [Results Index](RESULTS.md). Additional workflow/artifact claims remain
+   disclosed separately. Each displayed claim retains its own scope, evidence
+   references, and falsifier; a study-wide measurement cannot silently support
+   an unrelated causal, transfer, or outcome claim.
 2. **Narrative report** — comparison, measurements, limitations, and reasoning.
 3. **Evidence receipt** — machine-readable claims, decisions, provenance, and
    invalidation triggers.
@@ -145,7 +153,7 @@ uv run ael study audit \
 uv run python -m unittest discover -s tests -v
 ```
 
-Expected validation summary for alpha.7:
+Expected validation summary for alpha.8:
 
 ```text
 validation passed: 30 document(s); concept=4, evidence_receipt=2,
@@ -168,15 +176,17 @@ audit. It is not a hosted submission service, and arbitrary third-party
 execution remains blocked. The smallest local study starts from an existing
 example:
 
-1. Write a `Concept` describing the idea and proposed mechanism.
-2. Freeze a `Study Manifest` with baseline, treatment, tasks, budget, and
-   analysis rules.
+1. Frame one decision and strongest supportable claim with the
+   [AEL Method](docs/method.md).
+2. Write a `Concept` describing the idea and proposed mechanism.
 3. Run the pilot [Study Quality Preflight](docs/study-quality-preflight.md) to
    bind task/evaluator evidence, claim limits, decision rules, uncertainty, and
    execution declarations before scored work.
-4. Produce one `Run Record` for every condition, task, and repeat.
-5. Record evaluator-owned outcomes in a `Measurement Set`.
-6. Author an `Evidence Receipt`, then validate and render it with the CLI.
+4. Freeze a `Study Manifest` with baseline, treatment, tasks, budget, and
+   analysis rules.
+5. Produce one `Run Record` for every condition, task, and repeat.
+6. Record evaluator-owned outcomes in a `Measurement Set`.
+7. Author an `Evidence Receipt`, then validate and render it with the CLI.
 
 Use [Contract v0](docs/contract-v0.md) for the five document types and
 [the public examples](examples) as executable starting points. The contract is
@@ -209,7 +219,7 @@ maintainer-reviewed snapshots and maintainer-controlled fixtures; arbitrary
 submissions remain blocked. Read [SECURITY.md](SECURITY.md) and
 [Container runner isolation](docs/runner-isolation.md) before execution.
 
-The `0.1.0a7` development line is pre-stable. It does not claim universal
+The `0.1.0a8` development line is pre-stable. It does not claim universal
 benchmarking, independent verification of Kizz-authored capabilities,
 model-only superiority from stack comparisons, or downstream production
 impact.

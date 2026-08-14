@@ -2,14 +2,7 @@
 
 - Card ID: `focused-change-verification-calibration`
 - Catalog state: **listed**
-- Receipt: [machine-readable evidence](../../examples/coding-skill/calibration-v1/evidence-receipt.json)
-- Receipt SHA-256: `7a770b0b177a313f6b042d67d2aaab62919d333b6d1625fcd7b3eff766c3e581`
-- Report: [narrative result](../../reports/2026-08-12-focused-change-verification-codex-calibration.md)
-- Evidence level: `runtime_conformant`
-- Public graph verification: `graph_validatable`
-- Maintainer rerun: `not_assessed`
-- Independent replication: `none_linked`
-- Evaluation ownership: `maintainer_evaluated`
+- Narrative report: [open](../../reports/2026-08-12-focused-change-verification-codex-calibration.md)
 
 ## Decision
 
@@ -23,6 +16,79 @@ Scope:
 
 Reversal trigger: Reconsider after a frozen discriminating pack, preregistered behavioral rubric, randomized order, repeated cells, and a safer credential boundary are available.
 
+## Decision-governing claims
+
+### AEL-FCV-CAL-03 — bounded
+
+No deterministic implementation-acceptance difference was observed: baseline and treatment each passed three of three tasks.
+
+Claim class: `workflow`
+
+Scope:
+- one calibration repeat
+- three public tasks
+- deterministic acceptance only
+
+Evidence references:
+- `acceptance-total:S0` — Measurement Set `aggregate`; task-pack roles: `adaptation`
+- `acceptance-total:S1` — Measurement Set `aggregate`; task-pack roles: `adaptation`
+
+Falsifier: Repeated matched runs on a discriminating pack produce a stable acceptance or critical-omission difference.
+
+### AEL-FCV-CAL-04 — bounded
+
+The current public prompts are too explicit to isolate the skill's verification-routing contribution and should remain smoke tests rather than become the first confirmatory pack.
+
+Claim class: `workflow`
+
+Scope:
+- current task wording
+- observed 6-of-6 acceptance ceiling
+
+Evidence references:
+- `acceptance-total:S0` — Measurement Set `aggregate`; task-pack roles: `adaptation`
+- `acceptance-total:S1` — Measurement Set `aggregate`; task-pack roles: `adaptation`
+
+Falsifier: A preregistered repeated study on the unchanged pack exhibits reliable non-ceiling discrimination on the primary behavioral estimand.
+
+## Additional selected claims
+
+These claims disclose supporting workflow or artifact facts; they do not govern the displayed disposition.
+
+### AEL-FCV-CAL-01 — supported
+
+The controlled-egress Docker adapter executed six stable Codex cells without changing any canonical fixture and captured enough telemetry for deterministic post-run evaluation.
+
+Claim class: `workflow`
+
+Scope:
+- six runtime-v2 calibration cells
+- maintainer-controlled fixtures
+
+Evidence references:
+- `canonical-fixture-mutation` — opaque receipt reference; this projection does not independently resolve it
+- `acceptance-total:S0` — Measurement Set `aggregate`; task-pack roles: `adaptation`
+- `acceptance-total:S1` — Measurement Set `aggregate`; task-pack roles: `adaptation`
+
+Falsifier: A byte-equivalent rerun mutates a fixture, cannot export a candidate, or cannot bind telemetry to the evaluated workspace.
+
+### AEL-FCV-CAL-02 — supported
+
+The frozen skill was installed and explicitly read in all three treatment cells and in no baseline cell.
+
+Claim class: `artifact`
+
+Scope:
+- S1 treatment cells
+- retained private Codex event streams
+
+Evidence references:
+- `skill-activation:local-unit:S1` — Measurement Set `process`; task-pack roles: `adaptation`
+- `skill-activation:cross-contract:S1` — Measurement Set `process`; task-pack roles: `adaptation`
+- `skill-activation:migration:S1` — Measurement Set `process`; task-pack roles: `adaptation`
+
+Falsifier: A retained treatment trace lacks the exact skill read or a baseline trace loads it.
+
 ## What was tested
 
 Does the exact installable verification skill improve owner-layer test selection and state-truth reporting relative to the same coding agent without the skill?
@@ -32,19 +98,27 @@ Comparison mode: `controlled_factor`. Study state: `draft`.
 Primary estimand: **verified change completion difference** — Paired difference in deterministic repository acceptance and critical validation omissions with downstream correction effort reported separately.
 
 Conditions:
-- `S0` — Coding agent without verification skill (`baseline`)
-- `S1` — Coding agent with focused verification skill (`treatment`)
+- `S0` — Coding agent without verification skill (`baseline`, `skill`)
+- `S1` — Coding agent with focused verification skill (`treatment`, `skill`)
 
 Task strata:
 - `focused-change-verification-adaptation-v1` (`adaptation`): local-unit-change, cross-module-contract-change, migration-backed-change
 
 Decision owner(s): `kizz-ael-maintainer`
 
-## Runs and measurements
+## Observed runs, measurements, and cost
 
 Runs: `6`; by status: `valid=6`.
 
 Measurements: `33`; by kind: `aggregate=6`, `cost=12`, `deterministic=12`, `process=3`.
+
+### Repeat and uncertainty evidence
+
+- Repeat coverage: `single_valid_observation_per_retained_cell` across `6` retained task-condition cells.
+- Valid repeats per cell: minimum `1`, maximum `1`.
+- Measurement intervals: `not_reported` on `0` measurements.
+
+These are facts about retained observations. The projection cannot infer a completely absent planned cell from Run Records alone. They are not a reliability grade, and planned repeat or perturbation coverage cannot substitute for observed data.
 
 Selected descriptive totals (not stable effects):
 
@@ -54,41 +128,50 @@ Selected descriptive totals (not stable effects):
 - `wall_time` / `S0`: total `331689 milliseconds` (`cost_or_latency`)
 - `wall_time` / `S1`: total `378385 milliseconds` (`cost_or_latency`)
 
-## Claims
+## Study design preflight
 
-### AEL-FCV-CAL-01 — supported
+Status: `not_assessed_historical`; scope: `design_preflight`.
 
-The controlled-egress Docker adapter executed six stable Codex cells without changing any canonical fixture and captured enough telemetry for deterministic post-run evaluation.
+- `design_class`: `not_assessed_historical`
+- `task_validity`: `not_assessed_historical`
+- `evaluator_validity`: `not_assessed_historical`
+- `sampling_strength`: `not_assessed_historical`
+- `planned_reliability_coverage`: `not_assessed_historical`
+- `independence`: `not_assessed_historical`
+- `freshness`: `not_assessed_historical`
 
-Claim level: `workflow`
+The study predates the pilot Study Quality Profile. No retrospective measurement-quality assessment is inferred from current artifacts.
 
-Falsifier: A byte-equivalent rerun mutates a fixture, cannot export a candidate, or cannot bind telemetry to the evaluated workspace.
+## Decision lifecycle
 
-### AEL-FCV-CAL-02 — supported
+- admission: `not_declared_historical`
+- action: `not_declared_historical`
+- outcome_follow_up: `not_declared_historical`
+- freshness: `unassessed`
 
-The frozen skill was installed and explicitly read in all three treatment cells and in no baseline cell.
+## Replication and independence
 
-Claim level: `artifact`
+- Public graph verification: `graph_validatable`
+- Maintainer rerun: `not_assessed`
+- Independent replication: `none_linked`
+- Evaluation ownership: `maintainer_evaluated`
 
-Falsifier: A retained treatment trace lacks the exact skill read or a baseline trace loads it.
+This is maintainer calibration evidence, not independent certification or a confirmatory skill-effect study.
 
-### AEL-FCV-CAL-03 — bounded
+Maintainer rerun boundary:
 
-No deterministic implementation-acceptance difference was observed: baseline and treatment each passed three of three tasks.
+No current maintainer rerun package is asserted; the public package supports evidence-graph validation only.
 
-Claim level: `workflow`
+## Technical evidence
 
-Falsifier: Repeated matched runs on a discriminating pack produce a stable acceptance or critical-omission difference.
+- Receipt: [machine-readable evidence](../../examples/coding-skill/calibration-v1/evidence-receipt.json)
+- Receipt SHA-256: `7a770b0b177a313f6b042d67d2aaab62919d333b6d1625fcd7b3eff766c3e581`
+- Receipt evidence state: `runtime_conformant`
+- Receipt Contract v0 reproducibility field: `rerunnable`
 
-### AEL-FCV-CAL-04 — bounded
+The receipt evidence state and reproducibility field are retained Contract v0 compatibility metadata. Neither is a score, a public task-rerun claim, or proof of independent replication.
 
-The current public prompts are too explicit to isolate the skill's verification-routing contribution and should remain smoke tests rather than become the first confirmatory pack.
-
-Claim level: `workflow`
-
-Falsifier: A preregistered repeated study on the unchanged pack exhibits reliable non-ceiling discrimination on the primary behavioral estimand.
-
-## Verification boundary
+### Verification boundary
 
 Kind: `evidence_graph`
 
@@ -100,36 +183,6 @@ Command (presentation only; not executed by this generator):
 uv run ael validate examples/coding-skill
 ```
 
-Receipt Contract v0 reproducibility label: `rerunnable`. This retained source field is not a claim of a public task rerun or independent replication.
-
-## Maintainer rerun boundary
-
-No current maintainer rerun package is asserted; the public package supports evidence-graph validation only.
-
-## Measurement quality
-
-Status: `not_assessed_historical`; scope: `design_preflight`.
-
-- `design_class`: `not_assessed_historical`
-- `task_validity`: `not_assessed_historical`
-- `evaluator_validity`: `not_assessed_historical`
-- `sampling_strength`: `not_assessed_historical`
-- `reliability_coverage`: `not_assessed_historical`
-- `independence`: `not_assessed_historical`
-- `freshness`: `not_assessed_historical`
-
-The study predates the pilot Study Quality Profile. No retrospective measurement-quality assessment is inferred from current artifacts.
-
-## Independence
-
-This is maintainer calibration evidence, not independent certification or a confirmatory skill-effect study.
-
-## Historical status
-
-- admission: `not_declared_historical`
-- action: `not_declared_historical`
-- outcome_follow_up: `not_declared_historical`
-- freshness: `unassessed`
 
 ## Materials
 
@@ -179,6 +232,6 @@ This is maintainer calibration evidence, not independent certification or a conf
 - `examples/coding-skill/concept.json` — `056da8f4a9bd5f90140f3440e7c283b0c172f64adfa5606f783a8223372d48b8`
 - `examples/coding-skill/study-manifest.json` — `330700bc8cb12d77520f251fb94f54c8b879a9915c39f530feaf5d56a1bed841`
 - `reports/2026-08-12-focused-change-verification-codex-calibration.md` — `0d5159f51fbe4be863be1feb319ffd0ef1364ddbd859f12d49cfabef15d15d2c`
-- `studies/public-results.json` — `d0f6f21f4591c84a9c1d17521756a01f57ba8a07b2459ad46ea0fabf165bcf25`
+- `studies/public-results.json` — `df0a8c164b1b9035be0d72bcd5e05873feff91a88516ebc06b1f35062bff3518`
 
-Generated by `agentic-evidence-lab` `0.1.0a7` under `ael.publication-projection/0.4`.
+Generated by `agentic-evidence-lab` `0.1.0a8` under `ael.publication-projection/0.5`.

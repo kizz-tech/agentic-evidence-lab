@@ -36,7 +36,8 @@ A candidate may appear only when its receipt:
 - discloses model/runtime freshness and all exposed configuration differences;
 - reports critical failures and invalid runs without selective removal;
 - has no unresolved integrity, publication-rights, or credential incident;
-- uses an evidence and independence label supported by its recorded roles.
+- selects claim classes whose claim-specific evidence and comparison predicates
+  are satisfied, and uses an independence label supported by recorded roles.
 
 ## Required columns
 
@@ -47,7 +48,8 @@ Every board shows at least:
 - task and repeat counts;
 - critical failures and operational-invalid rate;
 - generated work, wall time, and available cost measures;
-- evidence level and independence label;
+- decision-governing claim class/status, supporting predicate, and independence
+  label;
 - last eligible run date and invalidation state;
 - link to the source receipt.
 
@@ -55,13 +57,14 @@ No overall rank may hide a critical failure. When candidates trade quality,
 cost, latency, or safety, AEL shows a Pareto frontier or separate columns instead
 of inventing undisclosed weights.
 
-Evidence level, public graph verification, maintainer rerun capability, linked
+Receipt evidence state, study-design preflight, observed repeat coverage,
+uncertainty, public graph verification, maintainer rerun capability, linked
 independent replication, freshness, action, and outcome are orthogonal facets.
 A board or result card must show them separately; one facet never upgrades
-another. The raw Contract v0 reproducibility enum may remain in technical
-metadata but cannot replace those explicit public facets. Missing historical
-action or outcome is rendered as `not_declared_historical`, not as a claim that
-no action or outcome occurred.
+another. The raw Contract v0 evidence and reproducibility enums may remain in
+technical metadata but cannot replace explicit claim-specific support or public
+facets. Missing historical action or outcome is rendered as
+`not_declared_historical`, not as a claim that no action or outcome occurred.
 
 ## Update and correction policy
 

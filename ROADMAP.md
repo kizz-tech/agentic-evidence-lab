@@ -2,111 +2,140 @@
 
 ## Mission
 
-Agent progress should come from better systems as well as better models. AEL
-exists to discover which exact skills, prompts, tools, context strategies,
-models, runtimes, and workflows make an agent system more useful on a defined
-class of work.
+Better agent systems need more than bigger models. AEL exists to discover which
+exact skills, prompts, tools, context strategies, models, runtimes, and
+workflows make an agent system more useful on a defined class of work.
 
 **AEL advances when it makes one real agent-stack decision more defensible.**
 
-The research loop is:
-
 ```text
-important question → exact comparison → bounded decision → real action
-                   → observed outcome → next version or reversal
+important question → exact claim → admitted comparison → bounded decision
+                   → real action → observed outcome → revision or reversal
 ```
 
-This roadmap describes research direction and evidence gates, not fixed
-delivery dates. A negative or null result is progress when it prevents a weak
-change from becoming the default.
+The roadmap is dependency-based, not a calendar. Negative and null results are
+progress when they prevent a weak change from becoming the default.
 
-## What users should get
+## The ideal product
 
-Each mature study should produce:
+A mature AEL study should let a reader answer, without trusting a universal
+score:
 
-1. one recognizable question about an agent-system change;
-2. one clear decision: adopt, reject, narrow, or retest;
-3. one exact tested artifact or reference configuration when publishable;
-4. observed outcome, cost, failures, and reliability or an explicit statement
-   that reliability was not established;
-5. the task boundary and trigger that makes the decision stale;
-6. a result card, machine-readable receipt, and audit or replication path.
+1. What exact change and complete system were tested?
+2. Which claim was supported, contradicted, bounded, or unresolved?
+3. Which task population, evaluator, budget, and time boundary apply?
+4. What was observed about outcome, cost, failure, repeats, and uncertainty?
+5. Which owner decision and action followed?
+6. Was an outcome observed, independently replicated, or made stale?
+7. Which exact records can be audited or used for a new observation?
 
-The public result is the answer. The evidence machinery exists to make that
-answer inspectable, not to replace it.
+The public answer is a claim-first result card. Contract records make it
+inspectable; they do not replace it.
 
-## Available
+## Available foundation
 
 - Contract v0: five strict, hash-linked evidence document types for concepts,
   studies, runs, measurements, and receipts.
 - Deterministic validation, receipt rendering, public result cards, frozen
   study audits, source locks, and release-artifact verification.
-- Docker execution boundaries for disposable offline fixtures and a restricted
-  hosted Codex adapter for exact maintainer-controlled inputs.
-- Prospective pilot records for admission, effect, adoption, action, and
-  follow-up without promoting those shapes into stable Contract v0.
-- A pilot Study Quality Profile and `ael study preflight` for checking a study
-  design before scored work.
+- Disposable Docker execution boundaries and a restricted hosted Codex adapter
+  for exact maintainer-controlled inputs.
+- Pilot admission, effect, adoption, action, and follow-up records without
+  promoting those study-local shapes into stable Contract v0.
+- A hash-bound Study Quality Profile and `ael study preflight` for checking a
+  prospective design before scored work.
+- Four bounded, maintainer-evaluated result families, including negative and
+  calibration findings; none is an independent replication or general ranking.
+- A separated publication kernel: pure claim policy, one provenance ledger,
+  one closed audit-adapter registry, pure rendering and a stable orchestration
+  facade. Architecture tests preserve dependency direction.
+
+## Current release target: alpha.8 Claim-First Decision Method
+
+Alpha.8 is a bounded method correction before the next scored study. It is
+justified by a known executable defect: the earlier result projection treated
+heterogeneous Contract evidence states as one numeric claim ceiling and
+headlined that value, even though transfer, use, reliability, replication, and
+outcome are independent predicates.
+
+The local release candidate delivers:
+
+- replace ordinal claim admission with explicit claim-specific predicates;
+- lead every public card with the decision and explicitly identified
+  decision-governing claim statements, while disclosing additional selected
+  workflow/artifact claims separately;
+- retain `evidence_level` only as technical receipt compatibility metadata;
+- label Study Quality as prospective design preflight and reliability coverage
+  as planned coverage;
+- expose observed repeat coverage and uncertainty presence from retained data;
+- document one claim-to-decision method and owner vocabulary;
+- advance the generated result profile and projection policy to `0.5`;
+- keep all five Contract v0 schemas and frozen evidence bytes unchanged.
+
+Alpha.8 does not run a model study, create a Decision Case schema, stabilize a
+sixth object, or claim that claim-first cards improve decisions. A reader
+comprehension test and the first prospective use remain empirical falsifiers.
+
+The unpublished alpha.7 candidate is an implementation input, not a required
+historical release. Alpha.8 can supersede it as the next prerelease; publication
+still requires a green exact-SHA CI run, verified tag-built artifacts, and a
+separate release action.
 
 ## Next flagship question: Completion Integrity
 
 > Can a coding agent reliably tell when the requested work is actually complete?
 
-The user-facing outcome is a tested completion policy and routing rule, or an
-honest result that the candidate did not improve false-completion behavior.
-Final repository state and user-level acceptance remain primary; confident
-prose is not success.
+The desired output is a tested completion policy and routing rule, or an honest
+finding that the candidate did not improve false-completion behavior. Final
+repository state and user-level acceptance remain primary; confident prose is
+not success.
 
 The existing Season 1 **Truthful Completion** protocol tests one pinned skill
-and reached a baseline ceiling during sacrificial calibration. A future
-prompt-only comparison must therefore use a distinct study identity and exact
-intervention. Before any scored call, unscored calibration must demonstrate:
+and reached a baseline ceiling during sacrificial calibration. A prompt-only
+successor therefore needs a distinct study identity and exact intervention.
+Before any scored call, unscored calibration must demonstrate:
 
-- non-zero baseline failure opportunity without making the hidden answer
-  obvious;
-- deterministic ownership of user-level completion and regression outcomes;
-- an exact prompt or workflow delta rather than a theme-level intervention;
-- task/evaluator audit, multiple declared strata, and a material decision the
-  result can govern;
+- non-zero baseline failure opportunity without exposing the hidden answer;
+- deterministic ownership of completion and regression outcomes;
+- one exact prompt or workflow delta;
+- audited task/evaluator evidence and multiple declared strata;
+- one material predeclared owner decision;
 - blocked or randomized repeated execution, a paraphrase perturbation,
   retained failures, uncertainty, and an untouched confirmation subset.
 
-If this discrimination gate fails, redesign or stop the study. Do not turn a
-ceiling into an effectiveness result.
+If discrimination fails, redesign or stop. Do not turn a ceiling into an
+effectiveness result.
 
-## Trust work that runs alongside the flagship study
+## Evidence sequence after alpha.8
 
-1. Use the Study Quality Profile prospectively in the Completion Integrity
-   study and one materially different study.
-2. Complete the scheduled Systematic Debugging operational follow-up, recording
-   an observed outcome or an explicit missing-observation state.
-3. Reproduce one eligible decision with separated operator, task, or evaluator
-   ownership; keep a maintainer rerun distinct from independent replication.
-4. Exercise repeats, prompt perturbations, fault cases, correction,
-   invalidation, and freshness before using stability language.
-5. Test whether the public decision card helps a reader choose adopt, reject,
-   narrow, or retest without mistaking incompatible studies for a leaderboard.
+1. **First prospective profiled study.** If Completion Integrity passes its
+   no-call gate, execute the repeated prompt-only comparison and publish the
+   positive, negative, null, or invalid result without changing the frozen rule.
+2. **Outcome closure.** Complete the scheduled Systematic Debugging follow-up,
+   recording an observation or an explicit missing/cancelled state.
+3. **Role-separated reproduction.** Reproduce one eligible exact decision with
+   separated operator, task, or evaluator ownership; a maintainer rerun remains
+   a different predicate.
+4. **Second study family.** Apply the same method to one licensed third-party
+   coding skill and publish a task-specific `use / skip / escalate` rule.
+5. **Method fitness review.** Test whether preflight and claim-first cards
+   changed admission, interpretation, or owner action. Remove fields that only
+   created ceremony.
 
-## Next intervention families
+Only after those steps should AEL consider:
 
-After the first prospective repeated study and one role-separated reproduction:
+- a crossed model × scaffold design that separates main and interaction effects;
+- repository instruction, context, or tool-boundary studies with real owner
+  decisions and valid task supply;
+- a generic Decision Case or replication-event shape supported by repeated use;
+- EGCAI, StateSuff, Council Generation 2, or Structural Search through their
+  existing readiness and falsification gates.
 
-- evaluate one licensed third-party coding skill and publish a task-specific
-  `use / skip / escalate` routing rule;
-- compare model and scaffold only through a crossed design that can separate
-  their individual and interaction effects;
-- study repository instructions, context policies, and tool boundaries when a
-  real owner decision and valid task supply exist;
-- expand to durable project state and evidence-gated continual improvement only
-  after the fixed protocol closes real decision and outcome loops.
-
-A capability registry or contextual leaderboard becomes useful only after
-enough compatible results exist to make discovery—not evidence quality—the
-measured bottleneck.
+A capability registry or contextual leaderboard becomes useful only when
+enough compatible evidence exists to make discovery, rather than measurement
+quality, the observed bottleneck.
 
 ## Default research cadence
-
-The preferred cycle is:
 
 ```text
 one serious decision question
@@ -114,46 +143,45 @@ one serious decision question
 + one improvement to trust, transfer, or outcome follow-up
 ```
 
-Method-only releases are exceptions. They are justified when a known defect in
-the instrument blocks the next important answer; method volume is not product
-progress by itself.
+Method-only releases are exceptions. They require a named instrument defect
+that blocks or distorts the next important answer. Alpha.8 is such an exception;
+method volume is not product progress by itself.
 
 ## Beta evidence gates
 
-AEL should not call its method beta until all of these are true:
+AEL should not call its method beta until all of these are observed:
 
-- at least two prospective Study Quality Profiles completed a full
+- two materially different prospective Study Quality Profiles complete a full
   preflight-to-receipt lifecycle;
-- at least one result has role-separated or external reproduction evidence;
-- task validity and evaluator calibration have been exercised on more than one
+- one result has role-separated or external replication evidence;
+- task validity and evaluator calibration are exercised across more than one
   study family;
-- uncertainty and reliability outputs are generated from observed data rather
-  than only declared plans;
+- uncertainty and reliability outputs come from observed data, not only plans;
 - one real-shadow decision has a completed downstream follow-up;
-- release, correction, invalidation, and freshness paths have each been tested;
-- untrusted third-party execution either has short-lived brokered credentials
+- correction, invalidation, freshness, and release paths are exercised;
+- one receipt demonstrably governs an owner action;
+- untrusted third-party execution either uses short-lived brokered credentials
   or remains explicitly blocked.
 
 ## Deferred and non-goals
 
 - No universal agent score or global model ranking.
 - No claim that a system-level gain made the base model intrinsically smarter.
-- No weighted study-quality grade that lets strengths compensate for a
+- No weighted quality or evidence grade that lets strengths compensate for a
   critical design failure.
 - No retrospective quality certification of studies that predate the profile.
 - No automatic execution of arbitrary third-party code with reusable hosted
   credentials.
-- No stable sixth Contract object until repeated prospective use reveals a
+- No stable sixth Contract object before repeated prospective use reveals a
   durable cross-study shape and an explicit migration decision is made.
-- No hosted marketplace, generic eval dashboard, or automatic search platform
-  before repeated external use demonstrates the need.
-- No claim that structural conformance proves scientific validity, chronology
-  of private model calls, transfer, independent replication, or production
-  impact.
+- No hosted marketplace, generic eval dashboard, registry, or automatic search
+  platform before repeated external use demonstrates the need.
+- No claim that structural conformance proves scientific validity, private-call
+  chronology, transfer, independent replication, or production impact.
 
 ## How the roadmap changes
 
-Roadmap changes should cite a completed study, external review, security
-finding, repeated implementation need, or explicit owner decision. New ideas
-can enter the research horizon without becoming active studies. Failed studies
-can remove or reverse a direction; previous results remain immutable.
+A roadmap change must cite a completed study, external review, security or
+method defect, repeated implementation need, or explicit owner decision. New
+ideas can enter the research horizon without becoming active studies. Failed
+studies can remove or reverse a direction; previous results remain immutable.

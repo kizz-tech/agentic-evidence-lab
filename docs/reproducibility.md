@@ -23,7 +23,7 @@ from Git tag, GitHub release, or package-publication state.
 
 ## Graph verification: deterministic public checks
 
-From a clean checkout of the exact alpha.7 source revision under review:
+From a clean checkout of the exact alpha.8 source revision under review:
 
 ```bash
 uv sync --locked --all-groups
@@ -57,7 +57,7 @@ uv run python tools/check_frozen_artifacts.py
 uv run python tools/release_check.py
 uv build
 uv run python tools/verify_release_artifacts.py \
-  --expected-version 0.1.0a7 dist/*.whl dist/*.tar.gz
+  --expected-version 0.1.0a8 dist/*.whl dist/*.tar.gz
 ```
 
 These checks establish package, schema, cross-reference, committed-fixture,

@@ -2,7 +2,7 @@
 
 - Study: `kizz:ael:study:council-generation-1-heldout`
 - Decision: **adopt**
-- Evidence level: `controlled_effect_observed`
+- Receipt evidence state: `controlled_effect_observed`
 - Independence: `maintainer_evaluated`
 - Reproducibility: `rerunnable`
 - Publication state: `public_ready`
@@ -24,7 +24,7 @@ Adopt the frozen adaptive routing and integration semantics for the local Engine
 
 The frozen candidate repaired the observed full-history named-profile execution and consultation-provenance defect on the measured local runtime surface.
 
-Claim level: `workflow`
+Claim class: `workflow`
 
 Scope:
 - historical C2 versus frozen C3
@@ -37,7 +37,7 @@ Falsifier: A hash-equivalent rerun reproduces the same full-history fork failure
 
 The candidate preserved measured held-out decision quality relative to the historical skill and fixed sequential revision under the frozen tie rule.
 
-Claim level: `workflow`
+Claim class: `workflow`
 
 Scope:
 - one run per cell
@@ -51,7 +51,7 @@ Falsifier: Repeated held-out or real-shadow runs show a material quality or crit
 
 The candidate used 9,598 generated-work tokens on the two consequential held-out cases versus 12,560 for the historical skill, an observed reduction of about 23.6 percent.
 
-Claim level: `workflow`
+Claim class: `workflow`
 
 Scope:
 - E4 and E7 only
@@ -65,7 +65,7 @@ Falsifier: Repeated matched-budget runs do not preserve the generated-work advan
 
 The adaptive candidate correctly declined council consultation on the routine local bug case.
 
-Claim level: `workflow`
+Claim class: `workflow`
 
 Scope:
 - E1 routine held-out case
@@ -78,7 +78,7 @@ Falsifier: A hash-equivalent rerun invokes advisors or adds disproportionate arc
 
 Consultation identity and trace attribution remained incomplete even though the candidate improved process accountability.
 
-Claim level: `artifact`
+Claim class: `artifact`
 
 Scope:
 - retained Codex CLI events

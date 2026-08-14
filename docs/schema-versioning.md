@@ -93,6 +93,31 @@ regeneration, not a compatibility promise to released consumers. Mixed
 versions fail closed. The five Contract v0 `0.1` schemas and frozen evidence
 remain unchanged.
 
+## Alpha.8 claim-first projection boundary
+
+Alpha.8 advances only the generated public-results profile and projection
+policy to `ael.public-results/0.5` and
+`ael.publication-projection/0.5`. It replaces the unreleased ordinal claim
+ceiling with explicit evidence-state and comparison-design predicates, leads
+human cards with decisions and a non-empty `decision_claim_ids` subset of the
+selected receipt claims, and derives observed repeat coverage and uncertainty
+presence from existing Run Records and Measurement Sets. The profile grouping
+controls presentation only; it cannot create or change a receipt claim.
+
+The original Contract v0 `evidence_level` remains present and byte-compatible
+as a receipt evidence state. It is not interpreted as a score or total order,
+and use, payment, transfer, outcome, reliability, and independence cannot
+authorize one another. The five Contract v0 `0.1` schemas, historical evidence,
+and study decisions remain unchanged. The live receipt renderer changes only
+its human labels from `Evidence level` / `Claim level` to `Receipt evidence
+state` / `Claim class`; frozen Markdown created by prior releases remains
+byte-identical and is not rematerialized.
+
+The `0.4` projection was part of the unpublished alpha.7 development line, so
+the supported migration is a mechanical profile-version update followed by
+deterministic regeneration. Alpha.8 does not add a Claim-Support Envelope,
+Decision Case, or sixth evidence object.
+
 ## Migration requirement
 
 The first incompatible schema change must include:
