@@ -9,8 +9,13 @@ from ael.result_core import ResultSurfaceError, SourceLedger, load_json_object
 
 
 class ResultCoreTests(unittest.TestCase):
+    @staticmethod
+    def temporary_directory() -> tempfile.TemporaryDirectory[str]:
+        directory = "/private/tmp" if Path("/private/tmp").is_dir() else None
+        return tempfile.TemporaryDirectory(dir=directory)
+
     def test_source_ledger_records_every_resolved_reference_once(self) -> None:
-        with tempfile.TemporaryDirectory(dir="/private/tmp") as raw_root:
+        with self.temporary_directory() as raw_root:
             root = Path(raw_root)
             owner = root / "profile.json"
             target = root / "evidence.json"
@@ -29,7 +34,7 @@ class ResultCoreTests(unittest.TestCase):
             self.assertEqual({"evidence.json": digest}, ledger.snapshot())
 
     def test_source_ledger_detects_mid_projection_source_change(self) -> None:
-        with tempfile.TemporaryDirectory(dir="/private/tmp") as raw_root:
+        with self.temporary_directory() as raw_root:
             root = Path(raw_root)
             target = root / "evidence.json"
             target.write_text('{"version": 1}\n', encoding="utf-8")
@@ -41,7 +46,7 @@ class ResultCoreTests(unittest.TestCase):
                 ledger.add(target)
 
     def test_source_ledger_accounts_for_a_complete_regular_tree(self) -> None:
-        with tempfile.TemporaryDirectory(dir="/private/tmp") as raw_root:
+        with self.temporary_directory() as raw_root:
             root = Path(raw_root)
             bundle = root / "bundle"
             nested = bundle / "nested"
@@ -60,7 +65,7 @@ class ResultCoreTests(unittest.TestCase):
         for payload in ('{"x": 1, "x": 2}\n', '{"x": 1e400}\n'):
             with (
                 self.subTest(payload=payload),
-                tempfile.TemporaryDirectory(dir="/private/tmp") as raw_root,
+                self.temporary_directory() as raw_root,
             ):
                 path = Path(raw_root) / "input.json"
                 path.write_text(payload, encoding="utf-8")
