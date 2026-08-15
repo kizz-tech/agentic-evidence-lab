@@ -112,8 +112,9 @@ class CompletionIntegrityActivationMaterializerTests(unittest.TestCase):
     def test_materialized_contract_graph_resolves_every_local_reference(self) -> None:
         freeze = load_json(STUDY_ROOT / "freeze.json")
         preregistration_sha = "b" * 40
+        temporary_parent = Path("/private/tmp") if Path("/private/tmp").is_dir() else None
         with tempfile.TemporaryDirectory(
-            prefix="ael-ci11-materializer-", dir="/private/tmp"
+            prefix="ael-ci11-materializer-", dir=temporary_parent
         ) as raw:
             temporary = Path(raw)
             raw_root = temporary / "raw"
