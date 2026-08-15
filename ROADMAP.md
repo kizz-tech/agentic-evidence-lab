@@ -104,26 +104,83 @@ independent replication. The full design and terminal result are recorded in
 [the Completion Integrity decision](docs/decisions/2026-08-14-alpha9-completion-integrity-release-design.md)
 and [result report](reports/2026-08-15-completion-integrity-prompt-policy-v1.md).
 
-## Next major release: outcome closure and external challenge
+## Method release: alpha.10 truthful-completion measurement foundation
+
+Alpha.9 answered the frozen effect question but could not explain its null. The
+retained evidence does not distinguish a redundant instruction from absent
+policy enactment or an enacted but ineffective process. This is a named
+diagnostic defect, not a reason to rewrite the null.
+
+The alpha.10 method release repairs the measurement foundation without scored
+calls:
+
+- four non-compensating observable facets: policy-byte binding, ledger
+  materialization, normalized pre-terminal check evidence, and terminal
+  reconciliation;
+- an explicit `not_assessable` state for historical runs without the required
+  evidence;
+- repair-loop-compatible stage observations rather than a false linear process;
+- a golden bundle bound to the exact method, policy fixture, and normalized
+  synthetic inputs.
+- a terminal-claim kernel that keeps truth (`complete`, `incomplete`,
+  `uncertain`), progress and verified/failed/unresolved extent orthogonal;
+- a reporter-only frozen-trajectory contract that rejects remediation fields
+  and compares claims with evaluator-owned truth without claiming runtime
+  isolation;
+- task-supply `0.2-development`: lifecycle and study role are separate, terminal
+  truth/blocker feasibility/evaluator custody are mandatory, and sample sizing
+  blocks admission until a power or precision rationale is hash-bound.
+
+The release deliberately contains no invented public decision-task pack.
+Task expansion now has an executable prospective contract: separate instrument
+development, sacrificial qualification, fresh screening, and untouched
+confirmation; non-compensating quality and lineage gates; private hash-bound
+artifacts; and no scored work before roles, estimand, pack-specific sample-size
+rationale, pooling and stopping are frozen. The private 32-design inventory is
+authoring capacity, not a powered population. See
+[Completion Integrity task supply](docs/completion-integrity-task-supply.md) and
+[terminal claims](docs/completion-integrity-terminal-claims.md).
+
+Independent architecture reviews converged on a family-local instrument but
+rejected the first overbuilt draft. The released instrument is deliberately
+small. Publication does not change its empirical state: synthetic conformance
+cannot prove that a real runner captures the evidence or that the diagnostic
+changes a decision.
+See [the enactment decision](docs/decisions/2026-08-15-alpha10-observable-enactment-candidate.md)
+and [terminal-claim foundation](docs/decisions/2026-08-15-alpha10-terminal-claim-foundation.md).
+
+## Next major release: exercise alpha.10 and close a weak predicate
 
 The next release should improve the weakest current predicates rather than add
-another internal mechanism study. It has two ordered deliverables:
+another internal framework increment. Its ordered path is:
 
-1. **Outcome closure.** Complete the scheduled Systematic Debugging follow-up,
+1. **Instrument activation.** Add an owner adapter and exercise the
+   observable-enactment slice on
+   sacrificial real attempts under a new authorization and freeze. If the
+   required evidence is not retained safely and deterministically, stop.
+2. **Outcome closure.** Complete the scheduled Systematic Debugging follow-up,
    recording an observation or an explicit missing/cancelled state.
-2. **Role-separated reproduction.** Reproduce one eligible exact decision with
+3. **Role-separated reproduction.** Reproduce one eligible exact decision with
    separated operator, task, or evaluator ownership; a maintainer rerun remains
-   a different predicate.
-3. **Second prospective family.** Apply the method to one licensed third-party
+   a different predicate. Prefer a reproduction that exercises the candidate
+   diagnostics when the intervention meaning fits.
+4. **Evidence-gated task supply and sizing pilot.** Author a private candidate
+   pool larger than the desired scored population. Use the current `16–24`
+   range only as authoring capacity, not scientific justification. Pilot task
+   discordance and clustering, declare the minimum useful effect or precision
+   target, bind the calculation, then freeze the pack-specific minimum, target,
+   screening and untouched confirmation populations. Stop rather than pad; do
+   not pool post-effect additions into the confirmatory estimand.
+5. **Second prospective family.** Apply the method to one licensed third-party
    coding skill and publish a task-specific `use / skip / escalate` rule.
-4. **Method fitness review.** Test whether preflight and claim-first cards
-   changed admission, interpretation, or owner action. Remove fields that only
-   created ceremony.
+6. **Method fitness review.** Test whether preflight, claim-first cards, and
+   process diagnostics changed admission, interpretation, or owner action.
+   Remove fields that only created ceremony.
 
-The release is not admitted by more framework code. It must close at least one
-real downstream outcome or add one genuinely role-separated reproduction. If
-neither can be obtained, publish the explicit missing state and do not relabel
-a maintainer rerun as independence.
+The next empirical release is not admitted by alpha.10 alone. It must close at
+least one real downstream outcome or add one genuinely role-separated
+reproduction. If neither can be obtained, record the explicit missing state
+and do not relabel a maintainer rerun as independence.
 
 Only after those steps should AEL consider:
 
@@ -133,6 +190,26 @@ Only after those steps should AEL consider:
 - a generic Decision Case or replication-event shape supported by repeated use;
 - EGCAI, StateSuff, Council Generation 2, or Structural Search through their
   existing readiness and falsification gates.
+
+The current research base also preserves four separate future study families;
+they must not be bundled into the Completion Integrity flagship:
+
+- **Repository instructions and skills:** freeze the complete instruction chain,
+  route and activation/selection fidelity; an artifact being loadable is not
+  causal-use evidence.
+- **Model × harness × supervisor:** record a component passport and distinguish
+  a frozen artifact effect from the optimizer procedure and transfer vector;
+  use crossed factors only when each factor can actually vary independently.
+- **Project-state memory:** first establish a chain/state-matched residual and a
+  strong raw-retrieval baseline, then cross representation with retriever;
+  adding RAG infrastructure is not a result.
+- **Untrusted inputs:** measure utility and security across the full
+  source→write→persist→retrieve→authorize→act→consequence chain using disposable
+  synthetic environments, inert canaries and mock sinks—never real secrets or
+  external targets.
+
+Each track needs its own decision question, task instrument, authority boundary
+and freeze. A positive result in one cannot be used as evidence for another.
 
 A capability registry or contextual leaderboard becomes useful only when
 enough compatible evidence exists to make discovery, rather than measurement
@@ -149,7 +226,9 @@ one serious decision question
 Method-only releases are exceptions. They require a named instrument defect
 that blocks or distorts the next important answer. Alpha.8 was such an
 exception; alpha.9 demonstrates why method volume is not product progress by
-itself.
+itself. Alpha.10 is the method-only exception for a named diagnostic defect;
+real capture and decision use, not fixture count, determine whether its
+instruments earn empirical support.
 
 ## Beta evidence gates
 

@@ -23,6 +23,15 @@ class ResultArchitectureTests(unittest.TestCase):
     def test_method_policy_remains_pure(self) -> None:
         self.assertEqual(set(), _ael_imports("method_policy"))
 
+    def test_completion_integrity_engagement_policy_remains_pure(self) -> None:
+        self.assertEqual(set(), _ael_imports("completion_integrity_engagement"))
+
+    def test_completion_integrity_terminal_claim_policy_remains_pure(self) -> None:
+        self.assertEqual(set(), _ael_imports("completion_integrity_claim"))
+
+    def test_completion_integrity_task_supply_policy_remains_pure(self) -> None:
+        self.assertEqual(set(), _ael_imports("completion_integrity_task_supply"))
+
     def test_publication_dependencies_point_toward_narrow_boundaries(self) -> None:
         self.assertEqual(
             {"ael.sandbox", "ael.validation"},

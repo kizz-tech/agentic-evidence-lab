@@ -51,6 +51,16 @@ jobs:
             --json-output studies/quality-preflight/examples/pass/preflight.json \
             --markdown-output studies/quality-preflight/examples/pass/preflight.md \
             --check
+          uv run python tools/check_completion_integrity_engagement.py \
+            --method-plan studies/completion-integrity/diagnostics/process-v1/method-plan.pilot.json \
+            --observations studies/completion-integrity/diagnostics/process-v1/fixtures/normalized-cells.json \
+            --diagnostics-json studies/completion-integrity/diagnostics/process-v1/fixtures/expected-diagnostics.json \
+            --check
+          uv run python tools/check_completion_integrity_claim.py \
+            --policy studies/completion-integrity/terminal-claim-v1/policy.pilot.json \
+            --cases studies/completion-integrity/terminal-claim-v1/fixtures/cases.json \
+            --assessments-json studies/completion-integrity/terminal-claim-v1/fixtures/expected-assessments.json \
+            --check
           uv run ael results check studies/public-results.json --require-git-proof
           uv run python tools/check_frozen_artifacts.py
           uv run ael study audit \
@@ -90,7 +100,7 @@ jobs:
         run: |
           uv build
           uv run python tools/verify_release_artifacts.py \
-            --expected-version 0.1.0a9 \
+            --expected-version 0.1.0a10 \
             dist/*.whl dist/*.tar.gz
 
   clean-wheel:
@@ -114,12 +124,22 @@ jobs:
           test -n "$wheel"
           uv venv .release-venv
           uv pip install --python .release-venv/bin/python "$wheel"
-          test "$(.release-venv/bin/ael --version)" = "0.1.0a9"
-          test "$(.release-venv/bin/python -c 'import importlib.metadata; print(importlib.metadata.version("agentic-evidence-lab"))')" = "0.1.0a9"
+          test "$(.release-venv/bin/ael --version)" = "0.1.0a10"
+          test "$(.release-venv/bin/python -c 'import importlib.metadata; print(importlib.metadata.version("agentic-evidence-lab"))')" = "0.1.0a10"
           .release-venv/bin/ael study preflight \
             studies/quality-preflight/examples/pass/quality-profile.json \
             --json-output studies/quality-preflight/examples/pass/preflight.json \
             --markdown-output studies/quality-preflight/examples/pass/preflight.md \
+            --check
+          .release-venv/bin/python tools/check_completion_integrity_engagement.py \
+            --method-plan studies/completion-integrity/diagnostics/process-v1/method-plan.pilot.json \
+            --observations studies/completion-integrity/diagnostics/process-v1/fixtures/normalized-cells.json \
+            --diagnostics-json studies/completion-integrity/diagnostics/process-v1/fixtures/expected-diagnostics.json \
+            --check
+          .release-venv/bin/python tools/check_completion_integrity_claim.py \
+            --policy studies/completion-integrity/terminal-claim-v1/policy.pilot.json \
+            --cases studies/completion-integrity/terminal-claim-v1/fixtures/cases.json \
+            --assessments-json studies/completion-integrity/terminal-claim-v1/fixtures/expected-assessments.json \
             --check
           .release-venv/bin/ael results check studies/public-results.json --require-git-proof
           .release-venv/bin/ael study audit \

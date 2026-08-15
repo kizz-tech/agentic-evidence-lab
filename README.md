@@ -61,6 +61,22 @@ prompt policy produced the same `0.375` false-completion rate as baseline on
 the frozen eight-task study, so AEL rejects that exact policy instead of
 promoting plausible-sounding instructions without measured benefit.
 
+Alpha.10 publishes an experimental
+[observable-enactment instrument](docs/completion-integrity-enactment.md) for a
+future Completion Integrity study. It distinguishes policy-byte binding,
+ledger materialization, normalized check evidence, and terminal reconciliation without
+retrospectively reinterpreting alpha.9 or claiming to observe cognition.
+The accompanying [task-supply contract](docs/completion-integrity-task-supply.md)
+defines how a larger private candidate pool can earn admission without counting
+repeats, paraphrases, ports, calibration cases, or weak clones as independent
+evidence. No v2 task population or scored result is claimed yet.
+
+The separate [terminal-claim instrument](docs/completion-integrity-terminal-claims.md)
+keeps truth (`complete` / `incomplete` / `uncertain`), progress, and verified /
+failed / unresolved extent orthogonal. It tests a closed reporter-only contract
+against evaluator-owned frozen truth; it does not claim that synthetic fixtures
+enforce runtime isolation or that reviewer remediation has been studied.
+
 ## What AEL helps answer
 
 An agent result is produced by a whole stack:
@@ -93,8 +109,8 @@ question and claim → design preflight → frozen comparison → retained obser
    uncertainty plan, roles, and strongest supportable claim.
 3. Freeze the baseline, changed factors, tasks, budget, schedule, and stop rule.
 4. Run matched conditions and retain poor answers, failures, and invalid runs.
-5. Measure task outcomes, critical failures, process behavior, cost, and
-   limitations separately.
+5. Measure task outcomes, critical failures, observable process enactment when
+   instrumented, cost, and limitations separately.
 6. Publish a human result and a machine-readable evidence receipt stating what
    is supported, unsupported, and invalidating.
 
@@ -144,6 +160,11 @@ uv run ael study preflight \
   --json-output studies/quality-preflight/examples/pass/preflight.json \
   --markdown-output studies/quality-preflight/examples/pass/preflight.md \
   --check
+uv run python tools/check_completion_integrity_engagement.py \
+  --method-plan studies/completion-integrity/diagnostics/process-v1/method-plan.pilot.json \
+  --observations studies/completion-integrity/diagnostics/process-v1/fixtures/normalized-cells.json \
+  --diagnostics-json studies/completion-integrity/diagnostics/process-v1/fixtures/expected-diagnostics.json \
+  --check
 uv run ael results check studies/public-results.json --require-git-proof
 uv run ael study audit \
   --freeze studies/completion-integrity/freeze.json \
@@ -163,7 +184,7 @@ uv run ael study audit \
 uv run python -m unittest discover -s tests -v
 ```
 
-Expected example-validation summary for alpha.9:
+Expected example-validation summary for the current checkout:
 
 ```text
 validation passed: 30 document(s); concept=4, evidence_receipt=2,
@@ -230,10 +251,14 @@ maintainer-reviewed snapshots and maintainer-controlled fixtures; arbitrary
 submissions remain blocked. Read [SECURITY.md](SECURITY.md) and
 [Container runner isolation](docs/runner-isolation.md) before execution.
 
-The `0.1.0a9` development line is pre-stable. It does not claim universal
+The published `0.1.0a10` line is pre-stable. It does not claim universal
 benchmarking, independent verification of Kizz-authored capabilities,
 model-only superiority from stack comparisons, or downstream production
 impact.
+
+Alpha.10 is a method/instrument release, not an empirically exercised method
+result. Its synthetic fixtures validate bounded computation rather than real
+workflow benefit.
 
 ## Documentation
 

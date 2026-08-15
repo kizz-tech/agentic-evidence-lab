@@ -13,8 +13,11 @@ separate repositories, provenance, versions, and release authority.
 
 ## Current state
 
-The current package line is `v0.1.0-alpha.9`, the Completion Integrity decision
-release. Its exact prompt policy produced a null result and is rejected.
+The current package line is `v0.1.0-alpha.10`, a method-only Completion
+Integrity measurement-foundation release covering observable enactment,
+terminal claims, and task admission. It does not supersede the alpha.9 null or
+establish that the new instruments improve a real agent workflow; deterministic
+fixtures prove only bounded computation and contract conformance.
 GitHub Releases owns the latest externally published state; repository prose
 does not prove publication. The project is Apache-2.0 licensed but remains
 pre-stable. Do not claim that a commit is pushed, a tag is released, CI is
@@ -44,11 +47,29 @@ external account requires explicit task-specific authority.
 - Separate operational stack comparisons from controlled factor comparisons.
 - Do not infer model-only superiority from a comparison of different stacks.
 - Freeze confirmatory candidates before held-out evaluation.
+- Treat task packs as measurement instruments. Repeats, paraphrases, language
+  ports, calibration cases, and renamed fixtures do not increase independent
+  task count. Hidden evaluators may verify observable or repository-inferable
+  requirements but may not invent them.
+- Keep development, sacrificial qualification, scored screening, and untouched
+  confirmation separate. Repair after a qualification attempt creates a new
+  task revision; confirmation outcomes never repair that frozen revision.
 - Preserve failed, negative, and inconclusive results when they are admissible.
 - Report unsupported claims and critical failures explicitly.
 - Hosted model identifiers may not imply immutable model behavior; time-bound
   claims and record the exposed provider/runtime identity.
 - Self-evaluation is maintainer-evaluated evidence, never independent evidence.
+- Observable policy enactment is not cognition, causal mediation, or task
+  outcome. Missing historical process evidence remains `not_assessable`.
+- Terminal truth, progress feasibility, and verified/failed/unresolved extent
+  are orthogonal. `blocked` is not a truth value, and a failed check alone does
+  not prove external blockage.
+- A task count is pack-specific design evidence, not a universal method
+  constant. Admission requires a hash-bound power or precision rationale;
+  unresolved sizing remains `pending_pilot` and blocks scored freeze.
+- Reporter-only shape and hash checks do not prove runtime isolation. Claim
+  isolation and reviewer-assisted remediation are separate causal questions;
+  remediation requires separately frozen authority and budget.
 
 ## External review trust boundary
 
@@ -73,6 +94,10 @@ project-provided context may restate that context without adding evidence.
 - Never commit secrets, credentials, signed URLs, private repository content,
   raw reasoning traces, personal profile state, or unredacted customer data.
 - Keep hidden and rotating holdouts outside public artifacts.
+- Keep active task instructions, fixtures, evaluators, reference/alternative
+  solutions, semantic mutants, canaries, and raw qualification attempts outside
+  Git; public task-supply records may expose only bounded identities, strata,
+  counts, hashes, and audit states.
 - Run third-party skills and tools only in disposable least-privilege
   environments with explicit filesystem, network, process, resource, secret,
   and retention policy.

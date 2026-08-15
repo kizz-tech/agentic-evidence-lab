@@ -23,7 +23,7 @@ from Git tag, GitHub release, or package-publication state.
 
 ## Graph verification: deterministic public checks
 
-From a clean checkout of the exact alpha.9 source revision under review:
+From a clean checkout of the exact alpha.10 source revision under review:
 
 ```bash
 uv sync --locked --all-groups
@@ -35,6 +35,11 @@ uv run ael study preflight \
   studies/quality-preflight/examples/pass/quality-profile.json \
   --json-output studies/quality-preflight/examples/pass/preflight.json \
   --markdown-output studies/quality-preflight/examples/pass/preflight.md \
+  --check
+uv run python tools/check_completion_integrity_engagement.py \
+  --method-plan studies/completion-integrity/diagnostics/process-v1/method-plan.pilot.json \
+  --observations studies/completion-integrity/diagnostics/process-v1/fixtures/normalized-cells.json \
+  --diagnostics-json studies/completion-integrity/diagnostics/process-v1/fixtures/expected-diagnostics.json \
   --check
 uv run ael source-lock check studies/agent-skills-season-1/sources.lock.toml
 uv run ael study audit \
@@ -59,10 +64,15 @@ uv run ael validate \
 uv run python tools/materialize_agent_skills_season.py --check
 uv run ael results check studies/public-results.json --require-git-proof
 uv run python tools/check_frozen_artifacts.py
+uv run python tools/check_completion_integrity_claim.py \
+  --policy studies/completion-integrity/terminal-claim-v1/policy.pilot.json \
+  --cases studies/completion-integrity/terminal-claim-v1/fixtures/cases.json \
+  --assessments-json studies/completion-integrity/terminal-claim-v1/fixtures/expected-assessments.json \
+  --check
 uv run python tools/release_check.py
 uv build
 uv run python tools/verify_release_artifacts.py \
-  --expected-version 0.1.0a9 dist/*.whl dist/*.tar.gz
+  --expected-version 0.1.0a10 dist/*.whl dist/*.tar.gz
 ```
 
 These checks establish package, schema, cross-reference, committed-fixture,
@@ -107,6 +117,13 @@ freeze and preregistration binding, reconstructs all 52 scheduled cells from
 521 public measurements, and recomputes the null effect and exact-policy
 rejection. Private tasks, evaluator code, candidates, events, attempt journals,
 and authentication remain outside the public graph.
+
+The observable-enactment fixture check is separate. It validates an
+experimental classifier against sanitized known states and verifies that its policy,
+ledger, and golden projection hashes remain bound.
+It does not rerun alpha.9 or classify its process retrospectively: alpha.9 is
+explicitly `not_assessable` because it retained no structured ledger and no
+requirement-to-check event bindings.
 
 The `systematic-debugging-real-shadow-v1` adapter additionally verifies the
 prospective admission-to-action chain and reconstructs the terminal effect from

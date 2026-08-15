@@ -18,6 +18,12 @@ entire evidence contract or runner design.
 - [Alpha.9 Completion Integrity release design](decisions/2026-08-14-alpha9-completion-integrity-release-design.md)
   — the empirical release boundary, no-call admission gate, core comparison,
   architecture constraints, and stop rules.
+- [Alpha.10 observable-enactment decision](decisions/2026-08-15-alpha10-observable-enactment-candidate.md)
+  — why the instrument is released as method infrastructure while empirical
+  admission remains pending real exercise.
+- [Alpha.10 terminal-claim foundation](decisions/2026-08-15-alpha10-terminal-claim-foundation.md)
+  — terminal semantics, sample-size admission, council evidence and deferred
+  runtime/remediation boundaries.
 
 ## I want to see what works
 
@@ -55,6 +61,11 @@ entire evidence contract or runner design.
   and explicit scale triggers.
 - [Study Quality Preflight](study-quality-preflight.md) — the pilot hash-bound
   design preflight, hard gates, warnings, public facets, and scientific boundary.
+- [Completion Integrity observable enactment](completion-integrity-enactment.md)
+- [Completion Integrity terminal claims](completion-integrity-terminal-claims.md)
+- [Completion Integrity task supply](completion-integrity-task-supply.md)
+  — three distinct experimental family-local policies for process diagnostics,
+  claim accuracy and prospective task admission.
 
 The contract is runner-independent. AEL can describe a complete operational
 stack comparison or a controlled change to one declared factor, but the receipt
@@ -87,9 +98,11 @@ must not promote a stack result into a model-only claim.
 - [Release notes](release-notes/v0.1.0-alpha.8.md) — the claim-first method,
   explicit non-ordinal claim admission, observed repeat/uncertainty disclosure,
   and the regenerated projection. A note file is not proof of a tag or release.
-- [Release notes](release-notes/v0.1.0-alpha.9.md) — the terminal Completion
-  Integrity null result, exact-policy rejection, and first complete profiled
-  prospective study. A note file is not proof of a tag or release.
+- [Alpha.10 release notes](release-notes/v0.1.0-alpha.10.md) — the method-only
+  measurement foundation and its empirical limits.
+- [Alpha.9 release notes](release-notes/v0.1.0-alpha.9.md) — the terminal
+  Completion Integrity null result and exact-policy rejection. A note file is
+  not proof of a tag or release.
 - [Changelog](../CHANGELOG.md) — user-visible project history.
 - [Roadmap](../ROADMAP.md) — evidence-gated direction, beta criteria, and
   explicit non-goals; it is not a delivery promise.

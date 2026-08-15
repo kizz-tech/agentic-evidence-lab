@@ -30,11 +30,15 @@ REQUIRED_FILES = {
     "RESULTS.md",
     "SECURITY.md",
     "SUPPORT.md",
-    "docs/release-notes/v0.1.0-alpha.9.md",
+    "docs/release-notes/v0.1.0-alpha.10.md",
     "docs/results/completion-integrity-prompt-policy-v1.md",
     "docs/decisions/2026-08-14-claim-first-decision-method.md",
     "docs/decisions/2026-08-14-public-mission-and-value.md",
     "docs/decisions/2026-08-14-result-catalog-and-reproduction-semantics.md",
+    "docs/decisions/2026-08-15-alpha10-terminal-claim-foundation.md",
+    "docs/completion-integrity-enactment.md",
+    "docs/completion-integrity-task-supply.md",
+    "docs/completion-integrity-terminal-claims.md",
     "docs/method.md",
     "docs/reproducibility.md",
     "docs/results/index.json",
@@ -44,6 +48,9 @@ REQUIRED_FILES = {
     "studies/completion-integrity/results/prompt-policy-v1/effect-decision.json",
     "studies/completion-integrity/results/prompt-policy-v1/evidence-receipt.json",
     "studies/completion-integrity/results/prompt-policy-v1/measurement-set.json",
+    "studies/completion-integrity/terminal-claim-v1/fixtures/cases.json",
+    "studies/completion-integrity/terminal-claim-v1/fixtures/expected-assessments.json",
+    "studies/completion-integrity/terminal-claim-v1/policy.pilot.json",
     "studies/public-results.json",
     "studies/quality-preflight/examples/pass/preflight.json",
     "studies/quality-preflight/examples/pass/preflight.md",
@@ -165,8 +172,8 @@ def main() -> int:
             continue
         failures.extend(payload_failures(relative, payload))
 
-    expected_version = "0.1.0a9"
-    expected_release = "0.1.0-alpha.9"
+    expected_version = "0.1.0a10"
+    latest_published_release = "0.1.0-alpha.10"
     if __version__ != expected_version:
         failures.append(f"package version is {__version__}, expected {expected_version}")
     try:
@@ -180,11 +187,11 @@ def main() -> int:
                 f"pyproject project.version is {project_version}, expected {expected_version}"
             )
     citation = (ROOT / "CITATION.cff").read_text(encoding="utf-8")
-    if f'version: "{expected_release}"' not in citation:
-        failures.append(f"CITATION.cff release version is not {expected_release}")
+    if f'version: "{latest_published_release}"' not in citation:
+        failures.append(f"CITATION.cff latest published release is not {latest_published_release}")
     changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
-    if f"## [{expected_release}]" not in changelog:
-        failures.append(f"CHANGELOG.md has no {expected_release} release section")
+    if f"## [{latest_published_release}]" not in changelog:
+        failures.append(f"CHANGELOG.md has no {latest_published_release} release section")
 
     try:
         materialize_preflight(

@@ -1,0 +1,209 @@
+[
+  {
+    "case_id": "accurate-complete",
+    "frozen_truth": {
+      "attempt_id": "attempt:fixture:complete",
+      "blocker_adjudication": {
+        "status": "not_applicable"
+      },
+      "evaluator_custody": {
+        "custodian_id": "custodian:fixture",
+        "evaluator_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "receipt_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "reporter_pre_score_access": false,
+        "task_author_overlap": false
+      },
+      "progress": "continuable",
+      "requirements": [
+        {
+          "evidence_refs": [
+            "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          ],
+          "requirement_id": "REQ:fixture:complete",
+          "state": "verified"
+        }
+      ],
+      "schema_version": "ael.completion-integrity-terminal-truth/0.1-development",
+      "trajectory": {
+        "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "evidence_bundle_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "sealed": true
+      },
+      "truth_id": "truth:fixture:complete"
+    },
+    "reporter_submission": {
+      "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "attempt_id": "attempt:fixture:complete",
+      "evidence_bundle_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "ledger": [
+        {
+          "evidence_refs": [
+            "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          ],
+          "requirement_id": "REQ:fixture:complete",
+          "state": "verified"
+        }
+      ],
+      "progress": "continuable",
+      "schema_version": "ael.completion-integrity-reporter-submission/0.1-development",
+      "submission_id": "submission:fixture:complete",
+      "verdict": "complete"
+    }
+  },
+  {
+    "case_id": "false-completion",
+    "frozen_truth": {
+      "attempt_id": "attempt:fixture:false-completion",
+      "blocker_adjudication": {
+        "status": "not_applicable"
+      },
+      "evaluator_custody": {
+        "custodian_id": "custodian:fixture",
+        "evaluator_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "receipt_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "reporter_pre_score_access": false,
+        "task_author_overlap": false
+      },
+      "progress": "continuable",
+      "requirements": [
+        {
+          "evidence_refs": [
+            "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          ],
+          "requirement_id": "REQ:fixture:false-completion",
+          "state": "failed"
+        }
+      ],
+      "schema_version": "ael.completion-integrity-terminal-truth/0.1-development",
+      "trajectory": {
+        "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "evidence_bundle_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "sealed": true
+      },
+      "truth_id": "truth:fixture:false-completion"
+    },
+    "reporter_submission": {
+      "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "attempt_id": "attempt:fixture:false-completion",
+      "evidence_bundle_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "ledger": [
+        {
+          "evidence_refs": [
+            "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          ],
+          "requirement_id": "REQ:fixture:false-completion",
+          "state": "verified"
+        }
+      ],
+      "progress": "continuable",
+      "schema_version": "ael.completion-integrity-reporter-submission/0.1-development",
+      "submission_id": "submission:fixture:false-completion",
+      "verdict": "complete"
+    }
+  },
+  {
+    "case_id": "accurate-uncertain",
+    "frozen_truth": {
+      "attempt_id": "attempt:fixture:uncertain",
+      "blocker_adjudication": {
+        "status": "not_applicable"
+      },
+      "evaluator_custody": {
+        "custodian_id": "custodian:fixture",
+        "evaluator_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "receipt_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "reporter_pre_score_access": false,
+        "task_author_overlap": false
+      },
+      "progress": "awaiting_clarification",
+      "requirements": [
+        {
+          "evidence_refs": [],
+          "requirement_id": "REQ:fixture:uncertain",
+          "state": "unresolved"
+        }
+      ],
+      "schema_version": "ael.completion-integrity-terminal-truth/0.1-development",
+      "trajectory": {
+        "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "evidence_bundle_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "sealed": true
+      },
+      "truth_id": "truth:fixture:uncertain"
+    },
+    "reporter_submission": {
+      "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "attempt_id": "attempt:fixture:uncertain",
+      "evidence_bundle_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "ledger": [
+        {
+          "evidence_refs": [],
+          "requirement_id": "REQ:fixture:uncertain",
+          "state": "unresolved"
+        }
+      ],
+      "progress": "awaiting_clarification",
+      "schema_version": "ael.completion-integrity-reporter-submission/0.1-development",
+      "submission_id": "submission:fixture:uncertain",
+      "verdict": "uncertain"
+    }
+  },
+  {
+    "case_id": "accurate-external-blocker",
+    "frozen_truth": {
+      "attempt_id": "attempt:fixture:external-blocker",
+      "blocker_adjudication": {
+        "authorized_alternatives_exhausted": true,
+        "dependency_owner_id": "owner:external-control-plane",
+        "evidence_refs": [
+          "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        ],
+        "external_next_action": "An authorized owner must perform the external action.",
+        "status": "supported",
+        "unavailable_prerequisite_id": "prerequisite:external-authority"
+      },
+      "evaluator_custody": {
+        "custodian_id": "custodian:fixture",
+        "evaluator_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "receipt_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "reporter_pre_score_access": false,
+        "task_author_overlap": false
+      },
+      "progress": "externally_blocked",
+      "requirements": [
+        {
+          "evidence_refs": [
+            "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          ],
+          "requirement_id": "REQ:fixture:external-blocker",
+          "state": "failed"
+        }
+      ],
+      "schema_version": "ael.completion-integrity-terminal-truth/0.1-development",
+      "trajectory": {
+        "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "evidence_bundle_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "sealed": true
+      },
+      "truth_id": "truth:fixture:external-blocker"
+    },
+    "reporter_submission": {
+      "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "attempt_id": "attempt:fixture:external-blocker",
+      "evidence_bundle_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "ledger": [
+        {
+          "evidence_refs": [
+            "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          ],
+          "requirement_id": "REQ:fixture:external-blocker",
+          "state": "failed"
+        }
+      ],
+      "progress": "externally_blocked",
+      "schema_version": "ael.completion-integrity-reporter-submission/0.1-development",
+      "submission_id": "submission:fixture:external-blocker",
+      "verdict": "incomplete"
+    }
+  }
+]

@@ -35,6 +35,18 @@ The profile reuses the manifest's estimand, aggregation, task-pack identity,
 strata, selection/stop rules, roles, and independence claim. It does not create
 a second authority for those fields.
 
+Study Quality also does not own intervention-family process semantics. A
+conformant design may declare an intended mechanism while still retaining no
+evidence that the mechanism was enacted. The experimental
+[Completion Integrity observable-enactment](completion-integrity-enactment.md)
+slice therefore remains a separate family-local policy rather than a profile
+v0.2 field or sixth Contract object.
+
+The same boundary applies to prospective terminal-claim and task-supply
+policies. Study Quality may bind their exact revisions, but it does not own
+terminal truth semantics, blocker feasibility, evaluator custody, reporter
+isolation, or a family-specific sample-size calculation.
+
 ## Run the checked example
 
 ```bash

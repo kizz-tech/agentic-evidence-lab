@@ -1,0 +1,202 @@
+{
+  "boundary": "The policy fixture bytes and input projections are bound. Normalized event labels remain caller-provided synthetic declarations until a future owner adapter captures real harness events.",
+  "input_hashes": {
+    "method_plan_sha256": "4d3561f9e885852de309dca81ee9a378e6b798a7157dc2f1384110ae15a7bf82",
+    "observations_sha256": "0b66dfb372fdf6775e096e3f9cbc9492eca3b132f52f3b7c562b3f6de6483384",
+    "policy_fixture_sha256": "44e5cc81d914c280aee759701db0036c897f34d7c6861d2dc0c5c04e59cf415e"
+  },
+  "policy_fixture": {
+    "sha256": "44e5cc81d914c280aee759701db0036c897f34d7c6861d2dc0c5c04e59cf415e",
+    "uri": "policy-fixture.txt"
+  },
+  "report": {
+    "boundary": "Synthetic normalized fixtures test classifier behavior only. They are not empirical evidence that a real agent enacted a policy or that the policy improved outcomes.",
+    "cell_count": 5,
+    "diagnostics": [
+      {
+        "boundary": "This classifies caller-provided normalized pilot facts. Event labels and event digests are reported declarations, not proof of real harness capture or causal mediation.",
+        "cell_id": "fixture-repair-loop-complete",
+        "counts": {
+          "ledger_entries": 2,
+          "requirements": 2,
+          "successful_preterminal_checks": 1,
+          "supported_blockers": 0,
+          "unresolved_requirements": 0
+        },
+        "facets": {
+          "checks_evidenced": "satisfied",
+          "ledger_materialized": "satisfied",
+          "policy_bytes_bound": "satisfied",
+          "terminal_reconciled": "satisfied"
+        },
+        "issues": [],
+        "schema_version": "ael.completion-integrity-enactment-diagnostic/0.1-pilot",
+        "source_hashes": {
+          "ledger_sha256": "4f96b2d88d5ed2d60b5dc1edabf69739bdbc252347a44e584294984f8e2aaa48",
+          "policy_sha256": "44e5cc81d914c280aee759701db0036c897f34d7c6861d2dc0c5c04e59cf415e",
+          "reported_event_sha256": [
+            "1111111111111111111111111111111111111111111111111111111111111111",
+            "2222222222222222222222222222222222222222222222222222222222222222",
+            "3333333333333333333333333333333333333333333333333333333333333333",
+            "4444444444444444444444444444444444444444444444444444444444444444",
+            "5555555555555555555555555555555555555555555555555555555555555555",
+            "6666666666666666666666666666666666666666666666666666666666666666"
+          ],
+          "terminal_sha256": "7777777777777777777777777777777777777777777777777777777777777777"
+        },
+        "stage_vector": {
+          "change": "observed",
+          "declare": "observed",
+          "inspect": "observed",
+          "reconcile": "observed",
+          "verify": "observed"
+        },
+        "state": "observable_chain_complete"
+      },
+      {
+        "boundary": "This classifies caller-provided normalized pilot facts. Event labels and event digests are reported declarations, not proof of real harness capture or causal mediation.",
+        "cell_id": "fixture-blocked-supported",
+        "counts": {
+          "ledger_entries": 1,
+          "requirements": 1,
+          "successful_preterminal_checks": 0,
+          "supported_blockers": 1,
+          "unresolved_requirements": 1
+        },
+        "facets": {
+          "checks_evidenced": "satisfied",
+          "ledger_materialized": "satisfied",
+          "policy_bytes_bound": "satisfied",
+          "terminal_reconciled": "satisfied"
+        },
+        "issues": [],
+        "schema_version": "ael.completion-integrity-enactment-diagnostic/0.1-pilot",
+        "source_hashes": {
+          "ledger_sha256": "60759cc457ab9c80cf946a2b222df0c3133d2fe758dda37ed2ba2200f75fe63f",
+          "policy_sha256": "44e5cc81d914c280aee759701db0036c897f34d7c6861d2dc0c5c04e59cf415e",
+          "reported_event_sha256": [
+            "8181818181818181818181818181818181818181818181818181818181818181",
+            "8282828282828282828282828282828282828282828282828282828282828282",
+            "8383838383838383838383838383838383838383838383838383838383838383"
+          ],
+          "terminal_sha256": "8484848484848484848484848484848484848484848484848484848484848484"
+        },
+        "stage_vector": {
+          "change": "missing",
+          "declare": "observed",
+          "inspect": "observed",
+          "reconcile": "observed",
+          "verify": "observed"
+        },
+        "state": "observable_chain_complete"
+      },
+      {
+        "boundary": "This classifies caller-provided normalized pilot facts. Event labels and event digests are reported declarations, not proof of real harness capture or causal mediation.",
+        "cell_id": "fixture-false-blocked-declaration",
+        "counts": {
+          "ledger_entries": 1,
+          "requirements": 1,
+          "successful_preterminal_checks": 0,
+          "supported_blockers": 0,
+          "unresolved_requirements": 1
+        },
+        "facets": {
+          "checks_evidenced": "satisfied",
+          "ledger_materialized": "satisfied",
+          "policy_bytes_bound": "satisfied",
+          "terminal_reconciled": "unsatisfied"
+        },
+        "issues": [],
+        "schema_version": "ael.completion-integrity-enactment-diagnostic/0.1-pilot",
+        "source_hashes": {
+          "ledger_sha256": "124dc4115849b8d6861030afb5a95915342681a45cf8507bb213fec588286c46",
+          "policy_sha256": "44e5cc81d914c280aee759701db0036c897f34d7c6861d2dc0c5c04e59cf415e",
+          "reported_event_sha256": [
+            "9191919191919191919191919191919191919191919191919191919191919191",
+            "9292929292929292929292929292929292929292929292929292929292929292"
+          ],
+          "terminal_sha256": "9393939393939393939393939393939393939393939393939393939393939393"
+        },
+        "stage_vector": {
+          "change": "missing",
+          "declare": "observed",
+          "inspect": "observed",
+          "reconcile": "observed",
+          "verify": "missing"
+        },
+        "state": "observable_chain_incomplete"
+      },
+      {
+        "boundary": "This classifies caller-provided normalized pilot facts. Event labels and event digests are reported declarations, not proof of real harness capture or causal mediation.",
+        "cell_id": "fixture-zero-events",
+        "counts": {
+          "ledger_entries": 1,
+          "requirements": 1,
+          "successful_preterminal_checks": 0,
+          "supported_blockers": 0,
+          "unresolved_requirements": 1
+        },
+        "facets": {
+          "checks_evidenced": "unsatisfied",
+          "ledger_materialized": "satisfied",
+          "policy_bytes_bound": "satisfied",
+          "terminal_reconciled": "unsatisfied"
+        },
+        "issues": [],
+        "schema_version": "ael.completion-integrity-enactment-diagnostic/0.1-pilot",
+        "source_hashes": {
+          "ledger_sha256": "124dc4115849b8d6861030afb5a95915342681a45cf8507bb213fec588286c46",
+          "policy_sha256": "44e5cc81d914c280aee759701db0036c897f34d7c6861d2dc0c5c04e59cf415e",
+          "reported_event_sha256": [],
+          "terminal_sha256": "9494949494949494949494949494949494949494949494949494949494949494"
+        },
+        "stage_vector": {
+          "change": "missing",
+          "declare": "observed",
+          "inspect": "missing",
+          "reconcile": "missing",
+          "verify": "missing"
+        },
+        "state": "observable_chain_incomplete"
+      },
+      {
+        "boundary": "The required normalized ledger and event bindings were not retained; alpha.9 supports neither an enactment nor a non-enactment claim.",
+        "cell_id": "alpha9-historical-unassessable",
+        "counts": {
+          "ledger_entries": 0,
+          "requirements": 0,
+          "successful_preterminal_checks": 0,
+          "supported_blockers": 0,
+          "unresolved_requirements": 0
+        },
+        "facets": {
+          "checks_evidenced": "not_assessable",
+          "ledger_materialized": "not_assessable",
+          "policy_bytes_bound": "not_assessable",
+          "terminal_reconciled": "not_assessable"
+        },
+        "issues": [],
+        "schema_version": "ael.completion-integrity-enactment-diagnostic/0.1-pilot",
+        "source_hashes": {},
+        "stage_vector": {
+          "change": "not_assessable",
+          "declare": "not_assessable",
+          "inspect": "not_assessable",
+          "reconcile": "not_assessable",
+          "verify": "not_assessable"
+        },
+        "state": "not_assessable"
+      }
+    ],
+    "issues": [],
+    "schema_version": "ael.completion-integrity-enactment-report/0.1-pilot",
+    "state_counts": {
+      "invalid": 0,
+      "not_assessable": 1,
+      "observable_chain_complete": 2,
+      "observable_chain_incomplete": 2
+    },
+    "status": "complete"
+  },
+  "schema_version": "ael.completion-integrity-enactment-bundle/0.1-pilot"
+}

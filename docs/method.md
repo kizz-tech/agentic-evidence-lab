@@ -51,6 +51,15 @@ to bind:
 - uncertainty method or explicit `not_estimable` limitation;
 - planned repeats, ordering, perturbations, role overlap, and freshness.
 
+For a new Completion Integrity population, the family-local
+[task-supply contract](completion-integrity-task-supply.md) additionally
+requires observable requirements, exact oracle coverage, structurally distinct
+valid solutions, semantic mutants, environment checks, independent root
+lineage, known-state terminal truth, blocker-feasibility adjudication, evaluator
+custody, sacrificial qualification, untouched confirmation, private artifact
+binding, and a pack-specific power or precision rationale. A task-count target
+cannot compensate for a failed gate; unresolved sizing blocks admission.
+
 A preflight pass means the declaration is conformant. It is not scientific
 certification and does not prove that the profile preceded private model calls.
 
@@ -66,6 +75,21 @@ post-result threshold creates a new revision; it never edits the old study.
 Retain one Run Record for every admitted task-condition-repeat cell. Preserve
 poor answers, critical failures, invalid runs, retries, effects, cost, and event
 capture limits. Operational invalidity and task failure are different states.
+
+When a study claims that a workflow mechanism was enacted, retain observable
+engagement evidence separately from the terminal task outcome. Policy delivery,
+structured artifacts, checks captured by the owning harness, and terminal
+reconciliation may be measured; token volume, elapsed time, or longer prose do
+not establish engagement. Missing historical instrumentation is
+`not_assessable`, not proof
+that an agent ignored the intervention. The current family-local example is
+[Completion Integrity observable enactment](completion-integrity-enactment.md).
+
+Terminal reporting uses a different predicate. Truth (`complete`, `incomplete`,
+`uncertain`), progress feasibility and verified/failed/unresolved extent remain
+orthogonal, and the reporter is compared with evaluator-owned frozen truth. A
+closed schema does not prove runtime capability isolation. See
+[Completion Integrity terminal claims](completion-integrity-terminal-claims.md).
 
 ### 5. Evaluate exact claims
 
@@ -144,6 +168,9 @@ An alpha.8 card is read in this order:
 7. technical receipt metadata, raw graph, and limitations.
 
 The generated card is a deterministic projection, not a new evidence owner.
+
+Process diagnostics remain additional evidence. They cannot compensate for a
+failed final state or promote a null effect into a mechanism claim.
 
 ## Minimal local path
 

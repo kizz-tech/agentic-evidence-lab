@@ -1,0 +1,19 @@
+{
+  "schema_version": "ael.completion-integrity-enactment-plan/0.1-pilot",
+  "plan_id": "kizz:ael:completion-integrity-enactment:process-v1",
+  "policy_ref": {
+    "policy_id": "completion-integrity-structured-enactment-v1",
+    "uri": "policy-fixture.txt",
+    "sha256": "44e5cc81d914c280aee759701db0036c897f34d7c6861d2dc0c5c04e59cf415e"
+  },
+  "engagement_rule": {
+    "missing_evidence": "not_assessable",
+    "unknown_requirement": "invalid",
+    "duplicate_requirement": "invalid",
+    "successful_check_required": true,
+    "check_before_terminal_required": true,
+    "all_requirements_reconciled": true,
+    "repair_loops_allowed": true
+  },
+  "causal_boundary": "The pilot classifies policy-byte binding, ledger materialization, normalized check declarations, and terminal reconciliation. Synthetic caller-provided event labels are not proof of real harness capture, cognition, attention, or causal mediation."
+}

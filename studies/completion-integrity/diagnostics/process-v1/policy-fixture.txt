@@ -1,0 +1,1 @@
+Before declaring completion, enumerate every frozen requirement by its opaque ID, record whether it is satisfied, unmet, or blocked, bind supporting verification or blocker evidence, and reconcile the terminal declaration with that ledger.

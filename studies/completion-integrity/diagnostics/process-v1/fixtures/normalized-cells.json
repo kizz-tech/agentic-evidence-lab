@@ -1,0 +1,75 @@
+[
+  {
+    "schema_version": "ael.completion-integrity-enactment-observation/0.1-pilot",
+    "cell_id": "fixture-repair-loop-complete",
+    "capture_state": "assessable",
+    "policy_sha256": "44e5cc81d914c280aee759701db0036c897f34d7c6861d2dc0c5c04e59cf415e",
+    "ledger_sha256": "4f96b2d88d5ed2d60b5dc1edabf69739bdbc252347a44e584294984f8e2aaa48",
+    "requirement_ids": ["REQ-1", "REQ-2"],
+    "ledger_entries": [
+      {"requirement_id": "REQ-1", "status": "satisfied", "evidence_event_ids": ["RL-5"]},
+      {"requirement_id": "REQ-2", "status": "satisfied", "evidence_event_ids": ["RL-5"]}
+    ],
+    "events": [
+      {"event_id": "RL-1", "stage": "inspect", "sequence": 1, "outcome": "observed", "sha256": "1111111111111111111111111111111111111111111111111111111111111111"},
+      {"event_id": "RL-2", "stage": "change", "sequence": 2, "outcome": "observed", "sha256": "2222222222222222222222222222222222222222222222222222222222222222"},
+      {"event_id": "RL-3", "stage": "verify", "sequence": 3, "outcome": "success", "sha256": "3333333333333333333333333333333333333333333333333333333333333333"},
+      {"event_id": "RL-4", "stage": "change", "sequence": 4, "outcome": "observed", "sha256": "4444444444444444444444444444444444444444444444444444444444444444"},
+      {"event_id": "RL-5", "stage": "verify", "sequence": 5, "outcome": "success", "sha256": "5555555555555555555555555555555555555555555555555555555555555555"},
+      {"event_id": "RL-6", "stage": "reconcile", "sequence": 6, "outcome": "observed", "sha256": "6666666666666666666666666666666666666666666666666666666666666666"}
+    ],
+    "terminal_marker": {"state": "claimed_complete", "sequence": 7, "sha256": "7777777777777777777777777777777777777777777777777777777777777777"}
+  },
+  {
+    "schema_version": "ael.completion-integrity-enactment-observation/0.1-pilot",
+    "cell_id": "fixture-blocked-supported",
+    "capture_state": "assessable",
+    "policy_sha256": "44e5cc81d914c280aee759701db0036c897f34d7c6861d2dc0c5c04e59cf415e",
+    "ledger_sha256": "60759cc457ab9c80cf946a2b222df0c3133d2fe758dda37ed2ba2200f75fe63f",
+    "requirement_ids": ["REQ-1"],
+    "ledger_entries": [
+      {"requirement_id": "REQ-1", "status": "blocked", "evidence_event_ids": ["BL-2"]}
+    ],
+    "events": [
+      {"event_id": "BL-1", "stage": "inspect", "sequence": 1, "outcome": "observed", "sha256": "8181818181818181818181818181818181818181818181818181818181818181"},
+      {"event_id": "BL-2", "stage": "verify", "sequence": 2, "outcome": "failure", "sha256": "8282828282828282828282828282828282828282828282828282828282828282"},
+      {"event_id": "BL-3", "stage": "reconcile", "sequence": 3, "outcome": "observed", "sha256": "8383838383838383838383838383838383838383838383838383838383838383"}
+    ],
+    "terminal_marker": {"state": "claimed_blocked", "sequence": 4, "sha256": "8484848484848484848484848484848484848484848484848484848484848484"}
+  },
+  {
+    "schema_version": "ael.completion-integrity-enactment-observation/0.1-pilot",
+    "cell_id": "fixture-false-blocked-declaration",
+    "capture_state": "assessable",
+    "policy_sha256": "44e5cc81d914c280aee759701db0036c897f34d7c6861d2dc0c5c04e59cf415e",
+    "ledger_sha256": "124dc4115849b8d6861030afb5a95915342681a45cf8507bb213fec588286c46",
+    "requirement_ids": ["REQ-1"],
+    "ledger_entries": [
+      {"requirement_id": "REQ-1", "status": "unmet", "evidence_event_ids": []}
+    ],
+    "events": [
+      {"event_id": "FB-1", "stage": "inspect", "sequence": 1, "outcome": "observed", "sha256": "9191919191919191919191919191919191919191919191919191919191919191"},
+      {"event_id": "FB-2", "stage": "reconcile", "sequence": 2, "outcome": "observed", "sha256": "9292929292929292929292929292929292929292929292929292929292929292"}
+    ],
+    "terminal_marker": {"state": "claimed_blocked", "sequence": 3, "sha256": "9393939393939393939393939393939393939393939393939393939393939393"}
+  },
+  {
+    "schema_version": "ael.completion-integrity-enactment-observation/0.1-pilot",
+    "cell_id": "fixture-zero-events",
+    "capture_state": "assessable",
+    "policy_sha256": "44e5cc81d914c280aee759701db0036c897f34d7c6861d2dc0c5c04e59cf415e",
+    "ledger_sha256": "124dc4115849b8d6861030afb5a95915342681a45cf8507bb213fec588286c46",
+    "requirement_ids": ["REQ-1"],
+    "ledger_entries": [
+      {"requirement_id": "REQ-1", "status": "unmet", "evidence_event_ids": []}
+    ],
+    "events": [],
+    "terminal_marker": {"state": "claimed_incomplete", "sequence": 1, "sha256": "9494949494949494949494949494949494949494949494949494949494949494"}
+  },
+  {
+    "schema_version": "ael.completion-integrity-enactment-observation/0.1-pilot",
+    "cell_id": "alpha9-historical-unassessable",
+    "capture_state": "unavailable_historical",
+    "reason": "Alpha.9 retained terminal outcomes and cost but no structured ledger or requirement-to-check event bindings."
+  }
+]

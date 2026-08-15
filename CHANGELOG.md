@@ -6,6 +6,50 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.0-alpha.10] - 2026-08-15
+
+### Added
+
+- A pure Completion Integrity observable-chain classifier with four
+  non-compensating facets: policy-byte binding, requirement-ledger coverage,
+  normalized check evidence, and terminal reconciliation.
+- A strict deterministic adapter, a byte-bound policy fixture, known-state
+  fixtures, and a golden projection bound to its exact inputs.
+- A prospective Completion Integrity task-supply policy and strict private-pack
+  checker with non-compensating observable-contract, oracle, alternative-
+  solution, semantic-mutant, environment, lineage, qualification, and privacy
+  gates.
+- A pure terminal-claim kernel and strict deterministic fixtures that separate
+  `complete` / `incomplete` / `uncertain` truth, progress feasibility and
+  verified/failed/unresolved extent while binding evaluator-owned frozen truth.
+- Task-supply `0.2-development`: distinct lifecycle/study-role fields,
+  terminal-state challenge cases, blocker-feasibility evidence, evaluator
+  custody, and a pack-specific sample-size rationale that blocks admission while
+  `pending_pilot`.
+- A 32-root private authoring inventory whose entries are explicitly capacity
+  designs, not qualified tasks or a powered population.
+
+### Boundaries
+
+- The release performs no scored model call and does not reinterpret the
+  alpha.9 null. Historical alpha.9 engagement is `not_assessable` because the
+  required ledger and requirement-to-event bindings were not retained.
+- Synthetic event labels are caller-provided declarations, not evidence that a
+  real harness captured the process. Task supply remains prospective: no v2
+  task root is admitted, frozen, or scored. The initial `16–24` authoring range
+  is not a universal sample-size claim; a future pack-specific minimum and
+  target require pilot-informed power or precision evidence.
+- Reporter-only shape/hash checks do not establish runtime isolation, and no
+  reviewer-remediation runner is implemented. Remediation remains a separate
+  future intervention with explicit authority and matched budget.
+- Contract v0, Study Quality, published evidence, and alpha.9-bound policy,
+  runner, audit, manifest, freeze, and result bytes remain unchanged.
+- Alpha.10 is a method/instrument release, not evidence that the instruments
+  improve a real agent workflow. Empirical admission still requires owner-
+  captured attempts under a new freeze.
+- Package, citation, CI, clean-wheel checks, generated public projections, and
+  release metadata identify `0.1.0a10` / `v0.1.0-alpha.10`.
+
 ## [0.1.0-alpha.9] - 2026-08-15
 
 ### Added
@@ -304,7 +348,9 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   process can read the reusable credential.
 - Contract v0 remains pre-stable and may change incompatibly before `1.0`.
 
-[Unreleased]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.8...HEAD
+[Unreleased]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.10...HEAD
+[0.1.0-alpha.10]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.9...v0.1.0-alpha.10
+[0.1.0-alpha.9]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.8...v0.1.0-alpha.9
 [0.1.0-alpha.8]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.5...v0.1.0-alpha.8
 [0.1.0-alpha.7]: docs/release-notes/v0.1.0-alpha.7.md
 [0.1.0-alpha.6]: docs/release-notes/v0.1.0-alpha.6.md

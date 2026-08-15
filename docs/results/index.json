@@ -2,7 +2,7 @@
   "as_of": "2026-08-15",
   "generator": {
     "name": "agentic-evidence-lab",
-    "version": "0.1.0a9"
+    "version": "0.1.0a10"
   },
   "projection_policy": "ael.publication-projection/0.5",
   "schema_version": "ael.public-results/0.5",
@@ -83,7 +83,7 @@
       "evidence_level": "controlled_effect_observed",
       "generator": {
         "name": "agentic-evidence-lab",
-        "version": "0.1.0a9"
+        "version": "0.1.0a10"
       },
       "history": {
         "action": "not_declared_historical",
@@ -596,7 +596,7 @@
       "evidence_level": "controlled_effect_observed",
       "generator": {
         "name": "agentic-evidence-lab",
-        "version": "0.1.0a9"
+        "version": "0.1.0a10"
       },
       "history": {
         "action": "not_declared_historical",
@@ -1085,7 +1085,7 @@
       "evidence_level": "runtime_conformant",
       "generator": {
         "name": "agentic-evidence-lab",
-        "version": "0.1.0a9"
+        "version": "0.1.0a10"
       },
       "history": {
         "action": "not_declared_historical",
@@ -1467,7 +1467,7 @@
       "evidence_level": "controlled_effect_observed",
       "generator": {
         "name": "agentic-evidence-lab",
-        "version": "0.1.0a9"
+        "version": "0.1.0a10"
       },
       "history": {
         "action": "not_declared_historical",
@@ -1957,7 +1957,7 @@
       "evidence_level": "controlled_effect_observed",
       "generator": {
         "name": "agentic-evidence-lab",
-        "version": "0.1.0a9"
+        "version": "0.1.0a10"
       },
       "history": {
         "action": "verified",

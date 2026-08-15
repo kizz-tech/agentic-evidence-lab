@@ -145,6 +145,56 @@ This is an information-hiding refactor, not a plugin system. Adapter names stay
 closed and code-owned; arbitrary profile input cannot load Python. See
 [`Publication kernel boundaries`](decisions/2026-08-14-publication-kernel-boundaries.md).
 
+### Completion Integrity observable-enactment instruments
+
+The alpha.10 method release adds three family-local pure policies without
+changing the alpha.9 policy or the generic evidence kernel:
+
+```text
+strict enactment adapter ──→ completion_integrity_engagement
+strict claim adapter     ──→ completion_integrity_claim
+strict private-pack      ──→ completion_integrity_task_supply
+```
+
+Each pure module accepts parsed, normalized facts and imports no AEL I/O,
+runner, Contract, CLI, sandbox, or provider module. The adapter owns strict
+JSON, path safety, byte reading, input hashes, atomic output, and check mode.
+The enactment policy receives immutable policy bytes and hashes them itself; a
+pair of matching caller-provided digest strings cannot establish byte binding.
+It also recomputes the canonical ledger digest, permits repair loops, and
+returns four non-compensating facets. Event labels remain normalized caller-
+provided facts; the instrumentation does not infer real harness capture, cognition,
+or causal mediation.
+
+The terminal-claim policy compares a closed reporter submission with evaluator-
+owned frozen truth. It keeps truth, progress and verified/failed/unresolved
+extent orthogonal and binds attempt, artifact and evidence hashes. Closed-shape
+validation cannot prove that a real runtime denied the reporter tools, writes,
+retries, executor access, evaluator access or remediation authority. That proof
+belongs to the first owner adapter.
+
+Task supply is now a separate family-local development boundary:
+
+```text
+strict private-pack adapter ──→ completion_integrity_task_supply
+       │                                  └─ non-compensating assessment
+       ├─ safe paths + artifact hashes
+       └─ private/public boundary
+```
+
+The task policy consumes normalized task-quality facts. Its `0.2-development`
+contract separates lifecycle state from study role, requires terminal truth,
+blocker-feasibility and evaluator-custody evidence, and blocks admission while
+sample sizing remains `pending_pilot`. The adapter alone reads private paths
+and bytes. It remains prospective: no task registry, generic mediator schema,
+public synthetic dataset, stable cross-family API or alpha.9 policy change is
+introduced. See
+[Completion Integrity task supply](completion-integrity-task-supply.md).
+
+No public audit adapter is registered until a real result exists. See
+[Observable enactment for Completion Integrity](completion-integrity-enactment.md)
+and [Completion Integrity terminal claims](completion-integrity-terminal-claims.md).
+
 Git ancestry or a tag can prove repository artifact ordering—for example, that
 freeze bytes are present in an ancestor. It cannot prove that private model
 calls occurred before a result, reconstruct private events, or establish
