@@ -28,6 +28,23 @@ ATTEMPT_FILES = {
 EXECUTOR_OUTPUT_KEYS = {"verdict", "progress", "ledger"}
 REPORTER_OUTPUT_KEYS = {"verdict", "progress", "ledger"}
 _REQUIREMENT_LINE = re.compile(r"^- `(?P<id>REQ:[A-Z0-9:._-]+)`: (?P<statement>.+)$")
+_SHA256 = re.compile(r"^[a-f0-9]{64}$")
+
+
+def activation_attempt_id(freeze_sha256: str, cell_id: str) -> str:
+    """Construct a deterministic identifier accepted by the terminal-claim grammar.
+
+    The digest is deliberately prefixed with an alphabetic namespace. A bare
+    hexadecimal digest can begin with a digit and is therefore not, by itself,
+    a valid Completion Integrity identifier.
+    """
+
+    if _SHA256.fullmatch(freeze_sha256) is None:
+        raise SandboxError("activation attempt ID requires a lowercase SHA-256 freeze binding")
+    if not isinstance(cell_id, str) or not cell_id.strip():
+        raise SandboxError("activation attempt ID requires a non-empty cell identity")
+    digest = hashlib.sha256(f"{freeze_sha256}:{cell_id}".encode()).hexdigest()[:32]
+    return f"attempt:{digest}"
 
 
 def sha256_path(path: Path) -> str:

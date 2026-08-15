@@ -215,6 +215,20 @@ class CompletionIntegrityActivationMaterializerTests(unittest.TestCase):
         self.assertIn("0 observed agreements across 0 valid calls", statement)
         self.assertNotIn("0/2", statement)
 
+    def test_current_protocol_invalid_projection_uses_artifact_claims(self) -> None:
+        receipt = load_json(V2_ROOT / "results" / "evidence-receipt.json")
+        self.assertEqual("structurally_valid", receipt["evidence_level"])
+        self.assertEqual(
+            {"artifact"},
+            {claim["claim_level"] for claim in receipt["evaluated_claims"]},
+        )
+        self.assertTrue(
+            all(
+                claim["statement"].startswith("The published")
+                for claim in receipt["evaluated_claims"]
+            )
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

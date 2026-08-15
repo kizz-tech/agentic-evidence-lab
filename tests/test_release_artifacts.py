@@ -80,7 +80,7 @@ class ReleaseArtifactTests(unittest.TestCase):
                 tag="v0.1.0-alpha.9",
                 commit="A" * 40,
                 version=VERSION,
-                projection_policy="ael.publication-projection/0.5",
+                projection_policy="ael.publication-projection/0.6",
             )
             manifest = json.loads((output / "release-manifest.json").read_text(encoding="utf-8"))
             self.assertEqual("ael.release-manifest/0.1", manifest["format"])
@@ -107,13 +107,13 @@ class ReleaseArtifactTests(unittest.TestCase):
             for tag, policy, message in (
                 (
                     "v0.1.0-alpha.6",
-                    "ael.publication-projection/0.5",
+                    "ael.publication-projection/0.6",
                     "tag must be v0.1.0-alpha.9",
                 ),
                 (
                     "v0.1.0-alpha.9",
                     "ael.publication-projection/0.3",
-                    "projection policy must be ael.publication-projection/0.5",
+                    "projection policy must be ael.publication-projection/0.6",
                 ),
             ):
                 with (

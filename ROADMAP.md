@@ -44,7 +44,7 @@ inspectable; they do not replace it.
   promoting those study-local shapes into stable Contract v0.
 - A hash-bound Study Quality Profile and `ael study preflight` for checking a
   prospective design before scored work.
-- Five bounded, maintainer-evaluated result families, including negative, null,
+- Six bounded, maintainer-evaluated result families, including negative, null,
   calibration findings; none is an independent replication or general ranking.
 - A separated publication kernel: pure claim policy, one provenance ledger,
   one closed audit-adapter registry, pure rendering and a stable orchestration
@@ -149,40 +149,111 @@ changes a decision.
 See [the enactment decision](docs/decisions/2026-08-15-alpha10-observable-enactment-candidate.md)
 and [terminal-claim foundation](docs/decisions/2026-08-15-alpha10-terminal-claim-foundation.md).
 
-## Next major release: exercise alpha.10 and close a weak predicate
+## Empirical integrity release: alpha.11 activation
 
-The next release should improve the weakest current predicates rather than add
-another internal framework increment. Its ordered path is:
+Alpha.11 exercised the alpha.10 method on real Codex CLI calls. It did not
+produce a reporter effect: activation v1 stopped at provider-schema acceptance,
+and separately preregistered v2 stopped after two of six cells when an
+owner-generated attempt identifier violated the terminal-claim grammar.
 
-1. **Instrument activation.** Add an owner adapter and exercise the
-   observable-enactment slice on
-   sacrificial real attempts under a new authorization and freeze. If the
-   required evidence is not retained safely and deterministically, stop.
-2. **Outcome closure.** Complete the scheduled Systematic Debugging follow-up,
-   recording an observation or an explicit missing/cancelled state.
-3. **Role-separated reproduction.** Reproduce one eligible exact decision with
-   separated operator, task, or evaluator ownership; a maintainer rerun remains
-   a different predicate. Prefer a reproduction that exercises the candidate
-   diagnostics when the intervention meaning fits.
-4. **Evidence-gated task supply and sizing pilot.** Author a private candidate
-   pool larger than the desired scored population. Use the current `16–24`
-   range only as authoring capacity, not scientific justification. Pilot task
-   discordance and clustering, declare the minimum useful effect or precision
-   target, bind the calculation, then freeze the pack-specific minimum, target,
-   screening and untouched confirmation populations. Stop rather than pad; do
-   not pool post-effect additions into the confirmatory estimand.
-5. **Second prospective family.** Apply the method to one licensed third-party
-   coding skill and publish a task-specific `use / skip / escalate` rule.
-6. **Method fitness review.** Test whether preflight, claim-first cards, and
-   process diagnostics changed admission, interpretation, or owner action.
-   Remove fields that only created ceremony.
+V2 retained one valid executor, one invalid reporter, four unrun cells, and no
+retry. The private reporter content matched frozen truth, but the owner wrapper
+was invalid. The public decision is therefore
+`protocol_invalid / revise_activation_adapter`, not a retrospective accuracy
+success. The result closes the weak predicate alpha.10 named: the pure method
+did not yet compose into a valid owner adapter.
 
-The next empirical release is not admitted by alpha.10 alone. It must close at
-least one real downstream outcome or add one genuinely role-separated
-reproduction. If neither can be obtained, record the explicit missing state
-and do not relabel a maintainer rerun as independence.
+Alpha.11 also exposes two method corrections:
 
-Only after those steps should AEL consider:
+- schema capability must be qualified through the complete owner wrapper, not
+  only the model-authored JSON;
+- a prospective study without a frozen quality profile is
+  `not_assessed_current`, not historical and not retrospectively certified.
+
+The current source repairs future identity construction and publication claim
+class, while the v2 freeze and invalid result remain unchanged. See the
+[activation report](reports/2026-08-15-completion-integrity-activation-v2.md)
+and [decision record](docs/decisions/2026-08-15-alpha11-activation-result.md).
+
+## Next major release: alpha.12 qualified scale-up
+
+Alpha.12 should be a larger evidence release, not another collection of
+synthetic tests. It has two sequential gates and must stop honestly at either
+one.
+
+### Gate A — qualify the real adapter on fresh sacrificial roots
+
+1. Create activation v3 with new Python and TypeScript roots, a new raw root,
+   new preregistration, and no reuse of observed v2 task content.
+2. Run a pre-freeze full-wrapper qualification that constructs every scheduled
+   attempt identity, frozen truth, reporter submission, and terminal assessment
+   in addition to provider schema, evidence readability, image, isolation,
+   credential, and optional-tool checks.
+3. Freeze a Study Quality Profile before any scored call. A missing or critical
+   profile finding blocks execution; no `not_assessed_current` shortcut is
+   allowed for v3.
+4. Submit each cell once, retain invalid/ambiguous/harmful/negative states, and
+   stop on the first frozen integrity failure. Passing unit tests alone are not
+   activation evidence.
+5. Admit the larger pilot only if every adapter, custody, capture, isolation,
+   and claim-validity gate passes. A semantically correct but structurally
+   invalid answer still fails activation.
+
+### Gate B — deepen the Codex task population
+
+If Gate A passes, build a Codex-only Completion Integrity pilot with at least
+16 genuinely independent task roots—twice the alpha.9 task count—and increase
+that target when the preregistered precision or power calculation requires it.
+Do not lower the floor or pad it with repeats, paraphrases, language ports,
+calibration cases, or near-duplicate bug shapes.
+
+Every admitted root must earn its place through:
+
+- an explicit multi-predicate owner contract with non-compensating terminal
+  truth;
+- at least two structurally distinct valid solutions and mandatory semantic
+  mutants that pass visible checks while violating hidden owner predicates;
+- deterministic evaluator repeats, mutation sensitivity, and zero unexplained
+  evaluator disagreement;
+- pairwise lineage and overlap audit across the full candidate pool;
+- meaningful difficulty: a pristine root must fail hidden acceptance, shallow
+  textual repair must not pass, and the task must require repository-level
+  inspection plus owner-level verification;
+- balanced strata across code, tests, schema/configuration, CLI/API behavior,
+  and documentation or release consistency without treating ecosystem ports as
+  independent evidence;
+- untouched confirmation roots and an explicit contamination ledger.
+
+The pilot must use task-root clustering, at least two valid stochastic reporter
+observations per retained task-condition cell, condition-order balancing, a
+predeclared minimum useful effect or precision target, uncertainty intervals,
+critical-failure guardrails, cost reporting, and an exact owner-action rule.
+The independent unit remains the task root; calls and repeats do not inflate
+`n`.
+
+Alpha.12 succeeds only if it publishes one of the frozen outcomes—positive,
+null, harmful, inconclusive, or protocol-invalid—with its exact action. A larger
+call count without a stronger task/evaluator/uncertainty predicate is not
+progress.
+
+### Codex-first boundary
+
+Until the method exits alpha, Codex remains the only scored harness. This keeps
+task quality, adapter validity, and measurement error from being confounded
+with cross-harness differences. The runtime passport must still bind the exact
+Codex CLI, model, reasoning effort, images, permissions, network policy, tools,
+and budget. A future Claude Code, Cursor, or bare-model comparison starts only
+after the Codex pipeline passes activation and one larger study is
+decision-valid.
+
+### Parallel evidence debts
+
+Alpha.12 should also close, or explicitly record as missing, the scheduled
+Systematic Debugging downstream follow-up. Role-separated reproduction remains
+a beta gate and must not be relabeled from a maintainer rerun. These debts do
+not compensate for a failed activation or weak task population.
+
+Only after a valid Codex scale-up should AEL consider:
 
 - a crossed model × scaffold design that separates main and interaction effects;
 - repository instruction, context, or tool-boundary studies with real owner
@@ -224,11 +295,11 @@ one serious decision question
 ```
 
 Method-only releases are exceptions. They require a named instrument defect
-that blocks or distorts the next important answer. Alpha.8 was such an
-exception; alpha.9 demonstrates why method volume is not product progress by
-itself. Alpha.10 is the method-only exception for a named diagnostic defect;
-real capture and decision use, not fixture count, determine whether its
-instruments earn empirical support.
+that blocks or distorts the next important answer. Alpha.8 and alpha.10 were
+such exceptions; alpha.9 and alpha.11 show why null and invalid empirical
+answers are more valuable than method volume or passing fixture count. Alpha.12
+must earn scale through real adapter activation, task validity, evaluator
+sensitivity, observed repeat evidence, and a frozen owner decision.
 
 ## Beta evidence gates
 

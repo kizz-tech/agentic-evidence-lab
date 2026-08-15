@@ -396,6 +396,21 @@ def _receipt(
         "revise_capture_mapping": "inconclusive",
         "revise_reporter_protocol": "inconclusive",
     }
+    completed_protocol = decision["status"] == "complete"
+    claim_level = "workflow" if completed_protocol else "artifact"
+    decision_statement = str(decision["reason"])
+    count_statement = (
+        "On the exact two roots, B0 produced "
+        f"{counts['B0']['claim_agreement']} observed agreements across "
+        f"{counts['B0']['valid']} valid calls; T1 produced "
+        f"{counts['T1']['claim_agreement']} observed agreements across "
+        f"{counts['T1']['valid']} valid calls. Unrun or invalid calls are not "
+        "counted as disagreements; these are descriptive counts, not an effect estimate."
+    )
+    if not completed_protocol:
+        decision_statement = f"The published activation bundle records: {decision_statement}"
+        count_statement = f"The published normalized record states: {count_statement}"
+
     return {
         "schema_version": "ael.evidence-receipt/0.1",
         "object_type": "evidence_receipt",
@@ -429,9 +444,7 @@ def _receipt(
             "visibility": "public",
             "measurement_set_id": measurement_set_id,
         },
-        "evidence_level": (
-            "runtime_conformant" if decision["status"] == "complete" else "structurally_valid"
-        ),
+        "evidence_level": "runtime_conformant" if completed_protocol else "structurally_valid",
         "reproducibility": "not_rerunnable",
         "independence": {
             "label": "maintainer_evaluated",
@@ -453,9 +466,9 @@ def _receipt(
         "evaluated_claims": [
             {
                 "claim_id": f"{claim_prefix}-01",
-                "statement": str(decision["reason"]),
+                "statement": decision_statement,
                 "status": "bounded",
-                "claim_level": "workflow",
+                "claim_level": claim_level,
                 "scope": [
                     "exact two-root activation schedule",
                     "versioned owner capture and reporter adapters",
@@ -468,16 +481,9 @@ def _receipt(
             },
             {
                 "claim_id": f"{claim_prefix}-02",
-                "statement": (
-                    "On the exact two roots, B0 produced "
-                    f"{counts['B0']['claim_agreement']} observed agreements across "
-                    f"{counts['B0']['valid']} valid calls; T1 produced "
-                    f"{counts['T1']['claim_agreement']} observed agreements across "
-                    f"{counts['T1']['valid']} valid calls. Unrun or invalid calls are not "
-                    "counted as disagreements; these are descriptive counts, not an effect estimate."
-                ),
+                "statement": count_statement,
                 "status": "bounded",
-                "claim_level": "workflow",
+                "claim_level": claim_level,
                 "scope": ["B0 and T1 reporter calls over identical sealed task-level evidence"],
                 "evidence_refs": [
                     f"{measurement_prefix}:B0_claim_agreement",

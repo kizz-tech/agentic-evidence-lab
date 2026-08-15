@@ -1,0 +1,95 @@
+{
+  "condition_id": "E0",
+  "effects": [
+    {
+      "effect_type": "candidate_workspace_change",
+      "evidence_refs": [
+        {
+          "sha256": "e373f3325c6e9551889072a735f24ba51fe8621c9a822f9c9829188358a9200d",
+          "uri": "../../freeze.json",
+          "visibility": "public"
+        },
+        {
+          "sha256": "86a872c230351db41868ad3da1b6710cbaa0d4f5b096457f2928ae00de8ed7ba",
+          "uri": "urn:kizz:ael:private:codex-events:CI2-PY-01-E0",
+          "visibility": "hidden"
+        }
+      ],
+      "outcome": "observed",
+      "target": "urn:kizz:ael:private:executor:CI2-PY-01-E0"
+    }
+  ],
+  "event_summary": {
+    "authenticated_actor_ids": [],
+    "captured": true,
+    "event_count": 56,
+    "limitations": [
+      "Raw Codex events are retained privately; this record exposes hashes and counts only."
+    ]
+  },
+  "integrity_issues": [],
+  "object_type": "run_record",
+  "outputs": [
+    {
+      "sha256": "3e787de89a7c566fa96121c9509c3ee0d706470fb69132fe34dfa522fb24df06",
+      "uri": "urn:kizz:ael:private:candidate:CI2-PY-01-E0",
+      "visibility": "hidden"
+    }
+  ],
+  "repeat_index": 1,
+  "run_id": "kizz:ael:run:completion-integrity-activation-v2:revision:2:CI2-PY-01-E0",
+  "runtime": {
+    "context_sha256": "3e787de89a7c566fa96121c9509c3ee0d706470fb69132fe34dfa522fb24df06",
+    "environment": {
+      "digest": "f5ebad21373b16799a4bb0189d917856280cca8394c25967c95d612b6b61ac08",
+      "ephemeral": true,
+      "identity_available": true
+    },
+    "harness": {
+      "name": "codex-cli",
+      "version": "0.146.0"
+    },
+    "model": {
+      "effort": "xhigh",
+      "immutable_revision_exposed": false,
+      "model_id": "gpt-5.6-sol",
+      "provider": "OpenAI"
+    },
+    "sandbox": "docker-ephemeral-writable-candidate-openai-proxy",
+    "tool_policy_sha256": "22d75d5722b685768c657ce8be1024a33ca5f78257082dee5848bc1a0db7dab7"
+  },
+  "schema_version": "ael.run-record/0.1",
+  "source_refs": [
+    {
+      "sha256": "e373f3325c6e9551889072a735f24ba51fe8621c9a822f9c9829188358a9200d",
+      "uri": "../../freeze.json",
+      "visibility": "public"
+    },
+    {
+      "sha256": "86a872c230351db41868ad3da1b6710cbaa0d4f5b096457f2928ae00de8ed7ba",
+      "uri": "urn:kizz:ael:private:codex-events:CI2-PY-01-E0",
+      "visibility": "hidden"
+    }
+  ],
+  "status": "valid",
+  "study_ref": {
+    "revision": 2,
+    "sha256": "e8eb6d3056b766e2440e121472ebd5ff89a4079dc641688959c80691832f081a",
+    "study_id": "kizz:ael:study:completion-integrity-activation-v2",
+    "uri": "../../study-manifest.json",
+    "visibility": "public"
+  },
+  "task": {
+    "role": "calibration",
+    "stratum": "python-cli",
+    "task_id": "CI2-PY-01",
+    "task_pack_id": "completion-integrity-v2-activation"
+  },
+  "usage": {
+    "cached_input_tokens": 297984,
+    "input_tokens": 332984,
+    "output_tokens": 8922,
+    "reasoning_output_tokens": 4820,
+    "wall_time_ms": 194219
+  }
+}

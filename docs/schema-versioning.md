@@ -118,6 +118,25 @@ the supported migration is a mechanical profile-version update followed by
 deterministic regeneration. Alpha.8 does not add a Claim-Support Envelope,
 Decision Case, or sixth evidence object.
 
+## Alpha.11 current-unassessed projection boundary
+
+Alpha.11 advances the repository-owned result profile and projection to
+`ael.public-results/0.6` and `ael.publication-projection/0.6`.
+`quality.assessment = not_assessed_current` requires a reason and projects every
+quality axis as unassessed. It is for a prospective run that lacked a
+preregistered Study Quality Profile; it cannot be relabeled historical or
+certified retrospectively.
+
+The migration is mechanical: update both projection identifiers, use the new
+state only for genuinely current unprofiled studies, and regenerate the derived
+cards. Historical and hash-bound profiled entries retain their meaning. The
+five Contract v0 `0.1` schemas remain unchanged.
+
+Activation v2 also discloses a post-run publication repair: its
+`structurally_valid` invalid-protocol receipt uses record-centric `artifact`
+claims rather than unsupported `workflow` claims. Observations, measurements,
+decision, freeze, and the historical materializer hash do not change.
+
 ## Migration requirement
 
 The first incompatible schema change must include:

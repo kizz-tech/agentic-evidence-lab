@@ -171,7 +171,7 @@ owned frozen truth. It keeps truth, progress and verified/failed/unresolved
 extent orthogonal and binds attempt, artifact and evidence hashes. Closed-shape
 validation cannot prove that a real runtime denied the reporter tools, writes,
 retries, executor access, evaluator access or remediation authority. That proof
-belongs to the first owner adapter.
+belongs to the activation owner adapter and its retained runtime evidence.
 
 Task supply is now a separate family-local development boundary:
 
@@ -191,9 +191,13 @@ public synthetic dataset, stable cross-family API or alpha.9 policy change is
 introduced. See
 [Completion Integrity task supply](completion-integrity-task-supply.md).
 
-No public audit adapter is registered until a real result exists. See
-[Observable enactment for Completion Integrity](completion-integrity-enactment.md)
-and [Completion Integrity terminal claims](completion-integrity-terminal-claims.md).
+Alpha.11 adds the real owner adapter and a public study-family audit. The path
+is executor → event capture → offline evaluator → sealed reporter evidence →
+closed submission → terminal assessment. Activation v2 proved that response-
+schema acceptance alone is insufficient: an owner-generated identifier failed
+the complete wrapper contract. Current source makes attempt IDs valid by
+construction and tests the complete wrapper, while the v2 freeze continues to
+bind the historical source. See [Completion Integrity activation](completion-integrity-activation.md).
 
 Git ancestry or a tag can prove repository artifact ordering—for example, that
 freeze bytes are present in an ancestor. It cannot prove that private model

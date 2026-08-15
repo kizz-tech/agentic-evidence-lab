@@ -76,6 +76,11 @@ jobs:
             --result studies/completion-integrity/activation-v1/results \
             --decision-adapter completion-integrity-activation-v1 \
             --require-git-proof
+          uv run ael study audit \
+            --freeze studies/completion-integrity/activation-v2/freeze.json \
+            --result studies/completion-integrity/activation-v2/results \
+            --decision-adapter completion-integrity-activation-v1 \
+            --require-git-proof
       - name: Validate Agent Skills Season 1
         run: |
           uv run ael source-lock check studies/agent-skills-season-1/sources.lock.toml
@@ -108,7 +113,7 @@ jobs:
         run: |
           uv build
           uv run python tools/verify_release_artifacts.py \
-            --expected-version 0.1.0a10 \
+            --expected-version 0.1.0a11 \
             dist/*.whl dist/*.tar.gz
 
   clean-wheel:
@@ -132,8 +137,8 @@ jobs:
           test -n "$wheel"
           uv venv .release-venv
           uv pip install --python .release-venv/bin/python "$wheel"
-          test "$(.release-venv/bin/ael --version)" = "0.1.0a10"
-          test "$(.release-venv/bin/python -c 'import importlib.metadata; print(importlib.metadata.version("agentic-evidence-lab"))')" = "0.1.0a10"
+          test "$(.release-venv/bin/ael --version)" = "0.1.0a11"
+          test "$(.release-venv/bin/python -c 'import importlib.metadata; print(importlib.metadata.version("agentic-evidence-lab"))')" = "0.1.0a11"
           .release-venv/bin/ael study preflight \
             studies/quality-preflight/examples/pass/quality-profile.json \
             --json-output studies/quality-preflight/examples/pass/preflight.json \
@@ -161,6 +166,11 @@ jobs:
           .release-venv/bin/ael study audit \
             --freeze studies/completion-integrity/activation-v1/freeze.json \
             --result studies/completion-integrity/activation-v1/results \
+            --decision-adapter completion-integrity-activation-v1 \
+            --require-git-proof
+          .release-venv/bin/ael study audit \
+            --freeze studies/completion-integrity/activation-v2/freeze.json \
+            --result studies/completion-integrity/activation-v2/results \
             --decision-adapter completion-integrity-activation-v1 \
             --require-git-proof
           .release-venv/bin/ael validate examples

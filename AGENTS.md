@@ -13,11 +13,14 @@ separate repositories, provenance, versions, and release authority.
 
 ## Current state
 
-The current package line is `v0.1.0-alpha.10`, a method-only Completion
-Integrity measurement-foundation release covering observable enactment,
-terminal claims, and task admission. It does not supersede the alpha.9 null or
-establish that the new instruments improve a real agent workflow; deterministic
-fixtures prove only bounded computation and contract conformance.
+The current package line is `v0.1.0-alpha.11`, an empirical Completion
+Integrity activation release. Activation v2 terminated
+`protocol_invalid / revise_activation_adapter` after two of six Codex cells;
+no cell was retried and no reporter-effect or accuracy result exists. Current
+source repairs future attempt identity and full-wrapper coverage, but the v2
+freeze and invalid result remain historical authority. A repaired observation
+requires a new revision, new raw root, new preregistration, and prospective
+quality profile.
 GitHub Releases owns the latest externally published state; repository prose
 does not prove publication. The project is Apache-2.0 licensed but remains
 pre-stable. Do not claim that a commit is pushed, a tag is released, CI is
@@ -70,6 +73,12 @@ external account requires explicit task-specific authority.
 - Reporter-only shape and hash checks do not prove runtime isolation. Claim
   isolation and reviewer-assisted remediation are separate causal questions;
   remediation requires separately frozen authority and budget.
+- Provider response-schema acceptance is not end-to-end qualification. Every
+  owner-generated identifier, truth wrapper, reporter submission, and terminal
+  assessment must compose before a real activation is admitted.
+- A prospective run without a preregistered Study Quality Profile is
+  `not_assessed_current`. Do not relabel it as historical or certify it
+  retrospectively.
 
 ## External review trust boundary
 

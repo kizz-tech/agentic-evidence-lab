@@ -287,11 +287,17 @@ def _validate_quality(value: Any, location: str) -> None:
     if assessment == "not_assessed_historical":
         _require_keys(value, {"assessment"}, set(), location)
         return
+    if assessment == "not_assessed_current":
+        _require_keys(value, {"assessment", "reason"}, set(), location)
+        _nonempty_string(value.get("reason"), f"{location}.reason")
+        return
     if assessment == "profiled":
         _require_keys(value, {"assessment", "profile_ref"}, set(), location)
         _validate_profile_ref_shape(value.get("profile_ref"), f"{location}.profile_ref")
         return
-    _fail(f"{location}.assessment must be not_assessed_historical or profiled")
+    _fail(
+        f"{location}.assessment must be not_assessed_historical, not_assessed_current, or profiled"
+    )
 
 
 def _validate_lifecycle(value: Any, location: str) -> None:
@@ -896,6 +902,25 @@ def _quality_projection(
             "boundary": (
                 "The study predates the pilot Study Quality Profile. No retrospective "
                 "measurement-quality assessment is inferred from current artifacts."
+            ),
+        }
+    if value["assessment"] == "not_assessed_current":
+        return {
+            "scope": "design_preflight",
+            "status": "not_assessed_current",
+            "quality_axes": {
+                "design_class": "not_assessed_current",
+                "task_validity": "not_assessed_current",
+                "evaluator_validity": "not_assessed_current",
+                "sampling_strength": "not_assessed_current",
+                "reliability_coverage": "not_assessed_current",
+                "independence": "not_assessed_current",
+                "freshness": "not_assessed_current",
+            },
+            "issues": [],
+            "boundary": (
+                str(value["reason"])
+                + " No retrospective design certification is inferred from the completed run."
             ),
         }
     quality_path, quality_digest = sources.resolve(

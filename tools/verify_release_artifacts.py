@@ -51,7 +51,7 @@ PERSONAL_PATH_PATTERNS = (
 WORKSPACE_MARKER = b"codex" + b"-work1"
 EXPECTED_PROJECT_NAME = "agentic-evidence-lab"
 EXPECTED_DISTRIBUTION_NAME = "agentic_evidence_lab"
-EXPECTED_PROJECTION_POLICY = "ael.publication-projection/0.5"
+EXPECTED_PROJECTION_POLICY = "ael.publication-projection/0.6"
 
 WHEEL_REQUIRED_SUFFIXES = ("ael/__init__.py",)
 WHEEL_REQUIRED_DIST_INFO = ("METADATA", "WHEEL", "RECORD")

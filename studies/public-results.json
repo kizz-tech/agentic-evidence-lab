@@ -1,8 +1,83 @@
 {
-  "schema_version": "ael.public-results/0.5",
+  "schema_version": "ael.public-results/0.6",
   "as_of": "2026-08-15",
-  "projection_policy": "ael.publication-projection/0.5",
+  "projection_policy": "ael.publication-projection/0.6",
   "studies": [
+    {
+      "card_id": "completion-integrity-activation-v2",
+      "title": "Completion Integrity activation v2",
+      "catalog_state": "listed",
+      "maintainer_rerun": {
+        "status": "unavailable",
+        "boundary": "The submitted v2 schedule cannot be retried or resumed. Any repaired adapter must create a new protocol revision, preregistration, raw root, and provider observation."
+      },
+      "receipt_ref": {
+        "uri": "studies/completion-integrity/activation-v2/results/evidence-receipt.json",
+        "sha256": "b29ffd2ccc9aec0156b0218244ddc015c33c607f7afad4725a23c1651a2f3f13"
+      },
+      "report_ref": {
+        "uri": "reports/2026-08-15-completion-integrity-activation-v2.md",
+        "sha256": "e6fbdf2b10721b47333b6ed6098a6fed0cf529ef1693e7d1fdeb8c1143ada920"
+      },
+      "claim_ids": [
+        "AEL-CI11-R2-01",
+        "AEL-CI11-R2-02"
+      ],
+      "decision_claim_ids": [
+        "AEL-CI11-R2-01"
+      ],
+      "verification": {
+        "kind": "frozen_public_bundle",
+        "command": [
+          "uv run ael study audit --freeze studies/completion-integrity/activation-v2/freeze.json --result studies/completion-integrity/activation-v2/results --decision-adapter completion-integrity-activation-v1 --require-git-proof"
+        ],
+        "boundary": "Validates the public Contract v0 graph, exact freeze and preregistration bindings, all scheduled terminal and unrun states, normalized measurements, and the recomputed protocol-invalid decision. It does not reveal or rerun private tasks, evaluators, candidates, raw events, authentication, or hosted calls, and it is not independent replication.",
+        "freeze_ref": {
+          "uri": "studies/completion-integrity/activation-v2/freeze.json",
+          "sha256": "e373f3325c6e9551889072a735f24ba51fe8621c9a822f9c9829188358a9200d"
+        },
+        "result_root": "studies/completion-integrity/activation-v2/results",
+        "adapter": "completion-integrity-activation-v1"
+      },
+      "materials": [
+        {
+          "label": "Alpha.11 activation result and post-run publication repair decision",
+          "availability": "public",
+          "ref": {
+            "uri": "docs/decisions/2026-08-15-alpha11-activation-result.md",
+            "sha256": "19d4f8eed11112bc25c1ba289f3bff4c7a5567769f4c5351237bdda12725cd0e"
+          }
+        },
+        {
+          "label": "Private tasks, evaluators, candidates, raw events, and attempt journals",
+          "availability": "withheld",
+          "reason": "Exact task fixtures, evaluator code, candidate workspaces, Codex events, terminal assessments, and no-retry journals remain in the private evidence boundary.",
+          "reproduction_impact": "A public checkout can recompute the protocol-invalid decision and verify opaque hashes but cannot reconstruct the wrapper-level causal diagnosis or rerun the historical cells."
+        },
+        {
+          "label": "Hosted model calls",
+          "availability": "not_retained",
+          "reason": "The public graph retains normalized run records rather than a replayable provider execution service or immutable model revision.",
+          "reproduction_impact": "The exact historical provider behavior cannot be replayed from the repository."
+        },
+        {
+          "label": "Reusable authentication",
+          "availability": "not_collected",
+          "reason": "Reusable credentials are excluded from public evidence and release artifacts.",
+          "reproduction_impact": "Public audit requires no credentials; any new hosted observation requires separately authorized authentication."
+        }
+      ],
+      "history": {
+        "admission": "not_declared_historical",
+        "action": "not_declared_historical",
+        "outcome_follow_up": "not_declared_historical",
+        "freshness": "unassessed"
+      },
+      "quality": {
+        "assessment": "not_assessed_current",
+        "reason": "Activation v2 was prospectively frozen, but no preregistered Study Quality Profile governed it."
+      }
+    },
     {
       "card_id": "completion-integrity-prompt-policy-v1",
       "title": "Completion Integrity prompt policy v1",

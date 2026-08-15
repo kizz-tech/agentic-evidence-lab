@@ -48,9 +48,9 @@ class ResultSurfaceTests(unittest.TestCase):
         shutil.copytree(EXAMPLE, example)
         receipt = example / "evidence-receipt.json"
         profile: dict[str, object] = {
-            "schema_version": "ael.public-results/0.5",
+            "schema_version": "ael.public-results/0.6",
             "as_of": "2026-08-12",
-            "projection_policy": "ael.publication-projection/0.5",
+            "projection_policy": "ael.publication-projection/0.6",
             "studies": [
                 {
                     "card_id": "council-generation-1",
@@ -87,7 +87,7 @@ class ResultSurfaceTests(unittest.TestCase):
         profile_path.write_text(json.dumps(profile, indent=2), encoding="utf-8")
         return profile_path, profile, receipt
 
-    def test_current_five_card_projection_is_deterministic(self) -> None:
+    def test_current_public_projection_is_deterministic(self) -> None:
         first = build_result_surface(PROFILE)
         second = build_result_surface(PROFILE)
         self.assertEqual(first, second)
@@ -95,6 +95,7 @@ class ResultSurfaceTests(unittest.TestCase):
             {
                 "RESULTS.md",
                 "docs/results/index.json",
+                "docs/results/completion-integrity-activation-v2.md",
                 "docs/results/completion-integrity-prompt-policy-v1.md",
                 "docs/results/council-generation-1.md",
                 "docs/results/focused-change-verification-calibration.md",
@@ -107,9 +108,10 @@ class ResultSurfaceTests(unittest.TestCase):
         profile_entries = {
             entry["card_id"]: entry for entry in load_public_profile(PROFILE)["studies"]
         }
-        self.assertEqual("ael.public-results/0.5", index["schema_version"])
+        self.assertEqual("ael.public-results/0.6", index["schema_version"])
         self.assertEqual(
             [
+                "completion-integrity-activation-v2",
                 "completion-integrity-prompt-policy-v1",
                 "council-generation-1",
                 "focused-change-verification-calibration",
@@ -145,7 +147,12 @@ class ResultSurfaceTests(unittest.TestCase):
         self.assertIn("not_declared_historical", first["docs/results/property-based-testing-v2.md"])
         self.assertIn("not_assessed_historical", first["docs/results/property-based-testing-v2.md"])
         for card in index["studies"]:
-            if card["card_id"] == "completion-integrity-prompt-policy-v1":
+            if card["card_id"] == "completion-integrity-activation-v2":
+                self.assertEqual("not_assessed_current", card["quality"]["status"])
+                self.assertEqual(
+                    {"not_assessed_current"}, set(card["quality"]["quality_axes"].values())
+                )
+            elif card["card_id"] == "completion-integrity-prompt-policy-v1":
                 self.assertEqual("current", card["quality"]["quality_axes"]["freshness"])
                 self.assertEqual("audited", card["quality"]["quality_axes"]["task_validity"])
             else:
@@ -153,7 +160,13 @@ class ResultSurfaceTests(unittest.TestCase):
                 self.assertEqual(
                     {"not_assessed_historical"}, set(card["quality"]["quality_axes"].values())
                 )
-            if card["card_id"] == "completion-integrity-prompt-policy-v1":
+            if card["card_id"] == "completion-integrity-activation-v2":
+                self.assertEqual(
+                    "retained_cell_without_valid_observation",
+                    card["runs"]["repeat_evidence"]["status"],
+                )
+                self.assertEqual("not_reported", card["measurements"]["uncertainty"]["status"])
+            elif card["card_id"] == "completion-integrity-prompt-policy-v1":
                 self.assertEqual(
                     "repeated_valid_observations_per_retained_cell",
                     card["runs"]["repeat_evidence"]["status"],
@@ -292,6 +305,28 @@ class ResultSurfaceTests(unittest.TestCase):
         }
         with self.assertRaisesRegex(ResultSurfaceError, "profile_ref"):
             validate_public_profile(malformed_quality)
+
+        missing_current_reason = copy.deepcopy(profile)
+        missing_current_reason["studies"][0]["quality"] = {  # type: ignore[index]
+            "assessment": "not_assessed_current"
+        }
+        with self.assertRaisesRegex(ResultSurfaceError, "reason"):
+            validate_public_profile(missing_current_reason)
+
+    def test_current_unprofiled_quality_is_explicit_and_non_retrospective(self) -> None:
+        with self._temporary_directory() as temporary:
+            profile_path, profile, _receipt = self._profile_tree(temporary)
+            profile["studies"][0]["quality"] = {  # type: ignore[index]
+                "assessment": "not_assessed_current",
+                "reason": "No preregistered Study Quality Profile governed this run.",
+            }
+            profile_path.write_text(json.dumps(profile, indent=2) + "\n", encoding="utf-8")
+            outputs = build_result_surface(profile_path, Path(temporary))
+            index = json.loads(outputs["docs/results/index.json"])
+            projected = index["studies"][0]["quality"]
+            self.assertEqual("not_assessed_current", projected["status"])
+            self.assertEqual({"not_assessed_current"}, set(projected["quality_axes"].values()))
+            self.assertIn("No retrospective design certification", projected["boundary"])
 
     def test_duplicate_cards_and_claims_are_rejected(self) -> None:
         profile = load_public_profile(PROFILE)

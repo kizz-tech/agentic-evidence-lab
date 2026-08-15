@@ -17,6 +17,12 @@ longer prose cannot resolve that ambiguity.
 Alpha.10 does not rewrite that result. It defines the smallest candidate
 instrument needed for a future study to ask a different question.
 
+Alpha.11 supplied that owner adapter and exercised it on real Codex calls.
+Activation v2 retained one `observable_chain_incomplete` executor before a
+separate wrapper-integrity failure stopped the schedule. That is a bounded real
+observation, not evidence that the classifier or reporter improves outcomes.
+See [Completion Integrity activation](completion-integrity-activation.md).
+
 ## Four non-compensating facets
 
 | Facet | Candidate rule |
@@ -43,10 +49,11 @@ whether a normalized event label was present.
 ## Evidence ceiling
 
 The policy file, method plan, observations, and golden bundle are byte-bound.
-The ledger digest is recomputed. Normalized event labels and event digests are
-still caller-provided synthetic declarations; no current owner adapter proves
-that a real harness captured them. Therefore fixture success establishes
-deterministic classifier behavior only—not real enactment, cognition, causal
+The ledger digest is recomputed. Normalized event labels and event digests in
+the alpha.10 golden fixture are caller-provided synthetic declarations. The
+alpha.11 owner adapter can retain real Codex events, but each run still needs
+its own custody and binding proof. Fixture success alone establishes
+deterministic classifier behavior—not real enactment, cognition, causal
 mediation, outcome correctness, or intervention benefit.
 
 Alpha.9 is explicitly `not_assessable` for this new predicate because it did

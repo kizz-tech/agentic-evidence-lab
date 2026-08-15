@@ -6,6 +6,54 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.0-alpha.11] - 2026-08-15
+
+### Added
+
+- The first real Codex activation of the alpha.10 Completion Integrity
+  instrument, retained as a six-cell public result with one valid executor,
+  one invalid reporter, four unrun cells, and zero outcome retries.
+- A claim-first activation card, narrative report, Contract v0 result bundle,
+  and exact frozen-study audit for the
+  `protocol_invalid / revise_activation_adapter` decision.
+- A full-wrapper regression proving that adapter-generated attempt identity,
+  frozen truth, reporter submission, and terminal assessment compose.
+- A public alpha.11 decision record separating historical result, post-run
+  publication repair, current source repair, and alpha.12 admission.
+
+### Changed
+
+- Future activation attempt IDs are alphabetically namespaced and valid by
+  construction instead of using a bare hexadecimal digest that may violate the
+  terminal-claim identifier grammar.
+- Invalid activation receipts project record-centric `artifact` claims under
+  `structurally_valid`; completed activation retains `workflow` claims only
+  under `runtime_conformant`.
+- Public-results and publication-projection policies advance to `0.6` and add
+  an explicit `not_assessed_current` state with a mandatory reason. This avoids
+  both false historical labeling and retrospective design certification.
+- CI and clean-wheel gates audit both activation revisions and the new public
+  result, while release checks require the alpha.11 report, decision, card, and
+  evidence bundle.
+- Package, citation, CI, clean-wheel checks, generated projections, and release
+  metadata identify `0.1.0a11` / `v0.1.0-alpha.11`.
+
+### Research integrity
+
+- Activation v2 was preregistered at
+  `462e3d9b9676fecfe55705cd021aac83cdfa9077`; its exact-SHA preregistration CI
+  passed before scored execution.
+- The schedule stopped at the first wrapper-integrity failure. No v2 cell was
+  retried, resumed, retrospectively accepted, or counted as a disagreement.
+- The private B0 content matched frozen truth, but the owner wrapper was
+  invalid; this is retained as adapter evidence, not reporter-accuracy evidence.
+- The post-run claim-class repair changes publication representation only. It
+  does not change frozen observations, measurements, scheduled states, or the
+  terminal decision, and the historical materializer hash remains in the
+  freeze.
+- No reporter effect, model quality, reliability, transfer, independent
+  replication, stable cost, or downstream outcome is claimed.
+
 ## [0.1.0-alpha.10] - 2026-08-15
 
 ### Added
@@ -348,7 +396,8 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   process can read the reusable credential.
 - Contract v0 remains pre-stable and may change incompatibly before `1.0`.
 
-[Unreleased]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.10...HEAD
+[Unreleased]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.11...HEAD
+[0.1.0-alpha.11]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.10...v0.1.0-alpha.11
 [0.1.0-alpha.10]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.9...v0.1.0-alpha.10
 [0.1.0-alpha.9]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.8...v0.1.0-alpha.9
 [0.1.0-alpha.8]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.5...v0.1.0-alpha.8

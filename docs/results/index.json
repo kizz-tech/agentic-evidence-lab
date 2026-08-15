@@ -2,14 +2,384 @@
   "as_of": "2026-08-15",
   "generator": {
     "name": "agentic-evidence-lab",
-    "version": "0.1.0a10"
+    "version": "0.1.0a11"
   },
-  "projection_policy": "ael.publication-projection/0.5",
-  "schema_version": "ael.public-results/0.5",
+  "projection_policy": "ael.publication-projection/0.6",
+  "schema_version": "ael.public-results/0.6",
   "source_hashes": {
-    "studies/public-results.json": "37f1a8d6f196ee5a2079c3529137af26cdc853a93a1b9523c5d2533cd719aebe"
+    "studies/public-results.json": "1462b65fe2fbb6103ee0a0d3512d4c381a1d904db3aa475ff37b94e62508d34a"
   },
   "studies": [
+    {
+      "card_id": "completion-integrity-activation-v2",
+      "catalog_state": "listed",
+      "claim_ids": [
+        "AEL-CI11-R2-01",
+        "AEL-CI11-R2-02"
+      ],
+      "claims": [
+        {
+          "claim_id": "AEL-CI11-R2-01",
+          "claim_level": "artifact",
+          "decision_governing": true,
+          "evidence_bindings": [
+            {
+              "binding": "measurement",
+              "measurement_kind": "aggregate",
+              "reference": "ci11-r2:observable_chain_complete",
+              "task_pack_roles": [
+                "calibration"
+              ]
+            },
+            {
+              "binding": "measurement",
+              "measurement_kind": "aggregate",
+              "reference": "ci11-r2:artifact_or_evaluator_exposure",
+              "task_pack_roles": [
+                "calibration"
+              ]
+            }
+          ],
+          "evidence_refs": [
+            "ci11-r2:observable_chain_complete",
+            "ci11-r2:artifact_or_evaluator_exposure"
+          ],
+          "falsifier": "A frozen recomputation produces a different disposition or any retained raw boundary check contradicts the normalized observation.",
+          "scope": [
+            "exact two-root activation schedule",
+            "versioned owner capture and reporter adapters"
+          ],
+          "statement": "The published activation bundle records: The frozen activation protocol was not completed without an integrity failure.",
+          "status": "bounded"
+        },
+        {
+          "claim_id": "AEL-CI11-R2-02",
+          "claim_level": "artifact",
+          "decision_governing": false,
+          "evidence_bindings": [
+            {
+              "binding": "measurement",
+              "measurement_kind": "aggregate",
+              "reference": "ci11-r2:B0_claim_agreement",
+              "task_pack_roles": [
+                "calibration"
+              ]
+            },
+            {
+              "binding": "measurement",
+              "measurement_kind": "aggregate",
+              "reference": "ci11-r2:T1_claim_agreement",
+              "task_pack_roles": [
+                "calibration"
+              ]
+            }
+          ],
+          "evidence_refs": [
+            "ci11-r2:B0_claim_agreement",
+            "ci11-r2:T1_claim_agreement"
+          ],
+          "falsifier": "The public observations or terminal-claim assessments recompute to different condition counts.",
+          "scope": [
+            "B0 and T1 reporter calls over identical sealed task-level evidence"
+          ],
+          "statement": "The published normalized record states: On the exact two roots, B0 produced 0 observed agreements across 0 valid calls; T1 produced 0 observed agreements across 0 valid calls. Unrun or invalid calls are not counted as disagreements; these are descriptive counts, not an effect estimate.",
+          "status": "bounded"
+        }
+      ],
+      "decision": {
+        "disposition": "inconclusive",
+        "reversal_trigger": "A recomputation mismatch, frozen-binding failure, hidden protocol breach, or larger preregistered pilot contradicts this bounded decision.",
+        "scope": [
+          "the versioned Completion Integrity activation adapter",
+          "two qualified sacrificial Python and TypeScript roots",
+          "the pinned Codex CLI 0.146.0 / gpt-5.6-sol xhigh stack"
+        ],
+        "summary": "The frozen activation protocol was not completed without an integrity failure."
+      },
+      "decision_claim_ids": [
+        "AEL-CI11-R2-01"
+      ],
+      "evidence_level": "structurally_valid",
+      "generator": {
+        "name": "agentic-evidence-lab",
+        "version": "0.1.0a11"
+      },
+      "history": {
+        "action": "not_declared_historical",
+        "admission": "not_declared_historical",
+        "freshness": "unassessed",
+        "outcome_follow_up": "not_declared_historical"
+      },
+      "independence": {
+        "disclosure": "No independent task selection, evaluation, provider execution, or replication exists.",
+        "label": "maintainer_evaluated",
+        "role_overlaps": [
+          "Kizz authored the method, sacrificial tasks, deterministic evaluators, adapters, analysis, and owner decision."
+        ]
+      },
+      "invalidation_triggers": [
+        "Any public graph hash, frozen decision count, preregistration ordering, or protected private hash fails verification.",
+        "Any reporter received task artifact, evaluator, executor workspace, intervention, or mutable evidence access.",
+        "A hidden raw event, evaluator repeat, or no-retry journal contradicts the public normalized record."
+      ],
+      "limitations": [
+        "The frozen design contains only two sacrificial roots and schedules each reporter condition once per root; protocol-invalid execution can leave cells unrun.",
+        "Task, evaluator, candidate, event, authentication, and personal-path bytes remain private.",
+        "Maintainer authorship and evaluation overlap; provider state is not immutable or replayable.",
+        "The reporter retained a built-in command tool inside a read-only evidence boundary; it was not tool-free."
+      ],
+      "materials": [
+        {
+          "availability": "public",
+          "label": "Alpha.11 activation result and post-run publication repair decision",
+          "ref": {
+            "sha256": "19d4f8eed11112bc25c1ba289f3bff4c7a5567769f4c5351237bdda12725cd0e",
+            "uri": "docs/decisions/2026-08-15-alpha11-activation-result.md"
+          }
+        },
+        {
+          "availability": "withheld",
+          "label": "Private tasks, evaluators, candidates, raw events, and attempt journals",
+          "reason": "Exact task fixtures, evaluator code, candidate workspaces, Codex events, terminal assessments, and no-retry journals remain in the private evidence boundary.",
+          "reproduction_impact": "A public checkout can recompute the protocol-invalid decision and verify opaque hashes but cannot reconstruct the wrapper-level causal diagnosis or rerun the historical cells."
+        },
+        {
+          "availability": "not_retained",
+          "label": "Hosted model calls",
+          "reason": "The public graph retains normalized run records rather than a replayable provider execution service or immutable model revision.",
+          "reproduction_impact": "The exact historical provider behavior cannot be replayed from the repository."
+        },
+        {
+          "availability": "not_collected",
+          "label": "Reusable authentication",
+          "reason": "Reusable credentials are excluded from public evidence and release artifacts.",
+          "reproduction_impact": "Public audit requires no credentials; any new hosted observation requires separately authorized authentication."
+        }
+      ],
+      "measurements": {
+        "by_kind": {
+          "aggregate": 6,
+          "cost": 12,
+          "process": 6
+        },
+        "count": 24,
+        "measurement_set_id": "kizz:ael:measurements:completion-integrity-activation-v2:revision:2",
+        "selected_summaries": [
+          {
+            "aggregation_basis": "non_aggregate_measurements",
+            "category": "cost_or_latency",
+            "condition_id": "all",
+            "metric": "generated_work_tokens",
+            "observations": 6,
+            "total": 14418.0,
+            "unit": "tokens"
+          },
+          {
+            "aggregation_basis": "non_aggregate_measurements",
+            "category": "cost_or_latency",
+            "condition_id": "all",
+            "metric": "wall_time",
+            "observations": 6,
+            "total": 212947.0,
+            "unit": "ms"
+          }
+        ],
+        "uncertainty": {
+          "measurement_count": 0,
+          "status": "not_reported"
+        }
+      },
+      "quality": {
+        "boundary": "Activation v2 was prospectively frozen, but no preregistered Study Quality Profile governed it. No retrospective design certification is inferred from the completed run.",
+        "issues": [],
+        "quality_axes": {
+          "design_class": "not_assessed_current",
+          "evaluator_validity": "not_assessed_current",
+          "freshness": "not_assessed_current",
+          "independence": "not_assessed_current",
+          "reliability_coverage": "not_assessed_current",
+          "sampling_strength": "not_assessed_current",
+          "task_validity": "not_assessed_current"
+        },
+        "scope": "design_preflight",
+        "status": "not_assessed_current"
+      },
+      "receipt": {
+        "sha256": "b29ffd2ccc9aec0156b0218244ddc015c33c607f7afad4725a23c1651a2f3f13",
+        "uri": "studies/completion-integrity/activation-v2/results/evidence-receipt.json"
+      },
+      "receipt_id": "kizz:ael:receipt:completion-integrity-activation-v2:revision:2",
+      "receipt_reproducibility": "not_rerunnable",
+      "report": {
+        "sha256": "e6fbdf2b10721b47333b6ed6098a6fed0cf529ef1693e7d1fdeb8c1143ada920",
+        "uri": "reports/2026-08-15-completion-integrity-activation-v2.md"
+      },
+      "reproduction": {
+        "independent_replication": {
+          "boundary": "No independent task selection, evaluation, provider execution, or replication exists.",
+          "status": "none_linked"
+        },
+        "public_graph_verification": {
+          "boundary": "Validates the public Contract v0 graph, exact freeze and preregistration bindings, all scheduled terminal and unrun states, normalized measurements, and the recomputed protocol-invalid decision. It does not reveal or rerun private tasks, evaluators, candidates, raw events, authentication, or hosted calls, and it is not independent replication.",
+          "status": "decision_recomputable"
+        },
+        "study_rerun": {
+          "boundary": "The submitted v2 schedule cannot be retried or resumed. Any repaired adapter must create a new protocol revision, preregistration, raw root, and provider observation.",
+          "status": "unavailable"
+        }
+      },
+      "runs": {
+        "by_condition": {
+          "B0": 2,
+          "E0": 2,
+          "T1": 2
+        },
+        "by_status": {
+          "invalid": 1,
+          "unrun": 4,
+          "valid": 1
+        },
+        "count": 6,
+        "repeat_evidence": {
+          "maximum_valid_repeats_per_cell": 1,
+          "minimum_valid_repeats_per_cell": 0,
+          "retained_task_condition_cells": 6,
+          "status": "retained_cell_without_valid_observation"
+        }
+      },
+      "source_hashes": {
+        "docs/decisions/2026-08-15-alpha11-activation-result.md": "19d4f8eed11112bc25c1ba289f3bff4c7a5567769f4c5351237bdda12725cd0e",
+        "reports/2026-08-15-completion-integrity-activation-v2.md": "e6fbdf2b10721b47333b6ed6098a6fed0cf529ef1693e7d1fdeb8c1143ada920",
+        "studies/completion-integrity/activation-v2/freeze.json": "e373f3325c6e9551889072a735f24ba51fe8621c9a822f9c9829188358a9200d",
+        "studies/completion-integrity/activation-v2/results/decision.json": "9d523357cec051c311e2409ce0e1ef6ec0588b959fc376cf1205088a0a4f04aa",
+        "studies/completion-integrity/activation-v2/results/evidence-receipt.json": "b29ffd2ccc9aec0156b0218244ddc015c33c607f7afad4725a23c1651a2f3f13",
+        "studies/completion-integrity/activation-v2/results/evidence-receipt.md": "1af354f8973978da22a55269298c833cb3d5dd372359b638d2e4905c31408a77",
+        "studies/completion-integrity/activation-v2/results/freeze-ref.json": "0865b3c9765fd0516f2961069943d49c3ada38fc2173469ca224b5af92c56da0",
+        "studies/completion-integrity/activation-v2/results/measurement-set.json": "0b03be59c4ef5a2ffac067388ff4186f05428742c446ce7b1c71e52c89d2ae04",
+        "studies/completion-integrity/activation-v2/results/observations.json": "c22b63d09dc64c48c993068273bb300692cc773ef38ddcb83b714335287bc262",
+        "studies/completion-integrity/activation-v2/results/runs/CI2-PY-01-B0.json": "8357c2cab853782e39e6d60a4e276ddc4231b33bd431c0aeb84597382635042d",
+        "studies/completion-integrity/activation-v2/results/runs/CI2-PY-01-E0.json": "386d60ecd8a4cda5c69b076935d0e3d4653ff91b5239a41b0894ecb61462bfb0",
+        "studies/completion-integrity/activation-v2/results/runs/CI2-PY-01-T1.json": "32c8fcad68a2b3eed1dcf3f8bf3052a145f2dde660683bb371450e43cd857e17",
+        "studies/completion-integrity/activation-v2/results/runs/CI2-TS-01-B0.json": "936205d3392b8a6344e2f6877c8d75a0fcb3ed2a9edc90ea923c33607e7e528e",
+        "studies/completion-integrity/activation-v2/results/runs/CI2-TS-01-E0.json": "f95b10bd7a904b22299d41a22f597368a634ee1d84ff9479343a1902ed6445dc",
+        "studies/completion-integrity/activation-v2/results/runs/CI2-TS-01-T1.json": "73779151797208b4cf83443f80318e6cbe28d5c2953c8f67f80d70b9cc1b176f",
+        "studies/completion-integrity/activation-v2/study-manifest.json": "e8eb6d3056b766e2440e121472ebd5ff89a4079dc641688959c80691832f081a",
+        "studies/completion-integrity/concept.json": "1aca3c9b3925293c240e0cdfdd1b2c3590e9c7702d66d00a05244e379e45255f",
+        "studies/public-results.json": "1462b65fe2fbb6103ee0a0d3512d4c381a1d904db3aa475ff37b94e62508d34a"
+      },
+      "state": {
+        "artifact": "public_bounded_result_materialized",
+        "deployment": "not_applicable",
+        "experiment": "terminated_protocol_invalid",
+        "outcome": "not_observed",
+        "publication": "prepared_not_published",
+        "repository": "prepared_uncommitted"
+      },
+      "study": {
+        "comparison_mode": "controlled_factor",
+        "conditions": [
+          {
+            "condition_id": "E0",
+            "intervention_class": "workflow",
+            "label": "Common upstream Codex executor",
+            "role": "control"
+          },
+          {
+            "condition_id": "B0",
+            "intervention_class": "prompt",
+            "label": "Minimal evidence-only reporter",
+            "role": "baseline"
+          },
+          {
+            "condition_id": "T1",
+            "intervention_class": "prompt",
+            "label": "Structured requirement-reconciliation reporter",
+            "role": "treatment"
+          }
+        ],
+        "decision_owners": [
+          "kizz-ael-maintainer"
+        ],
+        "decision_question": "After repairing only the provider-incompatible response-schema boundary exposed by activation v1, can the versioned Completion Integrity capture and reporter boundary activate on two qualified sacrificial Codex task roots, and is the structured reporter accurate on both roots without being descriptively worse than the minimal reporter?",
+        "primary_estimand": {
+          "aggregation": "Exact counts by condition across two roots, with no inferential interval and no compensation for protocol failures.",
+          "description": "Record B0 and T1 terminal-claim agreement separately on each frozen sacrificial task root; the vector is descriptive and is not a population-effect estimate.",
+          "name": "exact two-root reporter agreement vector",
+          "unit_of_analysis": "independent sacrificial task root"
+        },
+        "revision": 2,
+        "status": "frozen",
+        "study_id": "kizz:ael:study:completion-integrity-activation-v2",
+        "task_packs": [
+          {
+            "role": "calibration",
+            "strata": [
+              "explicit-multipart-cli-contract",
+              "code-schema-cli-docs-sync"
+            ],
+            "task_pack_id": "completion-integrity-v2-activation"
+          }
+        ]
+      },
+      "title": "Completion Integrity activation v2",
+      "unsupported_inferences": [
+        "The structured reporter caused a change in claim accuracy.",
+        "Either reporter is reliable on a broader task population.",
+        "The result identifies intrinsic gpt-5.6-sol or Codex quality.",
+        "The workflow transfers to another model, harness, repository, organization, or production environment.",
+        "The result is independently reproduced or externally outcome-verified."
+      ],
+      "verification": {
+        "audit": {
+          "evidence": {
+            "contract_documents": 10,
+            "measurements": 24,
+            "run_records": 6
+          },
+          "preregistration": {
+            "boundary": "Git proof is an optional fail-closed build gate and is not projected as evidence; when required, it establishes repository artifact ordering only.",
+            "sha": "462e3d9b9676fecfe55705cd021aac83cdfa9077"
+          },
+          "result": {
+            "claim_ceiling": "Descriptive maintainer-evaluated activation on two sacrificial roots. This does not estimate a reporter effect, reliability, transfer, model quality, or independent reproduction.",
+            "condition_counts": {
+              "B0": {
+                "claim_agreement": 0,
+                "valid": 0
+              },
+              "T1": {
+                "claim_agreement": 0,
+                "valid": 0
+              }
+            },
+            "counts": {
+              "artifact_or_evaluator_exposure": 0,
+              "executor_claim_agreement": 0,
+              "executor_valid": 1,
+              "observable_chain_complete": 0,
+              "reporter_claim_agreement": 0,
+              "reporter_evidence_hash_match": 1,
+              "reporter_valid": 0,
+              "reporter_workspace_unchanged": 1,
+              "task_roots": 2
+            },
+            "disposition": "revise_activation_adapter",
+            "status": "protocol_invalid"
+          },
+          "schema_version": "ael.completion-integrity-activation-audit/0.1-pilot",
+          "status": "passed",
+          "study": {
+            "revision": 2,
+            "study_id": "kizz:ael:study:completion-integrity-activation-v2"
+          }
+        },
+        "boundary": "Validates the public Contract v0 graph, exact freeze and preregistration bindings, all scheduled terminal and unrun states, normalized measurements, and the recomputed protocol-invalid decision. It does not reveal or rerun private tasks, evaluators, candidates, raw events, authentication, or hosted calls, and it is not independent replication.",
+        "command": [
+          "uv run ael study audit --freeze studies/completion-integrity/activation-v2/freeze.json --result studies/completion-integrity/activation-v2/results --decision-adapter completion-integrity-activation-v1 --require-git-proof"
+        ],
+        "kind": "frozen_public_bundle"
+      }
+    },
     {
       "card_id": "completion-integrity-prompt-policy-v1",
       "catalog_state": "listed",
@@ -83,7 +453,7 @@
       "evidence_level": "controlled_effect_observed",
       "generator": {
         "name": "agentic-evidence-lab",
-        "version": "0.1.0a10"
+        "version": "0.1.0a11"
       },
       "history": {
         "action": "not_declared_historical",
@@ -347,7 +717,7 @@
         "studies/completion-integrity/results/prompt-policy-v1/runs/CI-08-T1-R02-original.json": "e2e3df7e871f21b9071e7a2af791ea71598ccaa430cd4b6090d41a9e5fa86806",
         "studies/completion-integrity/results/prompt-policy-v1/runs/CI-08-T1-R03-original.json": "1eade3ec77d2bdcdff4e963ab83552e398653421c67fdab84f4b104c01fc022b",
         "studies/completion-integrity/study-manifest.json": "1c78faa58522277bbe0f9a932768a171aa523eba8f504b9d70865d4cca22d26d",
-        "studies/public-results.json": "37f1a8d6f196ee5a2079c3529137af26cdc853a93a1b9523c5d2533cd719aebe"
+        "studies/public-results.json": "1462b65fe2fbb6103ee0a0d3512d4c381a1d904db3aa475ff37b94e62508d34a"
       },
       "state": {
         "artifact": "materialized_and_audited_locally",
@@ -596,7 +966,7 @@
       "evidence_level": "controlled_effect_observed",
       "generator": {
         "name": "agentic-evidence-lab",
-        "version": "0.1.0a10"
+        "version": "0.1.0a11"
       },
       "history": {
         "action": "not_declared_historical",
@@ -824,7 +1194,7 @@
         "examples/council-generation-1/runs/E7-C3.json": "fbc585cadc103cdd9726c9d8584cf06ba1727170f4b98d5202db146c726cd141",
         "examples/council-generation-1/study-manifest.json": "aad0f01c68fc7346f0a834e7039f0650af31a04f65ceee927312468b335e9206",
         "reports/2026-08-12-council-generation-1.md": "9e9114b8c42cc135890fba800257ea405df8ef7b68928bd6e405b4ff3844313a",
-        "studies/public-results.json": "37f1a8d6f196ee5a2079c3529137af26cdc853a93a1b9523c5d2533cd719aebe"
+        "studies/public-results.json": "1462b65fe2fbb6103ee0a0d3512d4c381a1d904db3aa475ff37b94e62508d34a"
       },
       "state": {
         "artifact": "locally_implemented_and_validated",
@@ -1085,7 +1455,7 @@
       "evidence_level": "runtime_conformant",
       "generator": {
         "name": "agentic-evidence-lab",
-        "version": "0.1.0a10"
+        "version": "0.1.0a11"
       },
       "history": {
         "action": "not_declared_historical",
@@ -1258,7 +1628,7 @@
         "examples/coding-skill/concept.json": "056da8f4a9bd5f90140f3440e7c283b0c172f64adfa5606f783a8223372d48b8",
         "examples/coding-skill/study-manifest.json": "330700bc8cb12d77520f251fb94f54c8b879a9915c39f530feaf5d56a1bed841",
         "reports/2026-08-12-focused-change-verification-codex-calibration.md": "0d5159f51fbe4be863be1feb319ffd0ef1364ddbd859f12d49cfabef15d15d2c",
-        "studies/public-results.json": "37f1a8d6f196ee5a2079c3529137af26cdc853a93a1b9523c5d2533cd719aebe"
+        "studies/public-results.json": "1462b65fe2fbb6103ee0a0d3512d4c381a1d904db3aa475ff37b94e62508d34a"
       },
       "state": {
         "artifact": "frozen skill and public task pack locally validated",
@@ -1467,7 +1837,7 @@
       "evidence_level": "controlled_effect_observed",
       "generator": {
         "name": "agentic-evidence-lab",
-        "version": "0.1.0a10"
+        "version": "0.1.0a11"
       },
       "history": {
         "action": "not_declared_historical",
@@ -1681,7 +2051,7 @@
         "studies/agent-skills-season-1/results/property-based-testing-v2/runs/P-S04-S1-R01.json": "5ca5ed0127590840c6e2bec4dd174cec01a5be6ce38610c23390b78f12ad7c72",
         "studies/agent-skills-season-1/results/property-based-testing-v2/screening-decision.json": "90f792419b4b2d64ecc49d10afd54e9f3e7f9f597f7981a299a027fac6a192d1",
         "studies/agent-skills-season-1/screening/property-based-testing-v2.freeze.json": "a1fac08b84e35f412de04f37a1d3eb3ac3ce2711df474febd9a64b2fb4e3fb05",
-        "studies/public-results.json": "37f1a8d6f196ee5a2079c3529137af26cdc853a93a1b9523c5d2533cd719aebe"
+        "studies/public-results.json": "1462b65fe2fbb6103ee0a0d3512d4c381a1d904db3aa475ff37b94e62508d34a"
       },
       "state": {
         "artifact": "frozen private task composites represented by hashes; sanitized evidence materialized",
@@ -1793,13 +2163,10 @@
           ],
           "preregistration": {
             "boundary": "Git proof is an optional fail-closed build gate and is not projected as evidence; when required, it establishes repository artifact ordering only.",
-            "freeze_bytes_verified": true,
             "sha": "610f0d9e1e19d9c89dd6beba8fab7900222df5dd",
             "tags": [
               "property-based-testing-v2-freeze"
-            ],
-            "terminal_decision_absent_at_freeze": true,
-            "terminal_decision_committed_after_freeze": true
+            ]
           },
           "schema_version": "ael.study-audit/0.1",
           "status": "passed",
@@ -1957,7 +2324,7 @@
       "evidence_level": "controlled_effect_observed",
       "generator": {
         "name": "agentic-evidence-lab",
-        "version": "0.1.0a10"
+        "version": "0.1.0a11"
       },
       "history": {
         "action": "verified",
@@ -2205,7 +2572,7 @@
         "studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/runs/D-S04-S1-R01.json": "c7aab7465d82d775021d72c9b97b764e55077281526c95fe3135a35e9a745be8",
         "studies/agent-skills-season-1/screening/systematic-debugging-real-shadow.admission.pilot.json": "ecf001fb6c03757621ed7159875c2801056aa869891281baae4bf04f0125d94c",
         "studies/agent-skills-season-1/screening/systematic-debugging-real-shadow.freeze.json": "b5c63ce49c594c7345a242b72f1156c8aef0558466f9b72291e8bc18c7aafdd7",
-        "studies/public-results.json": "37f1a8d6f196ee5a2079c3529137af26cdc853a93a1b9523c5d2533cd719aebe"
+        "studies/public-results.json": "1462b65fe2fbb6103ee0a0d3512d4c381a1d904db3aa475ff37b94e62508d34a"
       },
       "state": {
         "artifact": "sanitized public Contract v0 projection; private materials represented by hashes",

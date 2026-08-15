@@ -56,26 +56,25 @@ state, and every card separates what a public checkout can verify, what only the
 maintainer can rerun as a new observation, and what has independent replication
 evidence.
 
-The newest result is deliberately negative: the exact Completion Integrity
-prompt policy produced the same `0.375` false-completion rate as baseline on
-the frozen eight-task study, so AEL rejects that exact policy instead of
-promoting plausible-sounding instructions without measured benefit.
+The newest result is an integrity failure caught before scale. Completion
+Integrity activation v2 stopped after two of six Codex cells because an
+owner-generated attempt identifier violated the terminal-claim grammar. The
+reporter content matched frozen truth, but the wrapper was invalid; AEL records
+`revise_activation_adapter` and counts no reporter-accuracy observation. Read
+the [claim-first card](docs/results/completion-integrity-activation-v2.md) or
+[full report](reports/2026-08-15-completion-integrity-activation-v2.md).
 
-Alpha.10 publishes an experimental
-[observable-enactment instrument](docs/completion-integrity-enactment.md) for a
-future Completion Integrity study. It distinguishes policy-byte binding,
-ledger materialization, normalized check evidence, and terminal reconciliation without
-retrospectively reinterpreting alpha.9 or claiming to observe cognition.
-The accompanying [task-supply contract](docs/completion-integrity-task-supply.md)
-defines how a larger private candidate pool can earn admission without counting
-repeats, paraphrases, ports, calibration cases, or weak clones as independent
-evidence. No v2 task population or scored result is claimed yet.
+That result follows the alpha.9 null: the exact Completion Integrity prompt
+policy produced the same `0.375` false-completion rate as baseline on the
+frozen eight-task study. Together, the studies reject a weak prompt-only change
+and prevent a schema-qualified but composition-broken adapter from entering a
+larger pilot.
 
-The separate [terminal-claim instrument](docs/completion-integrity-terminal-claims.md)
-keeps truth (`complete` / `incomplete` / `uncertain`), progress, and verified /
-failed / unresolved extent orthogonal. It tests a closed reporter-only contract
-against evaluator-owned frozen truth; it does not claim that synthetic fixtures
-enforce runtime isolation or that reviewer remediation has been studied.
+The [activation boundary](docs/completion-integrity-activation.md) composes the
+alpha.10 observable-enactment, terminal-claim, task-supply, Docker, and Codex
+adapters. Alpha.11 fixes future attempt IDs and adds a full-wrapper regression,
+but does not retry or reinterpret v2. A new observation requires a new revision,
+new roots, new preregistration, and a prospective quality profile.
 
 ## What AEL helps answer
 
@@ -172,6 +171,11 @@ uv run ael study audit \
   --decision-adapter completion-integrity-prompt-policy-v1 \
   --require-git-proof
 uv run ael study audit \
+  --freeze studies/completion-integrity/activation-v2/freeze.json \
+  --result studies/completion-integrity/activation-v2/results \
+  --decision-adapter completion-integrity-activation-v1 \
+  --require-git-proof
+uv run ael study audit \
   --freeze studies/agent-skills-season-1/screening/property-based-testing-v2.freeze.json \
   --result studies/agent-skills-season-1/results/property-based-testing-v2 \
   --decision-adapter pbt-v2 \
@@ -193,13 +197,14 @@ measurement_set=2, run_record=18, study_manifest=4
 
 The study audits additionally check each freeze, terminal decision, public
 runs, measurements, receipt, and repository artifact ordering as one bundle.
-The Completion Integrity adapter recomputes the 52-cell null result and exact
-policy rejection; the PBT v2 adapter recomputes its counts and terminal
-outcome. Git ancestry proves repository artifact ordering only; it does not
-prove that private model calls occurred before results or reconstruct private
-events. These commands do not rerun historical model calls or independently
-reproduce the research result. See [Reproducibility](docs/reproducibility.md)
-for the exact boundaries and commands.
+The Completion Integrity adapters recompute both the 52-cell null/rejection and
+the six-cell activation protocol failure; the PBT v2 adapter recomputes its
+counts and terminal outcome. Git ancestry proves repository artifact ordering
+only; it does not prove that private model calls occurred before results or
+reconstruct private events. These commands do not rerun historical model calls
+or independently reproduce the research result. See
+[Reproducibility](docs/reproducibility.md) for the exact boundaries and
+commands.
 
 ## Evaluate your own system
 
@@ -251,14 +256,15 @@ maintainer-reviewed snapshots and maintainer-controlled fixtures; arbitrary
 submissions remain blocked. Read [SECURITY.md](SECURITY.md) and
 [Container runner isolation](docs/runner-isolation.md) before execution.
 
-The published `0.1.0a10` line is pre-stable. It does not claim universal
+The current `0.1.0a11` source line is pre-stable. GitHub Releases determines
+whether it is externally published. It does not claim universal
 benchmarking, independent verification of Kizz-authored capabilities,
 model-only superiority from stack comparisons, or downstream production
 impact.
 
-Alpha.10 is a method/instrument release, not an empirically exercised method
-result. Its synthetic fixtures validate bounded computation rather than real
-workflow benefit.
+Alpha.11 empirically exercised the activation path and found it invalid. It is
+evidence that the exact adapter must be revised, not evidence about reporter
+effect, Codex quality, model reliability, transfer, or production benefit.
 
 ## Documentation
 

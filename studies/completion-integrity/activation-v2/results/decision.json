@@ -1,0 +1,35 @@
+{
+  "claim_ceiling": "Descriptive maintainer-evaluated activation on two sacrificial roots. This does not estimate a reporter effect, reliability, transfer, model quality, or independent reproduction.",
+  "condition_counts": {
+    "B0": {
+      "claim_agreement": 0,
+      "valid": 0
+    },
+    "T1": {
+      "claim_agreement": 0,
+      "valid": 0
+    }
+  },
+  "counts": {
+    "artifact_or_evaluator_exposure": 0,
+    "executor_claim_agreement": 0,
+    "executor_valid": 1,
+    "observable_chain_complete": 0,
+    "reporter_claim_agreement": 0,
+    "reporter_evidence_hash_match": 1,
+    "reporter_valid": 0,
+    "reporter_workspace_unchanged": 1,
+    "task_roots": 2
+  },
+  "decision_id": "kizz:ael:completion-integrity:activation-v2",
+  "disposition": "revise_activation_adapter",
+  "input_sha256": "7b5b3289b0d6f24667ff0ecb54e9c689ef9d467229852b303f3a358bb57120af",
+  "owner_action": "do_not_use_for_alpha12_until_protocol_failure_is_repaired",
+  "reason": "The frozen activation protocol was not completed without an integrity failure.",
+  "reporter_status_counts": {
+    "invalid": 1,
+    "unrun": 3
+  },
+  "schema_version": "ael.completion-integrity-activation-decision/0.1-pilot",
+  "status": "protocol_invalid"
+}

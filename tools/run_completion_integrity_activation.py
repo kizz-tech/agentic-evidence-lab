@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Any
 
 from completion_integrity_activation_support import (
+    activation_attempt_id,
     append_attempt_event,
     assess_executor_claim,
     build_frozen_truth,
@@ -48,10 +49,6 @@ CELL_SCHEMA = "ael.completion-integrity-activation-cell/0.1-pilot"
 
 def utc_now() -> str:
     return dt.datetime.now(dt.UTC).replace(microsecond=0).strftime("%Y-%m-%dT%H:%M:%SZ")
-
-
-def _attempt_id(freeze_sha256: str, cell_id: str) -> str:
-    return hashlib.sha256(f"{freeze_sha256}:{cell_id}".encode()).hexdigest()[:32]
 
 
 def _tree_size(path: Path) -> int:
@@ -187,7 +184,7 @@ def _new_attempt(
 ) -> dict[str, Any]:
     attempt = {
         "schema_version": ATTEMPT_SCHEMA,
-        "attempt_id": _attempt_id(freeze_sha256, str(entry["cell_id"])),
+        "attempt_id": activation_attempt_id(freeze_sha256, str(entry["cell_id"])),
         "freeze_sha256": freeze_sha256,
         "sequence": entry["sequence"],
         "cell_id": entry["cell_id"],

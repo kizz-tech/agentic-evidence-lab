@@ -100,6 +100,8 @@ must not promote a stack result into a model-only claim.
   and the regenerated projection. A note file is not proof of a tag or release.
 - [Alpha.10 release notes](release-notes/v0.1.0-alpha.10.md) — the method-only
   measurement foundation and its empirical limits.
+- [Alpha.11 release notes](release-notes/v0.1.0-alpha.11.md) — the real Codex
+  activation failure, full-wrapper repair, and bounded alpha.12 admission path.
 - [Alpha.9 release notes](release-notes/v0.1.0-alpha.9.md) — the terminal
   Completion Integrity null result and exact-policy rejection. A note file is
   not proof of a tag or release.
@@ -110,6 +112,12 @@ must not promote a stack result into a model-only claim.
 Machine-readable manifests, runs, measurements, and receipts live under both
 [`examples/`](../examples) and [`studies/`](../studies). Start from the generated
 result projection or a narrative report before opening those raw records.
+
+For the current Completion Integrity execution path, start with
+[Completion Integrity activation](completion-integrity-activation.md), then
+open its [result card](results/completion-integrity-activation-v2.md),
+[narrative report](../reports/2026-08-15-completion-integrity-activation-v2.md),
+or [decision record](decisions/2026-08-15-alpha11-activation-result.md).
 
 ## I want to run agent code safely
 

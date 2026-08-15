@@ -6,14 +6,15 @@ from types import MappingProxyType
 
 from ael import __version__
 
-PUBLIC_RESULTS_SCHEMA_VERSION = "ael.public-results/0.5"
-PUBLICATION_PROJECTION_POLICY = "ael.publication-projection/0.5"
+PUBLIC_RESULTS_SCHEMA_VERSION = "ael.public-results/0.6"
+PUBLICATION_PROJECTION_POLICY = "ael.publication-projection/0.6"
 GENERATOR_NAME = "agentic-evidence-lab"
 GENERATOR_VERSION = __version__
 
 PUBLIC_STATUS_LABELS = MappingProxyType(
     {
         "not_assessed_historical": "historical · not assessed",
+        "not_assessed_current": "current · not assessed",
         "retained_cell_without_valid_observation": "retained cell without a valid run",
         "single_valid_observation_per_retained_cell": "1 valid run / retained cell",
         "repeated_valid_observations_per_retained_cell": "2+ valid runs / retained cell",

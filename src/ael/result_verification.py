@@ -145,7 +145,15 @@ def public_audit_projection(adapter: str, request: AuditRequest) -> dict[str, An
         }
     preregistration = summary.get("preregistration")
     if isinstance(preregistration, dict):
-        preregistration.pop("git_verified", None)
+        for build_only_key in (
+            "git_verified",
+            "freeze_bytes_verified",
+            "terminal_decision_absent_at_freeze",
+            "terminal_decision_committed_after_freeze",
+            "terminal_result_absent_at_freeze",
+            "terminal_result_committed_after_freeze",
+        ):
+            preregistration.pop(build_only_key, None)
         preregistration["boundary"] = (
             "Git proof is an optional fail-closed build gate and is not projected as evidence; "
             "when required, it establishes repository artifact ordering only."
