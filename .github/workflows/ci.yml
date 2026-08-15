@@ -53,6 +53,11 @@ jobs:
             --check
           uv run ael results check studies/public-results.json --require-git-proof
           uv run python tools/check_frozen_artifacts.py
+          uv run ael study audit \
+            --freeze studies/completion-integrity/freeze.json \
+            --result studies/completion-integrity/results/prompt-policy-v1 \
+            --decision-adapter completion-integrity-prompt-policy-v1 \
+            --require-git-proof
       - name: Validate Agent Skills Season 1
         run: |
           uv run ael source-lock check studies/agent-skills-season-1/sources.lock.toml
@@ -85,7 +90,7 @@ jobs:
         run: |
           uv build
           uv run python tools/verify_release_artifacts.py \
-            --expected-version 0.1.0a8 \
+            --expected-version 0.1.0a9 \
             dist/*.whl dist/*.tar.gz
 
   clean-wheel:
@@ -109,14 +114,19 @@ jobs:
           test -n "$wheel"
           uv venv .release-venv
           uv pip install --python .release-venv/bin/python "$wheel"
-          test "$(.release-venv/bin/ael --version)" = "0.1.0a8"
-          test "$(.release-venv/bin/python -c 'import importlib.metadata; print(importlib.metadata.version("agentic-evidence-lab"))')" = "0.1.0a8"
+          test "$(.release-venv/bin/ael --version)" = "0.1.0a9"
+          test "$(.release-venv/bin/python -c 'import importlib.metadata; print(importlib.metadata.version("agentic-evidence-lab"))')" = "0.1.0a9"
           .release-venv/bin/ael study preflight \
             studies/quality-preflight/examples/pass/quality-profile.json \
             --json-output studies/quality-preflight/examples/pass/preflight.json \
             --markdown-output studies/quality-preflight/examples/pass/preflight.md \
             --check
           .release-venv/bin/ael results check studies/public-results.json --require-git-proof
+          .release-venv/bin/ael study audit \
+            --freeze studies/completion-integrity/freeze.json \
+            --result studies/completion-integrity/results/prompt-policy-v1 \
+            --decision-adapter completion-integrity-prompt-policy-v1 \
+            --require-git-proof
           .release-venv/bin/ael validate examples
           .release-venv/bin/ael validate \
             studies/agent-skills-season-1/concept.json \

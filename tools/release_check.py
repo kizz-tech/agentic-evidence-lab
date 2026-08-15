@@ -30,7 +30,8 @@ REQUIRED_FILES = {
     "RESULTS.md",
     "SECURITY.md",
     "SUPPORT.md",
-    "docs/release-notes/v0.1.0-alpha.8.md",
+    "docs/release-notes/v0.1.0-alpha.9.md",
+    "docs/results/completion-integrity-prompt-policy-v1.md",
     "docs/decisions/2026-08-14-claim-first-decision-method.md",
     "docs/decisions/2026-08-14-public-mission-and-value.md",
     "docs/decisions/2026-08-14-result-catalog-and-reproduction-semantics.md",
@@ -39,6 +40,10 @@ REQUIRED_FILES = {
     "docs/results/index.json",
     "docs/study-quality-preflight.md",
     "pyproject.toml",
+    "reports/2026-08-15-completion-integrity-prompt-policy-v1.md",
+    "studies/completion-integrity/results/prompt-policy-v1/effect-decision.json",
+    "studies/completion-integrity/results/prompt-policy-v1/evidence-receipt.json",
+    "studies/completion-integrity/results/prompt-policy-v1/measurement-set.json",
     "studies/public-results.json",
     "studies/quality-preflight/examples/pass/preflight.json",
     "studies/quality-preflight/examples/pass/preflight.md",
@@ -160,8 +165,8 @@ def main() -> int:
             continue
         failures.extend(payload_failures(relative, payload))
 
-    expected_version = "0.1.0a8"
-    expected_release = "0.1.0-alpha.8"
+    expected_version = "0.1.0a9"
+    expected_release = "0.1.0-alpha.9"
     if __version__ != expected_version:
         failures.append(f"package version is {__version__}, expected {expected_version}")
     try:

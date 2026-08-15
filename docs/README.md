@@ -36,6 +36,9 @@ entire evidence contract or runner design.
 - [Systematic Debugging real-shadow v1](../reports/2026-08-13-systematic-debugging-real-shadow-v1.md)
   — a prospective matched pilot whose frozen safety gate triggered an
   exact-version block and an explicit follow-up.
+- [Completion Integrity prompt policy v1](../reports/2026-08-15-completion-integrity-prompt-policy-v1.md)
+  — the first fully profiled prospective study: 52 valid cells, no measured
+  false-completion improvement, and a frozen rejection of the exact policy.
 
 ## I want to evaluate a skill, model, or workflow
 
@@ -84,6 +87,9 @@ must not promote a stack result into a model-only claim.
 - [Release notes](release-notes/v0.1.0-alpha.8.md) — the claim-first method,
   explicit non-ordinal claim admission, observed repeat/uncertainty disclosure,
   and the regenerated projection. A note file is not proof of a tag or release.
+- [Release notes](release-notes/v0.1.0-alpha.9.md) — the terminal Completion
+  Integrity null result, exact-policy rejection, and first complete profiled
+  prospective study. A note file is not proof of a tag or release.
 - [Changelog](../CHANGELOG.md) — user-visible project history.
 - [Roadmap](../ROADMAP.md) — evidence-gated direction, beta criteria, and
   explicit non-goals; it is not a delivery promise.

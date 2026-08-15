@@ -1,0 +1,22 @@
+{
+  "schema_version": "ael.completion-integrity-adoption/0.1-pilot",
+  "adoption_id": "kizz:ael:adoption:completion-integrity:prompt-policy-v1",
+  "recorded_at": "2026-08-15T00:02:30Z",
+  "owner_id": "kizz-ael-maintainer",
+  "effect_ref": {
+    "uri": "effect-decision.json",
+    "sha256": "43ab311a8040e3bdd6c72839ab0f372733fc2fdc38629fbd54b681092bc7b71e",
+    "visibility": "public"
+  },
+  "evidence_receipt_ref": {
+    "uri": "evidence-receipt.json",
+    "sha256": "15e77cc5c68c684030d4ab0f89043fe71279ac1baf355f8a7b0a7ac0dd30da23",
+    "visibility": "public"
+  },
+  "study_disposition": "reject_exact_policy",
+  "public_disposition": "reject",
+  "eligible_mechanisms": [],
+  "state": "recorded_not_deployed",
+  "scope": "Exact prompt policy on the frozen Kizz Codex study surface only.",
+  "reversal_trigger": "Re-evaluate after any prompt, task, evaluator, model, CLI, image, budget, schedule, decision rule, or provider-behavior change."
+}

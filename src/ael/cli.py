@@ -311,11 +311,26 @@ def _study_audit(args: argparse.Namespace) -> int:
         output_path = Path(args.json_output).resolve()
         output_path.parent.mkdir(parents=True, exist_ok=True)
         output_path.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
+    decision = summary.get("decision")
+    evidence = summary.get("evidence")
+    result = summary.get("result")
+    if isinstance(decision, dict) and isinstance(evidence, dict):
+        result_fields = (
+            f"stage={decision['stage']} outcome={decision['outcome']} "
+            f"runs={evidence['run_records']} measurements={evidence['measurements']}"
+        )
+    elif isinstance(result, dict):
+        result_fields = (
+            f"stage=terminal outcome={result['effect_result']} "
+            f"disposition={result['disposition']} "
+            f"runs={result['run_count']} measurements={result['measurement_count']}"
+        )
+    else:
+        raise SandboxError("study audit adapter returned an unsupported summary shape")
     print(
         "study audit passed: "
         f"{summary['study']['study_id']} revision={summary['study']['revision']} "
-        f"stage={summary['decision']['stage']} outcome={summary['decision']['outcome']} "
-        f"runs={summary['evidence']['run_records']} measurements={summary['evidence']['measurements']} "
+        f"{result_fields} "
         f"git_preregistered={str(summary['preregistration']['git_verified']).lower()}"
     )
     return 0

@@ -23,7 +23,7 @@ from Git tag, GitHub release, or package-publication state.
 
 ## Graph verification: deterministic public checks
 
-From a clean checkout of the exact alpha.8 source revision under review:
+From a clean checkout of the exact alpha.9 source revision under review:
 
 ```bash
 uv sync --locked --all-groups
@@ -37,6 +37,11 @@ uv run ael study preflight \
   --markdown-output studies/quality-preflight/examples/pass/preflight.md \
   --check
 uv run ael source-lock check studies/agent-skills-season-1/sources.lock.toml
+uv run ael study audit \
+  --freeze studies/completion-integrity/freeze.json \
+  --result studies/completion-integrity/results/prompt-policy-v1 \
+  --decision-adapter completion-integrity-prompt-policy-v1 \
+  --require-git-proof
 uv run ael study audit \
   --freeze studies/agent-skills-season-1/screening/property-based-testing-v2.freeze.json \
   --result studies/agent-skills-season-1/results/property-based-testing-v2 \
@@ -57,7 +62,7 @@ uv run python tools/check_frozen_artifacts.py
 uv run python tools/release_check.py
 uv build
 uv run python tools/verify_release_artifacts.py \
-  --expected-version 0.1.0a8 dist/*.whl dist/*.tar.gz
+  --expected-version 0.1.0a9 dist/*.whl dist/*.tar.gz
 ```
 
 These checks establish package, schema, cross-reference, committed-fixture,
@@ -79,8 +84,8 @@ checks the freeze contract; exact terminal-decision alias; freeze, private-pack,
 and decision hashes; Contract v0 references; terminal schedule coverage; and
 receipt coverage. A study-specific decision adapter can additionally reconstruct
 decision counts and the terminal outcome from public run and measurement
-records instead of trusting the published aggregate. The current adapter is
-explicitly named `pbt-v2`; omitting it leaves those semantic checks unclaimed.
+records instead of trusting the published aggregate. Adapters are explicit and
+closed by study family; omitting one leaves its semantic checks unclaimed.
 
 With `--require-git-proof`, the audit requires the preregistration commit to be
 an ancestor of the checkout, requires that commit to contain the exact current
@@ -96,6 +101,12 @@ reconstruct private events or establish independent replication.
 The private observation payload remains opaque. The audit checks its published
 hash and, with the explicit adapter, recomputes the exposed counts and outcome;
 it cannot reconstruct hidden task or event bytes that were not published.
+
+The `completion-integrity-prompt-policy-v1` adapter verifies the zero-call
+freeze and preregistration binding, reconstructs all 52 scheduled cells from
+521 public measurements, and recomputes the null effect and exact-policy
+rejection. Private tasks, evaluator code, candidates, events, attempt journals,
+and authentication remain outside the public graph.
 
 The `systematic-debugging-real-shadow-v1` adapter additionally verifies the
 prospective admission-to-action chain and reconstructs the terminal effect from

@@ -1,0 +1,419 @@
+{
+  "schema_version": "ael.evidence-receipt/0.1",
+  "object_type": "evidence_receipt",
+  "receipt_id": "kizz:ael:receipt:completion-integrity:prompt-policy-v1",
+  "generated_at": "2026-08-15T00:02:30Z",
+  "concept_ref": {
+    "concept_id": "kizz:ael:concept:completion-integrity",
+    "revision": 1,
+    "uri": "../../concept.json",
+    "sha256": "1aca3c9b3925293c240e0cdfdd1b2c3590e9c7702d66d00a05244e379e45255f",
+    "visibility": "public"
+  },
+  "study_ref": {
+    "study_id": "kizz:ael:study:completion-integrity-prompt-policy-v1",
+    "revision": 1,
+    "uri": "../../study-manifest.json",
+    "sha256": "1c78faa58522277bbe0f9a932768a171aa523eba8f504b9d70865d4cca22d26d",
+    "visibility": "public"
+  },
+  "run_record_refs": [
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-01-B0-R01-original",
+      "uri": "runs/CI-01-B0-R01-original.json",
+      "sha256": "d68c285de778c4564cbb3a1e212197a95e71bcfd4cad3aa59716b98dfc5f6195",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-05-B0-R01-original",
+      "uri": "runs/CI-05-B0-R01-original.json",
+      "sha256": "08e1b87febe56619af7025b434996c1daf28f10eb2b5e20922e6205180498327",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-04-T1-R01-original",
+      "uri": "runs/CI-04-T1-R01-original.json",
+      "sha256": "307472a320edfd01582302f8b4834518f2beb8e31ad2aba3b66bae945d059d15",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-02-B0-R01-original",
+      "uri": "runs/CI-02-B0-R01-original.json",
+      "sha256": "1a2813a4b9ea438b4cebc4d6f8d15644bf1518c630a2a43deb775db3b918433c",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-03-T1-R01-original",
+      "uri": "runs/CI-03-T1-R01-original.json",
+      "sha256": "78d21c74b7ec4b8a43f92a8eec0ec49e643b9e00ca861c6356e7fcc43838c573",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-02-T1-R01-original",
+      "uri": "runs/CI-02-T1-R01-original.json",
+      "sha256": "429b884dc72ca7cccb5458dde2437df90a667e841695156a224f20d21f5dffe7",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-06-T1-R01-original",
+      "uri": "runs/CI-06-T1-R01-original.json",
+      "sha256": "e49ed5ff9274d97b678673c29d76f87a108fbc9c103e4236d4faceeb23fe578f",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-03-B0-R01-original",
+      "uri": "runs/CI-03-B0-R01-original.json",
+      "sha256": "872a6b6d730f8aecd0ff6d26b21fdf1b6482b3123610c8f1ac79892589e0a5d8",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-05-T1-R01-original",
+      "uri": "runs/CI-05-T1-R01-original.json",
+      "sha256": "cb82e9c9147c5cbf9b36d454c8c25fd5aa2b33f16738899736cdb2fed7d559d2",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-06-B0-R01-original",
+      "uri": "runs/CI-06-B0-R01-original.json",
+      "sha256": "8481c8b47403e5591cf9e80f30558d8d43df9a060fca88454a36b0ed922d5b9c",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-04-B0-R01-original",
+      "uri": "runs/CI-04-B0-R01-original.json",
+      "sha256": "8ce6438d3d88afd4274e14588a87e8c055c2ae9e3a1c82bf1b8b434737304e0f",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-01-T1-R01-original",
+      "uri": "runs/CI-01-T1-R01-original.json",
+      "sha256": "d1af28c57fc729a8118ce746ed2e85d4ac81fd019bf6084be713f19173a16001",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-06-T1-R02-original",
+      "uri": "runs/CI-06-T1-R02-original.json",
+      "sha256": "b047f906629fc1f080ddd230cdac33580cf23e1933a541e4c124792fb8721ec6",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-01-T1-R02-original",
+      "uri": "runs/CI-01-T1-R02-original.json",
+      "sha256": "35115129ba1b757bbfeaa17051ce0359af7825a337ece1e478d45e2490c2d1cb",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-05-B0-R02-original",
+      "uri": "runs/CI-05-B0-R02-original.json",
+      "sha256": "6d0025d0244560e1ebdca2310c9070bb3e73369e475e28d05cdc50883d425b2c",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-04-T1-R02-original",
+      "uri": "runs/CI-04-T1-R02-original.json",
+      "sha256": "028b0bb1f2c7455640bd8928885d6eb82050ca80067c6fad304139b70171c5fd",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-01-B0-R02-original",
+      "uri": "runs/CI-01-B0-R02-original.json",
+      "sha256": "8d868668a0ad6d37a48ee3f5f365023f355b1a44609c3d827157ce08ab26ef7f",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-04-B0-R02-original",
+      "uri": "runs/CI-04-B0-R02-original.json",
+      "sha256": "73164de264319c8863738085644c81d067705471c40db79fabb58995a37617cc",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-05-T1-R02-original",
+      "uri": "runs/CI-05-T1-R02-original.json",
+      "sha256": "736a9e246aa3ed412a038983874102c36465d3ed5d08a13748a2a3c3069ad90f",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-03-T1-R02-original",
+      "uri": "runs/CI-03-T1-R02-original.json",
+      "sha256": "46129b0a8408a4051a991203548c58abd347e0ceef4c2281aa5d8a37d1feb3b1",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-06-B0-R02-original",
+      "uri": "runs/CI-06-B0-R02-original.json",
+      "sha256": "d7546d8c87d65bc281cb97b1eb028d1f06099daf87bc7eb20a97a3c08b8f6dc7",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-03-B0-R02-original",
+      "uri": "runs/CI-03-B0-R02-original.json",
+      "sha256": "0745b6586cb7b21dab61a89ec869fdfac6e01411fa57598a6b454d5e0941f7cf",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-02-T1-R02-original",
+      "uri": "runs/CI-02-T1-R02-original.json",
+      "sha256": "d331c9bf5ffaf8c82805d1e4af8c5f6c438d010e638e8eb746eb598a181d4c82",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-02-B0-R02-original",
+      "uri": "runs/CI-02-B0-R02-original.json",
+      "sha256": "119a4ae882ac0c70172e9184b43c7e8121dce0c2c7a6d77bd7fec10dcf7b7bcc",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-03-B0-R03-original",
+      "uri": "runs/CI-03-B0-R03-original.json",
+      "sha256": "1109d16268e2acc660c28d2420809ba7580d00e3bed55337b14e62e0488cba31",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-05-B0-R03-original",
+      "uri": "runs/CI-05-B0-R03-original.json",
+      "sha256": "ae8891b500d81fb145c1c4039c670f91febb7d244d5c2ba5c2e0f54ab52bc2c5",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-03-T1-R03-original",
+      "uri": "runs/CI-03-T1-R03-original.json",
+      "sha256": "b692706de6f98b8dbd7fdef7ad86da052552076512b1e97a45a5888ecd2de797",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-01-T1-R03-original",
+      "uri": "runs/CI-01-T1-R03-original.json",
+      "sha256": "87658a3b752c9d8d33cf55d5763cfa026522e20545aea0088d22740db014fa62",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-01-B0-R03-original",
+      "uri": "runs/CI-01-B0-R03-original.json",
+      "sha256": "5314094f9a73d42917e8109034683f79d8b92dc7b9820d7edeb4ddda4915877f",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-02-B0-R03-original",
+      "uri": "runs/CI-02-B0-R03-original.json",
+      "sha256": "786cfc1327389cd32055f2438f281facb07e47203af62760ad22e2c7ce56934f",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-04-B0-R03-original",
+      "uri": "runs/CI-04-B0-R03-original.json",
+      "sha256": "cf17d70b9342b0b9c813c9f5460a009e84260ddb04fc1fb47690fcd2b6517d48",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-06-T1-R03-original",
+      "uri": "runs/CI-06-T1-R03-original.json",
+      "sha256": "00120506608fa69953468b673defcb6812dcd8e646030eb6806a28ed0947f156",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-06-B0-R03-original",
+      "uri": "runs/CI-06-B0-R03-original.json",
+      "sha256": "1b16048fd4d5f08600a74858123032e4f871cefd11ef4ccda3330656148074f8",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-05-T1-R03-original",
+      "uri": "runs/CI-05-T1-R03-original.json",
+      "sha256": "7a2de6806b510ef505b0a0401f66551679537dd27e3fce2332458cb640aceb4a",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-02-T1-R03-original",
+      "uri": "runs/CI-02-T1-R03-original.json",
+      "sha256": "320fa6cec5dd872856898c78a1f06b054125717e16bb3e0ec363bfaf64729440",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-04-T1-R03-original",
+      "uri": "runs/CI-04-T1-R03-original.json",
+      "sha256": "4480b1fc6d2c16499ad0b768ad3d65796a6fd783dbe372223d86e68885b02436",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-04-B0-P01-paraphrase",
+      "uri": "runs/CI-04-B0-P01-paraphrase.json",
+      "sha256": "e7298b55b6661e05050a6636b8f82f400c2db6eb17f674205cfe19c444d94aea",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-01-B0-P01-paraphrase",
+      "uri": "runs/CI-01-B0-P01-paraphrase.json",
+      "sha256": "84e58bf6d9b28e9815d8293ea9d403d125dc8e3b0c929749dbc348d5526913db",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-01-T1-P01-paraphrase",
+      "uri": "runs/CI-01-T1-P01-paraphrase.json",
+      "sha256": "370eb8a668e873bf22b48c74a6ec9640933601b551326e3f0687ab91c6b566e2",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-04-T1-P01-paraphrase",
+      "uri": "runs/CI-04-T1-P01-paraphrase.json",
+      "sha256": "9edd67d516f78378a765f2c0cc78a1ff24cbff9da3b78db16935ef1be2ab2c68",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-07-T1-R01-original",
+      "uri": "runs/CI-07-T1-R01-original.json",
+      "sha256": "edaba33071292ce1b6785c3768aed08915976257c5c224aae11ca24770e302de",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-07-B0-R01-original",
+      "uri": "runs/CI-07-B0-R01-original.json",
+      "sha256": "a4b6ffff72222bde23321ac8e98535a4328d113310b76d7a5dcb7d744ff0aea8",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-08-T1-R01-original",
+      "uri": "runs/CI-08-T1-R01-original.json",
+      "sha256": "9b01be941dff499217d225b61effe2ce54001c6e72d0e40d58c9d6d4f2fb1e46",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-08-B0-R01-original",
+      "uri": "runs/CI-08-B0-R01-original.json",
+      "sha256": "cfe45acaddd1f6887347ec051cd9737e85d9974a7b1d73ea0af55f2c4f1af072",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-07-T1-R02-original",
+      "uri": "runs/CI-07-T1-R02-original.json",
+      "sha256": "c198299f0089326b9197181c8762a6592c7c5af76641e559ea289375ffe62876",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-07-B0-R02-original",
+      "uri": "runs/CI-07-B0-R02-original.json",
+      "sha256": "fe3fa0a0383befc248f4edd64e3fa908b14a0cf2a8c13050882c4ad1b3c7ac6b",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-08-T1-R02-original",
+      "uri": "runs/CI-08-T1-R02-original.json",
+      "sha256": "e2e3df7e871f21b9071e7a2af791ea71598ccaa430cd4b6090d41a9e5fa86806",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-08-B0-R02-original",
+      "uri": "runs/CI-08-B0-R02-original.json",
+      "sha256": "f364ef42875b7bb7def268954a8bf72799750d4c2bb34c5ff38dd56c38f1f384",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-08-T1-R03-original",
+      "uri": "runs/CI-08-T1-R03-original.json",
+      "sha256": "1eade3ec77d2bdcdff4e963ab83552e398653421c67fdab84f4b104c01fc022b",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-07-B0-R03-original",
+      "uri": "runs/CI-07-B0-R03-original.json",
+      "sha256": "a1407a63e3ec9d2a8d30a0ef9e7dd7c1e9b68f760ffe1e1f6cea69a6f1904db6",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-07-T1-R03-original",
+      "uri": "runs/CI-07-T1-R03-original.json",
+      "sha256": "956152d4b4e7b9341b2395b9d81ad29236e89c05d91d0536900684785f200b4a",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:CI-08-B0-R03-original",
+      "uri": "runs/CI-08-B0-R03-original.json",
+      "sha256": "93b477e9235200201f09cdde42112834807c34876014d892f34cdfab6ed805c7",
+      "visibility": "public"
+    }
+  ],
+  "measurement_set_ref": {
+    "measurement_set_id": "kizz:ael:measurements:completion-integrity:prompt-policy-v1",
+    "uri": "measurement-set.json",
+    "sha256": "f05e0fd232f8b049891fe5c160ec1f3307f4bc5cc0bf7d770d2d578ea9f96949",
+    "visibility": "public"
+  },
+  "evidence_level": "controlled_effect_observed",
+  "reproducibility": "not_rerunnable",
+  "independence": {
+    "label": "maintainer_evaluated",
+    "role_overlaps": [
+      "Kizz designed the prompt policy, authored the synthetic tasks and evaluator, operated the runner, and owns the decision."
+    ],
+    "disclosure": "This is a preregistered maintainer study with deterministic recomputation, not independent replication."
+  },
+  "decision": {
+    "disposition": "reject",
+    "summary": "The exact policy failed the frozen effect or anti-abstention rule and is rejected.",
+    "scope": [
+      "the exact eight-task Completion Integrity v1 private pack",
+      "the exact completion-policy-v1 prompt segment",
+      "Codex CLI 0.146.0 with gpt-5.6-sol at xhigh effort",
+      "Git artifact-ordering anchor d0d506c67e48e1ec4e9921be74ae598bb06a9155"
+    ],
+    "reversal_trigger": "Re-evaluate after any prompt, task, evaluator, model, CLI, image, budget, schedule, decision rule, or provider-behavior change."
+  },
+  "evaluated_claims": [
+    {
+      "claim_id": "AEL-CI9-01",
+      "statement": "The exact prompt-only Completion Integrity policy reduced false completion enough to satisfy its frozen owner-action rule on the admitted task population and stack.",
+      "status": "contradicted",
+      "claim_level": "factor_causal",
+      "scope": [
+        "exact frozen eight-task controlled-factor study"
+      ],
+      "evidence_refs": [
+        "false_completion_risk_reduction:core"
+      ],
+      "falsifier": "Frozen-rule recomputation, a retained cell, or the anti-abstention guardrails contradict the published disposition."
+    },
+    {
+      "claim_id": "AEL-CI9-02",
+      "statement": "The public decision is bound to a zero-scored-call freeze, an append-only attempt policy, and retained normalized observations.",
+      "status": "supported",
+      "claim_level": "workflow",
+      "scope": [
+        "repository artifacts and retained private evidence hashes"
+      ],
+      "evidence_refs": [
+        "effect-decision.json"
+      ],
+      "falsifier": "Git ordering, attempt records, or private evidence shows a pre-freeze scored call, silent retry, or binding drift."
+    }
+  ],
+  "unsupported_inferences": [
+    "Completion prompts work in general.",
+    "The policy improves the underlying model or transfers to other tasks, models, CLIs, repositories, or organizations.",
+    "A maintainer-authored deterministic evaluator is independent verification.",
+    "Git ancestry independently timestamps private hosted-model calls.",
+    "Token or latency differences in this pilot are stable economic effects."
+  ],
+  "limitations": [
+    "Only eight independent maintainer-authored tasks were scored; confirmation cells are held out from design calibration but not independently authored.",
+    "The hosted provider exposed a model identifier but no immutable model revision.",
+    "The public repository withholds exact tasks, evaluators, candidate workspaces, events, and reusable authentication.",
+    "The task-cluster interval describes this frozen task population and is not a population-level confidence guarantee."
+  ],
+  "invalidation_triggers": [
+    "Any freeze-bound byte, runtime image, private-pack hash, or public effect value differs from the audited artifact.",
+    "A submitted or ambiguous attempt was retried or omitted from the normalized observation set.",
+    "Private task, evaluator, event, credential, or canary bytes cross the public boundary."
+  ],
+  "state": {
+    "experiment": "completed_under_frozen_rule",
+    "artifact": "materialized_and_audited_locally",
+    "repository": "prepared_for_exact_commit",
+    "publication": "prepared_not_published",
+    "deployment": "not_applicable",
+    "outcome": "owner_policy_decision_only; no downstream outcome observed"
+  },
+  "publication_state": "public_ready",
+  "generator": {
+    "name": "ael-completion-integrity-materializer",
+    "version": "0.1"
+  }
+}

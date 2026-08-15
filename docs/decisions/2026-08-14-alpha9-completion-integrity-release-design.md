@@ -1,7 +1,7 @@
 # Alpha.9 is a Completion Integrity decision release
 
 - Date: 2026-08-14
-- Status: implementation architecture accepted; scored execution not started
+- Status: completed as a terminal null result; exact policy rejected
 - Scope: `v0.1.0-alpha.9`, Completion Integrity study, and release boundary
 
 ## Decision
@@ -333,7 +333,17 @@ final freeze-bound code closure, and declares zero scored calls. Revisions 1
 and 2 are retained as invalid pre-execution history and cannot authorize a
 submission.
 
-This closes design admission, not the study. Scored execution, terminal effect,
-owner adoption record, public result projection, exact-commit Git proof, and
-release verification remain outstanding. Nothing in this decision claims an
-observed policy effect.
+## Terminal result
+
+All 52 frozen cells terminated validly with no ambiguous submission or outcome
+retry. Baseline and treatment each produced a `0.375` equal-task-weighted
+false-completion rate, for a primary reduction of `0.000` and a deterministic
+80% task-cluster interval of `[0.000, 0.000]`. All anti-abstention guardrails
+passed, but neither mechanism met the routing rule. The frozen decision is
+`null`; the owner disposition is `reject_exact_policy`, recorded but not
+deployed.
+
+The public bundle, report, and result card retain this negative result. The
+completed study validates the architecture boundary and prospective chain; it
+does not show that the prompt helped. Release publication remains externally
+owned by the exact tag, CI run, release manifest, and GitHub prerelease.

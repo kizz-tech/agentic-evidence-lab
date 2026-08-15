@@ -13,7 +13,8 @@ separate repositories, provenance, versions, and release authority.
 
 ## Current state
 
-The current package line is `v0.1.0-alpha.8`, the claim-first method release.
+The current package line is `v0.1.0-alpha.9`, the Completion Integrity decision
+release. Its exact prompt policy produced a null result and is rejected.
 GitHub Releases owns the latest externally published state; repository prose
 does not prove publication. The project is Apache-2.0 licensed but remains
 pre-stable. Do not claim that a commit is pushed, a tag is released, CI is

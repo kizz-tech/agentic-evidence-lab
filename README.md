@@ -56,6 +56,11 @@ state, and every card separates what a public checkout can verify, what only the
 maintainer can rerun as a new observation, and what has independent replication
 evidence.
 
+The newest result is deliberately negative: the exact Completion Integrity
+prompt policy produced the same `0.375` false-completion rate as baseline on
+the frozen eight-task study, so AEL rejects that exact policy instead of
+promoting plausible-sounding instructions without measured benefit.
+
 ## What AEL helps answer
 
 An agent result is produced by a whole stack:
@@ -141,6 +146,11 @@ uv run ael study preflight \
   --check
 uv run ael results check studies/public-results.json --require-git-proof
 uv run ael study audit \
+  --freeze studies/completion-integrity/freeze.json \
+  --result studies/completion-integrity/results/prompt-policy-v1 \
+  --decision-adapter completion-integrity-prompt-policy-v1 \
+  --require-git-proof
+uv run ael study audit \
   --freeze studies/agent-skills-season-1/screening/property-based-testing-v2.freeze.json \
   --result studies/agent-skills-season-1/results/property-based-testing-v2 \
   --decision-adapter pbt-v2 \
@@ -153,16 +163,17 @@ uv run ael study audit \
 uv run python -m unittest discover -s tests -v
 ```
 
-Expected validation summary for alpha.8:
+Expected example-validation summary for alpha.9:
 
 ```text
 validation passed: 30 document(s); concept=4, evidence_receipt=2,
 measurement_set=2, run_record=18, study_manifest=4
 ```
 
-The study audit additionally checks the freeze, terminal decision, public runs,
-measurements, receipt, and repository artifact ordering as one bundle. The
-explicit PBT v2 decision adapter also recomputes its exact counts and terminal
+The study audits additionally check each freeze, terminal decision, public
+runs, measurements, receipt, and repository artifact ordering as one bundle.
+The Completion Integrity adapter recomputes the 52-cell null result and exact
+policy rejection; the PBT v2 adapter recomputes its counts and terminal
 outcome. Git ancestry proves repository artifact ordering only; it does not
 prove that private model calls occurred before results or reconstruct private
 events. These commands do not rerun historical model calls or independently
@@ -219,7 +230,7 @@ maintainer-reviewed snapshots and maintainer-controlled fixtures; arbitrary
 submissions remain blocked. Read [SECURITY.md](SECURITY.md) and
 [Container runner isolation](docs/runner-isolation.md) before execution.
 
-The `0.1.0a8` development line is pre-stable. It does not claim universal
+The `0.1.0a9` development line is pre-stable. It does not claim universal
 benchmarking, independent verification of Kizz-authored capabilities,
 model-only superiority from stack comparisons, or downstream production
 impact.

@@ -6,11 +6,41 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.0-alpha.9] - 2026-08-15
+
 ### Added
 
-- An accepted alpha.9 Completion Integrity release design that requires a
-  terminal prospective study, keeps study-family policy local, and blocks
-  another framework-only release.
+- The first terminal Study Quality-profiled prospective study: 52 valid
+  Completion Integrity cells, 521 public measurements, a frozen null effect,
+  and a recorded exact-policy rejection.
+- A claim-first Completion Integrity result card, bounded narrative report,
+  public effect/adoption/freeze records, and deterministic receipt rendering.
+- A study-local audit adapter that reconstructs all scheduled cells and
+  recomputes the null decision from public measurements while keeping private
+  tasks, evaluators, candidates, events, and authentication outside Git.
+
+### Changed
+
+- Public results now contain five contextual families and lead with the
+  contradicted Completion Integrity effect claim rather than hiding the null.
+- Study-audit CLI and public rendering accept both generic Contract summaries
+  and richer study-local terminal summaries through one stable projection.
+- The roadmap advances from internal mechanism preparation to outcome closure
+  and role-separated reproduction.
+- Package, release metadata, CI, clean-wheel checks, and generated public
+  surfaces identify `0.1.0a9`.
+
+### Research integrity
+
+- Baseline and treatment false-completion rates were both `0.375`; the frozen
+  reduction and 80% task-cluster interval were both exactly zero, so neither
+  declared mechanism was eligible and the exact prompt policy was rejected.
+- All 52 scheduled cells were retained as valid, with zero ambiguous or outcome
+  retries. Negative, null, failure, and guardrail facts remain visible.
+- Contract v0 schemas and previously released evidence bytes are unchanged.
+- The result is maintainer-evaluated, task-bounded, provider-time-bound, and not
+  an independent replication, universal completion-prompt verdict, stable cost
+  effect, or downstream production outcome.
 
 ## [0.1.0-alpha.8] - 2026-08-14
 

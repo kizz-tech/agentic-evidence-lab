@@ -1,0 +1,10 @@
+{
+  "schema_version": "ael.completion-integrity-result-bindings/0.1-pilot",
+  "freeze_sha256": "e562f7dbcf879a766ec498e3f7547b6a69edb45b4ad7386304f39291868a4942",
+  "observations_sha256": "b12868f826562da0b3e67eaa1ec5c34e17e52719b8373ca182b445d42e35392b",
+  "effect_decision_sha256": "43ab311a8040e3bdd6c72839ab0f372733fc2fdc38629fbd54b681092bc7b71e",
+  "measurement_set_sha256": "f05e0fd232f8b049891fe5c160ec1f3307f4bc5cc0bf7d770d2d578ea9f96949",
+  "evidence_receipt_sha256": "15e77cc5c68c684030d4ab0f89043fe71279ac1baf355f8a7b0a7ac0dd30da23",
+  "adoption_decision_sha256": "0aa1e61ddc32025bb8b9c256066a5345224dbed96056d4802a7c8687d07a3f0f",
+  "preregistration_sha": "d0d506c67e48e1ec4e9921be74ae598bb06a9155"
+}

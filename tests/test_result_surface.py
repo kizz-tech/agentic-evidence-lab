@@ -87,7 +87,7 @@ class ResultSurfaceTests(unittest.TestCase):
         profile_path.write_text(json.dumps(profile, indent=2), encoding="utf-8")
         return profile_path, profile, receipt
 
-    def test_current_four_card_projection_is_deterministic(self) -> None:
+    def test_current_five_card_projection_is_deterministic(self) -> None:
         first = build_result_surface(PROFILE)
         second = build_result_surface(PROFILE)
         self.assertEqual(first, second)
@@ -95,6 +95,7 @@ class ResultSurfaceTests(unittest.TestCase):
             {
                 "RESULTS.md",
                 "docs/results/index.json",
+                "docs/results/completion-integrity-prompt-policy-v1.md",
                 "docs/results/council-generation-1.md",
                 "docs/results/focused-change-verification-calibration.md",
                 "docs/results/property-based-testing-v2.md",
@@ -109,6 +110,7 @@ class ResultSurfaceTests(unittest.TestCase):
         self.assertEqual("ael.public-results/0.5", index["schema_version"])
         self.assertEqual(
             [
+                "completion-integrity-prompt-policy-v1",
                 "council-generation-1",
                 "focused-change-verification-calibration",
                 "property-based-testing-v2",
@@ -143,15 +145,26 @@ class ResultSurfaceTests(unittest.TestCase):
         self.assertIn("not_declared_historical", first["docs/results/property-based-testing-v2.md"])
         self.assertIn("not_assessed_historical", first["docs/results/property-based-testing-v2.md"])
         for card in index["studies"]:
-            self.assertEqual("not_assessed_historical", card["quality"]["status"])
-            self.assertEqual(
-                {"not_assessed_historical"}, set(card["quality"]["quality_axes"].values())
-            )
-            self.assertEqual(
-                "single_valid_observation_per_retained_cell",
-                card["runs"]["repeat_evidence"]["status"],
-            )
-            self.assertEqual("not_reported", card["measurements"]["uncertainty"]["status"])
+            if card["card_id"] == "completion-integrity-prompt-policy-v1":
+                self.assertEqual("current", card["quality"]["quality_axes"]["freshness"])
+                self.assertEqual("audited", card["quality"]["quality_axes"]["task_validity"])
+            else:
+                self.assertEqual("not_assessed_historical", card["quality"]["status"])
+                self.assertEqual(
+                    {"not_assessed_historical"}, set(card["quality"]["quality_axes"].values())
+                )
+            if card["card_id"] == "completion-integrity-prompt-policy-v1":
+                self.assertEqual(
+                    "repeated_valid_observations_per_retained_cell",
+                    card["runs"]["repeat_evidence"]["status"],
+                )
+                self.assertEqual("reported", card["measurements"]["uncertainty"]["status"])
+            else:
+                self.assertEqual(
+                    "single_valid_observation_per_retained_cell",
+                    card["runs"]["repeat_evidence"]["status"],
+                )
+                self.assertEqual("not_reported", card["measurements"]["uncertainty"]["status"])
             sources = card["source_hashes"]
             self.assertEqual(card["receipt"]["sha256"], sources[card["receipt"]["uri"]])
             if "report" in card:
@@ -181,6 +194,15 @@ class ResultSurfaceTests(unittest.TestCase):
         self.assertEqual(21944, totals[("generated_work_tokens", "S1")])
         self.assertEqual(331689, totals[("wall_time", "S0")])
         self.assertEqual(378385, totals[("wall_time", "S1")])
+        completion = next(
+            card
+            for card in index["studies"]
+            if card["card_id"] == "completion-integrity-prompt-policy-v1"
+        )
+        self.assertEqual("reject", completion["decision"]["disposition"])
+        self.assertEqual("contradicted", completion["claims"][0]["status"])
+        self.assertEqual(52, completion["verification"]["audit"]["evidence"]["run_records"])
+        self.assertEqual("null", completion["verification"]["audit"]["result"]["effect_result"])
         pbt = next(
             card for card in index["studies"] if card["card_id"] == "property-based-testing-v2"
         )

@@ -7,8 +7,8 @@ authors:
   - family-names: "Ryuhmanov"
     given-names: "M"
     alias: "ryuhmanov-m"
-version: "0.1.0-alpha.8"
-date-released: 2026-08-14
+version: "0.1.0-alpha.9"
+date-released: 2026-08-15
 license: Apache-2.0
 repository-code: "https://github.com/kizz-tech/agentic-evidence-lab"
 url: "https://github.com/kizz-tech/agentic-evidence-lab"

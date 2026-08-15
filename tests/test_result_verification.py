@@ -15,6 +15,8 @@ from ael.sandbox import SandboxError
 ROOT = Path(__file__).resolve().parents[1]
 PBT_FREEZE = ROOT / "studies/agent-skills-season-1/screening/property-based-testing-v2.freeze.json"
 PBT_RESULT = ROOT / "studies/agent-skills-season-1/results/property-based-testing-v2"
+CI_FREEZE = ROOT / "studies/completion-integrity/freeze.json"
+CI_RESULT = ROOT / "studies/completion-integrity/results/prompt-policy-v1"
 
 
 class ResultVerificationTests(unittest.TestCase):
@@ -52,6 +54,19 @@ class ResultVerificationTests(unittest.TestCase):
                 "systematic-debugging-real-shadow-v1",
                 AuditRequest(PBT_FREEZE, PBT_RESULT, screening_root=ROOT),
             )
+
+    def test_completion_integrity_projection_has_stable_rendering_counts(self) -> None:
+        summary = public_audit_projection(
+            "completion-integrity-prompt-policy-v1",
+            AuditRequest(CI_FREEZE, CI_RESULT, git_root=ROOT),
+        )
+
+        self.assertEqual("passed", summary["status"])
+        self.assertEqual(
+            {"contract_documents": 56, "run_records": 52, "measurements": 521},
+            summary["evidence"],
+        )
+        self.assertEqual("null", summary["result"]["effect_result"])
 
 
 if __name__ == "__main__":

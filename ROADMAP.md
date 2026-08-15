@@ -44,7 +44,7 @@ inspectable; they do not replace it.
   promoting those study-local shapes into stable Contract v0.
 - A hash-bound Study Quality Profile and `ael study preflight` for checking a
   prospective design before scored work.
-- Four bounded, maintainer-evaluated result families, including negative and
+- Five bounded, maintainer-evaluated result families, including negative, null,
   calibration findings; none is an independent replication or general ranking.
 - A separated publication kernel: pure claim policy, one provenance ledger,
   one closed audit-adapter registry, pure rendering and a stable orchestration
@@ -84,50 +84,46 @@ comprehension test and the first prospective use remain empirical falsifiers.
 The unpublished alpha.7 candidate is retained as an implementation input, not a
 fabricated historical release. Alpha.8 superseded it.
 
-## Next release target: alpha.9 Completion Integrity
+## Empirical release: alpha.9 Completion Integrity
 
-Alpha.9 is admitted only as a terminal empirical study release, not another
-method, framework, or preparation release. Its accepted design is recorded in
-[the Completion Integrity release decision](docs/decisions/2026-08-14-alpha9-completion-integrity-release-design.md).
+Alpha.9 completes the first prospective use of the alpha.8 claim-first method.
+The exact appended prompt policy did not change false completion on the frozen
+eight-task population: `0.375` for both baseline and treatment, a `0.000`
+reduction with a deterministic 80% task-cluster interval of `[0.000, 0.000]`.
+All 52 scheduled calls were valid, all guardrails passed, neither mechanism was
+route-eligible, and the frozen owner rule rejected the exact policy.
 
-> Can a coding agent reliably tell when the requested work is actually complete?
+The result is progress because it prevents a plausible but ineffective prompt
+from becoming the default. It also narrows the next Completion Integrity
+hypothesis: a stronger intervention must change execution state or verification
+behavior, not merely add the same class of completion advice. That hypothesis
+is not yet evidence and does not authorize a larger run.
 
-The desired output is a tested completion policy and routing rule, or an honest
-finding that the candidate did not improve false-completion behavior. Final
-repository state and user-level acceptance remain primary; confident prose is
-not success.
+Alpha.9 adds no Contract object, universal completion claim, model ranking, or
+independent replication. The full design and terminal result are recorded in
+[the Completion Integrity decision](docs/decisions/2026-08-14-alpha9-completion-integrity-release-design.md)
+and [result report](reports/2026-08-15-completion-integrity-prompt-policy-v1.md).
 
-The existing Season 1 **Truthful Completion** protocol tests one pinned skill
-and reached a baseline ceiling during sacrificial calibration. A prompt-only
-successor therefore needs a distinct study identity and exact intervention.
-Before any scored call, unscored calibration must demonstrate:
+## Next major release: outcome closure and external challenge
 
-- non-zero baseline failure opportunity without exposing the hidden answer;
-- deterministic ownership of completion and regression outcomes;
-- one exact prompt or workflow delta;
-- audited task/evaluator evidence and multiple declared strata;
-- one material predeclared owner decision;
-- blocked or randomized repeated execution, a paraphrase perturbation,
-  retained failures, uncertainty, and an untouched confirmation subset.
+The next release should improve the weakest current predicates rather than add
+another internal mechanism study. It has two ordered deliverables:
 
-If discrimination fails, redesign or stop. Do not turn a ceiling into an
-effectiveness result or publish a preflight-only alpha.9.
-
-## Evidence sequence after alpha.8
-
-1. **First prospective profiled study.** If Completion Integrity passes its
-   no-call gate, execute the repeated prompt-only comparison and publish the
-   positive, negative, null, or invalid result without changing the frozen rule.
-2. **Outcome closure.** Complete the scheduled Systematic Debugging follow-up,
+1. **Outcome closure.** Complete the scheduled Systematic Debugging follow-up,
    recording an observation or an explicit missing/cancelled state.
-3. **Role-separated reproduction.** Reproduce one eligible exact decision with
+2. **Role-separated reproduction.** Reproduce one eligible exact decision with
    separated operator, task, or evaluator ownership; a maintainer rerun remains
    a different predicate.
-4. **Second study family.** Apply the same method to one licensed third-party
+3. **Second prospective family.** Apply the method to one licensed third-party
    coding skill and publish a task-specific `use / skip / escalate` rule.
-5. **Method fitness review.** Test whether preflight and claim-first cards
+4. **Method fitness review.** Test whether preflight and claim-first cards
    changed admission, interpretation, or owner action. Remove fields that only
    created ceremony.
+
+The release is not admitted by more framework code. It must close at least one
+real downstream outcome or add one genuinely role-separated reproduction. If
+neither can be obtained, publish the explicit missing state and do not relabel
+a maintainer rerun as independence.
 
 Only after those steps should AEL consider:
 
@@ -151,8 +147,9 @@ one serious decision question
 ```
 
 Method-only releases are exceptions. They require a named instrument defect
-that blocks or distorts the next important answer. Alpha.8 is such an exception;
-method volume is not product progress by itself.
+that blocks or distorts the next important answer. Alpha.8 was such an
+exception; alpha.9 demonstrates why method volume is not product progress by
+itself.
 
 ## Beta evidence gates
 

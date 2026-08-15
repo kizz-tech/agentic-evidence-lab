@@ -1,8 +1,78 @@
 {
   "schema_version": "ael.public-results/0.5",
-  "as_of": "2026-08-14",
+  "as_of": "2026-08-15",
   "projection_policy": "ael.publication-projection/0.5",
   "studies": [
+    {
+      "card_id": "completion-integrity-prompt-policy-v1",
+      "title": "Completion Integrity prompt policy v1",
+      "catalog_state": "listed",
+      "maintainer_rerun": {
+        "status": "maintainer_only_new_observation",
+        "boundary": "A new maintainer-controlled execution could reuse retained private inputs, but it would observe a new provider state and would not constitute independent replication."
+      },
+      "receipt_ref": {
+        "uri": "studies/completion-integrity/results/prompt-policy-v1/evidence-receipt.json",
+        "sha256": "15e77cc5c68c684030d4ab0f89043fe71279ac1baf355f8a7b0a7ac0dd30da23"
+      },
+      "report_ref": {
+        "uri": "reports/2026-08-15-completion-integrity-prompt-policy-v1.md",
+        "sha256": "d425962e34110d03d4406bcb8ae76649283cf4da52543ca4bfe27e32a796ce4b"
+      },
+      "claim_ids": [
+        "AEL-CI9-01",
+        "AEL-CI9-02"
+      ],
+      "decision_claim_ids": [
+        "AEL-CI9-01"
+      ],
+      "verification": {
+        "kind": "frozen_public_bundle",
+        "command": [
+          "uv run ael study audit --freeze studies/completion-integrity/freeze.json --result studies/completion-integrity/results/prompt-policy-v1 --decision-adapter completion-integrity-prompt-policy-v1 --require-git-proof"
+        ],
+        "boundary": "Validates the public Contract v0 graph, exact freeze and preregistration bindings, recomputes the frozen null decision from normalized measurements, and verifies repository artifact ordering. It does not reveal or rerun private tasks, evaluators, candidates, events, authentication, or hosted calls, and it is not independent replication.",
+        "freeze_ref": {
+          "uri": "studies/completion-integrity/freeze.json",
+          "sha256": "e562f7dbcf879a766ec498e3f7547b6a69edb45b4ad7386304f39291868a4942"
+        },
+        "result_root": "studies/completion-integrity/results/prompt-policy-v1",
+        "adapter": "completion-integrity-prompt-policy-v1"
+      },
+      "materials": [
+        {
+          "label": "Private tasks, evaluators, candidates, and raw execution bytes",
+          "availability": "withheld",
+          "reason": "Exact fixtures, evaluator code, candidate workspaces, raw events, and attempt journals remain in the private evidence boundary.",
+          "reproduction_impact": "A public checkout can recompute the decision from normalized records and verify opaque hashes but cannot rerun the exact 52 cells."
+        },
+        {
+          "label": "Hosted model calls",
+          "availability": "not_retained",
+          "reason": "The public graph retains normalized run records rather than a replayable provider execution service or immutable model revision.",
+          "reproduction_impact": "The exact historical provider behavior cannot be replayed from the repository."
+        },
+        {
+          "label": "Reusable authentication",
+          "availability": "not_collected",
+          "reason": "Reusable credentials are excluded from public evidence and release artifacts.",
+          "reproduction_impact": "Public audit requires no credentials; any new hosted observation requires separately authorized authentication."
+        }
+      ],
+      "history": {
+        "admission": "not_declared_historical",
+        "action": "not_declared_historical",
+        "outcome_follow_up": "not_declared_historical",
+        "freshness": "unassessed"
+      },
+      "quality": {
+        "assessment": "profiled",
+        "profile_ref": {
+          "uri": "studies/completion-integrity/quality-profile.json",
+          "sha256": "9cd4ac799b49e2a21505f8e25afd01a541327d6fbe35852fa27dce0329322f05"
+        }
+      }
+    },
     {
       "card_id": "systematic-debugging-real-shadow-v1",
       "title": "Systematic Debugging real-shadow v1",
