@@ -28,6 +28,11 @@ SPEC.loader.exec_module(TOOL)
 SHA = "a" * 64
 
 
+def temporary_directory() -> tempfile.TemporaryDirectory[str]:
+    directory = "/private/tmp" if Path("/private/tmp").is_dir() else None
+    return tempfile.TemporaryDirectory(dir=directory)
+
+
 def valid_task(
     task_id: str = "CI2-01",
     *,
@@ -389,7 +394,7 @@ class TaskSupplyAdapterTests(unittest.TestCase):
         (root / "pack.json").write_text(json.dumps(value, indent=2) + "\n", encoding="utf-8")
 
     def test_private_pack_adapter_verifies_hashes(self) -> None:
-        with tempfile.TemporaryDirectory(dir="/private/tmp") as temporary:
+        with temporary_directory() as temporary:
             root = Path(temporary)
             self._write_pack(root)
             result = TOOL.check_supply(root)
@@ -397,7 +402,7 @@ class TaskSupplyAdapterTests(unittest.TestCase):
             self.assertEqual(1, result["candidate_roots"])
 
     def test_private_pack_adapter_rejects_hash_drift(self) -> None:
-        with tempfile.TemporaryDirectory(dir="/private/tmp") as temporary:
+        with temporary_directory() as temporary:
             root = Path(temporary)
             self._write_pack(root)
             artifact = root / "tasks" / "CI2-01" / "artifacts" / "fixture.txt"
@@ -407,7 +412,7 @@ class TaskSupplyAdapterTests(unittest.TestCase):
             self.assertTrue(any("hash mismatch" in issue for issue in result["issues"]))
 
     def test_private_pack_adapter_rejects_symlink(self) -> None:
-        with tempfile.TemporaryDirectory(dir="/private/tmp") as temporary:
+        with temporary_directory() as temporary:
             root = Path(temporary)
             self._write_pack(root)
             artifact = root / "tasks" / "CI2-01" / "artifacts" / "fixture.txt"
@@ -417,14 +422,14 @@ class TaskSupplyAdapterTests(unittest.TestCase):
                 TOOL.check_supply(root)
 
     def test_strict_json_rejects_duplicate_keys(self) -> None:
-        with tempfile.TemporaryDirectory(dir="/private/tmp") as temporary:
+        with temporary_directory() as temporary:
             path = Path(temporary) / "duplicate.json"
             path.write_text('{"a": 1, "a": 2}\n', encoding="utf-8")
             with self.assertRaises(SandboxError):
                 TOOL._load_json(path)
 
     def test_assessment_output_cannot_mutate_private_pack_root(self) -> None:
-        with tempfile.TemporaryDirectory(dir="/private/tmp") as temporary:
+        with temporary_directory() as temporary:
             root = Path(temporary)
             with self.assertRaisesRegex(SandboxError, "outside"):
                 TOOL._require_external_output(root, root / "assessment.json")
