@@ -7,6 +7,7 @@ from pathlib import Path
 from ael.sandbox import SandboxError
 from tools.completion_integrity_activation_support import (
     assess_executor_claim,
+    parse_codex_events,
     parse_task_requirements,
 )
 
@@ -62,6 +63,26 @@ def executor_output(command: str) -> dict[str, object]:
 
 
 class ActivationSupportTests(unittest.TestCase):
+    def test_codex_web_search_duplicate_ids_are_preserved_but_other_duplicates_fail(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "events.jsonl"
+            path.write_text(
+                '{"type":"item.completed","item":{"id":"item_1","type":"web_search","id":"exec_1","query":"x"}}\n'
+                '{"type":"turn.completed","usage":{}}\n',
+                encoding="utf-8",
+            )
+            parsed = parse_codex_events(path)
+            self.assertEqual(
+                ["item_1", "exec_1"],
+                parsed["events"][0]["item"]["_ael_duplicate_id_values"],
+            )
+            path.write_text(
+                '{"type":"turn.completed","type":"turn.completed","usage":{}}\n',
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(SandboxError, "duplicate JSON key"):
+                parse_codex_events(path)
+
     def test_requirement_parser_accepts_only_explicit_unique_contract_lines(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             path = Path(temporary) / "TASK.md"

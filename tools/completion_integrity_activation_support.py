@@ -67,6 +67,24 @@ def _pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
     return result
 
 
+def _codex_event_pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    duplicates: dict[str, list[Any]] = {}
+    for key, value in pairs:
+        if key in result:
+            duplicates.setdefault(key, [result[key]]).append(value)
+            continue
+        result[key] = value
+    if duplicates:
+        if set(duplicates) != {"id"} or result.get("type") != "web_search":
+            raise ValueError(f"duplicate JSON key: {sorted(duplicates)[0]}")
+        values = duplicates["id"]
+        if any(not isinstance(value, str) or not value for value in values):
+            raise ValueError("duplicate web_search id values must be non-empty strings")
+        result["_ael_duplicate_id_values"] = values
+    return result
+
+
 def load_json(path: Path) -> dict[str, Any]:
     if path.is_symlink() or not path.is_file():
         raise SandboxError(f"required JSON is missing or unsafe: {path}")
@@ -162,7 +180,7 @@ def parse_codex_events(path: Path) -> dict[str, Any]:
                 line,
                 parse_constant=_reject_constant,
                 parse_float=_reject_float,
-                object_pairs_hook=_pairs,
+                object_pairs_hook=_codex_event_pairs,
             )
         except (json.JSONDecodeError, ValueError) as exc:
             raise SandboxError(f"Codex JSONL line {line_number} is invalid: {exc}") from exc

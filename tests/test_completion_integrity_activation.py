@@ -6,6 +6,7 @@ import unittest
 from ael.completion_integrity_activation import (
     ACTIVATION_SCHEMA_VERSION,
     decide_activation,
+    decision_id_from_study_id,
     decision_measurements,
     validate_observations,
 )
@@ -55,6 +56,25 @@ def observations() -> dict[str, object]:
 
 
 class CompletionIntegrityActivationTests(unittest.TestCase):
+    def test_versioned_study_identity_maps_to_versioned_decision_identity(self) -> None:
+        self.assertEqual(
+            "kizz:ael:completion-integrity:activation-v2",
+            decision_id_from_study_id("kizz:ael:study:completion-integrity-activation-v2"),
+        )
+        for invalid in (
+            "kizz:ael:study:completion-integrity-activation-v0",
+            "kizz:ael:study:completion-integrity-activation-vx",
+            "other",
+            None,
+        ):
+            with self.subTest(invalid=invalid), self.assertRaises(ValueError):
+                decision_id_from_study_id(invalid)
+        with self.assertRaisesRegex(ValueError, "positive integer"):
+            decide_activation(
+                observations(),
+                decision_id="kizz:ael:completion-integrity:activation-vx",
+            )
+
     def test_complete_activation_adopts_adapter_without_superiority_claim(self) -> None:
         decision = decide_activation(observations())
         self.assertEqual("complete", decision["status"])

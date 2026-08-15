@@ -1,0 +1,10 @@
+{
+  "decision_sha256": "48ab38610d5fe6f471a5748896974afcac7634ab78e7272288feff91dc0c2cec",
+  "freeze_id": "kizz:ael:completion-integrity:activation-v1:freeze:1",
+  "freeze_sha256": "a534260fd83dd7312c260788992ec8cb82666de9fb0dd44ed1da5d27e7494b17",
+  "observations_sha256": "6db8e90fdaf4d14cbb288b35d7f9974db65d96e6bef540aa2bb8de3b7ebff505",
+  "preregistration_sha": "d70a92e025270b2ef0964fec8450ad169557d698",
+  "private_pack_sha256": "1cd88053e1ad0a4827156f091d967b19de04abee9987f924de054092b5efa0a7",
+  "qualification_sha256": "84b4926b374a4a6739e07708c4b4f1a33978f14c0ee0286a92755ab50d80fd52",
+  "schema_version": "ael.completion-integrity-activation-freeze-ref/0.1-pilot"
+}

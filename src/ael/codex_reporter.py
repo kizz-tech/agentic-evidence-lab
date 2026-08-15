@@ -15,6 +15,23 @@ DEFAULT_REPORTER_IMAGE = "kizz/ael-codex-reporter:0.146.0"
 DEFAULT_MODEL = "gpt-5.6-sol"
 DEFAULT_REASONING_EFFORT = "xhigh"
 DEFAULT_TIMEOUT_SECONDS = 900
+REPORTER_DISABLED_FEATURES = (
+    "apps",
+    "auth_elicitation",
+    "browser_use",
+    "computer_use",
+    "goals",
+    "image_generation",
+    "in_app_browser",
+    "multi_agent",
+    "plugin_sharing",
+    "plugins",
+    "remote_plugin",
+    "skill_search",
+    "tool_call_mcp_elicitation",
+    "tool_suggest",
+    "workspace_dependencies",
+)
 
 
 def reporter_command(model: str, reasoning_effort: str, *, prompt: str) -> list[str]:
@@ -23,7 +40,9 @@ def reporter_command(model: str, reasoning_effort: str, *, prompt: str) -> list[
     The CLI still has its built-in command tool.  The capability boundary is
     therefore evidence-only and non-mutating, not tool-free: the process starts
     in the read-only evidence mount, has no task/evaluator/executor workspace,
-    requests the Codex read-only sandbox, and emits one schema-bound final file.
+    disables optional app/plugin/browser surfaces, relies on the outer hardened
+    container rather than an incompatible nested Linux sandbox, and emits one
+    schema-bound final file.
     """
 
     if not model.strip():
@@ -42,7 +61,7 @@ def reporter_command(model: str, reasoning_effort: str, *, prompt: str) -> list[
         "--strict-config",
         "--skip-git-repo-check",
         "--sandbox",
-        "read-only",
+        "danger-full-access",
         "--model",
         model,
         "--config",
@@ -53,6 +72,7 @@ def reporter_command(model: str, reasoning_effort: str, *, prompt: str) -> list[
         'approval_policy="never"',
         "--color",
         "never",
+        *[value for feature in REPORTER_DISABLED_FEATURES for value in ("--disable", feature)],
         "--output-schema",
         "/fixture/reporter-output-schema.json",
         "--output-last-message",

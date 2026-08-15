@@ -1,0 +1,81 @@
+{
+  "condition_id": "T1",
+  "effects": [
+    {
+      "effect_type": "terminal_claim_report",
+      "evidence_refs": [
+        {
+          "sha256": "a534260fd83dd7312c260788992ec8cb82666de9fb0dd44ed1da5d27e7494b17",
+          "uri": "../../freeze.json",
+          "visibility": "public"
+        }
+      ],
+      "outcome": "unknown",
+      "target": "urn:kizz:ael:private:reporter:CI2-PY-01-T1"
+    }
+  ],
+  "event_summary": {
+    "authenticated_actor_ids": [],
+    "captured": false,
+    "event_count": 0,
+    "limitations": [
+      "Raw Codex events are retained privately; this record exposes hashes and counts only."
+    ]
+  },
+  "integrity_issues": [
+    "cell was not submitted"
+  ],
+  "object_type": "run_record",
+  "outputs": [],
+  "repeat_index": 1,
+  "run_id": "kizz:ael:run:completion-integrity:activation-v1:CI2-PY-01-T1",
+  "runtime": {
+    "context_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "environment": {
+      "digest": "afcc47533056678c8c0e2729437dc0152f38c1a1d127f0af9d520ba8378968aa",
+      "ephemeral": true,
+      "identity_available": true
+    },
+    "harness": {
+      "name": "codex-cli",
+      "version": "0.146.0"
+    },
+    "model": {
+      "effort": "xhigh",
+      "immutable_revision_exposed": false,
+      "model_id": "gpt-5.6-sol",
+      "provider": "OpenAI"
+    },
+    "sandbox": "docker-read-only-evidence-openai-proxy",
+    "tool_policy_sha256": "e673fb8518d1a2668df0cbadff7941b2e1ee4619b4b2bf684369cb87dcb3cdce"
+  },
+  "schema_version": "ael.run-record/0.1",
+  "source_refs": [
+    {
+      "sha256": "a534260fd83dd7312c260788992ec8cb82666de9fb0dd44ed1da5d27e7494b17",
+      "uri": "../../freeze.json",
+      "visibility": "public"
+    }
+  ],
+  "status": "unrun",
+  "study_ref": {
+    "revision": 1,
+    "sha256": "c1a249142a83afbf782e5e1f9dce85d1588f41f11e2714bbee3e518197dda2f9",
+    "study_id": "kizz:ael:study:completion-integrity-activation-v1",
+    "uri": "../../study-manifest.json",
+    "visibility": "public"
+  },
+  "task": {
+    "role": "calibration",
+    "stratum": "python-cli",
+    "task_id": "CI2-PY-01",
+    "task_pack_id": "completion-integrity-v2-activation"
+  },
+  "usage": {
+    "cached_input_tokens": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "reasoning_output_tokens": 0,
+    "wall_time_ms": 0
+  }
+}

@@ -11,7 +11,9 @@ from ael.sandbox import SandboxError, run_container, tree_sha256
 PROBE_SCHEMA = "ael.completion-integrity-reporter-capability/0.1-pilot"
 
 
-def probe_reporter(raw_root: Path, output: Path, *, image: str) -> dict[str, object]:
+def probe_reporter(raw_root: Path, output: Path, *, image: str, study_id: str) -> dict[str, object]:
+    if not study_id.startswith("kizz:ael:study:completion-integrity-activation-v"):
+        raise SandboxError("reporter probe study identity is invalid")
     raw_root = raw_root.absolute()
     output = output.absolute()
     if raw_root.is_symlink() or (raw_root.exists() and any(raw_root.iterdir())):
@@ -51,7 +53,7 @@ def probe_reporter(raw_root: Path, output: Path, *, image: str) -> dict[str, obj
     )
     document: dict[str, object] = {
         "schema_version": PROBE_SCHEMA,
-        "probe_id": "kizz:ael:completion-integrity:activation-v1:reporter-boundary",
+        "probe_id": f"{study_id}:reporter-boundary",
         "status": "pass" if passed else "fail",
         "image": image,
         "image_id": result.image_id,
@@ -84,9 +86,18 @@ def main() -> int:
     parser.add_argument("--raw-root", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--image", default=DEFAULT_REPORTER_IMAGE)
+    parser.add_argument(
+        "--study-id",
+        default="kizz:ael:study:completion-integrity-activation-v1",
+    )
     args = parser.parse_args()
     try:
-        document = probe_reporter(args.raw_root, args.output, image=args.image)
+        document = probe_reporter(
+            args.raw_root,
+            args.output,
+            image=args.image,
+            study_id=args.study_id,
+        )
     except SandboxError as exc:
         print(f"reporter capability probe failed: {exc}")
         return 1

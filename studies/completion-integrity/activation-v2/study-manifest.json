@@ -1,0 +1,223 @@
+{
+  "schema_version": "ael.study-manifest/0.1",
+  "object_type": "study_manifest",
+  "study_id": "kizz:ael:study:completion-integrity-activation-v2",
+  "revision": 2,
+  "status": "frozen",
+  "frozen_at": "2026-08-15T16:22:58Z",
+  "decision_question": "After repairing only the provider-incompatible response-schema boundary exposed by activation v1, can the versioned Completion Integrity capture and reporter boundary activate on two qualified sacrificial Codex task roots, and is the structured reporter accurate on both roots without being descriptively worse than the minimal reporter?",
+  "comparison_mode": "controlled_factor",
+  "primary_estimand": {
+    "name": "exact two-root reporter agreement vector",
+    "description": "Record B0 and T1 terminal-claim agreement separately on each frozen sacrificial task root; the vector is descriptive and is not a population-effect estimate.",
+    "unit_of_analysis": "independent sacrificial task root",
+    "aggregation": "Exact counts by condition across two roots, with no inferential interval and no compensation for protocol failures."
+  },
+  "concept_ref": {
+    "concept_id": "kizz:ael:concept:completion-integrity",
+    "revision": 1,
+    "uri": "../concept.json",
+    "sha256": "1aca3c9b3925293c240e0cdfdd1b2c3590e9c7702d66d00a05244e379e45255f",
+    "visibility": "public"
+  },
+  "conditions": [
+    {
+      "condition_id": "E0",
+      "label": "Common upstream Codex executor",
+      "role": "control",
+      "intervention_class": "workflow",
+      "intervention_ref": {
+        "uri": "prompts/executor.txt",
+        "sha256": "22d75d5722b685768c657ce8be1024a33ca5f78257082dee5848bc1a0db7dab7",
+        "revision": "executor-v2",
+        "visibility": "public"
+      },
+      "changed_factors": [],
+      "delta_from_baseline": "Common upstream artifact-producing call; not part of the B0/T1 reporter comparison."
+    },
+    {
+      "condition_id": "B0",
+      "label": "Minimal evidence-only reporter",
+      "role": "baseline",
+      "intervention_class": "prompt",
+      "intervention_ref": {
+        "uri": "prompts/reporter-B0.txt",
+        "sha256": "7ee63ebd36a45e67e08e3f2744a00fdf407d664a5f065d4b2454306362ecc983",
+        "revision": "reporter-B0-v2",
+        "visibility": "public"
+      },
+      "changed_factors": [],
+      "delta_from_baseline": "Reference reporter instruction over the shared sealed evidence packet and shared output schema."
+    },
+    {
+      "condition_id": "T1",
+      "label": "Structured requirement-reconciliation reporter",
+      "role": "treatment",
+      "intervention_class": "prompt",
+      "intervention_ref": {
+        "uri": "prompts/reporter-T1.txt",
+        "sha256": "e673fb8518d1a2668df0cbadff7941b2e1ee4619b4b2bf684369cb87dcb3cdce",
+        "revision": "reporter-T1-v2",
+        "visibility": "public"
+      },
+      "changed_factors": [
+        "explicit_non_compensating_requirement_reconciliation"
+      ],
+      "delta_from_baseline": "Adds a fixed requirement-by-requirement reconciliation procedure; model, effort, evidence bytes, output schema, image, budget, and capability boundary remain matched."
+    }
+  ],
+  "task_packs": [
+    {
+      "task_pack_id": "completion-integrity-v2-activation",
+      "revision": 3,
+      "role": "calibration",
+      "strata": [
+        "explicit-multipart-cli-contract",
+        "code-schema-cli-docs-sync"
+      ],
+      "artifact_ref": {
+        "uri": "urn:kizz:ael:private-pack:completion-integrity-v2-activation:revision:3",
+        "sha256": "1cd88053e1ad0a4827156f091d967b19de04abee9987f924de054092b5efa0a7",
+        "revision": 3,
+        "visibility": "hidden"
+      },
+      "contamination_notes": [
+        "Both roots are maintainer-authored sacrificial calibration artifacts and were adapted during qualification; neither root is a scored screening or confirmation unit.",
+        "The executed qualification receipt binds eight known-state cases per root, including two valid solutions and five mandatory mutant classes.",
+        "Activation v1 exposed only a provider schema incompatibility before model generation; it supplied no task or reporter outcome used to adapt these roots."
+      ]
+    }
+  ],
+  "budget": {
+    "status": "matched_policy",
+    "description": "B0 and T1 share the exact model, effort, sealed evidence, schema, reporter image, and limits. The executor is a common upstream calibration call, not a comparison condition.",
+    "dimensions": [
+      {
+        "metric": "model_calls",
+        "unit": "calls",
+        "scope": "complete activation schedule",
+        "rule": "Submit each frozen cell at most once; no resume or outcome retry after submission.",
+        "limit": 6,
+        "source": "frozen activation schedule"
+      },
+      {
+        "metric": "executor_wall_time",
+        "unit": "seconds",
+        "scope": "each executor call",
+        "rule": "A timeout is retained as an ambiguous protocol stop.",
+        "limit": 1800,
+        "source": "frozen runtime budget"
+      },
+      {
+        "metric": "reporter_wall_time",
+        "unit": "seconds",
+        "scope": "each reporter call",
+        "rule": "A timeout is retained as an ambiguous protocol stop.",
+        "limit": 900,
+        "source": "frozen runtime budget"
+      }
+    ]
+  },
+  "adaptation_boundary": {
+    "candidate_freeze_required": true,
+    "runner_up_substitution": "forbidden",
+    "description": "After preregistration, do not repair or replace a task, evaluator, prompt, schema, adapter, image, model, schedule, budget, capture rule, claim rule, or owner decision in response to observed output."
+  },
+  "selection_rules": [
+    "This calibration governs only whether the versioned adapter and structured reporter design may enter a larger alpha.12 pilot.",
+    "Eligibility requires complete capture on both roots, valid and isolated reporter execution in all four cells, T1 agreement on both roots, and no lower T1 agreement count than B0.",
+    "No effect size, reliability, model superiority, transfer, production, or independent-reproduction claim may be selected from two roots."
+  ],
+  "stop_rules": [
+    "Stop before execution if any freeze binding differs from its current bytes or image identity.",
+    "Stop after any ambiguous submission, timeout without terminal evidence, credential persistence, evidence mutation, forbidden reporter mount exposure, evaluator operational failure, or output-limit breach.",
+    "Never retry or resume a submitted cell; preserve negative, null, harmful, invalid, missing, and partial outcomes."
+  ],
+  "roles": [
+    {
+      "role": "concept_owner",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    },
+    {
+      "role": "artifact_author",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    },
+    {
+      "role": "task_pack_owner",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    },
+    {
+      "role": "runner_operator",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    },
+    {
+      "role": "evaluator",
+      "actor_id": "kizz-ael-maintainer-completion-integrity-oracle",
+      "organization": "Kizz",
+      "independence_group": "maintainer-evaluation"
+    },
+    {
+      "role": "decision_owner",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    },
+    {
+      "role": "receipt_signer",
+      "actor_id": "kizz-ael-maintainer",
+      "organization": "Kizz",
+      "independence_group": "maintainer"
+    }
+  ],
+  "independence_claim": {
+    "label": "maintainer_evaluated",
+    "role_overlaps": [
+      "Kizz authored the method, sacrificial tasks, deterministic evaluators, adapters, analysis, and owner decision; no independent selection, evaluation, or replication exists."
+    ]
+  },
+  "analysis_plan": {
+    "uri": "analysis-plan.md",
+    "sha256": "1a1050a7864f40c50e4c243bdedab1435b145a951a5a06c7bb06edc4e3250348",
+    "visibility": "public"
+  },
+  "source_refs": [
+    {
+      "uri": "protocol.json",
+      "sha256": "2bd5439585ed1991ac0e6498c996c12de0f606908f180866df8ed32b25de8b08",
+      "visibility": "public"
+    },
+    {
+      "uri": "capability-probe.json",
+      "sha256": "beaf82e02b3bd4aa354398e861fd76b063cb3fea076bb3df93d9a774b15463b7",
+      "visibility": "public"
+    },
+    {
+      "uri": "schema-capability-probe.json",
+      "sha256": "a8b1df6d0cc05b351eb705116e6f53af181df1da7bbcea0aaa9a7e719a0471f7",
+      "visibility": "public"
+    },
+    {
+      "uri": "executor-output-schema.json",
+      "sha256": "ee4eb95578a590d9c165f7fe0a1409366a3d03e4353db73648687557ec627a20",
+      "visibility": "public"
+    },
+    {
+      "uri": "reporter-output-schema.json",
+      "sha256": "b3dc8453825afd55a37acb8f4f97b3b472f34e13a28cb8ae585845ce0eb8369e",
+      "visibility": "public"
+    },
+    {
+      "uri": "../activation-v1/results/decision.json",
+      "sha256": "48ab38610d5fe6f471a5748896974afcac7634ab78e7272288feff91dc0c2cec",
+      "visibility": "public"
+    }
+  ]
+}

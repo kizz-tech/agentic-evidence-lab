@@ -1,4 +1,4 @@
-"""Fail-closed public audit for Completion Integrity activation v1."""
+"""Fail-closed public audit for a versioned Completion Integrity activation."""
 
 from __future__ import annotations
 
@@ -10,6 +10,7 @@ from typing import Any
 
 from ael.completion_integrity_activation import (
     decide_activation,
+    decision_id_from_study_id,
     decision_measurements,
     validate_observations,
 )
@@ -96,15 +97,13 @@ def _verify_freeze_refs(freeze: Mapping[str, Any], repository_root: Path) -> Non
             _fail(f"frozen public reference differs: {relative}")
 
 
-def _verify_contract(*, repository_root: Path, result_root: Path) -> tuple[int, int, int]:
+def _verify_contract(
+    *, repository_root: Path, freeze_path: Path, result_root: Path
+) -> tuple[int, int, int]:
     run_paths = sorted((result_root / "runs").glob("*.json"))
     paths = [
         repository_root / "studies" / "completion-integrity" / "concept.json",
-        repository_root
-        / "studies"
-        / "completion-integrity"
-        / "activation-v1"
-        / "study-manifest.json",
+        freeze_path.parent / "study-manifest.json",
         *run_paths,
         result_root / "measurement-set.json",
         result_root / "evidence-receipt.json",
@@ -117,9 +116,13 @@ def _verify_contract(*, repository_root: Path, result_root: Path) -> tuple[int, 
 
 
 def _verify_decision_measurements(
-    decision: Mapping[str, Any], measurement_set: Mapping[str, Any]
+    decision: Mapping[str, Any],
+    measurement_set: Mapping[str, Any],
+    *,
+    study_revision: int,
 ) -> None:
-    expected = {f"ci11:{metric}": value for metric, value in decision_measurements(decision)}
+    prefix = "ci11" if study_revision == 1 else f"ci11-r{study_revision}"
+    expected = {f"{prefix}:{metric}": value for metric, value in decision_measurements(decision)}
     observed: dict[str, object] = {}
     for measurement in measurement_set.get("measurements", []):
         if not isinstance(measurement, Mapping):
@@ -163,8 +166,10 @@ def audit_completion_integrity_activation_bundle(
     freeze = _load(freeze_path)
     if freeze.get("schema_version") != FREEZE_SCHEMA:
         _fail("freeze schema version differs")
-    if freeze.get("study_id") != "kizz:ael:study:completion-integrity-activation-v1":
-        _fail("freeze study identity differs")
+    try:
+        decision_id = decision_id_from_study_id(freeze.get("study_id"))
+    except ValueError as exc:
+        _fail(str(exc))
     _verify_freeze_refs(freeze, repository_root)
     required = {
         "observations.json",
@@ -176,7 +181,7 @@ def audit_completion_integrity_activation_bundle(
     if not required.issubset({path.name for path in result_root.iterdir() if path.is_file()}):
         _fail("result root lacks a required public document")
     observations = validate_observations(_load(result_root / "observations.json"))
-    decision = decide_activation(observations)
+    decision = decide_activation(observations, decision_id=decision_id)
     if _load(result_root / "decision.json") != decision:
         _fail("terminal decision does not recompute from public observations")
     if observations["freeze_sha256"] != sha256_path(freeze_path):
@@ -201,18 +206,28 @@ def audit_completion_integrity_activation_bundle(
     if [path.stem for path in run_paths] != sorted(expected_cells):
         _fail("public run identities differ from frozen schedule")
     measurement_set = _load(result_root / "measurement-set.json")
-    _verify_decision_measurements(decision, measurement_set)
+    revision = freeze.get("study_revision")
+    if not isinstance(revision, int) or revision < 1:
+        _fail("freeze study revision is invalid")
+    _verify_decision_measurements(
+        decision,
+        measurement_set,
+        study_revision=revision,
+    )
     receipt = _load(result_root / "evidence-receipt.json")
+    claim_prefix = "AEL-CI11" if revision == 1 else f"AEL-CI11-R{revision}"
     if [claim.get("claim_id") for claim in receipt.get("evaluated_claims", [])] != [
-        "AEL-CI11-01",
-        "AEL-CI11-02",
+        f"{claim_prefix}-01",
+        f"{claim_prefix}-02",
     ]:
         _fail("receipt claim set differs from the bounded activation surface")
     unsupported = receipt.get("unsupported_inferences")
     if not isinstance(unsupported, list) or len(unsupported) < 5:
         _fail("receipt does not preserve the activation claim ceiling")
     documents, run_count, measurement_count = _verify_contract(
-        repository_root=repository_root, result_root=result_root
+        repository_root=repository_root,
+        freeze_path=freeze_path,
+        result_root=result_root,
     )
     _scan_public(result_root)
     preregistration = {

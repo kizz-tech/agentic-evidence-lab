@@ -68,6 +68,14 @@ jobs:
             --result studies/completion-integrity/results/prompt-policy-v1 \
             --decision-adapter completion-integrity-prompt-policy-v1 \
             --require-git-proof
+          uv run ael validate \
+            studies/completion-integrity/concept.json \
+            studies/completion-integrity/activation-v2/study-manifest.json
+          uv run ael study audit \
+            --freeze studies/completion-integrity/activation-v1/freeze.json \
+            --result studies/completion-integrity/activation-v1/results \
+            --decision-adapter completion-integrity-activation-v1 \
+            --require-git-proof
       - name: Validate Agent Skills Season 1
         run: |
           uv run ael source-lock check studies/agent-skills-season-1/sources.lock.toml
@@ -147,6 +155,14 @@ jobs:
             --result studies/completion-integrity/results/prompt-policy-v1 \
             --decision-adapter completion-integrity-prompt-policy-v1 \
             --require-git-proof
+          .release-venv/bin/ael validate \
+            studies/completion-integrity/concept.json \
+            studies/completion-integrity/activation-v2/study-manifest.json
+          .release-venv/bin/ael study audit \
+            --freeze studies/completion-integrity/activation-v1/freeze.json \
+            --result studies/completion-integrity/activation-v1/results \
+            --decision-adapter completion-integrity-activation-v1 \
+            --require-git-proof
           .release-venv/bin/ael validate examples
           .release-venv/bin/ael validate \
             studies/agent-skills-season-1/concept.json \
@@ -215,5 +231,6 @@ jobs:
         run: |
           output=$(mktemp -d)
           uv run python tools/probe_completion_integrity_reporter.py \
+            --study-id kizz:ael:study:completion-integrity-activation-v2 \
             --raw-root "$output/raw" \
             --output "$output/capability-probe.json"

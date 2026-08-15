@@ -1,0 +1,145 @@
+{
+  "concept_ref": {
+    "concept_id": "kizz:ael:concept:completion-integrity",
+    "revision": 1,
+    "sha256": "1aca3c9b3925293c240e0cdfdd1b2c3590e9c7702d66d00a05244e379e45255f",
+    "uri": "../../concept.json",
+    "visibility": "public"
+  },
+  "decision": {
+    "disposition": "inconclusive",
+    "reversal_trigger": "A recomputation mismatch, frozen-binding failure, hidden protocol breach, or larger preregistered pilot contradicts this bounded decision.",
+    "scope": [
+      "the versioned Completion Integrity activation adapter",
+      "two qualified sacrificial Python and TypeScript roots",
+      "the pinned Codex CLI 0.146.0 / gpt-5.6-sol xhigh stack"
+    ],
+    "summary": "The frozen activation protocol was not completed without an integrity failure."
+  },
+  "evaluated_claims": [
+    {
+      "claim_id": "AEL-CI11-01",
+      "claim_level": "workflow",
+      "evidence_refs": [
+        "ci11:observable_chain_complete",
+        "ci11:artifact_or_evaluator_exposure"
+      ],
+      "falsifier": "A frozen recomputation produces a different disposition or any retained raw boundary check contradicts the normalized observation.",
+      "scope": [
+        "exact two-root activation schedule",
+        "versioned owner capture and reporter adapters"
+      ],
+      "statement": "The frozen activation protocol was not completed without an integrity failure.",
+      "status": "bounded"
+    },
+    {
+      "claim_id": "AEL-CI11-02",
+      "claim_level": "workflow",
+      "evidence_refs": [
+        "ci11:B0_claim_agreement",
+        "ci11:T1_claim_agreement"
+      ],
+      "falsifier": "The public observations or terminal-claim assessments recompute to different condition counts.",
+      "scope": [
+        "B0 and T1 reporter calls over identical sealed task-level evidence"
+      ],
+      "statement": "On the exact two roots, B0 produced 0 observed agreements across 0 valid calls; T1 produced 0 observed agreements across 0 valid calls. Unrun or invalid calls are not counted as disagreements; these are descriptive counts, not an effect estimate.",
+      "status": "bounded"
+    }
+  ],
+  "evidence_level": "structurally_valid",
+  "generated_at": "2026-08-15T16:12:00Z",
+  "generator": {
+    "name": "ael-completion-integrity-activation-materializer",
+    "version": "0.1"
+  },
+  "independence": {
+    "disclosure": "No independent task selection, evaluation, provider execution, or replication exists.",
+    "label": "maintainer_evaluated",
+    "role_overlaps": [
+      "Kizz authored the method, sacrificial tasks, deterministic evaluators, adapters, analysis, and owner decision."
+    ]
+  },
+  "invalidation_triggers": [
+    "Any public graph hash, frozen decision count, preregistration ordering, or protected private hash fails verification.",
+    "Any reporter received task artifact, evaluator, executor workspace, intervention, or mutable evidence access.",
+    "A hidden raw event, evaluator repeat, or no-retry journal contradicts the public normalized record."
+  ],
+  "limitations": [
+    "The frozen design contains only two sacrificial roots and schedules each reporter condition once per root; protocol-invalid execution can leave cells unrun.",
+    "Task, evaluator, candidate, event, authentication, and personal-path bytes remain private.",
+    "Maintainer authorship and evaluation overlap; provider state is not immutable or replayable.",
+    "The reporter retained a built-in command tool inside a read-only evidence boundary; it was not tool-free."
+  ],
+  "measurement_set_ref": {
+    "measurement_set_id": "kizz:ael:measurements:completion-integrity:activation-v1",
+    "sha256": "623c45c99f08482a030b48b22f289bb31ed935e87840a0cde984c9297094cacc",
+    "uri": "measurement-set.json",
+    "visibility": "public"
+  },
+  "object_type": "evidence_receipt",
+  "publication_state": "public_ready",
+  "receipt_id": "kizz:ael:receipt:completion-integrity:activation-v1",
+  "reproducibility": "not_rerunnable",
+  "run_record_refs": [
+    {
+      "run_id": "kizz:ael:run:completion-integrity:activation-v1:CI2-PY-01-B0",
+      "sha256": "b2193d5068cba7173ad741cbe744d85897b0fcfde5e4c0717d7f85fc999be6d4",
+      "uri": "runs/CI2-PY-01-B0.json",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:activation-v1:CI2-PY-01-E0",
+      "sha256": "e549f2801166bce5faefb6d9f5d53cb8282690b852fc844fbea009481950227d",
+      "uri": "runs/CI2-PY-01-E0.json",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:activation-v1:CI2-PY-01-T1",
+      "sha256": "a973b154e4d25fd1da04ae847c94757c8eb60624d86528670c0babcd54f3e6c7",
+      "uri": "runs/CI2-PY-01-T1.json",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:activation-v1:CI2-TS-01-B0",
+      "sha256": "bbfc1db6316f472e9c71f0c8045455d5cd6bb2fa60cbeb26756618b43f80d3d4",
+      "uri": "runs/CI2-TS-01-B0.json",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:activation-v1:CI2-TS-01-E0",
+      "sha256": "ced763836bff7ff6b386cbb716b649ff8bb580375ca71f456841ae34935d32d9",
+      "uri": "runs/CI2-TS-01-E0.json",
+      "visibility": "public"
+    },
+    {
+      "run_id": "kizz:ael:run:completion-integrity:activation-v1:CI2-TS-01-T1",
+      "sha256": "7f3848ba4dad6e083f0443c6b17c6ea2e2db9636e185e695496d8440e75d44bf",
+      "uri": "runs/CI2-TS-01-T1.json",
+      "visibility": "public"
+    }
+  ],
+  "schema_version": "ael.evidence-receipt/0.1",
+  "state": {
+    "artifact": "public_bounded_result_materialized",
+    "deployment": "not_applicable",
+    "experiment": "terminated_protocol_invalid",
+    "outcome": "not_observed",
+    "publication": "prepared_not_published",
+    "repository": "prepared_uncommitted"
+  },
+  "study_ref": {
+    "revision": 1,
+    "sha256": "c1a249142a83afbf782e5e1f9dce85d1588f41f11e2714bbee3e518197dda2f9",
+    "study_id": "kizz:ael:study:completion-integrity-activation-v1",
+    "uri": "../study-manifest.json",
+    "visibility": "public"
+  },
+  "unsupported_inferences": [
+    "The structured reporter caused a change in claim accuracy.",
+    "Either reporter is reliable on a broader task population.",
+    "The result identifies intrinsic gpt-5.6-sol or Codex quality.",
+    "The workflow transfers to another model, harness, repository, organization, or production environment.",
+    "The result is independently reproduced or externally outcome-verified."
+  ]
+}

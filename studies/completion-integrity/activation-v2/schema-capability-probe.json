@@ -1,0 +1,67 @@
+{
+  "boundary": "These two non-scored provider calls show that the exact executor and reporter schemas were accepted by the pinned Codex stack and produced locally schema-valid outputs. They do not test task completion, terminal-claim accuracy, or treatment effect.",
+  "call_count": 2,
+  "calls": [
+    {
+      "completed_item_types": [
+        "agent_message"
+      ],
+      "credential_persistence_matches": 0,
+      "fixture_identity_unchanged": true,
+      "forbidden_optional_tool_count": 0,
+      "image": "kizz/ael-codex-runner:0.146.0",
+      "image_id": "sha256:f5ebad21373b16799a4bb0189d917856280cca8394c25967c95d612b6b61ac08",
+      "model": "gpt-5.6-sol",
+      "output_sha256": "033c626daccbcf13ed01aa10b477964b2ea2a2b925104508ee90b0bba49946e9",
+      "reasoning_effort": "xhigh",
+      "role": "executor",
+      "schema_sha256": "ee4eb95578a590d9c165f7fe0a1409366a3d03e4353db73648687557ec627a20",
+      "status": "pass",
+      "successful_command_count": 0,
+      "turn_completed": true,
+      "usage": {
+        "cached_input_tokens": 0,
+        "input_tokens": 13050,
+        "output_tokens": 89,
+        "reasoning_output_tokens": 0
+      }
+    },
+    {
+      "completed_item_types": [
+        "agent_message",
+        "command_execution"
+      ],
+      "credential_persistence_matches": 0,
+      "fixture_identity_unchanged": true,
+      "forbidden_optional_tool_count": 0,
+      "image": "kizz/ael-codex-reporter:0.146.0",
+      "image_id": "sha256:afcc47533056678c8c0e2729437dc0152f38c1a1d127f0af9d520ba8378968aa",
+      "model": "gpt-5.6-sol",
+      "output_sha256": "49cf4674c0df39d6446aa54d07cd32e4f7a5b11bd7e2d5d984d71f53d3e289f3",
+      "reasoning_effort": "xhigh",
+      "role": "reporter",
+      "schema_sha256": "b3dc8453825afd55a37acb8f4f97b3b472f34e13a28cb8ae585845ce0eb8369e",
+      "status": "pass",
+      "successful_command_count": 1,
+      "turn_completed": true,
+      "usage": {
+        "cached_input_tokens": 9984,
+        "input_tokens": 22163,
+        "output_tokens": 236,
+        "reasoning_output_tokens": 38
+      }
+    }
+  ],
+  "cumulative_non_scored_call_count": 4,
+  "prior_attempts": [
+    {
+      "attempt": 1,
+      "model_calls": 2,
+      "reason": "Both schemas were accepted, but the nested Codex sandbox blocked local evidence reads and optional MCP/web-search surfaces remained reachable.",
+      "status": "fail"
+    }
+  ],
+  "probe_id": "kizz:ael:study:completion-integrity-activation-v2:schema-capability:2",
+  "schema_version": "ael.completion-integrity-schema-capability/0.1-pilot",
+  "status": "pass"
+}

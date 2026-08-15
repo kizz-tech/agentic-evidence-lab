@@ -9,6 +9,7 @@ from pathlib import Path
 from ael.completion_integrity_activation import (
     ACTIVATION_SCHEMA_VERSION,
     decide_activation,
+    decision_id_from_study_id,
 )
 from ael.validation import validate
 from tools.completion_integrity_activation_support import (
@@ -18,7 +19,9 @@ from tools.completion_integrity_activation_support import (
 )
 
 ROOT = Path(__file__).resolve().parents[1]
-STUDY_ROOT = ROOT / "studies" / "completion-integrity" / "activation-v1"
+STUDIES_ROOT = ROOT / "studies" / "completion-integrity"
+V1_ROOT = STUDIES_ROOT / "activation-v1"
+V2_ROOT = STUDIES_ROOT / "activation-v2"
 
 
 def _cell(entry: dict[str, object]) -> dict[str, object]:
@@ -68,10 +71,12 @@ def _cell(entry: dict[str, object]) -> dict[str, object]:
     }
 
 
-def _observations(freeze: dict[str, object], preregistration_sha: str) -> dict[str, object]:
+def _observations(
+    freeze: dict[str, object], preregistration_sha: str, *, study_root: Path
+) -> dict[str, object]:
     return {
         "schema_version": ACTIVATION_SCHEMA_VERSION,
-        "freeze_sha256": sha256_path(STUDY_ROOT / "freeze.json"),
+        "freeze_sha256": sha256_path(study_root / "freeze.json"),
         "preregistration_sha": preregistration_sha,
         "task_pack_sha256": freeze["private_pack"]["supply_artifact_sha256"],  # type: ignore[index]
         "qualification_sha256": freeze["qualification"]["receipt_sha256"],  # type: ignore[index]
@@ -110,7 +115,12 @@ def _observations(freeze: dict[str, object], preregistration_sha: str) -> dict[s
 
 class CompletionIntegrityActivationMaterializerTests(unittest.TestCase):
     def test_materialized_contract_graph_resolves_every_local_reference(self) -> None:
-        freeze = load_json(STUDY_ROOT / "freeze.json")
+        for study_root in (V1_ROOT, V2_ROOT):
+            with self.subTest(study=study_root.name):
+                self._assert_materialized_graph(study_root)
+
+    def _assert_materialized_graph(self, study_root: Path) -> None:
+        freeze = load_json(study_root / "freeze.json")
         preregistration_sha = "b" * 40
         temporary_parent = Path("/private/tmp") if Path("/private/tmp").is_dir() else None
         with tempfile.TemporaryDirectory(
@@ -119,9 +129,19 @@ class CompletionIntegrityActivationMaterializerTests(unittest.TestCase):
             temporary = Path(raw)
             raw_root = temporary / "raw"
             (raw_root / "cells").mkdir(parents=True)
-            observations = _observations(freeze, preregistration_sha)
+            observations = _observations(
+                freeze,
+                preregistration_sha,
+                study_root=study_root,
+            )
             write_json_atomic(raw_root / "observations.json", observations)
-            write_json_atomic(raw_root / "decision.json", decide_activation(observations))
+            write_json_atomic(
+                raw_root / "decision.json",
+                decide_activation(
+                    observations,
+                    decision_id=decision_id_from_study_id(str(freeze["study_id"])),
+                ),
+            )
             for entry in freeze["schedule"]:
                 write_json_atomic(
                     raw_root / "cells" / f"{entry['cell_id']}.json",  # type: ignore[index]
@@ -129,17 +149,19 @@ class CompletionIntegrityActivationMaterializerTests(unittest.TestCase):
                 )
 
             repository = temporary / "repository"
-            activation_root = repository / "studies" / "completion-integrity" / "activation-v1"
+            activation_root = repository / "studies" / "completion-integrity" / study_root.name
             activation_root.parent.mkdir(parents=True)
             (repository / "pyproject.toml").write_text(
                 "[project]\nname='fixture'\n", encoding="utf-8"
             )
             shutil.copyfile(
-                STUDY_ROOT.parent / "concept.json",
+                STUDIES_ROOT / "concept.json",
                 repository / "studies" / "completion-integrity" / "concept.json",
             )
-            shutil.copytree(STUDY_ROOT, activation_root)
+            shutil.copytree(study_root, activation_root)
             result_root = activation_root / "results"
+            if result_root.exists():
+                shutil.rmtree(result_root)
             completed = subprocess.run(
                 [
                     "uv",
@@ -147,7 +169,7 @@ class CompletionIntegrityActivationMaterializerTests(unittest.TestCase):
                     "python",
                     "tools/materialize_completion_integrity_activation.py",
                     "--freeze",
-                    str(STUDY_ROOT / "freeze.json"),
+                    str(study_root / "freeze.json"),
                     "--raw-root",
                     str(raw_root),
                     "--result-root",
@@ -175,6 +197,23 @@ class CompletionIntegrityActivationMaterializerTests(unittest.TestCase):
             )
             self.assertEqual([], issues)
             self.assertEqual(10, len(documents))
+
+            receipt = load_json(result_root / "evidence-receipt.json")
+            revision = int(freeze["study_revision"])
+            expected_claim = "AEL-CI11-01" if revision == 1 else f"AEL-CI11-R{revision}-01"
+            self.assertEqual(expected_claim, receipt["evaluated_claims"][0]["claim_id"])
+            measurement = load_json(result_root / "measurement-set.json")
+            prefix = "ci11" if revision == 1 else f"ci11-r{revision}"
+            self.assertIn(
+                f"{prefix}:observable_chain_complete",
+                {row["measurement_id"] for row in measurement["measurements"]},
+            )
+
+    def test_protocol_invalid_receipt_does_not_treat_unrun_as_disagreement(self) -> None:
+        receipt = load_json(V1_ROOT / "results" / "evidence-receipt.json")
+        statement = receipt["evaluated_claims"][1]["statement"]
+        self.assertIn("0 observed agreements across 0 valid calls", statement)
+        self.assertNotIn("0/2", statement)
 
 
 if __name__ == "__main__":

@@ -20,12 +20,24 @@ DECISION_SCHEMA_VERSION = "ael.completion-integrity-activation-decision/0.1-pilo
 
 TASK_IDS = ("CI2-PY-01", "CI2-TS-01")
 REPORTER_CONDITIONS = ("B0", "T1")
+DEFAULT_DECISION_ID = "kizz:ael:completion-integrity:activation-v1"
+STUDY_ID_PREFIX = "kizz:ael:study:completion-integrity-activation-v"
+DECISION_ID_PREFIX = "kizz:ael:completion-integrity:activation-v"
 CAPTURE_STATES = {
     "observable_chain_complete",
     "observable_chain_incomplete",
     "not_assessable",
     "invalid",
 }
+
+
+def decision_id_from_study_id(study_id: object) -> str:
+    if not isinstance(study_id, str) or not study_id.startswith(STUDY_ID_PREFIX):
+        raise ValueError("activation study_id must be a versioned Kizz AEL identity")
+    version = study_id.removeprefix(STUDY_ID_PREFIX)
+    if not version.isdigit() or int(version) < 1:
+        raise ValueError("activation study_id version must be a positive integer")
+    return f"{DECISION_ID_PREFIX}{version}"
 
 
 def canonical_sha256(value: object) -> str:
@@ -184,9 +196,16 @@ def validate_observations(document: Mapping[str, Any]) -> dict[str, Any]:
     return {**dict(document), "tasks": normalized_tasks}
 
 
-def decide_activation(document: Mapping[str, Any]) -> dict[str, Any]:
+def decide_activation(
+    document: Mapping[str, Any], *, decision_id: str = DEFAULT_DECISION_ID
+) -> dict[str, Any]:
     """Compute the frozen, descriptive alpha.11 owner decision."""
 
+    if not isinstance(decision_id, str) or not decision_id.startswith(DECISION_ID_PREFIX):
+        raise ValueError("activation decision_id must be a versioned Kizz AEL identity")
+    version = decision_id.removeprefix(DECISION_ID_PREFIX)
+    if not version.isdigit() or int(version) < 1:
+        raise ValueError("activation decision_id version must be a positive integer")
     observations = validate_observations(document)
     tasks = observations["tasks"]
     reporter_rows = [reporter for task in tasks for reporter in task["reporters"]]
@@ -261,7 +280,7 @@ def decide_activation(document: Mapping[str, Any]) -> dict[str, Any]:
 
     return {
         "schema_version": DECISION_SCHEMA_VERSION,
-        "decision_id": "kizz:ael:completion-integrity:activation-v1",
+        "decision_id": decision_id,
         "status": "complete" if protocol_valid else "protocol_invalid",
         "disposition": disposition,
         "owner_action": owner_action,

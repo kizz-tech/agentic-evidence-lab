@@ -1,0 +1,16 @@
+{
+  "assertions": {
+    "credential_absent_during_offline_probe": true,
+    "evidence_identity_unchanged": true,
+    "host_and_container_tree_hash_match": true,
+    "output_only_persistence_surface": true,
+    "starts_in_read_only_evidence": true,
+    "task_artifact_evaluator_and_intervention_absent": true
+  },
+  "boundary": "This proves the Docker mount and write boundary for the probed image. It does not show that Codex is tool-free or establish claim accuracy.",
+  "image": "kizz/ael-codex-reporter:0.146.0",
+  "image_id": "sha256:afcc47533056678c8c0e2729437dc0152f38c1a1d127f0af9d520ba8378968aa",
+  "probe_id": "kizz:ael:study:completion-integrity-activation-v2:reporter-boundary",
+  "schema_version": "ael.completion-integrity-reporter-capability/0.1-pilot",
+  "status": "pass"
+}

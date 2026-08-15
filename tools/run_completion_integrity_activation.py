@@ -33,6 +33,7 @@ from ael.codex_reporter import run_codex_reporter
 from ael.completion_integrity_activation import (
     ACTIVATION_SCHEMA_VERSION,
     decide_activation,
+    decision_id_from_study_id,
     validate_observations,
 )
 from ael.completion_integrity_claim import assess_terminal_claim
@@ -40,7 +41,7 @@ from ael.completion_integrity_engagement import diagnose_policy_enactment
 from ael.sandbox import SandboxError, run_container, tree_sha256
 
 ROOT = Path(__file__).resolve().parents[1]
-STUDY_ROOT = ROOT / "studies" / "completion-integrity" / "activation-v1"
+DEFAULT_STUDY_ROOT = ROOT / "studies" / "completion-integrity" / "activation-v1"
 ATTEMPT_SCHEMA = "ael.completion-integrity-activation-attempt/0.1-pilot"
 CELL_SCHEMA = "ael.completion-integrity-activation-cell/0.1-pilot"
 
@@ -94,7 +95,9 @@ def verify_preregistration(freeze_path: Path, preregistration_sha: str) -> None:
     frozen_bytes = _git("show", f"{preregistration_sha}:{relative}").stdout
     if hashlib.sha256(frozen_bytes).hexdigest() != sha256_path(freeze_path):
         raise SandboxError("preregistration commit contains different freeze bytes")
-    result_relative = "studies/completion-integrity/activation-v1/results/decision.json"
+    result_relative = (
+        (freeze_path.parent / "results" / "decision.json").relative_to(ROOT).as_posix()
+    )
     if (
         _git("cat-file", "-e", f"{preregistration_sha}:{result_relative}", check=False).returncode
         == 0
@@ -128,6 +131,24 @@ def _task_map(pack_root: Path) -> dict[str, Path]:
             raise SandboxError("activation pack task identity is ambiguous")
         result[task_id] = _safe_task_root(pack_root, str(entry["path"]))
     return result
+
+
+def _executor_fixture(*, task_root: Path, study_root: Path, raw_root: Path, task_id: str) -> Path:
+    source = task_root / "fixture"
+    schema = study_root / "executor-output-schema.json"
+    if not schema.exists():
+        return source
+    if schema.is_symlink() or not schema.is_file():
+        raise SandboxError("activation executor schema is missing or unsafe")
+    derived = raw_root / "derived" / task_id / "executor-fixture"
+    if derived.exists() or derived.is_symlink():
+        raise SandboxError("derived executor fixture must be new")
+    shutil.copytree(source, derived, symlinks=True)
+    target = derived / ".ael" / "executor-output-schema.json"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(schema, target)
+    tree_sha256(derived)
+    return derived
 
 
 def _evaluate_candidate(
@@ -213,12 +234,18 @@ def _run_executor(
     freeze: Mapping[str, Any],
     freeze_sha256: str,
     auth_file: Path,
+    study_root: Path,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     cell_id = str(entry["cell_id"])
     task_id = str(entry["task_id"])
-    prompt_path = STUDY_ROOT / "prompts" / "executor.txt"
+    prompt_path = study_root / "prompts" / "executor.txt"
     prompt = prompt_path.read_text(encoding="utf-8")
-    fixture = task_root / "fixture"
+    fixture = _executor_fixture(
+        task_root=task_root,
+        study_root=study_root,
+        raw_root=raw_root,
+        task_id=task_id,
+    )
     journal = raw_root / "attempts" / cell_id
     attempt = _new_attempt(
         freeze_sha256=freeze_sha256,
@@ -275,7 +302,7 @@ def _run_executor(
         timeout_seconds=int(freeze["budget"]["evaluator_timeout_seconds"]),
     )
     requirements = parse_task_requirements(task_root / "fixture" / "TASK.md")
-    method_plan = load_json(STUDY_ROOT / "method-plan.json")
+    method_plan = load_json(study_root / "method-plan.json")
     normalized = normalize_executor_capture(
         task_id=task_id,
         requirement_ids=[row["requirement_id"] for row in requirements],
@@ -320,7 +347,7 @@ def _run_executor(
     evidence_root.mkdir(parents=True, mode=0o700)
     write_json_atomic(evidence_root / "EVIDENCE.json", evidence)
     shutil.copyfile(
-        STUDY_ROOT / "reporter-output-schema.json",
+        study_root / "reporter-output-schema.json",
         evidence_root / "reporter-output-schema.json",
     )
     write_json_atomic(task_derived / "truth.json", truth)
@@ -375,11 +402,12 @@ def _run_reporter(
     freeze: Mapping[str, Any],
     freeze_sha256: str,
     auth_file: Path,
+    study_root: Path,
 ) -> dict[str, Any]:
     cell_id = str(entry["cell_id"])
     task_id = str(entry["task_id"])
     condition_id = str(entry["condition_id"])
-    prompt_path = STUDY_ROOT / "prompts" / f"reporter-{condition_id}.txt"
+    prompt_path = study_root / "prompts" / f"reporter-{condition_id}.txt"
     prompt = prompt_path.read_text(encoding="utf-8")
     evidence_root = Path(str(context["evidence_root"]))
     expected_tree = str(context["evidence_tree_sha256"])
@@ -394,7 +422,7 @@ def _run_reporter(
             "evidence_tree_sha256": expected_tree,
             "evidence_bundle_sha256": context["evidence_bundle_sha256"],
             "prompt_sha256": sha256_path(prompt_path),
-            "output_schema_sha256": sha256_path(STUDY_ROOT / "reporter-output-schema.json"),
+            "output_schema_sha256": sha256_path(study_root / "reporter-output-schema.json"),
             "model": freeze["runtime"]["model"],
             "reasoning_effort": freeze["runtime"]["reasoning_effort"],
             "image_id": freeze["runtime"]["reporter_image_id"],
@@ -435,7 +463,7 @@ def _run_reporter(
         model_output=model_output,
     )
     assessment = assess_terminal_claim(
-        load_json(STUDY_ROOT / "terminal-claim-policy.json"),
+        load_json(study_root / "terminal-claim-policy.json"),
         context["truth"],
         submission,
     )
@@ -561,6 +589,13 @@ def _observations(
 
 def run_activation(args: argparse.Namespace) -> dict[str, Any]:
     freeze_path = args.freeze.absolute()
+    study_root = freeze_path.parent
+    if (
+        study_root.is_symlink()
+        or not study_root.is_dir()
+        or not study_root.resolve().is_relative_to(ROOT.resolve())
+    ):
+        raise SandboxError("activation study root is missing or unsafe")
     pack_root = args.pack_root.absolute()
     qualification_root = args.qualification_root.absolute()
     assessment_path = args.assessment.absolute()
@@ -591,6 +626,7 @@ def run_activation(args: argparse.Namespace) -> dict[str, Any]:
                     freeze=freeze,
                     freeze_sha256=freeze_sha256,
                     auth_file=args.auth_file,
+                    study_root=study_root,
                 )
                 cells[cell_id] = cell
                 contexts[task_id] = context
@@ -604,6 +640,7 @@ def run_activation(args: argparse.Namespace) -> dict[str, Any]:
                     freeze=freeze,
                     freeze_sha256=freeze_sha256,
                     auth_file=args.auth_file,
+                    study_root=study_root,
                 )
         except BaseException as exc:
             journal = raw_root / "attempts" / cell_id
@@ -623,7 +660,10 @@ def run_activation(args: argparse.Namespace) -> dict[str, Any]:
         protocol_issues=protocol_issues,
     )
     validate_observations(observations)
-    decision = decide_activation(observations)
+    decision = decide_activation(
+        observations,
+        decision_id=decision_id_from_study_id(freeze["study_id"]),
+    )
     write_json_atomic(raw_root / "observations.json", observations)
     write_json_atomic(raw_root / "decision.json", decision)
     write_json_atomic(
@@ -643,8 +683,10 @@ def run_activation(args: argparse.Namespace) -> dict[str, Any]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Execute the frozen activation-v1 Codex schedule")
-    parser.add_argument("--freeze", type=Path, default=STUDY_ROOT / "freeze.json")
+    parser = argparse.ArgumentParser(
+        description="Execute a frozen Completion Integrity activation schedule"
+    )
+    parser.add_argument("--freeze", type=Path, default=DEFAULT_STUDY_ROOT / "freeze.json")
     parser.add_argument("--preregistration-sha", required=True)
     parser.add_argument("--pack-root", required=True, type=Path)
     parser.add_argument("--qualification-root", required=True, type=Path)

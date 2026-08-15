@@ -319,11 +319,20 @@ def _study_audit(args: argparse.Namespace) -> int:
             f"stage={decision['stage']} outcome={decision['outcome']} "
             f"runs={evidence['run_records']} measurements={evidence['measurements']}"
         )
-    elif isinstance(result, dict):
+    elif isinstance(result, dict) and isinstance(evidence, dict):
+        outcome = result.get("effect_result", result.get("status"))
+        run_count = result.get("run_count", evidence.get("run_records"))
+        measurement_count = result.get("measurement_count", evidence.get("measurements"))
+        if (
+            not isinstance(outcome, str)
+            or not isinstance(run_count, int)
+            or not isinstance(measurement_count, int)
+        ):
+            raise SandboxError("study audit adapter returned incomplete result fields")
         result_fields = (
-            f"stage=terminal outcome={result['effect_result']} "
+            f"stage=terminal outcome={outcome} "
             f"disposition={result['disposition']} "
-            f"runs={result['run_count']} measurements={result['measurement_count']}"
+            f"runs={run_count} measurements={measurement_count}"
         )
     else:
         raise SandboxError("study audit adapter returned an unsupported summary shape")

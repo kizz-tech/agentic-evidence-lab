@@ -1,0 +1,161 @@
+{
+  "attempt_policy": {
+    "ambiguous_attempt_action": "stop_and_preserve",
+    "outcome_retries": 0,
+    "resume_after_submission": false
+  },
+  "budget": {
+    "evaluator_timeout_seconds": 120,
+    "executor_timeout_seconds": 1800,
+    "max_model_calls": 6,
+    "max_output_bytes_per_cell": 134217728,
+    "minimum_free_disk_bytes": 5368709120,
+    "reporter_timeout_seconds": 900
+  },
+  "claim_ceiling": "Descriptive maintainer-evaluated activation on two qualified sacrificial roots. No effect, reliability, transfer, model-only, production, or independent-reproduction inference.",
+  "code_refs": {
+    "docker/codex-reporter/Dockerfile": "8ebdfc3eb822ef196f2ce6ef8882ecfbd5959e9d3537b1a9d1bda5063ba396a1",
+    "docker/codex-reporter/entrypoint.py": "c7e55fbfb2b27832fd05ea174ef48ed9a4dc1a13127e644ebbde6ce5fe2a2232",
+    "src/ael/codex_activation_runner.py": "56bdfe3f5b0255ac078e485c8e6d9d9a76a50b1d418381e5dca3719f580e7f2a",
+    "src/ael/codex_reporter.py": "af092adf78171f5205f88717066a86ef4ff98ea3d50d8a3cd558e1e9970886fa",
+    "src/ael/completion_integrity_activation.py": "629824303da607c36d1a804d3949fd0b2db8919dc98dcfd57a723ac8fd53717d",
+    "src/ael/completion_integrity_activation_audit.py": "431275007c289bb64d78cc6e6c2d93f4b6a0b0211bb1d59c4633f76f3075daa7",
+    "src/ael/completion_integrity_claim.py": "88ab816da9f1c511a046399f2e4d71c408630b0b4bc03cc99b8970ae4f6e7bce",
+    "src/ael/completion_integrity_engagement.py": "167c458bd70ae6885b47d4d23f52777f790751bb3b9c50408e9914f5631f6835",
+    "src/ael/sandbox.py": "79795718393d3245c28e0dd0a8800894ab61142dea9bef0b05cf971d76e40156",
+    "tools/check_completion_integrity_task_supply.py": "7b614079b4bce17817b2b9893280077e84eef356412fcbf6ea852ad868560a08",
+    "tools/completion_integrity_activation_support.py": "587132a447e016722f335ad937cc919635d0e1db5c7d62b598682811457c5d06",
+    "tools/materialize_completion_integrity_activation.py": "fa9c31c7a3283589de9bdebc5165454a3d9669f3258596d8ead47985e854378f",
+    "tools/prepare_completion_integrity_activation.py": "8d0fec50f90b074e3d17a133a05a4554d5fa75a398be1e3d6a24a2f1df05597b",
+    "tools/probe_completion_integrity_reporter.py": "f40a26c5d2948c6c9899f060479b35997781155a272e7d3d7325fd448ebb5321",
+    "tools/probe_completion_integrity_schemas.py": "360b0ad68f49a05878636489489a276f0a6e2c231f9eba274ab2200366f97e03",
+    "tools/qualify_completion_integrity_tasks.py": "19b033d5ec3e5ea199239b1dcc8119f771a17967accb738e6cbbc9d345fc0c07",
+    "tools/run_completion_integrity_activation.py": "26e7861a66a8913859aaee8851f7431bb6e216bf84ec021bbd85aecdf0671090"
+  },
+  "decision_rule": {
+    "T1_must_be_non_worse_than_B0": true,
+    "T1_required_agreements": 2,
+    "all_reporter_calls_valid": true,
+    "all_reporter_evidence_hashes_match": true,
+    "all_reporter_workspaces_unchanged": true,
+    "both_executor_calls_valid": true,
+    "both_observable_chains_complete": true,
+    "eligible_action": "adopt_adapter_for_alpha12_pilot",
+    "forbidden_reporter_mounts": 0
+  },
+  "freeze_id": "kizz:ael:study:completion-integrity-activation-v2:freeze:2",
+  "freeze_revision": 2,
+  "frozen_at": "2026-08-15T16:22:58Z",
+  "model_calls_executed_before_freeze": 0,
+  "private_pack": {
+    "revision": 3,
+    "sandbox_tree_sha256": "af0a6d0aa4696b330cd309761c491862f7027eeac3eba2540f9a9abf05ad8aec",
+    "supply_artifact_sha256": "1cd88053e1ad0a4827156f091d967b19de04abee9987f924de054092b5efa0a7",
+    "tasks": [
+      {
+        "qualification_cases": 8,
+        "revision": 2,
+        "task_id": "CI2-PY-01",
+        "task_root_sha256": "a429db85b702c536af6a8e65047cff212d8cd5e7f0ca722074e896982afaefff"
+      },
+      {
+        "qualification_cases": 8,
+        "revision": 3,
+        "task_id": "CI2-TS-01",
+        "task_root_sha256": "a32cc663bf0e40df0bdca4b8f3fb7d8a47ebed2164eac659686aaad70e54f4f5"
+      }
+    ],
+    "uri": "urn:kizz:ael:private-pack:completion-integrity-v2-activation:revision:3"
+  },
+  "public_refs": {
+    "studies/completion-integrity/activation-v2/analysis-plan.md": "1a1050a7864f40c50e4c243bdedab1435b145a951a5a06c7bb06edc4e3250348",
+    "studies/completion-integrity/activation-v2/capability-probe.json": "beaf82e02b3bd4aa354398e861fd76b063cb3fea076bb3df93d9a774b15463b7",
+    "studies/completion-integrity/activation-v2/executor-output-schema.json": "ee4eb95578a590d9c165f7fe0a1409366a3d03e4353db73648687557ec627a20",
+    "studies/completion-integrity/activation-v2/method-plan.json": "7951b3e9cfb0be9c2503995dae310576ff24427400327d2009e2ec97a1be703e",
+    "studies/completion-integrity/activation-v2/prompts/executor.txt": "22d75d5722b685768c657ce8be1024a33ca5f78257082dee5848bc1a0db7dab7",
+    "studies/completion-integrity/activation-v2/prompts/reporter-B0.txt": "7ee63ebd36a45e67e08e3f2744a00fdf407d664a5f065d4b2454306362ecc983",
+    "studies/completion-integrity/activation-v2/prompts/reporter-T1.txt": "e673fb8518d1a2668df0cbadff7941b2e1ee4619b4b2bf684369cb87dcb3cdce",
+    "studies/completion-integrity/activation-v2/protocol.json": "2bd5439585ed1991ac0e6498c996c12de0f606908f180866df8ed32b25de8b08",
+    "studies/completion-integrity/activation-v2/reporter-output-schema.json": "b3dc8453825afd55a37acb8f4f97b3b472f34e13a28cb8ae585845ce0eb8369e",
+    "studies/completion-integrity/activation-v2/schema-capability-probe.json": "a8b1df6d0cc05b351eb705116e6f53af181df1da7bbcea0aaa9a7e719a0471f7",
+    "studies/completion-integrity/activation-v2/study-manifest.json": "e8eb6d3056b766e2440e121472ebd5ff89a4079dc641688959c80691832f081a",
+    "studies/completion-integrity/activation-v2/terminal-claim-policy.json": "770c11ff761c6d86e7fc8c656685d5af23ee7fc6143303f0d237c657d23b1049"
+  },
+  "qualification": {
+    "assessment_sha256": "039687a45477dfafab3cc091717e0da5e5ad0374b47103c38a324cbd9eb3f240",
+    "challenge_cases": 16,
+    "evaluator_repeats_per_case": 2,
+    "receipt_sha256": "84b4926b374a4a6739e07708c4b4f1a33978f14c0ee0286a92755ab50d80fd52",
+    "status": "pass",
+    "task_count": 2
+  },
+  "qualification_model_calls_executed_before_freeze": 4,
+  "runtime": {
+    "concurrency": 1,
+    "evaluator_image": "kizz/ael-runner:0.1.0-alpha.1",
+    "evaluator_image_id": "sha256:4f136124c94206f2becf356de995094096cb04fe8a68bfaaa070f7b8f7a29f02",
+    "executor_image": "kizz/ael-codex-runner:0.146.0",
+    "executor_image_id": "sha256:f5ebad21373b16799a4bb0189d917856280cca8394c25967c95d612b6b61ac08",
+    "harness": "codex-cli",
+    "harness_version": "0.146.0",
+    "model": "gpt-5.6-sol",
+    "network_policy": "openai-proxy",
+    "proxy_image": "kizz/ael-egress-proxy:0.1.0-alpha.1",
+    "proxy_image_id": "sha256:69a5e44397a2e752507076cf12b30b7609c47711bd6d3f342c612dba7d968e35",
+    "reasoning_effort": "xhigh",
+    "reporter_image": "kizz/ael-codex-reporter:0.146.0",
+    "reporter_image_id": "sha256:afcc47533056678c8c0e2729437dc0152f38c1a1d127f0af9d520ba8378968aa"
+  },
+  "schedule": [
+    {
+      "cell_id": "CI2-PY-01-E0",
+      "condition_id": null,
+      "role": "executor",
+      "sequence": 1,
+      "task_id": "CI2-PY-01"
+    },
+    {
+      "cell_id": "CI2-PY-01-B0",
+      "condition_id": "B0",
+      "role": "reporter",
+      "sequence": 2,
+      "task_id": "CI2-PY-01"
+    },
+    {
+      "cell_id": "CI2-PY-01-T1",
+      "condition_id": "T1",
+      "role": "reporter",
+      "sequence": 3,
+      "task_id": "CI2-PY-01"
+    },
+    {
+      "cell_id": "CI2-TS-01-E0",
+      "condition_id": null,
+      "role": "executor",
+      "sequence": 4,
+      "task_id": "CI2-TS-01"
+    },
+    {
+      "cell_id": "CI2-TS-01-B0",
+      "condition_id": "B0",
+      "role": "reporter",
+      "sequence": 5,
+      "task_id": "CI2-TS-01"
+    },
+    {
+      "cell_id": "CI2-TS-01-T1",
+      "condition_id": "T1",
+      "role": "reporter",
+      "sequence": 6,
+      "task_id": "CI2-TS-01"
+    }
+  ],
+  "schema_capability_qualification": {
+    "non_scored_model_calls": 4,
+    "receipt_sha256": "a8b1df6d0cc05b351eb705116e6f53af181df1da7bbcea0aaa9a7e719a0471f7",
+    "status": "pass"
+  },
+  "schema_version": "ael.completion-integrity-activation-freeze/0.1-pilot",
+  "study_id": "kizz:ael:study:completion-integrity-activation-v2",
+  "study_revision": 2
+}

@@ -9,15 +9,15 @@ from completion_integrity_activation_support import load_json, sha256_path, writ
 
 from ael.completion_integrity_activation import (
     decide_activation,
+    decision_id_from_study_id,
     decision_measurements,
     validate_observations,
 )
 from ael.sandbox import SandboxError
 
 ROOT = Path(__file__).resolve().parents[1]
-STUDY_ROOT = ROOT / "studies" / "completion-integrity" / "activation-v1"
-DEFAULT_RESULT_ROOT = STUDY_ROOT / "results"
-RUN_PREFIX = "kizz:ael:run:completion-integrity:activation-v1"
+DEFAULT_STUDY_ROOT = ROOT / "studies" / "completion-integrity" / "activation-v1"
+DEFAULT_RESULT_ROOT = DEFAULT_STUDY_ROOT / "results"
 
 
 def _require(condition: bool, message: str) -> None:
@@ -29,18 +29,35 @@ def _ref(uri: str, sha256: str, visibility: str = "public") -> dict[str, str]:
     return {"uri": uri, "sha256": sha256, "visibility": visibility}
 
 
-def _study_ref(manifest_sha256: str, *, uri: str) -> dict[str, object]:
+def _study_ref(
+    manifest_sha256: str, *, uri: str, study_id: str, study_revision: int
+) -> dict[str, object]:
     return {
         "uri": uri,
         "sha256": manifest_sha256,
         "visibility": "public",
-        "study_id": "kizz:ael:study:completion-integrity-activation-v1",
-        "revision": 1,
+        "study_id": study_id,
+        "revision": study_revision,
     }
 
 
-def _run_id(cell_id: str) -> str:
-    return f"{RUN_PREFIX}:{cell_id}"
+def _identity_prefix(study_id: str, object_type: str, study_revision: int) -> str:
+    prefix = "kizz:ael:study:"
+    _require(study_id.startswith(prefix), "study identity is not canonical")
+    activation = study_id.removeprefix(prefix)
+    if study_revision == 1 and activation == "completion-integrity-activation-v1":
+        # Activation v1 was materialized before the generic revision-aware
+        # implementation existed. Preserve its public IDs byte-for-byte.
+        return f"kizz:ael:{object_type}:completion-integrity:activation-v1"
+    return f"kizz:ael:{object_type}:{activation}:revision:{study_revision}"
+
+
+def _measurement_prefix(study_revision: int) -> str:
+    return "ci11" if study_revision == 1 else f"ci11-r{study_revision}"
+
+
+def _run_id(cell_id: str, *, run_prefix: str) -> str:
+    return f"{run_prefix}:{cell_id}"
 
 
 def _private_output_refs(cell: Mapping[str, Any], role: str, cell_id: str) -> list[dict[str, str]]:
@@ -62,6 +79,10 @@ def _run_record(
     manifest_sha256: str,
     freeze_sha256: str,
     freeze: Mapping[str, Any],
+    study_root: Path,
+    study_id: str,
+    study_revision: int,
+    run_prefix: str,
 ) -> dict[str, Any]:
     cell_id = str(entry["cell_id"])
     role = str(entry["role"])
@@ -81,7 +102,7 @@ def _run_record(
     if not isinstance(context_sha, str) or len(context_sha) != 64:
         context_sha = "0" * 64
     prompt_name = "executor.txt" if role == "executor" else f"reporter-{entry['condition_id']}.txt"
-    prompt_sha = sha256_path(STUDY_ROOT / "prompts" / prompt_name)
+    prompt_sha = sha256_path(study_root / "prompts" / prompt_name)
     image_id = (
         str(freeze["runtime"]["executor_image_id"])
         if role == "executor"
@@ -102,8 +123,13 @@ def _run_record(
     return {
         "schema_version": "ael.run-record/0.1",
         "object_type": "run_record",
-        "run_id": _run_id(cell_id),
-        "study_ref": _study_ref(manifest_sha256, uri="../../study-manifest.json"),
+        "run_id": _run_id(cell_id, run_prefix=run_prefix),
+        "study_ref": _study_ref(
+            manifest_sha256,
+            uri="../../study-manifest.json",
+            study_id=study_id,
+            study_revision=study_revision,
+        ),
         "condition_id": str(entry["condition_id"] or "E0"),
         "task": {
             "task_pack_id": "completion-integrity-v2-activation",
@@ -178,6 +204,7 @@ def _measurement(
     direction: str = "descriptive",
     condition_id: str | None = None,
     task_id: str | None = None,
+    evaluator_id: str,
 ) -> dict[str, Any]:
     return {
         "measurement_id": measurement_id,
@@ -190,7 +217,7 @@ def _measurement(
         **({"condition_id": condition_id} if condition_id else {}),
         **({"task_id": task_id} if task_id else {}),
         "evaluator": {
-            "evaluator_id": "ael.completion-integrity.activation-v1",
+            "evaluator_id": evaluator_id,
             "kind": "deterministic",
             "blinded": False,
         },
@@ -206,9 +233,18 @@ def _measurement_set(
     run_paths: Mapping[str, Path],
     observations_sha256: str,
     manifest_sha256: str,
+    study_root: Path,
+    study_id: str,
+    study_revision: int,
+    run_prefix: str,
+    measurement_set_id: str,
+    measurement_prefix: str,
 ) -> dict[str, Any]:
     observation_ref = _ref("observations.json", observations_sha256)
-    all_run_ids = [_run_id(str(entry["cell_id"])) for entry in freeze["schedule"]]
+    evaluator_id = f"ael.completion-integrity.activation-v{study_revision}"
+    all_run_ids = [
+        _run_id(str(entry["cell_id"]), run_prefix=run_prefix) for entry in freeze["schedule"]
+    ]
     executor_run_ids = [run_id for run_id in all_run_ids if run_id.endswith("-E0")]
     reporter_run_ids = [run_id for run_id in all_run_ids if not run_id.endswith("-E0")]
     metric_runs = {
@@ -221,7 +257,7 @@ def _measurement_set(
     }
     measurements = [
         _measurement(
-            measurement_id=f"ci11:{metric}",
+            measurement_id=f"{measurement_prefix}:{metric}",
             metric=metric,
             value=value,
             unit="count",
@@ -229,6 +265,7 @@ def _measurement_set(
             evidence_ref=observation_ref,
             kind="aggregate",
             condition_id=metric[:2] if metric.startswith(("B0", "T1")) else None,
+            evaluator_id=evaluator_id,
         )
         for metric, value in decision_measurements(decision)
     ]
@@ -248,7 +285,7 @@ def _measurement_set(
         measurements.extend(
             [
                 _measurement(
-                    measurement_id=f"ci11:{cell_id}:wall-time-ms",
+                    measurement_id=f"{measurement_prefix}:{cell_id}:wall-time-ms",
                     metric="wall_time",
                     value=run["usage"]["wall_time_ms"],
                     unit="ms",
@@ -256,9 +293,10 @@ def _measurement_set(
                     evidence_ref=evidence_ref,
                     kind="cost",
                     task_id=str(run["task"]["task_id"]),
+                    evaluator_id=evaluator_id,
                 ),
                 _measurement(
-                    measurement_id=f"ci11:{cell_id}:generated-tokens",
+                    measurement_id=f"{measurement_prefix}:{cell_id}:generated-tokens",
                     metric="generated_work_tokens",
                     value=run["usage"]["output_tokens"] + run["usage"]["reasoning_output_tokens"],
                     unit="tokens",
@@ -266,6 +304,7 @@ def _measurement_set(
                     evidence_ref=evidence_ref,
                     kind="cost",
                     task_id=str(run["task"]["task_id"]),
+                    evaluator_id=evaluator_id,
                 ),
             ]
         )
@@ -273,7 +312,7 @@ def _measurement_set(
         if cell_id.endswith("-E0"):
             measurements.append(
                 _measurement(
-                    measurement_id=f"ci11:{cell_id}:capture-state",
+                    measurement_id=f"{measurement_prefix}:{cell_id}:capture-state",
                     metric="observable_chain_state",
                     value=cell["capture_state"],
                     unit="state",
@@ -281,12 +320,13 @@ def _measurement_set(
                     evidence_ref=observation_ref,
                     kind="process",
                     task_id=str(run["task"]["task_id"]),
+                    evaluator_id=evaluator_id,
                 )
             )
         else:
             measurements.append(
                 _measurement(
-                    measurement_id=f"ci11:{cell_id}:tool-events",
+                    measurement_id=f"{measurement_prefix}:{cell_id}:tool-events",
                     metric="reporter_tool_event_count",
                     value=cell["tool_event_count"],
                     unit="events",
@@ -295,17 +335,23 @@ def _measurement_set(
                     kind="process",
                     condition_id=str(run["condition_id"]),
                     task_id=str(run["task"]["task_id"]),
+                    evaluator_id=evaluator_id,
                 )
             )
     return {
         "schema_version": "ael.measurement-set/0.1",
         "object_type": "measurement_set",
-        "measurement_set_id": "kizz:ael:measurements:completion-integrity:activation-v1",
-        "study_ref": _study_ref(manifest_sha256, uri="../study-manifest.json"),
+        "measurement_set_id": measurement_set_id,
+        "study_ref": _study_ref(
+            manifest_sha256,
+            uri="../study-manifest.json",
+            study_id=study_id,
+            study_revision=study_revision,
+        ),
         "measurements": measurements,
         "critical_failures": [
             {
-                "failure_id": "ci11:protocol-integrity-failure",
+                "failure_id": f"{measurement_prefix}:protocol-integrity-failure",
                 "severity": "critical",
                 "observed": decision["status"] == "protocol_invalid",
                 "description": "The six-cell activation schedule did not finish under every frozen integrity boundary.",
@@ -321,7 +367,7 @@ def _measurement_set(
         ],
         "source_refs": [
             observation_ref,
-            _ref("../freeze.json", sha256_path(STUDY_ROOT / "freeze.json")),
+            _ref("../freeze.json", sha256_path(study_root / "freeze.json")),
         ],
     }
 
@@ -333,6 +379,14 @@ def _receipt(
     manifest_sha256: str,
     run_paths: Mapping[str, Path],
     measurement_path: Path,
+    study_root: Path,
+    study_id: str,
+    study_revision: int,
+    run_prefix: str,
+    measurement_set_id: str,
+    receipt_id: str,
+    claim_prefix: str,
+    measurement_prefix: str,
 ) -> dict[str, Any]:
     counts = decision["condition_counts"]
     disposition_map = {
@@ -345,22 +399,27 @@ def _receipt(
     return {
         "schema_version": "ael.evidence-receipt/0.1",
         "object_type": "evidence_receipt",
-        "receipt_id": "kizz:ael:receipt:completion-integrity:activation-v1",
+        "receipt_id": receipt_id,
         "generated_at": generated_at,
         "concept_ref": {
             "uri": "../../concept.json",
-            "sha256": sha256_path(STUDY_ROOT.parent / "concept.json"),
+            "sha256": sha256_path(study_root.parent / "concept.json"),
             "visibility": "public",
             "concept_id": "kizz:ael:concept:completion-integrity",
             "revision": 1,
         },
-        "study_ref": _study_ref(manifest_sha256, uri="../study-manifest.json"),
+        "study_ref": _study_ref(
+            manifest_sha256,
+            uri="../study-manifest.json",
+            study_id=study_id,
+            study_revision=study_revision,
+        ),
         "run_record_refs": [
             {
                 "uri": f"runs/{path.name}",
                 "sha256": sha256_path(path),
                 "visibility": "public",
-                "run_id": _run_id(cell_id),
+                "run_id": _run_id(cell_id, run_prefix=run_prefix),
             }
             for cell_id, path in sorted(run_paths.items())
         ],
@@ -368,7 +427,7 @@ def _receipt(
             "uri": "measurement-set.json",
             "sha256": sha256_path(measurement_path),
             "visibility": "public",
-            "measurement_set_id": "kizz:ael:measurements:completion-integrity:activation-v1",
+            "measurement_set_id": measurement_set_id,
         },
         "evidence_level": (
             "runtime_conformant" if decision["status"] == "complete" else "structurally_valid"
@@ -393,7 +452,7 @@ def _receipt(
         },
         "evaluated_claims": [
             {
-                "claim_id": "AEL-CI11-01",
+                "claim_id": f"{claim_prefix}-01",
                 "statement": str(decision["reason"]),
                 "status": "bounded",
                 "claim_level": "workflow",
@@ -402,21 +461,28 @@ def _receipt(
                     "versioned owner capture and reporter adapters",
                 ],
                 "evidence_refs": [
-                    "ci11:observable_chain_complete",
-                    "ci11:artifact_or_evaluator_exposure",
+                    f"{measurement_prefix}:observable_chain_complete",
+                    f"{measurement_prefix}:artifact_or_evaluator_exposure",
                 ],
                 "falsifier": "A frozen recomputation produces a different disposition or any retained raw boundary check contradicts the normalized observation.",
             },
             {
-                "claim_id": "AEL-CI11-02",
+                "claim_id": f"{claim_prefix}-02",
                 "statement": (
-                    f"On the exact two roots, B0 agreed with frozen truth {counts['B0']['claim_agreement']}/2 times and "
-                    f"T1 agreed {counts['T1']['claim_agreement']}/2 times; these are descriptive counts, not an effect estimate."
+                    "On the exact two roots, B0 produced "
+                    f"{counts['B0']['claim_agreement']} observed agreements across "
+                    f"{counts['B0']['valid']} valid calls; T1 produced "
+                    f"{counts['T1']['claim_agreement']} observed agreements across "
+                    f"{counts['T1']['valid']} valid calls. Unrun or invalid calls are not "
+                    "counted as disagreements; these are descriptive counts, not an effect estimate."
                 ),
                 "status": "bounded",
                 "claim_level": "workflow",
                 "scope": ["B0 and T1 reporter calls over identical sealed task-level evidence"],
-                "evidence_refs": ["ci11:B0_claim_agreement", "ci11:T1_claim_agreement"],
+                "evidence_refs": [
+                    f"{measurement_prefix}:B0_claim_agreement",
+                    f"{measurement_prefix}:T1_claim_agreement",
+                ],
                 "falsifier": "The public observations or terminal-claim assessments recompute to different condition counts.",
             },
         ],
@@ -428,7 +494,7 @@ def _receipt(
             "The result is independently reproduced or externally outcome-verified.",
         ],
         "limitations": [
-            "Only two sacrificial roots were executed once per reporter condition.",
+            "The frozen design contains only two sacrificial roots and schedules each reporter condition once per root; protocol-invalid execution can leave cells unrun.",
             "Task, evaluator, candidate, event, authentication, and personal-path bytes remain private.",
             "Maintainer authorship and evaluation overlap; provider state is not immutable or replayable.",
             "The reporter retained a built-in command tool inside a read-only evidence boundary; it was not tool-free.",
@@ -448,7 +514,11 @@ def _receipt(
             "repository": "prepared_uncommitted",
             "publication": "prepared_not_published",
             "deployment": "not_applicable",
-            "outcome": "not_observed",
+            "outcome": (
+                "bounded_activation_observed"
+                if decision["status"] == "complete"
+                else "not_observed"
+            ),
         },
         "publication_state": "public_ready",
         "generator": {"name": "ael-completion-integrity-activation-materializer", "version": "0.1"},
@@ -464,8 +534,19 @@ def materialize(
     generated_at: str,
 ) -> dict[str, Any]:
     freeze = load_json(freeze_path)
+    study_root = freeze_path.absolute().parent
+    study_id = str(freeze["study_id"])
+    study_revision = int(freeze["study_revision"])
+    run_prefix = _identity_prefix(study_id, "run", study_revision)
+    measurement_set_id = _identity_prefix(study_id, "measurements", study_revision)
+    receipt_id = _identity_prefix(study_id, "receipt", study_revision)
+    claim_prefix = "AEL-CI11" if study_revision == 1 else f"AEL-CI11-R{study_revision}"
+    measurement_prefix = _measurement_prefix(study_revision)
     observations = validate_observations(load_json(raw_root / "observations.json"))
-    decision = decide_activation(observations)
+    decision = decide_activation(
+        observations,
+        decision_id=decision_id_from_study_id(study_id),
+    )
     _require(
         load_json(raw_root / "decision.json") == decision, "private decision recomputation differs"
     )
@@ -480,7 +561,7 @@ def materialize(
     if result_root.exists() and any(result_root.iterdir()):
         raise SandboxError("activation result root must be new or empty")
     (result_root / "runs").mkdir(parents=True, exist_ok=True)
-    manifest_sha256 = sha256_path(STUDY_ROOT / "study-manifest.json")
+    manifest_sha256 = sha256_path(study_root / "study-manifest.json")
     cells = {
         path.stem: load_json(path)
         for path in sorted((raw_root / "cells").glob("*.json"))
@@ -498,6 +579,10 @@ def materialize(
                 manifest_sha256=manifest_sha256,
                 freeze_sha256=sha256_path(freeze_path),
                 freeze=freeze,
+                study_root=study_root,
+                study_id=study_id,
+                study_revision=study_revision,
+                run_prefix=run_prefix,
             ),
         )
         run_paths[cell_id] = path
@@ -528,6 +613,12 @@ def materialize(
             run_paths=run_paths,
             observations_sha256=sha256_path(observations_path),
             manifest_sha256=manifest_sha256,
+            study_root=study_root,
+            study_id=study_id,
+            study_revision=study_revision,
+            run_prefix=run_prefix,
+            measurement_set_id=measurement_set_id,
+            measurement_prefix=measurement_prefix,
         ),
     )
     receipt_path = result_root / "evidence-receipt.json"
@@ -539,6 +630,14 @@ def materialize(
             manifest_sha256=manifest_sha256,
             run_paths=run_paths,
             measurement_path=measurement_path,
+            study_root=study_root,
+            study_id=study_id,
+            study_revision=study_revision,
+            run_prefix=run_prefix,
+            measurement_set_id=measurement_set_id,
+            receipt_id=receipt_id,
+            claim_prefix=claim_prefix,
+            measurement_prefix=measurement_prefix,
         ),
     )
     return {
@@ -550,8 +649,8 @@ def materialize(
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Materialize the public activation-v1 result")
-    parser.add_argument("--freeze", type=Path, default=STUDY_ROOT / "freeze.json")
+    parser = argparse.ArgumentParser(description="Materialize a public activation result")
+    parser.add_argument("--freeze", type=Path, default=DEFAULT_STUDY_ROOT / "freeze.json")
     parser.add_argument("--raw-root", required=True, type=Path)
     parser.add_argument("--result-root", type=Path, default=DEFAULT_RESULT_ROOT)
     parser.add_argument("--preregistration-sha", required=True)
