@@ -13,6 +13,9 @@ from pathlib import Path
 from types import MappingProxyType
 from typing import Any
 
+from ael.completion_integrity_activation_audit import (
+    audit_completion_integrity_activation_bundle,
+)
 from ael.completion_integrity_audit import audit_completion_integrity_bundle
 from ael.debugging_shadow_audit import audit_debugging_shadow_bundle
 from ael.sandbox import SandboxError
@@ -72,8 +75,23 @@ def _completion_integrity_prompt_policy(request: AuditRequest) -> dict[str, Any]
     )
 
 
+def _completion_integrity_activation(request: AuditRequest) -> dict[str, Any]:
+    if request.screening_root or request.confirmation_root:
+        raise SandboxError(
+            "the Completion Integrity activation adapter verifies opaque private-pack hashes; "
+            "legacy screening/confirmation roots are unsupported"
+        )
+    return audit_completion_integrity_activation_bundle(
+        request.freeze_path,
+        request.result_root,
+        git_root=request.git_root,
+        require_git_proof=request.require_git_proof,
+    )
+
+
 AUDIT_ADAPTERS: Mapping[str, AuditRunner] = MappingProxyType(
     {
+        "completion-integrity-activation-v1": _completion_integrity_activation,
         "completion-integrity-prompt-policy-v1": _completion_integrity_prompt_policy,
         "pbt-v2": _pbt_v2,
         "systematic-debugging-real-shadow-v1": _systematic_debugging_real_shadow,

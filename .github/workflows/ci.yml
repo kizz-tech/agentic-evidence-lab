@@ -189,6 +189,7 @@ jobs:
         run: |
           docker build --pull=false --tag kizz/ael-runner:0.1.0-alpha.1 docker/runner
           docker build --pull=false --tag kizz/ael-codex-runner:0.146.0 docker/codex-runner
+          docker build --pull=false --tag kizz/ael-codex-reporter:0.146.0 docker/codex-reporter
           docker build --pull=false --tag kizz/ael-egress-proxy:0.1.0-alpha.1 docker/egress-proxy
       - name: Run offline isolation smoke
         run: |
@@ -207,4 +208,12 @@ jobs:
             --output "$output/result" \
             --image kizz/ael-runner:0.1.0-alpha.1
       - name: Check Codex image without credentials
-        run: docker run --rm --entrypoint codex kizz/ael-codex-runner:0.146.0 --version
+        run: |
+          docker run --rm --entrypoint codex kizz/ael-codex-runner:0.146.0 --version
+          docker run --rm --entrypoint codex kizz/ael-codex-reporter:0.146.0 --version
+      - name: Prove reporter evidence boundary offline
+        run: |
+          output=$(mktemp -d)
+          uv run python tools/probe_completion_integrity_reporter.py \
+            --raw-root "$output/raw" \
+            --output "$output/capability-probe.json"

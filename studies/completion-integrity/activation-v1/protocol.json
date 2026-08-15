@@ -1,0 +1,31 @@
+{
+  "schema_version": "ael.completion-integrity-activation-protocol/0.1-pilot",
+  "protocol_id": "kizz:ael:completion-integrity:activation-v1",
+  "study_role": "descriptive_activation_calibration",
+  "independent_unit": "task_root",
+  "task_roots": 2,
+  "model_calls": 6,
+  "conditions": ["B0", "T1"],
+  "executor": {
+    "calls_per_root": 1,
+    "workspace": "ephemeral_writable_candidate",
+    "evaluator_access": false,
+    "final_output": "closed_json_schema"
+  },
+  "reporter": {
+    "calls_per_condition_per_root": 1,
+    "input": "identical_sealed_owner_evidence_per_root",
+    "workspace": "read_only_evidence_mount",
+    "task_artifact_access": false,
+    "evaluator_access": false,
+    "intervention_access": false,
+    "tool_free_claimed": false,
+    "final_output": "closed_json_schema"
+  },
+  "attempt_policy": {
+    "outcome_retries": 0,
+    "resume_after_submission": false,
+    "ambiguous_attempt_action": "stop_and_preserve"
+  },
+  "claim_ceiling": "Descriptive maintainer-evaluated activation on two qualified sacrificial roots. No effect, reliability, transfer, model-only, production, or independent-reproduction inference."
+}

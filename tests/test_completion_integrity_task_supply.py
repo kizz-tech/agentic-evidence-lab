@@ -434,6 +434,19 @@ class TaskSupplyAdapterTests(unittest.TestCase):
             with self.assertRaisesRegex(SandboxError, "outside"):
                 TOOL._require_external_output(root, root / "assessment.json")
 
+    def test_private_boundary_ignores_local_private_artifact_symlinks(self) -> None:
+        with temporary_directory() as temporary:
+            base = Path(temporary)
+            private = base / "private"
+            public = base / "public"
+            private.mkdir()
+            public.mkdir()
+            (private / "secret.txt").write_text("private", encoding="utf-8")
+            ignored = public / "artifacts" / "private"
+            ignored.mkdir(parents=True)
+            (ignored / "python").symlink_to("/missing/interpreter")
+            self.assertEqual([], TOOL._scan_public_boundary(private, public))
+
 
 if __name__ == "__main__":
     unittest.main()

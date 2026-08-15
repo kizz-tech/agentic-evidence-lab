@@ -1,0 +1,19 @@
+{
+  "schema_version": "ael.completion-integrity-enactment-plan/0.1-pilot",
+  "plan_id": "kizz:ael:completion-integrity-enactment:activation-v1",
+  "policy_ref": {
+    "policy_id": "completion-integrity-executor-report-v1",
+    "uri": "prompts/executor.txt",
+    "sha256": "22d75d5722b685768c657ce8be1024a33ca5f78257082dee5848bc1a0db7dab7"
+  },
+  "engagement_rule": {
+    "missing_evidence": "not_assessable",
+    "unknown_requirement": "invalid",
+    "duplicate_requirement": "invalid",
+    "successful_check_required": true,
+    "check_before_terminal_required": true,
+    "all_requirements_reconciled": true,
+    "repair_loops_allowed": true
+  },
+  "causal_boundary": "The owner adapter classifies policy-byte binding, a model-produced requirement ledger, actual completed Codex command and file-change events, successful preterminal checks, and terminal reconciliation. These observations do not reveal cognition or establish that the prompt caused the behavior."
+}

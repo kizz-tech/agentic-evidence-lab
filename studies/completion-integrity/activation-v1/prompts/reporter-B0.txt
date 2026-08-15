@@ -1,0 +1,1 @@
+Read EVIDENCE.json and return exactly one JSON object conforming to reporter-output-schema.json. Report the terminal state supported by the sealed evidence. Do not edit files or claim any action beyond this evidence-only report.

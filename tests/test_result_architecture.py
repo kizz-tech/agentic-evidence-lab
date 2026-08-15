@@ -41,6 +41,7 @@ class ResultArchitectureTests(unittest.TestCase):
         self.assertEqual({"ael.result_constants"}, _ael_imports("result_rendering"))
         self.assertEqual(
             {
+                "ael.completion_integrity_activation_audit",
                 "ael.completion_integrity_audit",
                 "ael.debugging_shadow_audit",
                 "ael.sandbox",

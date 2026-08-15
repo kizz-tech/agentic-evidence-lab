@@ -1,0 +1,5 @@
+{
+  "policy_id": "ci:terminal-claim:activation-v1:reporter-only",
+  "revision": 1,
+  "schema_version": "ael.completion-integrity-terminal-claim-policy/0.1-development"
+}

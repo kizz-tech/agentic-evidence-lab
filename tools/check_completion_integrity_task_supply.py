@@ -14,6 +14,7 @@ from ael.sandbox import SandboxError
 
 PRIVATE_CANARY_PREFIX = "AEL-HIDDEN-" + "CANARY:CI10-"
 IGNORED_PUBLIC_PARTS = {".git", ".venv", "__pycache__", "build", "dist"}
+IGNORED_PUBLIC_PREFIXES = {"artifacts/private"}
 
 
 def _reject_constant(value: str) -> None:
@@ -126,6 +127,12 @@ def _scan_public_boundary(private_root: Path, public_root: Path) -> list[str]:
     }
     issues: list[str] = []
     for path in sorted(public_root.rglob("*")):
+        relative = path.relative_to(public_root).as_posix()
+        if any(
+            relative == prefix or relative.startswith(prefix + "/")
+            for prefix in IGNORED_PUBLIC_PREFIXES
+        ):
+            continue
         if IGNORED_PUBLIC_PARTS.intersection(path.parts):
             continue
         if path.is_symlink():
@@ -134,7 +141,6 @@ def _scan_public_boundary(private_root: Path, public_root: Path) -> list[str]:
         if not path.is_file():
             continue
         payload = path.read_bytes()
-        relative = path.relative_to(public_root).as_posix()
         if PRIVATE_CANARY_PREFIX.encode("utf-8") in payload:
             issues.append(f"private canary leaked into public tree: {relative}")
         if hashlib.sha256(payload).hexdigest() in private_hashes:

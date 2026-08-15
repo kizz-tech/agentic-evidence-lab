@@ -23,6 +23,7 @@ class ResultVerificationTests(unittest.TestCase):
     def test_registry_is_immutable_and_has_one_canonical_name_source(self) -> None:
         self.assertEqual(
             (
+                "completion-integrity-activation-v1",
                 "completion-integrity-prompt-policy-v1",
                 "pbt-v2",
                 "systematic-debugging-real-shadow-v1",
