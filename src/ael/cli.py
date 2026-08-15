@@ -291,6 +291,42 @@ def _study_freeze_check(args: argparse.Namespace) -> int:
     return 0
 
 
+def _audit_result_fields(summary: dict[str, object]) -> str:
+    decision = summary.get("decision")
+    evidence = summary.get("evidence")
+    result = summary.get("result")
+    if isinstance(decision, dict) and isinstance(evidence, dict):
+        result_fields = (
+            f"stage={decision['stage']} outcome={decision['outcome']} "
+            f"runs={evidence['run_records']} measurements={evidence['measurements']}"
+        )
+    elif isinstance(result, dict):
+        outcome = result.get("effect_result", result.get("status"))
+        run_count = result.get("run_count")
+        measurement_count = result.get("measurement_count")
+        if isinstance(evidence, dict):
+            run_count = run_count if run_count is not None else evidence.get("run_records")
+            measurement_count = (
+                measurement_count if measurement_count is not None else evidence.get("measurements")
+            )
+        disposition = result.get("disposition")
+        if (
+            not isinstance(outcome, str)
+            or not isinstance(run_count, int)
+            or not isinstance(measurement_count, int)
+            or not isinstance(disposition, str)
+        ):
+            raise SandboxError("study audit adapter returned incomplete result fields")
+        result_fields = (
+            f"stage=terminal outcome={outcome} "
+            f"disposition={disposition} "
+            f"runs={run_count} measurements={measurement_count}"
+        )
+    else:
+        raise SandboxError("study audit adapter returned an unsupported summary shape")
+    return result_fields
+
+
 def _study_audit(args: argparse.Namespace) -> int:
     try:
         summary = audit_bundle(
@@ -304,6 +340,7 @@ def _study_audit(args: argparse.Namespace) -> int:
                 require_git_proof=args.require_git_proof,
             ),
         )
+        result_fields = _audit_result_fields(summary)
     except SandboxError as exc:
         print(str(exc), file=sys.stderr)
         return 1
@@ -311,31 +348,6 @@ def _study_audit(args: argparse.Namespace) -> int:
         output_path = Path(args.json_output).resolve()
         output_path.parent.mkdir(parents=True, exist_ok=True)
         output_path.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
-    decision = summary.get("decision")
-    evidence = summary.get("evidence")
-    result = summary.get("result")
-    if isinstance(decision, dict) and isinstance(evidence, dict):
-        result_fields = (
-            f"stage={decision['stage']} outcome={decision['outcome']} "
-            f"runs={evidence['run_records']} measurements={evidence['measurements']}"
-        )
-    elif isinstance(result, dict) and isinstance(evidence, dict):
-        outcome = result.get("effect_result", result.get("status"))
-        run_count = result.get("run_count", evidence.get("run_records"))
-        measurement_count = result.get("measurement_count", evidence.get("measurements"))
-        if (
-            not isinstance(outcome, str)
-            or not isinstance(run_count, int)
-            or not isinstance(measurement_count, int)
-        ):
-            raise SandboxError("study audit adapter returned incomplete result fields")
-        result_fields = (
-            f"stage=terminal outcome={outcome} "
-            f"disposition={result['disposition']} "
-            f"runs={run_count} measurements={measurement_count}"
-        )
-    else:
-        raise SandboxError("study audit adapter returned an unsupported summary shape")
     print(
         "study audit passed: "
         f"{summary['study']['study_id']} revision={summary['study']['revision']} "

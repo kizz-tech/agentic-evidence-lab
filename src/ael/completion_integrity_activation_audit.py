@@ -39,6 +39,27 @@ def _load(path: Path) -> dict[str, Any]:
     return load_json_object(path)
 
 
+def _repository_root(freeze_path: Path, explicit_root: Path | None) -> Path:
+    if explicit_root is not None:
+        root = explicit_root.resolve()
+    else:
+        root = next(
+            (
+                candidate
+                for candidate in (freeze_path.parent, *freeze_path.parents)
+                if (candidate / "pyproject.toml").is_file()
+                and (candidate / "src" / "ael" / "schemas").is_dir()
+            ),
+            None,
+        )
+        if root is None:
+            _fail("repository root could not be derived from the freeze path")
+        root = root.resolve()
+    if not freeze_path.resolve().is_relative_to(root):
+        _fail("freeze path is outside the repository root")
+    return root
+
+
 def _git(root: Path, *arguments: str, check: bool = True) -> subprocess.CompletedProcess[bytes]:
     result = subprocess.run(["git", *arguments], cwd=root, capture_output=True, check=False)
     if check and result.returncode != 0:
@@ -162,7 +183,7 @@ def audit_completion_integrity_activation_bundle(
         _fail("freeze path is missing or unsafe")
     if result_root.is_symlink() or not result_root.is_dir():
         _fail("result root is missing or unsafe")
-    repository_root = (git_root or Path(__file__).resolve().parents[2]).resolve()
+    repository_root = _repository_root(freeze_path, git_root)
     freeze = _load(freeze_path)
     if freeze.get("schema_version") != FREEZE_SCHEMA:
         _fail("freeze schema version differs")

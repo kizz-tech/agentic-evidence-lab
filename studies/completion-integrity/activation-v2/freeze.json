@@ -19,7 +19,7 @@
     "src/ael/codex_activation_runner.py": "56bdfe3f5b0255ac078e485c8e6d9d9a76a50b1d418381e5dca3719f580e7f2a",
     "src/ael/codex_reporter.py": "af092adf78171f5205f88717066a86ef4ff98ea3d50d8a3cd558e1e9970886fa",
     "src/ael/completion_integrity_activation.py": "629824303da607c36d1a804d3949fd0b2db8919dc98dcfd57a723ac8fd53717d",
-    "src/ael/completion_integrity_activation_audit.py": "431275007c289bb64d78cc6e6c2d93f4b6a0b0211bb1d59c4633f76f3075daa7",
+    "src/ael/completion_integrity_activation_audit.py": "700b0af6b48eca04814e18f4a6b4bd24594d793d2d3de608a64391c769d5077f",
     "src/ael/completion_integrity_claim.py": "88ab816da9f1c511a046399f2e4d71c408630b0b4bc03cc99b8970ae4f6e7bce",
     "src/ael/completion_integrity_engagement.py": "167c458bd70ae6885b47d4d23f52777f790751bb3b9c50408e9914f5631f6835",
     "src/ael/sandbox.py": "79795718393d3245c28e0dd0a8800894ab61142dea9bef0b05cf971d76e40156",
