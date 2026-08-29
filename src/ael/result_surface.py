@@ -24,6 +24,7 @@ from jsonschema import Draft202012Validator, FormatChecker
 
 from ael import result_core as _result_core
 from ael import result_rendering as _result_rendering
+from ael.contract_graph import validate
 from ael.method_policy import (
     ClaimSupportContext,
     EvidenceBinding,
@@ -39,7 +40,7 @@ from ael.result_constants import (
 from ael.result_verification import AuditRequest, audit_adapter_names, public_audit_projection
 from ael.sandbox import SandboxError
 from ael.study_quality import public_projection as project_study_quality
-from ael.validation import SCHEMA_FILES, sha256_path, validate
+from ael.validation import SCHEMA_FILES, sha256_path
 
 ResultSurfaceError = _result_core.ResultSurfaceError
 SourceLedger = _result_core.SourceLedger

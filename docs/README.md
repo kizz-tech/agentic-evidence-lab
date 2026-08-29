@@ -7,6 +7,12 @@ entire evidence contract or runner design.
 
 - [AEL Method](method.md) — the claim-to-decision workflow, non-compensation
   rule, claim-specific support predicates, and public reading order.
+- [AEL Coevolution Protocol](ael-cep.md) — the family-local protocol for
+  evolving Builders and Evaluators while keeping evidence history, protected
+  anchors, custody, and promotion authority outside the adaptive loop.
+- [AEL-CEP Stage 0 implementation decision](decisions/2026-08-15-ael-cep-stage0-implementation.md)
+  — the pure-kernel, strict-sidecar, deterministic no-effect implementation
+  boundary and its reversal plan.
 - [Public mission and value decision](decisions/2026-08-14-public-mission-and-value.md)
   — why user-facing decisions lead the public story while scientific rigor
   remains in the evidence layer.
@@ -61,6 +67,11 @@ entire evidence contract or runner design.
   and explicit scale triggers.
 - [Study Quality Preflight](study-quality-preflight.md) — the pilot hash-bound
   design preflight, hard gates, warnings, public facets, and scientific boundary.
+- [AEL Coevolution Protocol](ael-cep.md) — evaluator-release identity,
+  immutable score lineage, rescore/replay classification, bridge and epoch
+  rules, custody-separated promotion, per-stratum bridge gates, independent
+  anchor truth, and the A0--A5 no-effect simulator. Stage 0's claim ceiling is
+  local implementation invariants only, not empirical superiority or safety.
 - [Completion Integrity observable enactment](completion-integrity-enactment.md)
 - [Completion Integrity terminal claims](completion-integrity-terminal-claims.md)
 - [Completion Integrity task supply](completion-integrity-task-supply.md)
@@ -76,6 +87,10 @@ must not promote a stack result into a model-only claim.
 - [Reproducibility](reproducibility.md) — deterministic validation, receipt
   reproduction, container checks, and the boundary between rerunning and
   independently reproducing a study.
+- [AEL-CEP reproducibility boundary](reproducibility.md) — the dedicated
+  protocol/bundle checks and deterministic Stage 0 simulation are documented
+  alongside the existing evidence-graph checks; generic Contract v0 validation
+  does not validate AEL-CEP sidecar artifacts.
 - [Schema versioning](schema-versioning.md) — compatibility and migration rules
   for the pre-stable contract.
 - [Release notes](release-notes/v0.1.0-alpha.1.md) — exact first-alpha contents
@@ -102,6 +117,8 @@ must not promote a stack result into a model-only claim.
   measurement foundation and its empirical limits.
 - [Alpha.11 release notes](release-notes/v0.1.0-alpha.11.md) — the real Codex
   activation failure, full-wrapper repair, and bounded alpha.12 admission path.
+- [Alpha.12 release notes](release-notes/v0.1.0-alpha.12.md) — the bounded
+  AEL-CEP Stage-0 method foundation and CLI/file-only compatibility boundary.
 - [Alpha.9 release notes](release-notes/v0.1.0-alpha.9.md) — the terminal
   Completion Integrity null result and exact-policy rejection. A note file is
   not proof of a tag or release.
@@ -167,6 +184,12 @@ they link to a completed result:
   skill-effect results. The real-shadow study also exercises prospective
   admission, owner action, and follow-up; the remaining protocols are still
   calibration, design, or unrun work.
+- [AEL Coevolution Protocol Stage 0](ael-cep.md) — a released, offline
+  no-effect simulator and family-local policy boundary. One dependency-bound
+  `contrast_summary` seals exact trajectory rows; the core derives operating
+  metrics, primary endpoints, and diagnostic-only contrasts with explicit
+  denominators. It is an implementation and adversarial-method test, not an
+  empirical result or superiority claim.
 
 Their draft manifests, simulations, and task-pack briefs must not be cited as
 successful experimental results.
@@ -183,6 +206,8 @@ Decision records preserve why important boundaries changed:
 - [Measurement-quality preflight](decisions/2026-08-14-measurement-quality-preflight.md)
 - [Public mission and value](decisions/2026-08-14-public-mission-and-value.md)
 - [Claim-first decision method](decisions/2026-08-14-claim-first-decision-method.md)
+- [AEL-CEP Stage 0 implementation boundary](decisions/2026-08-15-ael-cep-stage0-implementation.md)
+- [Alpha.12 AEL-CEP public boundary](decisions/2026-08-30-alpha12-public-boundary.md)
 
 [The Contract v0 drafting brief](contract-v0-brief.md) is retained as design
 history. It does not replace the executable [current Contract v0](contract-v0.md).

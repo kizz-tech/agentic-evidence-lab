@@ -6,6 +6,84 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.0-alpha.12] - 2026-08-30
+
+### Added
+
+- AEL Coevolution Protocol `0.2-development` as the next family-local
+  research direction, with an evaluator-release/binding identity model,
+  append-only score lineage, rescore/replay classes, evaluator bridges,
+  measurement epochs, custody-separated promotion, and explicit exposure and
+  revocation semantics.
+- A Stage 0 pure-policy kernel, strict sidecar artifact boundary, and
+  deterministic no-effect A0--A5 simulator for adversarial operating
+  characteristics. The simulator keeps latent utility, evaluator score, and
+  prospective anchor outcome distinct and matches declared algorithms and
+  total-system budgets across arms.
+- Dedicated `coevolution simulate`, `check`, and data-only `rescore` CLI
+  operations with atomic materialization, ordered predecessor-chain checks,
+  exact custody/authority validation, and bounded 2 MiB / 2,048-record /
+  10,000-edge adapter ceilings.
+- Stage 0 bridge validation now requires a protocol-weighted five-stratum panel
+  with retained B0/B1 evidence, four actual B0/B1×E0/E1 score runs per
+  stratum, and arm-blinded anchor observations whose value/decision-threshold
+  agreement is recomputed by the kernel. Global shift, interaction, evaluator
+  decision, and anchor decision gates are derived per stratum, so weighted
+  aggregation cannot cancel a failing stratum; anchors bind exact B0/B1
+  subject-evidence refs/hashes.
+- Promotion projections are candidate-keyed with independent predecessor
+  chains. First-class blocked/not-dispatched `effect_attempt` records are
+  contained per candidate, including a second forbidden candidate chain in the
+  frozen scenario. Exact trajectory rows now require one dependency-bound
+  `contrast_summary` seal; the core derives operating metrics, primary
+  endpoints, and contrast diagnostics from that seal only, with candidate-level
+  and task-level denominators kept distinct.
+- Optional-stopping diagnostics use replicate-level denominators and preserve
+  actual executed-task cost separately from declared fixed-N cost; affected
+  causal contrasts are marked ineligible.
+- Confirmation consumption reserves one candidate-bound pack before exactly one
+  final decision (`promote`, `narrow`, `abstain`, or `reject`). Only an
+  exposure resolving to the sealed confirmation task root before a positive
+  `promote` blocks it; screening and bridge exposures remain governed by their
+  own budgets and lifecycle.
+- Bridge anchors use an independent named truth stream and are committed with
+  B0/B1 subject evidence before the second-phase score bindings, so evaluator
+  perturbations cannot change their bytes or hashes. Positive A5 promotion
+  targets the bridge's new Builder B1; synthetic construct/reliability statuses
+  remain non-empirical fixtures, and a revoked, tainted, or unscorable
+  `contrast_summary` exposes no stale fallback metrics. Confirmation eligibility
+  is pre-consumption; one candidate-bound pack is irreversibly reserved/marked
+  used before one final decision (`promote`, `narrow`, `abstain`, or `reject`),
+  while failed bridges start a new measurement epoch and early tombstones
+  contain eligible candidates.
+
+### Changed
+
+- The roadmap and architecture now identify evaluator coevolution as AEL's
+  central development direction while keeping Contract v0 and released alpha.11
+  evidence unchanged. AEL-CEP JSON is family-local and is not covered by the
+  generic Contract v0 validator.
+- The first released AEL-CEP compatibility boundary is intentionally limited to
+  the three CLI operations and versioned file/schema contracts. Direct imports
+  from `ael.coevolution*` remain experimental internals and publish an empty
+  `__all__`; no Python API compatibility is promised.
+- Four independent engineering advisors retained the reviewed three-module
+  architecture and rejected a speculative pre-release split of the
+  invariant-dense policy kernel.
+
+### Research integrity
+
+- Stage 0 is an offline implementation and no-effect method test. Its fixture
+  exercises deterministic local invariants; materialized arithmetic/hash
+  closure does not prove physical custody, holdout secrecy, organizational
+  independence, real model improvement, empirical validity or superiority,
+  transfer, novelty, or production safety.
+- No scored model call, external execution, or empirical superiority claim is
+  introduced by this method release.
+- The adapter is scoped to trusted local directories and logical content
+  integrity. It does not claim hostile shared-directory race protection,
+  physical append-only storage, access control, deletion, or recovery custody.
+
 ## [0.1.0-alpha.11] - 2026-08-15
 
 ### Added
@@ -396,7 +474,8 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   process can read the reusable credential.
 - Contract v0 remains pre-stable and may change incompatibly before `1.0`.
 
-[Unreleased]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.11...HEAD
+[Unreleased]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.12...HEAD
+[0.1.0-alpha.12]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.11...v0.1.0-alpha.12
 [0.1.0-alpha.11]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.10...v0.1.0-alpha.11
 [0.1.0-alpha.10]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.9...v0.1.0-alpha.10
 [0.1.0-alpha.9]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.8...v0.1.0-alpha.9

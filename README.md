@@ -8,6 +8,7 @@
 
 [**Browse decisions**](RESULTS.md) ·
 [**Understand the method**](docs/method.md) ·
+[**Study evaluator coevolution**](docs/ael-cep.md) ·
 [**Evaluate a system**](#evaluate-your-own-system) ·
 [**See the roadmap**](ROADMAP.md) ·
 [**Read the documentation**](docs/README.md)
@@ -27,6 +28,90 @@ from available models through better agent-system design. Today, AEL is an
 open-source research alpha for producing bounded, auditable decisions about
 versioned agent-stack changes. It is not a universal agent score or a claim
 that one configuration works everywhere.
+
+## Current method foundation: evaluator coevolution
+
+AEL's current method foundation is the [AEL Coevolution
+Protocol](docs/ael-cep.md) (AEL-CEP `0.2-development`). It studies systems in
+which the ability to do work and the ability to measure that work both change
+over time. Builder, Evaluator, and (later) Challenger releases may evolve
+together, while evidence history, protected prospective anchors, confirmation
+custody, and promotion authority remain outside the adaptive loop they govern.
+
+Alpha.12 publishes Stage 0 as a family-local, offline implementation boundary
+beside Contract v0:
+
+- a pure policy kernel owns identities, evaluation bindings, append-only score
+  lineage, rescore/replay classes, evaluator bridges, measurement epochs,
+  custody ceilings, taint/revocation, and promotion transitions;
+- a strict sidecar adapter owns JSON/schema/path/byte handling and materializes
+  validated bundles without changing the policy's verdicts;
+- a deterministic no-effect simulator exercises A0--A5 trajectories, matching
+  algorithms and total-system budgets, adversarial scenarios, and operating
+  characteristics.
+
+Scores are added as new, content-addressed facts. A later evaluator creates a
+new binding and `ScoreRun`; it does not overwrite, relabel, or silently upgrade
+an earlier verdict. A failed bridge starts a new measurement epoch, and an
+exposed or consumed confirmation cannot be reused as fresh evidence.
+
+Stage 0 bridges are whole weighted five-stratum panels with retained B0/B1
+evidence, four actual B0/B1×E0/E1 score cells, and arm-blinded anchor value /
+decision-threshold checks. The kernel derives global shift, interaction, and
+both decision agreements per stratum; every stratum must pass, so weighted
+summaries cannot cancel a failing stratum. Anchors bind the exact B0/B1
+`SubjectExecutionEvidence` refs/hashes. Promotion projection is keyed
+independently per candidate, and blocked effects remain candidate-bound
+containment facts.
+
+The simulator derives anchor truth from an independent named stream and emits
+subject evidence/anchors before score bindings, so evaluator perturbations
+cannot alter those committed bytes or hashes. A positive A5 promotion targets
+the bridge's new Builder B1. Synthetic construct/reliability statuses are
+fixture declarations, not empirical evidence; a revoked, tainted, or
+unscorable `contrast_summary` makes all derived report projections unavailable
+rather than falling back to a stale or nested summary.
+
+Stage 0's deterministic fixture exercises local implementation rules such as
+deterministic serialization, fail-closed custody, append-only lineage, bridge
+decisions, one-pack confirmation consumption, causal-arm matching, and
+promotion-state legality. Exact task/scenario/arm rows are sealed by one
+dependency-bound `contrast_summary`; the pure kernel derives
+`operating_metrics`, `primary_endpoints`, and `contrast_diagnostics` from that
+seal only. `false_promotion_share` uses all candidate promotions as its
+denominator,
+whereas `invalid_candidate_promotion_rate` uses invalid candidate-level
+opportunities; these are distinct from task dispositions. Primary endpoints
+retain exact `sum_ppm`/`observed_count`, and optional-stopping or actual-cost
+mismatch contrasts are diagnostic-only; any missing compared arm/scenario
+endpoint is not estimable.
+
+This arithmetic/hash closure covers materialized rows and graph links only. It
+does **not** demonstrate unmaterialized external raw events, real custody or
+holdout secrecy, organizational independence, model improvement, empirical
+validity or superiority, transfer, novelty, or production safety. Contract v0
+and released alpha.11 evidence remain unchanged; AEL-CEP artifacts use a
+dedicated family-local validation boundary, and generic `ael validate` does not
+accept a CEP directory. `confirmation_eligible` is pre-confirmation; exactly
+one candidate-bound pack is reserved/marked used before one final decision
+(`promote`, `narrow`, `abstain`, or `reject`). A recorded exposure blocks a
+positive `promote` only when it resolves to the sealed confirmation task root
+before that decision; screening and bridge exposures remain allowed under
+their own budgets and lifecycle. See
+[the protocol](docs/ael-cep.md), [the implementation decision](docs/decisions/2026-08-15-ael-cep-stage0-implementation.md),
+and [reproducibility boundaries](docs/reproducibility.md).
+
+The supported alpha.12 contract is the three `ael coevolution` CLI operations
+and the versioned protocol/bundle/schema/file formats. The
+`ael.coevolution*` Python modules remain experimental implementation details;
+direct imports have no compatibility guarantee. Stage 0 assumes trusted local
+directory ownership and supplies logical content integrity, not hostile
+shared-directory race protection or physical custody.
+
+The next evidence milestone is decision utility: compare the same evidence as
+an ordinary decision note, a note plus static checklist, and an AEL claim-first
+card. Only after AEL governs a real Codex action and downstream outcome does
+Stage 1 attempt an append-only retrospective evaluator rescore.
 
 ## What AEL publishes
 
@@ -256,7 +341,7 @@ maintainer-reviewed snapshots and maintainer-controlled fixtures; arbitrary
 submissions remain blocked. Read [SECURITY.md](SECURITY.md) and
 [Container runner isolation](docs/runner-isolation.md) before execution.
 
-The current `0.1.0a11` source line is pre-stable. GitHub Releases determines
+The current `0.1.0a12` source line is pre-stable. GitHub Releases determines
 whether it is externally published. It does not claim universal
 benchmarking, independent verification of Kizz-authored capabilities,
 model-only superiority from stack comparisons, or downstream production
@@ -265,6 +350,9 @@ impact.
 Alpha.11 empirically exercised the activation path and found it invalid. It is
 evidence that the exact adapter must be revised, not evidence about reporter
 effect, Codex quality, model reliability, transfer, or production benefit.
+
+Alpha.12 adds no scored model call. It publishes the deterministic Stage-0
+method artifact without claiming that coevolution works on real agents.
 
 ## Documentation
 

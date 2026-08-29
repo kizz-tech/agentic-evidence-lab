@@ -2,7 +2,11 @@ from __future__ import annotations
 
 import unittest
 
-from tools.release_check import PRIVATE_EVIDENCE_CANARY_PREFIX, payload_failures
+from tools.release_check import (
+    PRIVATE_EVIDENCE_CANARY_PREFIX,
+    REQUIRED_FILES,
+    payload_failures,
+)
 
 
 class ReleaseCheckTests(unittest.TestCase):
@@ -30,6 +34,17 @@ class ReleaseCheckTests(unittest.TestCase):
             "https://storage.example/x?X-Amz-Sig" + "nature=abcdef0123456789abcdef0123456789",
         )
         self.assertTrue(any("signed URL query" in failure for failure in failures))
+
+    def test_ael_cep_stage0_golden_package_is_required(self) -> None:
+        self.assertTrue(
+            {
+                "tools/materialize_ael_cep_stage0.py",
+                "studies/ael-cep/stage-0/README.md",
+                "studies/ael-cep/stage-0/protocol.json",
+                "studies/ael-cep/stage-0/trajectory-bundle.json",
+                "studies/ael-cep/stage-0/report.md",
+            }.issubset(REQUIRED_FILES)
+        )
 
 
 if __name__ == "__main__":

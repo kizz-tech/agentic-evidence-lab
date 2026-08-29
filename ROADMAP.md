@@ -175,11 +175,108 @@ class, while the v2 freeze and invalid result remain unchanged. See the
 [activation report](reports/2026-08-15-completion-integrity-activation-v2.md)
 and [decision record](docs/decisions/2026-08-15-alpha11-activation-result.md).
 
-## Next major release: alpha.12 qualified scale-up
+## Method foundation release: alpha.12 validity-preserving coevolution
 
-Alpha.12 should be a larger evidence release, not another collection of
-synthetic tests. It has two sequential gates and must stop honestly at either
-one.
+The owner decision on 2026-08-15 moved evaluator coevolution into AEL's method
+program. The question is no longer only whether one frozen
+intervention improves one frozen study. AEL must also learn whether its ability
+to perform work and its ability to measure work can improve together without
+destroying the validity of the evidence used to select them.
+
+Alpha.12 publishes the Stage-0
+[AEL Coevolution Protocol](docs/ael-cep.md) foundation. Builder,
+Evaluator, and later Challenger populations may evolve. Evidence history,
+prospective intake, anchor custody, and promotion authority remain fixed inside
+one measurement epoch. A new evaluator appends a new score; it never overwrites
+the historical verdict it replaces.
+
+The development path is sequential with explicit rejection gates:
+
+1. **Stage 0 — deterministic no-effect falsification: released in alpha.12.**
+   The package implements the family-local protocol, content-addressed ledger, append-only rescore,
+   evaluator bridge, exposure and deletion semantics, promotion automaton, and
+   replicated A0--A5 simulator. Exercise nulls, useful effects, shared blind
+   spots, evaluator exploitation, leakage, optional stopping, drift,
+   forgetting, missingness, poisoning, critical failures, tombstones, and
+   forbidden effects. Emit exact task/scenario/arm trajectory rows followed by
+   one dependency-bound `contrast_summary` seal; derive operating metrics,
+   primary endpoints, and contrast diagnostics only from that seal. Keep
+   candidate-level promotion opportunities separate from task-level disposition
+   counts, and mark optional-stopping or actual-cost-mismatch contrasts
+   diagnostic-only.
+   A failed or uncertain bridge starts `new_measurement_epoch` without
+   confirmation; early eligible-state revocation requires an authority-bound
+   `deletion_tombstone`.
+2. **Implementation Gate B: completed for the Stage-0 release boundary.**
+   Independent audits covered the exact schemas, source, simulator, allocation
+   generator, promotion reducer, custody declarations,
+   receipt projection, deletion closure, and golden bytes. Passing the research
+   design review is not enough.
+3. **Stage 1 — retrospective shadow: gated.** Adapt only eligible retained evidence
+   and rescore it without new Builder calls. Historical evidence remains
+   descriptive and cannot become fresh confirmation.
+4. **Stage 2 — first prospective factorial study.** Compare A0--A4 under
+   matched total-system cost, identical causal algorithms, an arm-blinded
+   prospective intake, and multiple independently randomized trajectories.
+5. **Stage 3 — quarantined Challenger.** Add A5 only after the task generator
+   is demonstrably unable to define truth or promotion.
+6. **Stage 4 — second task family and role-separated replication.** Test whether
+   the identities and invariants transfer before calling them generic.
+7. **Stage 5 — Contract v1 decision.** Promote shared CEP records into the
+   generic contract only after two materially different prospective families
+   exercise the same consistency boundaries.
+
+The primary future endpoint is success on a predefined external prospective
+task population at matched total-system cost. Guardrails include program-level
+false promotion, critical harm, evaluator-exploit acceptance, calibration and
+decision stability, forgetting, temporal and out-of-distribution transfer,
+human burden, missingness, quarantine, and rollback completeness.
+
+Stage 0 is a bounded method artifact because evaluator identity,
+append-only rescoring, bridge validity, exposure accounting, and external
+promotion are named missing instruments. Its deterministic fixture and
+sufficient-stat/hash closure do not prove unmaterialized external events,
+empirical validity, real custody, production safety, or that coevolution works.
+Alpha.12 supports only the CLI and versioned file/schema contracts; direct
+Python imports remain experimental internals.
+
+## Next evidence stage: decision utility to action
+
+The next milestone is not prospective coevolution. AEL must close this chain:
+
+```text
+credible measurement
+→ better decision than a competent ordinary workflow
+→ one real Codex action
+→ observed downstream outcome
+→ append-only retrospective evaluator revision
+```
+
+1. Compare identical evidence as an ordinary decision note, the note plus a
+   static checklist, and an AEL claim-first card. Measure severity-weighted,
+   unweighted, and severity-stratum action error plus critical misses, false
+   blocks, time, burden, and confidence calibration.
+2. Qualify one decision-governing Codex intervention. Completion Integrity is
+   the default candidate only if its wrapper, task, oracle, sample-size,
+   custody, and authority gates all pass.
+3. Record the exact owner action and complete the predeclared downstream
+   follow-up. Missing or unavailable outcome evidence remains explicit.
+4. Only then run AEL-CEP Stage 1 as a retrospective append-only rescore/bridge
+   over eligible retained evidence, with no Builder rerun or promotion.
+
+If the AEL card does not beat a competent checklist within burden, simplify the
+human surface while retaining the machine evidence protocol. If a fixed
+Evaluator or ordinary immutable ledger matches AEL-CEP at lower total cost,
+freeze or narrow the coevolution program.
+
+## Deferred Completion Integrity qualified scale-up
+
+The Completion Integrity scale-up remains scientifically useful, but it is no
+longer the active central implementation. It retains two sequential gates and
+must stop honestly at either one. The alpha.11 failure and every frozen
+alpha.12-labelled historical action string remain unchanged; a future study
+must assign a new prospective revision and release identity rather than
+rewriting those records.
 
 ### Gate A — qualify the real adapter on fresh sacrificial roots
 
@@ -195,13 +292,13 @@ one.
 4. Submit each cell once, retain invalid/ambiguous/harmful/negative states, and
    stop on the first frozen integrity failure. Passing unit tests alone are not
    activation evidence.
-5. Admit the larger pilot only if every adapter, custody, capture, isolation,
+5. Admit a larger pilot only if every adapter, custody, capture, isolation,
    and claim-validity gate passes. A semantically correct but structurally
    invalid answer still fails activation.
 
 ### Gate B — deepen the Codex task population
 
-If Gate A passes, build a Codex-only Completion Integrity pilot with at least
+If Gate A passes, a future Codex-only Completion Integrity pilot needs at least
 16 genuinely independent task roots—twice the alpha.9 task count—and increase
 that target when the preregistered precision or power calculation requires it.
 Do not lower the floor or pad it with repeats, paraphrases, language ports,
@@ -231,10 +328,10 @@ critical-failure guardrails, cost reporting, and an exact owner-action rule.
 The independent unit remains the task root; calls and repeats do not inflate
 `n`.
 
-Alpha.12 succeeds only if it publishes one of the frozen outcomes—positive,
-null, harmful, inconclusive, or protocol-invalid—with its exact action. A larger
-call count without a stronger task/evaluator/uncertainty predicate is not
-progress.
+That future study succeeds only if it publishes one of the frozen
+outcomes—positive, null, harmful, inconclusive, or protocol-invalid—with its
+exact action. A larger call count without a stronger
+task/evaluator/uncertainty predicate is not progress.
 
 ### Codex-first boundary
 
@@ -248,10 +345,10 @@ decision-valid.
 
 ### Parallel evidence debts
 
-Alpha.12 should also close, or explicitly record as missing, the scheduled
-Systematic Debugging downstream follow-up. Role-separated reproduction remains
-a beta gate and must not be relabeled from a maintainer rerun. These debts do
-not compensate for a failed activation or weak task population.
+The scheduled Systematic Debugging downstream follow-up remains an evidence
+debt. Role-separated reproduction remains a beta gate and must not be
+relabeled from a maintainer rerun. These debts do not compensate for a failed
+activation, weak task population, or a passing coevolution simulation.
 
 Only after a valid Codex scale-up should AEL consider:
 
@@ -297,9 +394,10 @@ one serious decision question
 Method-only releases are exceptions. They require a named instrument defect
 that blocks or distorts the next important answer. Alpha.8 and alpha.10 were
 such exceptions; alpha.9 and alpha.11 show why null and invalid empirical
-answers are more valuable than method volume or passing fixture count. Alpha.12
-must earn scale through real adapter activation, task validity, evaluator
-sensitivity, observed repeat evidence, and a frozen owner decision.
+answers are more valuable than method volume or passing fixture count. AEL-CEP
+must earn prospective use through the exact implementation audit, task
+validity, evaluator sensitivity, observed repeat evidence, protected custody,
+and a frozen owner decision.
 
 ## Beta evidence gates
 
@@ -328,6 +426,8 @@ AEL should not call its method beta until all of these are observed:
   credentials.
 - No stable sixth Contract object before repeated prospective use reveals a
   durable cross-study shape and an explicit migration decision is made.
+- No self-certifying Builder--Evaluator loop, mutable historical score, or
+  promotion authority owned by the adaptive population it judges.
 - No hosted marketplace, generic eval dashboard, registry, or automatic search
   platform before repeated external use demonstrates the need.
 - No claim that structural conformance proves scientific validity, private-call

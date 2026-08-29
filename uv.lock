@@ -4,7 +4,7 @@ requires-python = ">=3.11"
 
 [[package]]
 name = "agentic-evidence-lab"
-version = "0.1.0a11"
+version = "0.1.0a12"
 source = { editable = "." }
 dependencies = [
     { name = "jsonschema" },

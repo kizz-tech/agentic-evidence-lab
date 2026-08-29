@@ -13,8 +13,14 @@ separate repositories, provenance, versions, and release authority.
 
 ## Current state
 
-The current package line is `v0.1.0-alpha.11`, an empirical Completion
-Integrity activation release. Activation v2 terminated
+The current package line is `v0.1.0-alpha.12`, a bounded AEL-CEP Stage-0
+method release. It supports the three `ael coevolution` CLI operations and
+versioned file/schema contracts; `ael.coevolution*` Python modules remain
+experimental internals without compatibility guarantees. Stage 0 is a
+deterministic no-effect artifact and does not establish real evaluator
+validity, coevolution benefit, custody, transfer, or production safety.
+
+The preceding alpha.11 empirical Completion Integrity activation terminated
 `protocol_invalid / revise_activation_adapter` after two of six Codex cells;
 no cell was retried and no reporter-effect or accuracy result exists. Current
 source repairs future attempt identity and full-wrapper coverage, but the v2

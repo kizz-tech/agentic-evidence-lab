@@ -109,11 +109,13 @@ jobs:
           uv run python tools/materialize_agent_skills_season.py --check
       - name: Check public release tree
         run: uv run python tools/release_check.py
+      - name: Check AEL-CEP Stage-0 golden package
+        run: uv run python tools/materialize_ael_cep_stage0.py --check
       - name: Build distributions
         run: |
           uv build
           uv run python tools/verify_release_artifacts.py \
-            --expected-version 0.1.0a11 \
+            --expected-version 0.1.0a12 \
             dist/*.whl dist/*.tar.gz
 
   clean-wheel:
@@ -137,8 +139,9 @@ jobs:
           test -n "$wheel"
           uv venv .release-venv
           uv pip install --python .release-venv/bin/python "$wheel"
-          test "$(.release-venv/bin/ael --version)" = "0.1.0a11"
-          test "$(.release-venv/bin/python -c 'import importlib.metadata; print(importlib.metadata.version("agentic-evidence-lab"))')" = "0.1.0a11"
+          test "$(.release-venv/bin/ael --version)" = "0.1.0a12"
+          test "$(.release-venv/bin/python -c 'import importlib.metadata; print(importlib.metadata.version("agentic-evidence-lab"))')" = "0.1.0a12"
+          .release-venv/bin/python -c 'import ael.coevolution as c; import ael.coevolution_bundle as b; import ael.coevolution_simulator as s; assert c.__all__ == b.__all__ == s.__all__ == ()'
           .release-venv/bin/ael study preflight \
             studies/quality-preflight/examples/pass/quality-profile.json \
             --json-output studies/quality-preflight/examples/pass/preflight.json \
@@ -196,6 +199,11 @@ jobs:
             studies/agent-skills-season-1/results/property-based-testing-v2/evidence-receipt.json \
             studies/agent-skills-season-1/results/property-based-testing-v2/measurement-set.json \
             studies/agent-skills-season-1/results/property-based-testing-v2/runs
+          .release-venv/bin/ael coevolution check \
+            studies/ael-cep/stage-0/protocol.json \
+            studies/ael-cep/stage-0/trajectory-bundle.json \
+            --report studies/ael-cep/stage-0/report.md \
+            --check-report
 
   docker-smoke:
     name: docker isolation smoke

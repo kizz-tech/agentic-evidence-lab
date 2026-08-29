@@ -1,0 +1,343 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-evidence-lab.dev/schemas/ael-cep/protocol-0.2-development.schema.json",
+  "title": "AEL-CEP 0.2-development ProtocolFreeze",
+  "description": "Closed pilot protocol schema. Opaque declaration values are data; policy keys are closed.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "protocol_id", "epoch", "principals", "intake", "partitions", "arms", "contrasts",
+    "algorithms", "budgets", "feedback_exposure", "missingness", "stopping", "bridge", "decision_rule", "replay",
+    "independence", "promotion", "effect_policy", "simulation"
+  ],
+  "properties": {
+    "schema_version": {"const": "ael-cep-protocol-0.2-development"},
+    "protocol_id": {"$ref": "#/$defs/nonEmptyString"},
+    "epoch": {
+      "type": "object", "additionalProperties": false,
+      "required": ["epoch_id", "state", "constitution_ref", "constitution_hash"],
+      "properties": {
+        "epoch_id": {"$ref": "#/$defs/nonEmptyString"},
+        "state": {"enum": ["frozen", "development"]},
+        "constitution_ref": {"$ref": "#/$defs/nonEmptyString"},
+        "constitution_hash": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "principals": {
+      "type": "object", "additionalProperties": false,
+      "required": ["evidence", "confirmation", "anchor", "adjudication", "promotion"],
+      "properties": {
+        "evidence": {"$ref": "#/$defs/principal"},
+        "confirmation": {"$ref": "#/$defs/principal"},
+        "anchor": {"$ref": "#/$defs/principal"},
+        "adjudication": {"$ref": "#/$defs/principal"},
+        "promotion": {"$ref": "#/$defs/principal"}
+      }
+    },
+    "intake": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "target_population", "use", "intake_owner", "sampling_custodian", "sampling_frame", "sampling_method",
+        "sampling_window", "sampling_cutoff", "eligibility", "deduplication", "censoring_late_arrival", "oracle",
+        "adjudication", "appeal", "utility", "harms", "weights", "margins", "arm_blinding", "allocation_proof",
+        "exposure_policy"
+      ],
+      "properties": {
+        "target_population": {"$ref": "#/$defs/value"},
+        "use": {"$ref": "#/$defs/value"},
+        "intake_owner": {"$ref": "#/$defs/value"},
+        "sampling_custodian": {"$ref": "#/$defs/value"},
+        "sampling_frame": {"$ref": "#/$defs/value"},
+        "sampling_method": {"$ref": "#/$defs/value"},
+        "sampling_window": {"$ref": "#/$defs/value"},
+        "sampling_cutoff": {"$ref": "#/$defs/value"},
+        "eligibility": {"$ref": "#/$defs/value"},
+        "deduplication": {"$ref": "#/$defs/value"},
+        "censoring_late_arrival": {"$ref": "#/$defs/value"},
+        "oracle": {"$ref": "#/$defs/value"},
+        "adjudication": {"$ref": "#/$defs/value"},
+        "appeal": {"$ref": "#/$defs/value"},
+        "utility": {"$ref": "#/$defs/value"},
+        "harms": {"$ref": "#/$defs/value"},
+        "weights": {"$ref": "#/$defs/value"},
+        "margins": {"$ref": "#/$defs/value"},
+        "arm_blinding": {"$ref": "#/$defs/value"},
+        "allocation_proof": {"$ref": "#/$defs/value"},
+        "exposure_policy": {"$ref": "#/$defs/value"}
+      }
+    },
+    "partitions": {
+      "type": "object", "additionalProperties": false,
+      "required": ["development", "screening", "bridge", "confirmation", "historical"],
+      "properties": {
+        "development": {"$ref": "#/$defs/partition"},
+        "screening": {"$ref": "#/$defs/partition"},
+        "bridge": {"$ref": "#/$defs/partition"},
+        "confirmation": {"$ref": "#/$defs/partition"},
+        "historical": {"$ref": "#/$defs/partition"}
+      }
+    },
+    "arms": {
+      "type": "object", "additionalProperties": false,
+      "required": ["A0", "A1", "A2", "A3", "A4", "A5"],
+      "properties": {
+        "A0": {"$ref": "#/$defs/armA0"},
+        "A1": {"$ref": "#/$defs/armA1"},
+        "A2": {"$ref": "#/$defs/armA2"},
+        "A3": {"$ref": "#/$defs/armA3"},
+        "A4": {"$ref": "#/$defs/armA4"},
+        "A5": {"$ref": "#/$defs/armA5"}
+      }
+    },
+    "contrasts": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/contrast"}},
+    "algorithms": {
+      "type": "object", "additionalProperties": false,
+      "required": ["eligibility", "task_allocation", "proposal_admission", "selection_ranking", "stopping", "analysis", "promotion"],
+      "properties": {
+        "eligibility": {"$ref": "#/$defs/algorithm"},
+        "task_allocation": {"$ref": "#/$defs/algorithm"},
+        "proposal_admission": {"$ref": "#/$defs/algorithm"},
+        "selection_ranking": {"$ref": "#/$defs/algorithm"},
+        "stopping": {"$ref": "#/$defs/algorithm"},
+        "analysis": {"$ref": "#/$defs/algorithm"},
+        "promotion": {"$ref": "#/$defs/algorithm"}
+      }
+    },
+    "budgets": {
+      "type": "object", "additionalProperties": false,
+      "required": ["total_system", "feedback", "exposure", "confirmation"],
+      "properties": {
+        "total_system": {"type": "number", "minimum": 0},
+        "feedback": {"type": "number", "minimum": 0},
+        "exposure": {"type": "number", "minimum": 0},
+        "confirmation": {"type": "number", "minimum": 0}
+      }
+    },
+    "feedback_exposure": {"$ref": "#/$defs/fiveValues"},
+    "missingness": {"$ref": "#/$defs/threeValues"},
+    "stopping": {
+      "type": "object", "additionalProperties": false,
+      "required": ["algorithm_ref", "algorithm_hash", "rule", "max_looks", "missing_data"],
+      "properties": {
+        "algorithm_ref": {"$ref": "#/$defs/nonEmptyString"},
+        "algorithm_hash": {"$ref": "#/$defs/hash"},
+        "rule": {"$ref": "#/$defs/value"},
+        "max_looks": {"type": "integer", "minimum": 0},
+        "missing_data": {"$ref": "#/$defs/value"}
+      }
+    },
+    "bridge": {
+      "type": "object", "additionalProperties": false,
+      "required": ["global_shift_tolerance", "interaction_tolerance", "decision_agreement_min", "construct_required", "reliability_required", "anchor_required", "strata"],
+      "properties": {
+        "global_shift_tolerance": {"type": "number", "minimum": 0},
+        "interaction_tolerance": {"type": "number", "minimum": 0},
+        "decision_agreement_min": {"type": "number", "minimum": 0, "maximum": 1},
+        "construct_required": {"type": "boolean"},
+        "reliability_required": {"type": "boolean"},
+        "anchor_required": {"type": "boolean"},
+        "strata": {"type": "array", "minItems": 5, "maxItems": 5, "uniqueItems": true, "items": {"$ref": "#/$defs/weightedStratum"}}
+      }
+    },
+    "decision_rule": {
+      "type": "object", "additionalProperties": false,
+      "required": ["threshold", "operator", "value_range", "required_status", "outcome", "critical_failure"],
+      "properties": {
+        "threshold": {"type": "number", "minimum": 0, "maximum": 1},
+        "operator": {"const": "gte"},
+        "value_range": {"type": "array", "prefixItems": [{"const": 0}, {"const": 1}], "items": false, "minItems": 2, "maxItems": 2},
+        "required_status": {"const": "observed"},
+        "outcome": {"$ref": "#/$defs/nonEmptyString"},
+        "critical_failure": {"const": "block"}
+      }
+    },
+    "replay": {
+      "type": "object", "additionalProperties": false,
+      "required": ["retention_policy", "required_surfaces", "deterministic_code_policy"],
+      "properties": {
+        "retention_policy": {"$ref": "#/$defs/value"},
+        "required_surfaces": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/nonEmptyString"}},
+        "deterministic_code_policy": {"$ref": "#/$defs/value"}
+      }
+    },
+    "independence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["protected_dimensions", "ceiling"],
+      "properties": {
+        "protected_dimensions": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/nonEmptyString"}},
+        "ceiling": {"$ref": "#/$defs/value"}
+      }
+    },
+    "promotion": {
+      "type": "object", "additionalProperties": false,
+      "required": ["initial_state", "transition_table", "terminal_states"],
+      "properties": {
+        "initial_state": {"const": "registered"},
+        "transition_table": {"$ref": "#/$defs/promotionTable"},
+        "terminal_states": {"const": ["screening_reject", "new_measurement_epoch", "expire", "revoke"]}
+      }
+    },
+    "effect_policy": {"const": "forbidden"},
+    "simulation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["config_version", "seed", "scenarios"],
+      "properties": {
+        "config_version": {"$ref": "#/$defs/nonEmptyString"},
+        "seed": {"type": "integer", "minimum": 0},
+        "scenarios": {"type": "array", "minItems": 1, "maxItems": 64, "items": {"$ref": "#/$defs/scenario"}}
+      }
+    }
+  },
+  "$defs": {
+    "nonEmptyString": {"type": "string", "minLength": 1},
+    "hash": {"type": "string", "pattern": "^[0-9A-Fa-f]{64}$"},
+    "value": {
+      "anyOf": [
+        {"type": "string"}, {"type": "number"}, {"type": "boolean"}, {"type": "null"},
+        {"type": "array", "items": {"$ref": "#/$defs/value"}},
+        {"type": "object", "additionalProperties": {"$ref": "#/$defs/value"}}
+      ]
+    },
+    "principal": {
+      "type": "object", "additionalProperties": false,
+      "required": ["principal_id", "custody", "independence"],
+      "properties": {
+        "principal_id": {"$ref": "#/$defs/nonEmptyString"},
+        "custody": {"$ref": "#/$defs/nonEmptyString"},
+        "independence": {"$ref": "#/$defs/nonEmptyString"},
+        "lineage": {"$ref": "#/$defs/value"}
+      }
+    },
+    "partition": {
+      "type": "object", "additionalProperties": false,
+      "required": ["partition_id", "purpose", "feedback", "sealed", "single_use", "eligible_for_promotion", "exposure_budget", "task_root_hash"],
+      "properties": {
+        "partition_id": {"$ref": "#/$defs/nonEmptyString"},
+        "purpose": {"$ref": "#/$defs/nonEmptyString"},
+        "feedback": {"$ref": "#/$defs/nonEmptyString"},
+        "sealed": {"type": "boolean"},
+        "single_use": {"type": "boolean"},
+        "eligible_for_promotion": {"type": "boolean"},
+        "exposure_budget": {"type": "number", "minimum": 0},
+        "task_root_hash": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "armBase": {
+      "type": "object", "additionalProperties": false,
+      "required": ["builder", "evaluator", "loop", "custody", "challenger", "anchor"],
+      "properties": {
+        "builder": {"enum": ["fixed", "evolving"]},
+        "evaluator": {"enum": ["fixed", "evolving"]},
+        "loop": {"$ref": "#/$defs/nonEmptyString"},
+        "custody": {"enum": ["shared", "separated"]},
+        "challenger": {"enum": ["absent", "present"]},
+        "anchor": {"enum": ["absent", "protected"]}
+      }
+    },
+    "armA0": {"allOf": [{"$ref": "#/$defs/armBase"}, {"properties": {"builder": {"const": "fixed"}, "evaluator": {"const": "fixed"}, "loop": {"const": "open"}, "custody": {"const": "shared"}, "challenger": {"const": "absent"}, "anchor": {"const": "absent"}}}]},
+    "armA1": {"allOf": [{"$ref": "#/$defs/armBase"}, {"properties": {"builder": {"const": "evolving"}, "evaluator": {"const": "fixed"}, "loop": {"const": "open"}, "custody": {"const": "shared"}, "challenger": {"const": "absent"}, "anchor": {"const": "absent"}}}]},
+    "armA2": {"allOf": [{"$ref": "#/$defs/armBase"}, {"properties": {"builder": {"const": "fixed"}, "evaluator": {"const": "evolving"}, "loop": {"const": "open"}, "custody": {"const": "shared"}, "challenger": {"const": "absent"}, "anchor": {"const": "absent"}}}]},
+    "armA3": {"allOf": [{"$ref": "#/$defs/armBase"}, {"properties": {"builder": {"const": "evolving"}, "evaluator": {"const": "evolving"}, "loop": {"const": "naive_closed"}, "custody": {"const": "shared"}, "challenger": {"const": "absent"}, "anchor": {"const": "absent"}}}]},
+    "armA4": {"allOf": [{"$ref": "#/$defs/armBase"}, {"properties": {"builder": {"const": "evolving"}, "evaluator": {"const": "evolving"}, "loop": {"const": "custody_separated"}, "custody": {"const": "separated"}, "challenger": {"const": "absent"}, "anchor": {"const": "protected"}}}]},
+    "armA5": {"allOf": [{"$ref": "#/$defs/armBase"}, {"properties": {"builder": {"const": "evolving"}, "evaluator": {"const": "evolving"}, "loop": {"const": "challenger_anchor"}, "custody": {"const": "separated"}, "challenger": {"const": "present"}, "anchor": {"const": "protected"}}}]},
+    "algorithm": {
+      "type": "object", "additionalProperties": false,
+      "required": ["ref", "hash"],
+      "properties": {"ref": {"$ref": "#/$defs/nonEmptyString"}, "hash": {"$ref": "#/$defs/hash"}}
+    },
+    "scenario": {
+      "type": "object", "additionalProperties": false,
+      "required": ["name", "tasks", "replicates"],
+      "properties": {
+        "name": {"$ref": "#/$defs/nonEmptyString"},
+        "tasks": {"type": "integer", "minimum": 1, "maximum": 1024},
+        "replicates": {"type": "integer", "minimum": 1, "maximum": 256}
+      }
+    },
+    "promotionStateArray": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"enum": ["registered", "development_eligible", "screening_pass", "screening_reject", "bridge_eligible", "new_measurement_epoch", "confirmation_eligible", "promote", "narrow", "abstain", "reject", "monitor", "expire", "revoke"]}
+    },
+    "promotionTable": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["registered", "development_eligible", "screening_pass", "screening_reject", "bridge_eligible", "new_measurement_epoch", "confirmation_eligible", "promote", "narrow", "abstain", "reject", "monitor", "expire", "revoke"],
+      "properties": {
+        "registered": {"const": ["development_eligible"]},
+        "development_eligible": {"const": ["revoke", "screening_pass", "screening_reject"]},
+        "screening_pass": {"const": ["bridge_eligible", "new_measurement_epoch", "revoke"]},
+        "screening_reject": {"const": []},
+        "bridge_eligible": {"const": ["confirmation_eligible", "new_measurement_epoch", "revoke"]},
+        "new_measurement_epoch": {"const": []},
+        "confirmation_eligible": {"const": ["abstain", "narrow", "promote", "reject", "revoke"]},
+        "promote": {"const": ["expire", "monitor", "revoke"]},
+        "narrow": {"const": ["expire", "monitor", "revoke"]},
+        "abstain": {"const": ["expire", "monitor", "revoke"]},
+        "reject": {"const": ["expire", "monitor", "revoke"]},
+        "monitor": {"const": ["expire", "revoke"]},
+        "expire": {"const": []},
+        "revoke": {"const": []}
+      }
+    },
+    "treatment": {
+      "type": "object", "additionalProperties": false,
+      "required": ["dimension", "arm_a_level", "arm_b_level"],
+      "properties": {
+        "dimension": {"$ref": "#/$defs/nonEmptyString"},
+        "arm_a_level": {"$ref": "#/$defs/nonEmptyString"},
+        "arm_b_level": {"$ref": "#/$defs/nonEmptyString"}
+      }
+    },
+    "contrast": {
+      "type": "object", "additionalProperties": false,
+      "required": ["contrast_id", "arm_a", "arm_b", "treatment", "estimand_kind", "eligibility", "task_allocation", "proposal_admission", "selection_ranking", "stopping", "analysis", "promotion", "budgets"],
+      "properties": {
+        "contrast_id": {"$ref": "#/$defs/nonEmptyString"},
+        "arm_a": {"pattern": "^A[0-5]$", "type": "string"},
+        "arm_b": {"pattern": "^A[0-5]$", "type": "string"},
+        "treatment": {"$ref": "#/$defs/treatment"},
+        "estimand_kind": {"enum": ["component", "policy_package"]},
+        "eligibility": {"$ref": "#/$defs/algorithm"},
+        "task_allocation": {"$ref": "#/$defs/algorithm"},
+        "proposal_admission": {"$ref": "#/$defs/algorithm"},
+        "selection_ranking": {"$ref": "#/$defs/algorithm"},
+        "stopping": {"$ref": "#/$defs/algorithm"},
+        "analysis": {"$ref": "#/$defs/algorithm"},
+        "promotion": {"$ref": "#/$defs/algorithm"},
+        "budgets": {
+          "type": "object", "additionalProperties": false,
+          "required": ["total_system", "feedback", "exposure", "confirmation"],
+          "properties": {
+            "total_system": {"type": "number", "minimum": 0}, "feedback": {"type": "number", "minimum": 0},
+            "exposure": {"type": "number", "minimum": 0}, "confirmation": {"type": "number", "minimum": 0}
+          }
+        }
+      }
+    },
+    "weightedStratum": {
+      "type": "object", "additionalProperties": false,
+      "required": ["stratum", "weight", "task_root_hash"],
+      "properties": {
+        "stratum": {"$ref": "#/$defs/nonEmptyString"},
+        "weight": {"type": "number", "exclusiveMinimum": 0},
+        "task_root_hash": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "fiveValues": {
+      "type": "object", "additionalProperties": false,
+      "required": ["development", "screening", "bridge", "confirmation", "total"],
+      "properties": {
+        "development": {"$ref": "#/$defs/value"}, "screening": {"$ref": "#/$defs/value"},
+        "bridge": {"$ref": "#/$defs/value"}, "confirmation": {"$ref": "#/$defs/value"}, "total": {"$ref": "#/$defs/value"}
+      }
+    },
+    "threeValues": {
+      "type": "object", "additionalProperties": false,
+      "required": ["policy", "bounds", "critical_failure_rule"],
+      "properties": {
+        "policy": {"$ref": "#/$defs/value"}, "bounds": {"$ref": "#/$defs/value"}, "critical_failure_rule": {"$ref": "#/$defs/value"}
+      }
+    }
+  }
+}

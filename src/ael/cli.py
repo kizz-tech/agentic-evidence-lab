@@ -14,6 +14,19 @@ from ael.codex_runner import (
     DEFAULT_REASONING_EFFORT,
     run_codex_task,
 )
+from ael.coevolution import CoevolutionError
+from ael.coevolution_bundle import (
+    CoevolutionBundleError,
+    append_rescore_files,
+    check_bundle,
+    load_bundle,
+    load_protocol,
+    materialize_bundle,
+    render_bundle_report,
+    write_text_atomic,
+)
+from ael.coevolution_simulator import SimulatorError, simulate
+from ael.contract_graph import validate
 from ael.render import render_receipt
 from ael.result_surface import materialize_result_surface
 from ael.result_verification import AuditRequest, audit_adapter_names, audit_bundle
@@ -40,7 +53,122 @@ from ael.study_freeze import (
 )
 from ael.study_quality import materialize_preflight
 from ael.taskpack import check_adaptation_pack, evaluate_candidate
-from ael.validation import sha256_path, validate
+from ael.validation import sha256_path
+
+
+def _coevolution_distinct_paths(*named_paths: tuple[str, str | None]) -> None:
+    """Reject CLI output aliases before an atomic writer can replace an input."""
+
+    seen: dict[Path, str] = {}
+    for label, raw_path in named_paths:
+        if raw_path is None:
+            continue
+        path = Path(raw_path).resolve()
+        prior = seen.get(path)
+        if prior is not None:
+            raise CoevolutionBundleError("output_alias", f"{label} must not alias {prior}")
+        seen[path] = label
+
+
+def _coevolution_error(command: str, exc: Exception) -> int:
+    """Return a stable, fail-closed CLI error without leaking a traceback."""
+
+    print(f"coevolution {command} failed: {exc}", file=sys.stderr)
+    return 2
+
+
+def _coevolution_check(args: argparse.Namespace) -> int:
+    try:
+        if args.check_report and not args.report:
+            raise CoevolutionBundleError("missing_report", "--check-report requires --report PATH")
+        _coevolution_distinct_paths(
+            ("protocol", args.protocol),
+            ("bundle", args.bundle),
+            *((f"predecessor[{index}]", path) for index, path in enumerate(args.predecessors)),
+            ("report", args.report),
+        )
+        protocol, _ = load_protocol(args.protocol)
+        bundle = load_bundle(args.bundle, protocol=protocol, predecessor_paths=args.predecessors)
+        projection = check_bundle(args.protocol, args.bundle, predecessor_paths=args.predecessors)
+        report_result: dict[str, object] | None = None
+        if args.report:
+            report_result = write_text_atomic(
+                args.report,
+                render_bundle_report(
+                    protocol,
+                    bundle,
+                    projection,
+                    predecessor_paths=args.predecessors,
+                ),
+                check=args.check_report,
+            )
+    except (CoevolutionBundleError, SimulatorError, CoevolutionError) as exc:
+        return _coevolution_error("check", exc)
+    suffix = ""
+    if report_result is not None:
+        suffix = f"; report={report_result['status']}"
+    print(
+        f"coevolution check passed: bundle={projection['bundle_id']} "
+        f"records={projection['record_count']}{suffix}"
+    )
+    return 0
+
+
+def _coevolution_simulate(args: argparse.Namespace) -> int:
+    try:
+        _coevolution_distinct_paths(
+            ("protocol", args.protocol),
+            ("bundle output", args.bundle_output),
+            ("report output", args.report_output),
+        )
+        protocol, _ = load_protocol(args.protocol)
+        synthetic_bundle = simulate(protocol)
+        bundle_result = materialize_bundle(
+            args.protocol,
+            args.bundle_output,
+            synthetic_bundle,
+            check=args.check,
+        )
+        bundle = load_bundle(args.bundle_output, protocol=protocol)
+        projection = check_bundle(args.protocol, args.bundle_output)
+        report_result = write_text_atomic(
+            args.report_output,
+            render_bundle_report(protocol, bundle, projection),
+            check=args.check,
+        )
+    except (CoevolutionBundleError, SimulatorError, CoevolutionError) as exc:
+        return _coevolution_error("simulate", exc)
+    print(
+        f"coevolution simulate {bundle_result['status']}: "
+        f"bundle={bundle_result['bundle_id']} report={report_result['status']}"
+    )
+    return 0
+
+
+def _coevolution_rescore(args: argparse.Namespace) -> int:
+    try:
+        _coevolution_distinct_paths(
+            ("protocol", args.protocol),
+            ("bundle", args.bundle),
+            ("request", args.request),
+            *((f"predecessor[{index}]", path) for index, path in enumerate(args.predecessors)),
+            ("output", args.output),
+        )
+        result = append_rescore_files(
+            args.protocol,
+            args.bundle,
+            args.request,
+            args.output,
+            predecessor_paths=args.predecessors,
+            check=args.check,
+        )
+    except (CoevolutionBundleError, SimulatorError, CoevolutionError) as exc:
+        return _coevolution_error("rescore", exc)
+    print(
+        f"coevolution rescore {result['status']}: "
+        f"bundle={result['bundle_id']} predecessor={Path(args.bundle).resolve()}"
+    )
+    return 0
 
 
 def _validate(args: argparse.Namespace) -> int:
@@ -429,6 +557,77 @@ def build_parser() -> argparse.ArgumentParser:
     calibrate_parser.add_argument("--output", required=True, help="simulation result JSON")
     calibrate_parser.add_argument("--report", help="optional Markdown report")
     calibrate_parser.set_defaults(handler=_calibrate)
+
+    coevolution_parser = subparsers.add_parser(
+        "coevolution",
+        help="validate and materialize family-local AEL-CEP Stage-0 artifacts",
+    )
+    coevolution_subparsers = coevolution_parser.add_subparsers(
+        dest="coevolution_command", required=True
+    )
+    coevolution_check_parser = coevolution_subparsers.add_parser(
+        "check", help="validate a protocol-bound trajectory bundle"
+    )
+    coevolution_check_parser.add_argument("protocol", help="frozen AEL-CEP protocol JSON")
+    coevolution_check_parser.add_argument("bundle", help="trajectory bundle JSON")
+    coevolution_check_parser.add_argument(
+        "--predecessor",
+        dest="predecessors",
+        action="append",
+        default=[],
+        metavar="PATH",
+        help="lineage bundle, repeat oldest genesis through immediate predecessor",
+    )
+    coevolution_check_parser.add_argument(
+        "--report", help="optional deterministic Markdown report output"
+    )
+    coevolution_check_parser.add_argument(
+        "--check-report",
+        action="store_true",
+        help="fail when the existing report differs from validated evidence",
+    )
+    coevolution_check_parser.set_defaults(handler=_coevolution_check)
+
+    coevolution_simulate_parser = coevolution_subparsers.add_parser(
+        "simulate", help="materialize deterministic no-effect Stage-0 simulation evidence"
+    )
+    coevolution_simulate_parser.add_argument("protocol", help="frozen AEL-CEP protocol JSON")
+    coevolution_simulate_parser.add_argument(
+        "--bundle-output", required=True, help="trajectory bundle JSON output"
+    )
+    coevolution_simulate_parser.add_argument(
+        "--report-output", required=True, help="deterministic Markdown report output"
+    )
+    coevolution_simulate_parser.add_argument(
+        "--check",
+        action="store_true",
+        help="fail when existing bundle or report differs from deterministic output",
+    )
+    coevolution_simulate_parser.set_defaults(handler=_coevolution_simulate)
+
+    coevolution_rescore_parser = coevolution_subparsers.add_parser(
+        "rescore", help="append a data-only evaluator rescore to a successor bundle"
+    )
+    coevolution_rescore_parser.add_argument("protocol", help="frozen AEL-CEP protocol JSON")
+    coevolution_rescore_parser.add_argument("bundle", help="source trajectory bundle JSON")
+    coevolution_rescore_parser.add_argument("request", help="data-only rescore request JSON")
+    coevolution_rescore_parser.add_argument(
+        "--output", required=True, help="successor trajectory bundle JSON output"
+    )
+    coevolution_rescore_parser.add_argument(
+        "--predecessor",
+        dest="predecessors",
+        action="append",
+        default=[],
+        metavar="PATH",
+        help="source lineage bundle, repeat oldest genesis through immediate predecessor",
+    )
+    coevolution_rescore_parser.add_argument(
+        "--check",
+        action="store_true",
+        help="fail when an existing successor differs from the validated rescore",
+    )
+    coevolution_rescore_parser.set_defaults(handler=_coevolution_rescore)
 
     results_parser = subparsers.add_parser(
         "results", help="build or check deterministic public result projections"

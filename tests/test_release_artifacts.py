@@ -8,8 +8,10 @@ import tempfile
 import unittest
 import zipfile
 from pathlib import Path
+from unittest.mock import patch
 
 from ael.result_surface import PUBLICATION_PROJECTION_POLICY
+from tools import verify_release_artifacts as release_artifacts
 from tools.verify_release_artifacts import (
     EXPECTED_PROJECTION_POLICY,
     main,
@@ -23,6 +25,12 @@ VERSION = "0.1.0a9"
 def _wheel(path: Path, *, payload: bytes = b"", extra: dict[str, bytes] | None = None) -> None:
     files = {
         "ael/__init__.py": b'__version__ = "0.1.0a9"\n',
+        "ael/contract_graph.py": b"# graph validator\n",
+        "ael/coevolution.py": b"# protocol kernel\n",
+        "ael/coevolution_bundle.py": b"# file adapter\n",
+        "ael/coevolution_simulator.py": b"# no-effect simulator\n",
+        "ael/coevolution_schemas/protocol.schema.json": b"{}\n",
+        "ael/coevolution_schemas/bundle.schema.json": b"{}\n",
         "agentic_evidence_lab-0.1.0a9.dist-info/METADATA": (
             b"Metadata-Version: 2.3\nName: agentic-evidence-lab\nVersion: 0.1.0a9\n"
         ),
@@ -46,6 +54,12 @@ def _sdist(
         "README.md": b"Public README\n",
         "LICENSE": b"Apache-2.0\n",
         "src/ael/__init__.py": b'__version__ = "0.1.0a9"\n',
+        "src/ael/contract_graph.py": b"# graph validator\n",
+        "src/ael/coevolution.py": b"# protocol kernel\n",
+        "src/ael/coevolution_bundle.py": b"# file adapter\n",
+        "src/ael/coevolution_simulator.py": b"# no-effect simulator\n",
+        "src/ael/coevolution_schemas/protocol.schema.json": b"{}\n",
+        "src/ael/coevolution_schemas/bundle.schema.json": b"{}\n",
     }
     if payload:
         files["src/ael/payload.txt"] = payload
@@ -230,6 +244,136 @@ class ReleaseArtifactTests(unittest.TestCase):
                     for item in verify_archives([replacement], VERSION)
                 )
             )
+
+    def test_ael_cep_modules_and_schema_resources_are_required(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            wheel = root / "agentic_evidence_lab-0.1.0a9-py3-none-any.whl"
+            _wheel(wheel)
+            removed = root / "without-protocol-schema.whl"
+            with zipfile.ZipFile(wheel) as source, zipfile.ZipFile(removed, "w") as target:
+                for info in source.infolist():
+                    if info.filename.endswith("coevolution_schemas/protocol.schema.json"):
+                        continue
+                    target.writestr(info, source.read(info))
+            failures = verify_archives([removed], VERSION)
+            self.assertTrue(
+                any(
+                    "missing required wheel file: ael/coevolution_schemas/protocol.schema.json"
+                    in item
+                    for item in failures
+                )
+            )
+
+            sdist = root / "agentic_evidence_lab-0.1.0a9.tar.gz"
+            _sdist(sdist)
+            without_module = root / "without-bundle-module.tar.gz"
+            with (
+                tarfile.open(sdist, "r:gz") as source,
+                tarfile.open(without_module, "w:gz") as target,
+            ):
+                for member in source.getmembers():
+                    if member.name.endswith("src/ael/coevolution_bundle.py"):
+                        continue
+                    if member.isfile():
+                        payload = source.extractfile(member)
+                        assert payload is not None
+                        with payload:
+                            target.addfile(member, payload)
+                    else:
+                        target.addfile(member)
+            failures = verify_archives([without_module], VERSION)
+            self.assertTrue(
+                any(
+                    "missing required sdist file: src/ael/coevolution_bundle.py" in item
+                    for item in failures
+                )
+            )
+
+    def test_decoy_suffixes_cannot_satisfy_canonical_archive_contract(self) -> None:
+        """A matching suffix under an attacker-controlled prefix is not evidence."""
+
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            wheel = root / "agentic_evidence_lab-0.1.0a9-py3-none-any.whl"
+            _wheel(wheel)
+            forged_wheel = root / "forged-wheel.whl"
+            with zipfile.ZipFile(wheel) as source, zipfile.ZipFile(forged_wheel, "w") as target:
+                for info in source.infolist():
+                    if info.filename == "ael/coevolution_bundle.py":
+                        continue
+                    target.writestr(info, source.read(info))
+                target.writestr("decoy/ael/coevolution_bundle.py", b"# decoy\n")
+            failures = verify_archives([forged_wheel], VERSION)
+            self.assertTrue(
+                any(
+                    "missing required wheel file: ael/coevolution_bundle.py" in item
+                    for item in failures
+                )
+            )
+
+            sdist = root / "agentic_evidence_lab-0.1.0a9.tar.gz"
+            _sdist(sdist)
+            forged_sdist = root / "forged-sdist.tar.gz"
+            with (
+                tarfile.open(sdist, "r:gz") as source,
+                tarfile.open(forged_sdist, "w:gz") as target,
+            ):
+                for member in source.getmembers():
+                    if member.name.endswith("src/ael/coevolution_bundle.py"):
+                        continue
+                    if member.isfile():
+                        payload = source.extractfile(member)
+                        assert payload is not None
+                        with payload:
+                            target.addfile(member, payload)
+                    else:
+                        target.addfile(member)
+                payload = b"# decoy\n"
+                info = tarfile.TarInfo("decoy/src/ael/coevolution_bundle.py")
+                info.size = len(payload)
+                target.addfile(info, io.BytesIO(payload))
+            failures = verify_archives([forged_sdist], VERSION)
+            self.assertTrue(
+                any("expected exactly one canonical sdist root" in item for item in failures)
+            )
+
+    def test_archive_expansion_limits_fail_closed_for_zip_and_tar(self) -> None:
+        """Small fixtures exercise declared bytes, total bytes, and member caps."""
+
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            wheel = root / "agentic_evidence_lab-0.1.0a9-py3-none-any.whl"
+            sdist = root / "agentic_evidence_lab-0.1.0a9.tar.gz"
+            _wheel(wheel, payload=b"12345")
+            _sdist(sdist, payload=b"12345")
+
+            with patch.object(release_artifacts, "MAX_ARCHIVE_MEMBER_BYTES", 4):
+                for archive in (wheel, sdist):
+                    with self.subTest(archive=archive.name, limit="member"):
+                        failures = verify_archives([archive], VERSION)
+                        self.assertTrue(
+                            any("declared member exceeds 4 bytes" in item for item in failures)
+                        )
+
+            with patch.object(release_artifacts, "MAX_ARCHIVE_TOTAL_BYTES", 4):
+                for archive in (wheel, sdist):
+                    with self.subTest(archive=archive.name, limit="total"):
+                        failures = verify_archives([archive], VERSION)
+                        self.assertTrue(
+                            any(
+                                "declared uncompressed archive total exceeds 4 bytes" in item
+                                for item in failures
+                            )
+                        )
+
+            with patch.object(release_artifacts, "MAX_ARCHIVE_MEMBERS", 2):
+                for archive in (wheel, sdist):
+                    with self.subTest(archive=archive.name, limit="members"):
+                        failures = verify_archives([archive], VERSION)
+                        self.assertTrue(
+                            any("archive member count exceeds 2" in item for item in failures)
+                        )
 
     def test_cli_requires_metadata_options_when_output_requested(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

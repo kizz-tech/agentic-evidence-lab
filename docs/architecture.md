@@ -118,6 +118,160 @@ evidence state** and **claim class**—without changing any JSON field or
 historical rendered evidence byte. Frozen Markdown produced by older releases
 remains historical output and is not regenerated.
 
+### AEL Coevolution Protocol (Stage 0)
+
+AEL-CEP is a family-local protocol beside Contract v0. It is the current
+central research direction for evaluating systems whose Builder and Evaluator
+capabilities evolve together. Contract v0 remains exactly its five released
+document types; AEL-CEP has its own schema namespace and dedicated validator
+until a second materially different task family demonstrates a stable shared
+boundary.
+
+The Stage 0 dependency direction is deliberately small and one-way:
+
+```text
+CLI / tool ──→ strict bundle adapter ──→ deterministic simulator ──→ pure policy kernel
+      └──────────────────────────────────────────────────────────────→ pure policy kernel
+```
+
+`ael.coevolution` is the pure kernel. It owns evaluator and builder release
+identity, exact evaluation bindings, content-addressed record lineage,
+append-only rescoring, replay classification, exposure and revocation
+projections, bridge comparability, measurement epochs, per-claim independence
+ceilings, causal contrast eligibility, and the promotion reducer. It does not
+import filesystem, CLI, process, network, provider, sandbox, runner, Contract
+validation, result projection, ambient clock, or ambient randomness facilities.
+
+The strict sidecar adapter owns JSON parsing, schema loading, path and size
+limits, raw-byte hashing, atomic materialization, and check mode. It may reject
+an artifact or report a deterministic error, but it does not decide whether a
+candidate should be promoted. AEL-CEP JSON is intentionally excluded from the
+generic `ael validate` Contract v0 walk; use the dedicated protocol and bundle
+boundary described in [AEL-CEP](ael-cep.md) and
+[Reproducibility](reproducibility.md).
+
+Alpha.12 supports that CLI/file/schema boundary only. The three
+`ael.coevolution*` Python modules are inward implementation details and export
+no compatibility-bearing star-import surface. This preserves freedom to split
+or recombine policy internals after observed change evidence rather than
+freezing speculative seams now.
+
+The adapter's Stage 0 ceilings are 2 MiB per JSON or Markdown file, 2,048
+records per bundle, and 10,000 dependency edges per bundle, with additional
+bounded JSON and predecessor-chain depth. A successor may supply an arbitrary
+ordered genesis-to-immediate-predecessor chain through repeated predecessor
+inputs; each link is validated and retained before new records are appended.
+These are fail-closed local limits, not production storage or physical
+append-only guarantees.
+
+The deterministic no-effect simulator owns only a declared synthetic world. It
+compares A0--A5 trajectories (fixed/evolving Builder and Evaluator, naive
+closed loop, custody-separated anchor, and Challenger-assisted custody) with
+the same task exposure, selection/stopping/analysis algorithms, and matched
+total-system budget for each declared contrast. It keeps latent utility,
+Evaluator score, and arm-blinded prospective anchor outcome separate. Its
+parameters are operating characteristics of that frozen simulation, not agent
+forecasts.
+
+An Evaluator is a release artifact, not a label. The evidence graph keeps the
+subject observation evaluator-independent until scoring:
+
+```text
+SubjectExecutionEvidence → EvaluationBinding → ScoreRun
+```
+
+`SubjectExecutionEvidence` is retained execution evidence. `EvaluationBinding`
+then freezes the exact Builder, Evaluator, measurement method, task revision,
+runner/environment, analysis, promotion policy, exposure state, and epoch. A
+`ScoreRun` binds that evidence and binding to the evaluator release and frozen
+adjudication/scoring actor. A new evaluator appends a new binding and score
+beside the old fact; it never rewrites or upgrades historical evidence. Direct
+cross-epoch comparison is denied by default. A bridge can establish bounded
+comparability, retain a linked-with-uncertainty description, or require a new
+measurement epoch.
+
+The Stage 0 bridge is a complete weighted panel over `good`, `bad`, `exploit`,
+`semantic_mutant`, and `near_threshold`. Every stratum retains B0/B1 evidence,
+four actual score runs (`B0×E0`, `B0×E1`, `B1×E0`, `B1×E1`), and arm-blinded B0/B1
+anchor observations. The kernel recomputes weighted global shift, interaction,
+score decision agreement, and anchor value/decision-threshold agreement; a
+status-only anchor match or scalar summary is insufficient. For each stratum,
+the kernel derives `G_s`, `I_s`, evaluator decision agreement, and anchor
+decision agreement from the four score cells and two anchor values. Every
+stratum must pass all four gates; weighted summaries cannot cancel a failing
+stratum. Each B0/B1 anchor binds the exact corresponding
+`SubjectExecutionEvidence` reference and hash. Promotion state is keyed by
+`(candidate_ref,candidate_hash)`, with an independent predecessor chain per
+candidate and `promotion_states` as the authoritative projection.
+
+The simulator obtains anchor values from an independent named `anchor_truth`
+stream and emits B0/B1 subject evidence plus anchor observations before the
+second-phase binding/score records. Evaluator-cell perturbations therefore
+cannot change committed evidence or anchor bytes/hashes or their thresholded
+decisions. On a positive A5 path, promotion targets the bridge's new Builder
+generation B1. Bridge `synthetic_pass`/`synthetic_fail` construct and
+reliability fields are fixture statuses, not empirical calibration or validity
+evidence.
+
+Blocked effects are also first-class ledger facts: each `effect_attempt` binds
+the candidate, subject evidence, evaluation binding, authority, request hash,
+and idempotency key, and Stage 0 requires `blocked` plus
+`postcondition_status=not_dispatched`. The frozen forbidden-effect scenario
+emits a second candidate-keyed containment chain; accepted effects are rejected
+before promotion.
+
+Promotion authority is outside the adaptive roles. Unknown/overlapping
+protected custody, self-approval, failed or missing bridges, reused or tainted
+confirmation, critical failure, ambiguous effects, and revoked ancestry are
+rejected by the local reducer. Stage 0's deterministic fixture exercises these
+rules and no-effect adversarial handling; its sufficient-stat arithmetic and
+hash closure do not prove unmaterialized external raw events, physical custody,
+holdout secrecy, organizational independence, real model improvement,
+empirical superiority, transfer, or production safety.
+
+The frozen protocol has separate evidence, confirmation, anchor, adjudication,
+and promotion principals. `confirmation_eligible` is pre-confirmation and does
+not consume or anchor. If it passes, exactly one candidate-bound sealed
+confirmation pack is materialized; `confirmation_consumption` irreversibly
+reserves/marks it used under the frozen confirmation authority before exactly
+one final decision (`promote`, `narrow`, `abstain`, or `reject`), and the anchor
+observation follows that consumption. A recorded exposure blocks a positive
+`promote` only when its target resolves to the sealed confirmation task root
+before that decision. Screening and bridge exposures remain allowed under
+their own budgets and lifecycle; off-ledger leaks remain an operational
+residual. ScoreRuns/rescores
+and promotion approvals use their exact frozen authorities; score adjudication
+cannot be performed by evaluator custody, and promotion approval cannot be the
+same actor as the transition actor. A failed or uncertain bridge transitions to
+`new_measurement_epoch` without opening confirmation. Early revocation from an
+eligible state requires an authority-bound `deletion_tombstone` and is terminal
+containment. The exact CLI forms (`coevolution simulate`, `check`, and `rescore`)
+plus materializer semantics are maintained in [Reproducibility](reproducibility.md).
+
+Each `trajectory_summary` is an exact task/scenario/arm sufficient statistic.
+One dependency-bound `contrast_summary` seal follows every trajectory row and
+depends on all row references and hashes. The core derives
+`operating_metrics`, `primary_endpoints`, and `contrast_diagnostics` only from
+that live seal; it never falls back to `simulation_summary`, scoped summaries,
+or arbitrary nested payloads. `false_promotion_share` is invalid promotions
+over all candidate promotions, while `invalid_candidate_promotion_rate` is the same
+invalid-promotion numerator over invalid candidate opportunities; candidate
+opportunities and task-level dispositions are different denominators. Primary
+endpoints retain exact `sum_ppm`/`observed_count` (integer half-up `mean_ppm`).
+A `causal_eligible` contrast requires complete compared arm/scenario endpoints;
+any missing compared row takes precedence as `not_estimable`, while optional
+stopping or actual-cost mismatch otherwise yields `diagnostic_only`. A zero
+denominator is unknown. A revoked, tainted, or unscorable seal makes all three
+projections unavailable. Generic `ael validate` does not accept a CEP directory; use the
+dedicated `ael coevolution check` boundary.
+
+These principals are distinct role-level authorities; a release may reuse its
+role's custody across generations while cross-role authority checks remain
+exact. This local role separation is not evidence of organizational or
+incentive independence. Sufficient-stat arithmetic and hash closure cover only
+materialized rows and dependency links, not unmaterialized external events,
+real custody, empirical validity, or production safety.
+
 ### Publication kernel
 
 Alpha.8 also separates the public projection's observed volatility seams while

@@ -31,6 +31,7 @@ REQUIRED_FILES = {
     "SECURITY.md",
     "SUPPORT.md",
     "docs/release-notes/v0.1.0-alpha.11.md",
+    "docs/release-notes/v0.1.0-alpha.12.md",
     "docs/results/completion-integrity-activation-v2.md",
     "docs/results/completion-integrity-prompt-policy-v1.md",
     "docs/decisions/2026-08-14-claim-first-decision-method.md",
@@ -38,6 +39,9 @@ REQUIRED_FILES = {
     "docs/decisions/2026-08-14-result-catalog-and-reproduction-semantics.md",
     "docs/decisions/2026-08-15-alpha10-terminal-claim-foundation.md",
     "docs/decisions/2026-08-15-alpha11-activation-result.md",
+    "docs/decisions/2026-08-15-ael-cep-stage0-implementation.md",
+    "docs/decisions/2026-08-30-alpha12-public-boundary.md",
+    "docs/ael-cep.md",
     "docs/completion-integrity-activation.md",
     "docs/completion-integrity-enactment.md",
     "docs/completion-integrity-task-supply.md",
@@ -62,6 +66,11 @@ REQUIRED_FILES = {
     "studies/quality-preflight/examples/pass/preflight.json",
     "studies/quality-preflight/examples/pass/preflight.md",
     "studies/quality-preflight/examples/pass/quality-profile.json",
+    "studies/ael-cep/stage-0/README.md",
+    "studies/ael-cep/stage-0/protocol.json",
+    "studies/ael-cep/stage-0/report.md",
+    "studies/ael-cep/stage-0/trajectory-bundle.json",
+    "tools/materialize_ael_cep_stage0.py",
     "uv.lock",
 }
 ALLOWED_TOP_LEVEL = {
@@ -179,8 +188,8 @@ def main() -> int:
             continue
         failures.extend(payload_failures(relative, payload))
 
-    expected_version = "0.1.0a11"
-    latest_published_release = "0.1.0-alpha.11"
+    expected_version = "0.1.0a12"
+    latest_published_release = "0.1.0-alpha.12"
     if __version__ != expected_version:
         failures.append(f"package version is {__version__}, expected {expected_version}")
     try:
@@ -210,6 +219,21 @@ def main() -> int:
         )
     except SandboxError as exc:
         failures.append(f"study quality preflight example is stale or invalid: {exc}")
+
+    cep_materializer = subprocess.run(
+        [
+            sys.executable,
+            str(ROOT / "tools/materialize_ael_cep_stage0.py"),
+            "--check",
+        ],
+        cwd=ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if cep_materializer.returncode:
+        detail = cep_materializer.stderr.strip() or cep_materializer.stdout.strip()
+        failures.append(f"AEL-CEP Stage-0 golden package is stale or invalid: {detail}")
 
     try:
         materialize_result_surface(

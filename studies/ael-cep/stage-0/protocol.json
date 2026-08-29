@@ -1,0 +1,1101 @@
+{
+  "algorithms": {
+    "analysis": {
+      "hash": "d4425a54325fc4ceacce8b4e6c6ffe8569ef95f89eb35cc339ce0d546808b0c3",
+      "ref": "ael-cep/analysis/anchor-utility/v1"
+    },
+    "eligibility": {
+      "hash": "f50f8885c4eb8e5a6f4ccf77aca86c61037b80fe7510a2f345f57acef2fcb627",
+      "ref": "ael-cep/eligibility/v1"
+    },
+    "promotion": {
+      "hash": "2925e7c481019de4d196cd2a383e72ca56da0d56141ca490948fc8f2ec58a8a7",
+      "ref": "ael-cep/promotion/fail-closed/v1"
+    },
+    "proposal_admission": {
+      "hash": "34d408b03398a4d45c845d46e530728d090acf3b50df2d2673be4f260937a04b",
+      "ref": "ael-cep/proposal-admission/fixed/v1"
+    },
+    "selection_ranking": {
+      "hash": "db7def7c64a5deb1a3df10bd0a0f37274074a3f4c0efb133ac6a3328ac507e75",
+      "ref": "ael-cep/selection-ranking/fixed/v1"
+    },
+    "stopping": {
+      "hash": "c3ddfd7faa9c11e00f1b22bb22660a33413ea236ebc4dd054623a12b152c0246",
+      "ref": "ael-cep/stopping/fixed-n/v1"
+    },
+    "task_allocation": {
+      "hash": "1bd0ca675d34b483d7fed3d53a23d3a9efe1f147257e159b5c97cbe7b0041f22",
+      "ref": "ael-cep/task-allocation/fixed-paired/v1"
+    }
+  },
+  "arms": {
+    "A0": {
+      "anchor": "absent",
+      "builder": "fixed",
+      "challenger": "absent",
+      "custody": "shared",
+      "evaluator": "fixed",
+      "loop": "open"
+    },
+    "A1": {
+      "anchor": "absent",
+      "builder": "evolving",
+      "challenger": "absent",
+      "custody": "shared",
+      "evaluator": "fixed",
+      "loop": "open"
+    },
+    "A2": {
+      "anchor": "absent",
+      "builder": "fixed",
+      "challenger": "absent",
+      "custody": "shared",
+      "evaluator": "evolving",
+      "loop": "open"
+    },
+    "A3": {
+      "anchor": "absent",
+      "builder": "evolving",
+      "challenger": "absent",
+      "custody": "shared",
+      "evaluator": "evolving",
+      "loop": "naive_closed"
+    },
+    "A4": {
+      "anchor": "protected",
+      "builder": "evolving",
+      "challenger": "absent",
+      "custody": "separated",
+      "evaluator": "evolving",
+      "loop": "custody_separated"
+    },
+    "A5": {
+      "anchor": "protected",
+      "builder": "evolving",
+      "challenger": "present",
+      "custody": "separated",
+      "evaluator": "evolving",
+      "loop": "challenger_anchor"
+    }
+  },
+  "bridge": {
+    "anchor_required": true,
+    "construct_required": true,
+    "decision_agreement_min": 0.9,
+    "global_shift_tolerance": 0.05,
+    "interaction_tolerance": 0.05,
+    "reliability_required": true,
+    "strata": [
+      {
+        "stratum": "good",
+        "task_root_hash": "804656752f2c62dbb801845f25fe906dfdbed29643f9c467da64be0378a99b26",
+        "weight": 0.2
+      },
+      {
+        "stratum": "bad",
+        "task_root_hash": "baf3e0416eee350eb2ef9c859dc3e9073284fd6eaf95b66e5bd09590bba1ea40",
+        "weight": 0.2
+      },
+      {
+        "stratum": "exploit",
+        "task_root_hash": "f8c32d1970c9e075ebbfd911cb4415c5a4ad5d6cc1310bf75ed06757cd2fc250",
+        "weight": 0.2
+      },
+      {
+        "stratum": "semantic_mutant",
+        "task_root_hash": "1327aef94faab4e5d5e8267647e52cfed35a0a1ee15dd11b4b794a37b9712fcb",
+        "weight": 0.2
+      },
+      {
+        "stratum": "near_threshold",
+        "task_root_hash": "b6826eda6aa037b43bd50f8c3962b3f9095eb808e21249503f2f8e049d4f0d5c",
+        "weight": 0.2
+      }
+    ]
+  },
+  "budgets": {
+    "confirmation": 80.0,
+    "exposure": 40.0,
+    "feedback": 120.0,
+    "total_system": 1000.0
+  },
+  "contrasts": [
+    {
+      "analysis": {
+        "hash": "d4425a54325fc4ceacce8b4e6c6ffe8569ef95f89eb35cc339ce0d546808b0c3",
+        "ref": "ael-cep/analysis/anchor-utility/v1"
+      },
+      "arm_a": "A0",
+      "arm_b": "A1",
+      "budgets": {
+        "confirmation": 80.0,
+        "exposure": 40.0,
+        "feedback": 120.0,
+        "total_system": 1000.0
+      },
+      "contrast_id": "contrast:A0:A1",
+      "eligibility": {
+        "hash": "f50f8885c4eb8e5a6f4ccf77aca86c61037b80fe7510a2f345f57acef2fcb627",
+        "ref": "ael-cep/eligibility/v1"
+      },
+      "estimand_kind": "component",
+      "promotion": {
+        "hash": "2925e7c481019de4d196cd2a383e72ca56da0d56141ca490948fc8f2ec58a8a7",
+        "ref": "ael-cep/promotion/fail-closed/v1"
+      },
+      "proposal_admission": {
+        "hash": "34d408b03398a4d45c845d46e530728d090acf3b50df2d2673be4f260937a04b",
+        "ref": "ael-cep/proposal-admission/fixed/v1"
+      },
+      "selection_ranking": {
+        "hash": "db7def7c64a5deb1a3df10bd0a0f37274074a3f4c0efb133ac6a3328ac507e75",
+        "ref": "ael-cep/selection-ranking/fixed/v1"
+      },
+      "stopping": {
+        "hash": "c3ddfd7faa9c11e00f1b22bb22660a33413ea236ebc4dd054623a12b152c0246",
+        "ref": "ael-cep/stopping/fixed-n/v1"
+      },
+      "task_allocation": {
+        "hash": "1bd0ca675d34b483d7fed3d53a23d3a9efe1f147257e159b5c97cbe7b0041f22",
+        "ref": "ael-cep/task-allocation/fixed-paired/v1"
+      },
+      "treatment": {
+        "arm_a_level": "fixed",
+        "arm_b_level": "evolving",
+        "dimension": "builder"
+      }
+    },
+    {
+      "analysis": {
+        "hash": "d4425a54325fc4ceacce8b4e6c6ffe8569ef95f89eb35cc339ce0d546808b0c3",
+        "ref": "ael-cep/analysis/anchor-utility/v1"
+      },
+      "arm_a": "A0",
+      "arm_b": "A2",
+      "budgets": {
+        "confirmation": 80.0,
+        "exposure": 40.0,
+        "feedback": 120.0,
+        "total_system": 1000.0
+      },
+      "contrast_id": "contrast:A0:A2",
+      "eligibility": {
+        "hash": "f50f8885c4eb8e5a6f4ccf77aca86c61037b80fe7510a2f345f57acef2fcb627",
+        "ref": "ael-cep/eligibility/v1"
+      },
+      "estimand_kind": "component",
+      "promotion": {
+        "hash": "2925e7c481019de4d196cd2a383e72ca56da0d56141ca490948fc8f2ec58a8a7",
+        "ref": "ael-cep/promotion/fail-closed/v1"
+      },
+      "proposal_admission": {
+        "hash": "34d408b03398a4d45c845d46e530728d090acf3b50df2d2673be4f260937a04b",
+        "ref": "ael-cep/proposal-admission/fixed/v1"
+      },
+      "selection_ranking": {
+        "hash": "db7def7c64a5deb1a3df10bd0a0f37274074a3f4c0efb133ac6a3328ac507e75",
+        "ref": "ael-cep/selection-ranking/fixed/v1"
+      },
+      "stopping": {
+        "hash": "c3ddfd7faa9c11e00f1b22bb22660a33413ea236ebc4dd054623a12b152c0246",
+        "ref": "ael-cep/stopping/fixed-n/v1"
+      },
+      "task_allocation": {
+        "hash": "1bd0ca675d34b483d7fed3d53a23d3a9efe1f147257e159b5c97cbe7b0041f22",
+        "ref": "ael-cep/task-allocation/fixed-paired/v1"
+      },
+      "treatment": {
+        "arm_a_level": "fixed",
+        "arm_b_level": "evolving",
+        "dimension": "evaluator"
+      }
+    },
+    {
+      "analysis": {
+        "hash": "d4425a54325fc4ceacce8b4e6c6ffe8569ef95f89eb35cc339ce0d546808b0c3",
+        "ref": "ael-cep/analysis/anchor-utility/v1"
+      },
+      "arm_a": "A0",
+      "arm_b": "A3",
+      "budgets": {
+        "confirmation": 80.0,
+        "exposure": 40.0,
+        "feedback": 120.0,
+        "total_system": 1000.0
+      },
+      "contrast_id": "contrast:A0:A3",
+      "eligibility": {
+        "hash": "f50f8885c4eb8e5a6f4ccf77aca86c61037b80fe7510a2f345f57acef2fcb627",
+        "ref": "ael-cep/eligibility/v1"
+      },
+      "estimand_kind": "policy_package",
+      "promotion": {
+        "hash": "2925e7c481019de4d196cd2a383e72ca56da0d56141ca490948fc8f2ec58a8a7",
+        "ref": "ael-cep/promotion/fail-closed/v1"
+      },
+      "proposal_admission": {
+        "hash": "34d408b03398a4d45c845d46e530728d090acf3b50df2d2673be4f260937a04b",
+        "ref": "ael-cep/proposal-admission/fixed/v1"
+      },
+      "selection_ranking": {
+        "hash": "db7def7c64a5deb1a3df10bd0a0f37274074a3f4c0efb133ac6a3328ac507e75",
+        "ref": "ael-cep/selection-ranking/fixed/v1"
+      },
+      "stopping": {
+        "hash": "c3ddfd7faa9c11e00f1b22bb22660a33413ea236ebc4dd054623a12b152c0246",
+        "ref": "ael-cep/stopping/fixed-n/v1"
+      },
+      "task_allocation": {
+        "hash": "1bd0ca675d34b483d7fed3d53a23d3a9efe1f147257e159b5c97cbe7b0041f22",
+        "ref": "ael-cep/task-allocation/fixed-paired/v1"
+      },
+      "treatment": {
+        "arm_a_level": "A0",
+        "arm_b_level": "A3",
+        "dimension": "policy_package"
+      }
+    },
+    {
+      "analysis": {
+        "hash": "d4425a54325fc4ceacce8b4e6c6ffe8569ef95f89eb35cc339ce0d546808b0c3",
+        "ref": "ael-cep/analysis/anchor-utility/v1"
+      },
+      "arm_a": "A0",
+      "arm_b": "A4",
+      "budgets": {
+        "confirmation": 80.0,
+        "exposure": 40.0,
+        "feedback": 120.0,
+        "total_system": 1000.0
+      },
+      "contrast_id": "contrast:A0:A4",
+      "eligibility": {
+        "hash": "f50f8885c4eb8e5a6f4ccf77aca86c61037b80fe7510a2f345f57acef2fcb627",
+        "ref": "ael-cep/eligibility/v1"
+      },
+      "estimand_kind": "policy_package",
+      "promotion": {
+        "hash": "2925e7c481019de4d196cd2a383e72ca56da0d56141ca490948fc8f2ec58a8a7",
+        "ref": "ael-cep/promotion/fail-closed/v1"
+      },
+      "proposal_admission": {
+        "hash": "34d408b03398a4d45c845d46e530728d090acf3b50df2d2673be4f260937a04b",
+        "ref": "ael-cep/proposal-admission/fixed/v1"
+      },
+      "selection_ranking": {
+        "hash": "db7def7c64a5deb1a3df10bd0a0f37274074a3f4c0efb133ac6a3328ac507e75",
+        "ref": "ael-cep/selection-ranking/fixed/v1"
+      },
+      "stopping": {
+        "hash": "c3ddfd7faa9c11e00f1b22bb22660a33413ea236ebc4dd054623a12b152c0246",
+        "ref": "ael-cep/stopping/fixed-n/v1"
+      },
+      "task_allocation": {
+        "hash": "1bd0ca675d34b483d7fed3d53a23d3a9efe1f147257e159b5c97cbe7b0041f22",
+        "ref": "ael-cep/task-allocation/fixed-paired/v1"
+      },
+      "treatment": {
+        "arm_a_level": "A0",
+        "arm_b_level": "A4",
+        "dimension": "policy_package"
+      }
+    },
+    {
+      "analysis": {
+        "hash": "d4425a54325fc4ceacce8b4e6c6ffe8569ef95f89eb35cc339ce0d546808b0c3",
+        "ref": "ael-cep/analysis/anchor-utility/v1"
+      },
+      "arm_a": "A0",
+      "arm_b": "A5",
+      "budgets": {
+        "confirmation": 80.0,
+        "exposure": 40.0,
+        "feedback": 120.0,
+        "total_system": 1000.0
+      },
+      "contrast_id": "contrast:A0:A5",
+      "eligibility": {
+        "hash": "f50f8885c4eb8e5a6f4ccf77aca86c61037b80fe7510a2f345f57acef2fcb627",
+        "ref": "ael-cep/eligibility/v1"
+      },
+      "estimand_kind": "policy_package",
+      "promotion": {
+        "hash": "2925e7c481019de4d196cd2a383e72ca56da0d56141ca490948fc8f2ec58a8a7",
+        "ref": "ael-cep/promotion/fail-closed/v1"
+      },
+      "proposal_admission": {
+        "hash": "34d408b03398a4d45c845d46e530728d090acf3b50df2d2673be4f260937a04b",
+        "ref": "ael-cep/proposal-admission/fixed/v1"
+      },
+      "selection_ranking": {
+        "hash": "db7def7c64a5deb1a3df10bd0a0f37274074a3f4c0efb133ac6a3328ac507e75",
+        "ref": "ael-cep/selection-ranking/fixed/v1"
+      },
+      "stopping": {
+        "hash": "c3ddfd7faa9c11e00f1b22bb22660a33413ea236ebc4dd054623a12b152c0246",
+        "ref": "ael-cep/stopping/fixed-n/v1"
+      },
+      "task_allocation": {
+        "hash": "1bd0ca675d34b483d7fed3d53a23d3a9efe1f147257e159b5c97cbe7b0041f22",
+        "ref": "ael-cep/task-allocation/fixed-paired/v1"
+      },
+      "treatment": {
+        "arm_a_level": "A0",
+        "arm_b_level": "A5",
+        "dimension": "policy_package"
+      }
+    },
+    {
+      "analysis": {
+        "hash": "d4425a54325fc4ceacce8b4e6c6ffe8569ef95f89eb35cc339ce0d546808b0c3",
+        "ref": "ael-cep/analysis/anchor-utility/v1"
+      },
+      "arm_a": "A1",
+      "arm_b": "A2",
+      "budgets": {
+        "confirmation": 80.0,
+        "exposure": 40.0,
+        "feedback": 120.0,
+        "total_system": 1000.0
+      },
+      "contrast_id": "contrast:A1:A2",
+      "eligibility": {
+        "hash": "f50f8885c4eb8e5a6f4ccf77aca86c61037b80fe7510a2f345f57acef2fcb627",
+        "ref": "ael-cep/eligibility/v1"
+      },
+      "estimand_kind": "policy_package",
+      "promotion": {
+        "hash": "2925e7c481019de4d196cd2a383e72ca56da0d56141ca490948fc8f2ec58a8a7",
+        "ref": "ael-cep/promotion/fail-closed/v1"
+      },
+      "proposal_admission": {
+        "hash": "34d408b03398a4d45c845d46e530728d090acf3b50df2d2673be4f260937a04b",
+        "ref": "ael-cep/proposal-admission/fixed/v1"
+      },
+      "selection_ranking": {
+        "hash": "db7def7c64a5deb1a3df10bd0a0f37274074a3f4c0efb133ac6a3328ac507e75",
+        "ref": "ael-cep/selection-ranking/fixed/v1"
+      },
+      "stopping": {
+        "hash": "c3ddfd7faa9c11e00f1b22bb22660a33413ea236ebc4dd054623a12b152c0246",
+        "ref": "ael-cep/stopping/fixed-n/v1"
+      },
+      "task_allocation": {
+        "hash": "1bd0ca675d34b483d7fed3d53a23d3a9efe1f147257e159b5c97cbe7b0041f22",
+        "ref": "ael-cep/task-allocation/fixed-paired/v1"
+      },
+      "treatment": {
+        "arm_a_level": "A1",
+        "arm_b_level": "A2",
+        "dimension": "policy_package"
+      }
+    },
+    {
+      "analysis": {
+        "hash": "d4425a54325fc4ceacce8b4e6c6ffe8569ef95f89eb35cc339ce0d546808b0c3",
+        "ref": "ael-cep/analysis/anchor-utility/v1"
+      },
+      "arm_a": "A1",
+      "arm_b": "A3",
+      "budgets": {
+        "confirmation": 80.0,
+        "exposure": 40.0,
+        "feedback": 120.0,
+        "total_system": 1000.0
+      },
+      "contrast_id": "contrast:A1:A3",
+      "eligibility": {
+        "hash": "f50f8885c4eb8e5a6f4ccf77aca86c61037b80fe7510a2f345f57acef2fcb627",
+        "ref": "ael-cep/eligibility/v1"
+      },
+      "estimand_kind": "policy_package",
+      "promotion": {
+        "hash": "2925e7c481019de4d196cd2a383e72ca56da0d56141ca490948fc8f2ec58a8a7",
+        "ref": "ael-cep/promotion/fail-closed/v1"
+      },
+      "proposal_admission": {
+        "hash": "34d408b03398a4d45c845d46e530728d090acf3b50df2d2673be4f260937a04b",
+        "ref": "ael-cep/proposal-admission/fixed/v1"
+      },
+      "selection_ranking": {
+        "hash": "db7def7c64a5deb1a3df10bd0a0f37274074a3f4c0efb133ac6a3328ac507e75",
+        "ref": "ael-cep/selection-ranking/fixed/v1"
+      },
+      "stopping": {
+        "hash": "c3ddfd7faa9c11e00f1b22bb22660a33413ea236ebc4dd054623a12b152c0246",
+        "ref": "ael-cep/stopping/fixed-n/v1"
+      },
+      "task_allocation": {
+        "hash": "1bd0ca675d34b483d7fed3d53a23d3a9efe1f147257e159b5c97cbe7b0041f22",
+        "ref": "ael-cep/task-allocation/fixed-paired/v1"
+      },
+      "treatment": {
+        "arm_a_level": "A1",
+        "arm_b_level": "A3",
+        "dimension": "policy_package"
+      }
+    },
+    {
+      "analysis": {
+        "hash": "d4425a54325fc4ceacce8b4e6c6ffe8569ef95f89eb35cc339ce0d546808b0c3",
+        "ref": "ael-cep/analysis/anchor-utility/v1"
+      },
+      "arm_a": "A1",
+      "arm_b": "A4",
+      "budgets": {
+        "confirmation": 80.0,
+        "exposure": 40.0,
+        "feedback": 120.0,
+        "total_system": 1000.0
+      },
+      "contrast_id": "contrast:A1:A4",
+      "eligibility": {
+        "hash": "f50f8885c4eb8e5a6f4ccf77aca86c61037b80fe7510a2f345f57acef2fcb627",
+        "ref": "ael-cep/eligibility/v1"
+      },
+      "estimand_kind": "policy_package",
+      "promotion": {
+        "hash": "2925e7c481019de4d196cd2a383e72ca56da0d56141ca490948fc8f2ec58a8a7",
+        "ref": "ael-cep/promotion/fail-closed/v1"
+      },
+      "proposal_admission": {
+        "hash": "34d408b03398a4d45c845d46e530728d090acf3b50df2d2673be4f260937a04b",
+        "ref": "ael-cep/proposal-admission/fixed/v1"
+      },
+      "selection_ranking": {
+        "hash": "db7def7c64a5deb1a3df10bd0a0f37274074a3f4c0efb133ac6a3328ac507e75",
+        "ref": "ael-cep/selection-ranking/fixed/v1"
+      },
+      "stopping": {
+        "hash": "c3ddfd7faa9c11e00f1b22bb22660a33413ea236ebc4dd054623a12b152c0246",
+        "ref": "ael-cep/stopping/fixed-n/v1"
+      },
+      "task_allocation": {
+        "hash": "1bd0ca675d34b483d7fed3d53a23d3a9efe1f147257e159b5c97cbe7b0041f22",
+        "ref": "ael-cep/task-allocation/fixed-paired/v1"
+      },
+      "treatment": {
+        "arm_a_level": "A1",
+        "arm_b_level": "A4",
+        "dimension": "policy_package"
+      }
+    },
+    {
+      "analysis": {
+        "hash": "d4425a54325fc4ceacce8b4e6c6ffe8569ef95f89eb35cc339ce0d546808b0c3",
+        "ref": "ael-cep/analysis/anchor-utility/v1"
+      },
+      "arm_a": "A1",
+      "arm_b": "A5",
+      "budgets": {
+        "confirmation": 80.0,
+        "exposure": 40.0,
+        "feedback": 120.0,
+        "total_system": 1000.0
+      },
+      "contrast_id": "contrast:A1:A5",
+      "eligibility": {
+        "hash": "f50f8885c4eb8e5a6f4ccf77aca86c61037b80fe7510a2f345f57acef2fcb627",
+        "ref": "ael-cep/eligibility/v1"
+      },
+      "estimand_kind": "policy_package",
+      "promotion": {
+        "hash": "2925e7c481019de4d196cd2a383e72ca56da0d56141ca490948fc8f2ec58a8a7",
+        "ref": "ael-cep/promotion/fail-closed/v1"
+      },
+      "proposal_admission": {
+        "hash": "34d408b03398a4d45c845d46e530728d090acf3b50df2d2673be4f260937a04b",
+        "ref": "ael-cep/proposal-admission/fixed/v1"
+      },
+      "selection_ranking": {
+        "hash": "db7def7c64a5deb1a3df10bd0a0f37274074a3f4c0efb133ac6a3328ac507e75",
+        "ref": "ael-cep/selection-ranking/fixed/v1"
+      },
+      "stopping": {
+        "hash": "c3ddfd7faa9c11e00f1b22bb22660a33413ea236ebc4dd054623a12b152c0246",
+        "ref": "ael-cep/stopping/fixed-n/v1"
+      },
+      "task_allocation": {
+        "hash": "1bd0ca675d34b483d7fed3d53a23d3a9efe1f147257e159b5c97cbe7b0041f22",
+        "ref": "ael-cep/task-allocation/fixed-paired/v1"
+      },
+      "treatment": {
+        "arm_a_level": "A1",
+        "arm_b_level": "A5",
+        "dimension": "policy_package"
+      }
+    },
+    {
+      "analysis": {
+        "hash": "d4425a54325fc4ceacce8b4e6c6ffe8569ef95f89eb35cc339ce0d546808b0c3",
+        "ref": "ael-cep/analysis/anchor-utility/v1"
+      },
+      "arm_a": "A2",
+      "arm_b": "A3",
+      "budgets": {
+        "confirmation": 80.0,
+        "exposure": 40.0,
+        "feedback": 120.0,
+        "total_system": 1000.0
+      },
+      "contrast_id": "contrast:A2:A3",
+      "eligibility": {
+        "hash": "f50f8885c4eb8e5a6f4ccf77aca86c61037b80fe7510a2f345f57acef2fcb627",
+        "ref": "ael-cep/eligibility/v1"
+      },
+      "estimand_kind": "policy_package",
+      "promotion": {
+        "hash": "2925e7c481019de4d196cd2a383e72ca56da0d56141ca490948fc8f2ec58a8a7",
+        "ref": "ael-cep/promotion/fail-closed/v1"
+      },
+      "proposal_admission": {
+        "hash": "34d408b03398a4d45c845d46e530728d090acf3b50df2d2673be4f260937a04b",
+        "ref": "ael-cep/proposal-admission/fixed/v1"
+      },
+      "selection_ranking": {
+        "hash": "db7def7c64a5deb1a3df10bd0a0f37274074a3f4c0efb133ac6a3328ac507e75",
+        "ref": "ael-cep/selection-ranking/fixed/v1"
+      },
+      "stopping": {
+        "hash": "c3ddfd7faa9c11e00f1b22bb22660a33413ea236ebc4dd054623a12b152c0246",
+        "ref": "ael-cep/stopping/fixed-n/v1"
+      },
+      "task_allocation": {
+        "hash": "1bd0ca675d34b483d7fed3d53a23d3a9efe1f147257e159b5c97cbe7b0041f22",
+        "ref": "ael-cep/task-allocation/fixed-paired/v1"
+      },
+      "treatment": {
+        "arm_a_level": "A2",
+        "arm_b_level": "A3",
+        "dimension": "policy_package"
+      }
+    },
+    {
+      "analysis": {
+        "hash": "d4425a54325fc4ceacce8b4e6c6ffe8569ef95f89eb35cc339ce0d546808b0c3",
+        "ref": "ael-cep/analysis/anchor-utility/v1"
+      },
+      "arm_a": "A2",
+      "arm_b": "A4",
+      "budgets": {
+        "confirmation": 80.0,
+        "exposure": 40.0,
+        "feedback": 120.0,
+        "total_system": 1000.0
+      },
+      "contrast_id": "contrast:A2:A4",
+      "eligibility": {
+        "hash": "f50f8885c4eb8e5a6f4ccf77aca86c61037b80fe7510a2f345f57acef2fcb627",
+        "ref": "ael-cep/eligibility/v1"
+      },
+      "estimand_kind": "policy_package",
+      "promotion": {
+        "hash": "2925e7c481019de4d196cd2a383e72ca56da0d56141ca490948fc8f2ec58a8a7",
+        "ref": "ael-cep/promotion/fail-closed/v1"
+      },
+      "proposal_admission": {
+        "hash": "34d408b03398a4d45c845d46e530728d090acf3b50df2d2673be4f260937a04b",
+        "ref": "ael-cep/proposal-admission/fixed/v1"
+      },
+      "selection_ranking": {
+        "hash": "db7def7c64a5deb1a3df10bd0a0f37274074a3f4c0efb133ac6a3328ac507e75",
+        "ref": "ael-cep/selection-ranking/fixed/v1"
+      },
+      "stopping": {
+        "hash": "c3ddfd7faa9c11e00f1b22bb22660a33413ea236ebc4dd054623a12b152c0246",
+        "ref": "ael-cep/stopping/fixed-n/v1"
+      },
+      "task_allocation": {
+        "hash": "1bd0ca675d34b483d7fed3d53a23d3a9efe1f147257e159b5c97cbe7b0041f22",
+        "ref": "ael-cep/task-allocation/fixed-paired/v1"
+      },
+      "treatment": {
+        "arm_a_level": "A2",
+        "arm_b_level": "A4",
+        "dimension": "policy_package"
+      }
+    },
+    {
+      "analysis": {
+        "hash": "d4425a54325fc4ceacce8b4e6c6ffe8569ef95f89eb35cc339ce0d546808b0c3",
+        "ref": "ael-cep/analysis/anchor-utility/v1"
+      },
+      "arm_a": "A2",
+      "arm_b": "A5",
+      "budgets": {
+        "confirmation": 80.0,
+        "exposure": 40.0,
+        "feedback": 120.0,
+        "total_system": 1000.0
+      },
+      "contrast_id": "contrast:A2:A5",
+      "eligibility": {
+        "hash": "f50f8885c4eb8e5a6f4ccf77aca86c61037b80fe7510a2f345f57acef2fcb627",
+        "ref": "ael-cep/eligibility/v1"
+      },
+      "estimand_kind": "policy_package",
+      "promotion": {
+        "hash": "2925e7c481019de4d196cd2a383e72ca56da0d56141ca490948fc8f2ec58a8a7",
+        "ref": "ael-cep/promotion/fail-closed/v1"
+      },
+      "proposal_admission": {
+        "hash": "34d408b03398a4d45c845d46e530728d090acf3b50df2d2673be4f260937a04b",
+        "ref": "ael-cep/proposal-admission/fixed/v1"
+      },
+      "selection_ranking": {
+        "hash": "db7def7c64a5deb1a3df10bd0a0f37274074a3f4c0efb133ac6a3328ac507e75",
+        "ref": "ael-cep/selection-ranking/fixed/v1"
+      },
+      "stopping": {
+        "hash": "c3ddfd7faa9c11e00f1b22bb22660a33413ea236ebc4dd054623a12b152c0246",
+        "ref": "ael-cep/stopping/fixed-n/v1"
+      },
+      "task_allocation": {
+        "hash": "1bd0ca675d34b483d7fed3d53a23d3a9efe1f147257e159b5c97cbe7b0041f22",
+        "ref": "ael-cep/task-allocation/fixed-paired/v1"
+      },
+      "treatment": {
+        "arm_a_level": "A2",
+        "arm_b_level": "A5",
+        "dimension": "policy_package"
+      }
+    },
+    {
+      "analysis": {
+        "hash": "d4425a54325fc4ceacce8b4e6c6ffe8569ef95f89eb35cc339ce0d546808b0c3",
+        "ref": "ael-cep/analysis/anchor-utility/v1"
+      },
+      "arm_a": "A3",
+      "arm_b": "A4",
+      "budgets": {
+        "confirmation": 80.0,
+        "exposure": 40.0,
+        "feedback": 120.0,
+        "total_system": 1000.0
+      },
+      "contrast_id": "contrast:A3:A4",
+      "eligibility": {
+        "hash": "f50f8885c4eb8e5a6f4ccf77aca86c61037b80fe7510a2f345f57acef2fcb627",
+        "ref": "ael-cep/eligibility/v1"
+      },
+      "estimand_kind": "policy_package",
+      "promotion": {
+        "hash": "2925e7c481019de4d196cd2a383e72ca56da0d56141ca490948fc8f2ec58a8a7",
+        "ref": "ael-cep/promotion/fail-closed/v1"
+      },
+      "proposal_admission": {
+        "hash": "34d408b03398a4d45c845d46e530728d090acf3b50df2d2673be4f260937a04b",
+        "ref": "ael-cep/proposal-admission/fixed/v1"
+      },
+      "selection_ranking": {
+        "hash": "db7def7c64a5deb1a3df10bd0a0f37274074a3f4c0efb133ac6a3328ac507e75",
+        "ref": "ael-cep/selection-ranking/fixed/v1"
+      },
+      "stopping": {
+        "hash": "c3ddfd7faa9c11e00f1b22bb22660a33413ea236ebc4dd054623a12b152c0246",
+        "ref": "ael-cep/stopping/fixed-n/v1"
+      },
+      "task_allocation": {
+        "hash": "1bd0ca675d34b483d7fed3d53a23d3a9efe1f147257e159b5c97cbe7b0041f22",
+        "ref": "ael-cep/task-allocation/fixed-paired/v1"
+      },
+      "treatment": {
+        "arm_a_level": "A3",
+        "arm_b_level": "A4",
+        "dimension": "policy_package"
+      }
+    },
+    {
+      "analysis": {
+        "hash": "d4425a54325fc4ceacce8b4e6c6ffe8569ef95f89eb35cc339ce0d546808b0c3",
+        "ref": "ael-cep/analysis/anchor-utility/v1"
+      },
+      "arm_a": "A3",
+      "arm_b": "A5",
+      "budgets": {
+        "confirmation": 80.0,
+        "exposure": 40.0,
+        "feedback": 120.0,
+        "total_system": 1000.0
+      },
+      "contrast_id": "contrast:A3:A5",
+      "eligibility": {
+        "hash": "f50f8885c4eb8e5a6f4ccf77aca86c61037b80fe7510a2f345f57acef2fcb627",
+        "ref": "ael-cep/eligibility/v1"
+      },
+      "estimand_kind": "policy_package",
+      "promotion": {
+        "hash": "2925e7c481019de4d196cd2a383e72ca56da0d56141ca490948fc8f2ec58a8a7",
+        "ref": "ael-cep/promotion/fail-closed/v1"
+      },
+      "proposal_admission": {
+        "hash": "34d408b03398a4d45c845d46e530728d090acf3b50df2d2673be4f260937a04b",
+        "ref": "ael-cep/proposal-admission/fixed/v1"
+      },
+      "selection_ranking": {
+        "hash": "db7def7c64a5deb1a3df10bd0a0f37274074a3f4c0efb133ac6a3328ac507e75",
+        "ref": "ael-cep/selection-ranking/fixed/v1"
+      },
+      "stopping": {
+        "hash": "c3ddfd7faa9c11e00f1b22bb22660a33413ea236ebc4dd054623a12b152c0246",
+        "ref": "ael-cep/stopping/fixed-n/v1"
+      },
+      "task_allocation": {
+        "hash": "1bd0ca675d34b483d7fed3d53a23d3a9efe1f147257e159b5c97cbe7b0041f22",
+        "ref": "ael-cep/task-allocation/fixed-paired/v1"
+      },
+      "treatment": {
+        "arm_a_level": "A3",
+        "arm_b_level": "A5",
+        "dimension": "policy_package"
+      }
+    },
+    {
+      "analysis": {
+        "hash": "d4425a54325fc4ceacce8b4e6c6ffe8569ef95f89eb35cc339ce0d546808b0c3",
+        "ref": "ael-cep/analysis/anchor-utility/v1"
+      },
+      "arm_a": "A4",
+      "arm_b": "A5",
+      "budgets": {
+        "confirmation": 80.0,
+        "exposure": 40.0,
+        "feedback": 120.0,
+        "total_system": 1000.0
+      },
+      "contrast_id": "contrast:A4:A5",
+      "eligibility": {
+        "hash": "f50f8885c4eb8e5a6f4ccf77aca86c61037b80fe7510a2f345f57acef2fcb627",
+        "ref": "ael-cep/eligibility/v1"
+      },
+      "estimand_kind": "policy_package",
+      "promotion": {
+        "hash": "2925e7c481019de4d196cd2a383e72ca56da0d56141ca490948fc8f2ec58a8a7",
+        "ref": "ael-cep/promotion/fail-closed/v1"
+      },
+      "proposal_admission": {
+        "hash": "34d408b03398a4d45c845d46e530728d090acf3b50df2d2673be4f260937a04b",
+        "ref": "ael-cep/proposal-admission/fixed/v1"
+      },
+      "selection_ranking": {
+        "hash": "db7def7c64a5deb1a3df10bd0a0f37274074a3f4c0efb133ac6a3328ac507e75",
+        "ref": "ael-cep/selection-ranking/fixed/v1"
+      },
+      "stopping": {
+        "hash": "c3ddfd7faa9c11e00f1b22bb22660a33413ea236ebc4dd054623a12b152c0246",
+        "ref": "ael-cep/stopping/fixed-n/v1"
+      },
+      "task_allocation": {
+        "hash": "1bd0ca675d34b483d7fed3d53a23d3a9efe1f147257e159b5c97cbe7b0041f22",
+        "ref": "ael-cep/task-allocation/fixed-paired/v1"
+      },
+      "treatment": {
+        "arm_a_level": "A4",
+        "arm_b_level": "A5",
+        "dimension": "policy_package"
+      }
+    }
+  ],
+  "decision_rule": {
+    "critical_failure": "block",
+    "operator": "gte",
+    "outcome": "prospective_utility",
+    "required_status": "observed",
+    "threshold": 0.64,
+    "value_range": [
+      0.0,
+      1.0
+    ]
+  },
+  "effect_policy": "forbidden",
+  "epoch": {
+    "constitution_hash": "9553709b701f88c2ddd455aafcf4979ea1d85141c688dc864d34cc6a700ec2dc",
+    "constitution_ref": "ael-cep-stage0-constitution",
+    "epoch_id": "epoch-stage0-20260815",
+    "state": "frozen"
+  },
+  "feedback_exposure": {
+    "bridge": "sealed-dual-score",
+    "confirmation": "none-before-open",
+    "development": "full-feedback",
+    "screening": "aggregate-only-bounded",
+    "total": "matched-total-system-budget"
+  },
+  "independence": {
+    "ceiling": "separate",
+    "protected_dimensions": [
+      "authorship",
+      "operation",
+      "custody",
+      "adjudication",
+      "organization",
+      "model_provider",
+      "training_data",
+      "exposure"
+    ]
+  },
+  "intake": {
+    "adjudication": "protected-anchor-adjudication",
+    "allocation_proof": "stream-derived-paired-allocation",
+    "appeal": "fail-closed-no-appeal",
+    "arm_blinding": "candidate-and-arm-blinded-anchor",
+    "censoring_late_arrival": "none-in-simulation",
+    "deduplication": "task-root-hash",
+    "eligibility": "declared synthetic task schema",
+    "exposure_policy": "append-only-exposure-ledger",
+    "harms": "critical-failure-and-reversal",
+    "intake_owner": "cep:intake-owner",
+    "margins": "synthetic-diagnostic-thresholds",
+    "oracle": "arm-blinded-anchor-truth-stream",
+    "sampling_custodian": "cep:sampling-custodian",
+    "sampling_cutoff": "simulated-cutoff",
+    "sampling_frame": "synthetic-fixed-task-frame-v1",
+    "sampling_method": "paired-stratified-deterministic",
+    "sampling_window": "simulated-epoch",
+    "target_population": "synthetic prospective agent tasks",
+    "use": "Stage-0 operating-characteristic simulation",
+    "utility": "bounded prospective utility [0,1]",
+    "weights": "equal-task-weight"
+  },
+  "missingness": {
+    "bounds": {
+      "mcar": 0.15,
+      "mnar": 0.3
+    },
+    "critical_failure_rule": "critical-failure-is-unscorable",
+    "policy": "record-assignment-execution-scoring-separately"
+  },
+  "partitions": {
+    "bridge": {
+      "eligible_for_promotion": false,
+      "exposure_budget": 40,
+      "feedback": "none",
+      "partition_id": "bridge",
+      "purpose": "evaluator bridge",
+      "sealed": true,
+      "single_use": true,
+      "task_root_hash": "4f059e4f309b67277700065906ec1616cfd0a5501012866f93d15d895efef024"
+    },
+    "confirmation": {
+      "eligible_for_promotion": true,
+      "exposure_budget": 80,
+      "feedback": "none",
+      "partition_id": "confirmation",
+      "purpose": "sealed confirmation",
+      "sealed": true,
+      "single_use": true,
+      "task_root_hash": "9df665a4844dc87a710b84f9a47ec441db0d3b4fe97f216ffbfff864e3408230"
+    },
+    "development": {
+      "eligible_for_promotion": false,
+      "exposure_budget": 0,
+      "feedback": "full",
+      "partition_id": "development",
+      "purpose": "adaptive development",
+      "sealed": false,
+      "single_use": false,
+      "task_root_hash": "9e7c2227f3853b402fe155261fdcd333933e58bdcdc869771716778b80f38052"
+    },
+    "historical": {
+      "eligible_for_promotion": false,
+      "exposure_budget": 0,
+      "feedback": "none",
+      "partition_id": "historical",
+      "purpose": "descriptive history",
+      "sealed": true,
+      "single_use": false,
+      "task_root_hash": "3be2f71331dabc99836fb771007192189ae7e9306a92d3949a581dc05213cf43"
+    },
+    "screening": {
+      "eligible_for_promotion": false,
+      "exposure_budget": 120,
+      "feedback": "aggregate",
+      "partition_id": "screening",
+      "purpose": "bounded adaptive screening",
+      "sealed": false,
+      "single_use": false,
+      "task_root_hash": "b56befbb646890995abb0faad27a790e473fce15d31d4cde4bf1603d69f935b6"
+    }
+  },
+  "principals": {
+    "adjudication": {
+      "custody": "synthetic-adjudication-custody",
+      "independence": "separate",
+      "lineage": "stage0:adjudication:lineage",
+      "principal_id": "cep:adjudication:stage0"
+    },
+    "anchor": {
+      "custody": "cep:anchor:stage0",
+      "independence": "separate",
+      "lineage": "stage0:anchor:lineage",
+      "principal_id": "cep:anchor:stage0"
+    },
+    "confirmation": {
+      "custody": "synthetic-confirmation-custody",
+      "independence": "separate",
+      "lineage": "stage0:confirmation:lineage",
+      "principal_id": "cep:confirmation:stage0"
+    },
+    "evidence": {
+      "custody": "synthetic-evidence-custody",
+      "independence": "separate",
+      "lineage": "stage0:evidence:lineage",
+      "principal_id": "cep:evidence:stage0"
+    },
+    "promotion": {
+      "custody": "synthetic-promotion-custody",
+      "independence": "separate",
+      "lineage": "stage0:promotion:lineage",
+      "principal_id": "cep:promotion:stage0"
+    }
+  },
+  "promotion": {
+    "initial_state": "registered",
+    "terminal_states": [
+      "screening_reject",
+      "new_measurement_epoch",
+      "expire",
+      "revoke"
+    ],
+    "transition_table": {
+      "abstain": [
+        "expire",
+        "monitor",
+        "revoke"
+      ],
+      "bridge_eligible": [
+        "confirmation_eligible",
+        "new_measurement_epoch",
+        "revoke"
+      ],
+      "confirmation_eligible": [
+        "abstain",
+        "narrow",
+        "promote",
+        "reject",
+        "revoke"
+      ],
+      "development_eligible": [
+        "revoke",
+        "screening_pass",
+        "screening_reject"
+      ],
+      "expire": [],
+      "monitor": [
+        "expire",
+        "revoke"
+      ],
+      "narrow": [
+        "expire",
+        "monitor",
+        "revoke"
+      ],
+      "new_measurement_epoch": [],
+      "promote": [
+        "expire",
+        "monitor",
+        "revoke"
+      ],
+      "registered": [
+        "development_eligible"
+      ],
+      "reject": [
+        "expire",
+        "monitor",
+        "revoke"
+      ],
+      "revoke": [],
+      "screening_pass": [
+        "bridge_eligible",
+        "new_measurement_epoch",
+        "revoke"
+      ],
+      "screening_reject": []
+    }
+  },
+  "protocol_id": "ael-cep-stage0-20260815",
+  "replay": {
+    "deterministic_code_policy": "mocked-effects-only",
+    "required_surfaces": [
+      "subject-output",
+      "task-input",
+      "runner-trace"
+    ],
+    "retention_policy": "retain-sanitized-surfaces"
+  },
+  "schema_version": "ael-cep-protocol-0.2-development",
+  "simulation": {
+    "config_version": "ael-cep-simulator-0.2-development",
+    "scenarios": [
+      {
+        "name": "null",
+        "replicates": 3,
+        "tasks": 16
+      },
+      {
+        "name": "useful",
+        "replicates": 3,
+        "tasks": 16
+      },
+      {
+        "name": "shared_blind_spot",
+        "replicates": 3,
+        "tasks": 16
+      },
+      {
+        "name": "evaluator_exploit",
+        "replicates": 3,
+        "tasks": 16
+      },
+      {
+        "name": "feedback_leakage",
+        "replicates": 3,
+        "tasks": 16
+      },
+      {
+        "name": "optional_stopping",
+        "replicates": 3,
+        "tasks": 16
+      },
+      {
+        "name": "drift_reversal",
+        "replicates": 3,
+        "tasks": 16
+      },
+      {
+        "name": "forgetting",
+        "replicates": 3,
+        "tasks": 16
+      },
+      {
+        "name": "missingness",
+        "replicates": 3,
+        "tasks": 16
+      },
+      {
+        "name": "poisoning",
+        "replicates": 3,
+        "tasks": 16
+      },
+      {
+        "name": "deletion_tombstone",
+        "replicates": 3,
+        "tasks": 16
+      },
+      {
+        "name": "forbidden_effect",
+        "replicates": 3,
+        "tasks": 16
+      }
+    ],
+    "seed": 20260815
+  },
+  "stopping": {
+    "algorithm_hash": "c3ddfd7faa9c11e00f1b22bb22660a33413ea236ebc4dd054623a12b152c0246",
+    "algorithm_ref": "ael-cep/stopping/fixed-n/v1",
+    "max_looks": 1,
+    "missing_data": "honest-denominators",
+    "rule": "fixed-N-except-optional-stopping-diagnostic"
+  }
+}

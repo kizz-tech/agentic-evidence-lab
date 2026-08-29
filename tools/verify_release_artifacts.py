@@ -17,7 +17,7 @@ import sys
 import tarfile
 import tomllib
 import zipfile
-from collections.abc import Iterable, Sequence
+from collections.abc import Sequence
 from email import policy
 from email.parser import BytesParser
 from pathlib import Path, PurePosixPath
@@ -52,14 +52,37 @@ WORKSPACE_MARKER = b"codex" + b"-work1"
 EXPECTED_PROJECT_NAME = "agentic-evidence-lab"
 EXPECTED_DISTRIBUTION_NAME = "agentic_evidence_lab"
 EXPECTED_PROJECTION_POLICY = "ael.publication-projection/0.6"
+# Archive members are untrusted input.  Keep the extraction surface below the
+# repository's public-file ceiling while permitting ordinary source releases.
+MAX_ARCHIVE_MEMBERS = 10_000
+MAX_ARCHIVE_MEMBER_BYTES = 2 * 1024 * 1024
+MAX_ARCHIVE_TOTAL_BYTES = 32 * 1024 * 1024
+_READ_CHUNK_BYTES = 64 * 1024
 
-WHEEL_REQUIRED_SUFFIXES = ("ael/__init__.py",)
+# AEL-CEP is a package-level feature, not an optional development fixture.
+# These are archive-relative paths, deliberately not suffixes: an attacker
+# must not be able to satisfy the contract with ``decoy/ael/...`` members.
+WHEEL_REQUIRED_FILES = (
+    "ael/__init__.py",
+    "ael/contract_graph.py",
+    "ael/coevolution.py",
+    "ael/coevolution_bundle.py",
+    "ael/coevolution_simulator.py",
+    "ael/coevolution_schemas/protocol.schema.json",
+    "ael/coevolution_schemas/bundle.schema.json",
+)
 WHEEL_REQUIRED_DIST_INFO = ("METADATA", "WHEEL", "RECORD")
-SDIST_REQUIRED_SUFFIXES = (
+SDIST_REQUIRED_FILES = (
     "pyproject.toml",
     "README.md",
     "LICENSE",
     "src/ael/__init__.py",
+    "src/ael/contract_graph.py",
+    "src/ael/coevolution.py",
+    "src/ael/coevolution_bundle.py",
+    "src/ael/coevolution_simulator.py",
+    "src/ael/coevolution_schemas/protocol.schema.json",
+    "src/ael/coevolution_schemas/bundle.schema.json",
 )
 
 
@@ -141,13 +164,57 @@ def _zip_mode(info: zipfile.ZipInfo) -> int:
     return (info.external_attr >> 16) & 0xFFFF
 
 
+def _bounded_read(stream: object, limit: int) -> tuple[bytes | None, str | None]:
+    """Read an archive member without allocating more than ``limit`` bytes."""
+
+    chunks: list[bytes] = []
+    actual_size = 0
+    try:
+        while True:
+            chunk = stream.read(_READ_CHUNK_BYTES)  # type: ignore[attr-defined]
+            if not chunk:
+                break
+            actual_size += len(chunk)
+            if actual_size > limit:
+                return None, f"actual uncompressed member exceeds {limit} bytes"
+            chunks.append(chunk)
+    except (EOFError, OSError, RuntimeError, tarfile.TarError, zipfile.BadZipFile) as exc:
+        return None, f"cannot read bounded member data: {exc}"
+    return b"".join(chunks), None
+
+
+def _declared_size_failure(path: Path, name: str, size: int, total: int) -> tuple[int, str | None]:
+    if size < 0:
+        return total, f"{_display_path(path)}: negative declared member size: {name}"
+    if size > MAX_ARCHIVE_MEMBER_BYTES:
+        return (
+            total,
+            f"{_display_path(path)}: declared member exceeds {MAX_ARCHIVE_MEMBER_BYTES} bytes: {name}",
+        )
+    next_total = total + size
+    if next_total > MAX_ARCHIVE_TOTAL_BYTES:
+        return (
+            total,
+            f"{_display_path(path)}: declared uncompressed archive total exceeds "
+            f"{MAX_ARCHIVE_TOTAL_BYTES} bytes",
+        )
+    return next_total, None
+
+
 def _read_zip(path: Path) -> tuple[dict[str, bytes], list[str]]:
     regular: dict[str, bytes] = {}
     failures: list[str] = []
     seen: set[str] = set()
     try:
         with zipfile.ZipFile(path) as archive:
-            for info in archive.infolist():
+            infos = archive.infolist()
+            if len(infos) > MAX_ARCHIVE_MEMBERS:
+                return regular, [
+                    f"{_display_path(path)}: archive member count exceeds {MAX_ARCHIVE_MEMBERS}"
+                ]
+            declared_total = 0
+            actual_total = 0
+            for info in infos:
                 name, name_failures = _member_failures(path, info.filename)
                 failures.extend(name_failures)
                 if name is None:
@@ -168,14 +235,44 @@ def _read_zip(path: Path) -> tuple[dict[str, bytes], list[str]]:
                 if is_directory:
                     if member_type not in (0, stat.S_IFDIR):
                         failures.append(f"{_display_path(path)}: special member: {name}")
+                    if info.file_size != 0:
+                        failures.append(
+                            f"{_display_path(path)}: directory has nonzero declared size: {name}"
+                        )
                     continue
                 if member_type == stat.S_IFDIR:
                     failures.append(f"{_display_path(path)}: directory marked as file: {name}")
                     continue
+                declared_total, size_failure = _declared_size_failure(
+                    path, name, info.file_size, declared_total
+                )
+                if size_failure is not None:
+                    failures.append(size_failure)
+                    continue
                 try:
-                    payload = archive.read(info)
+                    with archive.open(info) as stream:
+                        payload, read_failure = _bounded_read(
+                            stream,
+                            min(MAX_ARCHIVE_MEMBER_BYTES, MAX_ARCHIVE_TOTAL_BYTES - actual_total),
+                        )
                 except (OSError, RuntimeError, zipfile.BadZipFile) as exc:
                     failures.append(f"{_display_path(path)}: cannot read member {name}: {exc}")
+                    continue
+                if read_failure is not None:
+                    failures.append(f"{_display_path(path)}: {read_failure}: {name}")
+                    continue
+                assert payload is not None
+                if len(payload) != info.file_size:
+                    failures.append(
+                        f"{_display_path(path)}: declared/actual size mismatch for member {name}"
+                    )
+                    continue
+                actual_total += len(payload)
+                if actual_total > MAX_ARCHIVE_TOTAL_BYTES:
+                    failures.append(
+                        f"{_display_path(path)}: actual uncompressed archive total exceeds "
+                        f"{MAX_ARCHIVE_TOTAL_BYTES} bytes"
+                    )
                     continue
                 failures.extend(_payload_failures(name, payload))
                 regular[name] = payload
@@ -190,7 +287,16 @@ def _read_tar(path: Path) -> tuple[dict[str, bytes], list[str]]:
     seen: set[str] = set()
     try:
         with tarfile.open(path, mode="r:*") as archive:
-            for info in archive.getmembers():
+            declared_total = 0
+            actual_total = 0
+            member_count = 0
+            for info in archive:
+                member_count += 1
+                if member_count > MAX_ARCHIVE_MEMBERS:
+                    failures.append(
+                        f"{_display_path(path)}: archive member count exceeds {MAX_ARCHIVE_MEMBERS}"
+                    )
+                    break
                 name, name_failures = _member_failures(path, info.name)
                 failures.extend(name_failures)
                 if name is None:
@@ -202,18 +308,47 @@ def _read_tar(path: Path) -> tuple[dict[str, bytes], list[str]]:
                     failures.append(f"{_display_path(path)}: symlink/hardlink member: {name}")
                     continue
                 if info.isdir():
+                    if info.size != 0:
+                        failures.append(
+                            f"{_display_path(path)}: directory has nonzero declared size: {name}"
+                        )
                     continue
                 if not info.isreg():
                     failures.append(f"{_display_path(path)}: special member: {name}")
+                    continue
+                declared_total, size_failure = _declared_size_failure(
+                    path, name, info.size, declared_total
+                )
+                if size_failure is not None:
+                    failures.append(size_failure)
                     continue
                 extracted = archive.extractfile(info)
                 if extracted is None:
                     failures.append(f"{_display_path(path)}: cannot read member {name}")
                     continue
                 try:
-                    payload = extracted.read()
+                    payload, read_failure = _bounded_read(
+                        extracted,
+                        min(MAX_ARCHIVE_MEMBER_BYTES, MAX_ARCHIVE_TOTAL_BYTES - actual_total),
+                    )
                 finally:
                     extracted.close()
+                if read_failure is not None:
+                    failures.append(f"{_display_path(path)}: {read_failure}: {name}")
+                    continue
+                assert payload is not None
+                if len(payload) != info.size:
+                    failures.append(
+                        f"{_display_path(path)}: declared/actual size mismatch for member {name}"
+                    )
+                    continue
+                actual_total += len(payload)
+                if actual_total > MAX_ARCHIVE_TOTAL_BYTES:
+                    failures.append(
+                        f"{_display_path(path)}: actual uncompressed archive total exceeds "
+                        f"{MAX_ARCHIVE_TOTAL_BYTES} bytes"
+                    )
+                    continue
                 failures.extend(_payload_failures(name, payload))
                 regular[name] = payload
     except (OSError, tarfile.TarError) as exc:
@@ -221,32 +356,29 @@ def _read_tar(path: Path) -> tuple[dict[str, bytes], list[str]]:
     return regular, failures
 
 
-def _has_suffix(files: Iterable[str], suffix: str) -> bool:
-    return any(name == suffix or name.endswith("/" + suffix) for name in files)
-
-
-def _matching_suffixes(files: Iterable[str], suffix: str) -> list[str]:
-    return sorted(name for name in files if name == suffix or name.endswith("/" + suffix))
-
-
-def _wheel_dist_info(files: Iterable[str]) -> list[str]:
+def _wheel_dist_info(files: dict[str, bytes]) -> list[str]:
     return sorted(
         name for name in files if name.endswith(".dist-info/METADATA") and name.count("/") >= 1
     )
 
 
+def _wheel_dist_info_root(expected_version: str) -> str:
+    return f"{EXPECTED_DISTRIBUTION_NAME}-{expected_version}.dist-info"
+
+
 def _wheel_identity(
-    path: Path, files: dict[str, bytes], failures: list[str]
+    path: Path, files: dict[str, bytes], expected_version: str, failures: list[str]
 ) -> tuple[str, str] | None:
     metadata_paths = _wheel_dist_info(files)
-    if len(metadata_paths) != 1:
+    expected_metadata = f"{_wheel_dist_info_root(expected_version)}/METADATA"
+    if metadata_paths != [expected_metadata]:
         failures.append(
-            f"{_display_path(path)}: expected one *.dist-info/METADATA member, found {len(metadata_paths)}"
+            f"{_display_path(path)}: expected exactly one canonical wheel METADATA member "
+            f"{expected_metadata}, found {metadata_paths}"
         )
         return None
-    metadata_path = metadata_paths[0]
     try:
-        message = BytesParser(policy=policy.compat32).parsebytes(files[metadata_path])
+        message = BytesParser(policy=policy.compat32).parsebytes(files[expected_metadata])
     except (TypeError, ValueError) as exc:
         failures.append(f"{_display_path(path)}: invalid wheel METADATA: {exc}")
         return None
@@ -261,18 +393,16 @@ def _wheel_identity(
 def _check_wheel(
     path: Path, files: dict[str, bytes], expected_version: str, failures: list[str]
 ) -> None:
-    for suffix in WHEEL_REQUIRED_SUFFIXES:
-        if not _has_suffix(files, suffix):
-            failures.append(f"{_display_path(path)}: missing required wheel file: {suffix}")
+    for required in WHEEL_REQUIRED_FILES:
+        if required not in files:
+            failures.append(f"{_display_path(path)}: missing required wheel file: {required}")
 
-    metadata_paths = _wheel_dist_info(files)
-    if metadata_paths:
-        dist_info_root = metadata_paths[0].rsplit("/", 1)[0]
-        for filename in WHEEL_REQUIRED_DIST_INFO:
-            required = f"{dist_info_root}/{filename}"
-            if required not in files:
-                failures.append(f"{_display_path(path)}: missing required wheel file: {required}")
-    identity = _wheel_identity(path, files, failures)
+    dist_info_root = _wheel_dist_info_root(expected_version)
+    for filename in WHEEL_REQUIRED_DIST_INFO:
+        required = f"{dist_info_root}/{filename}"
+        if required not in files:
+            failures.append(f"{_display_path(path)}: missing required wheel file: {required}")
+    identity = _wheel_identity(path, files, expected_version, failures)
     if identity is None:
         return
     name, version = identity
@@ -288,16 +418,27 @@ def _check_wheel(
         )
 
 
-def _sdist_identity(
-    path: Path, files: dict[str, bytes], failures: list[str]
-) -> tuple[str, str] | None:
-    pyproject_paths = _matching_suffixes(files, "pyproject.toml")
-    if len(pyproject_paths) != 1:
+def _sdist_root(
+    path: Path, files: dict[str, bytes], expected_version: str, failures: list[str]
+) -> str | None:
+    expected_root = f"{EXPECTED_DISTRIBUTION_NAME}-{expected_version}"
+    roots = sorted({name.split("/", 1)[0] for name in files})
+    if roots != [expected_root]:
         failures.append(
-            f"{_display_path(path)}: expected one pyproject.toml member, found {len(pyproject_paths)}"
+            f"{_display_path(path)}: expected exactly one canonical sdist root "
+            f"{expected_root}, found {roots}"
         )
         return None
-    pyproject_path = pyproject_paths[0]
+    return expected_root
+
+
+def _sdist_identity(
+    path: Path, files: dict[str, bytes], root: str, failures: list[str]
+) -> tuple[str, str] | None:
+    pyproject_path = f"{root}/pyproject.toml"
+    if pyproject_path not in files:
+        failures.append(f"{_display_path(path)}: missing required sdist file: pyproject.toml")
+        return None
     try:
         document = tomllib.loads(files[pyproject_path].decode("utf-8"))
     except (UnicodeDecodeError, tomllib.TOMLDecodeError) as exc:
@@ -320,10 +461,16 @@ def _sdist_identity(
 def _check_sdist(
     path: Path, files: dict[str, bytes], expected_version: str, failures: list[str]
 ) -> None:
-    for suffix in SDIST_REQUIRED_SUFFIXES:
-        if not _has_suffix(files, suffix):
-            failures.append(f"{_display_path(path)}: missing required sdist file: {suffix}")
-    identity = _sdist_identity(path, files, failures)
+    root = _sdist_root(path, files, expected_version, failures)
+    if root is None:
+        return
+    for required_suffix in SDIST_REQUIRED_FILES:
+        required = f"{root}/{required_suffix}"
+        if required not in files:
+            failures.append(
+                f"{_display_path(path)}: missing required sdist file: {required_suffix}"
+            )
+    identity = _sdist_identity(path, files, root, failures)
     if identity is None:
         return
     name, version = identity

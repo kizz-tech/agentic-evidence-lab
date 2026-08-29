@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
 
+from ael.contract_graph import validate
 from ael.pbt_pilot import paired_counts
 from ael.sandbox import SandboxError
 from ael.study_freeze import (
@@ -15,7 +16,7 @@ from ael.study_freeze import (
     validate_freeze_bundle,
     verify_private_pack,
 )
-from ael.validation import MAX_JSON_BYTES, sha256_path, validate
+from ael.validation import MAX_JSON_BYTES, sha256_path
 
 AUDIT_SCHEMA_VERSION = "ael.study-audit/0.1"
 _SHA256 = re.compile(r"^[a-f0-9]{64}$")
