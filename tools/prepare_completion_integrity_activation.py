@@ -415,6 +415,11 @@ def build_freeze(
         }
         for task in tasks
     ]
+    eligible_action = (
+        "adopt_adapter_for_alpha12_pilot"
+        if study_revision <= 2
+        else "qualify_adapter_for_future_task_supply"
+    )
     result = {
         "schema_version": FREEZE_SCHEMA,
         "freeze_id": f"{manifest['study_id']}:freeze:{manifest['revision']}",
@@ -482,7 +487,7 @@ def build_freeze(
             "forbidden_reporter_mounts": 0,
             "T1_required_agreements": 2,
             "T1_must_be_non_worse_than_B0": True,
-            "eligible_action": "adopt_adapter_for_alpha12_pilot",
+            "eligible_action": eligible_action,
         },
         "claim_ceiling": (
             "Descriptive maintainer-evaluated activation on two qualified sacrificial roots. "

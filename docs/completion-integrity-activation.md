@@ -59,9 +59,9 @@ tool still emitted an `activation-v1` receipt identity. Version-derived
 qualification, schedule, truth, and submission identity is now covered by
 regression tests, and the complete deterministic matrix was rerun successfully.
 
-Activation remains blocked until the new two-call schema-capability probe is
-retained, every binding is frozen in a clean preregistration commit, and that
-exact SHA passes remote CI. The 16-root effect study remains separately blocked
+The new two-call schema-capability probe passes and is retained in `freeze.json`.
+Activation remains blocked until every binding is committed in one clean
+preregistration SHA and that exact SHA passes remote CI. The 16-root effect study remains separately blocked
 by task supply and `pending_pilot` sample size even if activation v3 passes.
 
 ## Current source versus frozen evidence

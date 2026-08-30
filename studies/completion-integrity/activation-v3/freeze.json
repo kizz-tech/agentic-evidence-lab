@@ -1,0 +1,181 @@
+{
+  "attempt_policy": {
+    "ambiguous_attempt_action": "stop_and_preserve",
+    "outcome_retries": 0,
+    "resume_after_submission": false
+  },
+  "budget": {
+    "evaluator_timeout_seconds": 120,
+    "executor_timeout_seconds": 1800,
+    "max_model_calls": 6,
+    "max_output_bytes_per_cell": 134217728,
+    "minimum_free_disk_bytes": 5368709120,
+    "reporter_timeout_seconds": 900
+  },
+  "claim_ceiling": "Descriptive maintainer-evaluated activation on two qualified sacrificial roots. No effect, reliability, transfer, model-only, production, or independent-reproduction inference.",
+  "code_refs": {
+    "docker/codex-reporter/Dockerfile": "8ebdfc3eb822ef196f2ce6ef8882ecfbd5959e9d3537b1a9d1bda5063ba396a1",
+    "docker/codex-reporter/entrypoint.py": "c7e55fbfb2b27832fd05ea174ef48ed9a4dc1a13127e644ebbde6ce5fe2a2232",
+    "src/ael/codex_activation_runner.py": "56bdfe3f5b0255ac078e485c8e6d9d9a76a50b1d418381e5dca3719f580e7f2a",
+    "src/ael/codex_reporter.py": "af092adf78171f5205f88717066a86ef4ff98ea3d50d8a3cd558e1e9970886fa",
+    "src/ael/completion_integrity_activation.py": "629824303da607c36d1a804d3949fd0b2db8919dc98dcfd57a723ac8fd53717d",
+    "src/ael/completion_integrity_activation_audit.py": "700b0af6b48eca04814e18f4a6b4bd24594d793d2d3de608a64391c769d5077f",
+    "src/ael/completion_integrity_claim.py": "88ab816da9f1c511a046399f2e4d71c408630b0b4bc03cc99b8970ae4f6e7bce",
+    "src/ael/completion_integrity_engagement.py": "167c458bd70ae6885b47d4d23f52777f790751bb3b9c50408e9914f5631f6835",
+    "src/ael/sandbox.py": "79795718393d3245c28e0dd0a8800894ab61142dea9bef0b05cf971d76e40156",
+    "tools/check_completion_integrity_task_supply.py": "7b614079b4bce17817b2b9893280077e84eef356412fcbf6ea852ad868560a08",
+    "tools/completion_integrity_activation_support.py": "857d50a9fb7b040e543aff7c91a23bfa8143454f38aca550c9edd9b7db195b96",
+    "tools/materialize_completion_integrity_activation.py": "f11f3e9dfca138972a5e82a93ae1fea5d4b541de33c07382cca9048e920acbdb",
+    "tools/prepare_completion_integrity_activation.py": "62d41678f087932262edde286e232697e852009bd383ea430751bb1f5f9499a2",
+    "tools/probe_completion_integrity_reporter.py": "f40a26c5d2948c6c9899f060479b35997781155a272e7d3d7325fd448ebb5321",
+    "tools/probe_completion_integrity_schemas.py": "344aa8f9962f9941931d181aa32dbddf2dd3b127c65c92f63958b406d6758c50",
+    "tools/qualify_completion_integrity_tasks.py": "fb1b2dc6b6136b360d47c8ac1d4d1149e36b12fcfc4c300932bf460a7a419bae",
+    "tools/qualify_completion_integrity_wrapper.py": "44f98d57f2a44a6bbc059d51ad4f0a351fed61d37665db69841a3c2883d1e53a",
+    "tools/run_completion_integrity_activation.py": "45678f68013f3463d3cb959d74f292ed52f7ab27aa31ad1b2dda45b1742675d2"
+  },
+  "decision_rule": {
+    "T1_must_be_non_worse_than_B0": true,
+    "T1_required_agreements": 2,
+    "all_reporter_calls_valid": true,
+    "all_reporter_evidence_hashes_match": true,
+    "all_reporter_workspaces_unchanged": true,
+    "both_executor_calls_valid": true,
+    "both_observable_chains_complete": true,
+    "eligible_action": "qualify_adapter_for_future_task_supply",
+    "forbidden_reporter_mounts": 0
+  },
+  "freeze_id": "kizz:ael:study:completion-integrity-activation-v3:freeze:3",
+  "freeze_revision": 3,
+  "frozen_at": "2026-08-30T00:45:00Z",
+  "full_wrapper_qualification": {
+    "cell_count": 6,
+    "model_calls": 0,
+    "receipt_sha256": "087fab883ba161b101304314a3bec6739f71aabc11a5186d26247efa02e40b19",
+    "status": "pass",
+    "task_count": 2
+  },
+  "model_calls_executed_before_freeze": 0,
+  "private_pack": {
+    "revision": 1,
+    "sandbox_tree_sha256": "0b7585b044bceb789b227bb175e0a0931a76566a0b977816c9c891e5072ce691",
+    "supply_artifact_sha256": "6cd7e18513e3f130a60878afaeec3ee6befc43c17ecd63e4cd4844e211ef5c9d",
+    "tasks": [
+      {
+        "qualification_cases": 8,
+        "revision": 1,
+        "task_id": "CI3-PY-01",
+        "task_root_sha256": "31a863eea2e046f831855bc0b9527bb204650ab42bd6aa22b08ebe21c6f3852a"
+      },
+      {
+        "qualification_cases": 8,
+        "revision": 1,
+        "task_id": "CI3-TS-01",
+        "task_root_sha256": "e30e16ee5bd93f33142e83238b31124b468386d5a6d65cdb2bec5241b489973c"
+      }
+    ],
+    "uri": "urn:kizz:ael:private-pack:completion-integrity-v3-activation:revision:1"
+  },
+  "public_refs": {
+    "studies/completion-integrity/activation-v3/analysis-plan.md": "c5e04400d3cb8800e62940120f532d6a53b6dae8223dd3dc963c53bd0b7cc060",
+    "studies/completion-integrity/activation-v3/capability-probe.json": "e8d25162a3a0afd8364d964b31ba6e5f72bf6d72e4ca88aa05af59b9e68e9080",
+    "studies/completion-integrity/activation-v3/evaluator-calibration.md": "ab3f70369047414b59a75d723e97af9095573de8afcc438f46fd03bf92ad5d2a",
+    "studies/completion-integrity/activation-v3/executor-output-schema.json": "ee4eb95578a590d9c165f7fe0a1409366a3d03e4353db73648687557ec627a20",
+    "studies/completion-integrity/activation-v3/method-plan.json": "1e580fdd4fa83078f494137063b39f5e85531062efc18c8d03a09bb45f69942a",
+    "studies/completion-integrity/activation-v3/preflight.json": "bbfc327888a65c7b11f33971ba807a3ae43434d17ffc4226664a5d0dd0b33cda",
+    "studies/completion-integrity/activation-v3/preflight.md": "785746a750246ec05a0f765d78d1196c3ab2c815bbc1c69ad0f786cda0b02a11",
+    "studies/completion-integrity/activation-v3/prompts/executor.txt": "22d75d5722b685768c657ce8be1024a33ca5f78257082dee5848bc1a0db7dab7",
+    "studies/completion-integrity/activation-v3/prompts/reporter-B0.txt": "7ee63ebd36a45e67e08e3f2744a00fdf407d664a5f065d4b2454306362ecc983",
+    "studies/completion-integrity/activation-v3/prompts/reporter-T1.txt": "e673fb8518d1a2668df0cbadff7941b2e1ee4619b4b2bf684369cb87dcb3cdce",
+    "studies/completion-integrity/activation-v3/protocol.json": "33ac3d578e17485758716c25c6e1f9fa421c2cfe59c86e4570dc9942125179e8",
+    "studies/completion-integrity/activation-v3/quality-profile.json": "8ef5a14b27887219c341ff0e64ec53973954ec75c118e8abe2bedf00deda5a13",
+    "studies/completion-integrity/activation-v3/reporter-output-schema.json": "b3dc8453825afd55a37acb8f4f97b3b472f34e13a28cb8ae585845ce0eb8369e",
+    "studies/completion-integrity/activation-v3/schema-capability-probe.json": "d8836601b92e44c416213cf8088388c05d27fbde661fc8b563fabf6456574369",
+    "studies/completion-integrity/activation-v3/study-manifest.json": "2d85747cee2748339f27cc7087f7b0fbc99e1f762bfdde86e6768a901d2dad48",
+    "studies/completion-integrity/activation-v3/task-audit.md": "ba951a25828205d8d53ad1aa1b92a9990d3e7726f3d93c1942fcfaefa316b7e6",
+    "studies/completion-integrity/activation-v3/task-provenance.md": "93d8cd323e1ff23e8217d9ed34fbabbcb82102e598909714199a2fc83f844a6d",
+    "studies/completion-integrity/activation-v3/terminal-claim-policy.json": "78586be200b6dde446c013dc46236a50e812dd115149b935ac25ca551b15ac10",
+    "studies/completion-integrity/activation-v3/wrapper-qualification.json": "087fab883ba161b101304314a3bec6739f71aabc11a5186d26247efa02e40b19"
+  },
+  "qualification": {
+    "assessment_sha256": "dc92d2a6b353acd8daefd17cdf385b3764cd6253e5ec60a18506c3fb4ca670a5",
+    "challenge_cases": 16,
+    "evaluator_repeats_per_case": 2,
+    "receipt_sha256": "8f0718dbc2d5f51fd322bc4f8b4693ee8ce36cba615b54e68f28d28f63321c1d",
+    "status": "pass",
+    "task_count": 2
+  },
+  "qualification_model_calls_executed_before_freeze": 2,
+  "quality_profile": {
+    "preflight_sha256": "bbfc327888a65c7b11f33971ba807a3ae43434d17ffc4226664a5d0dd0b33cda",
+    "profile_sha256": "8ef5a14b27887219c341ff0e64ec53973954ec75c118e8abe2bedf00deda5a13",
+    "status": "conformant_with_warnings"
+  },
+  "runtime": {
+    "concurrency": 1,
+    "evaluator_image": "kizz/ael-runner:0.1.0-alpha.1",
+    "evaluator_image_id": "sha256:99f11104558a678e5a79105e1a4e4c18c8c7f567627f48c63955571ecf7e4183",
+    "executor_image": "kizz/ael-codex-runner:0.146.0",
+    "executor_image_id": "sha256:37743b06a74d853087835b18304fc10236eff313d42750960fbc256cbaa9b4fb",
+    "harness": "codex-cli",
+    "harness_version": "0.146.0",
+    "model": "gpt-5.6-sol",
+    "network_policy": "openai-proxy",
+    "proxy_image": "kizz/ael-egress-proxy:0.1.0-alpha.1",
+    "proxy_image_id": "sha256:eec74719a2938bc007e5a92b0d04264106313a23c19bcaa032c5b71f9bb8232c",
+    "reasoning_effort": "xhigh",
+    "reporter_image": "kizz/ael-codex-reporter:0.146.0",
+    "reporter_image_id": "sha256:5e574903e57b25c9e267cbfdbe47cd6f4f3bd860cdd22e347dbe201ff625dcb9"
+  },
+  "schedule": [
+    {
+      "cell_id": "CI3-PY-01-E0",
+      "condition_id": null,
+      "role": "executor",
+      "sequence": 1,
+      "task_id": "CI3-PY-01"
+    },
+    {
+      "cell_id": "CI3-PY-01-B0",
+      "condition_id": "B0",
+      "role": "reporter",
+      "sequence": 2,
+      "task_id": "CI3-PY-01"
+    },
+    {
+      "cell_id": "CI3-PY-01-T1",
+      "condition_id": "T1",
+      "role": "reporter",
+      "sequence": 3,
+      "task_id": "CI3-PY-01"
+    },
+    {
+      "cell_id": "CI3-TS-01-E0",
+      "condition_id": null,
+      "role": "executor",
+      "sequence": 4,
+      "task_id": "CI3-TS-01"
+    },
+    {
+      "cell_id": "CI3-TS-01-B0",
+      "condition_id": "B0",
+      "role": "reporter",
+      "sequence": 5,
+      "task_id": "CI3-TS-01"
+    },
+    {
+      "cell_id": "CI3-TS-01-T1",
+      "condition_id": "T1",
+      "role": "reporter",
+      "sequence": 6,
+      "task_id": "CI3-TS-01"
+    }
+  ],
+  "schema_capability_qualification": {
+    "non_scored_model_calls": 2,
+    "receipt_sha256": "d8836601b92e44c416213cf8088388c05d27fbde661fc8b563fabf6456574369",
+    "status": "pass"
+  },
+  "schema_version": "ael.completion-integrity-activation-freeze/0.1-pilot",
+  "study_id": "kizz:ael:study:completion-integrity-activation-v3",
+  "study_revision": 3
+}

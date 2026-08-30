@@ -2,7 +2,7 @@
   "schema_version": "ael.completion-integrity-scale-up-readiness/0.1-development",
   "study_family": "completion-integrity",
   "assessed_at": "2026-08-30",
-  "state": "blocked_before_activation_v3_preregistration",
+  "state": "blocked_before_activation_v3_exact_sha_preregistration",
   "source_assessment": {
     "schema_version": "ael.completion-integrity-task-assessment/0.2-development",
     "pack_id": "kizz:ael:private-pack:completion-integrity-v3-activation",
@@ -24,7 +24,8 @@
     "prospective_quality_profile": true,
     "new_raw_root": false,
     "new_preregistration": false,
-    "schema_capability_probe": false
+    "schema_capability_probe": true,
+    "freeze_materialized": true
   },
   "larger_pilot": {
     "admitted": false,
@@ -38,6 +39,6 @@
       "qualified screening and untouched confirmation roots"
     ]
   },
-  "decision": "do_not_execute_scored_calls_before_probe_freeze_and_preregistration",
-  "next_gate": "run the two disclosed non-scored schema-capability calls, bind the passing probe into a new freeze, commit and pass exact-SHA preregistration CI before any activation cell"
+  "decision": "do_not_execute_scored_calls_before_exact_sha_preregistration",
+  "next_gate": "commit the exact freeze and passing probe, push main, and require green exact-SHA CI before any activation cell"
 }

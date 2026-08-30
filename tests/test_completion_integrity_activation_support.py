@@ -78,6 +78,10 @@ class ActivationSupportTests(unittest.TestCase):
         root = ROOT / "studies/completion-integrity/activation-v3"
         wrapper = json.loads((root / "wrapper-qualification.json").read_text(encoding="utf-8"))
         preflight = json.loads((root / "preflight.json").read_text(encoding="utf-8"))
+        freeze = json.loads((root / "freeze.json").read_text(encoding="utf-8"))
+        schema_probe = json.loads(
+            (root / "schema-capability-probe.json").read_text(encoding="utf-8")
+        )
         self.assertEqual("pass", wrapper["status"])
         self.assertEqual("activation-v3", wrapper["activation_namespace"])
         self.assertEqual(6, wrapper["cell_count"])
@@ -91,6 +95,21 @@ class ActivationSupportTests(unittest.TestCase):
             )
         )
         self.assertEqual("conformant_with_warnings", preflight["status"])
+        self.assertEqual("kizz:ael:study:completion-integrity-activation-v3", freeze["study_id"])
+        self.assertEqual(0, freeze["model_calls_executed_before_freeze"])
+        self.assertEqual(2, freeze["qualification_model_calls_executed_before_freeze"])
+        self.assertEqual("pass", freeze["full_wrapper_qualification"]["status"])
+        self.assertEqual("conformant_with_warnings", freeze["quality_profile"]["status"])
+        self.assertEqual(
+            "qualify_adapter_for_future_task_supply",
+            freeze["decision_rule"]["eligible_action"],
+        )
+        self.assertEqual(
+            "kizz:ael:study:completion-integrity-activation-v3:schema-capability:3",
+            schema_probe["probe_id"],
+        )
+        self.assertEqual([], schema_probe["prior_attempts"])
+        self.assertNotIn("CI2-", json.dumps(freeze["schedule"], sort_keys=True))
 
     def test_versioned_activation_and_qualification_identities_are_derived(self) -> None:
         self.assertEqual(

@@ -20,6 +20,9 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   graphs, a corrected version-bound qualification receipt, a six-cell no-call
   full-wrapper qualification, and a conformant-with-warnings Study Quality
   Profile. No activation-v3 model cell has been submitted.
+- A passing two-call activation-v3 schema capability receipt and exact freeze
+  binding the fresh pack, corrected qualification, full wrapper, quality
+  profile, images, code, schedule, budget, and no-retry decision rule.
 
 ### Research integrity
 

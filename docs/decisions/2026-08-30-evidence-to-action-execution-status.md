@@ -45,12 +45,12 @@ no-call qualification composes all six version-derived attempt/truth/submission/
 terminal-assessment identities, and the prospective Study Quality Profile is
 `conformant_with_warnings` with zero activation-v3 model calls.
 
-Activation remains blocked until two disclosed non-scored schema-capability
-calls pass, the probe is frozen, and an exact-SHA preregistration commit/CI gate
-passes. The larger pilot still has zero eligible screening/confirmation roots
+The two disclosed non-scored schema-capability calls now pass and are bound in
+the v3 freeze. Activation remains blocked until the exact freeze/probe commit is
+pushed and its exact-SHA CI gate passes. The larger pilot still has zero eligible screening/confirmation roots
 against a minimum floor of 16 independent roots and `pending_pilot` sizing.
 
-Decision: `do_not_execute_scored_calls_before_probe_freeze_and_preregistration`. See
+Decision: `do_not_execute_scored_calls_before_exact_sha_preregistration`. See
 [`scale-up-readiness.json`](../../studies/completion-integrity/scale-up-readiness.json).
 
 ## M3 — Action and downstream outcome
@@ -71,9 +71,8 @@ Two independent gates can advance:
 
 1. recruit and consent competent M1 participants, freeze the private blinded
    case pack and pilot sizing, then collect each response once;
-2. run the two activation-v3 schema-capability probes, freeze their passing
-   receipt with the qualified roots and quality profile, then require exact-SHA
-   preregistration CI before the first one-submit cell.
+2. commit and push the exact activation-v3 freeze/probe package, then require
+   green exact-SHA preregistration CI before the first one-submit cell.
 
 Neither gate authorizes the other. Negative, blocked, missing, or invalid
 outcomes remain first-class project evidence.
