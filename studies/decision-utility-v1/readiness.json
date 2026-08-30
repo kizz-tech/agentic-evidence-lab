@@ -1,0 +1,16 @@
+{
+  "schema_version": "ael.decision-utility-readiness/0.1-development",
+  "study_id": "kizz:ael:study:decision-utility-v1",
+  "revision": 1,
+  "state": "instrument_qualification_only",
+  "human_pilot_admitted": false,
+  "human_responses": 0,
+  "model_proxy_is_human_evidence": false,
+  "blockers": [
+    "competent human participant recruitment and consent are not assigned",
+    "private blinded scored case pack is not frozen",
+    "pilot action-error and burden variance are unavailable",
+    "target sample size and stopping rule remain pending_pilot"
+  ],
+  "next_gate": "freeze participant, case, rights, sample-size, assignment, missingness, and analysis contracts before the first human response"
+}

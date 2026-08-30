@@ -113,6 +113,11 @@ an ordinary decision note, a note plus static checklist, and an AEL claim-first
 card. Only after AEL governs a real Codex action and downstream outcome does
 Stage 1 attempt an append-only retrospective evaluator rescore.
 
+The repository now contains a checked synthetic calibration for that instrument
+under [`studies/decision-utility-v1`](studies/decision-utility-v1). It proves
+view equivalence, scheduling, and scoring mechanics only. The human pilot is
+not admitted and has zero responses.
+
 ## What AEL publishes
 
 ```text

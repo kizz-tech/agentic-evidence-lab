@@ -1,0 +1,705 @@
+{
+  "case_count": 6,
+  "case_pack_id": "kizz:ael:decision-utility:v1-public-calibration",
+  "case_pack_revision": 1,
+  "case_pack_sha256": "e9c4ea4399ef7d71b576344c1991df9c6375ac97282fc4c9676c0d47b7fde7d3",
+  "protocol_id": "kizz:ael:decision-utility:v1-calibration",
+  "protocol_revision": 1,
+  "protocol_sha256": "402b8b8e2cbbbe83a5b4e4eef48a1875ae49501ab7b17fd0074ab9c49acdbc04",
+  "readiness": {
+    "blockers": [
+      "competent human participant recruitment and consent are not assigned",
+      "private blinded scored case pack is not frozen",
+      "pilot action-error and burden variance are unavailable",
+      "target sample size and stopping rule remain pending_pilot"
+    ],
+    "human_pilot_admitted": false,
+    "human_responses": 0,
+    "model_proxy_is_human_evidence": false,
+    "next_gate": "freeze participant, case, rights, sample-size, assignment, missingness, and analysis contracts before the first human response",
+    "revision": 1,
+    "schema_version": "ael.decision-utility-readiness/0.1-development",
+    "state": "instrument_qualification_only",
+    "study_id": "kizz:ael:study:decision-utility-v1"
+  },
+  "schedule": {
+    "case_pack_id": "kizz:ael:decision-utility:v1-public-calibration",
+    "case_pack_revision": 1,
+    "cells": [
+      {
+        "arm_id": "A0",
+        "case_id": "DU-C01",
+        "participant_id": "CAL-P01",
+        "position": 1
+      },
+      {
+        "arm_id": "A1",
+        "case_id": "DU-C02",
+        "participant_id": "CAL-P01",
+        "position": 2
+      },
+      {
+        "arm_id": "A2",
+        "case_id": "DU-C03",
+        "participant_id": "CAL-P01",
+        "position": 3
+      },
+      {
+        "arm_id": "A0",
+        "case_id": "DU-C04",
+        "participant_id": "CAL-P01",
+        "position": 4
+      },
+      {
+        "arm_id": "A1",
+        "case_id": "DU-C05",
+        "participant_id": "CAL-P01",
+        "position": 5
+      },
+      {
+        "arm_id": "A2",
+        "case_id": "DU-C06",
+        "participant_id": "CAL-P01",
+        "position": 6
+      },
+      {
+        "arm_id": "A2",
+        "case_id": "DU-C02",
+        "participant_id": "CAL-P02",
+        "position": 1
+      },
+      {
+        "arm_id": "A0",
+        "case_id": "DU-C03",
+        "participant_id": "CAL-P02",
+        "position": 2
+      },
+      {
+        "arm_id": "A1",
+        "case_id": "DU-C04",
+        "participant_id": "CAL-P02",
+        "position": 3
+      },
+      {
+        "arm_id": "A2",
+        "case_id": "DU-C05",
+        "participant_id": "CAL-P02",
+        "position": 4
+      },
+      {
+        "arm_id": "A0",
+        "case_id": "DU-C06",
+        "participant_id": "CAL-P02",
+        "position": 5
+      },
+      {
+        "arm_id": "A1",
+        "case_id": "DU-C01",
+        "participant_id": "CAL-P02",
+        "position": 6
+      },
+      {
+        "arm_id": "A1",
+        "case_id": "DU-C03",
+        "participant_id": "CAL-P03",
+        "position": 1
+      },
+      {
+        "arm_id": "A2",
+        "case_id": "DU-C04",
+        "participant_id": "CAL-P03",
+        "position": 2
+      },
+      {
+        "arm_id": "A0",
+        "case_id": "DU-C05",
+        "participant_id": "CAL-P03",
+        "position": 3
+      },
+      {
+        "arm_id": "A1",
+        "case_id": "DU-C06",
+        "participant_id": "CAL-P03",
+        "position": 4
+      },
+      {
+        "arm_id": "A2",
+        "case_id": "DU-C01",
+        "participant_id": "CAL-P03",
+        "position": 5
+      },
+      {
+        "arm_id": "A0",
+        "case_id": "DU-C02",
+        "participant_id": "CAL-P03",
+        "position": 6
+      }
+    ],
+    "participant_count": 3,
+    "protocol_id": "kizz:ael:decision-utility:v1-calibration",
+    "protocol_revision": 1,
+    "schema_version": "ael.decision-utility-schedule/0.1-development"
+  },
+  "schema_version": "ael.decision-utility-calibration/0.1-development",
+  "view_count": 18,
+  "views": [
+    {
+      "arm_id": "A0",
+      "case_id": "DU-C01",
+      "content": {
+        "heading": "Scoped positive result",
+        "narrative": [
+          "Primary claim: Supported on the frozen task population",
+          "Critical guardrail: Passed with zero critical failures",
+          "Total-system cost: Within the declared budget",
+          "Transfer: No claim beyond the tested scope"
+        ],
+        "recommendation": "adopt_exact"
+      },
+      "evidence_fingerprint": "3e2596030fdbc608719c0ac7656e04f72c5e1fb08aa9a257c5333c46965c666f",
+      "format": "ordinary_decision_note",
+      "schema_version": "ael.decision-utility-view/0.1-development"
+    },
+    {
+      "arm_id": "A1",
+      "case_id": "DU-C01",
+      "content": {
+        "checklist": [
+          {
+            "checked": true,
+            "fact_id": "claim",
+            "label": "Primary claim"
+          },
+          {
+            "checked": true,
+            "fact_id": "guardrail",
+            "label": "Critical guardrail"
+          },
+          {
+            "checked": true,
+            "fact_id": "cost",
+            "label": "Total-system cost"
+          },
+          {
+            "checked": true,
+            "fact_id": "scope",
+            "label": "Transfer"
+          }
+        ],
+        "heading": "Scoped positive result",
+        "narrative": [
+          "Primary claim: Supported on the frozen task population",
+          "Critical guardrail: Passed with zero critical failures",
+          "Total-system cost: Within the declared budget",
+          "Transfer: No claim beyond the tested scope"
+        ],
+        "recommendation": "adopt_exact"
+      },
+      "evidence_fingerprint": "3e2596030fdbc608719c0ac7656e04f72c5e1fb08aa9a257c5333c46965c666f",
+      "format": "decision_note_with_static_checklist",
+      "schema_version": "ael.decision-utility-view/0.1-development"
+    },
+    {
+      "arm_id": "A2",
+      "case_id": "DU-C01",
+      "content": {
+        "claim_first_facts": [
+          {
+            "fact_id": "claim",
+            "label": "Primary claim",
+            "value": "Supported on the frozen task population"
+          },
+          {
+            "fact_id": "guardrail",
+            "label": "Critical guardrail",
+            "value": "Passed with zero critical failures"
+          },
+          {
+            "fact_id": "cost",
+            "label": "Total-system cost",
+            "value": "Within the declared budget"
+          },
+          {
+            "fact_id": "scope",
+            "label": "Transfer",
+            "value": "No claim beyond the tested scope"
+          }
+        ],
+        "decision": "adopt_exact",
+        "question": "Should the exact candidate be adopted for the tested scope?",
+        "scope": {
+          "severity": "low",
+          "stratum": "clear_positive"
+        }
+      },
+      "evidence_fingerprint": "3e2596030fdbc608719c0ac7656e04f72c5e1fb08aa9a257c5333c46965c666f",
+      "format": "ael_claim_first_card",
+      "schema_version": "ael.decision-utility-view/0.1-development"
+    },
+    {
+      "arm_id": "A0",
+      "case_id": "DU-C02",
+      "content": {
+        "heading": "Null effect hidden by positive prose",
+        "narrative": [
+          "Primary effect: Treatment-minus-baseline difference is zero",
+          "Interval: Frozen interval contains only zero",
+          "Critical guardrail: Passed",
+          "Cost: Treatment uses additional tokens"
+        ],
+        "recommendation": "adopt_exact"
+      },
+      "evidence_fingerprint": "4cb4c6382931c0e35f1b3d4543407b02b1e869cc04fdd3469a822efc6b98b290",
+      "format": "ordinary_decision_note",
+      "schema_version": "ael.decision-utility-view/0.1-development"
+    },
+    {
+      "arm_id": "A1",
+      "case_id": "DU-C02",
+      "content": {
+        "checklist": [
+          {
+            "checked": true,
+            "fact_id": "claim",
+            "label": "Primary effect"
+          },
+          {
+            "checked": true,
+            "fact_id": "uncertainty",
+            "label": "Interval"
+          },
+          {
+            "checked": true,
+            "fact_id": "guardrail",
+            "label": "Critical guardrail"
+          },
+          {
+            "checked": true,
+            "fact_id": "cost",
+            "label": "Cost"
+          }
+        ],
+        "heading": "Null effect hidden by positive prose",
+        "narrative": [
+          "Primary effect: Treatment-minus-baseline difference is zero",
+          "Interval: Frozen interval contains only zero",
+          "Critical guardrail: Passed",
+          "Cost: Treatment uses additional tokens"
+        ],
+        "recommendation": "adopt_exact"
+      },
+      "evidence_fingerprint": "4cb4c6382931c0e35f1b3d4543407b02b1e869cc04fdd3469a822efc6b98b290",
+      "format": "decision_note_with_static_checklist",
+      "schema_version": "ael.decision-utility-view/0.1-development"
+    },
+    {
+      "arm_id": "A2",
+      "case_id": "DU-C02",
+      "content": {
+        "claim_first_facts": [
+          {
+            "fact_id": "claim",
+            "label": "Primary effect",
+            "value": "Treatment-minus-baseline difference is zero"
+          },
+          {
+            "fact_id": "uncertainty",
+            "label": "Interval",
+            "value": "Frozen interval contains only zero"
+          },
+          {
+            "fact_id": "guardrail",
+            "label": "Critical guardrail",
+            "value": "Passed"
+          },
+          {
+            "fact_id": "cost",
+            "label": "Cost",
+            "value": "Treatment uses additional tokens"
+          }
+        ],
+        "decision": "adopt_exact",
+        "question": "Should the exact policy become the default?",
+        "scope": {
+          "severity": "medium",
+          "stratum": "null_effect"
+        }
+      },
+      "evidence_fingerprint": "4cb4c6382931c0e35f1b3d4543407b02b1e869cc04fdd3469a822efc6b98b290",
+      "format": "ael_claim_first_card",
+      "schema_version": "ael.decision-utility-view/0.1-development"
+    },
+    {
+      "arm_id": "A0",
+      "case_id": "DU-C03",
+      "content": {
+        "heading": "Average gain with a critical failure",
+        "narrative": [
+          "Average quality: Improved by the frozen threshold",
+          "Critical guardrail: One treatment-only security regression",
+          "Non-compensation rule: Any critical regression blocks promotion",
+          "Rollback: Available but not yet exercised"
+        ],
+        "recommendation": "adopt_exact"
+      },
+      "evidence_fingerprint": "c9531fb66e5654ce0409b2f1806733cb250267f803a1a2f7e7447287406803c8",
+      "format": "ordinary_decision_note",
+      "schema_version": "ael.decision-utility-view/0.1-development"
+    },
+    {
+      "arm_id": "A1",
+      "case_id": "DU-C03",
+      "content": {
+        "checklist": [
+          {
+            "checked": true,
+            "fact_id": "claim",
+            "label": "Average quality"
+          },
+          {
+            "checked": true,
+            "fact_id": "guardrail",
+            "label": "Critical guardrail"
+          },
+          {
+            "checked": true,
+            "fact_id": "decision",
+            "label": "Non-compensation rule"
+          },
+          {
+            "checked": true,
+            "fact_id": "recovery",
+            "label": "Rollback"
+          }
+        ],
+        "heading": "Average gain with a critical failure",
+        "narrative": [
+          "Average quality: Improved by the frozen threshold",
+          "Critical guardrail: One treatment-only security regression",
+          "Non-compensation rule: Any critical regression blocks promotion",
+          "Rollback: Available but not yet exercised"
+        ],
+        "recommendation": "adopt_exact"
+      },
+      "evidence_fingerprint": "c9531fb66e5654ce0409b2f1806733cb250267f803a1a2f7e7447287406803c8",
+      "format": "decision_note_with_static_checklist",
+      "schema_version": "ael.decision-utility-view/0.1-development"
+    },
+    {
+      "arm_id": "A2",
+      "case_id": "DU-C03",
+      "content": {
+        "claim_first_facts": [
+          {
+            "fact_id": "claim",
+            "label": "Average quality",
+            "value": "Improved by the frozen threshold"
+          },
+          {
+            "fact_id": "guardrail",
+            "label": "Critical guardrail",
+            "value": "One treatment-only security regression"
+          },
+          {
+            "fact_id": "decision",
+            "label": "Non-compensation rule",
+            "value": "Any critical regression blocks promotion"
+          },
+          {
+            "fact_id": "recovery",
+            "label": "Rollback",
+            "value": "Available but not yet exercised"
+          }
+        ],
+        "decision": "adopt_exact",
+        "question": "Should the candidate be promoted?",
+        "scope": {
+          "severity": "critical",
+          "stratum": "critical_failure"
+        }
+      },
+      "evidence_fingerprint": "c9531fb66e5654ce0409b2f1806733cb250267f803a1a2f7e7447287406803c8",
+      "format": "ael_claim_first_card",
+      "schema_version": "ael.decision-utility-view/0.1-development"
+    },
+    {
+      "arm_id": "A0",
+      "case_id": "DU-C04",
+      "content": {
+        "heading": "Evidence past its validity window",
+        "narrative": [
+          "Historical result: Supported on the prior stack",
+          "Freshness: Model and harness crossed frozen invalidation triggers",
+          "Current transfer: Not measured",
+          "Current action: Requires a new observation"
+        ],
+        "recommendation": "adopt_exact"
+      },
+      "evidence_fingerprint": "4883f599f00c663c7e1831b0ca1e962600bafbd4a8f17a6e6a5fb49f428096c4",
+      "format": "ordinary_decision_note",
+      "schema_version": "ael.decision-utility-view/0.1-development"
+    },
+    {
+      "arm_id": "A1",
+      "case_id": "DU-C04",
+      "content": {
+        "checklist": [
+          {
+            "checked": true,
+            "fact_id": "claim",
+            "label": "Historical result"
+          },
+          {
+            "checked": true,
+            "fact_id": "freshness",
+            "label": "Freshness"
+          },
+          {
+            "checked": true,
+            "fact_id": "transfer",
+            "label": "Current transfer"
+          },
+          {
+            "checked": true,
+            "fact_id": "action",
+            "label": "Current action"
+          }
+        ],
+        "heading": "Evidence past its validity window",
+        "narrative": [
+          "Historical result: Supported on the prior stack",
+          "Freshness: Model and harness crossed frozen invalidation triggers",
+          "Current transfer: Not measured",
+          "Current action: Requires a new observation"
+        ],
+        "recommendation": "adopt_exact"
+      },
+      "evidence_fingerprint": "4883f599f00c663c7e1831b0ca1e962600bafbd4a8f17a6e6a5fb49f428096c4",
+      "format": "decision_note_with_static_checklist",
+      "schema_version": "ael.decision-utility-view/0.1-development"
+    },
+    {
+      "arm_id": "A2",
+      "case_id": "DU-C04",
+      "content": {
+        "claim_first_facts": [
+          {
+            "fact_id": "claim",
+            "label": "Historical result",
+            "value": "Supported on the prior stack"
+          },
+          {
+            "fact_id": "freshness",
+            "label": "Freshness",
+            "value": "Model and harness crossed frozen invalidation triggers"
+          },
+          {
+            "fact_id": "transfer",
+            "label": "Current transfer",
+            "value": "Not measured"
+          },
+          {
+            "fact_id": "action",
+            "label": "Current action",
+            "value": "Requires a new observation"
+          }
+        ],
+        "decision": "adopt_exact",
+        "question": "Should the prior result authorize a current rollout?",
+        "scope": {
+          "severity": "high",
+          "stratum": "stale_evidence"
+        }
+      },
+      "evidence_fingerprint": "4883f599f00c663c7e1831b0ca1e962600bafbd4a8f17a6e6a5fb49f428096c4",
+      "format": "ael_claim_first_card",
+      "schema_version": "ael.decision-utility-view/0.1-development"
+    },
+    {
+      "arm_id": "A0",
+      "case_id": "DU-C05",
+      "content": {
+        "heading": "Structurally invalid observation",
+        "narrative": [
+          "Model content: Consistent with withheld truth",
+          "Owner wrapper: Failed the frozen identifier grammar",
+          "Valid reporter cells: Zero",
+          "Source repair: Implemented only after the observed failure"
+        ],
+        "recommendation": "narrow"
+      },
+      "evidence_fingerprint": "fff1854dcc3201f8eee74e7d9c2a2cfdf587d4376211e8c9f43d45a7a32a6117",
+      "format": "ordinary_decision_note",
+      "schema_version": "ael.decision-utility-view/0.1-development"
+    },
+    {
+      "arm_id": "A1",
+      "case_id": "DU-C05",
+      "content": {
+        "checklist": [
+          {
+            "checked": true,
+            "fact_id": "content",
+            "label": "Model content"
+          },
+          {
+            "checked": true,
+            "fact_id": "wrapper",
+            "label": "Owner wrapper"
+          },
+          {
+            "checked": true,
+            "fact_id": "valid_cells",
+            "label": "Valid reporter cells"
+          },
+          {
+            "checked": true,
+            "fact_id": "repair",
+            "label": "Source repair"
+          }
+        ],
+        "heading": "Structurally invalid observation",
+        "narrative": [
+          "Model content: Consistent with withheld truth",
+          "Owner wrapper: Failed the frozen identifier grammar",
+          "Valid reporter cells: Zero",
+          "Source repair: Implemented only after the observed failure"
+        ],
+        "recommendation": "narrow"
+      },
+      "evidence_fingerprint": "fff1854dcc3201f8eee74e7d9c2a2cfdf587d4376211e8c9f43d45a7a32a6117",
+      "format": "decision_note_with_static_checklist",
+      "schema_version": "ael.decision-utility-view/0.1-development"
+    },
+    {
+      "arm_id": "A2",
+      "case_id": "DU-C05",
+      "content": {
+        "claim_first_facts": [
+          {
+            "fact_id": "content",
+            "label": "Model content",
+            "value": "Consistent with withheld truth"
+          },
+          {
+            "fact_id": "wrapper",
+            "label": "Owner wrapper",
+            "value": "Failed the frozen identifier grammar"
+          },
+          {
+            "fact_id": "valid_cells",
+            "label": "Valid reporter cells",
+            "value": "Zero"
+          },
+          {
+            "fact_id": "repair",
+            "label": "Source repair",
+            "value": "Implemented only after the observed failure"
+          }
+        ],
+        "decision": "narrow",
+        "question": "Should the observed content count as an accuracy result?",
+        "scope": {
+          "severity": "high",
+          "stratum": "protocol_invalid"
+        }
+      },
+      "evidence_fingerprint": "fff1854dcc3201f8eee74e7d9c2a2cfdf587d4376211e8c9f43d45a7a32a6117",
+      "format": "ael_claim_first_card",
+      "schema_version": "ael.decision-utility-view/0.1-development"
+    },
+    {
+      "arm_id": "A0",
+      "case_id": "DU-C06",
+      "content": {
+        "heading": "Useful only in a narrow stratum",
+        "narrative": [
+          "High-risk stratum: Material verified improvement",
+          "Routine strata: No measured improvement",
+          "Total-system cost: Exceeds the global burden cap",
+          "Selective route: Meets the high-risk budget and guardrails"
+        ],
+        "recommendation": "narrow"
+      },
+      "evidence_fingerprint": "3dc83dd96736cea411bffd39496992e82092ef51239a172c81b08b58734548b8",
+      "format": "ordinary_decision_note",
+      "schema_version": "ael.decision-utility-view/0.1-development"
+    },
+    {
+      "arm_id": "A1",
+      "case_id": "DU-C06",
+      "content": {
+        "checklist": [
+          {
+            "checked": true,
+            "fact_id": "effect",
+            "label": "High-risk stratum"
+          },
+          {
+            "checked": true,
+            "fact_id": "other_strata",
+            "label": "Routine strata"
+          },
+          {
+            "checked": true,
+            "fact_id": "cost",
+            "label": "Total-system cost"
+          },
+          {
+            "checked": true,
+            "fact_id": "routing",
+            "label": "Selective route"
+          }
+        ],
+        "heading": "Useful only in a narrow stratum",
+        "narrative": [
+          "High-risk stratum: Material verified improvement",
+          "Routine strata: No measured improvement",
+          "Total-system cost: Exceeds the global burden cap",
+          "Selective route: Meets the high-risk budget and guardrails"
+        ],
+        "recommendation": "narrow"
+      },
+      "evidence_fingerprint": "3dc83dd96736cea411bffd39496992e82092ef51239a172c81b08b58734548b8",
+      "format": "decision_note_with_static_checklist",
+      "schema_version": "ael.decision-utility-view/0.1-development"
+    },
+    {
+      "arm_id": "A2",
+      "case_id": "DU-C06",
+      "content": {
+        "claim_first_facts": [
+          {
+            "fact_id": "effect",
+            "label": "High-risk stratum",
+            "value": "Material verified improvement"
+          },
+          {
+            "fact_id": "other_strata",
+            "label": "Routine strata",
+            "value": "No measured improvement"
+          },
+          {
+            "fact_id": "cost",
+            "label": "Total-system cost",
+            "value": "Exceeds the global burden cap"
+          },
+          {
+            "fact_id": "routing",
+            "label": "Selective route",
+            "value": "Meets the high-risk budget and guardrails"
+          }
+        ],
+        "decision": "narrow",
+        "question": "Should the intervention be routed selectively?",
+        "scope": {
+          "severity": "medium",
+          "stratum": "cost_dominant"
+        }
+      },
+      "evidence_fingerprint": "3dc83dd96736cea411bffd39496992e82092ef51239a172c81b08b58734548b8",
+      "format": "ael_claim_first_card",
+      "schema_version": "ael.decision-utility-view/0.1-development"
+    }
+  ]
+}

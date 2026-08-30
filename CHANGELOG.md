@@ -6,6 +6,20 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+- A family-local Decision Utility v1 instrument calibration with
+  evidence-equivalent ordinary-note, checklist, and AEL-card views; a balanced
+  no-repeat schedule; severity/guardrail/burden scoring; and an explicit human-
+  evidence requirement.
+
+### Research integrity
+
+- The public calibration contains no human responses. Participant recruitment,
+  consent, private blinded cases, pilot variance, sample size, and stopping
+  remain blocking; model readers cannot substitute for human decision-utility
+  evidence.
+
 ## [0.1.0-alpha.12] - 2026-08-30
 
 ### Added

@@ -1,0 +1,31 @@
+{
+  "schema_version": "ael.decision-utility-protocol/0.1-development",
+  "protocol_id": "kizz:ael:decision-utility:v1-calibration",
+  "revision": 1,
+  "arms": [
+    {"arm_id": "A0", "label": "Ordinary decision note", "format": "ordinary_decision_note"},
+    {"arm_id": "A1", "label": "Decision note plus static checklist", "format": "decision_note_with_static_checklist"},
+    {"arm_id": "A2", "label": "AEL claim-first card", "format": "ael_claim_first_card"}
+  ],
+  "actions": ["adopt_exact", "narrow", "reject_exact", "retest"],
+  "severity_weights": {"low": 1, "medium": 3, "high": 9, "critical": 27},
+  "strata": ["clear_positive", "null_effect", "critical_failure", "stale_evidence", "protocol_invalid", "cost_dominant"],
+  "primary_estimand": "severity_weighted_action_error",
+  "burden_cap_ms": 180000,
+  "schedule": {
+    "cases_per_participant": 6,
+    "balanced_arms": true,
+    "no_repeat_case": true,
+    "sequence_rule": "cyclic_latin_square"
+  },
+  "sample_size": {
+    "status": "pending_pilot",
+    "independent_unit": "human_participant",
+    "pilot_participants": null,
+    "target_participants": null,
+    "basis": "No human pilot variance or action-error rate exists; structural calibration cannot set n."
+  },
+  "missingness_policy": "retain_as_missing_no_imputation",
+  "human_evidence_required": true,
+  "claim_ceiling": "instrument_qualification_only_until_human_outcomes"
+}

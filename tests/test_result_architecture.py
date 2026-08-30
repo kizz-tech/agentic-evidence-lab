@@ -123,6 +123,14 @@ class ResultArchitectureTests(unittest.TestCase):
     def test_completion_integrity_task_supply_policy_remains_pure(self) -> None:
         self.assertEqual(set(), _ael_imports("completion_integrity_task_supply"))
 
+    def test_decision_utility_policy_remains_pure(self) -> None:
+        self.assertEqual(set(), _ael_imports("decision_utility"))
+        _assert_no_import_prefixes(
+            self,
+            "decision_utility",
+            _AMBIENT_IO_AND_NONDETERMINISM,
+        )
+
     def test_publication_dependencies_point_toward_narrow_boundaries(self) -> None:
         self.assertEqual(
             {"ael.sandbox", "ael.validation"},
@@ -218,6 +226,7 @@ class ResultArchitectureTests(unittest.TestCase):
             "ael.coevolution",
             "ael.coevolution_bundle",
             "ael.coevolution_simulator",
+            "ael.decision_utility",
         ):
             with self.subTest(module=module_name):
                 module = importlib.import_module(module_name)

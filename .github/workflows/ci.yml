@@ -111,6 +111,8 @@ jobs:
         run: uv run python tools/release_check.py
       - name: Check AEL-CEP Stage-0 golden package
         run: uv run python tools/materialize_ael_cep_stage0.py --check
+      - name: Check Decision Utility v1 instrument calibration
+        run: uv run python tools/materialize_decision_utility_v1.py --check
       - name: Build distributions
         run: |
           uv build
@@ -204,6 +206,7 @@ jobs:
             studies/ael-cep/stage-0/trajectory-bundle.json \
             --report studies/ael-cep/stage-0/report.md \
             --check-report
+          .release-venv/bin/python tools/materialize_decision_utility_v1.py --check
 
   docker-smoke:
     name: docker isolation smoke

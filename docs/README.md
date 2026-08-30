@@ -190,6 +190,9 @@ they link to a completed result:
   metrics, primary endpoints, and diagnostic-only contrasts with explicit
   denominators. It is an implementation and adversarial-method test, not an
   empirical result or superiority claim.
+- [Decision Utility v1](../studies/decision-utility-v1/README.md) — a checked
+  synthetic calibration of evidence-equivalent decision views and scoring;
+  human recruitment and outcomes remain blocked/not run.
 
 Their draft manifests, simulations, and task-pack briefs must not be cited as
 successful experimental results.

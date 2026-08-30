@@ -256,6 +256,9 @@ credible measurement
    static checklist, and an AEL claim-first card. Measure severity-weighted,
    unweighted, and severity-stratum action error plus critical misses, false
    blocks, time, burden, and confidence calibration.
+   The synthetic instrument calibration is implemented; the human pilot remains
+   unadmitted while participants, consent, private blinded cases, pilot
+   variance, sample size, and stopping are unresolved.
 2. Qualify one decision-governing Codex intervention. Completion Integrity is
    the default candidate only if its wrapper, task, oracle, sample-size,
    custody, and authority gates all pass.

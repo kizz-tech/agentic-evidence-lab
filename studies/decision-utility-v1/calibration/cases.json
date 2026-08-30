@@ -1,0 +1,116 @@
+{
+  "schema_version": "ael.decision-utility-case-pack/0.1-development",
+  "pack_id": "kizz:ael:decision-utility:v1-public-calibration",
+  "revision": 1,
+  "role": "public_instrument_calibration_only",
+  "cases": [
+    {
+      "case_id": "DU-C01",
+      "title": "Scoped positive result",
+      "decision_question": "Should the exact candidate be adopted for the tested scope?",
+      "stratum": "clear_positive",
+      "severity": "low",
+      "critical": false,
+      "presented_recommendation": "adopt_exact",
+      "correct_action": "adopt_exact",
+      "recommendation_state": "supported",
+      "facts": [
+        {"fact_id": "claim", "label": "Primary claim", "value": "Supported on the frozen task population"},
+        {"fact_id": "guardrail", "label": "Critical guardrail", "value": "Passed with zero critical failures"},
+        {"fact_id": "cost", "label": "Total-system cost", "value": "Within the declared budget"},
+        {"fact_id": "scope", "label": "Transfer", "value": "No claim beyond the tested scope"}
+      ],
+      "rationale": "The exact local action is supported and bounded without a blocking guardrail."
+    },
+    {
+      "case_id": "DU-C02",
+      "title": "Null effect hidden by positive prose",
+      "decision_question": "Should the exact policy become the default?",
+      "stratum": "null_effect",
+      "severity": "medium",
+      "critical": false,
+      "presented_recommendation": "adopt_exact",
+      "correct_action": "reject_exact",
+      "recommendation_state": "contradicted",
+      "facts": [
+        {"fact_id": "claim", "label": "Primary effect", "value": "Treatment-minus-baseline difference is zero"},
+        {"fact_id": "uncertainty", "label": "Interval", "value": "Frozen interval contains only zero"},
+        {"fact_id": "guardrail", "label": "Critical guardrail", "value": "Passed"},
+        {"fact_id": "cost", "label": "Cost", "value": "Treatment uses additional tokens"}
+      ],
+      "rationale": "The exact policy adds cost without the minimum useful effect and should be rejected."
+    },
+    {
+      "case_id": "DU-C03",
+      "title": "Average gain with a critical failure",
+      "decision_question": "Should the candidate be promoted?",
+      "stratum": "critical_failure",
+      "severity": "critical",
+      "critical": true,
+      "presented_recommendation": "adopt_exact",
+      "correct_action": "reject_exact",
+      "recommendation_state": "contradicted",
+      "facts": [
+        {"fact_id": "claim", "label": "Average quality", "value": "Improved by the frozen threshold"},
+        {"fact_id": "guardrail", "label": "Critical guardrail", "value": "One treatment-only security regression"},
+        {"fact_id": "decision", "label": "Non-compensation rule", "value": "Any critical regression blocks promotion"},
+        {"fact_id": "recovery", "label": "Rollback", "value": "Available but not yet exercised"}
+      ],
+      "rationale": "The critical-failure gate is non-compensating and blocks promotion."
+    },
+    {
+      "case_id": "DU-C04",
+      "title": "Evidence past its validity window",
+      "decision_question": "Should the prior result authorize a current rollout?",
+      "stratum": "stale_evidence",
+      "severity": "high",
+      "critical": false,
+      "presented_recommendation": "adopt_exact",
+      "correct_action": "retest",
+      "recommendation_state": "contradicted",
+      "facts": [
+        {"fact_id": "claim", "label": "Historical result", "value": "Supported on the prior stack"},
+        {"fact_id": "freshness", "label": "Freshness", "value": "Model and harness crossed frozen invalidation triggers"},
+        {"fact_id": "transfer", "label": "Current transfer", "value": "Not measured"},
+        {"fact_id": "action", "label": "Current action", "value": "Requires a new observation"}
+      ],
+      "rationale": "A valid historical result cannot authorize the changed current stack without revalidation."
+    },
+    {
+      "case_id": "DU-C05",
+      "title": "Structurally invalid observation",
+      "decision_question": "Should the observed content count as an accuracy result?",
+      "stratum": "protocol_invalid",
+      "severity": "high",
+      "critical": false,
+      "presented_recommendation": "narrow",
+      "correct_action": "retest",
+      "recommendation_state": "contradicted",
+      "facts": [
+        {"fact_id": "content", "label": "Model content", "value": "Consistent with withheld truth"},
+        {"fact_id": "wrapper", "label": "Owner wrapper", "value": "Failed the frozen identifier grammar"},
+        {"fact_id": "valid_cells", "label": "Valid reporter cells", "value": "Zero"},
+        {"fact_id": "repair", "label": "Source repair", "value": "Implemented only after the observed failure"}
+      ],
+      "rationale": "The protocol-invalid observation cannot be rescued retrospectively; a fresh revision is required."
+    },
+    {
+      "case_id": "DU-C06",
+      "title": "Useful only in a narrow stratum",
+      "decision_question": "Should the intervention be routed selectively?",
+      "stratum": "cost_dominant",
+      "severity": "medium",
+      "critical": false,
+      "presented_recommendation": "narrow",
+      "correct_action": "narrow",
+      "recommendation_state": "supported",
+      "facts": [
+        {"fact_id": "effect", "label": "High-risk stratum", "value": "Material verified improvement"},
+        {"fact_id": "other_strata", "label": "Routine strata", "value": "No measured improvement"},
+        {"fact_id": "cost", "label": "Total-system cost", "value": "Exceeds the global burden cap"},
+        {"fact_id": "routing", "label": "Selective route", "value": "Meets the high-risk budget and guardrails"}
+      ],
+      "rationale": "The evidence supports a named route, not global adoption or total rejection."
+    }
+  ]
+}

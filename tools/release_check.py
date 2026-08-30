@@ -46,6 +46,14 @@ REQUIRED_FILES = {
     "docs/completion-integrity-enactment.md",
     "docs/completion-integrity-task-supply.md",
     "docs/completion-integrity-terminal-claims.md",
+    "studies/decision-utility-v1/README.md",
+    "studies/decision-utility-v1/analysis-plan.md",
+    "studies/decision-utility-v1/calibration/cases.json",
+    "studies/decision-utility-v1/calibration/output.json",
+    "studies/decision-utility-v1/calibration/participants.json",
+    "studies/decision-utility-v1/calibration/protocol.json",
+    "studies/decision-utility-v1/calibration/report.md",
+    "studies/decision-utility-v1/readiness.json",
     "docs/method.md",
     "docs/reproducibility.md",
     "docs/results/index.json",
@@ -71,6 +79,7 @@ REQUIRED_FILES = {
     "studies/ael-cep/stage-0/report.md",
     "studies/ael-cep/stage-0/trajectory-bundle.json",
     "tools/materialize_ael_cep_stage0.py",
+    "tools/materialize_decision_utility_v1.py",
     "uv.lock",
 }
 ALLOWED_TOP_LEVEL = {
@@ -234,6 +243,24 @@ def main() -> int:
     if cep_materializer.returncode:
         detail = cep_materializer.stderr.strip() or cep_materializer.stdout.strip()
         failures.append(f"AEL-CEP Stage-0 golden package is stale or invalid: {detail}")
+
+    decision_utility_materializer = subprocess.run(
+        [
+            sys.executable,
+            str(ROOT / "tools/materialize_decision_utility_v1.py"),
+            "--check",
+        ],
+        cwd=ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if decision_utility_materializer.returncode:
+        detail = (
+            decision_utility_materializer.stderr.strip()
+            or decision_utility_materializer.stdout.strip()
+        )
+        failures.append(f"Decision Utility v1 calibration is stale or invalid: {detail}")
 
     try:
         materialize_result_surface(
