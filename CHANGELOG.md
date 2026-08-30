@@ -12,6 +12,10 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   evidence-equivalent ordinary-note, checklist, and AEL-card views; a balanced
   no-repeat schedule; severity/guardrail/burden scoring; and an explicit human-
   evidence requirement.
+- A bounded Evidence-to-Action execution status and Completion Integrity
+  scale-up readiness record that preserve `do_not_execute_scored_calls` while
+  fresh roots, sample-size evidence, and prospective activation-v3 contracts
+  are absent.
 
 ### Research integrity
 

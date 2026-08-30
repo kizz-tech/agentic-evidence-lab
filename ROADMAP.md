@@ -272,6 +272,11 @@ human surface while retaining the machine evidence protocol. If a fixed
 Evaluator or ordinary immutable ledger matches AEL-CEP at lower total cost,
 freeze or narrow the coevolution program.
 
+Current execution status is recorded in
+[Evidence-to-Action execution status](docs/decisions/2026-08-30-evidence-to-action-execution-status.md):
+M0 is published; M1 is instrument-qualified with zero human responses; M2 is
+blocked before activation v3; M3 and M4 remain ineligible by prerequisite.
+
 ## Deferred Completion Integrity qualified scale-up
 
 The Completion Integrity scale-up remains scientifically useful, but it is no

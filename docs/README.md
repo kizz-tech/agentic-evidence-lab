@@ -211,6 +211,8 @@ Decision records preserve why important boundaries changed:
 - [Claim-first decision method](decisions/2026-08-14-claim-first-decision-method.md)
 - [AEL-CEP Stage 0 implementation boundary](decisions/2026-08-15-ael-cep-stage0-implementation.md)
 - [Alpha.12 AEL-CEP public boundary](decisions/2026-08-30-alpha12-public-boundary.md)
+- [Evidence-to-Action execution status](decisions/2026-08-30-evidence-to-action-execution-status.md)
+  — M0 publication, M1 instrument qualification, and the exact M2–M4 blockers.
 
 [The Contract v0 drafting brief](contract-v0-brief.md) is retained as design
 history. It does not replace the executable [current Contract v0](contract-v0.md).
