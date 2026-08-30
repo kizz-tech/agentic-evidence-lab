@@ -7,7 +7,7 @@
   "projection_policy": "ael.publication-projection/0.6",
   "schema_version": "ael.public-results/0.6",
   "source_hashes": {
-    "studies/public-results.json": "fb0971a699faee0b35f602bbfd93860ae181a6b55c28c90ceed57131132ae5be"
+    "studies/public-results.json": "0871a30f7b7057613d05a589641bc5513b8c91fe6fc86a80b6fb88f97081a9ab"
   },
   "studies": [
     {
@@ -265,7 +265,7 @@
         "studies/completion-integrity/activation-v2/results/runs/CI2-TS-01-T1.json": "73779151797208b4cf83443f80318e6cbe28d5c2953c8f67f80d70b9cc1b176f",
         "studies/completion-integrity/activation-v2/study-manifest.json": "e8eb6d3056b766e2440e121472ebd5ff89a4079dc641688959c80691832f081a",
         "studies/completion-integrity/concept.json": "1aca3c9b3925293c240e0cdfdd1b2c3590e9c7702d66d00a05244e379e45255f",
-        "studies/public-results.json": "fb0971a699faee0b35f602bbfd93860ae181a6b55c28c90ceed57131132ae5be"
+        "studies/public-results.json": "0871a30f7b7057613d05a589641bc5513b8c91fe6fc86a80b6fb88f97081a9ab"
       },
       "state": {
         "artifact": "public_bounded_result_materialized",
@@ -511,7 +511,7 @@
           "availability": "public",
           "label": "Post-freeze normalization deviation and source binding",
           "ref": {
-            "sha256": "1e74810272f136d5b06c6db4cb77759aefcb1bd9efff526a6d71ec6dd151b469",
+            "sha256": "c146e5427bc103a40a839fd94c532a136b1b6f278b8657d624254bf1d10b216b",
             "uri": "studies/completion-integrity/activation-v3/results/normalization-deviation.json"
           }
         },
@@ -672,7 +672,7 @@
         "studies/completion-integrity/activation-v3/results/evidence-receipt.json": "4fc7c547ce044a48cf1ab4f6ec6da5866ff927b9d637beb7e0c44beb553cf3b1",
         "studies/completion-integrity/activation-v3/results/freeze-ref.json": "846a08d4ecb4885b8ecc3c37e7c2cc6977baeb2d2096a97b35dfaaadccfe0b60",
         "studies/completion-integrity/activation-v3/results/measurement-set.json": "f2af2d2bd68e05630f460df841c142e01aee8b209980a42f77c9542def0eec01",
-        "studies/completion-integrity/activation-v3/results/normalization-deviation.json": "1e74810272f136d5b06c6db4cb77759aefcb1bd9efff526a6d71ec6dd151b469",
+        "studies/completion-integrity/activation-v3/results/normalization-deviation.json": "c146e5427bc103a40a839fd94c532a136b1b6f278b8657d624254bf1d10b216b",
         "studies/completion-integrity/activation-v3/results/observations.json": "85379817d21b01a559435a18571759296431d5ad176bab4357e33a493dd58011",
         "studies/completion-integrity/activation-v3/results/runs/CI3-PY-01-B0.json": "df9b0e87dc017602736a7963bd12e91a62c8d16fa4ef464316cb83ef16c78289",
         "studies/completion-integrity/activation-v3/results/runs/CI3-PY-01-E0.json": "37f6f5fa353fd80a032ba3740e1bce81891f6630c967adbbbaea2ad7a0a2adaf",
@@ -682,7 +682,7 @@
         "studies/completion-integrity/activation-v3/results/runs/CI3-TS-01-T1.json": "6717c98f380bfef1496700e99c20a47b6864c8c470cb29eb34b5858ee6836ac2",
         "studies/completion-integrity/activation-v3/study-manifest.json": "2d85747cee2748339f27cc7087f7b0fbc99e1f762bfdde86e6768a901d2dad48",
         "studies/completion-integrity/concept.json": "1aca3c9b3925293c240e0cdfdd1b2c3590e9c7702d66d00a05244e379e45255f",
-        "studies/public-results.json": "fb0971a699faee0b35f602bbfd93860ae181a6b55c28c90ceed57131132ae5be"
+        "studies/public-results.json": "0871a30f7b7057613d05a589641bc5513b8c91fe6fc86a80b6fb88f97081a9ab"
       },
       "state": {
         "artifact": "public_bounded_result_materialized",
@@ -755,7 +755,7 @@
               "model_calls": 0,
               "retries": 0,
               "status": "disclosed",
-              "terminal_projection_commit": null
+              "terminal_projection_commit": "32da2e454449791fe4c81a07ba2573c4233edffd"
             },
             "run_records": 6
           },
@@ -1140,7 +1140,7 @@
         "studies/completion-integrity/results/prompt-policy-v1/runs/CI-08-T1-R02-original.json": "e2e3df7e871f21b9071e7a2af791ea71598ccaa430cd4b6090d41a9e5fa86806",
         "studies/completion-integrity/results/prompt-policy-v1/runs/CI-08-T1-R03-original.json": "1eade3ec77d2bdcdff4e963ab83552e398653421c67fdab84f4b104c01fc022b",
         "studies/completion-integrity/study-manifest.json": "1c78faa58522277bbe0f9a932768a171aa523eba8f504b9d70865d4cca22d26d",
-        "studies/public-results.json": "fb0971a699faee0b35f602bbfd93860ae181a6b55c28c90ceed57131132ae5be"
+        "studies/public-results.json": "0871a30f7b7057613d05a589641bc5513b8c91fe6fc86a80b6fb88f97081a9ab"
       },
       "state": {
         "artifact": "materialized_and_audited_locally",
@@ -1617,7 +1617,7 @@
         "examples/council-generation-1/runs/E7-C3.json": "fbc585cadc103cdd9726c9d8584cf06ba1727170f4b98d5202db146c726cd141",
         "examples/council-generation-1/study-manifest.json": "aad0f01c68fc7346f0a834e7039f0650af31a04f65ceee927312468b335e9206",
         "reports/2026-08-12-council-generation-1.md": "9e9114b8c42cc135890fba800257ea405df8ef7b68928bd6e405b4ff3844313a",
-        "studies/public-results.json": "fb0971a699faee0b35f602bbfd93860ae181a6b55c28c90ceed57131132ae5be"
+        "studies/public-results.json": "0871a30f7b7057613d05a589641bc5513b8c91fe6fc86a80b6fb88f97081a9ab"
       },
       "state": {
         "artifact": "locally_implemented_and_validated",
@@ -2051,7 +2051,7 @@
         "examples/coding-skill/concept.json": "056da8f4a9bd5f90140f3440e7c283b0c172f64adfa5606f783a8223372d48b8",
         "examples/coding-skill/study-manifest.json": "330700bc8cb12d77520f251fb94f54c8b879a9915c39f530feaf5d56a1bed841",
         "reports/2026-08-12-focused-change-verification-codex-calibration.md": "0d5159f51fbe4be863be1feb319ffd0ef1364ddbd859f12d49cfabef15d15d2c",
-        "studies/public-results.json": "fb0971a699faee0b35f602bbfd93860ae181a6b55c28c90ceed57131132ae5be"
+        "studies/public-results.json": "0871a30f7b7057613d05a589641bc5513b8c91fe6fc86a80b6fb88f97081a9ab"
       },
       "state": {
         "artifact": "frozen skill and public task pack locally validated",
@@ -2474,7 +2474,7 @@
         "studies/agent-skills-season-1/results/property-based-testing-v2/runs/P-S04-S1-R01.json": "5ca5ed0127590840c6e2bec4dd174cec01a5be6ce38610c23390b78f12ad7c72",
         "studies/agent-skills-season-1/results/property-based-testing-v2/screening-decision.json": "90f792419b4b2d64ecc49d10afd54e9f3e7f9f597f7981a299a027fac6a192d1",
         "studies/agent-skills-season-1/screening/property-based-testing-v2.freeze.json": "a1fac08b84e35f412de04f37a1d3eb3ac3ce2711df474febd9a64b2fb4e3fb05",
-        "studies/public-results.json": "fb0971a699faee0b35f602bbfd93860ae181a6b55c28c90ceed57131132ae5be"
+        "studies/public-results.json": "0871a30f7b7057613d05a589641bc5513b8c91fe6fc86a80b6fb88f97081a9ab"
       },
       "state": {
         "artifact": "frozen private task composites represented by hashes; sanitized evidence materialized",
@@ -2995,7 +2995,7 @@
         "studies/agent-skills-season-1/results/systematic-debugging-real-shadow-v1/runs/D-S04-S1-R01.json": "c7aab7465d82d775021d72c9b97b764e55077281526c95fe3135a35e9a745be8",
         "studies/agent-skills-season-1/screening/systematic-debugging-real-shadow.admission.pilot.json": "ecf001fb6c03757621ed7159875c2801056aa869891281baae4bf04f0125d94c",
         "studies/agent-skills-season-1/screening/systematic-debugging-real-shadow.freeze.json": "b5c63ce49c594c7345a242b72f1156c8aef0558466f9b72291e8bc18c7aafdd7",
-        "studies/public-results.json": "fb0971a699faee0b35f602bbfd93860ae181a6b55c28c90ceed57131132ae5be"
+        "studies/public-results.json": "0871a30f7b7057613d05a589641bc5513b8c91fe6fc86a80b6fb88f97081a9ab"
       },
       "state": {
         "artifact": "sanitized public Contract v0 projection; private materials represented by hashes",

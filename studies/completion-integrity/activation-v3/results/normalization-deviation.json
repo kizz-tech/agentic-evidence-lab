@@ -6,6 +6,7 @@
   "study_id": "kizz:ael:study:completion-integrity-activation-v3",
   "study_revision": 3,
   "preregistration_sha": "7257025eab78e8894f69e6ad0677fabec8cf5542",
+  "terminal_projection_commit": "32da2e454449791fe4c81a07ba2573c4233edffd",
   "freeze_sha256": "5cbbfefdcaf48d3c57a5394e72304a080b3cf85a6312a1c69816d4c9d6762f24",
   "observed_failures": [
     {
