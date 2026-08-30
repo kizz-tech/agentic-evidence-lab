@@ -16,6 +16,10 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   scale-up readiness record that preserve `do_not_execute_scored_calls` while
   fresh roots, sample-size evidence, and prospective activation-v3 contracts
   are absent.
+- A prospective activation-v3 package with two fresh sacrificial repository
+  graphs, a corrected version-bound qualification receipt, a six-cell no-call
+  full-wrapper qualification, and a conformant-with-warnings Study Quality
+  Profile. No activation-v3 model cell has been submitted.
 
 ### Research integrity
 

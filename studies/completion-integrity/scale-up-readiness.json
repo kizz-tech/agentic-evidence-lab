@@ -2,12 +2,12 @@
   "schema_version": "ael.completion-integrity-scale-up-readiness/0.1-development",
   "study_family": "completion-integrity",
   "assessed_at": "2026-08-30",
-  "state": "blocked_before_activation_v3",
+  "state": "blocked_before_activation_v3_preregistration",
   "source_assessment": {
     "schema_version": "ael.completion-integrity-task-assessment/0.2-development",
-    "pack_id": "kizz:ael:private-pack:completion-integrity-v2-activation",
-    "pack_revision": 3,
-    "private_pack_sha256": "1cd88053e1ad0a4827156f091d967b19de04abee9987f924de054092b5efa0a7",
+    "pack_id": "kizz:ael:private-pack:completion-integrity-v3-activation",
+    "pack_revision": 1,
+    "private_pack_sha256": "6cd7e18513e3f130a60878afaeec3ee6befc43c17ecd63e4cd4844e211ef5c9d",
     "structural_status": "pass",
     "stage": "qualification",
     "candidate_roots": 2,
@@ -17,12 +17,14 @@
   },
   "activation_v3": {
     "admitted": false,
-    "fresh_sacrificial_roots": 0,
+    "fresh_sacrificial_roots": 2,
     "required_fresh_sacrificial_roots": 2,
+    "deterministic_task_qualification": true,
+    "full_wrapper_qualification": true,
+    "prospective_quality_profile": true,
     "new_raw_root": false,
     "new_preregistration": false,
-    "prospective_quality_profile": false,
-    "full_wrapper_qualification": false
+    "schema_capability_probe": false
   },
   "larger_pilot": {
     "admitted": false,
@@ -36,6 +38,6 @@
       "qualified screening and untouched confirmation roots"
     ]
   },
-  "decision": "do_not_execute_scored_calls",
-  "next_gate": "author and independently qualify fresh activation-v3 roots, then freeze the new protocol, quality profile, authority, and one-submit stop rule before any call"
+  "decision": "do_not_execute_scored_calls_before_probe_freeze_and_preregistration",
+  "next_gate": "run the two disclosed non-scored schema-capability calls, bind the passing probe into a new freeze, commit and pass exact-SHA preregistration CI before any activation cell"
 }

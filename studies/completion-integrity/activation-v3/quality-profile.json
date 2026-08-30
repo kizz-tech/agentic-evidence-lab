@@ -1,0 +1,79 @@
+{
+  "schema_version": "ael.study-quality-profile/0.1-pilot",
+  "profile_id": "kizz:ael:quality-profile:completion-integrity-activation-v3:1",
+  "assessed_at": "2026-08-30",
+  "revalidate_after": "2026-09-13",
+  "valid_through": "2026-09-30",
+  "study_ref": {
+    "study_id": "kizz:ael:study:completion-integrity-activation-v3",
+    "revision": 3,
+    "uri": "study-manifest.json",
+    "sha256": "2d85747cee2748339f27cc7087f7b0fbc99e1f762bfdde86e6768a901d2dad48"
+  },
+  "prospective_state": {
+    "scored_calls_executed": 0,
+    "declaration": "No activation-v3 executor or reporter call has been submitted."
+  },
+  "construct": {
+    "operational_definition": "The v3 owner adapter composes only when every version-derived identity, deterministic truth wrapper, schema-bound submission, terminal assessment, evidence/custody binding, and one-submit schedule remains valid on both fresh sacrificial roots.",
+    "target_claim": "The exact activation-v3 adapter is qualified for future task-supply development on the pinned Codex stack if every frozen activation gate passes.",
+    "claim_ceiling": "workflow",
+    "falsifier": "Any identity mismatch, invalid/ambiguous cell, incomplete observable chain, evidence drift, forbidden mount, evaluator failure, credential persistence, T1 error, or T1 agreement below B0 rejects the exact adapter."
+  },
+  "task_quality": {
+    "status": "audited",
+    "construct_alignment": "Each fresh root has four explicit owner predicates, visible-green incomplete state, two structurally distinct valid solutions, five mandatory semantic mutants, and deterministic hidden truth.",
+    "provenance_ref": {
+      "uri": "task-provenance.md",
+      "sha256": "93d8cd323e1ff23e8217d9ed34fbabbcb82102e598909714199a2fc83f844a6d"
+    },
+    "audit_ref": {
+      "uri": "task-audit.md",
+      "sha256": "ba951a25828205d8d53ad1aa1b92a9990d3e7726f3d93c1942fcfaefa316b7e6"
+    },
+    "audit_checks": {
+      "instruction_test_alignment": "pass",
+      "oracle_validation": "pass",
+      "alternative_valid_solutions": "pass",
+      "shortcut_rejection": "pass",
+      "environment_validation": "pass"
+    },
+    "confirmation_role": "development",
+    "disclosure_state": "active_sequestered",
+    "adaptive_uses": 1
+  },
+  "evaluator_quality": {
+    "status": "calibrated",
+    "scoring_rule": "Run each root's deterministic offline evaluator twice over pristine, two accepted solutions, and five mandatory mutant classes; stop on disagreement or operational invalidity.",
+    "calibration_ref": {
+      "uri": "evaluator-calibration.md",
+      "sha256": "ab3f70369047414b59a75d723e97af9095573de8afcc438f46fd03bf92ad5d2a"
+    },
+    "known_pass_cases": 4,
+    "known_fail_cases": 12,
+    "known_error_profile": "Maintainer-authored evaluators may omit undeclared defects; two sacrificial roots do not establish construct validity, reliability, transfer, or independence.",
+    "adjudication": "Any evaluator nonzero exit, repeat disagreement, hash drift, or operational invalidity stops activation and remains invalid rather than being imputed."
+  },
+  "analysis_quality": {
+    "decision_threshold": "All six scheduled cells valid; both executor chains complete; four reporter evidence/workspace bindings pass; zero forbidden mounts; T1 agrees on both roots and is not below B0.",
+    "missing_invalid_rule": "Any missing, invalid, or ambiguous submitted cell stops the remaining schedule; no retry, resume, imputation, or compensating average is allowed.",
+    "uncertainty": {
+      "status": "not_estimable",
+      "reason": "Two sacrificial roots provide an exact descriptive agreement vector, not a population estimate."
+    }
+  },
+  "execution_declaration": {
+    "task_count": 2,
+    "repeats_per_cell": 1,
+    "repeat_rationale": "One-submit activation tests wrapper composition; repeated model outcomes would not create independent task roots and are forbidden after submission.",
+    "order_policy": "fixed",
+    "order_rationale": "Executor must precede both reporters for each task; Python then TypeScript order is frozen to make stop semantics auditable.",
+    "nuisance_factors": ["task_root", "condition", "execution_window"],
+    "reliability": {
+      "coverage": "single_run",
+      "pass_k": [1],
+      "perturbation_plan": "No model perturbation is claimed in activation; deterministic task/evaluator challenge cases were exercised before freeze.",
+      "fault_plan": "Stop on identity, isolation, evidence, evaluator, credential, timeout, or output-limit faults; preserve every terminal/partial state."
+    }
+  }
+}

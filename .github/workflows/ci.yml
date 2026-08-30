@@ -51,6 +51,12 @@ jobs:
             --json-output studies/quality-preflight/examples/pass/preflight.json \
             --markdown-output studies/quality-preflight/examples/pass/preflight.md \
             --check
+          uv run ael study preflight \
+            studies/completion-integrity/activation-v3/quality-profile.json \
+            --json-output studies/completion-integrity/activation-v3/preflight.json \
+            --markdown-output studies/completion-integrity/activation-v3/preflight.md \
+            --as-of 2026-08-30 \
+            --check
           uv run python tools/check_completion_integrity_engagement.py \
             --method-plan studies/completion-integrity/diagnostics/process-v1/method-plan.pilot.json \
             --observations studies/completion-integrity/diagnostics/process-v1/fixtures/normalized-cells.json \
@@ -148,6 +154,12 @@ jobs:
             studies/quality-preflight/examples/pass/quality-profile.json \
             --json-output studies/quality-preflight/examples/pass/preflight.json \
             --markdown-output studies/quality-preflight/examples/pass/preflight.md \
+            --check
+          .release-venv/bin/ael study preflight \
+            studies/completion-integrity/activation-v3/quality-profile.json \
+            --json-output studies/completion-integrity/activation-v3/preflight.json \
+            --markdown-output studies/completion-integrity/activation-v3/preflight.md \
+            --as-of 2026-08-30 \
             --check
           .release-venv/bin/python tools/check_completion_integrity_engagement.py \
             --method-plan studies/completion-integrity/diagnostics/process-v1/method-plan.pilot.json \

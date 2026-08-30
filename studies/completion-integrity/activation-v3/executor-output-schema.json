@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["verdict", "progress", "ledger"],
+  "properties": {
+    "verdict": {"enum": ["complete", "incomplete", "uncertain"]},
+    "progress": {"enum": ["continuable", "awaiting_clarification", "externally_blocked"]},
+    "ledger": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["requirement_id", "state", "evidence_commands"],
+        "properties": {
+          "requirement_id": {"type": "string"},
+          "state": {"enum": ["verified", "failed", "unresolved"]},
+          "evidence_commands": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      }
+    }
+  }
+}

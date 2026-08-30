@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -16,7 +17,10 @@ from tools.completion_integrity_activation_support import (
     parse_codex_events,
     parse_task_requirements,
     qualification_id_for_pack,
+    schema_probe_metadata,
 )
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def command_event(command: str, exit_code: int) -> dict[str, object]:
@@ -70,6 +74,24 @@ def executor_output(command: str) -> dict[str, object]:
 
 
 class ActivationSupportTests(unittest.TestCase):
+    def test_activation_v3_public_wrapper_qualification_is_version_bound(self) -> None:
+        root = ROOT / "studies/completion-integrity/activation-v3"
+        wrapper = json.loads((root / "wrapper-qualification.json").read_text(encoding="utf-8"))
+        preflight = json.loads((root / "preflight.json").read_text(encoding="utf-8"))
+        self.assertEqual("pass", wrapper["status"])
+        self.assertEqual("activation-v3", wrapper["activation_namespace"])
+        self.assertEqual(6, wrapper["cell_count"])
+        self.assertEqual(0, wrapper["model_calls"])
+        self.assertTrue(all(cell["status"] == "pass" for cell in wrapper["cells"]))
+        self.assertNotIn("activation-v1", json.dumps(wrapper, sort_keys=True))
+        self.assertTrue(
+            all(
+                cell["submission_id"] is None or cell["submission_id"].endswith(":activation-v3")
+                for cell in wrapper["cells"]
+            )
+        )
+        self.assertEqual("conformant_with_warnings", preflight["status"])
+
     def test_versioned_activation_and_qualification_identities_are_derived(self) -> None:
         self.assertEqual(
             "activation-v3",
@@ -83,6 +105,20 @@ class ActivationSupportTests(unittest.TestCase):
         )
         with self.assertRaisesRegex(SandboxError, "unsupported shape"):
             activation_namespace("kizz:ael:study:completion-integrity")
+        self.assertEqual(
+            {
+                "probe_id": "kizz:ael:study:completion-integrity-activation-v3:schema-capability:3",
+                "cumulative_non_scored_call_count": 2,
+                "prior_attempts": [],
+            },
+            schema_probe_metadata("kizz:ael:study:completion-integrity-activation-v3", 3),
+        )
+        self.assertEqual(
+            4,
+            schema_probe_metadata("kizz:ael:study:completion-integrity-activation-v2", 2)[
+                "cumulative_non_scored_call_count"
+            ],
+        )
 
     def test_schedule_is_derived_from_qualified_task_identities(self) -> None:
         schedule = activation_schedule(["CI3-PY-01", "CI3-TS-01"])

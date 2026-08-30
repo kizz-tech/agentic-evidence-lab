@@ -1,0 +1,50 @@
+{
+  "as_of": "2026-08-30",
+  "assessed_at": "2026-08-30",
+  "boundary": "Conformance checks declared, hash-bound pre-run design evidence only; they do not prove scientific validity, chronology of execution, replication, transfer, or outcome.",
+  "issues": [
+    {
+      "code": "QP-W001",
+      "location": "execution_declaration.repeats_per_cell",
+      "message": "one repeat supports a bounded pilot decision, not stability evidence",
+      "severity": "warning"
+    },
+    {
+      "code": "QP-W002",
+      "location": "execution_declaration.order_policy",
+      "message": "non-random order can preserve nuisance effects despite the declared rationale",
+      "severity": "warning"
+    },
+    {
+      "code": "QP-W003",
+      "location": "analysis_quality.uncertainty",
+      "message": "effect uncertainty is explicitly not estimable",
+      "severity": "warning"
+    },
+    {
+      "code": "QP-W004",
+      "location": "study_ref.independence_claim",
+      "message": "maintainer-only evaluation is not independent replication",
+      "severity": "warning"
+    }
+  ],
+  "profile_id": "kizz:ael:quality-profile:completion-integrity-activation-v3:1",
+  "profile_sha256": "8ef5a14b27887219c341ff0e64ec53973954ec75c118e8abe2bedf00deda5a13",
+  "quality_axes": {
+    "design_class": "calibration",
+    "evaluator_validity": "calibrated",
+    "freshness": "current",
+    "independence": "maintainer_only",
+    "reliability_coverage": "single_run",
+    "sampling_strength": "decision_thresholded_pilot",
+    "task_validity": "audited"
+  },
+  "schema_version": "ael.study-quality-preflight/0.1-pilot",
+  "scope": "design_preflight",
+  "status": "conformant_with_warnings",
+  "study": {
+    "manifest_sha256": "2d85747cee2748339f27cc7087f7b0fbc99e1f762bfdde86e6768a901d2dad48",
+    "revision": 3,
+    "study_id": "kizz:ael:study:completion-integrity-activation-v3"
+  }
+}

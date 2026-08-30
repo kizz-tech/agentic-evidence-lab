@@ -11,6 +11,7 @@ from completion_integrity_activation_support import (
     canonical_sha256,
     load_json,
     qualification_id_for_pack,
+    schema_probe_metadata,
     sha256_path,
     write_json_atomic,
 )
@@ -25,6 +26,7 @@ from ael.sandbox import (
     inspect_image,
     tree_sha256,
 )
+from ael.study_quality import materialize_preflight
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_STUDY_ROOT = ROOT / "studies" / "completion-integrity" / "activation-v1"
@@ -52,7 +54,17 @@ PUBLIC_REF_NAMES = (
     "prompts/reporter-T1.txt",
     "capability-probe.json",
 )
-OPTIONAL_PUBLIC_REF_NAMES = ("executor-output-schema.json", "schema-capability-probe.json")
+OPTIONAL_PUBLIC_REF_NAMES = (
+    "executor-output-schema.json",
+    "schema-capability-probe.json",
+    "wrapper-qualification.json",
+    "quality-profile.json",
+    "preflight.json",
+    "preflight.md",
+    "task-provenance.md",
+    "task-audit.md",
+    "evaluator-calibration.md",
+)
 
 CODE_REFS = (
     "docker/codex-reporter/Dockerfile",
@@ -71,6 +83,7 @@ CODE_REFS = (
     "tools/probe_completion_integrity_reporter.py",
     "tools/probe_completion_integrity_schemas.py",
     "tools/qualify_completion_integrity_tasks.py",
+    "tools/qualify_completion_integrity_wrapper.py",
     "tools/run_completion_integrity_activation.py",
 )
 
@@ -222,10 +235,14 @@ def _verify_schema_probe(
     )
     _require(probe.get("status") == "pass", "schema capability probe is not passing")
     _require(probe.get("call_count") == 2, "schema capability call count differs")
-    expected_cumulative_calls = 4 if study_revision == 2 else 2
+    metadata = schema_probe_metadata(study_id, study_revision)
     _require(
-        probe.get("cumulative_non_scored_call_count") == expected_cumulative_calls,
+        probe.get("cumulative_non_scored_call_count")
+        == metadata["cumulative_non_scored_call_count"],
         "schema capability cumulative call count differs",
+    )
+    _require(
+        probe.get("prior_attempts") == metadata["prior_attempts"], "schema probe lineage differs"
     )
     calls = probe.get("calls")
     _require(isinstance(calls, list) and len(calls) == 2, "schema capability calls are malformed")
@@ -288,6 +305,7 @@ def build_freeze(
         "study root is missing or unsafe",
     )
     manifest = load_json(study_root / "study-manifest.json")
+    study_revision = int(manifest.get("revision", 0))
     assessment = load_json(assessment_path)
     qualification_path = qualification_root / "qualification-receipt.json"
     qualification = load_json(qualification_path)
@@ -310,6 +328,63 @@ def build_freeze(
         "pack artifact hash differs",
     )
     _verify_qualification(qualification, pack_root, qualification_root)
+    wrapper_binding: dict[str, Any] | None = None
+    quality_binding: dict[str, Any] | None = None
+    if study_revision >= 3:
+        wrapper_path = study_root / "wrapper-qualification.json"
+        _require(
+            wrapper_path.is_file() and not wrapper_path.is_symlink(),
+            "wrapper qualification is required",
+        )
+        wrapper = load_json(wrapper_path)
+        _require(wrapper.get("status") == "pass", "wrapper qualification is not passing")
+        _require(
+            wrapper.get("study_id") == manifest.get("study_id"), "wrapper study identity differs"
+        )
+        _require(wrapper.get("study_revision") == study_revision, "wrapper study revision differs")
+        _require(
+            wrapper.get("pack_sha256") == tree_sha256(pack_root), "wrapper pack binding differs"
+        )
+        _require(
+            wrapper.get("qualification_receipt_sha256") == sha256_path(qualification_path),
+            "wrapper qualification receipt binding differs",
+        )
+        _require(
+            wrapper.get("task_count") == 2 and wrapper.get("cell_count") == 6,
+            "wrapper coverage differs",
+        )
+        _require(wrapper.get("model_calls") == 0, "wrapper qualification must be no-call")
+        wrapper_binding = {
+            "receipt_sha256": sha256_path(wrapper_path),
+            "status": "pass",
+            "task_count": 2,
+            "cell_count": 6,
+            "model_calls": 0,
+        }
+
+        quality_path = study_root / "quality-profile.json"
+        preflight_json = study_root / "preflight.json"
+        preflight_markdown = study_root / "preflight.md"
+        _require(
+            quality_path.is_file() and not quality_path.is_symlink(), "quality profile is required"
+        )
+        materialize_preflight(
+            quality_path,
+            json_output=preflight_json,
+            markdown_output=preflight_markdown,
+            check=True,
+            repository_root=ROOT,
+        )
+        preflight = load_json(preflight_json)
+        _require(
+            preflight.get("status") in {"conformant", "conformant_with_warnings"},
+            "quality preflight is blocking",
+        )
+        quality_binding = {
+            "profile_sha256": sha256_path(quality_path),
+            "preflight_sha256": sha256_path(preflight_json),
+            "status": preflight["status"],
+        }
     probe = load_json(study_root / "capability-probe.json")
     reporter_image_id = inspect_image(DEFAULT_REPORTER_IMAGE)
     _verify_probe(probe, image_id=reporter_image_id, study_id=str(manifest["study_id"]))
@@ -419,6 +494,10 @@ def build_freeze(
         result["qualification_model_calls_executed_before_freeze"] = int(
             schema_probe_binding["non_scored_model_calls"]
         )
+    if wrapper_binding is not None:
+        result["full_wrapper_qualification"] = wrapper_binding
+    if quality_binding is not None:
+        result["quality_profile"] = quality_binding
     return result
 
 

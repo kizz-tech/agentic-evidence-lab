@@ -65,6 +65,24 @@ REQUIRED_FILES = {
     "studies/completion-integrity/activation-v2/results/decision.json",
     "studies/completion-integrity/activation-v2/results/evidence-receipt.json",
     "studies/completion-integrity/activation-v2/results/measurement-set.json",
+    "studies/completion-integrity/activation-v3/analysis-plan.md",
+    "studies/completion-integrity/activation-v3/capability-probe.json",
+    "studies/completion-integrity/activation-v3/evaluator-calibration.md",
+    "studies/completion-integrity/activation-v3/executor-output-schema.json",
+    "studies/completion-integrity/activation-v3/method-plan.json",
+    "studies/completion-integrity/activation-v3/preflight.json",
+    "studies/completion-integrity/activation-v3/preflight.md",
+    "studies/completion-integrity/activation-v3/prompts/executor.txt",
+    "studies/completion-integrity/activation-v3/prompts/reporter-B0.txt",
+    "studies/completion-integrity/activation-v3/prompts/reporter-T1.txt",
+    "studies/completion-integrity/activation-v3/protocol.json",
+    "studies/completion-integrity/activation-v3/quality-profile.json",
+    "studies/completion-integrity/activation-v3/reporter-output-schema.json",
+    "studies/completion-integrity/activation-v3/study-manifest.json",
+    "studies/completion-integrity/activation-v3/task-audit.md",
+    "studies/completion-integrity/activation-v3/task-provenance.md",
+    "studies/completion-integrity/activation-v3/terminal-claim-policy.json",
+    "studies/completion-integrity/activation-v3/wrapper-qualification.json",
     "studies/completion-integrity/results/prompt-policy-v1/effect-decision.json",
     "studies/completion-integrity/results/prompt-policy-v1/evidence-receipt.json",
     "studies/completion-integrity/results/prompt-policy-v1/measurement-set.json",
@@ -82,6 +100,7 @@ REQUIRED_FILES = {
     "studies/ael-cep/stage-0/trajectory-bundle.json",
     "tools/materialize_ael_cep_stage0.py",
     "tools/materialize_decision_utility_v1.py",
+    "tools/qualify_completion_integrity_wrapper.py",
     "uv.lock",
 }
 ALLOWED_TOP_LEVEL = {
@@ -230,6 +249,18 @@ def main() -> int:
         )
     except SandboxError as exc:
         failures.append(f"study quality preflight example is stale or invalid: {exc}")
+
+    try:
+        materialize_preflight(
+            ROOT / "studies/completion-integrity/activation-v3/quality-profile.json",
+            json_output=ROOT / "studies/completion-integrity/activation-v3/preflight.json",
+            markdown_output=ROOT / "studies/completion-integrity/activation-v3/preflight.md",
+            check=True,
+            repository_root=ROOT,
+            as_of="2026-08-30",
+        )
+    except SandboxError as exc:
+        failures.append(f"activation-v3 quality preflight is stale or invalid: {exc}")
 
     cep_materializer = subprocess.run(
         [

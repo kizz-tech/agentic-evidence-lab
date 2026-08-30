@@ -1,0 +1,91 @@
+{
+  "activation_namespace": "activation-v3",
+  "binding_sha256": "bb8967631e70f897f10a9e8aae32e0c92d7e038f213559a39b5b3775d4f9d2f2",
+  "cell_count": 6,
+  "cells": [
+    {
+      "cell_id": "CI3-PY-01-E0",
+      "condition_id": null,
+      "journal_attempt_id": "attempt:4430a32fc51654b024568504ee3452ba",
+      "role": "executor",
+      "sequence": 1,
+      "status": "pass",
+      "submission_id": null,
+      "task_id": "CI3-PY-01",
+      "terminal_assessment": "not_applicable_executor",
+      "truth_id": "truth:CI3-PY-01:activation-v3"
+    },
+    {
+      "cell_id": "CI3-PY-01-B0",
+      "condition_id": "B0",
+      "journal_attempt_id": "attempt:2789f862fb1b0671b9e28bd8a746032e",
+      "role": "reporter",
+      "sequence": 2,
+      "status": "pass",
+      "submission_id": "submission:CI3-PY-01:B0:activation-v3",
+      "task_id": "CI3-PY-01",
+      "terminal_assessment": "pass",
+      "truth_id": "truth:CI3-PY-01:activation-v3"
+    },
+    {
+      "cell_id": "CI3-PY-01-T1",
+      "condition_id": "T1",
+      "journal_attempt_id": "attempt:1aa1668998d3c9403f1456975c1d270d",
+      "role": "reporter",
+      "sequence": 3,
+      "status": "pass",
+      "submission_id": "submission:CI3-PY-01:T1:activation-v3",
+      "task_id": "CI3-PY-01",
+      "terminal_assessment": "pass",
+      "truth_id": "truth:CI3-PY-01:activation-v3"
+    },
+    {
+      "cell_id": "CI3-TS-01-E0",
+      "condition_id": null,
+      "journal_attempt_id": "attempt:8c02207e0b939daf2af4c5e430a60d66",
+      "role": "executor",
+      "sequence": 4,
+      "status": "pass",
+      "submission_id": null,
+      "task_id": "CI3-TS-01",
+      "terminal_assessment": "not_applicable_executor",
+      "truth_id": "truth:CI3-TS-01:activation-v3"
+    },
+    {
+      "cell_id": "CI3-TS-01-B0",
+      "condition_id": "B0",
+      "journal_attempt_id": "attempt:e475bc54df674f55e4501cd8204f6793",
+      "role": "reporter",
+      "sequence": 5,
+      "status": "pass",
+      "submission_id": "submission:CI3-TS-01:B0:activation-v3",
+      "task_id": "CI3-TS-01",
+      "terminal_assessment": "pass",
+      "truth_id": "truth:CI3-TS-01:activation-v3"
+    },
+    {
+      "cell_id": "CI3-TS-01-T1",
+      "condition_id": "T1",
+      "journal_attempt_id": "attempt:b3e38e04ea19dc8b3cc12837df736bd7",
+      "role": "reporter",
+      "sequence": 6,
+      "status": "pass",
+      "submission_id": "submission:CI3-TS-01:T1:activation-v3",
+      "task_id": "CI3-TS-01",
+      "terminal_assessment": "pass",
+      "truth_id": "truth:CI3-TS-01:activation-v3"
+    }
+  ],
+  "claim_ceiling": "Synthetic full-wrapper composition over retained qualification truth; no runtime isolation, reporter accuracy, effect, reliability, or transfer claim.",
+  "model_calls": 0,
+  "pack_id": "kizz:ael:private-pack:completion-integrity-v3-activation",
+  "pack_revision": 1,
+  "pack_sha256": "0b7585b044bceb789b227bb175e0a0931a76566a0b977816c9c891e5072ce691",
+  "qualification_id": "kizz:ael:study:completion-integrity-activation-v3:full-wrapper-qualification:3",
+  "qualification_receipt_sha256": "8f0718dbc2d5f51fd322bc4f8b4693ee8ce36cba615b54e68f28d28f63321c1d",
+  "schema_version": "ael.completion-integrity-wrapper-qualification/0.1-pilot",
+  "status": "pass",
+  "study_id": "kizz:ael:study:completion-integrity-activation-v3",
+  "study_revision": 3,
+  "task_count": 2
+}

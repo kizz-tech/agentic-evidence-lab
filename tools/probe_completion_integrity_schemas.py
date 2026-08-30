@@ -10,6 +10,7 @@ from completion_integrity_activation_support import (
     canonical_sha256,
     load_json,
     parse_codex_events,
+    schema_probe_metadata,
     sha256_path,
     write_json_atomic,
 )
@@ -148,10 +149,17 @@ def probe_schemas(
     )
     manifest = load_json(study_root / "study-manifest.json")
     study_id = manifest.get("study_id")
+    study_revision = manifest.get("revision")
     _require(
         isinstance(study_id, str)
         and study_id.startswith("kizz:ael:study:completion-integrity-activation-v"),
         "study identity is invalid",
+    )
+    _require(
+        isinstance(study_revision, int)
+        and not isinstance(study_revision, bool)
+        and study_revision >= 2,
+        "study revision is invalid",
     )
     raw_root = _private_root(raw_root)
     executor_schema = study_root / "executor-output-schema.json"
@@ -240,23 +248,14 @@ def probe_schemas(
         },
     )
 
+    metadata = schema_probe_metadata(study_id, study_revision)
     document: dict[str, object] = {
         "schema_version": PROBE_SCHEMA,
-        "probe_id": f"{study_id}:schema-capability:2",
+        "probe_id": metadata["probe_id"],
         "status": "pass",
         "call_count": 2,
-        "cumulative_non_scored_call_count": 4,
-        "prior_attempts": [
-            {
-                "attempt": 1,
-                "status": "fail",
-                "model_calls": 2,
-                "reason": (
-                    "Both schemas were accepted, but the nested Codex sandbox blocked local "
-                    "evidence reads and optional MCP/web-search surfaces remained reachable."
-                ),
-            }
-        ],
+        "cumulative_non_scored_call_count": metadata["cumulative_non_scored_call_count"],
+        "prior_attempts": metadata["prior_attempts"],
         "calls": [executor_receipt, reporter_receipt],
         "boundary": (
             "These two non-scored provider calls show that the exact executor and reporter schemas "
@@ -270,7 +269,7 @@ def probe_schemas(
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Probe exact alpha.11 structured-output schemas against Codex"
+        description="Probe exact versioned activation output schemas against Codex"
     )
     parser.add_argument("--study-root", type=Path, default=DEFAULT_STUDY_ROOT)
     parser.add_argument("--raw-root", required=True, type=Path)

@@ -89,6 +89,34 @@ def activation_schedule(task_ids: Sequence[str]) -> list[dict[str, Any]]:
     return schedule
 
 
+def schema_probe_metadata(study_id: str, study_revision: int) -> dict[str, Any]:
+    """Return prospective schema-probe identity and disclosed call lineage."""
+
+    namespace = activation_namespace(study_id)
+    if namespace != f"activation-v{study_revision}":
+        raise SandboxError("schema-probe study identity and revision differ")
+    prior_attempts: list[dict[str, Any]] = []
+    cumulative_calls = 2
+    if study_revision == 2:
+        cumulative_calls = 4
+        prior_attempts = [
+            {
+                "attempt": 1,
+                "status": "fail",
+                "model_calls": 2,
+                "reason": (
+                    "Both schemas were accepted, but the nested Codex sandbox blocked local "
+                    "evidence reads and optional MCP/web-search surfaces remained reachable."
+                ),
+            }
+        ]
+    return {
+        "probe_id": f"{study_id}:schema-capability:{study_revision}",
+        "cumulative_non_scored_call_count": cumulative_calls,
+        "prior_attempts": prior_attempts,
+    }
+
+
 def activation_attempt_id(freeze_sha256: str, cell_id: str) -> str:
     """Construct a deterministic identifier accepted by the terminal-claim grammar.
 

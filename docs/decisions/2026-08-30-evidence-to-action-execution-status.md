@@ -34,18 +34,23 @@ Model participants cannot close this gate.
 
 ## M2 — Decision-governing Codex intervention
 
-The current private Completion Integrity v2 pack was rechecked against the
-public boundary. Its structural assessment passes, but it contains only two
-historical qualification candidates, zero scored roots, and a
-`pending_pilot` sample-size state.
+The old v2 pack remains historical and cannot be reused. A new private v3 pack
+now contains two fresh Python/TypeScript sacrificial repository graphs. Both
+passed the complete deterministic eight-case qualification with two evaluator
+repeats per case after one invalid owner receipt exposed and triggered removal
+of the remaining `activation-v1` identity constant.
 
-It cannot be reused for activation v3 because its task content and outputs have
-already been observed. No fresh v3 sacrificial root, raw root,
-preregistration, quality profile, or full-wrapper qualification exists. The
-larger pilot has zero eligible screening/confirmation roots against a minimum
-authoring/admission floor of 16 independent roots.
+The corrected qualification receipt binds the v3 pack revision. A separate
+no-call qualification composes all six version-derived attempt/truth/submission/
+terminal-assessment identities, and the prospective Study Quality Profile is
+`conformant_with_warnings` with zero activation-v3 model calls.
 
-Decision: `do_not_execute_scored_calls`. See
+Activation remains blocked until two disclosed non-scored schema-capability
+calls pass, the probe is frozen, and an exact-SHA preregistration commit/CI gate
+passes. The larger pilot still has zero eligible screening/confirmation roots
+against a minimum floor of 16 independent roots and `pending_pilot` sizing.
+
+Decision: `do_not_execute_scored_calls_before_probe_freeze_and_preregistration`. See
 [`scale-up-readiness.json`](../../studies/completion-integrity/scale-up-readiness.json).
 
 ## M3 — Action and downstream outcome
@@ -66,9 +71,9 @@ Two independent gates can advance:
 
 1. recruit and consent competent M1 participants, freeze the private blinded
    case pack and pilot sizing, then collect each response once;
-2. author two genuinely new activation-v3 sacrificial repositories and qualify
-   their owner contracts, alternatives, semantic mutants, evaluator repeats,
-   custody, isolation, and full wrapper before preregistration.
+2. run the two activation-v3 schema-capability probes, freeze their passing
+   receipt with the qualified roots and quality profile, then require exact-SHA
+   preregistration CI before the first one-submit cell.
 
 Neither gate authorizes the other. Negative, blocked, missing, or invalid
 outcomes remain first-class project evidence.

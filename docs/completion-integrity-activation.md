@@ -43,6 +43,27 @@ Read the [v2 report](../reports/2026-08-15-completion-integrity-activation-v2.md
 and [alpha.11 decision](decisions/2026-08-15-alpha11-activation-result.md) for
 the exact outcome and repair boundary.
 
+## Activation v3 prospective state
+
+V3 is a new prospective revision, not an alpha.11 retry. It has:
+
+- two fresh sacrificial Python/TypeScript repository graphs;
+- a corrected version-bound deterministic qualification receipt;
+- a six-cell no-call full-wrapper qualification;
+- a prospective `conformant_with_warnings` Study Quality Profile;
+- a passing offline reporter-boundary probe;
+- zero submitted activation-v3 model cells.
+
+The first fresh qualification output was retained as invalid because its owner
+tool still emitted an `activation-v1` receipt identity. Version-derived
+qualification, schedule, truth, and submission identity is now covered by
+regression tests, and the complete deterministic matrix was rerun successfully.
+
+Activation remains blocked until the new two-call schema-capability probe is
+retained, every binding is frozen in a clean preregistration commit, and that
+exact SHA passes remote CI. The 16-root effect study remains separately blocked
+by task supply and `pending_pilot` sample size even if activation v3 passes.
+
 ## Current source versus frozen evidence
 
 Alpha.11 source constructs future attempt identifiers as
