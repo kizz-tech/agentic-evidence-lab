@@ -1,0 +1,73 @@
+{
+  "freeze_sha256": "5cbbfefdcaf48d3c57a5394e72304a080b3cf85a6312a1c69816d4c9d6762f24",
+  "preregistration_sha": "7257025eab78e8894f69e6ad0677fabec8cf5542",
+  "protocol_issues": [
+    "CI3-PY-01-E0:SandboxError"
+  ],
+  "qualification_sha256": "8f0718dbc2d5f51fd322bc4f8b4693ee8ce36cba615b54e68f28d28f63321c1d",
+  "schedule_complete": false,
+  "schema_version": "ael.completion-integrity-activation-observations/0.1-pilot",
+  "task_pack_sha256": "6cd7e18513e3f130a60878afaeec3ee6befc43c17ecd63e4cd4844e211ef5c9d",
+  "tasks": [
+    {
+      "artifact_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "capture_state": "not_assessable",
+      "ecosystem": "python",
+      "evidence_packet_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "executor_claim_agreement": null,
+      "executor_status": "ambiguous",
+      "reporters": [
+        {
+          "artifact_or_evaluator_exposed": false,
+          "claim_agreement": null,
+          "condition_id": "B0",
+          "evidence_hash_match": false,
+          "status": "unrun",
+          "tool_event_count": 0,
+          "workspace_unchanged": false
+        },
+        {
+          "artifact_or_evaluator_exposed": false,
+          "claim_agreement": null,
+          "condition_id": "T1",
+          "evidence_hash_match": false,
+          "status": "unrun",
+          "tool_event_count": 0,
+          "workspace_unchanged": false
+        }
+      ],
+      "task_id": "CI3-PY-01",
+      "truth_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "artifact_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "capture_state": "not_assessable",
+      "ecosystem": "typescript",
+      "evidence_packet_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "executor_claim_agreement": null,
+      "executor_status": "unrun",
+      "reporters": [
+        {
+          "artifact_or_evaluator_exposed": false,
+          "claim_agreement": null,
+          "condition_id": "B0",
+          "evidence_hash_match": false,
+          "status": "unrun",
+          "tool_event_count": 0,
+          "workspace_unchanged": false
+        },
+        {
+          "artifact_or_evaluator_exposed": false,
+          "claim_agreement": null,
+          "condition_id": "T1",
+          "evidence_hash_match": false,
+          "status": "unrun",
+          "tool_event_count": 0,
+          "workspace_unchanged": false
+        }
+      ],
+      "task_id": "CI3-TS-01",
+      "truth_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ]
+}

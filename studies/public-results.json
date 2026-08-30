@@ -1,8 +1,94 @@
 {
   "schema_version": "ael.public-results/0.6",
-  "as_of": "2026-08-15",
+  "as_of": "2026-08-30",
   "projection_policy": "ael.publication-projection/0.6",
   "studies": [
+    {
+      "card_id": "completion-integrity-activation-v3",
+      "title": "Completion Integrity activation v3",
+      "catalog_state": "listed",
+      "maintainer_rerun": {
+        "status": "unavailable",
+        "boundary": "The submitted v3 attempt cannot be retried or resumed. Any repaired adapter must use new uncontaminated roots, a new protocol revision, preregistration, raw root, and provider observation."
+      },
+      "receipt_ref": {
+        "uri": "studies/completion-integrity/activation-v3/results/evidence-receipt.json",
+        "sha256": "4fc7c547ce044a48cf1ab4f6ec6da5866ff927b9d637beb7e0c44beb553cf3b1"
+      },
+      "report_ref": {
+        "uri": "reports/2026-08-30-completion-integrity-activation-v3.md",
+        "sha256": "56f523a069f634fcd210460be0bb6e295e0913d0b5f091e46906437d9aa2e6a9"
+      },
+      "claim_ids": [
+        "AEL-CI-ACTIVATION-V3-01",
+        "AEL-CI-ACTIVATION-V3-02"
+      ],
+      "decision_claim_ids": [
+        "AEL-CI-ACTIVATION-V3-01"
+      ],
+      "verification": {
+        "kind": "frozen_public_bundle",
+        "command": [
+          "uv run ael study audit --freeze studies/completion-integrity/activation-v3/freeze.json --result studies/completion-integrity/activation-v3/results --decision-adapter completion-integrity-activation-v1 --require-git-proof"
+        ],
+        "boundary": "Validates the public Contract v0 graph, exact freeze, preregistration and frozen-code bindings, the submitted-ambiguous versus unrun projection, all six scheduled states, 24 measurements, and the recomputed protocol-invalid decision. It does not reveal or rerun private tasks, evaluators, candidates, raw events, authentication, or hosted calls, and it is not independent replication.",
+        "freeze_ref": {
+          "uri": "studies/completion-integrity/activation-v3/freeze.json",
+          "sha256": "5cbbfefdcaf48d3c57a5394e72304a080b3cf85a6312a1c69816d4c9d6762f24"
+        },
+        "result_root": "studies/completion-integrity/activation-v3/results",
+        "adapter": "completion-integrity-activation-v1"
+      },
+      "materials": [
+        {
+          "label": "Activation-v3 result, root cause, and prospective v4 admission decision",
+          "availability": "public",
+          "ref": {
+            "uri": "docs/decisions/2026-08-30-completion-integrity-activation-v3-result.md",
+            "sha256": "0e7b9e0c1a13da5bd829488294e8cd727db9ef6f9ffb11156621db220c96e1ba"
+          }
+        },
+        {
+          "label": "Post-freeze normalization deviation and source binding",
+          "availability": "public",
+          "ref": {
+            "uri": "studies/completion-integrity/activation-v3/results/normalization-deviation.json",
+            "sha256": "1e74810272f136d5b06c6db4cb77759aefcb1bd9efff526a6d71ec6dd151b469"
+          }
+        },
+        {
+          "label": "Private tasks, evaluators, candidate, raw events, and immutable attempt journal",
+          "availability": "withheld",
+          "reason": "Exact task fixtures, evaluator code, candidate workspace, Codex events, authentication, and no-retry journal remain in the private evidence boundary.",
+          "reproduction_impact": "A public checkout can recompute the protocol-invalid decision and verify opaque hashes but cannot decide the ambiguous executor outcome or rerun the historical attempt."
+        },
+        {
+          "label": "Hosted model call",
+          "availability": "not_retained",
+          "reason": "The public graph retains normalized cost, status, and opaque source hashes rather than a replayable provider service or immutable model revision.",
+          "reproduction_impact": "The exact historical provider behavior cannot be replayed from the repository."
+        },
+        {
+          "label": "Reusable authentication",
+          "availability": "not_collected",
+          "reason": "Reusable credentials are excluded from public evidence and release artifacts.",
+          "reproduction_impact": "Public audit requires no credentials; any new hosted observation requires separately authorized authentication."
+        }
+      ],
+      "history": {
+        "admission": "not_declared_historical",
+        "action": "not_declared_historical",
+        "outcome_follow_up": "not_declared_historical",
+        "freshness": "unassessed"
+      },
+      "quality": {
+        "assessment": "profiled",
+        "profile_ref": {
+          "uri": "studies/completion-integrity/activation-v3/quality-profile.json",
+          "sha256": "8ef5a14b27887219c341ff0e64ec53973954ec75c118e8abe2bedf00deda5a13"
+        }
+      }
+    },
     {
       "card_id": "completion-integrity-activation-v2",
       "title": "Completion Integrity activation v2",

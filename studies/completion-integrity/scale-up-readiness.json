@@ -2,7 +2,7 @@
   "schema_version": "ael.completion-integrity-scale-up-readiness/0.1-development",
   "study_family": "completion-integrity",
   "assessed_at": "2026-08-30",
-  "state": "blocked_before_activation_v3_exact_sha_preregistration",
+  "state": "activation_v3_closed_protocol_invalid",
   "source_assessment": {
     "schema_version": "ael.completion-integrity-task-assessment/0.2-development",
     "pack_id": "kizz:ael:private-pack:completion-integrity-v3-activation",
@@ -22,10 +22,18 @@
     "deterministic_task_qualification": true,
     "full_wrapper_qualification": true,
     "prospective_quality_profile": true,
-    "new_raw_root": false,
-    "new_preregistration": false,
+    "new_raw_root": true,
+    "new_preregistration": true,
     "schema_capability_probe": true,
-    "freeze_materialized": true
+    "freeze_materialized": true,
+    "exact_sha_ci_passed": true,
+    "submitted_cells": 1,
+    "terminal_cells": 0,
+    "ambiguous_cells": 1,
+    "unrun_cells": 5,
+    "outcome_retries": 0,
+    "decision_status": "protocol_invalid",
+    "disposition": "revise_activation_adapter"
   },
   "larger_pilot": {
     "admitted": false,
@@ -39,6 +47,6 @@
       "qualified screening and untouched confirmation roots"
     ]
   },
-  "decision": "do_not_execute_scored_calls_before_exact_sha_preregistration",
-  "next_gate": "commit the exact freeze and passing probe, push main, and require green exact-SHA CI before any activation cell"
+  "decision": "do_not_scale_until_protocol_failure_is_repaired_in_a_new_revision",
+  "next_gate": "create activation v4 from new uncontaminated roots only after exact executor TASK parsing is part of qualification, then freeze a new raw root, quality profile, preregistration, and exact-SHA CI gate"
 }

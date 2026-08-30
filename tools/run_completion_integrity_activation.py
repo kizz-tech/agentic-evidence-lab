@@ -33,7 +33,7 @@ from prepare_completion_integrity_activation import verify_freeze
 from ael.codex_activation_runner import run_activation_executor
 from ael.codex_reporter import run_codex_reporter
 from ael.completion_integrity_activation import (
-    ACTIVATION_SCHEMA_VERSION,
+    build_activation_observations,
     decide_activation,
     decision_id_from_study_id,
     validate_observations,
@@ -528,75 +528,6 @@ def _run_reporter(
     return cell
 
 
-def _observations(
-    *,
-    freeze: Mapping[str, Any],
-    freeze_sha256: str,
-    preregistration_sha: str,
-    cells: Mapping[str, Mapping[str, Any]],
-    protocol_issues: list[str],
-) -> dict[str, Any]:
-    tasks = []
-    task_ids: list[str] = []
-    for entry in freeze["schedule"]:
-        task_id = str(entry["task_id"])
-        if task_id not in task_ids:
-            task_ids.append(task_id)
-    for task_id in task_ids:
-        ecosystem = (
-            "python" if "-PY-" in task_id else "typescript" if "-TS-" in task_id else "unknown"
-        )
-        executor = cells.get(f"{task_id}-E0")
-        reporter_rows = []
-        for condition_id in ("B0", "T1"):
-            reporter = cells.get(f"{task_id}-{condition_id}")
-            reporter_rows.append(
-                {
-                    "condition_id": condition_id,
-                    "status": reporter.get("status", "unrun") if reporter else "unrun",
-                    "claim_agreement": reporter.get("claim_agreement") if reporter else None,
-                    "workspace_unchanged": bool(reporter and reporter.get("workspace_unchanged")),
-                    "evidence_hash_match": bool(reporter and reporter.get("evidence_hash_match")),
-                    "artifact_or_evaluator_exposed": bool(
-                        reporter and reporter.get("artifact_or_evaluator_exposed")
-                    ),
-                    "tool_event_count": int(reporter.get("tool_event_count", 0)) if reporter else 0,
-                }
-            )
-        tasks.append(
-            {
-                "task_id": task_id,
-                "ecosystem": ecosystem,
-                "executor_status": executor.get("status", "unrun") if executor else "unrun",
-                "executor_claim_agreement": executor.get("executor_claim_agreement")
-                if executor
-                else None,
-                "capture_state": executor.get("capture_state", "not_assessable")
-                if executor
-                else "not_assessable",
-                "evidence_packet_sha256": executor.get("evidence_bundle_sha256", "0" * 64)
-                if executor
-                else "0" * 64,
-                "truth_sha256": executor.get("truth_sha256", "0" * 64) if executor else "0" * 64,
-                "artifact_sha256": executor.get("artifact_sha256", "0" * 64)
-                if executor
-                else "0" * 64,
-                "reporters": reporter_rows,
-            }
-        )
-    schedule_complete = len(cells) == len(freeze["schedule"]) and not protocol_issues
-    return {
-        "schema_version": ACTIVATION_SCHEMA_VERSION,
-        "freeze_sha256": freeze_sha256,
-        "preregistration_sha": preregistration_sha,
-        "task_pack_sha256": freeze["private_pack"]["supply_artifact_sha256"],
-        "qualification_sha256": freeze["qualification"]["receipt_sha256"],
-        "schedule_complete": schedule_complete,
-        "protocol_issues": sorted(set(protocol_issues)),
-        "tasks": tasks,
-    }
-
-
 def run_activation(args: argparse.Namespace) -> dict[str, Any]:
     freeze_path = args.freeze.absolute()
     study_root = freeze_path.parent
@@ -662,11 +593,17 @@ def run_activation(args: argparse.Namespace) -> dict[str, Any]:
         if cells[cell_id]["status"] != "valid":
             protocol_issues.extend(f"{cell_id}:{issue}" for issue in cells[cell_id]["issues"])
             break
-    observations = _observations(
+    attempt_states = {
+        str(entry["cell_id"]): str(events[-1]["state"])
+        for entry in freeze["schedule"]
+        if (events := read_attempt_journal(raw_root / "attempts" / str(entry["cell_id"])))
+    }
+    observations = build_activation_observations(
         freeze=freeze,
         freeze_sha256=freeze_sha256,
         preregistration_sha=args.preregistration_sha,
         cells=cells,
+        attempt_states=attempt_states,
         protocol_issues=protocol_issues,
     )
     validate_observations(observations)

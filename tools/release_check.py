@@ -32,6 +32,8 @@ REQUIRED_FILES = {
     "SUPPORT.md",
     "docs/release-notes/v0.1.0-alpha.11.md",
     "docs/release-notes/v0.1.0-alpha.12.md",
+    "docs/release-notes/v0.1.0-alpha.13.md",
+    "docs/results/completion-integrity-activation-v3.md",
     "docs/results/completion-integrity-activation-v2.md",
     "docs/results/completion-integrity-prompt-policy-v1.md",
     "docs/decisions/2026-08-14-claim-first-decision-method.md",
@@ -42,6 +44,7 @@ REQUIRED_FILES = {
     "docs/decisions/2026-08-15-ael-cep-stage0-implementation.md",
     "docs/decisions/2026-08-30-alpha12-public-boundary.md",
     "docs/decisions/2026-08-30-evidence-to-action-execution-status.md",
+    "docs/decisions/2026-08-30-completion-integrity-activation-v3-result.md",
     "docs/ael-cep.md",
     "docs/completion-integrity-activation.md",
     "docs/completion-integrity-enactment.md",
@@ -62,6 +65,7 @@ REQUIRED_FILES = {
     "pyproject.toml",
     "reports/2026-08-15-completion-integrity-prompt-policy-v1.md",
     "reports/2026-08-15-completion-integrity-activation-v2.md",
+    "reports/2026-08-30-completion-integrity-activation-v3.md",
     "studies/completion-integrity/activation-v2/results/decision.json",
     "studies/completion-integrity/activation-v2/results/evidence-receipt.json",
     "studies/completion-integrity/activation-v2/results/measurement-set.json",
@@ -85,6 +89,10 @@ REQUIRED_FILES = {
     "studies/completion-integrity/activation-v3/task-provenance.md",
     "studies/completion-integrity/activation-v3/terminal-claim-policy.json",
     "studies/completion-integrity/activation-v3/wrapper-qualification.json",
+    "studies/completion-integrity/activation-v3/results/decision.json",
+    "studies/completion-integrity/activation-v3/results/evidence-receipt.json",
+    "studies/completion-integrity/activation-v3/results/measurement-set.json",
+    "studies/completion-integrity/activation-v3/results/observations.json",
     "studies/completion-integrity/results/prompt-policy-v1/effect-decision.json",
     "studies/completion-integrity/results/prompt-policy-v1/evidence-receipt.json",
     "studies/completion-integrity/results/prompt-policy-v1/measurement-set.json",
@@ -102,6 +110,7 @@ REQUIRED_FILES = {
     "studies/ael-cep/stage-0/trajectory-bundle.json",
     "tools/materialize_ael_cep_stage0.py",
     "tools/materialize_decision_utility_v1.py",
+    "tools/finalize_completion_integrity_activation_run.py",
     "tools/qualify_completion_integrity_wrapper.py",
     "uv.lock",
 }
@@ -220,8 +229,8 @@ def main() -> int:
             continue
         failures.extend(payload_failures(relative, payload))
 
-    expected_version = "0.1.0a12"
-    latest_published_release = "0.1.0-alpha.12"
+    expected_version = "0.1.0a13"
+    latest_published_release = "0.1.0-alpha.13"
     if __version__ != expected_version:
         failures.append(f"package version is {__version__}, expected {expected_version}")
     try:

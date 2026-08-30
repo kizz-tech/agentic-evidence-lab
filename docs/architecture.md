@@ -353,6 +353,17 @@ the complete wrapper contract. Current source makes attempt IDs valid by
 construction and tests the complete wrapper, while the v2 freeze continues to
 bind the historical source. See [Completion Integrity activation](completion-integrity-activation.md).
 
+Alpha.13 closes another owner-boundary gap exposed by activation v3. Task
+qualification now executes the same exact requirement parser as live executor
+normalization. Terminal cells and append-only attempt journals feed one pure
+observation builder, so a submitted/ambiguous attempt cannot disappear as
+`unrun`. A separate post-stop tool may normalize existing immutable journals,
+but it contains no provider, Docker, evaluator, retry, resume, or overwrite
+path. The materializer maps ambiguity into Contract v0's `invalid` run state
+while retaining nonzero cost and hidden source hashes; the family audit checks
+that projection against the frozen schedule. These are adapter/tool changes,
+not a new supported Python API or a reinterpretation of v1/v2/v3 evidence.
+
 Git ancestry or a tag can prove repository artifact ordering—for example, that
 freeze bytes are present in an ancestor. It cannot prove that private model
 calls occurred before a result, reconstruct private events, or establish

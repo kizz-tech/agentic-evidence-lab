@@ -1,0 +1,81 @@
+{
+  "condition_id": "T1",
+  "effects": [
+    {
+      "effect_type": "terminal_claim_report",
+      "evidence_refs": [
+        {
+          "sha256": "5cbbfefdcaf48d3c57a5394e72304a080b3cf85a6312a1c69816d4c9d6762f24",
+          "uri": "../../freeze.json",
+          "visibility": "public"
+        }
+      ],
+      "outcome": "unknown",
+      "target": "urn:kizz:ael:private:reporter:CI3-TS-01-T1"
+    }
+  ],
+  "event_summary": {
+    "authenticated_actor_ids": [],
+    "captured": false,
+    "event_count": 0,
+    "limitations": [
+      "Raw Codex events are retained privately; this record exposes hashes and counts only."
+    ]
+  },
+  "integrity_issues": [
+    "cell was not submitted"
+  ],
+  "object_type": "run_record",
+  "outputs": [],
+  "repeat_index": 1,
+  "run_id": "kizz:ael:run:completion-integrity-activation-v3:revision:3:CI3-TS-01-T1",
+  "runtime": {
+    "context_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "environment": {
+      "digest": "5e574903e57b25c9e267cbfdbe47cd6f4f3bd860cdd22e347dbe201ff625dcb9",
+      "ephemeral": true,
+      "identity_available": true
+    },
+    "harness": {
+      "name": "codex-cli",
+      "version": "0.146.0"
+    },
+    "model": {
+      "effort": "xhigh",
+      "immutable_revision_exposed": false,
+      "model_id": "gpt-5.6-sol",
+      "provider": "OpenAI"
+    },
+    "sandbox": "docker-read-only-evidence-openai-proxy",
+    "tool_policy_sha256": "e673fb8518d1a2668df0cbadff7941b2e1ee4619b4b2bf684369cb87dcb3cdce"
+  },
+  "schema_version": "ael.run-record/0.1",
+  "source_refs": [
+    {
+      "sha256": "5cbbfefdcaf48d3c57a5394e72304a080b3cf85a6312a1c69816d4c9d6762f24",
+      "uri": "../../freeze.json",
+      "visibility": "public"
+    }
+  ],
+  "status": "unrun",
+  "study_ref": {
+    "revision": 3,
+    "sha256": "2d85747cee2748339f27cc7087f7b0fbc99e1f762bfdde86e6768a901d2dad48",
+    "study_id": "kizz:ael:study:completion-integrity-activation-v3",
+    "uri": "../../study-manifest.json",
+    "visibility": "public"
+  },
+  "task": {
+    "role": "calibration",
+    "stratum": "typescript-config",
+    "task_id": "CI3-TS-01",
+    "task_pack_id": "completion-integrity-v3-activation"
+  },
+  "usage": {
+    "cached_input_tokens": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "reasoning_output_tokens": 0,
+    "wall_time_ms": 0
+  }
+}

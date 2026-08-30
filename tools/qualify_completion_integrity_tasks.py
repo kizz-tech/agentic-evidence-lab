@@ -11,6 +11,7 @@ from typing import Any
 from completion_integrity_activation_support import (
     canonical_sha256,
     load_json,
+    parse_task_requirements,
     qualification_id_for_pack,
     sha256_path,
     write_json_atomic,
@@ -100,6 +101,25 @@ def _case_expectation(case: Mapping[str, Any]) -> tuple[bool, bool]:
     return visible, accepted
 
 
+def validate_executor_contract(task_root: Path, dossier: Mapping[str, Any]) -> list[str]:
+    """Verify the exact TASK syntax consumed by the scored executor adapter."""
+
+    parsed = parse_task_requirements(task_root / "fixture" / "TASK.md")
+    dossier_rows = dossier.get("requirements")
+    if not isinstance(dossier_rows, list) or any(
+        not isinstance(row, Mapping) or not isinstance(row.get("requirement_id"), str)
+        for row in dossier_rows
+    ):
+        raise SandboxError("private dossier requirements are malformed")
+    parsed_ids = [row["requirement_id"] for row in parsed]
+    dossier_ids = [str(row["requirement_id"]) for row in dossier_rows]
+    if parsed_ids != dossier_ids:
+        raise SandboxError(
+            "executor TASK requirement lines must exactly match dossier requirements in order"
+        )
+    return parsed_ids
+
+
 def qualify_task(
     task_root: Path,
     output_root: Path,
@@ -108,6 +128,7 @@ def qualify_task(
 ) -> dict[str, Any]:
     dossier = load_json(task_root / "dossier.json")
     plan = load_json(task_root / "qualification-plan.json")
+    validate_executor_contract(task_root, dossier)
     task_id = dossier.get("task_id")
     if plan.get("task_id") != task_id:
         raise SandboxError("qualification plan and dossier task identities differ")

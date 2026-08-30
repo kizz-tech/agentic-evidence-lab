@@ -108,7 +108,7 @@ direct imports have no compatibility guarantee. Stage 0 assumes trusted local
 directory ownership and supplies logical content integrity, not hostile
 shared-directory race protection or physical custody.
 
-The next evidence milestone is decision utility: compare the same evidence as
+The next evidence milestone remains decision utility: compare the same evidence as
 an ordinary decision note, a note plus static checklist, and an AEL claim-first
 card. Only after AEL governs a real Codex action and downstream outcome does
 Stage 1 attempt an append-only retrospective evaluator rescore.
@@ -146,25 +146,26 @@ state, and every card separates what a public checkout can verify, what only the
 maintainer can rerun as a new observation, and what has independent replication
 evidence.
 
-The newest result is an integrity failure caught before scale. Completion
-Integrity activation v2 stopped after two of six Codex cells because an
-owner-generated attempt identifier violated the terminal-claim grammar. The
-reporter content matched frozen truth, but the wrapper was invalid; AEL records
-`revise_activation_adapter` and counts no reporter-accuracy observation. Read
-the [claim-first card](docs/results/completion-integrity-activation-v2.md) or
-[full report](reports/2026-08-15-completion-integrity-activation-v2.md).
+The newest result is another integrity failure caught before scale. Completion
+Integrity activation v3 stopped on its first submitted executor cell because
+the owner-authored `TASK.md` syntax did not match the owner parser used by the
+live normalization path. The submitted attempt remains ambiguous, five cells
+remain unrun, and AEL records `revise_activation_adapter` with no executor,
+reporter, or model-quality estimate. Read the
+[claim-first card](docs/results/completion-integrity-activation-v3.md) or
+[full report](reports/2026-08-30-completion-integrity-activation-v3.md).
 
-That result follows the alpha.9 null: the exact Completion Integrity prompt
+That result follows the v2 wrapper failure and alpha.9 null: the exact Completion Integrity prompt
 policy produced the same `0.375` false-completion rate as baseline on the
 frozen eight-task study. Together, the studies reject a weak prompt-only change
 and prevent a schema-qualified but composition-broken adapter from entering a
 larger pilot.
 
 The [activation boundary](docs/completion-integrity-activation.md) composes the
-alpha.10 observable-enactment, terminal-claim, task-supply, Docker, and Codex
-adapters. Alpha.11 fixes future attempt IDs and adds a full-wrapper regression,
-but does not retry or reinterpret v2. A new observation requires a new revision,
-new roots, new preregistration, and a prospective quality profile.
+observable-enactment, terminal-claim, task-supply, Docker, and Codex adapters.
+Current source now qualifies the exact task grammar and preserves interrupted
+attempts, but does not retry or reinterpret v2/v3. A new observation requires a
+new revision, uncontaminated roots, preregistration, and quality profile.
 
 ## What AEL helps answer
 
@@ -346,7 +347,7 @@ maintainer-reviewed snapshots and maintainer-controlled fixtures; arbitrary
 submissions remain blocked. Read [SECURITY.md](SECURITY.md) and
 [Container runner isolation](docs/runner-isolation.md) before execution.
 
-The current `0.1.0a12` source line is pre-stable. GitHub Releases determines
+The current `0.1.0a13` source line is pre-stable. GitHub Releases determines
 whether it is externally published. It does not claim universal
 benchmarking, independent verification of Kizz-authored capabilities,
 model-only superiority from stack comparisons, or downstream production
@@ -358,6 +359,10 @@ effect, Codex quality, model reliability, transfer, or production benefit.
 
 Alpha.12 adds no scored model call. It publishes the deterministic Stage-0
 method artifact without claiming that coevolution works on real agents.
+
+Alpha.13 publishes one submitted ambiguous activation-v3 attempt as a bounded
+protocol-invalid result. It hardens future qualification and post-stop
+normalization, but makes no reporter-effect, Codex-quality, or AEL-CEP claim.
 
 ## Documentation
 

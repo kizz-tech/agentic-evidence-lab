@@ -1,0 +1,52 @@
+{
+  "schema_version": "ael.completion-integrity-activation-normalization-deviation/0.1-pilot",
+  "deviation_id": "kizz:ael:study:completion-integrity-activation-v3:normalization-deviation:1",
+  "detected_at": "2026-08-30T01:07:25Z",
+  "classification": "post_submission_owner_normalization_and_terminalization_failure",
+  "study_id": "kizz:ael:study:completion-integrity-activation-v3",
+  "study_revision": 3,
+  "preregistration_sha": "7257025eab78e8894f69e6ad0677fabec8cf5542",
+  "freeze_sha256": "5cbbfefdcaf48d3c57a5394e72304a080b3cf85a6312a1c69816d4c9d6762f24",
+  "observed_failures": [
+    {
+      "stage": "live_executor_normalization",
+      "effect": "The submitted executor attempt became ambiguous before a terminal cell because the private task requirement syntax did not match the owner parser grammar."
+    },
+    {
+      "stage": "automatic_terminal_materialization",
+      "effect": "The frozen observation validator still assumed CI2 task identities, so the live runner could not write observations.json, decision.json, or run-summary.json for v3 after stopping."
+    }
+  ],
+  "frozen_source_refs": {
+    "src/ael/completion_integrity_activation.py": "629824303da607c36d1a804d3949fd0b2db8919dc98dcfd57a723ac8fd53717d",
+    "src/ael/completion_integrity_activation_audit.py": "700b0af6b48eca04814e18f4a6b4bd24594d793d2d3de608a64391c769d5077f",
+    "tools/materialize_completion_integrity_activation.py": "f11f3e9dfca138972a5e82a93ae1fea5d4b541de33c07382cca9048e920acbdb",
+    "tools/qualify_completion_integrity_tasks.py": "fb1b2dc6b6136b360d47c8ac1d4d1149e36b12fcfc4c300932bf460a7a419bae",
+    "tools/run_completion_integrity_activation.py": "45678f68013f3463d3cb959d74f292ed52f7ab27aa31ad1b2dda45b1742675d2"
+  },
+  "terminal_projection_source_refs": {
+    "src/ael/completion_integrity_activation.py": "b5302c7226311b6b022f1f47de23c0dc2abfcee262f8805bf4e7a705f99fdded",
+    "src/ael/completion_integrity_activation_audit.py": "045971fb1bacb3bd346e9f15d90db1f72cc55cb4a0c8308c03153ba1a6dfb271",
+    "tools/finalize_completion_integrity_activation_run.py": "f87b6bf68d6006610a0a441dfdb4fd3c2049e4be1691322eb098aa021a4fe475",
+    "tools/materialize_completion_integrity_activation.py": "27175e13e08f793759701a1a089f6aec6f7817f1c5320f53a087f811b5d088b3",
+    "tools/qualify_completion_integrity_tasks.py": "8f6716adec28d7f817e8bbdb69ba99df2738cae0a49b11926ce68399cfaa2b4c",
+    "tools/run_completion_integrity_activation.py": "c4da677265dfe71856161bf3bfbf013903b72481acdd6e3d2bd42f0767312ea3"
+  },
+  "normalization": {
+    "operation": "derive_terminal_documents_from_existing_immutable_journals",
+    "model_calls": 0,
+    "evaluator_calls": 0,
+    "retries": 0,
+    "resumes": 0,
+    "overwrites": 0,
+    "terminal_cells_created": 0,
+    "private_recovery_sha256": "356cd880c925402ffc78cc6769438e671f24a6d209cbe76962571db49bd44939"
+  },
+  "published_result_refs": {
+    "observations.json": "85379817d21b01a559435a18571759296431d5ad176bab4357e33a493dd58011",
+    "decision.json": "e4d9871e29af7145b0f32eb784d61e4ad81ab062c5376342ec1cd4e314fda5ee",
+    "evidence-receipt.json": "4fc7c547ce044a48cf1ab4f6ec6da5866ff927b9d637beb7e0c44beb553cf3b1"
+  },
+  "decision_invariance": "The frozen schedule was incomplete and the first submitted attempt was ambiguous. Under both the frozen decision rule and the repaired revision-generic implementation, those facts require protocol_invalid / revise_activation_adapter. No outcome, agreement, or effect value was imputed.",
+  "claim_ceiling": "This record discloses post-freeze normalization code and proves no retry/model/evaluator work was used to construct terminal documents. It does not validate the ambiguous executor outcome, repair v3, or make the terminal projection preregistered."
+}

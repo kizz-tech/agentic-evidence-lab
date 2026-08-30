@@ -1,0 +1,108 @@
+{
+  "condition_id": "E0",
+  "effects": [
+    {
+      "effect_type": "candidate_workspace_change",
+      "evidence_refs": [
+        {
+          "sha256": "5cbbfefdcaf48d3c57a5394e72304a080b3cf85a6312a1c69816d4c9d6762f24",
+          "uri": "../../freeze.json",
+          "visibility": "public"
+        },
+        {
+          "sha256": "0ba8f2b777c1ea145cfee56b3a63b6d04a7107b35d84493295afeb810bb3deea",
+          "uri": "urn:kizz:ael:private:codex-events:CI3-PY-01-E0",
+          "visibility": "hidden"
+        },
+        {
+          "sha256": "eac0e6968af3c94ec638a2f9e2df25ba437c780daefb62b7d03b94b894ae533a",
+          "uri": "urn:kizz:ael:private:attempt-journal:CI3-PY-01-E0",
+          "visibility": "hidden"
+        }
+      ],
+      "outcome": "unknown",
+      "target": "urn:kizz:ael:private:executor:CI3-PY-01-E0"
+    }
+  ],
+  "event_summary": {
+    "authenticated_actor_ids": [],
+    "captured": true,
+    "event_count": 22,
+    "limitations": [
+      "Raw Codex events are retained privately; this record exposes hashes and counts only."
+    ]
+  },
+  "integrity_issues": [
+    "submitted attempt became ambiguous; no terminal cell was emitted"
+  ],
+  "invalid_reason": "submitted attempt became ambiguous; no terminal cell was emitted",
+  "object_type": "run_record",
+  "outputs": [
+    {
+      "sha256": "c9af01ee55b4e7d4ea999ec657eccd1307c3d7b18575bca0c9660030b8e8709d",
+      "uri": "urn:kizz:ael:private:candidate:CI3-PY-01-E0",
+      "visibility": "hidden"
+    }
+  ],
+  "repeat_index": 1,
+  "run_id": "kizz:ael:run:completion-integrity-activation-v3:revision:3:CI3-PY-01-E0",
+  "runtime": {
+    "context_sha256": "c9af01ee55b4e7d4ea999ec657eccd1307c3d7b18575bca0c9660030b8e8709d",
+    "environment": {
+      "digest": "37743b06a74d853087835b18304fc10236eff313d42750960fbc256cbaa9b4fb",
+      "ephemeral": true,
+      "identity_available": true
+    },
+    "harness": {
+      "name": "codex-cli",
+      "version": "0.146.0"
+    },
+    "model": {
+      "effort": "xhigh",
+      "immutable_revision_exposed": false,
+      "model_id": "gpt-5.6-sol",
+      "provider": "OpenAI"
+    },
+    "sandbox": "docker-ephemeral-writable-candidate-openai-proxy",
+    "tool_policy_sha256": "22d75d5722b685768c657ce8be1024a33ca5f78257082dee5848bc1a0db7dab7"
+  },
+  "schema_version": "ael.run-record/0.1",
+  "source_refs": [
+    {
+      "sha256": "5cbbfefdcaf48d3c57a5394e72304a080b3cf85a6312a1c69816d4c9d6762f24",
+      "uri": "../../freeze.json",
+      "visibility": "public"
+    },
+    {
+      "sha256": "0ba8f2b777c1ea145cfee56b3a63b6d04a7107b35d84493295afeb810bb3deea",
+      "uri": "urn:kizz:ael:private:codex-events:CI3-PY-01-E0",
+      "visibility": "hidden"
+    },
+    {
+      "sha256": "eac0e6968af3c94ec638a2f9e2df25ba437c780daefb62b7d03b94b894ae533a",
+      "uri": "urn:kizz:ael:private:attempt-journal:CI3-PY-01-E0",
+      "visibility": "hidden"
+    }
+  ],
+  "status": "invalid",
+  "study_ref": {
+    "revision": 3,
+    "sha256": "2d85747cee2748339f27cc7087f7b0fbc99e1f762bfdde86e6768a901d2dad48",
+    "study_id": "kizz:ael:study:completion-integrity-activation-v3",
+    "uri": "../../study-manifest.json",
+    "visibility": "public"
+  },
+  "task": {
+    "role": "calibration",
+    "stratum": "python-cli",
+    "task_id": "CI3-PY-01",
+    "task_pack_id": "completion-integrity-v3-activation"
+  },
+  "usage": {
+    "cached_input_tokens": 106752,
+    "input_tokens": 132484,
+    "output_tokens": 4327,
+    "reasoning_output_tokens": 1735,
+    "wall_time_ms": 119291
+  }
+}

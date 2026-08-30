@@ -5,15 +5,24 @@ from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
-from completion_integrity_activation_support import load_json, sha256_path, write_json_atomic
+from completion_integrity_activation_support import (
+    load_json,
+    parse_codex_events,
+    read_attempt_journal,
+    sha256_path,
+    write_json_atomic,
+)
 
 from ael.completion_integrity_activation import (
+    activation_claim_prefix,
+    activation_measurement_prefix,
+    activation_task_ecosystem,
     decide_activation,
     decision_id_from_study_id,
     decision_measurements,
     validate_observations,
 )
-from ael.sandbox import SandboxError
+from ael.sandbox import SandboxError, tree_sha256
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_STUDY_ROOT = ROOT / "studies" / "completion-integrity" / "activation-v1"
@@ -52,10 +61,6 @@ def _identity_prefix(study_id: str, object_type: str, study_revision: int) -> st
     return f"kizz:ael:{object_type}:{activation}:revision:{study_revision}"
 
 
-def _measurement_prefix(study_revision: int) -> str:
-    return "ci11" if study_revision == 1 else f"ci11-r{study_revision}"
-
-
 def _run_id(cell_id: str, *, run_prefix: str) -> str:
     return f"{run_prefix}:{cell_id}"
 
@@ -72,10 +77,81 @@ def _private_output_refs(cell: Mapping[str, Any], role: str, cell_id: str) -> li
     return [_ref(f"urn:kizz:ael:private:{label}:{cell_id}", digest, "hidden")]
 
 
+def _private_pack_id(freeze: Mapping[str, Any]) -> str:
+    private_pack = freeze.get("private_pack")
+    _require(isinstance(private_pack, Mapping), "freeze lacks a private-pack binding")
+    uri = private_pack.get("uri")
+    prefix = "urn:kizz:ael:private-pack:"
+    _require(isinstance(uri, str) and uri.startswith(prefix), "private-pack URI is invalid")
+    value = uri.removeprefix(prefix).split(":revision:", maxsplit=1)[0]
+    _require(bool(value), "private-pack identity is empty")
+    return value
+
+
+def _attempt_projection(raw_root: Path, entry: Mapping[str, Any]) -> dict[str, Any] | None:
+    """Project a submitted non-terminal attempt without converting it to a result."""
+
+    cell_id = str(entry["cell_id"])
+    events = read_attempt_journal(raw_root / "attempts" / cell_id)
+    if not events:
+        return None
+    last = events[-1]
+    state = last.get("state")
+    if state == "terminal":
+        return None
+    if state not in {"submitted", "ambiguous"}:
+        return None
+    output = raw_root / "runs" / cell_id
+    usage: dict[str, int] = {
+        "input_tokens": 0,
+        "cached_input_tokens": 0,
+        "output_tokens": 0,
+        "reasoning_output_tokens": 0,
+        "wall_time_ms": 0,
+    }
+    event_count = 0
+    private_refs: dict[str, str] = {
+        "attempt_journal_sha256": sha256_path(
+            raw_root
+            / "attempts"
+            / cell_id
+            / ("03-ambiguous.json" if state == "ambiguous" else "02-submitted.json")
+        )
+    }
+    stdout = output / "stdout.log"
+    if stdout.is_file() and not stdout.is_symlink():
+        bundle = parse_codex_events(stdout)
+        usage.update(bundle["usage"])
+        event_count = int(bundle["event_count"])
+        private_refs["events_sha256"] = sha256_path(stdout)
+    invocation_path = output / "sandbox-invocation.json"
+    if invocation_path.is_file() and not invocation_path.is_symlink():
+        invocation = load_json(invocation_path)
+        duration = invocation.get("duration_ms")
+        if isinstance(duration, int) and not isinstance(duration, bool) and duration >= 0:
+            usage["wall_time_ms"] = duration
+    workspace = output / "workspace"
+    if workspace.is_dir() and not workspace.is_symlink():
+        private_refs["candidate_tree_sha256"] = tree_sha256(workspace)
+    return {
+        "status": "invalid",
+        "issues": [
+            "submitted attempt became ambiguous; no terminal cell was emitted"
+            if state == "ambiguous"
+            else "submitted attempt has no terminal journal"
+        ],
+        "usage": usage,
+        "event_count": event_count,
+        "artifact_sha256": private_refs.get("candidate_tree_sha256"),
+        "private_refs": private_refs,
+    }
+
+
 def _run_record(
     *,
     entry: Mapping[str, Any],
     cell: Mapping[str, Any] | None,
+    attempt: Mapping[str, Any] | None,
     manifest_sha256: str,
     freeze_sha256: str,
     freeze: Mapping[str, Any],
@@ -86,17 +162,18 @@ def _run_record(
 ) -> dict[str, Any]:
     cell_id = str(entry["cell_id"])
     role = str(entry["role"])
-    status = str(cell.get("status")) if cell else "unrun"
+    source = cell if cell is not None else attempt
+    status = str(source.get("status")) if source else "unrun"
     if status not in {"valid", "invalid"}:
         status = "unrun"
-    usage = cell.get("usage") if cell else None
+    usage = source.get("usage") if source else None
     if not isinstance(usage, Mapping):
         usage = {}
     context_sha = (
-        cell.get("evidence_tree_sha256")
-        if role == "reporter" and cell
-        else cell.get("artifact_sha256")
-        if cell
+        source.get("evidence_tree_sha256")
+        if role == "reporter" and source
+        else source.get("artifact_sha256")
+        if source
         else None
     )
     if not isinstance(context_sha, str) or len(context_sha) != 64:
@@ -108,15 +185,25 @@ def _run_record(
         if role == "executor"
         else str(freeze["runtime"]["reporter_image_id"])
     )
-    issues = list(cell.get("issues", [])) if cell else ["cell was not submitted"]
+    issues = list(source.get("issues", [])) if source else ["cell was not submitted"]
     source_refs = [_ref("../../freeze.json", freeze_sha256)]
-    if cell:
-        private_refs = cell.get("private_refs")
+    if source:
+        private_refs = source.get("private_refs")
         if isinstance(private_refs, Mapping) and isinstance(private_refs.get("events_sha256"), str):
             source_refs.append(
                 _ref(
                     f"urn:kizz:ael:private:codex-events:{cell_id}",
                     str(private_refs["events_sha256"]),
+                    "hidden",
+                )
+            )
+        if isinstance(private_refs, Mapping) and isinstance(
+            private_refs.get("attempt_journal_sha256"), str
+        ):
+            source_refs.append(
+                _ref(
+                    f"urn:kizz:ael:private:attempt-journal:{cell_id}",
+                    str(private_refs["attempt_journal_sha256"]),
                     "hidden",
                 )
             )
@@ -132,16 +219,23 @@ def _run_record(
         ),
         "condition_id": str(entry["condition_id"] or "E0"),
         "task": {
-            "task_pack_id": "completion-integrity-v2-activation",
+            "task_pack_id": _private_pack_id(freeze),
             "task_id": str(entry["task_id"]),
-            "stratum": "python-cli" if entry["task_id"] == "CI2-PY-01" else "typescript-config",
+            "stratum": (
+                "python-cli"
+                if activation_task_ecosystem(entry["task_id"]) == "python"
+                else "typescript-config"
+            ),
             "role": "calibration",
         },
         "repeat_index": 1,
         "status": status,
         **({"invalid_reason": "; ".join(issues)} if status == "invalid" else {}),
         "runtime": {
-            "harness": {"name": "codex-cli", "version": "0.146.0"},
+            "harness": {
+                "name": str(freeze["runtime"]["harness"]),
+                "version": str(freeze["runtime"]["harness_version"]),
+            },
             "model": {
                 "provider": "OpenAI",
                 "model_id": str(freeze["runtime"]["model"]),
@@ -168,7 +262,7 @@ def _run_record(
             "reasoning_output_tokens": int(usage.get("reasoning_output_tokens", 0)),
             "wall_time_ms": int(usage.get("wall_time_ms", 0)),
         },
-        "outputs": _private_output_refs(cell or {}, role, cell_id),
+        "outputs": _private_output_refs(source or {}, role, cell_id),
         "effects": [
             {
                 "effect_type": (
@@ -180,8 +274,8 @@ def _run_record(
             }
         ],
         "event_summary": {
-            "captured": bool(cell),
-            "event_count": int(cell.get("event_count", 0)) if cell else 0,
+            "captured": bool(source),
+            "event_count": int(source.get("event_count", 0)) if source else 0,
             "authenticated_actor_ids": [],
             "limitations": [
                 "Raw Codex events are retained privately; this record exposes hashes and counts only."
@@ -387,10 +481,12 @@ def _receipt(
     receipt_id: str,
     claim_prefix: str,
     measurement_prefix: str,
+    freeze: Mapping[str, Any],
 ) -> dict[str, Any]:
     counts = decision["condition_counts"]
     disposition_map = {
         "adopt_adapter_for_alpha12_pilot": "narrow",
+        "qualify_adapter_for_future_task_supply": "narrow",
         "reject_structured_reporter_prompt": "reject",
         "revise_activation_adapter": "inconclusive",
         "revise_capture_mapping": "inconclusive",
@@ -404,7 +500,7 @@ def _receipt(
         f"{counts['B0']['claim_agreement']} observed agreements across "
         f"{counts['B0']['valid']} valid calls; T1 produced "
         f"{counts['T1']['claim_agreement']} observed agreements across "
-        f"{counts['T1']['valid']} valid calls. Unrun or invalid calls are not "
+        f"{counts['T1']['valid']} valid calls. Ambiguous, invalid, or unrun calls are not "
         "counted as disagreements; these are descriptive counts, not an effect estimate."
     )
     if not completed_protocol:
@@ -459,7 +555,11 @@ def _receipt(
             "scope": [
                 "the versioned Completion Integrity activation adapter",
                 "two qualified sacrificial Python and TypeScript roots",
-                "the pinned Codex CLI 0.146.0 / gpt-5.6-sol xhigh stack",
+                (
+                    f"the pinned {freeze['runtime']['harness']} "
+                    f"{freeze['runtime']['harness_version']} / {freeze['runtime']['model']} "
+                    f"{freeze['runtime']['reasoning_effort']} stack"
+                ),
             ],
             "reversal_trigger": "A recomputation mismatch, frozen-binding failure, hidden protocol breach, or larger preregistered pilot contradicts this bounded decision.",
         },
@@ -500,7 +600,7 @@ def _receipt(
             "The result is independently reproduced or externally outcome-verified.",
         ],
         "limitations": [
-            "The frozen design contains only two sacrificial roots and schedules each reporter condition once per root; protocol-invalid execution can leave cells unrun.",
+            "The frozen design contains only two sacrificial roots and schedules each reporter condition once per root; protocol-invalid execution can leave a submitted attempt ambiguous and later cells unrun.",
             "Task, evaluator, candidate, event, authentication, and personal-path bytes remain private.",
             "Maintainer authorship and evaluation overlap; provider state is not immutable or replayable.",
             "The reporter retained a built-in command tool inside a read-only evidence boundary; it was not tool-free.",
@@ -527,7 +627,7 @@ def _receipt(
             ),
         },
         "publication_state": "public_ready",
-        "generator": {"name": "ael-completion-integrity-activation-materializer", "version": "0.1"},
+        "generator": {"name": "ael-completion-integrity-activation-materializer", "version": "0.2"},
     }
 
 
@@ -546,9 +646,14 @@ def materialize(
     run_prefix = _identity_prefix(study_id, "run", study_revision)
     measurement_set_id = _identity_prefix(study_id, "measurements", study_revision)
     receipt_id = _identity_prefix(study_id, "receipt", study_revision)
-    claim_prefix = "AEL-CI11" if study_revision == 1 else f"AEL-CI11-R{study_revision}"
-    measurement_prefix = _measurement_prefix(study_revision)
+    claim_prefix = activation_claim_prefix(study_revision)
+    measurement_prefix = activation_measurement_prefix(study_revision)
     observations = validate_observations(load_json(raw_root / "observations.json"))
+    frozen_task_ids = list(dict.fromkeys(str(entry["task_id"]) for entry in freeze["schedule"]))
+    _require(
+        [str(task["task_id"]) for task in observations["tasks"]] == frozen_task_ids,
+        "observation tasks differ from the frozen schedule",
+    )
     decision = decide_activation(
         observations,
         decision_id=decision_id_from_study_id(study_id),
@@ -573,6 +678,13 @@ def materialize(
         for path in sorted((raw_root / "cells").glob("*.json"))
         if path.is_file() and not path.is_symlink()
     }
+    scheduled_cell_ids = {str(entry["cell_id"]) for entry in freeze["schedule"]}
+    _require(set(cells).issubset(scheduled_cell_ids), "private cells exceed the frozen schedule")
+    attempts = {
+        str(entry["cell_id"]): projection
+        for entry in freeze["schedule"]
+        if (projection := _attempt_projection(raw_root, entry)) is not None
+    }
     run_paths: dict[str, Path] = {}
     for entry in freeze["schedule"]:
         cell_id = str(entry["cell_id"])
@@ -582,6 +694,7 @@ def materialize(
             _run_record(
                 entry=entry,
                 cell=cells.get(cell_id),
+                attempt=attempts.get(cell_id),
                 manifest_sha256=manifest_sha256,
                 freeze_sha256=sha256_path(freeze_path),
                 freeze=freeze,
@@ -644,6 +757,7 @@ def materialize(
             receipt_id=receipt_id,
             claim_prefix=claim_prefix,
             measurement_prefix=measurement_prefix,
+            freeze=freeze,
         ),
     )
     return {

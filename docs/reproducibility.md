@@ -23,7 +23,7 @@ from Git tag, GitHub release, or package-publication state.
 
 ## Graph verification: deterministic public checks
 
-From a clean checkout of the exact alpha.12 source revision under review:
+From a clean checkout of the exact alpha.13 source revision under review:
 
 ```bash
 uv sync --locked --all-groups
@@ -53,6 +53,11 @@ uv run ael study audit \
   --decision-adapter completion-integrity-activation-v1 \
   --require-git-proof
 uv run ael study audit \
+  --freeze studies/completion-integrity/activation-v3/freeze.json \
+  --result studies/completion-integrity/activation-v3/results \
+  --decision-adapter completion-integrity-activation-v1 \
+  --require-git-proof
+uv run ael study audit \
   --freeze studies/agent-skills-season-1/screening/property-based-testing-v2.freeze.json \
   --result studies/agent-skills-season-1/results/property-based-testing-v2 \
   --decision-adapter pbt-v2 \
@@ -77,7 +82,7 @@ uv run python tools/check_completion_integrity_claim.py \
 uv run python tools/release_check.py
 uv build
 uv run python tools/verify_release_artifacts.py \
-  --expected-version 0.1.0a12 dist/*.whl dist/*.tar.gz
+  --expected-version 0.1.0a13 dist/*.whl dist/*.tar.gz
 ```
 
 These checks establish package, schema, cross-reference, committed-fixture,
@@ -305,19 +310,25 @@ rejection. Private tasks, evaluator code, candidates, events, attempt journals,
 and authentication remain outside the public graph.
 
 The `completion-integrity-activation-v1` audit adapter also verifies activation
-v2 because the adapter name identifies the study-family decision algorithm, not
-one hard-coded study revision. For v2 it checks the exact preregistration and
-freeze, six scheduled records including invalid and unrun cells, 24 normalized
-measurements, and the recomputed
+v2 and v3 because the adapter name identifies the study-family decision
+algorithm, not one hard-coded study revision. For v2 it checks the exact
+preregistration and freeze, six scheduled records including invalid and unrun
+cells, 24 normalized measurements, and the recomputed
 `protocol_invalid / revise_activation_adapter` decision. It does not use the
 current repaired runner source in place of the source hashes retained by the v2
 freeze.
 
-Activation audit is not a rerun. The exact v2 schedule cannot be retried or
-resumed; a repaired adapter requires a new revision and new provider
-observation. The public bundle cannot reconstruct the withheld reporter payload
-or independently verify the maintainer diagnosis that its semantic claim
-matched truth while the owner wrapper identifier was invalid.
+For v3 the audit additionally binds observation task identities to the freeze,
+requires the submitted ambiguous executor to project as an invalid public run,
+requires later cells to remain unrun, checks 24 measurements, verifies every
+frozen code reference from the preregistration commit, and recomputes the same
+protocol-invalid disposition. It cannot decide the ambiguous executor outcome.
+
+Activation audit is not a rerun. Exact v2/v3 schedules cannot be retried or
+resumed; a repaired adapter requires a new revision, uncontaminated roots, and
+new provider observation. The public bundles cannot reconstruct withheld task,
+candidate, evaluator, reporter, or event bytes or independently verify the
+maintainer root-cause diagnoses.
 
 The observable-enactment fixture check is separate. It validates an
 experimental classifier against sanitized known states and verifies that its policy,

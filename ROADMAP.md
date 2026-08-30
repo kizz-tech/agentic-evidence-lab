@@ -274,8 +274,9 @@ freeze or narrow the coevolution program.
 
 Current execution status is recorded in
 [Evidence-to-Action execution status](docs/decisions/2026-08-30-evidence-to-action-execution-status.md):
-M0 is published; M1 is instrument-qualified with zero human responses; M2 is
-blocked before activation v3; M3 and M4 remain ineligible by prerequisite.
+M0 is published; M1 is instrument-qualified with zero human responses; M2
+activation v3 is closed protocol-invalid after one ambiguous submitted attempt;
+M3 and M4 remain ineligible by prerequisite.
 
 ## Deferred Completion Integrity qualified scale-up
 
@@ -288,19 +289,26 @@ rewriting those records.
 
 ### Gate A — qualify the real adapter on fresh sacrificial roots
 
-1. Create activation v3 with new Python and TypeScript roots, a new raw root,
-   new preregistration, and no reuse of observed v2 task content.
-2. Run a pre-freeze full-wrapper qualification that constructs every scheduled
+Activation v3 attempted this gate and failed before a terminal cell: the exact
+executor-facing task syntax was not part of qualification and did not match the
+live parser. V3 is closed and its roots are contaminated by observation. The
+following requirements now apply to a prospective activation v4:
+
+1. Create activation v4 with new Python and TypeScript roots, a new raw root,
+   new preregistration, and no reuse of observed v2/v3 task content.
+2. Parse the exact executor-facing `TASK.md` during task qualification and
+   require ordered equality with the dossier before expensive evaluation.
+3. Run a pre-freeze full-wrapper qualification that constructs every scheduled
    attempt identity, frozen truth, reporter submission, and terminal assessment
    in addition to provider schema, evidence readability, image, isolation,
    credential, and optional-tool checks.
-3. Freeze a Study Quality Profile before any scored call. A missing or critical
+4. Freeze a Study Quality Profile before any scored call. A missing or critical
    profile finding blocks execution; no `not_assessed_current` shortcut is
-   allowed for v3.
-4. Submit each cell once, retain invalid/ambiguous/harmful/negative states, and
+   allowed for v4.
+5. Submit each cell once, retain invalid/ambiguous/harmful/negative states, and
    stop on the first frozen integrity failure. Passing unit tests alone are not
    activation evidence.
-5. Admit a larger pilot only if every adapter, custody, capture, isolation,
+6. Admit a larger pilot only if every adapter, custody, capture, isolation,
    and claim-validity gate passes. A semantically correct but structurally
    invalid answer still fails activation.
 

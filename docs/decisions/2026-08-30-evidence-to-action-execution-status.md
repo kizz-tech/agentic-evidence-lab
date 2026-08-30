@@ -1,7 +1,7 @@
 # Evidence-to-Action execution status
 
 Date: 2026-08-30
-Status: active stage; partial progress with explicit prerequisite blockers
+Status: active stage; M2 activation attempted and closed protocol-invalid
 
 ## M0 — Coevolution Foundation
 
@@ -34,23 +34,27 @@ Model participants cannot close this gate.
 
 ## M2 — Decision-governing Codex intervention
 
-The old v2 pack remains historical and cannot be reused. A new private v3 pack
-now contains two fresh Python/TypeScript sacrificial repository graphs. Both
-passed the complete deterministic eight-case qualification with two evaluator
-repeats per case after one invalid owner receipt exposed and triggered removal
-of the remaining `activation-v1` identity constant.
+The old v2 pack remains historical and cannot be reused. A private v3 pack with
+two fresh Python/TypeScript sacrificial repository graphs passed the complete
+deterministic eight-case qualification with two evaluator repeats per case.
 
 The corrected qualification receipt binds the v3 pack revision. A separate
-no-call qualification composes all six version-derived attempt/truth/submission/
-terminal-assessment identities, and the prospective Study Quality Profile is
-`conformant_with_warnings` with zero activation-v3 model calls.
+no-call qualification composed all six version-derived attempt/truth/submission/
+terminal-assessment identities, and the prospective Study Quality Profile was
+`conformant_with_warnings` before scored execution.
 
-The two disclosed non-scored schema-capability calls now pass and are bound in
-the v3 freeze. Activation remains blocked until the exact freeze/probe commit is
-pushed and its exact-SHA CI gate passes. The larger pilot still has zero eligible screening/confirmation roots
-against a minimum floor of 16 independent roots and `pending_pilot` sizing.
+The two disclosed non-scored schema-capability calls passed, the exact freeze
+was committed as `7257025eab78e8894f69e6ad0677fabec8cf5542`, and exact-SHA CI
+run `33284533065` passed all five jobs. The scored schedule was then attempted
+once. Its first executor submission became ambiguous after Codex and evaluator
+exit because the owner `TASK.md` syntax did not match the live requirement
+parser. Zero terminal cells were produced; five later cells were not submitted;
+zero retries or resumes occurred.
 
-Decision: `do_not_execute_scored_calls_before_exact_sha_preregistration`. See
+Decision: `do_not_scale_until_protocol_failure_is_repaired_in_a_new_revision`.
+V3 is closed `protocol_invalid / revise_activation_adapter`; it produced no
+reporter-effect or model-quality estimate. See the
+[v3 decision](2026-08-30-completion-integrity-activation-v3-result.md) and
 [`scale-up-readiness.json`](../../studies/completion-integrity/scale-up-readiness.json).
 
 ## M3 — Action and downstream outcome
@@ -71,8 +75,9 @@ Two independent gates can advance:
 
 1. recruit and consent competent M1 participants, freeze the private blinded
    case pack and pilot sizing, then collect each response once;
-2. commit and push the exact activation-v3 freeze/probe package, then require
-   green exact-SHA preregistration CI before the first one-submit cell.
+2. create activation v4 only from new uncontaminated roots after the exact
+   executor task parser is included in qualification, then freeze a new pack,
+   raw root, quality profile, preregistration, and exact-SHA CI gate.
 
 Neither gate authorizes the other. Negative, blocked, missing, or invalid
 outcomes remain first-class project evidence.

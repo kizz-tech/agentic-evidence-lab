@@ -6,23 +6,29 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.0-alpha.13] - 2026-08-30
+
 ### Added
 
 - A family-local Decision Utility v1 instrument calibration with
   evidence-equivalent ordinary-note, checklist, and AEL-card views; a balanced
   no-repeat schedule; severity/guardrail/burden scoring; and an explicit human-
   evidence requirement.
-- A bounded Evidence-to-Action execution status and Completion Integrity
-  scale-up readiness record that preserve `do_not_execute_scored_calls` while
-  fresh roots, sample-size evidence, and prospective activation-v3 contracts
-  are absent.
-- A prospective activation-v3 package with two fresh sacrificial repository
-  graphs, a corrected version-bound qualification receipt, a six-cell no-call
-  full-wrapper qualification, and a conformant-with-warnings Study Quality
-  Profile. No activation-v3 model cell has been submitted.
+- A bounded Evidence-to-Action execution record and Completion Integrity
+  scale-up readiness decision that keep M1 human evidence, M2 adapter
+  activation, M3 owner outcome, and M4 retrospective coevolution separate.
+- Activation v3 with two fresh sacrificial repository graphs, a corrected
+  version-bound qualification receipt, a six-cell no-call full-wrapper
+  qualification, and a conformant-with-warnings Study Quality Profile.
 - A passing two-call activation-v3 schema capability receipt and exact freeze
   binding the fresh pack, corrected qualification, full wrapper, quality
   profile, images, code, schedule, budget, and no-retry decision rule.
+- The terminal activation-v3 public bundle: six run records, 24 measurements,
+  one submitted ambiguous executor attempt, five unrun cells, and a
+  `protocol_invalid / revise_activation_adapter` decision.
+- A no-model, no-retry, no-overwrite finalizer for interrupted immutable
+  activation journals and public projection of submitted ambiguity with
+  observed cost instead of collapsing it to `unrun`.
 
 ### Research integrity
 
@@ -30,6 +36,11 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   consent, private blinded cases, pilot variance, sample size, and stopping
   remain blocking; model readers cannot substitute for human decision-utility
   evidence.
+- Activation v3 produced no valid executor or reporter observation and no
+  effect estimate. Codex and evaluator exit success do not compensate for the
+  owner task/parser mismatch or create terminal truth after the fact.
+- The exact v3 call was not retried or resumed. Its two-root pack is now
+  observed and cannot be reused as fresh evidence for v4.
 
 ### Fixed
 
@@ -37,6 +48,12 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   identities are now derived from the exact study/private-pack revision instead
   of carrying `activation-v1`/`CI2-*` constants into a future protocol. Legacy
   v1/v2 schedule bytes remain unchanged.
+- Semantic task qualification now parses the exact executor-facing `TASK.md`
+  grammar and requires ordered equality with dossier requirement IDs.
+- Activation observation, materialization, and audit are revision-generic for
+  v3+ while preserving legacy v1/v2 public IDs. The auditor binds public task
+  and run states to the frozen schedule and verifies frozen code from the
+  preregistration commit.
 
 ## [0.1.0-alpha.12] - 2026-08-30
 
@@ -506,7 +523,8 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   process can read the reusable credential.
 - Contract v0 remains pre-stable and may change incompatibly before `1.0`.
 
-[Unreleased]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.12...HEAD
+[Unreleased]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.13...HEAD
+[0.1.0-alpha.13]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.12...v0.1.0-alpha.13
 [0.1.0-alpha.12]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.11...v0.1.0-alpha.12
 [0.1.0-alpha.11]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.10...v0.1.0-alpha.11
 [0.1.0-alpha.10]: https://github.com/kizz-tech/agentic-evidence-lab/compare/v0.1.0-alpha.9...v0.1.0-alpha.10

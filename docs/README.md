@@ -119,6 +119,9 @@ must not promote a stack result into a model-only claim.
   activation failure, full-wrapper repair, and bounded alpha.12 admission path.
 - [Alpha.12 release notes](release-notes/v0.1.0-alpha.12.md) — the bounded
   AEL-CEP Stage-0 method foundation and CLI/file-only compatibility boundary.
+- [Alpha.13 release notes](release-notes/v0.1.0-alpha.13.md) — activation-v3's
+  protocol-invalid result, exact task-contract qualification, and no-retry
+  interruption finalization.
 - [Alpha.9 release notes](release-notes/v0.1.0-alpha.9.md) — the terminal
   Completion Integrity null result and exact-policy rejection. A note file is
   not proof of a tag or release.
@@ -132,9 +135,9 @@ result projection or a narrative report before opening those raw records.
 
 For the current Completion Integrity execution path, start with
 [Completion Integrity activation](completion-integrity-activation.md), then
-open its [result card](results/completion-integrity-activation-v2.md),
-[narrative report](../reports/2026-08-15-completion-integrity-activation-v2.md),
-or [decision record](decisions/2026-08-15-alpha11-activation-result.md).
+  open its [result card](results/completion-integrity-activation-v3.md),
+  [narrative report](../reports/2026-08-30-completion-integrity-activation-v3.md),
+  or [decision record](decisions/2026-08-30-completion-integrity-activation-v3-result.md).
 
 ## I want to run agent code safely
 
@@ -213,6 +216,8 @@ Decision records preserve why important boundaries changed:
 - [Alpha.12 AEL-CEP public boundary](decisions/2026-08-30-alpha12-public-boundary.md)
 - [Evidence-to-Action execution status](decisions/2026-08-30-evidence-to-action-execution-status.md)
   — M0 publication, M1 instrument qualification, and the exact M2–M4 blockers.
+- [Completion Integrity activation v3 result](decisions/2026-08-30-completion-integrity-activation-v3-result.md)
+  — one submitted ambiguous attempt, no retry, root cause, and the v4 admission boundary.
 
 [The Contract v0 drafting brief](contract-v0-brief.md) is retained as design
 history. It does not replace the executable [current Contract v0](contract-v0.md).

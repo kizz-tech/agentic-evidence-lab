@@ -96,6 +96,7 @@ class ResultSurfaceTests(unittest.TestCase):
                 "RESULTS.md",
                 "docs/results/index.json",
                 "docs/results/completion-integrity-activation-v2.md",
+                "docs/results/completion-integrity-activation-v3.md",
                 "docs/results/completion-integrity-prompt-policy-v1.md",
                 "docs/results/council-generation-1.md",
                 "docs/results/focused-change-verification-calibration.md",
@@ -112,6 +113,7 @@ class ResultSurfaceTests(unittest.TestCase):
         self.assertEqual(
             [
                 "completion-integrity-activation-v2",
+                "completion-integrity-activation-v3",
                 "completion-integrity-prompt-policy-v1",
                 "council-generation-1",
                 "focused-change-verification-calibration",
@@ -152,7 +154,10 @@ class ResultSurfaceTests(unittest.TestCase):
                 self.assertEqual(
                     {"not_assessed_current"}, set(card["quality"]["quality_axes"].values())
                 )
-            elif card["card_id"] == "completion-integrity-prompt-policy-v1":
+            elif card["card_id"] in {
+                "completion-integrity-activation-v3",
+                "completion-integrity-prompt-policy-v1",
+            }:
                 self.assertEqual("current", card["quality"]["quality_axes"]["freshness"])
                 self.assertEqual("audited", card["quality"]["quality_axes"]["task_validity"])
             else:
@@ -160,7 +165,10 @@ class ResultSurfaceTests(unittest.TestCase):
                 self.assertEqual(
                     {"not_assessed_historical"}, set(card["quality"]["quality_axes"].values())
                 )
-            if card["card_id"] == "completion-integrity-activation-v2":
+            if card["card_id"] in {
+                "completion-integrity-activation-v2",
+                "completion-integrity-activation-v3",
+            }:
                 self.assertEqual(
                     "retained_cell_without_valid_observation",
                     card["runs"]["repeat_evidence"]["status"],

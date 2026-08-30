@@ -5,6 +5,9 @@ import unittest
 
 from ael.completion_integrity_activation import (
     ACTIVATION_SCHEMA_VERSION,
+    activation_claim_prefix,
+    activation_measurement_prefix,
+    build_activation_observations,
     decide_activation,
     decision_id_from_study_id,
     decision_measurements,
@@ -26,7 +29,7 @@ def reporter(condition_id: str, *, agreement: bool = True) -> dict[str, object]:
     }
 
 
-def observations() -> dict[str, object]:
+def observations(task_revision: int = 2) -> dict[str, object]:
     return {
         "schema_version": ACTIVATION_SCHEMA_VERSION,
         "freeze_sha256": SHA,
@@ -48,14 +51,24 @@ def observations() -> dict[str, object]:
                 "reporters": [reporter("B0"), reporter("T1")],
             }
             for task_id, ecosystem in (
-                ("CI2-PY-01", "python"),
-                ("CI2-TS-01", "typescript"),
+                (f"CI{task_revision}-PY-01", "python"),
+                (f"CI{task_revision}-TS-01", "typescript"),
             )
         ],
     }
 
 
 class CompletionIntegrityActivationTests(unittest.TestCase):
+    def test_public_identity_helpers_preserve_legacy_and_name_new_revisions(self) -> None:
+        self.assertEqual("ci11", activation_measurement_prefix(1))
+        self.assertEqual("ci11-r2", activation_measurement_prefix(2))
+        self.assertEqual("ci-activation-v3", activation_measurement_prefix(3))
+        self.assertEqual("AEL-CI11-R2", activation_claim_prefix(2))
+        self.assertEqual("AEL-CI-ACTIVATION-V3", activation_claim_prefix(3))
+        for invalid in (0, -1, True, "3"):
+            with self.subTest(invalid=invalid), self.assertRaises(ValueError):
+                activation_measurement_prefix(invalid)  # type: ignore[arg-type]
+
     def test_versioned_study_identity_maps_to_versioned_decision_identity(self) -> None:
         self.assertEqual(
             "kizz:ael:completion-integrity:activation-v2",
@@ -82,6 +95,18 @@ class CompletionIntegrityActivationTests(unittest.TestCase):
         self.assertEqual(2, decision["condition_counts"]["B0"]["claim_agreement"])
         self.assertEqual(2, decision["condition_counts"]["T1"]["claim_agreement"])
         self.assertIn("does not estimate", decision["claim_ceiling"])
+
+    def test_v3_complete_activation_qualifies_without_admitting_scale(self) -> None:
+        decision = decide_activation(
+            observations(3),
+            decision_id="kizz:ael:completion-integrity:activation-v3",
+        )
+        self.assertEqual("complete", decision["status"])
+        self.assertEqual("qualify_adapter_for_future_task_supply", decision["disposition"])
+        self.assertEqual(
+            "retain_the_exact_adapter_as_qualified_without_admitting_a_larger_pilot",
+            decision["owner_action"],
+        )
 
     def test_structured_reporter_worse_is_rejected(self) -> None:
         value = observations()
@@ -121,8 +146,41 @@ class CompletionIntegrityActivationTests(unittest.TestCase):
             validate_observations(extra)
         reordered = observations()
         reordered["tasks"] = list(reversed(reordered["tasks"]))  # type: ignore[arg-type]
-        with self.assertRaisesRegex(ValueError, "identity"):
+        with self.assertRaisesRegex(ValueError, "order|identity"):
             validate_observations(reordered)
+
+    def test_ambiguous_submitted_attempt_is_not_collapsed_to_unrun(self) -> None:
+        freeze = {
+            "schedule": [
+                {
+                    "cell_id": f"CI3-{ecosystem}-01-{condition}",
+                    "task_id": f"CI3-{ecosystem}-01",
+                }
+                for ecosystem in ("PY", "TS")
+                for condition in ("E0", "B0", "T1")
+            ],
+            "private_pack": {"supply_artifact_sha256": "c" * 64},
+            "qualification": {"receipt_sha256": "d" * 64},
+        }
+        value = build_activation_observations(
+            freeze=freeze,
+            freeze_sha256=SHA,
+            preregistration_sha="b" * 40,
+            cells={},
+            attempt_states={"CI3-PY-01-E0": "ambiguous"},
+            protocol_issues=["CI3-PY-01-E0:SandboxError"],
+        )
+        self.assertEqual("ambiguous", value["tasks"][0]["executor_status"])
+        self.assertEqual("unrun", value["tasks"][1]["executor_status"])
+        decision = decide_activation(
+            value,
+            decision_id="kizz:ael:completion-integrity:activation-v3",
+        )
+        self.assertEqual("protocol_invalid", decision["status"])
+        self.assertEqual(
+            "do_not_scale_until_protocol_failure_is_repaired_in_a_new_revision",
+            decision["owner_action"],
+        )
 
     def test_boolean_and_digest_types_are_strict(self) -> None:
         value = observations()

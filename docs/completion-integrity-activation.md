@@ -43,44 +43,53 @@ Read the [v2 report](../reports/2026-08-15-completion-integrity-activation-v2.md
 and [alpha.11 decision](decisions/2026-08-15-alpha11-activation-result.md) for
 the exact outcome and repair boundary.
 
-## Activation v3 prospective state
+## What activation v3 learned
 
-V3 is a new prospective revision, not an alpha.11 retry. It has:
+V3 was a new prospective revision, not an alpha.11 retry. It froze:
 
 - two fresh sacrificial Python/TypeScript repository graphs;
 - a corrected version-bound deterministic qualification receipt;
 - a six-cell no-call full-wrapper qualification;
 - a prospective `conformant_with_warnings` Study Quality Profile;
 - a passing offline reporter-boundary probe;
-- zero submitted activation-v3 model cells.
+- a green exact-SHA preregistration gate.
 
 The first fresh qualification output was retained as invalid because its owner
 tool still emitted an `activation-v1` receipt identity. Version-derived
 qualification, schedule, truth, and submission identity is now covered by
 regression tests, and the complete deterministic matrix was rerun successfully.
 
-The new two-call schema-capability probe passes and is retained in `freeze.json`.
-Activation remains blocked until every binding is committed in one clean
-preregistration SHA and that exact SHA passes remote CI. The 16-root effect study remains separately blocked
-by task supply and `pending_pilot` sample size even if activation v3 passes.
+The first scored executor was submitted once. Codex and the evaluator exited
+successfully, but the owner adapter then failed to parse the private `TASK.md`:
+the task used a typographic dash where the live requirement parser required
+`: `. The attempt therefore remains ambiguous, zero cells are terminal, and
+the five later cells remain unrun. V3 is closed
+`protocol_invalid / revise_activation_adapter`; it did not measure reporter or
+model quality.
+
+Read the [v3 report](../reports/2026-08-30-completion-integrity-activation-v3.md)
+and [owner decision](decisions/2026-08-30-completion-integrity-activation-v3-result.md).
+The larger 16-root effect study remains blocked by adapter activation, task
+supply, and `pending_pilot` sample size.
 
 ## Current source versus frozen evidence
 
-Alpha.11 source constructs future attempt identifiers as
-`attempt:<32-hex-digest>` and tests that the generated identity survives the
-complete truth/submission/assessment path. The v2 freeze continues to bind the
-historical buggy source by SHA-256. A public audit checks that historical
-binding; it must not substitute current repaired source into the scored result.
+Current source constructs namespaced attempt identifiers, checks the exact
+executor-facing task grammar during semantic qualification, preserves an
+ambiguous submitted attempt in normalized observations, and can finalize an
+interrupted journal without a model call or retry. These repairs do not alter
+the v1/v2/v3 freezes or reinterpret their results.
 
-No v2 cell may be retried. A new observation requires a new revision, new raw
-root, new preregistration, and new prospective quality profile.
+No v2 or v3 cell may be retried. A new observation requires a new revision,
+new uncontaminated roots, new raw root, new preregistration, and new prospective
+quality profile.
 
 ## Public verification
 
 ```bash
 uv run ael study audit \
-  --freeze studies/completion-integrity/activation-v2/freeze.json \
-  --result studies/completion-integrity/activation-v2/results \
+  --freeze studies/completion-integrity/activation-v3/freeze.json \
+  --result studies/completion-integrity/activation-v3/results \
   --decision-adapter completion-integrity-activation-v1 \
   --require-git-proof
 ```
