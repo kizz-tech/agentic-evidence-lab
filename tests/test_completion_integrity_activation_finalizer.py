@@ -23,8 +23,9 @@ PREREGISTRATION_SHA = "7257025eab78e8894f69e6ad0677fabec8cf5542"
 
 class CompletionIntegrityActivationFinalizerTests(unittest.TestCase):
     def test_ambiguous_attempt_is_finalized_without_retry_or_model_call(self) -> None:
+        temporary_parent = Path("/private/tmp") if Path("/private/tmp").is_dir() else None
         with tempfile.TemporaryDirectory(
-            prefix="ael-activation-finalizer-", dir="/private/tmp"
+            prefix="ael-activation-finalizer-", dir=temporary_parent
         ) as raw:
             raw_root = Path(raw)
             journal = raw_root / "attempts" / "CI3-PY-01-E0"

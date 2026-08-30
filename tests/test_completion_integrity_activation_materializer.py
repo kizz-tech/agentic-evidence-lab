@@ -228,8 +228,9 @@ class CompletionIntegrityActivationMaterializerTests(unittest.TestCase):
 
     def test_submitted_ambiguous_attempt_is_publicly_invalid_not_unrun(self) -> None:
         freeze = load_json(V3_ROOT / "freeze.json")
+        temporary_parent = Path("/private/tmp") if Path("/private/tmp").is_dir() else None
         with tempfile.TemporaryDirectory(
-            prefix="ael-activation-ambiguous-materializer-", dir="/private/tmp"
+            prefix="ael-activation-ambiguous-materializer-", dir=temporary_parent
         ) as raw:
             temporary = Path(raw)
             raw_root = temporary / "raw"
