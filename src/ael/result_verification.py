@@ -158,4 +158,11 @@ def public_audit_projection(adapter: str, request: AuditRequest) -> dict[str, An
             "Git proof is an optional fail-closed build gate and is not projected as evidence; "
             "when required, it establishes repository artifact ordering only."
         )
+    evidence = summary.get("evidence")
+    if isinstance(evidence, dict):
+        normalization = evidence.get("normalization_deviation")
+        if isinstance(normalization, dict):
+            # Exact-Git verification is a build gate. The public card must be
+            # byte-identical whether that optional gate is requested or not.
+            normalization["status"] = "disclosed"
     return summary

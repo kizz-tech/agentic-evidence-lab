@@ -19,6 +19,8 @@ CI_FREEZE = ROOT / "studies/completion-integrity/freeze.json"
 CI_RESULT = ROOT / "studies/completion-integrity/results/prompt-policy-v1"
 CI_ACTIVATION_FREEZE = ROOT / "studies/completion-integrity/activation-v2/freeze.json"
 CI_ACTIVATION_RESULT = ROOT / "studies/completion-integrity/activation-v2/results"
+CI_ACTIVATION_V3_FREEZE = ROOT / "studies/completion-integrity/activation-v3/freeze.json"
+CI_ACTIVATION_V3_RESULT = ROOT / "studies/completion-integrity/activation-v3/results"
 
 
 class ResultVerificationTests(unittest.TestCase):
@@ -70,6 +72,26 @@ class ResultVerificationTests(unittest.TestCase):
         self.assertEqual(
             {"sha", "boundary"},
             set(with_proof["preregistration"]),
+        )
+
+    def test_v3_deviation_projection_is_identical_after_required_git_proof(self) -> None:
+        without_proof = public_audit_projection(
+            "completion-integrity-activation-v1",
+            AuditRequest(CI_ACTIVATION_V3_FREEZE, CI_ACTIVATION_V3_RESULT, git_root=ROOT),
+        )
+        with_proof = public_audit_projection(
+            "completion-integrity-activation-v1",
+            AuditRequest(
+                CI_ACTIVATION_V3_FREEZE,
+                CI_ACTIVATION_V3_RESULT,
+                git_root=ROOT,
+                require_git_proof=True,
+            ),
+        )
+        self.assertEqual(without_proof, with_proof)
+        self.assertEqual(
+            "disclosed",
+            with_proof["evidence"]["normalization_deviation"]["status"],
         )
 
     def test_real_shadow_adapter_rejects_legacy_private_roots_before_audit(self) -> None:
