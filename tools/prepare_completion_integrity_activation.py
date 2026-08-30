@@ -7,8 +7,10 @@ from typing import Any
 
 from check_completion_integrity_task_supply import check_supply
 from completion_integrity_activation_support import (
+    activation_schedule,
     canonical_sha256,
     load_json,
+    qualification_id_for_pack,
     sha256_path,
     write_json_atomic,
 )
@@ -72,51 +74,6 @@ CODE_REFS = (
     "tools/run_completion_integrity_activation.py",
 )
 
-SCHEDULE = (
-    {
-        "sequence": 1,
-        "cell_id": "CI2-PY-01-E0",
-        "task_id": "CI2-PY-01",
-        "role": "executor",
-        "condition_id": None,
-    },
-    {
-        "sequence": 2,
-        "cell_id": "CI2-PY-01-B0",
-        "task_id": "CI2-PY-01",
-        "role": "reporter",
-        "condition_id": "B0",
-    },
-    {
-        "sequence": 3,
-        "cell_id": "CI2-PY-01-T1",
-        "task_id": "CI2-PY-01",
-        "role": "reporter",
-        "condition_id": "T1",
-    },
-    {
-        "sequence": 4,
-        "cell_id": "CI2-TS-01-E0",
-        "task_id": "CI2-TS-01",
-        "role": "executor",
-        "condition_id": None,
-    },
-    {
-        "sequence": 5,
-        "cell_id": "CI2-TS-01-B0",
-        "task_id": "CI2-TS-01",
-        "role": "reporter",
-        "condition_id": "B0",
-    },
-    {
-        "sequence": 6,
-        "cell_id": "CI2-TS-01-T1",
-        "task_id": "CI2-TS-01",
-        "role": "reporter",
-        "condition_id": "T1",
-    },
-)
-
 
 def _require(condition: bool, message: str) -> None:
     if not condition:
@@ -148,6 +105,24 @@ def _verify_qualification(
     receipt: Mapping[str, Any], pack_root: Path, qualification_root: Path
 ) -> None:
     _require(receipt.get("status") == "pass", "qualification receipt is not passing")
+    pack = load_json(pack_root / "pack.json")
+    pack_id = str(pack.get("pack_id"))
+    pack_revision = int(pack.get("revision", 0))
+    expected_qualification_id = qualification_id_for_pack(pack_id, pack_revision)
+    legacy_id = "kizz:ael:completion-integrity:activation-v1:qualification"
+    if (
+        "completion-integrity-v1-activation" in pack_id
+        or "completion-integrity-v2-activation" in pack_id
+    ):
+        _require(
+            receipt.get("qualification_id") in {legacy_id, expected_qualification_id},
+            "legacy qualification identity differs",
+        )
+    else:
+        _require(
+            receipt.get("qualification_id") == expected_qualification_id,
+            "qualification identity differs from pack revision",
+        )
     _require(receipt.get("pack_sha256") == tree_sha256(pack_root), "qualification pack drift")
     tasks = receipt.get("tasks")
     _require(isinstance(tasks, list) and len(tasks) == 2, "qualification task count differs")
@@ -238,16 +213,18 @@ def _verify_schema_probe(
     study_id: str,
     executor_schema_sha256: str,
     reporter_schema_sha256: str,
+    study_revision: int,
 ) -> None:
     _require(probe.get("schema_version") == SCHEMA_PROBE_SCHEMA, "schema probe version differs")
     _require(
-        probe.get("probe_id") == f"{study_id}:schema-capability:2",
+        probe.get("probe_id") == f"{study_id}:schema-capability:{study_revision}",
         "schema probe identity differs",
     )
     _require(probe.get("status") == "pass", "schema capability probe is not passing")
     _require(probe.get("call_count") == 2, "schema capability call count differs")
+    expected_cumulative_calls = 4 if study_revision == 2 else 2
     _require(
-        probe.get("cumulative_non_scored_call_count") == 4,
+        probe.get("cumulative_non_scored_call_count") == expected_cumulative_calls,
         "schema capability cumulative call count differs",
     )
     calls = probe.get("calls")
@@ -346,11 +323,12 @@ def build_freeze(
             study_id=str(manifest["study_id"]),
             executor_schema_sha256=sha256_path(study_root / "executor-output-schema.json"),
             reporter_schema_sha256=sha256_path(study_root / "reporter-output-schema.json"),
+            study_revision=int(manifest["revision"]),
         )
         schema_probe_binding = {
             "receipt_sha256": sha256_path(schema_probe_path),
             "status": "pass",
-            "non_scored_model_calls": 4,
+            "non_scored_model_calls": schema_probe["cumulative_non_scored_call_count"],
         }
     tasks = qualification["tasks"]
     task_bindings = [
@@ -406,7 +384,7 @@ def build_freeze(
             "network_policy": "openai-proxy",
             "concurrency": 1,
         },
-        "schedule": [dict(entry) for entry in SCHEDULE],
+        "schedule": activation_schedule([str(task["task_id"]) for task in tasks]),
         "attempt_policy": {
             "outcome_retries": 0,
             "resume_after_submission": False,

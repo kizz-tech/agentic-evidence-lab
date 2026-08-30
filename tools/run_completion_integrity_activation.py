@@ -12,6 +12,7 @@ from typing import Any
 
 from completion_integrity_activation_support import (
     activation_attempt_id,
+    activation_namespace,
     append_attempt_event,
     assess_executor_claim,
     build_frozen_truth,
@@ -151,7 +152,9 @@ def _executor_fixture(*, task_root: Path, study_root: Path, raw_root: Path, task
 def _evaluate_candidate(
     *, candidate: Path, evaluator: Path, output: Path, image: str, timeout_seconds: int
 ) -> dict[str, Any]:
-    with tempfile.TemporaryDirectory(prefix="ael-ci11-evaluate-", dir="/private/tmp") as temp:
+    with tempfile.TemporaryDirectory(
+        prefix="ael-ci-activation-evaluate-", dir="/private/tmp"
+    ) as temp:
         fixture = Path(temp)
         shutil.copytree(candidate, fixture / "candidate", symlinks=True)
         shutil.copytree(evaluator, fixture / "evaluator", symlinks=True)
@@ -338,6 +341,7 @@ def _run_executor(
         evaluation=evaluation,
         evaluator_sha256=str(evaluator_binding["evaluator_sha256"]),
         custody_receipt_sha256=str(evaluator_binding["receipt_sha256"]),
+        activation_id=activation_namespace(str(freeze["study_id"])),
     )
     task_derived = raw_root / "derived" / task_id
     evidence_root = task_derived / "reporter-evidence"
@@ -458,6 +462,7 @@ def _run_reporter(
         artifact_sha256=str(context["artifact_sha256"]),
         evidence_bundle_sha256=str(context["evidence_bundle_sha256"]),
         model_output=model_output,
+        activation_id=activation_namespace(str(freeze["study_id"])),
     )
     assessment = assess_terminal_claim(
         load_json(study_root / "terminal-claim-policy.json"),
@@ -532,7 +537,15 @@ def _observations(
     protocol_issues: list[str],
 ) -> dict[str, Any]:
     tasks = []
-    for task_id, ecosystem in (("CI2-PY-01", "python"), ("CI2-TS-01", "typescript")):
+    task_ids: list[str] = []
+    for entry in freeze["schedule"]:
+        task_id = str(entry["task_id"])
+        if task_id not in task_ids:
+            task_ids.append(task_id)
+    for task_id in task_ids:
+        ecosystem = (
+            "python" if "-PY-" in task_id else "typescript" if "-TS-" in task_id else "unknown"
+        )
         executor = cells.get(f"{task_id}-E0")
         reporter_rows = []
         for condition_id in ("B0", "T1"):

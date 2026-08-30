@@ -11,6 +11,7 @@ from typing import Any
 from completion_integrity_activation_support import (
     canonical_sha256,
     load_json,
+    qualification_id_for_pack,
     sha256_path,
     write_json_atomic,
 )
@@ -236,7 +237,9 @@ def qualify_pack(pack_root: Path, output_root: Path, *, image: str) -> dict[str,
         tasks.append(qualify_task(task_root, output_root / "raw", image=image))
     receipt = {
         "schema_version": QUALIFICATION_SCHEMA_VERSION,
-        "qualification_id": "kizz:ael:completion-integrity:activation-v1:qualification",
+        "qualification_id": qualification_id_for_pack(
+            str(pack.get("pack_id")), int(pack.get("revision", 0))
+        ),
         "recorded_at": utc_now(),
         "pack_id": pack.get("pack_id"),
         "pack_revision": pack.get("revision"),

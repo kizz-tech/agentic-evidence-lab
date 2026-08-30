@@ -8,11 +8,14 @@ from ael.completion_integrity_claim import assess_terminal_claim
 from ael.sandbox import SandboxError
 from tools.completion_integrity_activation_support import (
     activation_attempt_id,
+    activation_namespace,
+    activation_schedule,
     assess_executor_claim,
     build_frozen_truth,
     build_reporter_submission,
     parse_codex_events,
     parse_task_requirements,
+    qualification_id_for_pack,
 )
 
 
@@ -67,6 +70,35 @@ def executor_output(command: str) -> dict[str, object]:
 
 
 class ActivationSupportTests(unittest.TestCase):
+    def test_versioned_activation_and_qualification_identities_are_derived(self) -> None:
+        self.assertEqual(
+            "activation-v3",
+            activation_namespace("kizz:ael:study:completion-integrity-activation-v3"),
+        )
+        self.assertEqual(
+            "kizz:ael:qualification:completion-integrity-v3-activation:revision:1",
+            qualification_id_for_pack(
+                "kizz:ael:private-pack:completion-integrity-v3-activation", 1
+            ),
+        )
+        with self.assertRaisesRegex(SandboxError, "unsupported shape"):
+            activation_namespace("kizz:ael:study:completion-integrity")
+
+    def test_schedule_is_derived_from_qualified_task_identities(self) -> None:
+        schedule = activation_schedule(["CI3-PY-01", "CI3-TS-01"])
+        self.assertEqual(6, len(schedule))
+        self.assertEqual(
+            [
+                "CI3-PY-01-E0",
+                "CI3-PY-01-B0",
+                "CI3-PY-01-T1",
+                "CI3-TS-01-E0",
+                "CI3-TS-01-B0",
+                "CI3-TS-01-T1",
+            ],
+            [cell["cell_id"] for cell in schedule],
+        )
+
     def test_attempt_id_is_valid_by_construction_across_digit_leading_digests(self) -> None:
         freeze_sha256 = "e" * 64
         attempt_id = activation_attempt_id(freeze_sha256, "CI2-PY-01-B0")
@@ -128,6 +160,47 @@ class ActivationSupportTests(unittest.TestCase):
             {"verdict": True, "progress": True, "ledger": True},
             assessment["agreement"],
         )
+
+        v3_truth = build_frozen_truth(
+            task_id="CI3-PY-01",
+            attempt_id=activation_attempt_id("f" * 64, "CI3-PY-01-B0"),
+            artifact_sha256="a" * 64,
+            evidence_bundle_sha256="b" * 64,
+            evaluation={
+                "requirements": [
+                    {
+                        "requirement_id": "REQ:ONE",
+                        "state": "verified",
+                        "evidence_sha256": "c" * 64,
+                        "evidence_code": "owner-check:one",
+                    }
+                ]
+            },
+            evaluator_sha256="d" * 64,
+            custody_receipt_sha256="e" * 64,
+            activation_id="activation-v3",
+        )
+        v3_submission = build_reporter_submission(
+            task_id="CI3-PY-01",
+            condition_id="B0",
+            attempt_id=v3_truth["attempt_id"],
+            artifact_sha256="a" * 64,
+            evidence_bundle_sha256="b" * 64,
+            model_output={
+                "verdict": "complete",
+                "progress": "continuable",
+                "ledger": [
+                    {
+                        "requirement_id": "REQ:ONE",
+                        "state": "verified",
+                        "evidence_refs": ["c" * 64],
+                    }
+                ],
+            },
+            activation_id="activation-v3",
+        )
+        self.assertEqual("truth:CI3-PY-01:activation-v3", v3_truth["truth_id"])
+        self.assertEqual("submission:CI3-PY-01:B0:activation-v3", v3_submission["submission_id"])
 
     def test_codex_web_search_duplicate_ids_are_preserved_but_other_duplicates_fail(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

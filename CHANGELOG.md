@@ -24,6 +24,13 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   remain blocking; model readers cannot substitute for human decision-utility
   evidence.
 
+### Fixed
+
+- Activation qualification, schedule, frozen-truth, and reporter-submission
+  identities are now derived from the exact study/private-pack revision instead
+  of carrying `activation-v1`/`CI2-*` constants into a future protocol. Legacy
+  v1/v2 schedule bytes remain unchanged.
+
 ## [0.1.0-alpha.12] - 2026-08-30
 
 ### Added

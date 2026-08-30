@@ -1,4 +1,4 @@
-"""Study-local adapters shared by Completion Integrity activation v1 tools."""
+"""Study-local adapters shared by versioned Completion Integrity activations."""
 
 from __future__ import annotations
 
@@ -29,6 +29,64 @@ EXECUTOR_OUTPUT_KEYS = {"verdict", "progress", "ledger"}
 REPORTER_OUTPUT_KEYS = {"verdict", "progress", "ledger"}
 _REQUIREMENT_LINE = re.compile(r"^- `(?P<id>REQ:[A-Z0-9:._-]+)`: (?P<statement>.+)$")
 _SHA256 = re.compile(r"^[a-f0-9]{64}$")
+_ACTIVATION_STUDY = re.compile(
+    r"^[A-Za-z0-9._:-]*completion-integrity-activation-v(?P<revision>[1-9][0-9]*)$"
+)
+_ACTIVATION_PACK = re.compile(
+    r"^(?P<prefix>[A-Za-z0-9._:-]*):private-pack:(?P<name>completion-integrity-v[1-9][0-9]*-activation)$"
+)
+
+
+def activation_namespace(study_id: str) -> str:
+    """Return the versioned identity suffix bound to one activation study."""
+
+    if not isinstance(study_id, str):
+        raise SandboxError("activation study identity must be a string")
+    match = _ACTIVATION_STUDY.fullmatch(study_id)
+    if match is None:
+        raise SandboxError("activation study identity has an unsupported shape")
+    return f"activation-v{match.group('revision')}"
+
+
+def qualification_id_for_pack(pack_id: str, revision: int) -> str:
+    """Derive a qualification identity from the exact private-pack revision."""
+
+    if not isinstance(pack_id, str) or isinstance(revision, bool) or not isinstance(revision, int):
+        raise SandboxError("qualification identity requires a pack ID and positive revision")
+    match = _ACTIVATION_PACK.fullmatch(pack_id)
+    if match is None or revision < 1:
+        raise SandboxError("qualification pack identity has an unsupported shape")
+    return f"{match.group('prefix')}:qualification:{match.group('name')}:revision:{revision}"
+
+
+def activation_schedule(task_ids: Sequence[str]) -> list[dict[str, Any]]:
+    """Build the fixed executor/B0/T1 schedule from qualified task identities."""
+
+    if len(task_ids) != 2 or any(
+        not isinstance(task_id, str) or not task_id for task_id in task_ids
+    ):
+        raise SandboxError("activation schedule requires exactly two task identities")
+    if len(set(task_ids)) != len(task_ids):
+        raise SandboxError("activation schedule task identities must be unique")
+    schedule: list[dict[str, Any]] = []
+    sequence = 0
+    for task_id in task_ids:
+        for role, condition_id, suffix in (
+            ("executor", None, "E0"),
+            ("reporter", "B0", "B0"),
+            ("reporter", "T1", "T1"),
+        ):
+            sequence += 1
+            schedule.append(
+                {
+                    "sequence": sequence,
+                    "cell_id": f"{task_id}-{suffix}",
+                    "task_id": task_id,
+                    "role": role,
+                    "condition_id": condition_id,
+                }
+            )
+    return schedule
 
 
 def activation_attempt_id(freeze_sha256: str, cell_id: str) -> str:
@@ -372,6 +430,7 @@ def build_frozen_truth(
     evaluation: Mapping[str, Any],
     evaluator_sha256: str,
     custody_receipt_sha256: str,
+    activation_id: str = "activation-v1",
 ) -> dict[str, Any]:
     requirements = evaluation.get("requirements")
     if not isinstance(requirements, list) or not requirements:
@@ -392,7 +451,7 @@ def build_frozen_truth(
         )
     return {
         "schema_version": TRUTH_SCHEMA_VERSION,
-        "truth_id": f"truth:{task_id}:activation-v1",
+        "truth_id": f"truth:{task_id}:{activation_id}",
         "attempt_id": attempt_id,
         "trajectory": {
             "artifact_sha256": artifact_sha256,
@@ -534,12 +593,13 @@ def build_reporter_submission(
     artifact_sha256: str,
     evidence_bundle_sha256: str,
     model_output: Mapping[str, Any],
+    activation_id: str = "activation-v1",
 ) -> dict[str, Any]:
     if set(model_output) != REPORTER_OUTPUT_KEYS:
         raise SandboxError("reporter output has unknown or missing keys")
     return {
         "schema_version": SUBMISSION_SCHEMA_VERSION,
-        "submission_id": f"submission:{task_id}:{condition_id}:activation-v1",
+        "submission_id": f"submission:{task_id}:{condition_id}:{activation_id}",
         "attempt_id": attempt_id,
         "artifact_sha256": artifact_sha256,
         "evidence_bundle_sha256": evidence_bundle_sha256,
