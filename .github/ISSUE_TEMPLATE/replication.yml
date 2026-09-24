@@ -1,0 +1,66 @@
+name: Replication proposal
+description: Propose a bounded rerun or role-separated reproduction of a published decision
+title: "[Replication]: "
+labels: ["replication", "triage"]
+body:
+  - type: input
+    id: target
+    attributes:
+      label: Target result, claim, and exact revision
+      description: Link the public result card or receipt and pin the commit or release.
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Intended evidence facet
+      options:
+        - Maintainer rerun
+        - Role-separated reproduction
+        - Independent replication
+        - Transfer test on a new task population
+        - Unsure; classification needed
+    validations:
+      required: true
+  - type: textarea
+    id: claim
+    attributes:
+      label: Claim being tested
+      description: State the exact claim and the conditions under which it would be supported, narrowed, contradicted, or unresolved.
+    validations:
+      required: true
+  - type: textarea
+    id: independence
+    attributes:
+      label: Ownership and independence
+      description: Who owns the operator, task source, evaluator, analysis, and funding? Disclose overlap with AEL maintainers.
+    validations:
+      required: true
+  - type: textarea
+    id: protocol
+    attributes:
+      label: Protocol fidelity and planned deviations
+      description: Identify what remains exact, what changes, and why the result remains comparable or intentionally tests transfer.
+    validations:
+      required: true
+  - type: textarea
+    id: outputs
+    attributes:
+      label: Public outputs and closure rule
+      description: List records, code, environment identity, negative outcomes, and the planned completed/rejected/invalid disposition.
+    validations:
+      required: true
+  - type: textarea
+    id: safety
+    attributes:
+      label: Safety, privacy, license, and credential boundary
+      description: Do not expose hidden holdouts, reusable credentials, private repositories, or artifacts without redistribution rights.
+    validations:
+      required: true
+  - type: checkboxes
+    id: acknowledgement
+    attributes:
+      label: Evidence boundary
+      options:
+        - label: I will not describe this as independent replication unless the declared ownership separation supports that claim.
+          required: true
